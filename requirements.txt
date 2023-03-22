@@ -21,7 +21,5 @@ psycopg2-binary
 pillow
 pyOpenSSL==23.0.0
 pytz==2022.1
-ubuntu-advantage-tools
-ubuntu-drivers-common
 pytz
 whitenoise
