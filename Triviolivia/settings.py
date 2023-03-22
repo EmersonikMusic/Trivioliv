@@ -170,13 +170,8 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = True
 
 STATICFILES_FINDERS = [
-
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-
-    'django_plotly_dash.finders.DashAssetFinder',
-    #'django_plotly_dash.finders.DashComponentFinder',
-    'django_plotly_dash.finders.DashAppDirectoryFinder',
 ]
 
 STATIC_URL = '/static/'
