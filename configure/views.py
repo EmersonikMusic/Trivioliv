@@ -48,7 +48,7 @@ def batch(request):
 
     df=pd.read_csv('trivia_questions2.csv',sep=',')
 
-    for q in range(6600,len(df)):
+    for q in range(0,len(df)):
         if q==1:
             q=2500
         question, created = Question.objects.get_or_create(text=df.iloc[q][4],
