@@ -28,7 +28,7 @@ Lines,Movies,2,1990s,What did Forrest Gump's mama always say life was like?,A bo
 Aliases,Pop culture,1,"1990s, 2000s, 2010s, 2020s",What is Eminem's real name?,Marshall Mathers.
 Countries,Geography,4,"1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",The area between the two Koreas is known as the DMZ. What does this stand for?,DeMilitarized Zone.
 Websites,Technology,3,2010s,What was Google's failed attempt at a social network to compete with Facebook called?,Google+. (Google Plus)
-Developers,Video Games,2,2010s,Which gaming studio made Cyberpunk 2077 and The Witcher video games?,CD Projekt Red.
+Developers,Video Games,2,2010s,Which gaming studio made Cyberpunk 2077 and The Witcher Video Games?,CD Projekt Red.
 Names,Technology,3,"2000s, 2010s, 2020s",The Reaper and Predator are US military types of what?,Drones.
 Stocks,Economics,2,"1970s, 1980s, 1990s, 2000s, 2010s, 2020s","In the options world, what is the opposite of a call?",A put.
 Finance,Economics,3,"1980s, 1990s, 2000s",Who orchestrated the largest known Ponzi scheme of all time?,Bernie Maddoff.
@@ -50,8 +50,8 @@ Chemistry,Science,5,"1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 20
 Landmarks,Geography,4,"1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",Heathrow is to London as Schipol is to which city?,Amsterdam.
 Characters,Movies,3,2010s,Which Marvel character did Disney and Sony have a well-known IP battle over?,Spiderman.
 Actors,Television,1,"2000s, 2010s",Who played Francis Underwood in Netflix's House of Cards?,Kevin Spacey.
-Games,Video games,1,"1990s, 2000s, 2010s, 2020s",What is the video game series called in which many Nintendo characters fight each other?,Super Smash Bros.
-Games,Video games,4,2010s,Which short-lived mobile trivia game featured live hosts and cash prizes?,Trivia HQ.
+Games,Video Games,1,"1990s, 2000s, 2010s, 2020s",What is the video game series called in which many Nintendo characters fight each other?,Super Smash Bros.
+Games,Video Games,4,2010s,Which short-lived mobile trivia game featured live hosts and cash prizes?,Trivia HQ.
 Poetry,Literature,1,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",How many lines does a haiku have?,Three.
 Poetry,Literature,2,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",How many syllables does a haiku have?,Seventeen.
 Constants,Math,3,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What is the fourth digit of pi?,One.
@@ -80,7 +80,7 @@ Scientists,Science,4,1800-1900,Who invented the pasteurization process?,Louis Pa
 Holy Books,Theology,3,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",How many books are in the Torah?,"Five (Genesis, Exodus, Leviticus, Numbers, and Deuteronomy)"
 Rules,Sports,2,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What score corresponds to a perfect game in ten-pin bowling?,300
 ,Miscellaneous,3,"1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",Lysergic acid diethylamide is commonly known as what three-letter acronym?,LSD.
-Characters,Video games,1,"2000s, 2010s, 2020s",Master Chief is the protagonist of which video game franchise?,Halo.
+Characters,Video Games,1,"2000s, 2010s, 2020s",Master Chief is the protagonist of which video game franchise?,Halo.
 Games,Miscellaneous,3,"1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",How many points is the letter K worth in Scrabble?,Five.
 Computing,Technology,4,"1970s, 1980s, 1990s, 2000s, 2010s, 2020s","On a North American QWERTY keyboard, what symbol will pressing the 7 key while holding the SHIFT key yield?",The ampersand. (&)
 Game Shows,Television,2,2000s,Who was the host of the television series Fear Factor?,Joe Rogan.
@@ -133,7 +133,7 @@ Artists,Music,2,"1980s, 1990s, 2000s, 2010s, 2020s",Who is the frontman of the b
 Celebrities,Pop culture,5,2000s,Who was standing next to Kanye West as he proclaimed that 'George Bush does not care about black people'?,Mike Meyers.
 Lyrics,Music,4,2000s,"In the Daft Punk classic, which three words follow 'Work it harder, make it better'?",Do it faster.
 Landmarks,Geography,2,"1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",In which bay is Alcatraz Federal Penitentiary located?,San Francisco Bay.
-Details,Video games,4,"2010s, 2020s",What was the fictional city based on Los Angeles called in Grand Theft Auto V?,Los Santos.
+Details,Video Games,4,"2010s, 2020s",What was the fictional city based on Los Angeles called in Grand Theft Auto V?,Los Santos.
 Rules,Sports,1,"1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",How many points is a safety worth in American football?,Two.
 Celebrities,Pop culture,1,"1980s, 1990s",Michael Jackson popularized which cosmic backward slide dance move?,The moonwalk.
 Artists,Music,5,1980s,Who was featured on guitar on Michael Jackson's hits Beat It and Dirty Diana?,Eddie Van Halen.
@@ -247,7 +247,7 @@ Origins,Food,2,"1970s, 1980s, 1990s, 2000s, 2010s, 2020s",Which city was the fir
 Teams,Sports,4,"2000s, 2010s, 2020s","The Los Angeles Wildcats, New York Guardians, and Dallas Renegades are teams in which sports league?",The XFL.
 Transportation,Technology,2,"1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s","What is the railroad car with accommodations for the train crew, typically attached to the end of the train called?",The caboose.
 Buildings,Miscellaneous,1,"2000s, 2010s, 2020s",What is the tallest skyscraper in the world?,The Burj Khalifa.
-Games,Video games,3,2010s,Which popular 2018 video game was inspired by the party game Mafia and the science fiction horror film The Thing?,Among Us.
+Games,Video Games,3,2010s,Which popular 2018 video game was inspired by the party game Mafia and the science fiction horror film The Thing?,Among Us.
 Space,Nature,3,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s","Andromeda, Cygnus A, and Virgo A are all examples of what?",Galaxies.
 Space,Nature,4,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",How many of the solar system's gas giants have rings?,All four of them.
 Foodstuffs,Food,3,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s","Almond, goat, butter, and chocolate are all types of what?",Milk.
@@ -332,7 +332,7 @@ Artists,Art,4,"1800-1900, 1900-1950, 1950s, 1960s","Which painter did much to co
 Scuplture,Art,5,"1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",Which Brazilian landmark was designed French sculptor Paul Landowski and built by Brazilian engineer Heitor da Silva Costa?,Christ the Redeemer.
 Consoles,Video Games,2,2010s,"Which comes next in this series? 64, GameCube, Wii, Wii U...",Switch.
 Regions,Geography,1,"1990s, 2000s, 2010s, 2020s",What country is the Kaliningrad Oblast a part of?,Russia.
-Developers,Video games,3,1980s,Alexej Pajitnov invented which popular video game in 1984?,Tetris.
+Developers,Video Games,3,1980s,Alexej Pajitnov invented which popular video game in 1984?,Tetris.
 Artists,Music,4,1990s,"Which electronic music producer made Natural Blues, Extreme Ways, and We Are All Made of Stars?",Moby.
 Machines,Technology,5,"2000s, 2010s, 2020s",What enormous underground machine spans France and Switzerland?,The Large Hadron Collider.
 Physics,Science,5,2010s,"Which physical phenomenon, initially predicted by Albert Einstein, did scientists first detect in 2015?",Gravitational waves.
@@ -421,7 +421,7 @@ Biochemistry,Science,3,"2000s, 2010s, 2020s","Rounded to the nearest billion, ho
 Biology,Science,5,1800-1900,Which biologist is considered to be the Father of Genetics?,Gregor Mendel.
 Physics,Science,4,1900-1950,What phenomenon did Albert Einstein refer to as 'spooky action at a distance'?,Entanglement.
 Human Body,Nature,4,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",Which C-shaped nerve fibre bundle connects the left and right cerebral hemispheres of the human brain?,The corpus callosum.
-Games,Video games,4,1980s,"First released in 1980, which popular Japanese arcade game franchise was created by Toru Iwatani and developed by Bandai Entertainment?",Pac-Man.
+Games,Video Games,4,1980s,"First released in 1980, which popular Japanese arcade game franchise was created by Toru Iwatani and developed by Bandai Entertainment?",Pac-Man.
 Terms,Television,3,"1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What is the narrative technique of jumping directly into a story at the beginning of a show before title sequence and opening credits called?,A cold open.
 Countries,Geography,4,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",Which European country is known at The Hexagon?,France.
 Terms,Science,2,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s","What is the study of a population based on factors such as age, race, and sex called?",Demography.
@@ -554,7 +554,7 @@ Rules,Sports,2,"1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020
 Terms,Sports,1,"1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s","Bump, set, spike is in reference to which sport?",Volleyball.
 Programming,Technology,2,"1970s, 1980s, 1990s, 2000s, 2010s, 2020s","In programming, what are the two possible states of a boolean variable?",True and false.
 Cinematography,Movies,5,"1970s, 1980s, 1990s, 2000s, 2010s, 2020s","What six syllable word is the term for when a movie seems realistic and the story has details, subjects, and characters that seem similar or true to real life?",Verisimilitude.
-Characters,Video games,1,1990s,What type of Pokémon is Charmander?,Fire type.
+Characters,Video Games,1,1990s,What type of Pokémon is Charmander?,Fire type.
 Lines,Movies,3,1970s,"In which film did Matthew McConaughey popularize the phrase 'Alright, alright, alright.'?",Dazed and Confused.
 Characters,Movies,5,1990s,What was Stanley Ipkis's dog's name in the 1994 movie The Mask?,Milo.
 Other,Sports,4,1980s,Which phrase did boxing announcer Michael Buffer trademark?,Let's get ready to rumble!
@@ -615,11 +615,11 @@ Events,History,3,1960s,Wernher von Braun was instrumental in the US victory of w
 Quotes,History,5,1900-1950,Who said 'Those who do not remember the past are condemned to repeat it.'?,George Santayana.
 Terms,Language,2,"1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What term means both insensitive to differences in musical pitch and matters of public sentiment?,Tone deaf.
 Events,History,3,1800-1900,"Which historic executive order was issued by US President Abraham Lincoln on January 1, 1863?",The Emancipation Proclamation.
-Items,Video games,2,"1990s, 2000s",What would one slip and spin out of control on in a game of Mario Kart?,A banana.
-Developers,Video games,4,1990s,Which company developed the video game GoldenEye 64?,Rareware.
-Games,Video games,3,1990s,Which video game is considered to be the spiritual successor to GoldenEye 64?,Perfect Dark.
-Characters,Video games,5,1990s,"Timber, Tiptup, Pipsy, and Drumstick are characters in which video game?",Diddy Kong Racing.
-Consoles,Video games,3,"1990s, 2000s, 2010s, 2020s",What four colored symbols are on a Playstation controller?,"X, triangle, circle, and square."
+Items,Video Games,2,"1990s, 2000s",What would one slip and spin out of control on in a game of Mario Kart?,A banana.
+Developers,Video Games,4,1990s,Which company developed the video game GoldenEye 64?,Rareware.
+Games,Video Games,3,1990s,Which video game is considered to be the spiritual successor to GoldenEye 64?,Perfect Dark.
+Characters,Video Games,5,1990s,"Timber, Tiptup, Pipsy, and Drumstick are characters in which video game?",Diddy Kong Racing.
+Consoles,Video Games,3,"1990s, 2000s, 2010s, 2020s",What four colored symbols are on a Playstation controller?,"X, triangle, circle, and square."
 Products,Pop culture,2,1970s,Which iconic puzzle toy was invented in 1974 by a Hungarian sculptor and professor?,The Rubik's Cube.
 Actors,Movies,3,2000s,Who played Elrond in the 2001-2003 live action Lord of the Rings trilogy?,Hugo Weaving.
 Quotes,History,5,1800-1900,"Who said 'Death is nothing, but to live defeated and inglorious is to die daily.'?",Napoleon Bonaparte.
@@ -1423,7 +1423,7 @@ Games,Video Games,5,2000s,Which band made more money off of its Guitar Hero game
 Games,Video Games,5,2000s,Which US Presidential campaign paid for in-game advertising in Burnout Paradise?,Barack Obama's.
 Films,Movies,4,2010s,Which 2019 film is the highest grossing movie of all time based on a video game?,Detective Pikachu.
 Actors,Video Games,3,1990s,John Leguizamo and Bob Hoskins portrayed which video game duo?,Mario and Luigi.
-Levels,Video Games,2,"1990s, 2000s, 2010s, 2020s",What is the name of the colorful final race of Mario Kart video games?,Rainbow Road.
+Levels,Video Games,2,"1990s, 2000s, 2010s, 2020s",What is the name of the colorful final race of Mario Kart Video Games?,Rainbow Road.
 Dtails,Video Games,1,1990s,Which video game franchise popularized the phrase 'Get over here!'?,Mortal Kombat.
 Developers,Video Games,3,"2000s, 2010s, 2020s",Which French video game company publishes the Far Cry series?,Ubisoft.
 Games,Video Games,4,1990s,Which video game was the first ever to get an M for Mature rating from the ESRB?,Mortal Kombat.
@@ -3362,7 +3362,7 @@ Details,Movies,2,"2010s, 2020s",Arendelle is the fictional land of which Disney 
 ,Math,3,"1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What value does the binary number 111 represent?,Seven.
 ,Math,5,"1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What value does the binary number 1111 represent?,Fifteen.
 ,Video Games,5,1990s,What is the name of the 1990 video game that featured Michael Jackson as the hero?,Moonwalker.
-,Video Games,5,1980s,Who created Mega Man in the Mega Man video games?,Dr Light.
+,Video Games,5,1980s,Who created Mega Man in the Mega Man Video Games?,Dr Light.
 ,Video Games,4,1990s,What was the first video game to make use of the Transfer Pack on the Nintendo 64?,Pokémon Stadium.
 ,Video Games,5,"1990s, 2000s, 2010s, 2020s",What planet is the video game character Kirby from?,Planet Popstar.
 ,Video Games,4,"1970s, 1980s, 1990s, 2000s, 2010s, 2020s",In which Japanese city are Nintendo's headquarters located?,Kyoto.
@@ -3406,7 +3406,7 @@ Details,Movies,2,"2010s, 2020s",Arendelle is the fictional land of which Disney 
 ,Science,1,"1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What is the technical name for the inkblot psychology test?,Rorschach test.
 ,Literature,4,2010s,What is the fourth book of the A Song of Ice and Fire series called?,A Feast for Crows.
 ,Literature,3,2010s,What is the fifth book of the A Song of Ice and Fire series called?,A Dance with Dragons.
-,Video Games,2,1990s,What are the three starting Pokémon in the original Pokémon Red and Blue video games?,"Bulbasaur, Charmander, and Squirtle."
+,Video Games,2,1990s,What are the three starting Pokémon in the original Pokémon Red and Blue Video Games?,"Bulbasaur, Charmander, and Squirtle."
 ,Video Games,2,2000s,What video game is being played in the Leroy Jenkins viral video?,World of Warcraft.
 ,Science,3,"1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s","What comes next in this series? Heptanol, hexanol, pentanol...",Butanol.
 ,Pop culture,2,"1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What was Queen Elizabeth II's last name?,Windsor.
@@ -3416,7 +3416,7 @@ Details,Movies,2,"2010s, 2020s",Arendelle is the fictional land of which Disney 
 ,Language,5,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What does an onomastician study?,Names.
 ,Language,5,"1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",Oniomania is an obsessive or uncontrollable urge to do what?,Buy things.
 ,Language,1,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",The study of weather is known as what?,Meteorology.
-,Video Games,5,"1990s, 2000s",What is the name of the star system in which the Star Fox video games take place?,The Lylat System.
+,Video Games,5,"1990s, 2000s",What is the name of the star system in which the Star Fox Video Games take place?,The Lylat System.
 ,Language,2,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What is the only English anagram of the word 'grown'?,Wrong.
 ,Language,4,"1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What is the most number of dots used in a letter of the braille alphabet?,Five.
 ,Language,3,"1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",How many positions are there for dots in the braille alphabet?,Six.
@@ -4073,7 +4073,7 @@ Terms,Economics,3,"1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2
 Terms,Economics,1,"1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What is the term for the business cycle contraction in which there is a general decline in economic activity and a widespread drop in spending?,Recession.
 Leaders,Politics,1,1800-1900,Who was the first Prime Minister of Canada?,John A MacDonald.
 Leaders,Politics,3,2020s,Who succeeded Angela Merkel as Chancellor of Germany?,Olaf Scholz.
-Characters,Video Games,4,1990s,What is the name of the unofficial Pokémon species that can be caught via a glitch in Pokémon Red and Blue video games?,MissingNo.
+Characters,Video Games,4,1990s,What is the name of the unofficial Pokémon species that can be caught via a glitch in Pokémon Red and Blue Video Games?,MissingNo.
 Finance,Economics,2,"1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s","In investing, what is the term for the money originally invested or loaned, on which basis interest and returns are calculated?",The principal.
 Currency,Economics,1,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",What is the primary producer of a country’s coin currency known as?,A mint.
 Currency,Economics,4,1500-1800,"What is the name of the traditional shell bead of the Eastern Woodlands Native American tribes, used as currency and means of exchange between the Colonists and Native Americans?",Wampum.
@@ -5758,7 +5758,7 @@ Holy Days,Theology,4,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970
 Leaders,Politics,2,2020s,Which US politician has the nickname Dark Brandon?,Joe Biden.
 Leaders,Politics,4,2010s,Which US politician did Donald Trump refer to as Pocahontas?,Elizabeth Warren.
 Artists,Music,4,"1990s, 2000s",Who is the lead singer of the alternative rock band Our Lady Peace?,Raine Maida.
-Games,Video Games,4,2020s,Which video gamesset a record for first-year launch revenue of more than $3 billion?,Genshin Impact.
+Games,Video Games,4,2020s,Which Video Gamesset a record for first-year launch revenue of more than $3 billion?,Genshin Impact.
 Developers,Video Games,5,2020s,Which company makes the video game Genshin Impact?,miHoYo.
 Games,Video Games,2,2020s,Which popular video game has the tagline 'Step Into a Vast Magical World of Adventure'?,Genshin Impact.
 Games,Video Games,3,1990s,What classic video game popularized the line 'Do a barrel roll!'?,StarFox 64.
@@ -5869,7 +5869,7 @@ Languages,Language,4,"<1500, 1500-1800, 1800-1900, 1900-1950, 1950s, 1960s, 1970
 ,Food,1,"1900-1950, 1950s, 1960s, 1970s, 1980s, 1990s, 2000s, 2010s, 2020s",Chester Cheetah is the official mascot of which snack brand?,Cheetos.
 ,Food,3,1900-1950,What was the first fast food chain the United States?,White Castle.
 ,Miscellaneous,1,"1990s, 2000s, 2010s, 2020s",Which website is home to the Tomatometer?,Rotten Tomatoes.
-,Video Games,5,"1980s, 1990s, 2000s, 2010s, 2020s","What sub-genre of platform video games is a portmanteau of two classic games and is focused on 2D, side-scrolling non-linearity and utility-gated exploration and progression?",Metroidvania.
+,Video Games,5,"1980s, 1990s, 2000s, 2010s, 2020s","What sub-genre of platform Video Games is a portmanteau of two classic games and is focused on 2D, side-scrolling non-linearity and utility-gated exploration and progression?",Metroidvania.
 ,Video Games,4,"2010s, 2020s","Which 2017 video game, developed and published by Team Cherry, features a nameless insectoid warrior who explores the world of Hallownest?",Hollow Knight.
 ,Video Games,2,2020s,Which popular 2022 video game had its worldbuilding provided by fantasy writer George RR Martin?,Elden Ring.
 ,Video Games,4,"2000s, 2010s, 2020s",Which Japanese video game developer developed Elden Ring as well as the Dark Souls series?,FromSoftware.
