@@ -48,7 +48,7 @@ def batch(request):
 
     df=pd.read_csv('trivia_questions2.csv',sep=',')
 
-    for q in range(0,len(df)):
+    for q in range(1200,len(df)):
         if q==1:
             q=2500
         question, created = Question.objects.get_or_create(text=df.iloc[q][4],
@@ -58,10 +58,11 @@ def batch(request):
                                                             'author':request.user,
                                                             })
 
-        era_list = df.iloc[q][3].split(', ')
-        for era in era_list:
-            print(str(q)+'. '+question.text+' - '+era)
-            question.eras.add(Era.objects.get(name=era))
+        if created:
+            era_list = df.iloc[q][3].split(', ')
+            for era in era_list:
+                print(str(q)+'. '+question.text+' - '+era)
+                question.eras.add(Era.objects.get(name=era))
         
 
     context={}
