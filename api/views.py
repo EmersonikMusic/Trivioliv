@@ -25,13 +25,16 @@ class QuestionList(generics.ListAPIView):
             difficulty = self.request.query_params.get('difficulty')
 
             if category is not None:
-                queryset = queryset.filter(category=category)
+                cat_list = category.split(',')
+                queryset = queryset.exclude(category__id__in=cat_list)
             
             if era is not None:
-                queryset = queryset.filter(eras=era)
+                era_list = era.split(',')
+                queryset = queryset.exclude(eras__id__in=era_list)
             
             if difficulty is not None:
-                queryset = queryset.filter(difficulty=difficulty)
+                diff_list = difficulty.split(',')
+                queryset = queryset.exclude(difficulty__id__in=diff_list)
             
             random_question = random.choice(queryset)
 
