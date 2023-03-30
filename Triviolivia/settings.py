@@ -193,3 +193,11 @@ class HerokuDiscoverRunner(DiscoverRunner):
 # Use HerokuDiscoverRunner on Heroku CI
 if "CI" in os.environ:
     TEST_RUNNER = "gettingstarted.settings.HerokuDiscoverRunner"
+
+import mimetypes
+
+mimetypes.add_type("text/javascript", ".js", True)
+
+STATICFILES_DIRS = (
+  os.path.join(BASE_DIR, 'static/'),
+)

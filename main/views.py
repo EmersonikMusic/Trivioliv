@@ -36,7 +36,7 @@ def main(request):
 
     }
 
-    return render(request,'main.html', context)
+    return render(request,'index.html', context)
 
 
 def choice_options(request):
