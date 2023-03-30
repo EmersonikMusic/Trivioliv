@@ -61,6 +61,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'Triviolivia.urls'
@@ -195,14 +197,3 @@ class HerokuDiscoverRunner(DiscoverRunner):
 # Use HerokuDiscoverRunner on Heroku CI
 if "CI" in os.environ:
     TEST_RUNNER = "gettingstarted.settings.HerokuDiscoverRunner"
-<<<<<<< HEAD
-
-import mimetypes
-
-mimetypes.add_type("text/javascript", ".js", True)
-
-STATICFILES_DIRS = (
-  os.path.join(BASE_DIR, 'static/'),
-)
-=======
->>>>>>> ee45c1c7548a7289e3865fc551ccf06cf6a8efc5
