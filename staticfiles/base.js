@@ -13,4 +13,4 @@ fetch(apiUrl)
   .catch(error => {
     // Log any errors to the console
     console.error(error);
-  }
+  });
