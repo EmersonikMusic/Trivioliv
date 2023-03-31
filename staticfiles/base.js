@@ -1,4 +1,4 @@
-const apiUrl = 'http://trivioliv.herokuapp.com/api/questions/?'; // replace with your API endpoint URL
+const apiUrl = 'https://trivioliv.herokuapp.com/api/questions/?'; // replace with your API endpoint URL
 
 // make a fetch request to the API
 fetch(apiUrl)
@@ -13,4 +13,4 @@ fetch(apiUrl)
   .catch(error => {
     // Log any errors to the console
     console.error(error);
-  });
+  }
