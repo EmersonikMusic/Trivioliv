@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['*', 'https://markadegames.com', 'https://www.markadegames.com'
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "https://markadegames.com",
+    "markadegames.com/:1S",
 ]
 
 # Application definition
