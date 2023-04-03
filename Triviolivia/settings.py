@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-qfadm-gnvm*0_lz7w0rja@tee-qi5l*^yi8waiick41bsfnce8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*', 'https://markadegames.com', 'https://www.markadegames.com',]
+ALLOWED_HOSTS = ['*', 'https://markadegames.com', 'https://www.markadegames.com','markadegames.com/:1',]
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
