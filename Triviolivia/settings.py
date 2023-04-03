@@ -29,7 +29,8 @@ SECRET_KEY = 'django-insecure-qfadm-gnvm*0_lz7w0rja@tee-qi5l*^yi8waiick41bsfnce8
 DEBUG = False
 
 ALLOWED_HOSTS = ['*', 'https://markadegames.com', 'https://www.markadegames.com',]
-
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
@@ -167,8 +168,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
