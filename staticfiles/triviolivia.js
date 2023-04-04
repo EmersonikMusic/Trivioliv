@@ -226,11 +226,6 @@ const showAnswer = (displayed_answer) => {
 //     }
 // }
 
-fetch('http://trivioliv.herokuapp.com/api/questions')
-.then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error(error));
-
 fetch('https://trivioliv.herokuapp.com/api/questions')
   .then(response => response.json())
   .then(data => console.log(data))
