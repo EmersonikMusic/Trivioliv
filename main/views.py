@@ -15,7 +15,7 @@ from django.views.generic.edit import CreateView
 
 import pandas as pd
 
-from .models import *
+from configure.models import *
 from .forms import *
 
 # Create your views here.
@@ -31,12 +31,19 @@ def entry(request):
 
 def main(request):
 
+	questions = Question.objects.all()
+	categories = Category.objects.all()
+	eras = Era.objects.filter()
+	difficulties = Difficulty.objects.all()
 
-    context = {
-
+	context = {
+		'questions': questions,
+		'categories': categories,
+		'eras': eras,
+		'difficulties': difficulties,
     }
 
-    return render(request,'index.html', context)
+	return render(request,'index.html', context)
 
 
 def choice_options(request):

@@ -12,8 +12,10 @@ var active_categories = {
     'art': true,
     'economics': true,
     'food': true,
+    'games': true,
     'geography': true,
     'history': true,
+    'human body': true,
     'language': true,
     'literature': true,
     'math': true,
@@ -21,6 +23,7 @@ var active_categories = {
     'movies': true,
     'music': true,
     'nature': true,
+    'philosophy': true,
     'politics': true,
     'pop-culture': true,
     'religion': true,
@@ -28,6 +31,7 @@ var active_categories = {
     'sports': true,
     'technology': true,
     'television': true,
+    'theater': true,
     'video-games': true
 }
 
@@ -40,47 +44,83 @@ var active_difficulties = {
 }
 
 var category_colors = {
-    'art': '#dd7e6b',
-    'economics': '#38761d',
-    'food': '#99000',
-    'geography': '#783f04',
-    'history': '#f1c232',
-    'language': '#9fc5e8',
-    'literature': '#ff9900',
-    'math': '#000000',
-    'miscellaneous': '#674ea7',
-    'movies': '#660000',
-    'music': '#0b5394',
-    'nature': '#93c47d',
-    'politics': '#351c75',
-    'pop-culture': '#cc4125',
-    'religion': '#ff00ff',
-    'science': '#a64d79',
-    'sports': '#999999',
-    'technology': '#ff0000',
-    'television': '#3c78d8',
-    'video-games': '#9900ff'
+    'Art': '#dd7e6b',
+    'Economics': '#315303',
+    'Food': '#99000',
+    'Games': '#134f5c',
+    'Geography': '#91774C',
+    'History': '#f1c232',
+    'Human Body': '#f6b26b',
+    'Human body': '#f6b26b',
+    'Language': '#9fc5e8',
+    'Literature': '#CC5500',
+    'Math': '#434343',
+    'Miscellaneous': '#674ea7',
+    'Movies': '#660000',
+    'Music': '#0b5394',
+    'Nature': '#93c47d',
+    'Philosophy': '#76a5af',
+    'Politics': '#351c75',
+    'Pop Culture': '#cc4125',
+    'Pop culture': '#cc4125',
+    'Religion': '#ff00ff',
+    'Science': '#a64d79',
+    'Sports': '#999999',
+    'Technology': '#cc0000',
+    'Television': '#3c78d8',
+    'Theater': '#7f6000',
+    'Theology': '#c27ba0',
+    'Video Games': '#9900ff',
+    'Video games': '#9900ff'
 }
 
+var fetched_questions = {
+
+}
+
+
 function hide_menu() {
-    console.log("menu is hidden")
     document.getElementById("menu").style.left = "-1000px";
 
 }
 
 function show_menu() {
-    console.log("menu is hidden")
     document.getElementById("menu").style.left = "0px";
 
 }
+
+function display_fetched_data() {
+    for (let i = 0; i < 10; i++) {
+  fetch('http://trivioliv.herokuapp.com/api/questions/')
+  .then(response => response.text())
+  .then(html => console.log(html))
+  .catch(error => console.error(error));
+}
+}
+
+let results = [];
+
+async function fetchJsonTenTimes(url) {
+    for (let i = 0; i < 5; i++) {
+      const response = await fetch(url);
+      const data = await response.json();
+      results.push(data);
+      console.log(data);
+      console.log(results[i][0].text);
+      console.log(results[i][0].answer);
+      console.log("\n");
+    }
+    
+  }
 
 
 function start_or_pause_game() {
     if (game_started == false) {
         game_started = true;
-        document.getElementById("demo").innerHTML = 'Game started. Good luck. Have fun.';
-        yourFunction();
         hide_menu();
+        fetchJsonTenTimes('http://trivioliv.herokuapp.com/api/questions/');
+        yourFunctionNew();
+        console.log(results);
     } else if (game_paused == false) {
         game_paused = true;
         document.getElementById("demo").innerHTML = 'Game paused.';
@@ -149,53 +189,6 @@ let Question = class {
     }
   }
 
-let question000001 = new Question(
-    000001, 
-    'politics', 
-    3, 
-    'How many times was Donald Trump impeached as President of the United States?', 
-    'Two.')
-
-let question000002 = new Question(
-    000002, 
-    'science', 
-    4,
-    'What element comes next in this series? Fluorine, chlorine, bromine...',
-    'Iodine.')
-
-let question000003 = new Question(
-    000003, 
-    'math', 
-    3,
-    'What is the only number in the English language to have as many letters as its value?',
-    'Four.')
-
-let question000004 = new Question(
-    000004, 
-    'literature', 
-    3,
-    "What was George Orwell's real name?",
-    'Eric Arthur Blair.')
-
-let question000005 = new Question(
-    000005, 
-    'sports', 
-    3,
-    'Which team was added to the National Hockey League in 2021?',
-    'The Seattle Kraken.')
-
-const question_list = [
-    [1, 'politics', 3, 'How many times was Donald Trump impeached as President of the United States?', 'Two.'],
-    [2, 'science', 4, 'What element comes next in this series? Fluorine, chlorine, bromine...', 'Iodine.'],
-    [3, 'math', 3, 'What is the only number in the English language to have as many letters as its value?', 'Four.'],
-    [4, 'literature', 3, "What was George Orwell's real name?", 'Eric Arthur Blair.'],
-    [5, 'sports', 2, 'Which team was added to the National Hockey League in 2021?', 'The Seattle Kraken.']
-]
-
-console.log(question000001)
-console.log(question000002)
-console.log(question000003)
-
 const showQuestion = (displayed_question) => {
     const messageElement = document.createElement('p')
     messageElement.textContent = displayed_question
@@ -226,49 +219,31 @@ const showAnswer = (displayed_answer) => {
 //     }
 // }
 
-fetch('https://trivioliv.herokuapp.com/api/questions')
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-
-
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-const yourFunction = async () => {
-    document.body.style.backgroundColor = '#351c75';
-    showQuestion('Q: ' + question000001.question)
-    await delay(time_per_question * 1000);
-    showAnswer('A: ' + question000001.answer)
-  
-    await delay(time_per_answer * 1000);
+const yourFunctionNew = async () => {
+    document.getElementById("demo").innerHTML = 'Put your game face on.';
 
-    document.body.style.backgroundColor = '#a64d79';
-    showQuestion('Q: ' + question000002.question)
-    await delay(time_per_question * 1000);
-    showAnswer('A: ' + question000002.answer)
-  
-    await delay(time_per_answer * 1000);
+    await delay(1 * 1000);
+    document.getElementById("demo").innerHTML = 'Put your game face on..';
 
-    document.body.style.backgroundColor = '#000000';
-    showQuestion('Q: ' + question000003.question)
-    await delay(time_per_question * 1000);
-    showAnswer('A: ' + question000003.answer)
+    await delay(1 * 1000);
+    document.getElementById("demo").innerHTML = 'Put your game face on...';
+    await delay(1 * 1000);
+    document.getElementById("demo").innerHTML = 'Game starts now!';
   
-    await delay(time_per_answer * 1000);
-
-    document.body.style.backgroundColor = '#ff9900';
-    showQuestion('Q: ' + question000004.question)
-    await delay(time_per_question * 1000);
-    showAnswer('A: ' + question000004.answer)
-  
-    await delay(time_per_answer * 1000);
-
-    document.body.style.backgroundColor = '#999999';
-    showQuestion('Q: ' + question000005.question)
-    await delay(time_per_question * 1000);
-    showAnswer('A: ' + question000005.answer)
-  
-    await delay(time_per_answer * 1000);
-
+    await delay(1 * 1000);
+    document.getElementById("demo").innerHTML = '';
+    
+    for (let i = 0; i < 5; i++) {
+        document.body.style.backgroundColor = category_colors[results[i][0].category_name];
+        document.getElementById("demo").innerHTML = 'Category: ' + results[i][0].category_name + ' -  Difficulty: ' + results[i][0].difficulty_name + ' - Author: Mark Mazurek';
+        showQuestion(results[i][0].text);
+        await delay(time_per_question * 1000);
+        showAnswer(results[i][0].answer)
+        await delay(time_per_answer * 1000);
+      }
+    
+    document.getElementById("demo").innerHTML = 'Thanks for playing! Refresh to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2023';
   };
