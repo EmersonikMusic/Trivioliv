@@ -32,7 +32,7 @@ def entry(request):
 def main(request):
 
 	questions = Question.objects.all()
-	categories = Category.objects.all()
+	categories = Category.objects.all().order_by("name")
 	eras = Era.objects.filter()
 	difficulties = Difficulty.objects.all()
 
