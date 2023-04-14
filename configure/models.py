@@ -57,7 +57,7 @@ class Tags(models.Model):
 
 class Question(models.Model):
     name = models.CharField(max_length=64, unique=True,blank=True, null=True)
-    text = models.CharField(max_length=256, unique=True)
+    text = models.CharField(max_length=511, unique=True)
     response = models.CharField(max_length=256,blank=True, null=True)
     answer = models.CharField(max_length=256)
     score = models.IntegerField(blank=True, null=True)
