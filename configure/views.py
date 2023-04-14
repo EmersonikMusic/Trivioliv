@@ -48,7 +48,7 @@ def batch(request):
 
     df=pd.read_csv('trivia_questions2.csv',sep=',')
 
-    for q in range(5000,len(df)):
+    for q in range(0,len(df)):
         if q==1:
             q=2500
         question, created = Question.objects.get_or_create(text=df.iloc[q][4],
@@ -108,7 +108,7 @@ class CategoryCreateView(CreateView):
 class CategoryUpdateView(UpdateView):
     model = Category
     template_name = 'configure/category_update.html'
-    fields = ['name', 'description']
+    fields = ['name', 'description','title']
     success_url =  reverse_lazy('configure:category-list')
 
 class CategoryDeleteView(DeleteView):
@@ -125,7 +125,7 @@ class EraListView(ListView):
 class EraCreateView(CreateView):
     model = Era
     template_name = 'configure/era_create.html'
-    fields = ['name', 'description']
+    fields = ['name', 'description','title']
 
     def get_success_url(self):
         return reverse('configure:era-list')
