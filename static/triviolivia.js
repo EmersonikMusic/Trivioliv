@@ -91,7 +91,7 @@ function show_menu() {
 
 function display_fetched_data() {
     for (let i = 0; i < 10; i++) {
-  fetch('http://trivioliv.herokuapp.com/api/questions/')
+  fetch('http://triviolivia.herokuapp.com/api/questions/')
   .then(response => response.text())
   .then(html => console.log(html))
   .catch(error => console.error(error));
