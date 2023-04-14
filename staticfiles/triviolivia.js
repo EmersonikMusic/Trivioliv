@@ -91,7 +91,7 @@ function show_menu() {
 
 function display_fetched_data() {
     for (let i = 0; i < 10; i++) {
-  fetch('http://trivioliv.herokuapp.com/api/questions/')
+  fetch('https://triviolivia.herokuapp.com/api/questions/')
   .then(response => response.text())
   .then(html => console.log(html))
   .catch(error => console.error(error));
@@ -118,7 +118,7 @@ function start_or_pause_game() {
     if (game_started == false) {
         game_started = true;
         hide_menu();
-        fetchJsonTenTimes('http://trivioliv.herokuapp.com/api/questions/');
+        fetchJsonTenTimes('https://triviolivia.herokuapp.com/api/questions/');
         yourFunctionNew();
         console.log(results);
     } else if (game_paused == false) {
