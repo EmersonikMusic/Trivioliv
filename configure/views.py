@@ -69,6 +69,12 @@ def batch(request):
 
     return render(request, 'configure/question_batch.html',context)
 
+def delete_all(request):
+
+    Question.objects.all().delete()
+
+    return reverse('configure:main')
+
 class QuestionUpdateView(UpdateView):
     model = Question
     template_name = 'configure/question_update.html'
