@@ -7,6 +7,7 @@ var game_started = false;
 var game_paused = false;
 var current_question_category = null;
 var menu_hidden = true;
+var start_or_pause_game = 'Start';
 
 var active_categories = {
     'art': true,
@@ -125,9 +126,11 @@ function start_or_pause_game() {
     } else if (game_paused == false) {
         game_paused = true;
         document.getElementById("demo").innerHTML = 'Game paused.';
+        document.querySelector('#start-pause').textContent = 'UNPAUSE';
     } else {
         game_paused = false;
         document.getElementById("demo").innerHTML = 'Game unpaused.';
+        document.querySelector('#start-pause').textContent = 'PAUSE';
     }
 }
 
