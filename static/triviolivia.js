@@ -78,7 +78,6 @@ var fetched_questions = {
 
 }
 
-
 function hide_menu() {
     document.getElementById("menu").style.left = "-1000px";
 
