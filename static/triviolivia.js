@@ -117,6 +117,8 @@ function start_or_pause_game() {
     if (game_started == false) {
         game_started = true;
         hide_menu();
+        document.querySelector('#start-pause').textContent = 'PAUSE';
+        document.getElementById('big-buttons').opacity = 0.3;
         fetchJsonTenTimes('https://triviolivia.herokuapp.com/api/questions/');
         yourFunctionNew();
         console.log(results);
@@ -141,7 +143,7 @@ function toggle_menu() {
 }
 
 function confirm_reset() {
-    window.confirm('Are you sure you want to reset the game?');
+    document.getElementById("demo").innerHTML = 'Are you sure you want to reset the game?';
 }
 
 function toggle_categories(clicked_id) {
