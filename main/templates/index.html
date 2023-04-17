@@ -9,7 +9,7 @@
     <div id="menu_categories" class="menu_left">
         {% for category in categories %}
         <div id='{{ category.name | lower }}'>
-            <button onclick='toggle_categories(this.id)' id='{{ category.id }}' title='{{ category.title }}'>{{ category.name }}</button> <br/>
+            <button onclick='toggle_categories(this.id)' id='{{ category.id }}' title='{{ category.title }}'>{{ category.name | upper }}</button> <br/>
         </div>
         {% endfor %}
         
@@ -22,7 +22,7 @@
     <div id="menu_difficulty" class="menu_left">
             {% for difficulty in difficulties %}
             <div id='{{ difficulty.name }}'>
-                <button onclick='toggle_difficulties(this.id)' id='{{ difficulty.score }}' type='button'>{{ difficulty.name }}</button> <br/>
+                <button onclick='toggle_difficulties(this.id)' id='{{ difficulty.score }}' type='button'>{{ difficulty.name | upper}}</button> <br/>
             </div>
             {% endfor %}
         <br>
