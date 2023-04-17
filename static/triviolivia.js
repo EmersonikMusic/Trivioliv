@@ -140,6 +140,9 @@ function toggle_menu() {
     }
 }
 
+function confirm_reset() {
+    window.confirm('Are you sure you want to reset the game?');
+}
 
 function toggle_categories(clicked_id) {
     if (active_categories[clicked_id] == true) {
