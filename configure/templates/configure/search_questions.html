@@ -3,14 +3,12 @@
 {% block content %} 
 
 <h1>Questions</h1>
-
 <h2>Search: </h2>
 <form action="{% url 'configure:search-questions' %}" method="POST" class="d-flex">
     {% csrf_token %}
     <input type="text" class="form-control" type="search" aria-label="Search" name="searched">
     <button class="btn-outline-primary" type="submit">Search</button>
 </form>
-
 <table class="table">
     <thead>
         <tr>
@@ -23,7 +21,7 @@
         </tr>
     </thead>
 
-{% for question in object_list %}
+{% for question in results %}
     <tbody>
         <tr>
             <td><a href="{% url 'configure:question-update' question.id %}">{{ question.text }}</a></td>
@@ -45,14 +43,6 @@
 
 <a href="{% url 'configure:question-create' %}">
     <button class="btn btn-primary">Create New Question</button>
-</a>
-
-<a href="{% url 'configure:question-batch' %}">
-    <button class="btn btn-secondary">Batch Add from CSV</button>
-</a>
-
-<a href="{% url 'configure:delete-all' %}">
-    <button class="btn btn-danger">Delete All Questions</button>
 </a>
 
 

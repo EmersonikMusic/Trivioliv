@@ -75,6 +75,18 @@ def delete_all(request):
 
     return reverse('configure:main')
 
+def search_questions(request):
+    question_results=[]
+    if request.method == "POST":
+        searched = request.POST['searched']
+        question_results = Question.objects.filter(text__contains=searched)
+
+    context={
+        'results':question_results
+    }
+
+    return render(request, 'configure/search_questions.html', context)
+
 class QuestionUpdateView(UpdateView):
     model = Question
     template_name = 'configure/question_update.html'
