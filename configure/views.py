@@ -3,12 +3,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import viewsets
-from rest_framework import permissions
-
-from django.db import IntegrityError
 
 from .models import *
+from .forms import *
 
 import pandas as pd
 
@@ -90,8 +87,8 @@ def search_questions(request):
 class QuestionUpdateView(UpdateView):
     model = Question
     template_name = 'configure/question_update.html'
-    fields = ['text', 'answer','category', 'eras', 'difficulty',]
-    success_url =  reverse_lazy('configure:question-list')
+    form_class = QuestionUpdateForm
+    success_url = reverse_lazy('configure:question-list')
 
 class QuestionDeleteView(DeleteView):
     model = Question
