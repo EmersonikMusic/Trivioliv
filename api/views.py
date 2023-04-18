@@ -32,7 +32,6 @@ class QuestionList(generics.ListAPIView):
             if era is not None:
                 banned_era_list = era.split(',')
                 valid_eras = Era.objects.exclude(id__in=banned_era_list)
-                print(valid_eras)
                 queryset = queryset.filter(eras__id__in=valid_eras)
             
             if difficulty is not None:
