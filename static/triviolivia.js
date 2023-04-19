@@ -6,45 +6,45 @@ var time_per_answer = 5
 var game_started = false;
 var game_paused = false;
 var current_question_category = null;
-var menu_hidden = true;
+var menu_hidden = false;
 var start_or_pause_game = 'Start';
 var difficulty_list = [];
 var category_list = [];
 var era_list = [];
 
-var active_categories = {
-    'art': true,
-    'economics': true,
-    'food': true,
-    'games': true,
-    'geography': true,
-    'history': true,
-    'human body': true,
-    'language': true,
-    'literature': true,
-    'math': true,
-    'miscellaneous': true,
-    'movies': true,
-    'music': true,
-    'nature': true,
-    'philosophy': true,
-    'politics': true,
-    'pop-culture': true,
-    'religion': true,
-    'science':true,
-    'sports': true,
-    'technology': true,
-    'television': true,
-    'theater': true,
-    'video-games': true
+var category_number_identities = {
+    1:'art',
+    2:'economics',
+    3:'food',
+    4:'games',
+    5:'geography',
+    6:'history',
+    7:'human body',
+    8:'language',
+    9:'literature',
+    10:'math',
+    11:'miscellaneous',
+    12:'movies',
+    13:'music',
+    14:'nature',
+    15:'philosophy',
+    16:'politics',
+    17:'pop-culture',
+    18:'religion',
+    19:'science',
+    20:'sports',
+    21:'technology',
+    22:'television',
+    23:'theater',
+    24:'video-games'
 }
 
-var active_difficulties = {
-    'genius': true,
-    'sharp': true,
-    'average': true,
-    'basic': true,
-    'insulting': true
+var difficulty_number_identities = {
+    1:'genius',
+    2:'sharp',
+    3:'average',
+    4:'basic',
+    5:'insulting'
 }
 
 var category_colors = {
@@ -168,11 +168,11 @@ function confirm_reset() {
 
 function toggle_categories(clicked_id) {
     if (!category_list.includes(clicked_id)) {
-        document.getElementById("demo").innerHTML = 'You have disabled the ' + clicked_id + ' category.';
+        document.getElementById("demo").innerHTML = 'You have disabled the ' + category_number_identities[clicked_id] + ' category.';
         category_list.push(clicked_id);
         console.log('Banned Categories:' + category_list);
     } else {
-        document.getElementById("demo").innerHTML = 'You have enabled the ' + clicked_id + ' category.';
+        document.getElementById("demo").innerHTML = 'You have enabled the ' + category_number_identities[clicked_id] + ' category.';
         category_list.splice(category_list.indexOf(clicked_id), 1);
         console.log('Banned Categories:' + category_list);
     }
@@ -180,11 +180,11 @@ function toggle_categories(clicked_id) {
 
 function toggle_difficulties(clicked_id) {
     if (!difficulty_list.includes(clicked_id)) {
-        document.getElementById("demo").innerHTML = 'You have disabled the ' + clicked_id + ' difficulty.';
+        document.getElementById("demo").innerHTML = 'You have disabled the ' + difficulty_number_identities[clicked_id] + ' difficulty.';
         difficulty_list.push(clicked_id);
         console.log('Banned Difficulties:' + difficulty_list);
     } else {
-        document.getElementById("demo").innerHTML = 'You have enabled the ' + clicked_id + ' difficulty.';
+        document.getElementById("demo").innerHTML = 'You have enabled the ' + difficulty_number_identities[clicked_id] + ' difficulty.';
         difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
         console.log('Banned Difficulties:' + difficulty_list);
     }
