@@ -13,38 +13,38 @@ var category_list = [];
 var era_list = [];
 
 var category_number_identities = {
-    1:'art',
-    2:'economics',
-    3:'food',
-    4:'games',
-    5:'geography',
-    6:'history',
-    7:'human body',
-    8:'language',
-    9:'literature',
-    10:'math',
-    11:'miscellaneous',
-    12:'movies',
-    13:'music',
-    14:'nature',
-    15:'philosophy',
-    16:'politics',
-    17:'pop-culture',
-    18:'religion',
-    19:'science',
-    20:'sports',
-    21:'technology',
-    22:'television',
-    23:'theater',
-    24:'video-games'
+    1:'Art',
+    2:'Economics',
+    3:'Food',
+    4:'Games',
+    5:'Geography',
+    6:'History',
+    7:'Human body',
+    8:'Language',
+    9:'Literature',
+    10:'Math',
+    11:'Miscellaneous',
+    12:'Movies',
+    13:'Music',
+    14:'Nature',
+    15:'Philosophy',
+    16:'Politics',
+    17:'Pop culture',
+    18:'Religion',
+    19:'Science',
+    20:'Sports',
+    21:'Technology',
+    22:'Television',
+    23:'Theater',
+    24:'Video games'
 }
 
 var difficulty_number_identities = {
-    1:'genius',
-    2:'sharp',
-    3:'average',
-    4:'basic',
-    5:'insulting'
+    5:'Genius',
+    4:'Sharp',
+    3:'Average',
+    2:'Easy',
+    1:'Casual'
 }
 
 var category_colors = {
