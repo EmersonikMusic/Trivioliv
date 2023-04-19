@@ -10,6 +10,17 @@
     <input type="text" class="form-control" type="search" aria-label="Search" name="searched">
     <button class="btn-outline-primary" type="submit">Search</button>
 </form>
+<br>
+<a href="{% url 'configure:question-create' %}">
+    <button class="btn btn-primary">Create New Question</button>
+</a>
+
+<form action="" method="POST">
+    {% csrf_token %}
+        <button class="btn btn-secondary" type="submit">Batch Add from CSV</button>
+    <input type="number" class="number" name="start_num" id="start_num" width="100px;" placeholder="0">
+</form>
+
 
 <table class="table">
     <thead>
@@ -23,7 +34,7 @@
         </tr>
     </thead>
 
-{% for question in object_list %}
+{% for question in questions %}
     <tbody>
         <tr>
             <td><a href="{% url 'configure:question-update' question.id %}">{{ question.text }}</a></td>
@@ -42,18 +53,5 @@
     No Questions yet.
 {% endfor %}
 </table>
-
-<a href="{% url 'configure:question-create' %}">
-    <button class="btn btn-primary">Create New Question</button>
-</a>
-
-<a href="{% url 'configure:question-batch' %}">
-    <button class="btn btn-secondary">Batch Add from CSV</button>
-</a>
-
-<a href="{% url 'configure:delete-all' %}">
-    <button class="btn btn-danger">Delete All Questions</button>
-</a>
-
 
 {% endblock %}

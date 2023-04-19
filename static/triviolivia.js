@@ -8,6 +8,9 @@ var game_paused = false;
 var current_question_category = null;
 var menu_hidden = true;
 var start_or_pause_game = 'Start';
+var difficulty_list = [];
+var category_list = [];
+var era_list = [];
 
 var active_categories = {
     'art': true,
@@ -75,13 +78,29 @@ var category_colors = {
     'Video games': '#9900ff'
 }
 
-var fetched_questions = {
+var baseUrl = 'http://localhost:8000/api/questions';
+var queryParams = [];
 
+function test() {
+    if (category_list.length > 0) {
+        queryParams.push('category=' + category_list.join(','));
+    }
+    if (difficulty_list.length > 0) {
+        queryParams.push('difficulty=' + difficulty_list.join(','));
+    }
+    if (era_list.length > 0) {
+        queryParams.push('era=' + era_list.join(','));
+    }
+    const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
+    console.log(urlWithParams);
+    fetch(urlWithParams)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
 }
 
 function hide_menu() {
     document.getElementById("menu").style.left = "-1000px";
-
 }
 
 function show_menu() {
@@ -91,7 +110,7 @@ function show_menu() {
 
 function display_fetched_data() {
     for (let i = 0; i < 10; i++) {
-  fetch('https://triviolivia.herokuapp.com/api/questions/')
+  fetch(urlWithParams)
   .then(response => response.text())
   .then(html => console.log(html))
   .catch(error => console.error(error));
@@ -113,7 +132,6 @@ async function fetchJsonTenTimes(url) {
     
   }
 
-
 function start_or_pause_game() {
     if (game_started == false) {
         game_started = true;
@@ -134,7 +152,6 @@ function start_or_pause_game() {
     }
 }
 
-
 function toggle_menu() {
     if (menu_hidden == true) {
         menu_hidden = false;
@@ -150,29 +167,40 @@ function confirm_reset() {
 }
 
 function toggle_categories(clicked_id) {
-    if (active_categories[clicked_id] == true) {
+    if (!category_list.includes(clicked_id)) {
         document.getElementById("demo").innerHTML = 'You have disabled the ' + clicked_id + ' category.';
-        active_categories[clicked_id] = false;
-        console.log(active_categories);
+        category_list.push(clicked_id);
+        console.log('Banned Categories:' + category_list);
     } else {
         document.getElementById("demo").innerHTML = 'You have enabled the ' + clicked_id + ' category.';
-        active_categories[clicked_id] = true;
-        console.log(active_categories);
+        category_list.splice(category_list.indexOf(clicked_id), 1);
+        console.log('Banned Categories:' + category_list);
     }
 }
 
 function toggle_difficulties(clicked_id) {
-    if (active_difficulties[clicked_id] == true) {
+    if (!difficulty_list.includes(clicked_id)) {
         document.getElementById("demo").innerHTML = 'You have disabled the ' + clicked_id + ' difficulty.';
-        active_difficulties[clicked_id] = false;
-        console.log(active_difficulties);
+        difficulty_list.push(clicked_id);
+        console.log('Banned Difficulties:' + difficulty_list);
     } else {
         document.getElementById("demo").innerHTML = 'You have enabled the ' + clicked_id + ' difficulty.';
-        active_difficulties[clicked_id] = true;
-        console.log(active_difficulties);
+        difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
+        console.log('Banned Difficulties:' + difficulty_list);
     }
 }
 
+function toggle_eras(clicked_id) {
+    if (!era_list.includes(clicked_id)) {
+        document.getElementById("demo").innerHTML = 'You have disabled the ' + clicked_id + ' era.';
+        era_list.push(clicked_id);
+        console.log('Banned eras:' + era_list);
+    } else {
+        document.getElementById("demo").innerHTML = 'You have enabled the ' + clicked_id + ' era.';
+        era_list.splice(era_list.indexOf(clicked_id), 1);
+        console.log('Banned eras:' + era_list);
+    }
+}
 
 function change_time_per_question(clicked_id) {
     time_per_question = clicked_id;

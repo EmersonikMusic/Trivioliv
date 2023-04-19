@@ -9,7 +9,7 @@ app_name = 'configure'
 urlpatterns = [
     path('', views.main, name='main'),
     
-    path('question/', QuestionListView.as_view(), name='question-list'),
+    path('question/', views.question_list, name='question-list'),
     path('question/create/', QuestionCreateView.as_view(), name='question-create'),
     path('question/batch/', views.batch, name='question-batch'),
     path('question/<int:pk>/update/', QuestionUpdateView.as_view(), name='question-update'),

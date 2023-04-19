@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 
 from .models import *
 from .forms import *
@@ -22,11 +23,40 @@ def main(request):
     }
     return render(request, 'configure/main.html',context)
 
-class QuestionListView(ListView):
-    model = Question
-    template_name = 'configure/question_list.html'
-    context_object_name = 'questions'
-    paginate_by = 25
+def  question_list(request):
+
+    uid = User.objects.get(id='5')
+    print(uid)
+
+    if request.method=="POST":
+        start_num=int(request.POST.get('start_num'))
+        df=pd.read_csv('trivia_questions2.csv',sep=',')
+
+        for q in range(start_num,20):
+            print(df.iloc[q][4])
+            question, created = Question.objects.update_or_create(text=df.iloc[q][4],
+                                                    defaults={'answer':df.iloc[q][5],
+                                                                'category':Category.objects.get(name=df.iloc[q][1]),
+                                                                'difficulty':Difficulty.objects.get(score=int(df.iloc[q][2])),
+                                                                'author':uid,
+                                                                })
+
+        
+            era_list = df.iloc[q][3].split(', ')
+            print(question)
+            for era in era_list:
+                print(str(q)+'. '+question.text+' - '+era)
+                question.eras.add(Era.objects.get(name=era))
+            
+
+        return redirect('configure:question-list')
+           
+    context = {
+        'questions': Question.objects.all()[:10],
+    }
+
+    return render(request, 'configure/question_list.html',context)
+    
 
 class QuestionCreateView(LoginRequiredMixin, CreateView):
     model = Question
@@ -41,26 +71,7 @@ class QuestionCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
-def batch(request):
-
-    df=pd.read_csv('trivia_questions2.csv',sep=',')
-
-    for q in range(0,len(df)):
-        if q==1:
-            q=2500
-        question, created = Question.objects.get_or_create(text=df.iloc[q][4],
-                                                  defaults={'answer':df.iloc[q][5],
-                                                            'category':Category.objects.get(name=df.iloc[q][1]),
-                                                            'difficulty':Difficulty.objects.get(score=int(df.iloc[q][2])),
-                                                            'author':request.user,
-                                                            })
-
-        if created:
-            era_list = df.iloc[q][3].split(', ')
-            for era in era_list:
-                print(str(q)+'. '+question.text+' - '+era)
-                question.eras.add(Era.objects.get(name=era))
-        
+def batch(request,start_num=0):
 
     context={}
 

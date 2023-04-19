@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qfadm-gnvm*0_lz7w0rja@tee-qi5l*^yi8waiick41bsfnce8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*', 'https://markadegames.com', 'https://www.markadegames.com','markadegames.com/:1',]
 CORS_ORIGIN_ALLOW_ALL = True
