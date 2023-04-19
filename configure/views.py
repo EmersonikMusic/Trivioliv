@@ -32,7 +32,7 @@ def  question_list(request):
         start_num=int(request.POST.get('start_num'))
         df=pd.read_csv('trivia_questions2.csv',sep=',')
 
-        for q in range(start_num,20):
+        for q in range(start_num,len(df)):
             print(df.iloc[q][4])
             question, created = Question.objects.update_or_create(text=df.iloc[q][4],
                                                     defaults={'answer':df.iloc[q][5],
