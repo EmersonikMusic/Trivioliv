@@ -47,6 +47,21 @@ var difficulty_number_identities = {
     1:'Casual'
 }
 
+var era_number_identities = {
+    1:'Pre-1500',
+    2:'1500-1800',
+    3:'1800-1900',
+    4:'1900-1950',
+    5:'1950s',
+    6:'1960s',
+    7:'1970s',
+    8:'1980s',
+    9:'1990s',
+    10:'2000s',
+    11:'2010s',
+    12:'2020s'
+}
+
 var category_colors = {
     'Art': '#dd7e6b',
     'Economics': '#315303',
@@ -192,11 +207,11 @@ function toggle_difficulties(clicked_id) {
 
 function toggle_eras(clicked_id) {
     if (!era_list.includes(clicked_id)) {
-        document.getElementById("demo").innerHTML = 'You have disabled the ' + clicked_id + ' era.';
+        document.getElementById("demo").innerHTML = 'You have disabled the ' + era_number_identities[clicked_id] + ' era.';
         era_list.push(clicked_id);
         console.log('Banned eras:' + era_list);
     } else {
-        document.getElementById("demo").innerHTML = 'You have enabled the ' + clicked_id + ' era.';
+        document.getElementById("demo").innerHTML = 'You have enabled the ' + era_number_identities[clicked_id] + ' era.';
         era_list.splice(era_list.indexOf(clicked_id), 1);
         console.log('Banned eras:' + era_list);
     }
