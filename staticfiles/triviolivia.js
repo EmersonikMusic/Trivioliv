@@ -78,7 +78,7 @@ var category_colors = {
     'Video games': '#9900ff'
 }
 
-var baseUrl = 'http://localhost:8000/api/questions';
+var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
 var queryParams = [];
 
 function test() {
