@@ -93,7 +93,7 @@ var category_colors = {
     'Video games': '#9900ff'
 }
 
-var baseUrl = 'http://triviolivia.herokuapp.com/api/questions';
+var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
 var moddedUrl = '';
 var queryParams = [];
 var fetched_data = new_game_starter();
