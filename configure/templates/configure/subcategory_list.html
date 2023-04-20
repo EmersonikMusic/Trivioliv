@@ -1,0 +1,47 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+
+<h1>Subcategories</h1>
+
+<a href="{% url 'configure:subcategory-create' %}">
+    <button class="btn btn-primary">Create New Subategory</button>
+</a>
+<form action="" method="post">
+    {% csrf_token %}
+    <button action="submit" class="btn btn-outline-secondary">Batch Add</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+{% for subcategory in object_list %}
+    <tbody>
+        <tr>
+            <td><a href="{% url 'configure:subcategory-update' subcategory.id %}">{{ subcategory.name }}</a></td>
+            <td>{{ subcategory.category.name }}</td>
+            <td>{{ subcategory.description }}</td>
+            <td>
+                <a href="{% url 'configure:subcategory-delete' subcategory.id %}">
+                    <button class="btn btn-danger">Delete</button>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+{% empty %}
+    No Subategories yet.
+{% endfor %}
+</table>
+
+<a href="{% url 'configure:subcategory-create' %}">
+    <button class="btn btn-primary">Create New Subategory</button>
+</a>
+
+
+{% endblock %}

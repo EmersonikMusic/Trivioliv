@@ -22,6 +22,11 @@ urlpatterns = [
     path('category/<int:pk>/update/', CategoryUpdateView.as_view(), name='category-update'),
     path('category/<int:pk>/delete/', CategoryDeleteView.as_view(), name='category-delete'),
 
+    path('subcategory/', SubcategoryListView.as_view(), name='subcategory-list'),
+    path('subcategory/create/', SubcategoryCreateView.as_view(), name='subcategory-create'),
+    path('subcategory/<int:pk>/update/', SubcategoryUpdateView.as_view(), name='subcategory-update'),
+    path('subcategory/<int:pk>/delete/', SubcategoryDeleteView.as_view(), name='subcategory-delete'),
+
     path('era/', EraListView.as_view(), name='era-list'),
     path('era/create/', EraCreateView.as_view(), name='era-create'),
     path('era/<int:pk>/update/', EraUpdateView.as_view(), name='era-update'),

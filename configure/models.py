@@ -64,6 +64,7 @@ class Question(models.Model):
     difficulty = models.ForeignKey(Difficulty, on_delete=models.CASCADE, related_name="questions")
     eras= models.ManyToManyField(Era, related_name="questions_for_era")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="questions")
+    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, related_name="questions")
     tags = models.ManyToManyField(Tags, related_name="questions")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)

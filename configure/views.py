@@ -25,34 +25,25 @@ def main(request):
 
 def  question_list(request):
 
-    uid = User.objects.get(id='5')
-    print(uid)
-
     if request.method=="POST":
         start_num=int(request.POST.get('start_num'))
         df=pd.read_csv('trivia_questions2.csv',sep=',')
 
         for q in range(start_num,len(df)):
-            print(df.iloc[q][4])
+            print(str(q)+ '. ' + df.iloc[q][4])
             question, created = Question.objects.update_or_create(text=df.iloc[q][4],
                                                     defaults={'answer':df.iloc[q][5],
+                                                                'subcategory':Subcategory.objects.get(name=df.iloc[q][0]),
                                                                 'category':Category.objects.get(name=df.iloc[q][1]),
                                                                 'difficulty':Difficulty.objects.get(score=int(df.iloc[q][2])),
-                                                                'author':uid,
+                                                                'author':request.user,
                                                                 })
 
-        
-            era_list = df.iloc[q][3].split(', ')
-            print(question)
-            for era in era_list:
-                print(str(q)+'. '+question.text+' - '+era)
-                question.eras.add(Era.objects.get(name=era))
-            
 
         return redirect('configure:question-list')
            
     context = {
-        'questions': Question.objects.all()[:10],
+        'questions': Question.objects.all()[:20],
     }
 
     return render(request, 'configure/question_list.html',context)
@@ -135,6 +126,46 @@ class CategoryDeleteView(DeleteView):
     model = Category
     template_name = 'configure/category_delete.html'
     success_url =  reverse_lazy('configure:category-list')
+
+
+class SubcategoryListView(ListView):
+    model = Subcategory
+    template_name = 'configure/subcategory_list.html'
+    context_object_name = 'subcategories'
+    paginate_by = 25
+
+    def post(self, request, *args, **kwargs):
+        df=pd.read_csv('subcategories.csv',sep=',')
+        for i in range(len(df)):
+            print(df.iloc[i][0])
+            subcategory, created = Subcategory.objects.update_or_create(name=df.iloc[i][1],
+                                                    defaults={'category':Category.objects.get(name=df.iloc[i][0]),
+                                                                })
+        return redirect('configure:subcategory-list')
+
+class SubcategoryDetailView(DetailView):
+    model = Subcategory
+    template_name = 'configure/subcategory_detail.html'
+    context_object_name = 'subcategory'
+
+class SubcategoryCreateView(CreateView):
+    model = Subcategory
+    template_name = 'configure/subcategory_create.html'
+    fields = ['name', 'description']
+
+    def get_success_url(self):
+        return reverse('configure:subcategory-list')
+
+class SubcategoryUpdateView(UpdateView):
+    model = Subcategory
+    template_name = 'configure/subcategory_update.html'
+    fields = ['name', 'description','title']
+    success_url =  reverse_lazy('configure:subcategory-list')
+
+class SubcategoryDeleteView(DeleteView):
+    model = Subcategory
+    template_name = 'configure/subcategory_delete.html'
+    success_url =  reverse_lazy('configure:subcategory-list')
 
 class EraListView(ListView):
     model = Era
