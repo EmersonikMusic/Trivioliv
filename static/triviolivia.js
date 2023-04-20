@@ -112,6 +112,7 @@ function test() {
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error(error));
+    yourFunctionNew();
 }
 
 function hide_menu() {
@@ -121,15 +122,6 @@ function hide_menu() {
 function show_menu() {
     document.getElementById("menu").style.left = "0px";
 
-}
-
-function display_fetched_data() {
-    for (let i = 0; i < 10; i++) {
-  fetch(urlWithParams)
-  .then(response => response.text())
-  .then(html => console.log(html))
-  .catch(error => console.error(error));
-}
 }
 
 let results = [];
@@ -287,11 +279,11 @@ const yourFunctionNew = async () => {
     document.getElementById("demo").innerHTML = '';
     
     for (let i = 0; i < 5; i++) {
-        document.body.style.backgroundColor = category_colors[results[i][0].category_name];
-        document.getElementById("demo").innerHTML = 'Category: ' + results[i][0].category_name + ' -  Difficulty: ' + results[i][0].difficulty_name + ' - Author: Mark Mazurek';
-        showQuestion(results[i][0].text);
+        document.body.style.backgroundColor = category_colors[data[i].category_name];
+        document.getElementById("demo").innerHTML = 'Category: ' + data[i].category_name + ' -  Difficulty: ' + data[i].difficulty_name + ' - Author: Mark Mazurek';
+        showQuestion(data[i].text);
         await delay(time_per_question * 1000);
-        showAnswer(results[i][0].answer)
+        showAnswer(data[i].answer)
         await delay(time_per_answer * 1000);
       }
     
