@@ -95,7 +95,6 @@ var category_colors = {
 
 var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
 var queryParams = [];
-let data = [];
 
 function test() {
     if (category_list.length > 0) {
@@ -281,10 +280,10 @@ const yourFunctionNew = async () => {
     
     for (let i = 0; i < 5; i++) {
         document.body.style.backgroundColor = category_colors[data[i].category_name];
-        document.getElementById("demo").innerHTML = 'Category: ' + data[i].category_name + ' -  Difficulty: ' + data[i].difficulty_name + ' - Author: Mark Mazurek';
-        showQuestion(data[i].text);
+        document.getElementById("demo").innerHTML = 'Category: ' + response[i].category_name + ' -  Difficulty: ' + response[i].difficulty_name + ' - Author: Mark Mazurek';
+        showQuestion(response[i].text);
         await delay(time_per_question * 1000);
-        showAnswer(data[i].answer)
+        showAnswer(response[i].answer)
         await delay(time_per_answer * 1000);
       }
     
