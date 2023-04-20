@@ -93,8 +93,47 @@ var category_colors = {
     'Video games': '#9900ff'
 }
 
-var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
+var baseUrl = 'http://triviolivia.herokuapp.com/api/questions';
+var moddedUrl = '';
 var queryParams = [];
+var fetched_data = new_game_starter();
+console.log(fetched_data);
+
+function url_generator() {
+    if (category_list.length > 0) {
+        queryParams.push('category=' + category_list.join(','));
+    }
+    if (difficulty_list.length > 0) {
+        queryParams.push('difficulty=' + difficulty_list.join(','));
+    }
+    if (era_list.length > 0) {
+        queryParams.push('era=' + era_list.join(','));
+    }
+    const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
+    return urlWithParams;
+}
+
+function url_fetcher(generated_url) {
+    fetch(generated_url)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+}
+
+async function fetchJSON(generated_url) {
+    const response = await fetch(generated_url);
+    const data = await response.json();
+    return data;
+}
+  
+function new_game_starter() {
+    var generated_url = url_generator();
+    console.log(generated_url);
+    var response_data = url_fetcher(generated_url);
+    console.log(response_data);
+    var new_response_data = fetchJSON(generated_url)
+    return new_response_data;
+}
 
 function test() {
     if (category_list.length > 0) {
@@ -107,13 +146,36 @@ function test() {
         queryParams.push('era=' + era_list.join(','));
     }
     const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
-    console.log(urlWithParams);
-    fetch(urlWithParams)
+    moddedUrl = urlWithParams;
+    fetch(moddedUrl)
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error(error));
     yourFunctionNew();
 }
+
+
+
+//ChatGPT attempt at making custom stuff work
+
+let globalData;
+
+async function fetchData(moddedUrl) {
+  const response = await fetch(moddedUrl);
+  const data = await response.json();
+  globalData = data;
+}
+
+fetchData('https://triviolivia.herokuapp.com/api/questions?questions=10')
+  .then(() => {
+    console.log(globalData);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+
+// end ChatGPT
 
 function hide_menu() {
     document.getElementById("menu").style.left = "-1000px";
@@ -278,12 +340,12 @@ const yourFunctionNew = async () => {
     await delay(1 * 1000);
     document.getElementById("demo").innerHTML = '';
     
-    for (let i = 0; i < 5; i++) {
-        document.body.style.backgroundColor = category_colors[data[i].category_name];
-        document.getElementById("demo").innerHTML = 'Category: ' + response[i].category_name + ' -  Difficulty: ' + response[i].difficulty_name + ' - Author: Mark Mazurek';
-        showQuestion(response[i].text);
+    for (let i = 0; i < 10; i++) {
+        document.body.style.backgroundColor = category_colors[globalData[i].category_name];
+        document.getElementById("demo").innerHTML = 'Category: ' + globalData[i].category_name + ' -  Difficulty: ' + globalData[i].difficulty_name + ' - Author: Mark Mazurek';
+        showQuestion(globalData[i].text);
         await delay(time_per_question * 1000);
-        showAnswer(response[i].answer)
+        showAnswer(globalData[i].answer)
         await delay(time_per_answer * 1000);
       }
     
