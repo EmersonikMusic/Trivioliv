@@ -6,45 +6,60 @@ var time_per_answer = 5
 var game_started = false;
 var game_paused = false;
 var current_question_category = null;
-var menu_hidden = true;
+var menu_hidden = false;
 var start_or_pause_game = 'Start';
 var difficulty_list = [];
 var category_list = [];
 var era_list = [];
 
-var active_categories = {
-    'art': true,
-    'economics': true,
-    'food': true,
-    'games': true,
-    'geography': true,
-    'history': true,
-    'human body': true,
-    'language': true,
-    'literature': true,
-    'math': true,
-    'miscellaneous': true,
-    'movies': true,
-    'music': true,
-    'nature': true,
-    'philosophy': true,
-    'politics': true,
-    'pop-culture': true,
-    'religion': true,
-    'science':true,
-    'sports': true,
-    'technology': true,
-    'television': true,
-    'theater': true,
-    'video-games': true
+var category_number_identities = {
+    1:'Art',
+    2:'Economics',
+    3:'Food',
+    4:'Games',
+    5:'Geography',
+    6:'History',
+    7:'Human body',
+    8:'Language',
+    9:'Literature',
+    10:'Math',
+    11:'Miscellaneous',
+    12:'Movies',
+    13:'Music',
+    14:'Nature',
+    15:'Philosophy',
+    16:'Politics',
+    17:'Pop culture',
+    18:'Religion',
+    19:'Science',
+    20:'Sports',
+    21:'Technology',
+    22:'Television',
+    23:'Theater',
+    24:'Video games'
 }
 
-var active_difficulties = {
-    'genius': true,
-    'sharp': true,
-    'average': true,
-    'basic': true,
-    'insulting': true
+var difficulty_number_identities = {
+    5:'Genius',
+    4:'Sharp',
+    3:'Average',
+    2:'Easy',
+    1:'Casual'
+}
+
+var era_number_identities = {
+    1:'Pre-1500',
+    2:'1500-1800',
+    3:'1800-1900',
+    4:'1900-1950',
+    5:'1950s',
+    6:'1960s',
+    7:'1970s',
+    8:'1980s',
+    9:'1990s',
+    10:'2000s',
+    11:'2010s',
+    12:'2020s'
 }
 
 var category_colors = {
@@ -168,11 +183,11 @@ function confirm_reset() {
 
 function toggle_categories(clicked_id) {
     if (!category_list.includes(clicked_id)) {
-        document.getElementById("demo").innerHTML = 'You have disabled the ' + clicked_id + ' category.';
+        document.getElementById("demo").innerHTML = 'You have disabled the ' + category_number_identities[clicked_id] + ' category.';
         category_list.push(clicked_id);
         console.log('Banned Categories:' + category_list);
     } else {
-        document.getElementById("demo").innerHTML = 'You have enabled the ' + clicked_id + ' category.';
+        document.getElementById("demo").innerHTML = 'You have enabled the ' + category_number_identities[clicked_id] + ' category.';
         category_list.splice(category_list.indexOf(clicked_id), 1);
         console.log('Banned Categories:' + category_list);
     }
@@ -180,11 +195,11 @@ function toggle_categories(clicked_id) {
 
 function toggle_difficulties(clicked_id) {
     if (!difficulty_list.includes(clicked_id)) {
-        document.getElementById("demo").innerHTML = 'You have disabled the ' + clicked_id + ' difficulty.';
+        document.getElementById("demo").innerHTML = 'You have disabled the ' + difficulty_number_identities[clicked_id] + ' difficulty.';
         difficulty_list.push(clicked_id);
         console.log('Banned Difficulties:' + difficulty_list);
     } else {
-        document.getElementById("demo").innerHTML = 'You have enabled the ' + clicked_id + ' difficulty.';
+        document.getElementById("demo").innerHTML = 'You have enabled the ' + difficulty_number_identities[clicked_id] + ' difficulty.';
         difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
         console.log('Banned Difficulties:' + difficulty_list);
     }
@@ -192,11 +207,11 @@ function toggle_difficulties(clicked_id) {
 
 function toggle_eras(clicked_id) {
     if (!era_list.includes(clicked_id)) {
-        document.getElementById("demo").innerHTML = 'You have disabled the ' + clicked_id + ' era.';
+        document.getElementById("demo").innerHTML = 'You have disabled the ' + era_number_identities[clicked_id] + ' era.';
         era_list.push(clicked_id);
         console.log('Banned eras:' + era_list);
     } else {
-        document.getElementById("demo").innerHTML = 'You have enabled the ' + clicked_id + ' era.';
+        document.getElementById("demo").innerHTML = 'You have enabled the ' + era_number_identities[clicked_id] + ' era.';
         era_list.splice(era_list.indexOf(clicked_id), 1);
         console.log('Banned eras:' + era_list);
     }
