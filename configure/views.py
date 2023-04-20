@@ -33,7 +33,7 @@ def  question_list(request):
             print(str(q)+ '. ' + df.iloc[q][4])
             question, created = Question.objects.update_or_create(text=df.iloc[q][4],
                                                     defaults={'answer':df.iloc[q][5],
-                                                                #'subcategory':Subcategory.objects.get(name=df.iloc[q][0]),
+                                                                'subcategory':Subcategory.objects.get(name=df.iloc[q][0]),
                                                                 'category':Category.objects.get(name=df.iloc[q][1]),
                                                                 'difficulty':Difficulty.objects.get(score=int(df.iloc[q][2])),
                                                                 'author':request.user,
