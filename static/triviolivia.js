@@ -95,6 +95,7 @@ var category_colors = {
 
 var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
 var queryParams = [];
+let data = [];
 
 function test() {
     if (category_list.length > 0) {
