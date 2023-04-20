@@ -96,8 +96,8 @@ var category_colors = {
 var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
 var moddedUrl = '';
 var queryParams = [];
-var fetched_data = new_game_starter();
-console.log(fetched_data);
+// var fetched_data = new_game_starter();
+// console.log(fetched_data);
 
 function url_generator() {
     if (category_list.length > 0) {
@@ -126,13 +126,21 @@ async function fetchJSON(generated_url) {
     return data;
 }
   
-function new_game_starter() {
-    var generated_url = url_generator();
-    console.log(generated_url);
-    var response_data = url_fetcher(generated_url);
-    console.log(response_data);
-    var new_response_data = fetchJSON(generated_url)
-    return new_response_data;
+// function new_game_starter() {
+//     var generated_url = url_generator();
+//     console.log(generated_url);
+//     var response_data = url_fetcher(generated_url);
+//     console.log(response_data);
+//     var new_response_data = fetchJSON(generated_url)
+//     return new_response_data;
+// }
+
+let globalData;
+
+async function fetchData(moddedUrl) {
+  const response = await fetch(moddedUrl);
+  const data = await response.json();
+  globalData = data;
 }
 
 function test() {
@@ -147,7 +155,7 @@ function test() {
     }
     const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
     moddedUrl = urlWithParams;
-    fetch(moddedUrl)
+    fetchData(moddedUrl)
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error(error));
@@ -158,21 +166,13 @@ function test() {
 
 //ChatGPT attempt at making custom stuff work
 
-let globalData;
-
-async function fetchData(moddedUrl) {
-  const response = await fetch(moddedUrl);
-  const data = await response.json();
-  globalData = data;
-}
-
-fetchData('https://triviolivia.herokuapp.com/api/questions?questions=10')
-  .then(() => {
-    console.log(globalData);
-  })
-  .catch(error => {
-    console.error(error);
-  });
+// fetchData('https://triviolivia.herokuapp.com/api/questions?questions=10')
+//   .then(() => {
+//     console.log(globalData);
+//   })
+//   .catch(error => {
+//     console.error(error);
+//   });
 
 
 // end ChatGPT
