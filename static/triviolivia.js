@@ -155,6 +155,7 @@ function test() {
     }
     const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
     moddedUrl = urlWithParams;
+    menu_hidden = true;
     hide_menu();
     fetchData(moddedUrl);
     // .then(response => response.json())
