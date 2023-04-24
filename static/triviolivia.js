@@ -351,5 +351,5 @@ const yourFunctionNew = async () => {
         await delay(time_per_answer * 1000);
       }
     
-    document.getElementById("demo").innerHTML = 'Thanks for playing! Refresh to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2023';
+    document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2023';
   };
