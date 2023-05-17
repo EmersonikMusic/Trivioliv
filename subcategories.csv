@@ -1,315 +1,315 @@
-﻿Art,Architecture
-Art,Artists
-Art,Awards
-Art,Colors
-Art,Digital Art
-Art,Festivals
-Art,Museums
-Art,Painting
-Art,Photography
-Art,Sculpture
-Art,Styles
-Art,Terms
-Art,Theory
-Art,Typography
-Economics,Business
-Economics,Businesspeople
-Economics,Cryptocurrency
-Economics,Currency
-Economics,Economists
-Economics,Events
-Economics,Finance
-Economics,Institutions
-Economics,Policies
-Economics,Stocks
-Economics,Terms
-Economics,Trade
-Food,Agriculture
-Food,Alcohol
-Food,Brands
-Food,Cooking
-Food,Drinks
-Food,Foodstuffs
-Food,Ingredients
-Food,National Dishes
-Food,Origins
-Food,Other
-Food,Producers
-Food,Restaurants
-Food,Spices
-Food,Terms
-Games,Bar Games
-Games,Board Games
-Games,Card Games
-Games,Games of Chance
-Games,Party Games
-Games,Puzzles
-Games,Schoolyard Games
-Games,Tabletop Games
-Geography,Bodies of Water
-Geography,Capitals
-Geography,Cartography
-Geography,Cities
-Geography,Countries
-Geography,Landmarks
-Geography,Regions
-Geography,Terms
-Geography,Territories
-History,Civilizations
-History,Deaths
-History,Empires
-History,Events
-History,Figures
-History,Firsts
-History,Names
-History,Other
-History,Periods
-History,Places
-History,Prehistory
-History,Quotes
-History,War
-Human Body,Anatomy
-Human Body,Disease
-Human Body,Organs
-Human Body,Physiology
-Human Body,Systems
-Human Body,Terms
-Language,Alphabets
-Language,Anagrams
-Language,Codes
-Language,Definitions
-Language,Languages
-Language,Linguistics
-Language,Parts of Speech
-Language,Punctuation
-Language,Sayings
-Language,Shorthands
-Language,Slang
-Language,Terms
-Language,Translation
-Language,Words
-Literature,Authors
-Literature,Awards
-Literature,Books
-Literature,Characters
-Literature,Details
-Literature,Graphic Novels
-Literature,Journalism
-Literature,Lines
-Literature,Literary Devices
-Literature,Poetry
-Literature,Stories
-Math,Branches
-Math,Concepts
-Math,Geometry
-Math,Mathematicians
-Math,Notation
-Math,Numbers
-Math,Other
-Math,Problems
-Math,Statistics
-Math,Symbols
-Math,Terms
-Math,Units
-Miscellaneous,Buildings
-Miscellaneous,Calendar
-Miscellaneous,Education
-Miscellaneous,Flags
-Miscellaneous,Journalism
-Miscellaneous,Law
-Miscellaneous,Logos
-Miscellaneous,Martial Arts
-Miscellaneous,Names
-Miscellaneous,Other
-Miscellaneous,Products
-Miscellaneous,Slogans
-Miscellaneous,Terms
-Movies,Actors
-Movies,Awards
-Movies,Characters
-Movies,Cinematography
-Movies,Details
-Movies,Directors
-Movies,Festivals
-Movies,Films
-Movies,Lines
-Movies,Musicals
-Movies,Other
-Movies,Studios
-Movies,Taglines
-Music,Albums
-Music,Aliases
-Music,Artists
-Music,Awards
-Music,Clubs
-Music,Concerts
-Music,Contests
-Music,Festivals
-Music,Genres
-Music,Hardware
-Music,Instruments
-Music,Labels
-Music,Lyrics
-Music,Notation
-Music,Other
-Music,Producers
-Music,Songs
-Music,Streaming
-Music,Terms
-Music,Theory
-Nature,Animals
-Nature,Environment
-Nature,Natural Disasters
-Nature,Plants
-Nature,Space
-Nature,Terms
-Philosophy,Branches
-Philosophy,Ideologies
-Philosophy,Metaphysics
-Philosophy,Philosophers
-Philosophy,Principles
-Philosophy,Terms
-Politics,Events
-Politics,Geopolitics
-Politics,Government
-Politics,Movements
-Politics,Parties
-Politics,Politicians
-Politics,Terms
-Politics,Treaties
-Politics,Unions
-Pop Culture,Aliases
-Pop Culture,Applications
-Pop Culture,Celebrities
-Pop Culture,Comics
-Pop Culture,Criminals
-Pop Culture,Deaths
-Pop Culture,Entertainment
-Pop Culture,Events
-Pop Culture,Fashion
-Pop Culture,Generations
-Pop Culture,Legends
-Pop Culture,Lifestyle
-Pop Culture,Magazines
-Pop Culture,Memes
-Pop Culture,Other
-Pop Culture,Podcasts
-Pop Culture,Products
-Pop Culture,Pseudoscience
-Pop Culture,Scandals
-Pop Culture,Social Media
-Pop Culture,Societies
-Pop Culture,Superstition
-Pop Culture,Traditions
-Pop Culture,Trends
-Pop Culture,Websites
-Pop Culture,Viral Videos
-Science,Astronomy
-Science,Biochemistry
-Science,Biology
-Science,Chemistry
-Science,Fields
-Science,Geology
-Science,Medicine
-Science,Pathology
-Science,Physics
-Science,Psychology
-Science,Research Centers
-Science,Scientists
-Science,Sociology
-Science,Techniques
-Science,Terms
-Science,Units
-Sports,Athletes
-Sports,Awards
-Sports,Equipment
-Sports,Events
-Sports,Games
-Sports,Governing Bodies
-Sports,Leagues
-Sports,Mascots
-Sports,Motorsports
-Sports,Olympics
-Sports,Other
-Sports,Records
-Sports,Rules
-Sports,Sports Entertainment
-Sports,Stadiums
-Sports,Teams
-Sports,Terms
-Sports,World Cups
-Technology,Advances
-Technology,Applications
-Technology,Companies
-Technology,Computers
-Technology,Engineering
-Technology,Events
-Technology,Hardware
-Technology,Internet
-Technology,Inventors
-Technology,Machines
-Technology,Names
-Technology,Programming
-Technology,Software
-Technology,Terms
-Technology,Vehicles
-Technology,Websites
-Television,Actors
-Television,Awards
-Television,Broadcasting
-Television,Characters
-Television,Commercials
-Television,Details
-Television,Events
-Television,Game Shows
-Television,Lines
-Television,News
-Television,Producers
-Television,Reality TV
-Television,Shows
-Television,Streaming
-Television,Theme Songs
-Television,Terms
-Television,YouTube
-Theater,Acting
-Theater,Actors
-Theater,Awards
-Theater,Dance
-Theater,Genres
-Theater,Lines
-Theater,Musicals
-Theater,Opera
-Theater,Plays
-Theater,Performers
-Theater,Playwrights
-Theater,Schools
-Theater,Terms
-Theater,Theaters
-Theology,Apparel
-Theology,Astrology
-Theology,Events
-Theology,Folklore
-Theology,Holy Books
-Theology,Holy Days
-Theology,Institutions
-Theology,Mythology
-Theology,Places of Worship
-Theology,Popes
-Theology,Saints
-Theology,Symbols
-Theology,Traditions
-Theology,World Religions
-Video Games,Awards
-Video Games,Characters
-Video Games,Consoles
-Video Games,Details
-Video Games,Developers
-Video Games,Esports
-Video Games,Games
-Video Games,Genres
-Video Games,Hardware
-Video Games,Items
-Video Games,Levels
-Video Games,Other
-Video Games,Publications
-Video Games,Terms
+﻿Art,Architecture,,Sub
+Art,Artists,,Politicians
+Art,Awards,,Chemistry
+Art,Colors,,Problems
+Art,Digital Art,,Authors
+Art,Festivals,,Teams
+Art,Museums,,Celebrities
+Art,Painting,,Athletes
+Art,Photography,,Actors
+Art,Sculpture,,Physics
+Art,Styles,,Artists
+Art,Terms,,Programming
+Art,Theory,,Instruments
+Art,Typography,,Scientists
+Economics,Business,,Terms
+Economics,Businesspeople,,Advances
+Economics,Cryptocurrency,,Translation
+Economics,Currency,,Space
+Economics,Economists,,Olympics
+Economics,Events,,Lines
+Economics,Finance,,Aliases
+Economics,Institutions,,Countries
+Economics,Policies,,Websites
+Economics,Stocks,,Developers
+Economics,Terms,,Names
+Economics,Trade,,Stocks
+Food,Agriculture,,Finance
+Food,Alcohol,,Cryptocurrency
+Food,Brands,,Units
+Food,Cooking,,Notation
+Food,Drinks,,Currency
+Food,Foodstuffs,,Shows
+Food,Ingredients,,Characters
+Food,National Dishes,,Landmarks
+Food,Origins,,Games
+Food,Other,,Poetry
+Food,Producers,,Numbers
+Food,Restaurants,,Awards
+Food,Spices,,Board Games
+Food,Terms,,Cities
+Games,Bar Games,,War
+Games,Board Games,,Events
+Games,Card Games,,Game Shows
+Games,Games of Chance,,Holy Books
+Games,Party Games,,Rules
+Games,Puzzles,,Other
+Games,Schoolyard Games,,Computing
+Games,Tabletop Games,,Vehicles
+Geography,Bodies of Water,,
+Geography,Capitals,,Restaurants
+Geography,Cartography,,Biology
+Geography,Cities,,Geometry
+Geography,Countries,,Theory
+Geography,Landmarks,,Foodstuffs
+Geography,Regions,,Comics
+Geography,Terms,,Flags
+Geography,Territories,,Schoolyard Games
+History,Civilizations,,Territories
+History,Deaths,,Definitions
+History,Empires,,Machines
+History,Events,,Capitals
+History,Figures,,Products
+History,Firsts,,Lyrics
+History,Names,,Details
+History,Other,,Biochemistry
+History,Periods,,Quotes
+History,Places,,Card Games
+History,Prehistory,,Deaths
+History,Quotes,,World Religions
+History,War,,Animals
+Human Body,Anatomy,,Origins
+Human Body,Disease,,Languages
+Human Body,Organs,,Figures
+Human Body,Physiology,,Slogans
+Human Body,Systems,,Festivals
+Human Body,Terms,,Museums
+Language,Alphabets,,Government
+Language,Anagrams,,Regions
+Language,Codes,,Films
+Language,Definitions,,Albums
+Language,Languages,,Companies
+Language,Linguistics,,Codes
+Language,Parts of Speech,,Buildings
+Language,Punctuation,,Linguistics
+Language,Sayings,,Philosophers
+Language,Shorthands,,Parts of Speech
+Language,Slang,,Words
+Language,Terms,,Painting
+Language,Translation,,Bodies of Water
+Language,Words,,Geopolitics
+Literature,Authors,,Unions
+Literature,Awards,,Pseudoscience
+Literature,Books,,Leagues
+Literature,Characters,,Internet
+Literature,Details,,Scandals
+Literature,Graphic Novels,,Tradition
+Literature,Journalism,,Scuplture
+Literature,Lines,,Consoles
+Literature,Literary Devices,,Books
+Literature,Poetry,,Trends
+Literature,Stories,,Software
+Math,Branches,,Prehistory
+Math,Concepts,,Slang
+Math,Geometry,,Streaming
+Math,Mathematicians,,Hardware
+Math,Notation,,Businesspeople
+Math,Numbers,,Business
+Math,Other,,Places
+Math,Problems,,Calendar
+Math,Statistics,,Directors
+Math,Symbols,,Medicine
+Math,Terms,,Sayings
+Math,Units,,Astronomy
+Miscellaneous,Buildings,,Sculpture
+Miscellaneous,Calendar,,Digital Art
+Miscellaneous,Education,,Records
+Miscellaneous,Flags,,Labels
+Miscellaneous,Journalism,,Clubs
+Miscellaneous,Law,,Sports Entertainment
+Miscellaneous,Logos,,Songs
+Miscellaneous,Martial Arts,,Cinematography
+Miscellaneous,Names,,Traditions
+Miscellaneous,Other,,Education
+Miscellaneous,Products,,Natural Disasters
+Miscellaneous,Slogans,,Producers
+Miscellaneous,Terms,,Opera
+Movies,Actors,,Equipment
+Movies,Awards,,Branches
+Movies,Characters,,Inventors
+Movies,Cinematography,,Items
+Movies,Details,,Institutions
+Movies,Directors,,Cartography
+Movies,Festivals,,Fashion
+Movies,Films,,Reality TV
+Movies,Lines,,Commericals
+Movies,Musicals,,Alcohol
+Movies,Other,,Brands
+Movies,Studios,,Ingredients
+Movies,Taglines,,Places of Worship
+Music,Albums,,Broadcasting
+Music,Aliases,,Superstition
+Music,Artists,,Concepts
+Music,Awards,,Genres
+Music,Clubs,,Societies
+Music,Concerts,,Esports
+Music,Contests,,Musicals
+Music,Festivals,,Parties
+Music,Genres,,Policies
+Music,Hardware,,Governing Bodies
+Music,Instruments,,Fields
+Music,Labels,,Stories
+Music,Lyrics,,Research Centers
+Music,Notation,,Law
+Music,Other,,Popes
+Music,Producers,,Firsts
+Music,Songs,,Geology
+Music,Streaming,,Environment
+Music,Terms,,Drinks
+Music,Theory,,Magazines
+Nature,Animals,,Anagrams
+Nature,Environment,,Commercials
+Nature,Natural Disasters,,Literary Devices
+Nature,Plants,,Psychology
+Nature,Space,,Mythology
+Nature,Terms,,Trade
+Philosophy,Branches,,World
+Philosophy,Ideologies,,Holy Days
+Philosophy,Metaphysics,,Symbols
+Philosophy,Philosophers,,Typography
+Philosophy,Principles,,Mathematicians
+Philosophy,Terms,,National Dishes
+Politics,Events,,Architecture
+Politics,Geopolitics,,Consoels
+Politics,Government,,Chracters
+Politics,Movements,,Levels
+Politics,Parties,,Dtails
+Politics,Politicians,,Agriculture
+Politics,Terms,,Plants
+Politics,Treaties,,Plays
+Politics,Unions,,Photography
+Pop Culture,Aliases,,Styles
+Pop Culture,Applications,,Motorsports
+Pop Culture,Celebrities,,Dance
+Pop Culture,Comics,,Computers
+Pop Culture,Criminals,,Podcasts
+Pop Culture,Deaths,,Performers
+Pop Culture,Entertainment,,Bar Games
+Pop Culture,Events,,World Cups
+Pop Culture,Fashion,,Memes
+Pop Culture,Generations,,Instituations
+Pop Culture,Legends,,Social Media
+Pop Culture,Lifestyle,,Empires
+Pop Culture,Magazines,,Pathology
+Pop Culture,Memes,,Theaters
+Pop Culture,Other,,Acting
+Pop Culture,Podcasts,,Puzzles
+Pop Culture,Products,,News
+Pop Culture,Pseudoscience,,Apparel
+Pop Culture,Scandals,,Engineering
+Pop Culture,Social Media,,Console
+Pop Culture,Societies,,Lifestyle
+Pop Culture,Superstition,,Studios
+Pop Culture,Traditions,,Viral Videos
+Pop Culture,Trends,,Saints
+Pop Culture,Websites,,Organs
+Pop Culture,Viral Videos,,Anatomy
+Science,Astronomy,,Systems
+Science,Biochemistry,,Physiology
+Science,Biology,,Logos
+Science,Chemistry,,Legends
+Science,Fields,,League
+Science,Geology,,Cooking
+Science,Medicine,,Playground Games
+Science,Pathology,,Alphabets
+Science,Physics,,Shorthands
+Science,Psychology,,Spices
+Science,Research Centers,,Cue Sports
+Science,Scientists,,Diretors
+Science,Sociology,,Colors
+Science,Techniques,,Crime
+Science,Terms,,Groups
+Science,Units,,Techniques
+Sports,Athletes,,English
+Sports,Awards,,Contests
+Sports,Equipment,,Journalism
+Sports,Events,,Atheles
+Sports,Games,,Stadiums
+Sports,Governing Bodies,,Atheletes
+Sports,Leagues,,Astrology
+Sports,Mascots,,Human Body
+Sports,Motorsports,,Definitios
+Sports,Olympics,,Movements
+Sports,Other,,Criminals
+Sports,Records,,Economists
+Sports,Rules,,Graphic Novels
+Sports,Sports Entertainment,,Applications
+Sports,Stadiums,,Detiails
+Sports,Teams,,Treaties
+Sports,Terms,,Language
+Sports,World Cups,,Taglines
+Technology,Advances,,Tabletop Games
+Technology,Applications,,Folklore
+Technology,Companies,,Publications
+Technology,Computers,,Generations
+Technology,Engineering,,Author
+Technology,Events,,Punctuation
+Technology,Hardware,,YouTube
+Technology,Internet,,Entertainment
+Technology,Inventors,,Statistics
+Technology,Machines,,Influencers
+Technology,Names,,Mascots
+Technology,Programming,,Mathermaticians
+Technology,Software,,Playwrights
+Technology,Terms,,Principles
+Technology,Vehicles,,Disease
+Technology,Websites,,Virology
+Television,Actors,,Textiles
+Television,Awards,,Disorders
+Television,Broadcasting,,Manufacturing
+Television,Characters,,Grammar
+Television,Commercials,,Concerts
+Television,Details,,Sociology
+Television,Events,,Schools
+Television,Game Shows,,Metaphysics
+Television,Lines,,Ideologies
+Television,News,,Periods
+Television,Producers,,Civilizations
+Television,Reality TV,,Games of Chance
+Television,Shows,,Theme Songs
+Television,Streaming,,Party Games
+Television,Theme Songs,,Martial Arts
+Television,Terms,,
+Television,YouTube,,
+Theater,Acting,,
+Theater,Actors,,
+Theater,Awards,,
+Theater,Dance,,
+Theater,Genres,,
+Theater,Lines,,
+Theater,Musicals,,
+Theater,Opera,,
+Theater,Plays,,
+Theater,Performers,,
+Theater,Playwrights,,
+Theater,Schools,,
+Theater,Terms,,
+Theater,Theaters,,
+Theology,Apparel,,
+Theology,Astrology,,
+Theology,Events,,
+Theology,Folklore,,
+Theology,Holy Books,,
+Theology,Holy Days,,
+Theology,Institutions,,
+Theology,Mythology,,
+Theology,Places of Worship,,
+Theology,Popes,,
+Theology,Saints,,
+Theology,Symbols,,
+Theology,Traditions,,
+Theology,World Religions,,
+Video Games,Awards,,
+Video Games,Characters,,
+Video Games,Consoles,,
+Video Games,Details,,
+Video Games,Developers,,
+Video Games,Esports,,
+Video Games,Games,,
+Video Games,Genres,,
+Video Games,Hardware,,
+Video Games,Items,,
+Video Games,Levels,,
+Video Games,Other,,
+Video Games,Publications,,
+Video Games,Terms,,
