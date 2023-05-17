@@ -4,10 +4,35 @@
 
 <h2>Create a new Question</h2>
 
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
+<form method="post" id="QuestionCreateForm" data-subcategories-url="{% url 'configure:ajax_load_subcategories' %}" novalidate>
+    
+    {% csrf_token %}
+
+    <table>
+        {{ form.as_table }}
+    </table>
+    
     <input type="submit" value="Save">
 </form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  $("#id_category").change(function () {
+    var url = $("#questionForm").attr("data-subcategories-url");  // get the url of the `load_cities` view
+    var categoryId = $(this).val();  // get the selected country ID from the HTML input
+    console.log(categoryId)
+    $.ajax({                       // initialize an AJAX request
+      url: "https://triviolivia.herokuapp.com/configure/ajax/load-subcategories/",
+      data: {
+        'category': categoryId       // add the country id to the GET parameters
+      },
+      success: function (data) {   // `data` is the return of the `load_cities` view function
+        $("#id_subcategory").html(data);  // replace the contents of the city input with the data that came from the server
+      }
+    });
+
+  });
+</script>
 
 {% endblock %}
 

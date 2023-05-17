@@ -37,5 +37,6 @@ urlpatterns = [
     path('difficulty/<int:pk>/update/', DifficultyUpdateView.as_view(), name='difficulty-update'),
     path('difficulty/<int:pk>/delete/', DifficultyDeleteView.as_view(), name='difficulty-delete'),
 
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('ajax/load-subcategories/', views.load_subcategories, name='ajax_load_subcategories'),
 ]

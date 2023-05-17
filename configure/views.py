@@ -52,7 +52,7 @@ def  question_list(request):
 class QuestionCreateView(LoginRequiredMixin, CreateView):
     model = Question
     template_name = 'configure/question_create.html'
-    fields = ['text', 'answer','category', 'eras', 'difficulty', ]
+    fields = ['text', 'answer','category', 'subcategory', 'eras', 'difficulty', ]
 
 
     def get_success_url(self):
@@ -216,3 +216,8 @@ class DifficultyDeleteView(DeleteView):
     model = Difficulty
     template_name = 'configure/difficulty_delete.html'
     success_url =  reverse_lazy('configure:difficulty-list')
+
+def load_subcategories(request):
+    category_id = request.GET.get('category')
+    subcategories = Subcategory.objects.filter(category_id=category_id).order_by('name')
+    return render(request, 'configure/subcategory_dropdown_list_options.html', {'subcategories': subcategories})
