@@ -32,12 +32,12 @@ var category_number_identities = {
     15:'Philosophy',
     16:'Politics',
     17:'Pop culture',
-    18:'Religion',
-    19:'Science',
-    20:'Sports',
-    21:'Technology',
-    22:'Television',
-    23:'Theater',
+    18:'Science',
+    19:'Sports',
+    20:'Technology',
+    21:'Television',
+    22:'Theater',
+    23:'Theology',
     24:'Video games'
 }
 var difficulty_number_identities = {
