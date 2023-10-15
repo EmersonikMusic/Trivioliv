@@ -70,7 +70,6 @@ var category_colors = {
     'Games': '#134f5c',
     'Geography': '#91774C',
     'History': '#f1c232',
-    'Human Body': '#f6b26b',
     'Human body': '#f6b26b',
     'Language': '#9fc5e8',
     'Literature': '#CC5500',
@@ -81,16 +80,13 @@ var category_colors = {
     'Nature': '#93c47d',
     'Philosophy': '#76a5af',
     'Politics': '#351c75',
-    'Pop Culture': '#cc4125',
     'Pop culture': '#cc4125',
-    'Religion': '#ff00ff',
     'Science': '#a64d79',
     'Sports': '#999999',
     'Technology': '#cc0000',
     'Television': '#3c78d8',
     'Theater': '#7f6000',
     'Theology': '#c27ba0',
-    'Video Games': '#9900ff',
     'Video games': '#9900ff'
 }
 
