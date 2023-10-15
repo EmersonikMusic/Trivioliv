@@ -7,29 +7,37 @@
 
 <div id="menu" class="menu_visable">
     <div id="menu_categories" class="menu_left">
+        CATEGORIES
+            <button id="all-none-categories" type="all-none-categories" onclick="allNoneCategoriesButton()">ALL/NONE</button>
         {% for category in categories %}
         <div id='{{ category.name | lower }}'>
-            <button onclick='toggle_categories(this.id)' id='{{ category.id }}' title='{{ category.title }}'>{{ category.name | upper }}</button> <br/>
+            <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}"><span class="indicator"></span><span class="{{ category.title }}">{{ category.name | upper }}</span></button>
         </div>
         {% endfor %}
         
-        <br>
-        <div id='reset'>
-            <button onclick='toggle_categories(this.id)' id='reset' type='button'>RESET</button> <br/>
+        <div id='other-buttons'>
+            <br>
+            <button id='refetch-questions' type='button'>REFETCH QUESTIONS</button>
+            <button id='refetch-questions' type='button'>RATE QUESTION</button>
+            <button id='refetch-questions' type='button'>SUBMIT QUESTION</button>
+            <button id='refetch-questions' type='button'>ABOUT US</button>
+            <button id='refetch-questions' type='button'>CONTACT US</button>
         </div>
+
+
     </div>
     
     <div id="menu_difficulty" class="menu_left">
-            {% for difficulty in difficulties %}
+            DIFFICULTIES
+            <button class="button all-none-rest" onclick="allNoneDifficultiesButton()">ALL/NONE </button>            {% for difficulty in difficulties %}
             <div id='{{ difficulty.name }}'>
-                <button onclick='toggle_difficulties(this.id)' id='{{ difficulty.score }}' type='button'>{{ difficulty.name | upper}}</button> <br/>
+                <button onclick='toggle_difficulties(this.id), toggleIndicator(this)' id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}"><span class="indicator"></span>{{ difficulty.name | upper}}</button>
             </div>
             {% endfor %}
-        <br>
-        {% for era in eras %}
-        <button onclick='toggle_eras(this.id)' id='{{ era.id }}' type='button'>{{ era.name }}</button> <br/>
+        ERAS
+        <button class="button all-none-rest" onclick="allNoneErasButton()">ALL/NONE </button>        {% for era in eras %}
+        <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}"><span class="indicator"></span>{{ era.name }}</button>
         {% endfor %}
-        <br>
     </div>
 
     <div id="menu_eras" class="menu_left">
@@ -37,16 +45,18 @@
     </div>
       
     <div id="menu_question_time" class="menu_left">
-        <button onclick='change_time_per_question(this.id)' id=10 type='button'>10s / QUESTION</button> <br/>
-        <button onclick='change_time_per_question(this.id)' id=15 type='button'>15s / QUESTION</button> <br/>
-        <button onclick='change_time_per_question(this.id)' id=20 type='button'>20s / QUESTION</button> <br/>
-        <button onclick='change_time_per_question(this.id)' id=30 type='button'>30s / QUESTION</button> <br/>
-        <br>
-        <button onclick='change_time_per_answer(this.id)' id=5 type='button'>5s / ANSWER</button> <br/>
-        <button onclick='change_time_per_answer(this.id)' id=10 type='button'>10s / ANSWER</button> <br/>
-        <button onclick='change_time_per_answer(this.id)' id=15 type='button'>15s / ANSWER</button> <br/>
-        <button onclick='change_time_per_answer(this.id)' id=20 type='button'>20s / ANSWER</button> <br/>
-        <br>
+        QTIME
+        <button onclick='change_time_per_question(this.id)' id=10 type='button'>10s</button>
+        <button onclick='change_time_per_question(this.id)' id=15 type='button'>15s</button>
+        <button onclick='change_time_per_question(this.id)' id=20 type='button'>20s</button>
+        <button onclick='change_time_per_question(this.id)' id=30 type='button'>30s</button>
+        <button id=prev type='button'>PREV</button>
+        ATIME
+        <button onclick='change_time_per_answer(this.id)' id=5 type='button'>5s</button>
+        <button onclick='change_time_per_answer(this.id)' id=10 type='button'>10s</button>
+        <button onclick='change_time_per_answer(this.id)' id=15 type='button'>15s</button>
+        <button onclick='change_time_per_answer(this.id)' id=20 type='button'>20s</button>
+        <button id=next type='button'>NEXT</button>
     </div>      
     
 </div>
@@ -65,6 +75,10 @@
 <div id="container_game">
     <div id='question-container' class="question-container"></div>
     <div id='answer-container' class="answer-container"></div>
+</div>
+
+<div class="loading-bar-container">
+    Economics.Currency.4.ByMarkMazurek
 </div>
 
 <script src="{% static 'triviolivia.js' %}"></script>

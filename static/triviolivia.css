@@ -1,19 +1,29 @@
 body {
-    background-color: #121213;
-    color: #ffffff;
+    font-family: Calibri, sans-serif;
     font-size: 15px;
+    color: white;
+    background-color: #2D2D2D;
 }
 
 * {
     color: #ffffff;
-    font-family: 'American Typewriter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    font-family: 'Calibri', 'American Typewriter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
     text-align: center;
 }
 
+/* Main buttons */
 button {
     margin: 0;
     background-color: #b7b7b7;
+    text-align: center;
+    width: 200px;
+    font-weight: bold;
+    border: none;
+}
+
+button:hover {
+    opacity: 80%;
 }
 
 h1 {
@@ -42,16 +52,30 @@ h2 {
     position: absolute;
 }
 
+/* Side menu buttons */
 #menu button {
-    width: 150px;
-    height: relative;
-    font-size: 14px;
-    border-radius: 10px;
-    margin: 1px auto;
-    color: #fff;
-    border-style: none;
+    color: white;
+    background-color: grey;
+    border: none;
+    font-size: 10px;
+    font-weight: bold;
+    margin: 1px 0;
     cursor: pointer;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    width: 140px;
+    box-sizing: border-box;
+    height: 18px;
+    padding: 0px;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
+
+#menu button:hover {
+    opacity: 80%;
+    transform: scale(1.03);
+  }
 
 #menu .menu_left{
     width: 40%;
@@ -62,10 +86,6 @@ h2 {
     width: 40%;
     float: right;
 
-}
-
-#categories button:hover {
-    border: 1px;
 }
 
 #art button {
@@ -165,30 +185,6 @@ h2 {
 }
 
 
-#genius button {
-    background-color: #cc4125;
-}
-
-#sharp button {
-    background-color: #e69138;
-}
-
-#average button {
-    background-color: #f1c232;
-}
-
-#easy button {
-    background-color: #6aa84f;
-}
-
-#casual button {
-    background-color: #38761d;
-}
-
-button:hover {
-    outline: 1px solid grey;
-}
-
 #start-pause button {
     width: 255px;
     height: 30px;
@@ -230,3 +226,26 @@ button:hover {
 #answer-container {
     font-size: 60px;
 }
+
+
+.indicator {
+    width: 8px; /* Reduce the indicator width to match smaller buttons */
+    height: 100%; /* Set the indicator's height to 100% of the button's height */
+    background-color: #00F829;
+    left: 0; /* Position the indicator at the left edge of the button */
+    top: 0; /* Align the indicator with the top of the button */
+    bottom: 0; /* Align the indicator with the bottom of the button */
+    margin-right: 0px; /* Create space between indicator and text */
+    border-right: 1px solid #2D2D2D;
+  }
+
+  .inactive .indicator  {
+    background-color: red;
+  }
+
+  .loading-bar-container {
+    background-color: grey;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }

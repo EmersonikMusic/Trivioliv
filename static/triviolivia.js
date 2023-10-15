@@ -1,6 +1,7 @@
 const questionDisplay = document.querySelector('.question-container')
 const answerDisplay = document.querySelector('.answer-container')
 
+// Initializing game variables
 var time_per_question = 5
 var time_per_answer = 5
 var game_started = false;
@@ -12,6 +13,7 @@ var difficulty_list = [];
 var category_list = [];
 var era_list = [];
 
+// Mapping of category, difficulty, and era numbers to their respective names
 var category_number_identities = {
     1:'Art',
     2:'Economics',
@@ -38,7 +40,6 @@ var category_number_identities = {
     23:'Theater',
     24:'Video games'
 }
-
 var difficulty_number_identities = {
     5:'Genius',
     4:'Sharp',
@@ -46,7 +47,6 @@ var difficulty_number_identities = {
     2:'Easy',
     1:'Casual'
 }
-
 var era_number_identities = {
     1:'Pre-1500',
     2:'1500-1800',
@@ -62,6 +62,7 @@ var era_number_identities = {
     12:'2020s'
 }
 
+// Mapping of category names to their associated colors
 var category_colors = {
     'Art': '#dd7e6b',
     'Economics': '#315303',
@@ -93,12 +94,14 @@ var category_colors = {
     'Video games': '#9900ff'
 }
 
+// Declaring variables for the base URL for fetching questions
 var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
 var moddedUrl = '';
 var queryParams = [];
 // var fetched_data = new_game_starter();
 // console.log(fetched_data);
 
+// Function to generate a URL with query parameters based on selected options
 function url_generator() {
     if (category_list.length > 0) {
         queryParams.push('category=' + category_list.join(','));
@@ -112,7 +115,7 @@ function url_generator() {
     const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
     return urlWithParams;
 }
-
+// Function to fetch data from a URL
 function url_fetcher(generated_url) {
     fetch(generated_url)
     .then(response => response.json())
@@ -143,6 +146,7 @@ async function fetchData(moddedUrl) {
   globalData = data;
 }
 
+// Function to fetch JSON data asynchronously
 function test() {
     if (category_list.length > 0) {
         queryParams.push('category=' + category_list.join(','));
@@ -179,10 +183,12 @@ function test() {
 
 // end ChatGPT
 
+// Function to hide the menu
 function hide_menu() {
     document.getElementById("menu").style.left = "-1000px";
 }
 
+// Function to show the menu
 function show_menu() {
     document.getElementById("menu").style.left = "0px";
 
@@ -203,6 +209,7 @@ async function fetchJsonTenTimes(url) {
     
   }
 
+//Function to start or pause game NEED TO ADD PAUSE/UNPAUSE FUNCTIONALITY
 function start_or_pause_game() {
     if (game_started == false) {
         game_started = true;
@@ -236,6 +243,18 @@ function toggle_menu() {
 function confirm_reset() {
     document.getElementById("demo").innerHTML = 'Are you sure you want to reset the game?';
 }
+
+function toggleIndicator(button) {
+    if (button.classList.contains('active')) {
+      button.classList.remove('active');
+      button.classList.add('inactive');
+      console.log(button);
+    } else {
+      button.classList.remove('inactive');
+      button.classList.add('active');
+      console.log(button);
+    }
+  }
 
 function toggle_categories(clicked_id) {
     if (!category_list.includes(clicked_id)) {
@@ -353,3 +372,65 @@ const yourFunctionNew = async () => {
     
     document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2023';
   };
+
+
+
+
+  all_none_categories = true;
+  all_none_difficulties = true;
+  all_none_eras = true;
+
+
+  function allNoneCategoriesButton() {
+    var categoryButtons = document.querySelectorAll('.category');
+      if (all_none_categories == true) {
+        for (var i = 0; i < categoryButtons.length; i++) {
+            categoryButtons[i].classList.remove('active');
+            categoryButtons[i].classList.add('inactive');
+            document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
+        }
+        all_none_categories = false;
+        } else {
+        for (var i = 0; i < categoryButtons.length; i++) {
+            categoryButtons[i].classList.remove('inactive');
+            categoryButtons[i].classList.add('active');
+        }
+        all_none_categories = true;
+      }
+  }
+
+  function allNoneDifficultiesButton() {
+    var difficultyButtons = document.querySelectorAll('.difficulty');
+      if (all_none_difficulties == true) {
+        for (var i = 0; i < difficultyButtons.length; i++) {
+            difficultyButtons[i].classList.remove('active');
+            difficultyButtons[i].classList.add('inactive');
+            document.getElementById("demo").innerHTML = 'You must select at least one difficulty before starting the game.';
+        }
+        all_none_difficulties = false;
+        } else {
+        for (var i = 0; i < difficultyButtons.length; i++) {
+            difficultyButtons[i].classList.remove('inactive');
+            difficultyButtons[i].classList.add('active');
+        }
+        all_none_difficulties = true;
+      }
+  } 
+  
+  function allNoneErasButton() {
+      var eraButtons = document.querySelectorAll('.era');
+      if (all_none_eras == true) {
+        for (var i = 0; i < eraButtons.length; i++) {
+            eraButtons[i].classList.remove('active');
+            eraButtons[i].classList.add('inactive');
+            document.getElementById("demo").innerHTML = 'You must select at least one era before starting the game.';
+        }
+        all_none_eras = false;
+        } else {
+        for (var i = 0; i < eraButtons.length; i++) {
+            eraButtons[i].classList.remove('inactive');
+            eraButtons[i].classList.add('active');
+        }
+        all_none_eras = true;
+      }
+  } 
