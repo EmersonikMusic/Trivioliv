@@ -244,7 +244,8 @@ h2 {
   }
 
   .loading-bar-container {
-    opacity: 70%;
+    background-color: black;
+    opacity: 50%;
     position: absolute;
     bottom: 0;
     width: 100%;
