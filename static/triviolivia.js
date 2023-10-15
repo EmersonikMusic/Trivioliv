@@ -359,7 +359,7 @@ const yourFunctionNew = async () => {
     
     for (let i = 0; i < 10; i++) {
         document.body.style.backgroundColor = category_colors[globalData[i].category_name];
-        document.getElementById("demo").innerHTML = 'Category: ' + globalData[i].category_name + ' - Subcategory: ' + globalData[i].subcategory +' -  Difficulty: ' + globalData[i].difficulty_name + ' - Author: Mark Mazurek';
+        document.getElementById("demo").innerHTML = 'Category: ' + globalData[i].category_name + ' - Subcategory: ' + globalData[i].sub +' -  Difficulty: ' + globalData[i].difficulty_name + ' - Author: Mark Mazurek';
         showQuestion(globalData[i].text);
         await delay(time_per_question * 1000);
         showAnswer(globalData[i].answer)
