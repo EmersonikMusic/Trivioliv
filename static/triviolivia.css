@@ -221,10 +221,14 @@ h2 {
 
 #question-container {
     font-size: 60px;
+    font: 'American Typewriter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
 }
 
 #answer-container {
     font-size: 60px;
+    font: 'American Typewriter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
 }
 
 
