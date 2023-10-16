@@ -14,6 +14,7 @@ body {
 
 /* Main buttons */
 button {
+    font: 'Calibri';
     margin: 0;
     background-color: #b7b7b7;
     text-align: center;
@@ -54,6 +55,7 @@ h2 {
 
 /* Side menu buttons */
 #menu button {
+    font: 'Calibri';
     color: white;
     background-color: grey;
     border: none;
@@ -199,6 +201,7 @@ h2 {
 }
 
 #settings button {
+    font: 'Calibri';
     width: 255px;
     height: 30px;
     font-size: 20px;
