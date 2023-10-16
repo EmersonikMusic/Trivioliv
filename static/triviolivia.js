@@ -374,9 +374,9 @@ const yourFunctionNew = async () => {
 
 
 
-  all_none_categories = true;
-  all_none_difficulties = true;
-  all_none_eras = true;
+var all_none_categories = true;
+var all_none_difficulties = true;
+var all_none_eras = true;
 
 
   function allNoneCategoriesButton() {
