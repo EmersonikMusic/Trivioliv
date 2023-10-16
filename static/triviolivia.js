@@ -313,8 +313,8 @@ let Question = class {
   }
 
 const showQuestion = (displayed_question) => {
-    const div2 = document.getElementById('demo');
-    div2.style.opacity = 1;
+    const div = document.getElementById('question-container');
+    div.style.opacity = 1;
     const messageElement = document.createElement('p')
     messageElement.textContent = displayed_question
     questionDisplay.append(messageElement)
@@ -322,8 +322,8 @@ const showQuestion = (displayed_question) => {
 }
 
 const showAnswer = (displayed_answer) => {
-    const div2 = document.getElementById('demo');
-    div2.style.opacity = 0.7;
+    const div = document.getElementById('question-container');
+    div.style.opacity = 0.7;
     const messageElement = document.createElement('p')
     messageElement.textContent = displayed_answer
     answerDisplay.append(messageElement)
