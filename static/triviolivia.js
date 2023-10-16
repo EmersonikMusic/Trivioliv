@@ -73,7 +73,7 @@ var category_colors = {
     'History': '#f1c232',
     'Human body': '#f6b26b',
     'Language': '#9fc5e8',
-    'Law': black,
+    'Law': 'black',
     'Literature': '#CC5500',
     'Math': '#434343',
     'Miscellaneous': '#674ea7',
