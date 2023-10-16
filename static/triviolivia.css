@@ -49,6 +49,7 @@ h2 {
 }
 
 #menu {
+    position: absolute;
 }
 
 /* Side menu buttons */
@@ -252,7 +253,6 @@ h2 {
     background-color: rgba(0,0,0,0.5);
     position: absolute;
     bottom: 0;
-    height: 20px;
     width: 100%;
   }
 
