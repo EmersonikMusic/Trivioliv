@@ -258,6 +258,5 @@ h2 {
   }
 
 #big-buttons {
-    background-color: black;
-    opacity: 50%;
+    background-color: 0,0,0,0.5;
 }
