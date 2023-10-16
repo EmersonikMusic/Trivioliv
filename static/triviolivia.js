@@ -38,7 +38,8 @@ var category_number_identities = {
     21:'Television',
     22:'Theater',
     23:'Theology',
-    24:'Video games'
+    24:'Video games',
+    25:'Law'
 }
 var difficulty_number_identities = {
     5:'Genius',
@@ -72,6 +73,7 @@ var category_colors = {
     'History': '#f1c232',
     'Human body': '#f6b26b',
     'Language': '#9fc5e8',
+    'Law': black,
     'Literature': '#CC5500',
     'Math': '#434343',
     'Miscellaneous': '#674ea7',
