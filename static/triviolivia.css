@@ -7,14 +7,13 @@ body {
 
 * {
     color: #ffffff;
-    font-family: 'American Typewriter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    font-family: 'Calibri', 'American Typewriter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
     text-align: center;
 }
 
 /* Main buttons */
 button {
-    font: 'Calibri';
     margin: 0;
     background-color: #b7b7b7;
     text-align: center;
@@ -28,7 +27,6 @@ button:hover {
 }
 
 h1 {
-    font: 'Calibri';
     font-size: 45px;
     font-weight: bold;
     width: 100%;
@@ -39,7 +37,6 @@ h1 {
 }
 
 h2 {
-    font: 'Calibri';
     display: block;
     font-size: 16px;
     font-weight: bold;
@@ -57,7 +54,6 @@ h2 {
 
 /* Side menu buttons */
 #menu button {
-    font: 'Calibri';
     color: white;
     background-color: grey;
     border: none;
@@ -93,7 +89,6 @@ h2 {
 }
 
 #art button {
-    font: 'Calibri';
     background-color: #dd7e6b;
 }
 
@@ -191,7 +186,6 @@ h2 {
 
 
 #start-pause button {
-    font: 'Calibri';
     width: 255px;
     height: 30px;
     font-size: 26px;
@@ -204,7 +198,6 @@ h2 {
 }
 
 #settings button {
-    font: 'Calibri';
     width: 255px;
     height: 30px;
     font-size: 20px;
@@ -228,14 +221,10 @@ h2 {
 
 #question-container {
     font-size: 60px;
-    font: 'American Typewriter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-    'Lucida Sans', Arial, sans-serif;
 }
 
 #answer-container {
     font-size: 60px;
-    font: 'American Typewriter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-    'Lucida Sans', Arial, sans-serif;
 }
 
 
