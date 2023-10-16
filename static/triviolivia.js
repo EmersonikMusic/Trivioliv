@@ -321,12 +321,15 @@ const showQuestion = (displayed_question) => {
 
 const showAnswer = (displayed_answer) => {
     const div = document.getElementById('question-container');
-    div.style.opacity = 0.5;
+    div.style.opacity = 0.7;
+    const div2 = document.getElementById('demo');
+    div.style.opacity = 0.7;
     const messageElement = document.createElement('p')
     messageElement.textContent = displayed_answer
     answerDisplay.append(messageElement)
     setTimeout(() => answerDisplay.removeChild(messageElement), time_per_answer * 1000)
     div.style.opacity = 1;
+    div2.style.opacity = 1;
 }
 
 // showQuestion('Q: ' + question000001.question)
