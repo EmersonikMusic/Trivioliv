@@ -92,6 +92,8 @@ var category_colors = {
     'Video games': '#9900ff'
 }
 
+document.getElementById("demo").innerHTML = 'Press START button to begin playing.'
+
 // Declaring variables for the base URL for fetching questions
 var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
 var moddedUrl = '';
