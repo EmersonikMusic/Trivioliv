@@ -320,6 +320,8 @@ const showQuestion = (displayed_question) => {
 }
 
 const showAnswer = (displayed_answer) => {
+    const div = document.getElementById('question-container');
+    div.style.opacity = 0.5;
     const messageElement = document.createElement('p')
     messageElement.textContent = displayed_answer
     answerDisplay.append(messageElement)
