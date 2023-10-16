@@ -50,6 +50,7 @@ h2 {
 
 #menu {
     position: absolute;
+    background-color: rgba(0,0,0,0.5);
 }
 
 /* Side menu buttons */
@@ -258,5 +259,5 @@ h2 {
   }
 
 #big-buttons {
-    background-color: 0,0,0,0.5;
+    background-color: rgba(0,0,0,0.5);
 }
