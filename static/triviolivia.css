@@ -251,3 +251,8 @@ h2 {
     bottom: 0;
     width: 100%;
   }
+
+  .top-area {
+    background-color: black;
+    opacity: 50%;
+  }
