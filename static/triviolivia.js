@@ -326,6 +326,7 @@ const showAnswer = (displayed_answer) => {
     messageElement.textContent = displayed_answer
     answerDisplay.append(messageElement)
     setTimeout(() => answerDisplay.removeChild(messageElement), time_per_answer * 1000)
+    div.style.opacity = 1;
 }
 
 // showQuestion('Q: ' + question000001.question)
