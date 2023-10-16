@@ -221,6 +221,7 @@ h2 {
 
 #question-container {
     font-size: 60px;
+    opacity: 50%;
 }
 
 #answer-container {
