@@ -257,7 +257,7 @@ h2 {
     width: 100%;
   }
 
-  .top-area {
+#big-buttons {
     background-color: black;
     opacity: 50%;
-  }
+}
