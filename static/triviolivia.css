@@ -116,12 +116,16 @@ h2 {
     background-color: #f6b26b;
 } 
 
+[id="human body"] {
+    background-color: #f6b26b;
+} 
+
 #language button {
     background-color: #9fc5e8;
 }
 
 #literature button {
-    background-color: #CC5500;
+    background-color: #000000;
 }
 
 #math button {
@@ -177,7 +181,7 @@ h2 {
 }
 
 #theology button {
-    background-color: #c27ba0;    ;
+    background-color: #c27ba0;    
 }
 
 #video-games button {
