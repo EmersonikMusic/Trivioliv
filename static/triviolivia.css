@@ -93,7 +93,7 @@ h2 {
 }
 
 #economics button {
-    background-color: #315303;
+    background-color: #0b6623;
 }
 
 #food button {
@@ -101,11 +101,11 @@ h2 {
 }
 
 #games button {
-    background-color: #134f5c;
+    background-color: #cc5500;
 }
 
 #geography button {
-    background-color: #91774C;
+    background-color: #43270f;
 }
 
 #history button {
@@ -114,18 +114,18 @@ h2 {
 
 #human-body button {
     background-color: #f6b26b;
-} 
-
-[id="human body"] {
-    background-color: #f6b26b;
-} 
+}
 
 #language button {
     background-color: #9fc5e8;
 }
 
+#law button {
+    background-color: #5a5a5a;
+}
+
 #literature button {
-    background-color: #000000;
+    background-color: #d99d29;
 }
 
 #math button {
@@ -133,7 +133,7 @@ h2 {
 }
 
 #miscellaneous button {
-    background-color: #674ea7;
+    background-color: #12A898;
 }
 
 #movies button {
@@ -145,11 +145,11 @@ h2 {
 }
 
 #nature button {
-    background-color: #93c47d;
+    background-color: #043927;
 }
 
 #philosophy button {
-    background-color: #76a5af;
+    background-color: #975fac;
 }
 
 #politics button {
@@ -157,23 +157,23 @@ h2 {
 }
 
 #pop-culture button {
-    background-color: #cc4125;
+    background-color: #086b73;
 }
 
 #science button {
-    background-color: #a64d79;
+    background-color: #06550d;
 }
 
 #sports button {
-    background-color: #999999;
+    background-color: #0917a2;
 }
 
 #technology button {
-    background-color: #cc0000;
+    background-color: #1f5967;
 }
 
 #television button {
-    background-color: #3c78d8;
+    background-color: #1F201F;
 }
 
 #theater button {
@@ -181,7 +181,7 @@ h2 {
 }
 
 #theology button {
-    background-color: #c27ba0;    
+    background-color: #9777b4;    
 }
 
 #video-games button {
