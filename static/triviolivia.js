@@ -91,10 +91,8 @@ var category_colors = {
     'Television': '#2d2c29',
     'Theater': '#b70000',
     'Theology': '#3C1321',
-    // 'Video Games': '#9900ff',
-    // 'Video games': '#9900ff',
-    'Video-Games': '#9900ff',
-    'VideoGames': '#9900ff'
+    'Video Games': '#9900ff',
+    // 'Video games': '#9900ff'
 }
 
 document.getElementById("demo").innerHTML = 'Press START button to begin.'
