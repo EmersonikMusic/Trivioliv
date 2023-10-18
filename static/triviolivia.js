@@ -66,7 +66,7 @@ var era_number_identities = {
 // Mapping of category names to their associated colors
 var category_colors = {
     'Art': '#dd7e6b',
-    'Economics': '#0b6623',
+    'Economics': '#90EE90',
     'Food': '#99000',
     'Games': '#cc5500c',
     'Geography': '#331800',
