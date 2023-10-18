@@ -21,7 +21,7 @@ var category_number_identities = {
     4:'Games',
     5:'Geography',
     6:'History',
-    7:'Human body',
+    7:'Human-body',
     8:'Language',
     9:'Literature',
     10:'Math',
@@ -31,14 +31,14 @@ var category_number_identities = {
     14:'Nature',
     15:'Philosophy',
     16:'Politics',
-    17:'Pop culture',
+    17:'Pop-culture',
     18:'Science',
     19:'Sports',
     20:'Technology',
     21:'Television',
     22:'Theater',
     23:'Theology',
-    24:'Video games',
+    24:'Video-games',
     25:'Law'
 }
 var difficulty_number_identities = {
