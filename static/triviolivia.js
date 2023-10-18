@@ -71,7 +71,7 @@ var category_colors = {
     'Games': '#134f5c',
     'Geography': '#91774C',
     'History': '#f1c232',
-    'Human body': '#f6b26b',
+    'Humanbody': '#f6b26b',
     'Human-body': '#f6b26b',
     'Language': '#9fc5e8',
     'Law': '#999999',
@@ -83,7 +83,7 @@ var category_colors = {
     'Nature': '#93c47d',
     'Philosophy': '#76a5af',
     'Politics': '#351c75',
-    'Pop culture': '#cc4125',
+    'Popculture': '#cc4125',
     'Pop-culture': '#cc4125',
     'Science': '#a64d79',
     'Sports': '#999999',
@@ -91,8 +91,10 @@ var category_colors = {
     'Television': '#3c78d8',
     'Theater': '#7f6000',
     'Theology': '#c27ba0',
-    'Video games': '#9900ff',
-    'Video-games': '#9900ff'
+    'Videogames': '#9900ff',
+    'Video-games': '#9900ff',
+    'video_games': '#9900ff',
+    'videogames': '#9900ff'
 }
 
 document.getElementById("demo").innerHTML = 'Press START button to begin.'
