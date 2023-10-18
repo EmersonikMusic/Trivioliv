@@ -71,7 +71,7 @@ var category_colors = {
     'Games': '#134f5c',
     'Geography': '#91774C',
     'History': '#f1c232',
-    'Human Body': '#f6b26b',
+    'Humanbody': '#f6b26b',
     'Language': '#9fc5e8',
     'Law': '#999999',
     'Literature': '#CC5500',
