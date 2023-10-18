@@ -21,7 +21,7 @@ var category_number_identities = {
     4:'Games',
     5:'Geography',
     6:'History',
-    7:'Human-body',
+    7:'Human body',
     8:'Language',
     9:'Literature',
     10:'Math',
@@ -31,14 +31,14 @@ var category_number_identities = {
     14:'Nature',
     15:'Philosophy',
     16:'Politics',
-    17:'Pop-culture',
+    17:'Pop culture',
     18:'Science',
     19:'Sports',
     20:'Technology',
     21:'Television',
     22:'Theater',
     23:'Theology',
-    24:'Video-games',
+    24:'Video games',
     25:'Law'
 }
 var difficulty_number_identities = {
@@ -72,6 +72,7 @@ var category_colors = {
     'Geography': '#91774C',
     'History': '#f1c232',
     'Human body': '#f6b26b',
+    'Human-body': '#f6b26b',
     'Language': '#9fc5e8',
     'Law': '#999999',
     'Literature': '#CC5500',
@@ -83,13 +84,15 @@ var category_colors = {
     'Philosophy': '#76a5af',
     'Politics': '#351c75',
     'Pop culture': '#cc4125',
+    'Pop-culture': '#cc4125',
     'Science': '#a64d79',
     'Sports': '#999999',
     'Technology': '#cc0000',
     'Television': '#3c78d8',
     'Theater': '#7f6000',
     'Theology': '#c27ba0',
-    'Video games': '#9900ff'
+    'Video games': '#9900ff',
+    'Video-games': '#9900ff'
 }
 
 document.getElementById("demo").innerHTML = 'Press START button to begin.'
