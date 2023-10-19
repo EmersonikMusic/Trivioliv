@@ -67,7 +67,7 @@ var era_number_identities = {
 var category_colors = {
     'Art': '#dd7e6b',
     'Economics': '#598C58',
-    'Food': '#99000',
+    'Food': '#990000',
     'Games': '#cc5500c',
     'Geography': '#331800',
     'History': '#f1c232',
