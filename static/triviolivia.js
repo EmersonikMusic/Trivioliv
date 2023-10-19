@@ -85,7 +85,7 @@ var category_colors = {
     'Pop Culture': '#f81894',
     'Science': '#06550d',
     'Sports': '#131e3a',
-    'Technology': '#cc0000',
+    'Technology': '#1f5967',
     'Television': '#2d2c29',
     'Theater': '#b70000',
     'Theology': '#3C1321',
