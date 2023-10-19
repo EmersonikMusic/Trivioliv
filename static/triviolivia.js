@@ -80,7 +80,7 @@ var category_colors = {
     'Movies': '#660000',
     'Music': '#0b5394',
     'Nature': '#043927',
-    'Philosophy': '#975facf',
+    'Philosophy': '#975fac',
     'Politics': '#351c75',
     'Pop Culture': '#f81894',
     'Science': '#06550d',
