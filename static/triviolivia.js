@@ -206,7 +206,6 @@ async function fetchJsonTenTimes(url) {
       console.log(results[i][0].answer);
       console.log("\n");
     }
-    
   }
 
 //Function to start or pause game NEED TO ADD PAUSE/UNPAUSE FUNCTIONALITY
@@ -242,6 +241,8 @@ function toggle_menu() {
 
 function confirm_reset() {
     document.getElementById("demo").innerHTML = 'Are you sure you want to reset the game?';
+    //Yes/No?
+    //Reset function call
 }
 
 function toggleIndicator(button) {
@@ -378,8 +379,6 @@ const yourFunctionNew = async () => {
   };
 
 
-
-
 var all_none_categories = true;
 var all_none_difficulties = true;
 var all_none_eras = true;
@@ -392,12 +391,16 @@ var all_none_eras = true;
             categoryButtons[i].classList.remove('active');
             categoryButtons[i].classList.add('inactive');
             document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
+            //Kill all categories
+            toggle_categories(i);
         }
         all_none_categories = false;
         } else {
         for (var i = 0; i < categoryButtons.length; i++) {
             categoryButtons[i].classList.remove('inactive');
             categoryButtons[i].classList.add('active');
+             //Enable all categories
+             toggle_categories(i);
         }
         all_none_categories = true;
       }
@@ -410,12 +413,14 @@ var all_none_eras = true;
             difficultyButtons[i].classList.remove('active');
             difficultyButtons[i].classList.add('inactive');
             document.getElementById("demo").innerHTML = 'You must select at least one difficulty before starting the game.';
+            //Kill all difficulties
         }
         all_none_difficulties = false;
         } else {
         for (var i = 0; i < difficultyButtons.length; i++) {
             difficultyButtons[i].classList.remove('inactive');
             difficultyButtons[i].classList.add('active');
+            //Enable all categories
         }
         all_none_difficulties = true;
       }
@@ -428,12 +433,14 @@ var all_none_eras = true;
             eraButtons[i].classList.remove('active');
             eraButtons[i].classList.add('inactive');
             document.getElementById("demo").innerHTML = 'You must select at least one era before starting the game.';
+            //Kill all eras
         }
         all_none_eras = false;
         } else {
         for (var i = 0; i < eraButtons.length; i++) {
             eraButtons[i].classList.remove('inactive');
             eraButtons[i].classList.add('active');
+            //Enable all eras
         }
         all_none_eras = true;
       }
