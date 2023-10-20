@@ -390,9 +390,9 @@ var all_none_eras = true;
         for (var i = 0; i < categoryButtons.length; i++) {
             categoryButtons[i].classList.remove('active');
             categoryButtons[i].classList.add('inactive');
-            document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
-            //Kill all categories
+            //Kill all categories FIX FUNCTION
             toggle_categories(i);
+            document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
         }
         all_none_categories = false;
         } else {
