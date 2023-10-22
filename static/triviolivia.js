@@ -68,7 +68,7 @@ var category_colors = {
     'Art': '#dd7e6b',
     'Economics': '#598C58',
     'Food': '#f28500',
-    'Games': '#cc5500c',
+    'Games': '#cc5500',
     'Geography': '#331800',
     'History': '#f1c232',
     'Human Body': '#d8965b',
