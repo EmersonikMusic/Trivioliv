@@ -2,7 +2,7 @@ const questionDisplay = document.querySelector('.question-container')
 const answerDisplay = document.querySelector('.answer-container')
 
 // Initializing game variables
-var time_per_question = 5
+var time_per_question = 10
 var time_per_answer = 5
 var game_started = false;
 var game_paused = false;
@@ -78,7 +78,7 @@ var category_colors = {
     'Math': '#65635c',
     'Miscellaneous': '#12A898',
     'Movies': '#660000',
-    'Music': '#0b5394',
+    'Music': '#1DB954',
     'Nature': '#043927',
     'Philosophy': '#975fac',
     'Politics': '#351c75',
