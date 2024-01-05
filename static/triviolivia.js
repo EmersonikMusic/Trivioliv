@@ -379,7 +379,7 @@ const yourFunctionNew = async () => {
   };
 
 
-var all_none_categories = false;
+var all_none_categories = true;
 var all_none_difficulties = true;
 var all_none_eras = true;
 
