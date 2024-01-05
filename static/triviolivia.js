@@ -396,15 +396,16 @@ var all_none_eras = true;
         }
         all_none_categories = false;
         } else {
+        category_list = [];
         for (var i = 0; i < categoryButtons.length; i++) {
             categoryButtons[String(i)].classList.remove('inactive');
             categoryButtons[String(i)].classList.add('active');
              //Enable all categories
              toggle_categories(String(i));
-        category_list = [];
         }
         all_none_categories = true;
       }
+      console.log(categoryButtons);
   }
 
   function allNoneDifficultiesButton() {
