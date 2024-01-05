@@ -388,8 +388,8 @@ var all_none_eras = true;
     var categoryButtons = document.querySelectorAll('.category');
       if (all_none_categories == true) {
         for (var i = 0; i < categoryButtons.length; i++) {
-            categoryButtons[i].classList.remove('active');
-            categoryButtons[i].classList.add('inactive');
+            categoryButtons[String(i)].classList.remove('active');
+            categoryButtons[String(i)].classList.add('inactive');
             //Kill all categories FIX FUNCTION
             toggle_categories(String(i));
             document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
@@ -397,10 +397,11 @@ var all_none_eras = true;
         all_none_categories = false;
         } else {
         for (var i = 0; i < categoryButtons.length; i++) {
-            categoryButtons[i].classList.remove('inactive');
-            categoryButtons[i].classList.add('active');
+            categoryButtons[String(i)].classList.remove('inactive');
+            categoryButtons[String(i)].classList.add('active');
              //Enable all categories
              toggle_categories(String(i));
+        category_list = [];
         }
         all_none_categories = true;
       }
