@@ -261,11 +261,11 @@ function toggle_categories(clicked_id) {
     if (!category_list.includes(clicked_id)) {
         document.getElementById("demo").innerHTML = 'You have disabled the ' + category_number_identities[clicked_id] + ' category.';
         category_list.push(clicked_id);
-        console.log('Banned Categories:' + category_list);
+        console.log(category_list);
     } else {
         document.getElementById("demo").innerHTML = 'You have enabled the ' + category_number_identities[clicked_id] + ' category.';
         category_list.splice(category_list.indexOf(clicked_id), 1);
-        console.log('Banned Categories:' + category_list);
+        console.log(category_list);
     }
 }
 
@@ -391,7 +391,7 @@ var all_none_eras = true;
             categoryButtons[i].classList.remove('active');
             categoryButtons[i].classList.add('inactive');
             //Kill all categories FIX FUNCTION
-            toggle_categories(i);
+            toggle_categories(String(i));
             document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
         }
         all_none_categories = false;
@@ -400,7 +400,7 @@ var all_none_eras = true;
             categoryButtons[i].classList.remove('inactive');
             categoryButtons[i].classList.add('active');
              //Enable all categories
-             toggle_categories(i);
+             toggle_categories(String(i));
         }
         all_none_categories = true;
       }
