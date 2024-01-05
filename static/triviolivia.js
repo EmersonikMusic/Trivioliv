@@ -387,26 +387,26 @@ var categoryButtons = document.querySelectorAll('.category');
 var difficultyButtons = document.querySelectorAll('.difficulty');
 var eraButtons = document.querySelectorAll('.era');
 
-function disable_all_categories(clicked_id) {
+function disable_category(clicked_id) {
     if (!category_list.includes(clicked_id)) {
         document.getElementById("demo").innerHTML = 'You have disabled the ' + category_number_identities[clicked_id] + ' category.';
+        category_list.push(clicked_id);
         console.log(category_list);
 
     } else {
         document.getElementById("demo").innerHTML = 'You have enabled the ' + category_number_identities[clicked_id] + ' category.';
-        category_list.push(clicked_id);
         console.log(category_list);
     }
 }
 
-function enable_all_categories(clicked_id) {
+function enable_category(clicked_id) {
     if (!category_list.includes(clicked_id)) {
         document.getElementById("demo").innerHTML = 'You have disabled the ' + category_number_identities[clicked_id] + ' category.';
-        category_list.splice(category_list.indexOf(clicked_id), 1);
         console.log(category_list);
 
     } else {
         document.getElementById("demo").innerHTML = 'You have enabled the ' + category_number_identities[clicked_id] + ' category.';
+        category_list.splice(category_list.indexOf(clicked_id), 1);
         console.log(category_list);
     }
 }
@@ -417,7 +417,7 @@ function enable_all_categories(clicked_id) {
             categoryButtons[String(i)].classList.remove('active');
             categoryButtons[String(i)].classList.add('inactive');
             //Kill all categories FIX FUNCTION
-            disable_all_categories(String(i));
+            disable_category(String(i));
             document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
         }
         all_none_categories = false;
@@ -427,7 +427,7 @@ function enable_all_categories(clicked_id) {
             categoryButtons[String(i)].classList.remove('inactive');
             categoryButtons[String(i)].classList.add('active');
              //Enable all categories
-             enable_all_categories(String(i));
+             enable_category(String(i));
         }
         all_none_categories = true;
       }
