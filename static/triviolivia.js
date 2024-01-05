@@ -262,10 +262,14 @@ function toggle_categories(clicked_id) {
         document.getElementById("demo").innerHTML = 'You have disabled the ' + category_number_identities[clicked_id] + ' category.';
         category_list.push(clicked_id);
         console.log(category_list);
+        categoryButtons[String(clicked_id)].classList.remove('active');
+        categoryButtons[String(clicked_id)].classList.add('inactive');
     } else {
         document.getElementById("demo").innerHTML = 'You have enabled the ' + category_number_identities[clicked_id] + ' category.';
         category_list.splice(category_list.indexOf(clicked_id), 1);
         console.log(category_list);
+        categoryButtons[String(clicked_id)].classList.remove('inactive');
+        categoryButtons[String(clicked_id)].classList.add('active');
     }
 }
 
