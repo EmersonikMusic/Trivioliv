@@ -480,8 +480,8 @@ function enable_era(clicked_id) {
         all_none_difficulties = false;
         } else {
         for (var i = 0; i < difficultyButtons.length; i++) {
-            difficultyButtons[i-1].classList.remove('inactive');
-            difficultyButtons[i-1].classList.add('active');
+            difficultyButtons[String(i-1)].classList.remove('inactive');
+            difficultyButtons[String(i-1)].classList.add('active');
             enable_difficulty(String(i));
         }
         all_none_difficulties = true;
