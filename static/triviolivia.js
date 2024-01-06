@@ -42,11 +42,11 @@ var category_number_identities = {
     25:'Law'
 }
 var difficulty_number_identities = {
-    4:'Genius',
-    3:'Sharp',
-    2:'Average',
-    1:'Easy',
-    0:'Casual'
+    5:'Genius',
+    4:'Sharp',
+    3:'Average',
+    2:'Easy',
+    1:'Casual'
 }
 var era_number_identities = {
     1:'Pre-1500',
