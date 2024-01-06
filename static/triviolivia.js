@@ -465,6 +465,7 @@ function enable_era(clicked_id) {
             enable_category(String(i));
         }
         all_none_categories = true;
+        document.getElementById("demo").innerHTML = 'You have enabled all categories.';
       }
       console.log(categoryButtons);
   }
