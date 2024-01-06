@@ -471,7 +471,7 @@ function enable_era(clicked_id) {
 
   function allNoneDifficultiesButton() {
       if (all_none_difficulties == true) {
-        for (var i = 0; i < difficultyButtons.length; i++) {
+        for (var i = 1; i < difficultyButtons.length + 1; i++) {
             difficultyButtons[String(i)].classList.remove('active');
             difficultyButtons[String(i)].classList.add('inactive');
             disable_difficulty(String(i));
@@ -479,7 +479,7 @@ function enable_era(clicked_id) {
         }
         all_none_difficulties = false;
         } else {
-        for (var i = 0; i < difficultyButtons.length; i++) {
+        for (var i = 1; i < difficultyButtons.length + 1; i++) {
             difficultyButtons[String(i)].classList.remove('inactive');
             difficultyButtons[String(i)].classList.add('active');
             enable_difficulty(String(i));
