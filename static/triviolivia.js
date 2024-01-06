@@ -475,7 +475,7 @@ function enable_era(clicked_id) {
         for (var i = 0; i < difficultyButtons.length; i++) {
             difficultyButtons[String(i)].classList.remove('active');
             difficultyButtons[String(i)].classList.add('inactive');
-            disable_difficulty(String(i));
+            disable_difficulty(String(i+1));
             document.getElementById("demo").innerHTML = 'You must select at least one difficulty before starting the game.';
         }
         all_none_difficulties = false;
