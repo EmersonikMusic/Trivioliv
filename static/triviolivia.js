@@ -282,15 +282,14 @@ function change_time_per_answer(clicked_id) {
     console.log(time_per_answer);
 }
 
-
+//Question class declaration
 let Question = class {
-    constructor(number, category, difficulty, question, answer, subcategory) {
+    constructor(number, category, difficulty, question, answer) {
         this.number = number;
         this.category = category;
         this.difficulty = difficulty;
         this.question = question;
         this.answer = answer;
-        this.subcategory = subcategory;
     }
   }
 
@@ -343,7 +342,7 @@ const yourFunctionNew = async () => {
     
     for (let i = 0; i < 10; i++) {
         document.body.style.backgroundColor = category_colors[globalData[i].category_name];
-        document.getElementById("demo").innerHTML = 'Category: ' + globalData[i].category_name + ' -  Difficulty: ' + globalData[i].difficulty_name + ' - Author: Mark Mazurek - Subcategory: ' + globalData[i].subcategory_name;
+        document.getElementById("demo").innerHTML = 'Category: ' + globalData[i].category_name + ' -  Difficulty: ' + globalData[i].difficulty_name + ' - Author: Mark Mazurek';
         showQuestion(globalData[i].text);
         await delay(time_per_question * 1000);
         showAnswer(globalData[i].answer)
