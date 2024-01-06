@@ -472,7 +472,7 @@ function enable_era(clicked_id) {
   function allNoneDifficultiesButton() {
       if (all_none_difficulties == true) {
         for (var i = 0; i < difficultyButtons.length; i++) {
-            difficultyButtons[String(i-1)].classList.remove('active');
+            difficultyButtons[String(i)].classList.remove('active');
             difficultyButtons[String(i-1)].classList.add('inactive');
             disable_difficulty(String(i));
             document.getElementById("demo").innerHTML = 'You must select at least one difficulty before starting the game.';
@@ -480,8 +480,8 @@ function enable_era(clicked_id) {
         all_none_difficulties = false;
         } else {
         for (var i = 0; i < difficultyButtons.length; i++) {
-            difficultyButtons[String(i-1)].classList.remove('inactive');
-            difficultyButtons[String(i-1)].classList.add('active');
+            difficultyButtons[String(i)].classList.remove('inactive');
+            difficultyButtons[String(i)].classList.add('active');
             enable_difficulty(String(i));
         }
         all_none_difficulties = true;
