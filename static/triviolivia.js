@@ -471,7 +471,7 @@ function enable_era(clicked_id) {
 
   function allNoneDifficultiesButton() {
       if (all_none_difficulties == true) {
-        for (var i = 0; i < difficultyButtons.length + 1; i++) {
+        for (var i = 0; i < difficultyButtons.length; i++) {
             difficultyButtons[String(i)].classList.remove('active');
             difficultyButtons[String(i)].classList.add('inactive');
             disable_difficulty(String(i));
@@ -480,7 +480,7 @@ function enable_era(clicked_id) {
         all_none_difficulties = false;
         } else {
         difficulty_list = [];
-        for (var i = 0; i < difficultyButtons.length + 1; i++) {
+        for (var i = 0; i < difficultyButtons.length; i++) {
             difficultyButtons[String(i)].classList.remove('inactive');
             difficultyButtons[String(i)].classList.add('active');
             enable_difficulty(String(i));
@@ -491,7 +491,7 @@ function enable_era(clicked_id) {
   
   function allNoneErasButton() {
       if (all_none_eras == true) {
-        for (var i = 0; i < eraButtons.length + 1; i++) {
+        for (var i = 0; i < eraButtons.length; i++) {
             eraButtons[String(i)].classList.remove('active');
             eraButtons[String(i)].classList.add('inactive');
             document.getElementById("demo").innerHTML = 'You must select at least one era before starting the game.';
@@ -500,7 +500,7 @@ function enable_era(clicked_id) {
         all_none_eras = false;
         } else {
         era_list = [];
-        for (var i = 0; i < eraButtons.length + 1; i++) {
+        for (var i = 0; i < eraButtons.length; i++) {
             eraButtons[String(i)].classList.remove('inactive');
             eraButtons[String(i)].classList.add('active');
             enable_era(String(i));
