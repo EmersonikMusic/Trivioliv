@@ -273,12 +273,12 @@ function toggle_categories(clicked_id) {
 function toggle_difficulties(clicked_id) {
     if (!difficulty_list.includes(clicked_id)) {
         document.getElementById("demo").innerHTML = 'You have disabled the ' + difficulty_number_identities[clicked_id] + ' difficulty.';
-        difficulty_list.push(clicked_id-1);
-        console.log('Banned Difficulties:' + difficulty_list);
+        difficulty_list.push(clicked_id);
+        console.log(difficulty_list);
     } else {
         document.getElementById("demo").innerHTML = 'You have enabled the ' + difficulty_number_identities[clicked_id] + ' difficulty.';
-        difficulty_list.splice(difficulty_list.indexOf(clicked_id -1), 1);
-        console.log('Banned Difficulties:' + difficulty_list);
+        difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
+        console.log(difficulty_list);
     }
 }
 
@@ -286,11 +286,11 @@ function toggle_eras(clicked_id) {
     if (!era_list.includes(clicked_id)) {
         document.getElementById("demo").innerHTML = 'You have disabled the ' + era_number_identities[clicked_id] + ' era.';
         era_list.push(clicked_id);
-        console.log('Banned eras:' + era_list);
+        console.log(era_list);
     } else {
         document.getElementById("demo").innerHTML = 'You have enabled the ' + era_number_identities[clicked_id] + ' era.';
         era_list.splice(era_list.indexOf(clicked_id), 1);
-        console.log('Banned eras:' + era_list);
+        console.log(era_list);
     }
 }
 
