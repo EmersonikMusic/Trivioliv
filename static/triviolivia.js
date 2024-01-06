@@ -387,27 +387,64 @@ var categoryButtons = document.querySelectorAll('.category');
 var difficultyButtons = document.querySelectorAll('.difficulty');
 var eraButtons = document.querySelectorAll('.era');
 
+//Functions to disable and enable category, difficulty, era
 function disable_category(clicked_id) {
     if (!category_list.includes(clicked_id)) {
-        document.getElementById("demo").innerHTML = 'You have disabled the ' + category_number_identities[clicked_id] + ' category.';
         category_list.push(clicked_id);
         console.log(category_list);
 
     } else {
-        document.getElementById("demo").innerHTML = 'You have enabled the ' + category_number_identities[clicked_id] + ' category.';
         console.log(category_list);
     }
 }
 
 function enable_category(clicked_id) {
     if (!category_list.includes(clicked_id)) {
-        document.getElementById("demo").innerHTML = 'You have disabled the ' + category_number_identities[clicked_id] + ' category.';
         console.log(category_list);
 
     } else {
-        document.getElementById("demo").innerHTML = 'You have enabled the ' + category_number_identities[clicked_id] + ' category.';
         category_list.splice(category_list.indexOf(clicked_id), 1);
         console.log(category_list);
+    }
+}
+
+function disable_difficulty(clicked_id) {
+    if (!difficulty_list.includes(clicked_id)) {
+        difficulty_list.push(clicked_id);
+        console.log(difficulty_list);
+
+    } else {
+        console.log(difficulty_list);
+    }
+}
+
+function enable_difficulty(clicked_id) {
+    if (!difficulty_list.includes(clicked_id)) {
+        console.log(difficulty_list);
+
+    } else {
+        difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
+        console.log(difficulty_list);
+    }
+}
+
+function disable_era(clicked_id) {
+    if (!era_list.includes(clicked_id)) {
+        era_list.push(clicked_id);
+        console.log(era_list);
+
+    } else {
+        console.log(era_list);
+    }
+}
+
+function enable_era(clicked_id) {
+    if (!era_list.includes(clicked_id)) {
+        console.log(era_list);
+
+    } else {
+        era_list.splice(era_list.indexOf(clicked_id), 1);
+        console.log(era_list);
     }
 }
 
@@ -416,7 +453,6 @@ function enable_category(clicked_id) {
         for (var i = 0; i < categoryButtons.length; i++) {
             categoryButtons[String(i)].classList.remove('active');
             categoryButtons[String(i)].classList.add('inactive');
-            //Kill all categories FIX FUNCTION
             disable_category(String(i));
             document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
         }
@@ -426,8 +462,7 @@ function enable_category(clicked_id) {
         for (var i = 0; i < categoryButtons.length; i++) {
             categoryButtons[String(i)].classList.remove('inactive');
             categoryButtons[String(i)].classList.add('active');
-             //Enable all categories
-             enable_category(String(i));
+            enable_category(String(i));
         }
         all_none_categories = true;
       }
@@ -437,17 +472,17 @@ function enable_category(clicked_id) {
   function allNoneDifficultiesButton() {
       if (all_none_difficulties == true) {
         for (var i = 0; i < difficultyButtons.length; i++) {
-            difficultyButtons[i].classList.remove('active');
-            difficultyButtons[i].classList.add('inactive');
+            difficultyButtons[String(i)].classList.remove('active');
+            difficultyButtons[String(i)].classList.add('inactive');
             document.getElementById("demo").innerHTML = 'You must select at least one difficulty before starting the game.';
-            //Kill all difficulties
+            disable_difficulty(String(i));
         }
         all_none_difficulties = false;
         } else {
         for (var i = 0; i < difficultyButtons.length; i++) {
             difficultyButtons[i].classList.remove('inactive');
             difficultyButtons[i].classList.add('active');
-            //Enable all categories
+            enable_difficulty(String(i));
         }
         all_none_difficulties = true;
       }
@@ -456,17 +491,17 @@ function enable_category(clicked_id) {
   function allNoneErasButton() {
       if (all_none_eras == true) {
         for (var i = 0; i < eraButtons.length; i++) {
-            eraButtons[i].classList.remove('active');
-            eraButtons[i].classList.add('inactive');
+            eraButtons[String(i)].classList.remove('active');
+            eraButtons[String(i)].classList.add('inactive');
             document.getElementById("demo").innerHTML = 'You must select at least one era before starting the game.';
-            //Kill all eras
+            disable_era(String(i));
         }
         all_none_eras = false;
         } else {
         for (var i = 0; i < eraButtons.length; i++) {
-            eraButtons[i].classList.remove('inactive');
-            eraButtons[i].classList.add('active');
-            //Enable all eras
+            eraButtons[String(i)].classList.remove('inactive');
+            eraButtons[String(i)].classList.add('active');
+            enable_era(String(i));
         }
         all_none_eras = true;
       }
