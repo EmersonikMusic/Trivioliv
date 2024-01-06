@@ -271,7 +271,7 @@ function toggle_categories(clicked_id) {
 }
 
 function toggle_difficulties(clicked_id) {
-    if (!difficulty_list.includes(clicked_id-1)) {
+    if (!difficulty_list.includes(clicked_id)) {
         document.getElementById("demo").innerHTML = 'You have disabled the ' + difficulty_number_identities[clicked_id] + ' difficulty.';
         difficulty_list.push(clicked_id-1);
         console.log('Banned Difficulties:' + difficulty_list);
