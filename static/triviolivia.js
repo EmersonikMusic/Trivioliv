@@ -271,13 +271,13 @@ function toggle_categories(clicked_id) {
 }
 
 function toggle_difficulties(clicked_id) {
-    if (!difficulty_list.includes(clicked_id)) {
+    if (!difficulty_list.includes(clicked_id-1)) {
         document.getElementById("demo").innerHTML = 'You have disabled the ' + difficulty_number_identities[clicked_id] + ' difficulty.';
-        difficulty_list.push(clicked_id);
+        difficulty_list.push(clicked_id-1);
         console.log('Banned Difficulties:' + difficulty_list);
     } else {
         document.getElementById("demo").innerHTML = 'You have enabled the ' + difficulty_number_identities[clicked_id] + ' difficulty.';
-        difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
+        difficulty_list.splice(difficulty_list.indexOf(clicked_id -1), 1);
         console.log('Banned Difficulties:' + difficulty_list);
     }
 }
@@ -499,7 +499,7 @@ function enable_era(clicked_id) {
         }
         all_none_eras = false;
         } else {
-        era_list = [];
+        category_list = [];
         for (var i = 0; i < eraButtons.length; i++) {
             eraButtons[String(i)].classList.remove('inactive');
             eraButtons[String(i)].classList.add('active');
