@@ -487,6 +487,7 @@ function enable_era(clicked_id) {
             enable_difficulty(String(i+1));
         }
         all_none_difficulties = true;
+        document.getElementById("demo").innerHTML = 'You have enabled all difficulties.';
       }
   } 
   
@@ -507,5 +508,6 @@ function enable_era(clicked_id) {
             enable_era(String(i+1));
         }
         all_none_eras = true;
+        document.getElementById("demo").innerHTML = 'You have enabled all eras.';
       }
   } 
