@@ -5,7 +5,9 @@
 
 <link rel='stylesheet' href='{% static "triviolivia.css" %}'>
 
+<!--Options menu-->
 <div id="menu" class="menu_visable">
+    <!--Categories menu-->
     <div id="menu_categories" class="menu_left">
         CATEGORIES
             <button id="all-none-categories" type="all-none-categories" onclick="allNoneCategoriesButton()">ALL/NONE</button>
@@ -14,19 +16,20 @@
             <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}"><span class="indicator"></span><span class="{{ category.title }}">{{ category.name | upper }}</span></button>
         </div>
         {% endfor %}
-        
-        <div id='other-buttons'>
-            <br>
-            <button id='refetch-questions' type='button'>REFETCH QUESTIONS</button>
-            <button id='refetch-questions' type='button'>RATE QUESTION</button>
-            <button id='refetch-questions' type='button'>SUBMIT QUESTION</button>
-            <button id='refetch-questions' type='button'>ABOUT US</button>
-            <button id='refetch-questions' type='button'>CONTACT US</button>
-        </div>
-
-
+       
+    <!--Other buttons menu-->
+    <div id='other-buttons'>
+        <br>
+        <button id='refetch-questions' type='button'>REFETCH QUESTIONS</button>
+        <button id='refetch-questions' type='button'>RATE QUESTION</button>
+        <button id='refetch-questions' type='button'>SUBMIT QUESTION</button>
+        <button id='refetch-questions' type='button'>ABOUT US</button>
+        <button id='refetch-questions' type='button'>CONTACT US</button>
     </div>
+
+</div>
     
+    <!--Difficulties menu-->
     <div id="menu_difficulty" class="menu_left">
             DIFFICULTIES
             <button class="button all-none-rest" onclick="allNoneDifficultiesButton()">ALL/NONE </button>            {% for difficulty in difficulties %}
@@ -40,10 +43,12 @@
         {% endfor %}
     </div>
 
+    <!--Eras menu-->
     <div id="menu_eras" class="menu_left">
         
     </div>
-      
+    
+    <!--Question and answer time menu-->
     <div id="menu_question_time" class="menu_left">
         qTIME
         <button onclick='change_time_per_question(this.id)' id=10 type='button'>10s</button>
@@ -61,6 +66,8 @@
     
 </div>
 
+
+<!--Top area with START,OPTIONS,RESET buttons-->
 <div id='top-area'>
     <div id='big-buttons'>
         <button onclick='test()' id='start-pause' type='button' style='background-color:green'>START</button>
@@ -71,16 +78,20 @@
 </div>
 
 
-
+<!--Main game container area-->
 <div id="container_game">
     <div id='question-container' class="question-container"></div>
     <div id='answer-container' class="answer-container"></div>
 </div>
 
+
+<!--Question info and feedback statement are and soon-to-be Q/A loading bar-->
 <div class="loading-bar-container">
     <div id="demo"><p id="demo"></p></div>
 </div>
 
+
+<!--The JavaScript-->
 <script src="{% static 'triviolivia.js' %}"></script>
 
 {% endblock %} 

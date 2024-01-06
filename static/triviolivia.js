@@ -12,6 +12,7 @@ var start_or_pause_game = 'Start';
 var difficulty_list = [];
 var category_list = [];
 var era_list = [];
+var game_active = false;
 
 // Mapping of category, difficulty, and era numbers to their respective names
 var category_number_identities = {
@@ -330,6 +331,7 @@ const showAnswer = (displayed_answer) => {
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 const yourFunctionNew = async () => {
+    game_active = true;
     document.getElementById("demo").innerHTML = 'Put your game face on.';
     await delay(1 * 1000);
     document.getElementById("demo").innerHTML = 'Put your game face on..';
@@ -348,7 +350,7 @@ const yourFunctionNew = async () => {
         showAnswer(globalData[i].answer)
         await delay(time_per_answer * 1000);
       }
-    
+    game_active = false;
     document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2023';
   };
 
