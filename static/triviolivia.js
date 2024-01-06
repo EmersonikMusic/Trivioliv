@@ -98,8 +98,6 @@ document.getElementById("demo").innerHTML = 'Press START to begin.'
 var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
 var moddedUrl = '';
 var queryParams = [];
-// var fetched_data = new_game_starter();
-// console.log(fetched_data);
 
 // Function to generate a URL with query parameters based on selected options
 function url_generator() {
@@ -128,15 +126,6 @@ async function fetchJSON(generated_url) {
     const data = await response.json();
     return data;
 }
-  
-// function new_game_starter() {
-//     var generated_url = url_generator();
-//     console.log(generated_url);
-//     var response_data = url_fetcher(generated_url);
-//     console.log(response_data);
-//     var new_response_data = fetchJSON(generated_url)
-//     return new_response_data;
-// }
 
 let globalData;
 
@@ -167,21 +156,6 @@ function test() {
     // .catch(error => console.error(error));
     yourFunctionNew();
 }
-
-
-
-//ChatGPT attempt at making custom stuff work
-
-// fetchData('https://triviolivia.herokuapp.com/api/questions?questions=10')
-//   .then(() => {
-//     console.log(globalData);
-//   })
-//   .catch(error => {
-//     console.error(error);
-//   });
-
-
-// end ChatGPT
 
 // Function to hide the menu
 function hide_menu() {
@@ -229,6 +203,7 @@ function start_or_pause_game() {
     }
 }
 
+//Function to hide and unhide the options menu
 function toggle_menu() {
     if (menu_hidden == true) {
         menu_hidden = false;
@@ -294,6 +269,7 @@ function toggle_eras(clicked_id) {
     }
 }
 
+//Change time per question and time per answer functions
 function change_time_per_question(clicked_id) {
     time_per_question = clicked_id;
     document.getElementById("demo").innerHTML = 'Questions are now displayed for ' + time_per_question + ' seconds.';
@@ -306,13 +282,15 @@ function change_time_per_answer(clicked_id) {
     console.log(time_per_answer);
 }
 
+
 let Question = class {
-    constructor(number, category, difficulty, question, answer) {
+    constructor(number, category, difficulty, question, answer, subcategory) {
         this.number = number;
         this.category = category;
         this.difficulty = difficulty;
         this.question = question;
         this.answer = answer;
+        this.subcategory = subcategory;
     }
   }
 
