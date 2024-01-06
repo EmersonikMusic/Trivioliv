@@ -334,6 +334,13 @@ const showAnswer = (displayed_answer) => {
     setTimeout(() => answerDisplay.removeChild(messageElement), time_per_answer * 1000)
 }
 
+const eraseQuestionContainer = () => {
+    const div = document.getElementById('question-container');
+    div.style.opacity = 1;
+    messageElement.textContent = '';
+    questionDisplay.append(messageElement);
+}
+
 // showQuestion('Q: ' + question000001.question)
 
 // var timeLeft = time_per_question;
@@ -350,10 +357,11 @@ const showAnswer = (displayed_answer) => {
 //     }
 // }
 
-
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 const yourFunctionNew = async () => {
+    eraseQuestionContainer();
+
     document.getElementById("demo").innerHTML = 'Put your game face on.';
 
     await delay(1 * 1000);
