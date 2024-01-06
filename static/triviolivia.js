@@ -471,7 +471,7 @@ function enable_era(clicked_id) {
 
   function allNoneDifficultiesButton() {
       if (all_none_difficulties == true) {
-        for (var i = ; i < difficultyButtons.length + 1; i++) {
+        for (var i = 1; i < difficultyButtons.length + 1; i++) {
             difficultyButtons[String(i)].classList.remove('active');
             difficultyButtons[String(i)].classList.add('inactive');
             disable_difficulty(String(i));
