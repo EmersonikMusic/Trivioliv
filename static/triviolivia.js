@@ -112,7 +112,7 @@ function url_generator() {
     if (era_list.length > 0) {
         queryParams.push('era=' + era_list.join(','));
     }
-    const urlWithParams = baseUrl + '?questions=2&' + queryParams.join('&');
+    const urlWithParams = baseUrl + '?questions=100&' + queryParams.join('&');
     return urlWithParams;
 }
 
