@@ -153,7 +153,7 @@ function test() {
         if (era_list.length > 0) {
             queryParams.push('era=' + era_list.join(','));
         }
-        const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
+        const urlWithParams = baseUrl + '?questions=100&' + queryParams.join('&');
         moddedUrl = urlWithParams;
         menu_hidden = true;
         hide_menu();
