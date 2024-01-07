@@ -117,12 +117,12 @@ function url_generator() {
 }
 
 // Function to fetch data from a URL
-function url_fetcher(generated_url) {
-    fetch(generated_url)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
-}
+// function url_fetcher(generated_url) {
+//     fetch(generated_url)
+//     .then(response => response.json())
+//     .then(data => console.log(data))
+//     .catch(error => console.error(error));
+// }
 
 async function fetchJSON(generated_url) {
     const response = await fetch(generated_url);
