@@ -186,7 +186,9 @@ async function fetchJsonTenTimes(url) {
 
 //Function to start or pause game NEED TO ADD PAUSE/UNPAUSE FUNCTIONALITY
 function start_or_pause_game() {
-    if (game_started == false) {
+    if (game_started == true) {
+        document.getElementById("demo").innerHTML = 'Game already started.';
+    } else if (game_started == false) {
         game_started = true;
         hide_menu();
         document.querySelector('start-pause').textContent = 'PAUSE';
@@ -194,8 +196,6 @@ function start_or_pause_game() {
         fetchJsonTenTimes('https://triviolivia.herokuapp.com/api/questions/');
         yourFunctionNew();
         console.log(results);
-    } else if (game_started == true) {
-        document.getElementById("demo").innerHTML = 'Game already started.';
     } else if (game_paused == false) {
         game_paused = true;
         document.getElementById("demo").innerHTML = 'Game paused.';
