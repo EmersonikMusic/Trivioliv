@@ -8,6 +8,7 @@ var game_started = false;
 var game_paused = false;
 var current_question_category = null;
 var menu_hidden = false;
+var number_of_questions = 10;
 
 //Banned category/difficulty/era lists
 var category_list = [];
@@ -157,7 +158,7 @@ function test() {
     menu_hidden = true;
     hide_menu();
     fetchData(moddedUrl);
-    yourFunctionNew();
+    mainGameFunction();
     }
 }
 
@@ -183,14 +184,14 @@ function toggle_menu() {
     }
 }
 
-//Future home of reset functionality
+//Future function of reset functionality
 function confirm_reset() {
     document.getElementById("demo").innerHTML = 'Are you sure you want to reset the game?';
     //Yes/No?
     //Reset function call
 }
 
-//Indicator light toggle function
+//Function for indicator light toggle
 function toggleIndicator(button) {
     if (button.classList.contains('active')) {
       button.classList.remove('active');
@@ -203,7 +204,7 @@ function toggleIndicator(button) {
     }
   }
 
-//Toggle categories, difficulties, and eras functions
+//Functions to toggle categories, difficulties, and eras
 function toggle_categories(clicked_id) {
     if (!category_list.includes(clicked_id)) {
         document.getElementById("demo").innerHTML = 'You have disabled the ' + category_number_identities[clicked_id] + ' category.';
@@ -241,7 +242,12 @@ function toggle_eras(clicked_id) {
     }
 }
 
-//Change time per question and time per answer functions
+//Functions to change number of questions, time per question, and time per answer
+function change_number_of_questions(clicked_id) {
+    number_of_questions = clicked_id;
+    document.getElementById("demo").innerHTML = 'Game set to ' + number_of_questions + ' questions.';
+}
+
 function change_time_per_question(clicked_id) {
     time_per_question = clicked_id;
     document.getElementById("demo").innerHTML = 'Questions are now displayed for ' + time_per_question + ' seconds.';
@@ -263,8 +269,9 @@ let Question = class {
         this.question = question;
         this.answer = answer;
     }
-  }
+}
 
+//Arrow function to show question
 const showQuestion = (displayed_question) => {
     const div = document.getElementById('question-container');
     div.style.opacity = 1;
@@ -274,6 +281,7 @@ const showQuestion = (displayed_question) => {
     setTimeout(() => questionDisplay.removeChild(messageElement), time_per_question * 1000 + time_per_answer * 1000)
 }
 
+//Arrow function to show answer
 const showAnswer = (displayed_answer) => {
     const div = document.getElementById('question-container');
     div.style.opacity = 0.7;
@@ -283,25 +291,10 @@ const showAnswer = (displayed_answer) => {
     setTimeout(() => answerDisplay.removeChild(messageElement), time_per_answer * 1000)
 }
 
-// showQuestion('Q: ' + question000001.question)
-
-// var timeLeft = time_per_question;
-// var elem = document.getElementById('Timer');
-// var timerId = setInterval(countdown, 1000);
-
-// function countdown() {
-//     if (timeLeft == 0) {
-//         clearTimeout(timerId);
-//         showAnswer('A: ' + question000001.answer)
-//     } else {
-//         elem.innerHTML = timeLeft;
-//         timeLeft--;
-//     }
-// }
-
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-const yourFunctionNew = async () => {
+//Arrow function for main game start
+const mainGameFunction = async () => {
     document.getElementById("demo").innerHTML = 'Put your game face on.';
     await delay(1 * 1000);
     document.getElementById("demo").innerHTML = 'Put your game face on..';
@@ -312,7 +305,7 @@ const yourFunctionNew = async () => {
     await delay(1 * 1000);
     document.getElementById("demo").innerHTML = '';
     
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < number_of_questions; i++) {
         document.body.style.backgroundColor = category_colors[globalData[i].category_name];
         document.getElementById("demo").innerHTML = 'Category: ' + globalData[i].category_name + ' -  Difficulty: ' + globalData[i].difficulty_name + ' - Author: Mark Mazurek';
         showQuestion(globalData[i].text);
@@ -322,7 +315,7 @@ const yourFunctionNew = async () => {
       }
     game_started = false;
     document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2023';
-  };
+};
 
 //Variables for ALL/NONE buttons
 var all_none_categories = true;
@@ -393,6 +386,7 @@ function enable_era(clicked_id) {
     }
 }
 
+//Functions for ALL/NONE buttons
 function allNoneCategoriesButton() {
     if (all_none_categories == true) {
     for (var i = 0; i < categoryButtons.length; i++) {
