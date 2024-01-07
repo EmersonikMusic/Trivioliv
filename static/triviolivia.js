@@ -112,7 +112,7 @@ function url_generator() {
     if (era_list.length > 0) {
         queryParams.push('era=' + era_list.join(','));
     }
-    const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
+    const urlWithParams = baseUrl + '?questions=2&' + queryParams.join('&');
     return urlWithParams;
 }
 
@@ -124,11 +124,11 @@ function url_generator() {
 //     .catch(error => console.error(error));
 // }
 
-async function fetchJSON(generated_url) {
-    const response = await fetch(generated_url);
-    const data = await response.json();
-    return data;
-}
+// async function fetchJSON(generated_url) {
+//     const response = await fetch(generated_url);
+//     const data = await response.json();
+//     return data;
+// }
 
 let globalData;
 
