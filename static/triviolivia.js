@@ -8,11 +8,12 @@ var game_started = false;
 var game_paused = false;
 var current_question_category = null;
 var menu_hidden = false;
-var start_or_pause_game = 'Start';
-var difficulty_list = [];
-var category_list = [];
-var era_list = [];
 var game_active = false;
+
+//Banned category/difficulty/era lists
+var category_list = [];
+var difficulty_list = [];
+var era_list = [];
 
 // Mapping of category, difficulty, and era numbers to their respective names
 var category_number_identities = {
@@ -188,7 +189,7 @@ function start_or_pause_game() {
     if (game_started == false) {
         game_started = true;
         hide_menu();
-        document.querySelector('#start-pause').textContent = 'PAUSE';
+        document.querySelector('start-pause').textContent = 'PAUSE';
         document.getElementById('big-buttons').opacity = 0.3;
         fetchJsonTenTimes('https://triviolivia.herokuapp.com/api/questions/');
         yourFunctionNew();
@@ -198,11 +199,11 @@ function start_or_pause_game() {
     } else if (game_paused == false) {
         game_paused = true;
         document.getElementById("demo").innerHTML = 'Game paused.';
-        document.querySelector('#start-pause').textContent = 'UNPAUSE';
+        document.querySelector('start-pause').textContent = 'UNPAUSE';
     } else {
         game_paused = false;
         document.getElementById("demo").innerHTML = 'Game unpaused.';
-        document.querySelector('#start-pause').textContent = 'PAUSE';
+        document.querySelector('start-pause').textContent = 'PAUSE';
     }
 }
 
