@@ -112,23 +112,9 @@ function url_generator() {
     if (era_list.length > 0) {
         queryParams.push('era=' + era_list.join(','));
     }
-    const urlWithParams = baseUrl + '?questions=99&' + queryParams.join('&');
+    const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
     return urlWithParams;
 }
-
-// Function to fetch data from a URL
-// function url_fetcher(generated_url) {
-//     fetch(generated_url)
-//     .then(response => response.json())
-//     .then(data => console.log(data))
-//     .catch(error => console.error(error));
-// }
-
-// async function fetchJSON(generated_url) {
-//     const response = await fetch(generated_url);
-//     const data = await response.json();
-//     return data;
-// }
 
 let globalData;
 
@@ -153,7 +139,7 @@ function test() {
         if (era_list.length > 0) {
             queryParams.push('era=' + era_list.join(','));
         }
-        const urlWithParams = baseUrl + '?questions=99&' + queryParams.join('&');
+        const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
         moddedUrl = urlWithParams;
         menu_hidden = true;
         hide_menu();
