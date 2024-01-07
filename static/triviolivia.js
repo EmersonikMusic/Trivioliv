@@ -143,22 +143,22 @@ function test() {
     if (game_started == true) {
         document.getElementById("demo").innerHTML = 'Game already started.';
     } else {
-    game_started = true;
-    if (category_list.length > 0) {
-        queryParams.push('category=' + category_list.join(','));
-    }
-    if (difficulty_list.length > 0) {
-        queryParams.push('difficulty=' + difficulty_list.join(','));
-    }
-    if (era_list.length > 0) {
-        queryParams.push('era=' + era_list.join(','));
-    }
-    const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
-    moddedUrl = urlWithParams;
-    menu_hidden = true;
-    hide_menu();
-    fetchData(moddedUrl);
-    mainGameFunction();
+        game_started = true;
+        if (category_list.length > 0) {
+            queryParams.push('category=' + category_list.join(','));
+        }
+        if (difficulty_list.length > 0) {
+            queryParams.push('difficulty=' + difficulty_list.join(','));
+        }
+        if (era_list.length > 0) {
+            queryParams.push('era=' + era_list.join(','));
+        }
+        const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
+        moddedUrl = urlWithParams;
+        menu_hidden = true;
+        hide_menu();
+        fetchData(moddedUrl);
+        mainGameFunction();
     }
 }
 
@@ -170,7 +170,6 @@ function hide_menu() {
 // Function to show the menu
 function show_menu() {
     document.getElementById("menu").style.left = "0px";
-
 }
 
 //Function to hide and unhide the options menu
