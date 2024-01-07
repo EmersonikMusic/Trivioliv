@@ -157,6 +157,7 @@ function test() {
     menu_hidden = true;
     hide_menu();
     fetchData(moddedUrl);
+    console.log(game_started);
     // .then(response => response.json())
     // .then(data => console.log(data))
     // .catch(error => console.error(error));
