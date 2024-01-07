@@ -112,7 +112,7 @@ function url_generator() {
     if (era_list.length > 0) {
         queryParams.push('era=' + era_list.join(','));
     }
-    const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
+    const urlWithParams = baseUrl + '?questions=99&' + queryParams.join('&');
     return urlWithParams;
 }
 
@@ -153,7 +153,7 @@ function test() {
         if (era_list.length > 0) {
             queryParams.push('era=' + era_list.join(','));
         }
-        const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
+        const urlWithParams = baseUrl + '?questions=99&' + queryParams.join('&');
         moddedUrl = urlWithParams;
         menu_hidden = true;
         hide_menu();
