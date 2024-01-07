@@ -8,7 +8,6 @@ var game_started = false;
 var game_paused = false;
 var current_question_category = null;
 var menu_hidden = false;
-var game_active = false;
 
 //Banned category/difficulty/era lists
 var category_list = [];
@@ -140,6 +139,17 @@ async function fetchData(moddedUrl) {
 
 // Function to fetch JSON data asynchronously
 function test() {
+
+    if (game_paused == false) {
+        game_paused = true;
+        document.getElementById("demo").innerHTML = 'Game paused.';
+        document.querySelector('start-pause').textContent = 'UNPAUSE';
+    } else {
+        game_paused = false;
+        document.getElementById("demo").innerHTML = 'Game unpaused.';
+        document.querySelector('start-pause').textContent = 'PAUSE';
+    }
+     
     if (game_started == true) {
         document.getElementById("demo").innerHTML = 'Game already started.';
     } else {
@@ -158,9 +168,8 @@ function test() {
     menu_hidden = true;
     hide_menu();
     fetchData(moddedUrl);
-    console.log(game_started);
     yourFunctionNew();
-}
+    }
 }
 
 // Function to hide the menu
@@ -360,7 +369,7 @@ const yourFunctionNew = async () => {
     document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2023';
   };
 
-
+//Variables for ALL/NONE buttons
 var all_none_categories = true;
 var all_none_difficulties = true;
 var all_none_eras = true;
@@ -429,66 +438,66 @@ function enable_era(clicked_id) {
     }
 }
 
-  function allNoneCategoriesButton() {
-      if (all_none_categories == true) {
-        for (var i = 0; i < categoryButtons.length; i++) {
-            categoryButtons[String(i)].classList.remove('active');
-            categoryButtons[String(i)].classList.add('inactive');
-            disable_category(String(i));
-            document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
-        }
-        all_none_categories = false;
-        } else {
-        category_list = [];
-        for (var i = 0; i < categoryButtons.length; i++) {
-            categoryButtons[String(i)].classList.remove('inactive');
-            categoryButtons[String(i)].classList.add('active');
-            enable_category(String(i));
-        }
-        all_none_categories = true;
-        document.getElementById("demo").innerHTML = 'You have enabled all categories.';
-      }
-      console.log(categoryButtons);
-  }
+function allNoneCategoriesButton() {
+    if (all_none_categories == true) {
+    for (var i = 0; i < categoryButtons.length; i++) {
+        categoryButtons[String(i)].classList.remove('active');
+        categoryButtons[String(i)].classList.add('inactive');
+        disable_category(String(i));
+        document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
+    }
+    all_none_categories = false;
+    } else {
+    category_list = [];
+    for (var i = 0; i < categoryButtons.length; i++) {
+        categoryButtons[String(i)].classList.remove('inactive');
+        categoryButtons[String(i)].classList.add('active');
+        enable_category(String(i));
+    }
+    all_none_categories = true;
+    document.getElementById("demo").innerHTML = 'You have enabled all categories.';
+    }
+    console.log(categoryButtons);
+}
 
-  function allNoneDifficultiesButton() {
-      if (all_none_difficulties == true) {
-        for (var i = 0; i < difficultyButtons.length; i++) {
-            difficultyButtons[String(i)].classList.remove('active');
-            difficultyButtons[String(i)].classList.add('inactive');
-            disable_difficulty(String(i+1));
-            document.getElementById("demo").innerHTML = 'You must select at least one difficulty before starting the game.';
-        }
-        all_none_difficulties = false;
-        } else {
-        difficulty_list = [];
-        for (var i = 0; i < difficultyButtons.length; i++) {
-            difficultyButtons[String(i)].classList.remove('inactive');
-            difficultyButtons[String(i)].classList.add('active');
-            enable_difficulty(String(i+1));
-        }
-        all_none_difficulties = true;
-        document.getElementById("demo").innerHTML = 'You have enabled all difficulties.';
-      }
-  } 
-  
-  function allNoneErasButton() {
-      if (all_none_eras == true) {
-        for (var i = 0; i < eraButtons.length; i++) {
-            eraButtons[String(i)].classList.remove('active');
-            eraButtons[String(i)].classList.add('inactive');
-            document.getElementById("demo").innerHTML = 'You must select at least one era before starting the game.';
-            disable_era(String(i+1));
-        }
-        all_none_eras = false;
-        } else {
-        category_list = [];
-        for (var i = 0; i < eraButtons.length; i++) {
-            eraButtons[String(i)].classList.remove('inactive');
-            eraButtons[String(i)].classList.add('active');
-            enable_era(String(i+1));
-        }
-        all_none_eras = true;
-        document.getElementById("demo").innerHTML = 'You have enabled all eras.';
-      }
-  } 
+function allNoneDifficultiesButton() {
+    if (all_none_difficulties == true) {
+    for (var i = 0; i < difficultyButtons.length; i++) {
+        difficultyButtons[String(i)].classList.remove('active');
+        difficultyButtons[String(i)].classList.add('inactive');
+        disable_difficulty(String(i+1));
+        document.getElementById("demo").innerHTML = 'You must select at least one difficulty before starting the game.';
+    }
+    all_none_difficulties = false;
+    } else {
+    difficulty_list = [];
+    for (var i = 0; i < difficultyButtons.length; i++) {
+        difficultyButtons[String(i)].classList.remove('inactive');
+        difficultyButtons[String(i)].classList.add('active');
+        enable_difficulty(String(i+1));
+    }
+    all_none_difficulties = true;
+    document.getElementById("demo").innerHTML = 'You have enabled all difficulties.';
+    }
+} 
+
+function allNoneErasButton() {
+    if (all_none_eras == true) {
+    for (var i = 0; i < eraButtons.length; i++) {
+        eraButtons[String(i)].classList.remove('active');
+        eraButtons[String(i)].classList.add('inactive');
+        document.getElementById("demo").innerHTML = 'You must select at least one era before starting the game.';
+        disable_era(String(i+1));
+    }
+    all_none_eras = false;
+    } else {
+    category_list = [];
+    for (var i = 0; i < eraButtons.length; i++) {
+        eraButtons[String(i)].classList.remove('inactive');
+        eraButtons[String(i)].classList.add('active');
+        enable_era(String(i+1));
+    }
+    all_none_eras = true;
+    document.getElementById("demo").innerHTML = 'You have enabled all eras.';
+    }
+} 
