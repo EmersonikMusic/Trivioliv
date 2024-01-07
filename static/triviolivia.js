@@ -115,6 +115,7 @@ function url_generator() {
     const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
     return urlWithParams;
 }
+
 // Function to fetch data from a URL
 function url_fetcher(generated_url) {
     fetch(generated_url)
@@ -158,9 +159,6 @@ function test() {
     hide_menu();
     fetchData(moddedUrl);
     console.log(game_started);
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    // .catch(error => console.error(error));
     yourFunctionNew();
     game_started = false;
 }
