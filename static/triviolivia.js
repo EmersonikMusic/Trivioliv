@@ -139,17 +139,6 @@ async function fetchData(moddedUrl) {
 
 // Function to fetch JSON data asynchronously
 function test() {
-
-    if (game_paused == false) {
-        game_paused = true;
-        document.getElementById("demo").innerHTML = 'Game paused.';
-        document.querySelector('start-pause').textContent = 'UNPAUSE';
-    } else {
-        game_paused = false;
-        document.getElementById("demo").innerHTML = 'Game unpaused.';
-        document.querySelector('start-pause').textContent = 'PAUSE';
-    }
-     
     if (game_started == true) {
         document.getElementById("demo").innerHTML = 'Game already started.';
     } else {
@@ -183,43 +172,6 @@ function show_menu() {
 
 }
 
-let results = [];
-
-async function fetchJsonTenTimes(url) {
-    for (let i = 0; i < 5; i++) {
-      const response = await fetch(url);
-      const data = await response.json();
-      results.push(data);
-      console.log(data);
-      console.log(results[i][0].text);
-      console.log(results[i][0].answer);
-      console.log("\n");
-    }
-  }
-
-//Function to start or pause game NEED TO ADD PAUSE/UNPAUSE FUNCTIONALITY
-function start_or_pause_game() {
-    if (game_started == true) {
-        document.getElementById("demo").innerHTML = 'Game already started.';
-    } else if (game_started == false) {
-        game_started = true;
-        hide_menu();
-        document.querySelector('start-pause').textContent = 'PAUSE';
-        document.getElementById('big-buttons').opacity = 0.3;
-        fetchJsonTenTimes('https://triviolivia.herokuapp.com/api/questions/');
-        yourFunctionNew();
-        console.log(results);
-    } else if (game_paused == false) {
-        game_paused = true;
-        document.getElementById("demo").innerHTML = 'Game paused.';
-        document.querySelector('start-pause').textContent = 'UNPAUSE';
-    } else {
-        game_paused = false;
-        document.getElementById("demo").innerHTML = 'Game unpaused.';
-        document.querySelector('start-pause').textContent = 'PAUSE';
-    }
-}
-
 //Function to hide and unhide the options menu
 function toggle_menu() {
     if (menu_hidden == true) {
@@ -231,12 +183,14 @@ function toggle_menu() {
     }
 }
 
+//Future home of reset functionality
 function confirm_reset() {
     document.getElementById("demo").innerHTML = 'Are you sure you want to reset the game?';
     //Yes/No?
     //Reset function call
 }
 
+//Indicator light toggle function
 function toggleIndicator(button) {
     if (button.classList.contains('active')) {
       button.classList.remove('active');
@@ -249,6 +203,7 @@ function toggleIndicator(button) {
     }
   }
 
+//Toggle categories, difficulties, and eras functions
 function toggle_categories(clicked_id) {
     if (!category_list.includes(clicked_id)) {
         document.getElementById("demo").innerHTML = 'You have disabled the ' + category_number_identities[clicked_id] + ' category.';
