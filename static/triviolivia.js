@@ -139,6 +139,10 @@ async function fetchData(moddedUrl) {
 
 // Function to fetch JSON data asynchronously
 function test() {
+    if (game_started == true) {
+        document.getElementById("demo").innerHTML = 'Game already started.';
+    } else {
+    game_started = true;
     if (category_list.length > 0) {
         queryParams.push('category=' + category_list.join(','));
     }
@@ -157,6 +161,8 @@ function test() {
     // .then(data => console.log(data))
     // .catch(error => console.error(error));
     yourFunctionNew();
+    game_started = false;
+}
 }
 
 // Function to hide the menu
