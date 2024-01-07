@@ -193,6 +193,8 @@ function start_or_pause_game() {
         fetchJsonTenTimes('https://triviolivia.herokuapp.com/api/questions/');
         yourFunctionNew();
         console.log(results);
+    } else if (game_started == true) {
+        document.getElementById("demo").innerHTML = 'Game already started.';
     } else if (game_paused == false) {
         game_paused = true;
         document.getElementById("demo").innerHTML = 'Game paused.';
