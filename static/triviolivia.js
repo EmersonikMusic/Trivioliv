@@ -8,7 +8,7 @@ var game_started = false;
 var game_paused = false;
 var current_question_category = null;
 var menu_hidden = false;
-var number_of_questions = 10;
+var number_of_questions = 100;
 
 //Banned category/difficulty/era lists
 var category_list = [];
