@@ -102,19 +102,19 @@ var moddedUrl = '';
 var queryParams = [];
 
 // Function to generate a URL with query parameters based on selected options
-function url_generator() {
-    if (category_list.length > 0) {
-        queryParams.push('category=' + category_list.join(','));
-    }
-    if (difficulty_list.length > 0) {
-        queryParams.push('difficulty=' + difficulty_list.join(','));
-    }
-    if (era_list.length > 0) {
-        queryParams.push('era=' + era_list.join(','));
-    }
-    const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
-    return urlWithParams;
-}
+// function url_generator() {
+//     if (category_list.length > 0) {
+//         queryParams.push('category=' + category_list.join(','));
+//     }
+//     if (difficulty_list.length > 0) {
+//         queryParams.push('difficulty=' + difficulty_list.join(','));
+//     }
+//     if (era_list.length > 0) {
+//         queryParams.push('era=' + era_list.join(','));
+//     }
+//     const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
+//     return urlWithParams;
+// }
 
 let globalData;
 
@@ -157,17 +157,6 @@ function hide_menu() {
 // Function to show the menu
 function show_menu() {
     document.getElementById("menu").style.left = "0px";
-}
-
-//Function to hide and unhide the options menu
-function toggle_menu() {
-    if (menu_hidden == true) {
-        menu_hidden = false;
-        show_menu();
-    } else {
-        menu_hidden = true;
-        hide_menu();
-    }
 }
 
 //Future function of reset functionality
@@ -257,7 +246,7 @@ let Question = class {
     }
 }
 
-//Arrow function to show question
+//Arrow functions to show question and answer
 const showQuestion = (displayed_question) => {
     const div = document.getElementById('question-container');
     div.style.opacity = 1;
@@ -267,7 +256,6 @@ const showQuestion = (displayed_question) => {
     setTimeout(() => questionDisplay.removeChild(messageElement), time_per_question * 1000 + time_per_answer * 1000)
 }
 
-//Arrow function to show answer
 const showAnswer = (displayed_answer) => {
     const div = document.getElementById('question-container');
     div.style.opacity = 0.7;
