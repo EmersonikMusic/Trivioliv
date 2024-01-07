@@ -8,7 +8,7 @@ var game_started = false;
 var game_paused = false;
 var current_question_category = null;
 var menu_hidden = false;
-var number_of_questions = 100;
+var number_of_questions = 10;
 
 //Banned category/difficulty/era lists
 var category_list = [];
@@ -122,6 +122,7 @@ async function fetchData(moddedUrl) {
   const response = await fetch(moddedUrl);
   const data = await response.json();
   globalData = data;
+  console.log(globalData);
 }
 
 // Function to fetch JSON data asynchronously
@@ -229,7 +230,7 @@ function toggle_eras(clicked_id) {
 
 //Functions to change number of questions, time per question, and time per answer
 function change_number_of_questions(clicked_id) {
-    number_of_questions = clicked_id;
+    number_of_questions = parseInt(clicked_id);
     document.getElementById("demo").innerHTML = 'Game set to ' + number_of_questions + ' questions.';
 }
 
