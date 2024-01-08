@@ -88,6 +88,10 @@ h2 {
 
 }
 
+#all-none-categories button {
+    background-color: white;
+}
+
 #art button {
     background-color: #dd7e6b;
 }

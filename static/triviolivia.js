@@ -100,22 +100,6 @@ document.getElementById("demo").innerHTML = 'Press START to begin.'
 var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
 var moddedUrl = '';
 var queryParams = [];
-
-// Function to generate a URL with query parameters based on selected options
-// function url_generator() {
-//     if (category_list.length > 0) {
-//         queryParams.push('category=' + category_list.join(','));
-//     }
-//     if (difficulty_list.length > 0) {
-//         queryParams.push('difficulty=' + difficulty_list.join(','));
-//     }
-//     if (era_list.length > 0) {
-//         queryParams.push('era=' + era_list.join(','));
-//     }
-//     const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
-//     return urlWithParams;
-// }
-
 let globalData;
 
 async function fetchData(moddedUrl) {
@@ -131,6 +115,7 @@ function test() {
         document.getElementById("demo").innerHTML = 'Game already started.';
     } else {
         game_started = true;
+        globalData = [];
         if (category_list.length > 0) {
             queryParams.push('category=' + category_list.join(','));
         }
