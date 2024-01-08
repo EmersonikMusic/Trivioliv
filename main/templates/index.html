@@ -10,7 +10,7 @@
     <!--Categories menu-->
     <div id="menu_categories" class="menu_left">
         CATEGORIES
-            <button id="all-none-categories" type="all-none-categories" onclick="allNoneCategoriesButton()">ALL/NONE</button>
+            <button id="all-none-categories" type="all-none-categories" style="background-color: #BBBBBB;" onclick="allNoneCategoriesButton()">ALL/NONE</button>
         {% for category in categories %}
         <div id='{{ category.name | slugify }}'>
             <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}"><span class="indicator"></span><span class="{{ category.title }}">{{ category.name | upper }}</span></button>
@@ -32,13 +32,13 @@
     <!--Difficulties menu-->
     <div id="menu_difficulty" class="menu_left">
             DIFFICULTIES
-            <button class="button all-none-rest" onclick="allNoneDifficultiesButton()">ALL/NONE </button>            {% for difficulty in difficulties %}
+            <button class="button all-none-rest" style="background-color: #BBBBBB;" onclick="allNoneDifficultiesButton()">ALL/NONE </button>            {% for difficulty in difficulties %}
             <div id='{{ difficulty.name }}'>
                 <button onclick='toggle_difficulties(this.id), toggleIndicator(this)' id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}"><span class="indicator"></span>{{ difficulty.name | upper}}</button>
             </div>
             {% endfor %}
         ERAS
-        <button class="button all-none-rest" onclick="allNoneErasButton()">ALL/NONE </button>        {% for era in eras %}
+        <button class="button all-none-rest" style="background-color: #BBBBBB;" onclick="allNoneErasButton()">ALL/NONE </button>        {% for era in eras %}
         <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}"><span class="indicator"></span>{{ era.name }}</button>
         {% endfor %}
     </div>
