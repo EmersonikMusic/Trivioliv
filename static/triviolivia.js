@@ -149,12 +149,21 @@ function test() {
     }
 }
 
-// Function to hide the menu
+// Function to toggle, hide, and show options menu
+function toggle_menu() {
+    if (menu_hidden == true) {
+        menu_hidden = false;
+        show_menu();
+    } else {
+        menu_hidden = true;
+        hide_menu();
+    }
+}
+
 function hide_menu() {
     document.getElementById("menu").style.left = "-1000px";
 }
 
-// Function to show the menu
 function show_menu() {
     document.getElementById("menu").style.left = "0px";
 }
