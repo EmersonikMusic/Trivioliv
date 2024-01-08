@@ -94,6 +94,7 @@ var category_colors = {
     'Video Games': '#9900ff'
 }
 
+// Default message in bar
 document.getElementById("demo").innerHTML = 'Press START to begin.'
 
 // Declaring variables for the base URL for fetching questions
