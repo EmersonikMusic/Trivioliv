@@ -227,8 +227,6 @@ h2 {
 }
 
 #question-container {
-    font-family: 'American Typewriter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-    'Lucida Sans', Arial, sans-serif;
     padding-top: 25px;
     padding-left: 15px;
     padding-right: 15px;
@@ -236,8 +234,6 @@ h2 {
 }
 
 #answer-container {
-    font-family: 'American Typewriter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-    'Lucida Sans', Arial, sans-serif;
     padding-left: 15px;
     padding-right: 15px;
     font-size: 70px;
