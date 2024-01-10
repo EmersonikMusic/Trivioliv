@@ -276,14 +276,14 @@ const mainGameFunction = async () => {
     
     for (let i = 0; i < number_of_questions; i++) {
         document.body.style.backgroundColor = category_colors[globalData[i].category_name];
-        document.getElementById("demo").innerHTML = globalData[i].category_name + '/' + globalData[i].difficulty_name + ' by Mark Mazurek';
+        document.getElementById("demo").innerHTML = globalData[i].category_name + ' - ' + globalData[i].difficulty_name + ' by Mark Mazurek';
         showQuestion(globalData[i].text);
         await delay(time_per_question * 1000);
         showAnswer(globalData[i].answer)
         await delay(time_per_answer * 1000);
       }
     game_started = false;
-    document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2023';
+    document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
 };
 
 //Variables for ALL/NONE buttons
