@@ -71,7 +71,7 @@ var category_colors = {
     'Economics': '#598C58',
     'Food': '#f28500',
     'Games': '#cc5500',
-    'Geography': '#331800',
+    'Geography': '#563d2d',
     'History': '#f1c232',
     'Human Body': '#d8965b',
     'Language': '#6693f5',
