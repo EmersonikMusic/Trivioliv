@@ -276,7 +276,7 @@ const mainGameFunction = async () => {
     
     for (let i = 0; i < number_of_questions; i++) {
         document.body.style.backgroundColor = category_colors[globalData[i].category_name];
-        document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' by Mark Mazurek';
+        document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek';
         showQuestion(globalData[i].text);
         await delay(time_per_question * 1000);
         showAnswer(globalData[i].answer)
