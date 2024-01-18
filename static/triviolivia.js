@@ -88,7 +88,7 @@ var category_colors = {
     'Science': '#06550d',
     'Sports': '#131e3a',
     'Technology': '#1f5967',
-    'Television': '#2d2c29',
+    'Television': '#0A0A0A',
     'Theater': '#b70000',
     'Theology': '#3C1321',
     'Video Games': '#9900ff'
