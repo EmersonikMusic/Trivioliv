@@ -1,21 +1,21 @@
 const questionDisplay = document.querySelector('.question-container')
 const answerDisplay = document.querySelector('.answer-container')
 
-// Initializing game variables
-var time_per_question = 10
-var time_per_answer = 5
+// Declaring game variables
+var number_of_questions = 10;
+var time_per_question = 10;
+var time_per_answer = 5;
 var game_started = false;
 var game_paused = false;
-var current_question_category = null;
 var menu_hidden = false;
-var number_of_questions = 10;
+var current_question_category = null;
 
-//Banned category/difficulty/era lists
+// Declaring banned category/difficulty/era lists
 var category_list = [];
 var difficulty_list = [];
 var era_list = [];
 
-// Mapping of category, difficulty, and era numbers to their respective names
+// Declaring of mapping of category, difficulty, and era numbers to their respective names
 var category_number_identities = {
     1:'Art',
     2:'Economics',
@@ -43,6 +43,7 @@ var category_number_identities = {
     24:'Video games',
     25:'Law'
 }
+
 var difficulty_number_identities = {
     5:'Genius',
     4:'Sharp',
@@ -50,6 +51,7 @@ var difficulty_number_identities = {
     2:'Easy',
     1:'Casual'
 }
+
 var era_number_identities = {
     1:'Pre-1500',
     2:'1500-1800',
@@ -103,11 +105,25 @@ var moddedUrl = '';
 var queryParams = [];
 let globalData;
 
+// Async JS that kind of scares me, honestly
 async function fetchData(moddedUrl) {
   const response = await fetch(moddedUrl);
   const data = await response.json();
   globalData = data;
   console.log(globalData);
+}
+
+// Function to not fetch JSON data if any of cat/dif/era are all deselected
+function dontFetchDataIfAllDeselected() {
+    if (category_list.length > 24) {
+        console.log('Cannot start game. You must select at least one category.');
+    } else if (difficulty_list.length > 4) {
+        console.log('Cannot start game. You must select at least one difficulty.');
+    } else if (era_list.length > 11) {
+        console.log('Cannot start game. You must select at least one era.');
+    } else {
+        test();
+    }
 }
 
 // Function to fetch JSON data asynchronously
