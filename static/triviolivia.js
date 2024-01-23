@@ -73,7 +73,7 @@ var category_colors = {
     'Economics': '#598C58',
     'Food': '#f28500',
     'Games': '#cc5500',
-    'Geography': '#563d2d',
+    'Geography': '#9a7b4f',
     'History': '#f1c232',
     'Human Body': '#d8965b',
     'Language': '#6693f5',
@@ -122,12 +122,12 @@ function dontFetchDataIfAllDeselected() {
     } else if (era_list.length > 11) {
         document.getElementById("demo").innerHTML = 'Cannot start game. You must select at least one era.';
     } else {
-        test();
+        fetchQuestionsAndStartGame();
     }
 }
 
 // Function to fetch JSON data asynchronously
-function test() {
+function fetchQuestionsAndStartGame() {
     if (game_started == true) {
         document.getElementById("demo").innerHTML = 'Game already started.';
     } else {
@@ -281,13 +281,13 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 //Arrow function for main game start
 const mainGameFunction = async () => {
     document.getElementById("demo").innerHTML = 'Put your game face on.';
-    await delay(1 * 1000);
+    await delay(1.2 * 1000);
     document.getElementById("demo").innerHTML = 'Put your game face on..';
-    await delay(1 * 1000);
+    await delay(1.2 * 1000);
     document.getElementById("demo").innerHTML = 'Put your game face on...';
-    await delay(1 * 1000);
+    await delay(1.2 * 1000);
     document.getElementById("demo").innerHTML = 'Game starts now!';
-    await delay(1 * 1000);
+    await delay(1.2 * 1000);
     document.getElementById("demo").innerHTML = '';
     
     for (let i = 0; i < number_of_questions; i++) {
