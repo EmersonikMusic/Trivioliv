@@ -86,7 +86,7 @@ var category_colors = {
     'Nature': '#043927',
     'Philosophy': '#975fac',
     'Politics': '#351c75',
-    'Pop Culture': '#ff6fff',
+    'Pop Culture': '#ff8fab',
     'Science': '#06550d',
     'Sports': '#131e3a',
     'Technology': '#1f5967',
