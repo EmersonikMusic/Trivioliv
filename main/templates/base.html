@@ -4,38 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
     <title>TRIVIOLIVIA - EARTH'S DEEPEST TRIVIA SOURCE</title>
 </head>
 <body>
-    <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0, 0, 0, 0.5); height: 35px ">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#" style="color: white; font-weight: bold;">TRIVIOLIVIA - EARTH'S DEEPEST TRIVIA SOURCE</a>
-        <div class="navbar-nav me-auto">
-            <!-- <li class="nav-link"><a class="nav-link" href="{% url 'compete:main' %}">Join Contest</a></li> -->
-        </div>
-        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="False" aria-label="Toggle navigation">
-        </button> -->
-
-        <ul class="navbar-nav">
+<!--Navbar-->
+<nav class="navbar">
+    <div class="title">
+        <h1>TRIVIOLIVIA - EARTH'S DEEPEST TRIVIA SOURCE</h1>
+    </div>
+    <div class="login">
             {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'configure:main' %}" style="color: white;">Configure</a></li>
-            <li class="nav-item">
-                <a class="nav-link" href="" style="color: white;"> {{user.username}}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}" style="color: white;">Logout</a>
-            </li>
+            <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
+            <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
+            <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
             {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}" style="color: white;">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}" style="color: white;">Login</a>
-            </li>
+                <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">Register</button></a>
+                <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">Login</button></a>
             {% endif %}
-        </ul>
+    </div> 
 
     </div>
   </nav>

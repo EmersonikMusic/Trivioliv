@@ -4,94 +4,122 @@
 {% block content %}
 
 <link rel='stylesheet' href='{% static "triviolivia.css" %}'>
-
-<!--Options menu-->
-<div id="menu" class="menu_visable">
-    <!--Categories menu-->
-    <div id="menu_categories" class="menu_left">
-        CATEGORIES
-            <button id="all-none-categories" type="all-none-categories" style="background-color: #BBBBBB;" onclick="allNoneCategoriesButton()">ALL/NONE</button>
-        {% for category in categories %}
-        <div id='{{ category.name | slugify }}'>
-            <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}"><span class="indicator"></span><span class="{{ category.title }}">{{ category.name | upper }}</span></button>
-        </div>
-        {% endfor %}
-       
-    <!--Other buttons menu-->
-    <div id='other-buttons'>
-        <br>
-        <button id='refetch-questions' type='button'>RATE QUESTION</button>
-        <button id='refetch-questions' type='button'>SUBMIT QUESTION</button>
-        <button id='refetch-questions' type='button'>ABOUT US</button>
-        <button id='refetch-questions' type='button'>CONTACT US</button>
-    </div>
-
-</div>
-    
-    <!--Difficulties menu-->
-    <div id="menu_difficulty" class="menu_left">
-            DIFFICULTIES
-            <button class="button all-none-rest" style="background-color: #BBBBBB;" onclick="allNoneDifficultiesButton()">ALL/NONE </button>            {% for difficulty in difficulties %}
-            <div id='{{ difficulty.name }}'>
-                <button onclick='toggle_difficulties(this.id), toggleIndicator(this)' id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}"><span class="indicator"></span>{{ difficulty.name | upper}}</button>
-            </div>
-            {% endfor %}
-        ERAS
-        <button class="button all-none-rest" style="background-color: #BBBBBB;" onclick="allNoneErasButton()">ALL/NONE </button>        {% for era in eras %}
-        <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}"><span class="indicator"></span>{{ era.name }}</button>
-        {% endfor %}
-    </div>
-
-    <!--Eras menu-->
-    <div id="menu_eras" class="menu_left">
-        
-    </div>
-    
-    <!--Question and answer time menu-->
-    <div id="menu_question_time" class="menu_left">
-        #Q
-        <button onclick='change_number_of_questions(this.id)' id=10 type='button'>10</button>
-        <button onclick='change_number_of_questions(this.id)' id=25 type='button'>25</button>
-        <button onclick='change_number_of_questions(this.id)' id=50 type='button'>50</button>
-        <button onclick='change_number_of_questions(this.id)' id=100 type='button'>100</button>
-        tQ
-        <button onclick='change_time_per_question(this.id)' id=10 type='button'>10s</button>
-        <button onclick='change_time_per_question(this.id)' id=15 type='button'>15s</button>
-        <button onclick='change_time_per_question(this.id)' id=20 type='button'>20s</button>
-        <button onclick='change_time_per_question(this.id)' id=30 type='button'>30s</button>
-        <button id=prev type='button'>PREV</button>
-        tA
-        <button onclick='change_time_per_answer(this.id)' id=5 type='button'>5s</button>
-        <button onclick='change_time_per_answer(this.id)' id=10 type='button'>10s</button>
-        <button onclick='change_time_per_answer(this.id)' id=15 type='button'>15s</button>
-        <button onclick='change_time_per_answer(this.id)' id=20 type='button'>20s</button>
-        <button id=next type='button'>NEXT</button>
-    </div>      
-    
-</div>
-
-
-<!--Top area with START,OPTIONS,RESET buttons-->
 <div id='top-area'>
     <div id='big-buttons'>
         <button onclick='dontFetchDataIfAllDeselected()' id='start-pause' type='button' style='background-color: rgb(0,0,0,0.5)'>START</button>
         <button onclick='toggle_menu()' id='toggle_menu' type='button' style='background-color: rgb(0,0,0,0.5)'>OPTIONS</button>
         <button onclick='confirm_reset()' id='reset' type='button' style='background-color: rgb(0,0,0,0.5)'>RESET</button>
     </div>
+</div>
+<!-- Main Container -->
+<div class="container">
+     <!--Top area with START,OPTIONS,RESET buttons-->
+    <div class="main-column">
+        <!--Question info and feedback statement are and soon-to-be Q/A loading bar-->
+        
+        <!--Main game container area-->
+        <div id="container_game">
+            <div id='question-container' class="question-container"></div>
+            <div id='answer-container' class="answer-container"></div>
+        </div>
+        <div class="loading-bar-container">
+            <div id="demo"><p id="demo"></p></div>
+        </div>
     </div>
-</div>
+
+    <div class="column-categories">
+        <div class="button-container left-indicator">
+            <!--Categories menu-->
+            <h2>CATEGORIES</h2>
+                <button id="all-none-categories" class="all-none-categories" style="background-color: #BBBBBB;" onclick="allNoneCategoriesButton()">ALL/NONE</button>
+                {% for category in categories %}
+                <div id='{{ category.name | slugify }}'>
+                <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                    <span class="indicator"></span>
+                    <span class= "category-title">{{ category.name | upper }}</span>
+                </button>
+                </div>
+                {% endfor %}
+            <!--Options menu-->
+            <div id="menu" class="menu_visable">
+            </div>
+        </div>
+    </div>   
 
 
-<!--Main game container area-->
-<div id="container_game">
-    <div id='question-container' class="question-container"></div>
-    <div id='answer-container' class="answer-container"></div>
-</div>
+    <div class="column-rest">
+        <!--Difficulties menu-->
+        <div id="menu_difficulty" class="button-container right-indicator">
+            <h2>DIFFICULTIES</h2>
+                <button class="button all-none-rest" style="background-color: #BBBBBB;" onclick="allNoneDifficultiesButton()">ALL/NONE </button>            {% for difficulty in difficulties %}
+                <div id='{{ difficulty.name }}'>
+                <button onclick='toggle_difficulties(this.id), toggleIndicator(this)' id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
+                    <span class="indicator"></span>
+                    <span class="difficulty-title">{{ difficulty.name | upper}}</span>
+                </button>
+            </div>
+                {% endfor %}
+        </div>
+
+        <!--Eras menu-->
+        <div id="menu_eras" class="button-container right-indicator">
+            <h2>ERAS</h2>
+            <button class="button all-none-rest" style="background-color: #BBBBBB;" onclick="allNoneErasButton()">ALL/NONE</button>
+            {% for era in eras %}
+            <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
+                <span class="indicator"></span>
+                <span class="era-title">{{ era.name }}</span>
+                </button>
+            {% endfor %}
+        </div>
+        
+        <!--Question and answer time menu-->
+        <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
+            <div id="number_of_questions">
+                <h2>#Q</h2>
+                <div class="number_of_questions">
+                    <button onclick='change_number_of_questions(this.id)' id=10 type='button'><span>10</span></button>
+                    <button onclick='change_number_of_questions(this.id)' id=25 type='button'><span>25</span></button>
+                    <button onclick='change_number_of_questions(this.id)' id=50 type='button'><span>50</span></button>
+                    <button onclick='change_number_of_questions(this.id)' id=100 type='button'><span>100</span></button>
+                </div>
+            </div>
+                <div id="time_settings_question">
+                    <h2>TQ</h2>
+                    <div class="time_settings_question">
+                        <button onclick='change_time_per_question(this.id)' id=10 type='button'>10s</button>
+                        <button onclick='change_time_per_question(this.id)' id=15 type='button'>15s</button>
+                        <button onclick='change_time_per_question(this.id)' id=20 type='button'>20s</button>
+                        <button onclick='change_time_per_question(this.id)' id=30 type='button'>30s</button>
+                    </div>
+                    
+                </div>
+                <div id="time_settings_answer">
+                <h2>TA</h2>
+                    <div class="time_settings_answer">
+                    <button onclick='change_time_per_answer(this.id)' id=5 type='button'>5s</button>
+                    <button onclick='change_time_per_answer(this.id)' id=10 type='button'>10s</button>
+                    <button onclick='change_time_per_answer(this.id)' id=15 type='button'>15s</button>
+                    <button onclick='change_time_per_answer(this.id)' id=20 type='button'>20s</button>
+                    </div>
+                </div>
+        </div>      
+        
+        <!--Other buttons menu-->
+        <!-- <div id='other-buttons'>
+            <br>
+            <button id='refetch-questions' type='button'>RATE QUESTION</button>
+            <button id='refetch-questions' type='button'>SUBMIT QUESTION</button>
+            <button id='refetch-questions' type='button'>ABOUT US</button>
+            <button id='refetch-questions' type='button'>CONTACT US</button>
+            <button id=next type='button'>NEXT</button>
+            <button id=prev type='button'>PREV</button>
+        </div> -->
 
 
-<!--Question info and feedback statement are and soon-to-be Q/A loading bar-->
-<div class="loading-bar-container">
-    <div id="demo"><p id="demo"></p></div>
+
+
+    </div> 
 </div>
 
 

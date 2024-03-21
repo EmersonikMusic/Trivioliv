@@ -6,8 +6,7 @@ body {
 
 * {
     color: #ffffff;
-    font-family: 'American Typewriter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-    'Lucida Sans', Arial, sans-serif;
+    font-family: Arial, sans-serif;
     text-align: center;
 }
 
@@ -38,6 +37,40 @@ h2 {
     'Lucida Sans', Arial, sans-serif;
 }
 
+ /* 2024 NEW CSS STARTS */
+
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .main-column {
+      width: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+  }
+
+  .column-categories {
+    width: 160px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 2.5px 0 5px;
+  }
+
+  .column-rest {
+    width: 160px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 5px 0 2.5px;
+  
+  }
+
+  /* 2024 NEW CSS ENDS */
 
 #menu {
     position: absolute;
