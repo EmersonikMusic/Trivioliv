@@ -198,9 +198,9 @@ button:hover {
 
 .behind-options-menu {
     display: flex;
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-    height: 90vh; /* Example height, adjust as needed */
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
 }
 
 .options-menu {
