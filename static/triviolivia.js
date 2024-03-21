@@ -97,7 +97,7 @@ var category_colors = {
 }
 
 // Default message in bar
-document.getElementById("demo").innerHTML = 'Press START to begin.'
+document.getElementById("demo").innerHTML = 'Press START to play.'
 
 // Declaring variables for the base URL for fetching questions
 var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
