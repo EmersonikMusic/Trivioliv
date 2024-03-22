@@ -394,6 +394,7 @@ h2 {
     padding-left: 15px;
     padding-right: 15px;
     font-size: 4vw; /* Adjust this value as needed */
+    font-size: min(12px);
     font-family: 'American Typewriter', sans-serif;
 }
 
