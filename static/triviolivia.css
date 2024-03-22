@@ -238,6 +238,18 @@ h1 {
     word-wrap: break-word;
 }
 
+.somewhat-smaller-font {
+    font-family: 'Calibri', Arial, sans-serif;
+    font-size: 25px;
+    font-style: italic;
+    color: white;
+}
+
+.smaller-font {
+    font-family: 'Calibri', Arial, sans-serif;
+    font-size: 20px;
+}
+
 h2 {
     display: block;
     font-size: 16px;
@@ -390,7 +402,7 @@ h2 {
 }
 
 #demo {
-    font-size: 20px;
+    font-size: 22px;
 }
 
 #question-container {
