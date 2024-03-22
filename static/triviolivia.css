@@ -60,7 +60,7 @@ button:hover {
     display: flex;
     justify-content: space-between;
     padding: 0px 20px;
-    background-color: rgba(0,0,0,0.5)
+    background-color: rgba(0,0,0,0.7)
   }
 
   #top-area {
@@ -189,7 +189,8 @@ button:hover {
 }
 
 #big-buttons button {
-    width: 120px;
+    width: 10%;
+    width: min(120px);
     margin: 5px;
     padding: 5px;
     align-items: center;
@@ -207,7 +208,7 @@ button:hover {
 
 .options-menu {
     display: flex;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.7);
 }
 
 .menu_question_time {
@@ -227,11 +228,12 @@ button:hover {
 
 
 h1 {
-    font-size: 4vw;
+    font-size: 3vw;
     line-height: 0;
     font-weight: bold;
     color: #ffffff;
     font-family: 'Calibri', Arial, sans-serif;
+    word-wrap: break-word;
 }
 
 h2 {
