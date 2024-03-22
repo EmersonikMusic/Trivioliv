@@ -447,12 +447,12 @@ questionSlider.addEventListener('input', function() {
 });
 
 perQuestionSlider.addEventListener('input', function() {
-    updateLabel('perQuestionLabel', this.value, 's PER QUESTION');
+    updateLabel('perQuestionLabel', this.value, 's / QUESTION');
     change_time_per_question(this.value);
 });
 
 perAnswerSlider.addEventListener('input', function() {
-    updateLabel('perAnswerLabel', this.value, 's PER ANSWER');
+    updateLabel('perAnswerLabel', this.value, 's / ANSWER');
     change_time_per_answer(this.value);
 });
 
