@@ -209,8 +209,8 @@ button:hover {
 .options-menu {
     display: flex;
     background-color: rgba(0,0,0,0.7);
-    border-top-left-radius: 20px; /* Set border radius for top-left corner */
-    border-bottom-left-radius: 20px; 
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .menu_question_time {
