@@ -25,12 +25,12 @@ button {
     font-size: 11px;
     color: white;
     text-align: center;
-    height: 18px;
+    height: 19px;
     width: 100%;
     padding: 0px;
     margin: 1px 0;
     border: none;
-    font-weight: bold;
+    font-weight: 950;
     cursor: pointer;
     border-radius: 2px;
 }
@@ -457,3 +457,23 @@ h2 {
     background-color: #888;
     cursor: pointer;
 }
+
+/* Define keyframes for the animation */
+@keyframes glisten {
+    0% {
+      background-color: rgba(0,0,0,0.5); /* Initial color */
+    }
+    50% {
+      background-color: rgba(0,20,0,0.5); /* Color change midpoint */
+    }
+    100% {
+      background-color: rgba(0,0,0,0.5); /* Back to initial color */
+    }
+  }
+  
+  /* Apply the animation to the START button */
+  #big-buttons button:first-child {
+    animation: glisten 10s infinite; /* Run the animation every 10 seconds infinitely */
+    transition: background-color 0.3s; /* Smooth transition between colors */
+  }
+  
