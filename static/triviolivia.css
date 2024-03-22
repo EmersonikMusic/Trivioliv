@@ -209,6 +209,7 @@ button:hover {
 .options-menu {
     display: flex;
     background-color: rgba(0,0,0,0.7);
+    border-radius: 12px;
 }
 
 .menu_question_time {
@@ -408,13 +409,13 @@ h2 {
 
 
 .indicator {
-    width: 8px; /* Reduce the indicator width to match smaller buttons */
-    height: 100%; /* Set the indicator's height to 100% of the button's height */
+    width: 8px;
+    height: 100%;
     background-color: #00F829;
-    left: 0; /* Position the indicator at the left edge of the button */
-    top: 0; /* Align the indicator with the top of the button */
-    bottom: 0; /* Align the indicator with the bottom of the button */
-    margin-right: 0px; /* Create space between indicator and text */
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin-right: 0px;
     border-right: 1px solid #2D2D2D;
   }
 
@@ -458,7 +459,8 @@ h2 {
     cursor: pointer;
 }
 
-/* Define keyframes for the animation */
+
+/* Define keyframes for the animation of START button */
 @keyframes glisten {
     0% {
       background-color: rgba(0,0,0,0.5); /* Initial color */
