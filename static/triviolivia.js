@@ -435,3 +435,27 @@ function allNoneErasButton() {
     document.getElementById("demo").innerHTML = 'You have enabled all eras.';
     }
 } 
+
+// Slider functions
+const questionSlider = document.getElementById('questionSlider');
+const perQuestionSlider = document.getElementById('perQuestionSlider');
+const perAnswerSlider = document.getElementById('perAnswerSlider');
+
+questionSlider.addEventListener('input', function() {
+    updateLabel('questionLabel', this.value, ' QUESTIONS');
+    change_number_of_questions(this.value);
+});
+
+perQuestionSlider.addEventListener('input', function() {
+    updateLabel('perQuestionLabel', this.value, 's PER QUESTION');
+    change_time_per_question(this.value);
+});
+
+perAnswerSlider.addEventListener('input', function() {
+    updateLabel('perAnswerLabel', this.value, 's PER ANSWER');
+    change_time_per_answer(this.value);
+});
+
+function updateLabel(labelId, value, unit) {
+    document.getElementById(labelId).textContent = value + unit;
+}

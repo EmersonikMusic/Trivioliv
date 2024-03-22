@@ -77,34 +77,22 @@
             
             <!--Question and answer time menu-->
             <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
-                <div id="number_of_questions">
-                    <h2>#Q</h2>
-                    <div class="number_of_questions">
-                        <button onclick='change_number_of_questions(this.id)' id=10 type='button'><span>10</span></button>
-                        <button onclick='change_number_of_questions(this.id)' id=25 type='button'><span>25</span></button>
-                        <button onclick='change_number_of_questions(this.id)' id=50 type='button'><span>50</span></button>
-                        <button onclick='change_number_of_questions(this.id)' id=100 type='button'><span>100</span></button>
+                
+                    <div class="slider-container">
+                        <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
+                        <input type="range" min="10" max="100" value="10" step="10" class="slider" id="questionSlider">
                     </div>
-                </div>
-                    <div id="time_settings_question">
-                        <h2>TQ</h2>
-                        <div class="time_settings_question">
-                            <button onclick='change_time_per_question(this.id)' id=10 type='button'>10s</button>
-                            <button onclick='change_time_per_question(this.id)' id=15 type='button'>15s</button>
-                            <button onclick='change_time_per_question(this.id)' id=20 type='button'>20s</button>
-                            <button onclick='change_time_per_question(this.id)' id=30 type='button'>30s</button>
-                        </div>
-                        
+                    
+                    <div class="slider-container">
+                    <div id="perQuestionLabel" class="slider-label">10s PER QUESTION</div>
+                        <input type="range" min="5" max="30" value="10" step="5" class="slider" id="perQuestionSlider">
                     </div>
-                    <div id="time_settings_answer">
-                    <h2>TA</h2>
-                        <div class="time_settings_answer">
-                        <button onclick='change_time_per_answer(this.id)' id=5 type='button'>5s</button>
-                        <button onclick='change_time_per_answer(this.id)' id=10 type='button'>10s</button>
-                        <button onclick='change_time_per_answer(this.id)' id=15 type='button'>15s</button>
-                        <button onclick='change_time_per_answer(this.id)' id=20 type='button'>20s</button>
-                        </div>
+                    
+                    <div class="slider-container">
+                        <div id="perAnswerLabel" class="slider-label">5s PER ANSWER</div>
+                        <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
                     </div>
+
             </div>      
             
             <!--Other buttons menu-->
