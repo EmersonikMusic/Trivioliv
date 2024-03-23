@@ -4,6 +4,7 @@ body {
     color: #2d2d2d;
     background-color: #262626;
     margin: 0;
+    overflow: hidden;
 }
 
 * {
@@ -25,7 +26,7 @@ button {
     font-size: 11px;
     color: white;
     text-align: center;
-    height: 19px;
+    height: 18px;
     width: 100%;
     padding: 0px;
     margin: 1px 0;
@@ -203,7 +204,6 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 81vh;
 }
 
 .options-menu {
@@ -396,27 +396,22 @@ h2 {
     cursor: pointer;
 }
 
-#Timer {
-    font-size: 100px;
-    color: #ffffff;
-}
-
 #demo {
     font-size: 22px;
 }
 
 #question-container {
-    padding-top: 15px;
+    padding-top: 10px;
     padding-left: 15px;
     padding-right: 15px;
-    font-size: 5vw; /* Adjust this value as needed */
+    font-size: 5vw;
     font-family: 'American Typewriter', sans-serif;
 }
 
 #answer-container {
     padding-left: 15px;
     padding-right: 15px;
-    font-size: 5vw; /* Adjust this value as needed */
+    font-size: 5vw;
     font-family: 'American Typewriter', sans-serif;
 }
 
