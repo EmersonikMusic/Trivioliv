@@ -204,6 +204,7 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 70%;
 }
 
 .options-menu {
@@ -211,6 +212,7 @@ button:hover {
     background-color: rgba(0,0,0,0.7);
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
+    height: 70%;
 }
 
 .menu_question_time {
