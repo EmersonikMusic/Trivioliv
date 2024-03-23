@@ -404,14 +404,14 @@ h2 {
     padding-top: 10px;
     padding-left: 15px;
     padding-right: 15px;
-    font-size: 5vw;
+    font-size: 100%;
     font-family: 'American Typewriter', sans-serif;
 }
 
 #answer-container {
     padding-left: 15px;
     padding-right: 15px;
-    font-size: 5vw;
+    font-size: 100%;
     font-family: 'American Typewriter', sans-serif;
 }
 
