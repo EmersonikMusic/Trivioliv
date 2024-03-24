@@ -131,7 +131,7 @@ function dontFetchDataIfAllDeselected() {
 // Function to fetch JSON data asynchronously
 function fetchQuestionsAndStartGame() {
     if (game_started == true) {
-        document.getElementById("demo").innerHTML = 'Game already started.';
+       console.log('Button pressed.');
     } else {
         game_started = true;
         globalData = [];
@@ -311,7 +311,7 @@ const mainGameFunction = async () => {
 
     for (let i = 0; i < number_of_questions; i++) {
         // Check if paused
-        while (pauseFlag) {
+        while (!pauseFlag) {
             await delay(100); // Check every 100 milliseconds
         }
         
