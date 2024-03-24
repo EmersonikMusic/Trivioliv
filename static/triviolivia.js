@@ -328,8 +328,9 @@ const mainGameFunction = async () => {
                 continue;
             }
             await delay(1000); // Update every second
-            document.getElementById("demo").innerHTML = "Remaining Time: " + questionTimeRemaining + " seconds";
             questionTimeRemaining--;
+            document.getElementById("demo").innerHTML = "Question time remaining: " + questionTimeRemaining + " seconds";
+
         }
         showQuestion(""); // Clear question display
         showAnswer(globalData[i].answer);
@@ -339,9 +340,9 @@ const mainGameFunction = async () => {
                 await delay(100);
                 continue;
             }
-            document.getElementById("demo").innerHTML = "Remaining Time: " + answerTimeRemaining + " seconds";
             await delay(1000); // Update every second
             answerTimeRemaining--;
+            document.getElementById("demo").innerHTML = "Answer time remaining: " + answerTimeRemaining + " seconds";
         }
         showAnswer(""); // Clear answer display
     }
