@@ -507,7 +507,7 @@ function changeButtonText() {
         button.textContent = 'RESUME GAME';
         pauseFlag = false;
         console.log('Game paused.');
-        document.getElementById("demo").innerHTML = 'Game paused.';
+        document.getElementById("demo").innerHTML = 'Game paused. Press RESUME GAME to continue.';
     } else {
         button.textContent = 'START GAME';
         pauseFlag = false;
