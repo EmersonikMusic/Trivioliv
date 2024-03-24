@@ -307,36 +307,40 @@ const mainGameFunction = async () => {
     await delay(1.2 * 1000);
     document.getElementById("demo").innerHTML = 'Game starts now!';
     await delay(1.2 * 1000);
+    document.getElementById("demo").innerHTML = '';
 
-    let previousText = ''; // To store the previous text content
-    
     for (let i = 0; i < number_of_questions; i++) {
         // Check if paused
         while (!pauseFlag) {
             await delay(100); // Check every 100 milliseconds
         }
         document.body.style.backgroundColor = category_colors[globalData[i].category_name];
-        const newText = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek';
-        
-        // Update text only if not paused or if text is different from the previous one
-        if (!pauseFlag || newText !== previousText) {
-            document.getElementById("demo").innerHTML = newText;
-            previousText = newText;
-        }
+        document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek';
 
-        while (!pauseFlag) {
-            await delay(100); // Check every 100 milliseconds
-        }
-        
-        showQuestion(globalData[i].text);
-        await delay(time_per_question * 1000);
+        let questionTimeRemaining = time_per_question;
+        let answerTimeRemaining = time_per_answer;
 
-        while (!pauseFlag) {
-            await delay(100); // Check every 100 milliseconds
+        while (questionTimeRemaining > 0) {
+            if (pauseFlag) {
+                await delay(100);
+                continue;
+            }
+            showQuestion(globalData[i].text + " - Remaining Time: " + questionTimeRemaining + " seconds");
+            await delay(1000); // Update every second
+            questionTimeRemaining--;
         }
-        
-        showAnswer(globalData[i].answer)
-        await delay(time_per_answer * 1000);
+        showQuestion(""); // Clear question display
+
+        while (answerTimeRemaining > 0) {
+            if (pauseFlag) {
+                await delay(100);
+                continue;
+            }
+            showAnswer(globalData[i].answer + " - Remaining Time: " + answerTimeRemaining + " seconds");
+            await delay(1000); // Update every second
+            answerTimeRemaining--;
+        }
+        showAnswer(""); // Clear answer display
     }
     game_started = false;
     document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
