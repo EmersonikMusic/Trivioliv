@@ -319,25 +319,27 @@ const mainGameFunction = async () => {
 
         let questionTimeRemaining = time_per_question;
         let answerTimeRemaining = time_per_answer;
+        
+        showQuestion(globalData[i].text);
 
         while (questionTimeRemaining > 0) {
-            showQuestion(globalData[i].text);
             if (pauseFlag) {
                 await delay(100);
                 continue;
             }
-            await delay(100); // Update every 1/10 second
-            document.getElementById("demo").innerHTML = " - Remaining Time: " + questionTimeRemaining + " seconds";
+            await delay(1000); // Update every second
+            document.getElementById("demo").innerHTML = "Remaining Time: " + questionTimeRemaining + " seconds";
             questionTimeRemaining--;
         }
         showQuestion(""); // Clear question display
+        showAnswer(globalData[i].answer);
 
         while (answerTimeRemaining > 0) {
             if (pauseFlag) {
                 await delay(100);
                 continue;
             }
-            showAnswer(globalData[i].answer + " - Remaining Time: " + answerTimeRemaining + " seconds");
+            document.getElementById("demo").innerHTML = "Remaining Time: " + answerTimeRemaining + " seconds";
             await delay(1000); // Update every second
             answerTimeRemaining--;
         }
