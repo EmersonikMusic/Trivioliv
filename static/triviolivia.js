@@ -325,9 +325,9 @@ const mainGameFunction = async () => {
                 await delay(100);
                 continue;
             }
-            showQuestion(globalData[i].text + " - Remaining Time: " + questionTimeRemaining + " seconds");
+            showQuestion(globalData[i].text);
             await delay(1000); // Update every second
-            questionTimeRemaining--;
+            document.getElementById("demo").innerHTML = "Remaining Time: " + questionTimeRemaining + " seconds";
         }
         showQuestion(""); // Clear question display
 
