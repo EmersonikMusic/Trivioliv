@@ -314,20 +314,22 @@ const mainGameFunction = async () => {
         while (!pauseFlag) {
             await delay(100); // Check every 100 milliseconds
         }
-        
         document.body.style.backgroundColor = category_colors[globalData[i].category_name];
         document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek';
+        
+        while (!pauseFlag) {
+            await delay(100); // Check every 100 milliseconds
+        }
+        
         showQuestion(globalData[i].text);
         await delay(time_per_question * 1000);
+
         while (!pauseFlag) {
             await delay(100); // Check every 100 milliseconds
         }
+        
         showAnswer(globalData[i].answer)
         await delay(time_per_answer * 1000);
-        while (!pauseFlag) {
-            await delay(100); // Check every 100 milliseconds
-        }
-
     }
     game_started = false;
     document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
