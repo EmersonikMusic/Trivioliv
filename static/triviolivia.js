@@ -261,7 +261,7 @@ function change_time_per_question(clicked_id) {
 }
 
 function change_time_per_answer(clicked_id) {
-    time_per_question = clicked_id;
+    time_per_answer = clicked_id;
     document.getElementById("demo").innerHTML = 'Answers are now displayed for ' + time_per_question + ' seconds.';
     console.log(time_per_answer);
 }
@@ -331,6 +331,7 @@ const mainGameFunction = async () => {
             let question_seconds = Math.floor(questionTimeRemaining / 10);
             let question_tenths = questionTimeRemaining % 10;
             document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + question_seconds + '.' + question_tenths + ' seconds';
+            console.log(question_seconds,question_tenths);
         }
         showQuestion(""); // Clear question display
         showAnswer(globalData[i].answer);
@@ -345,6 +346,7 @@ const mainGameFunction = async () => {
             let answer_seconds = Math.floor(answerTimeRemaining / 10);
             let answer_tenths = answerTimeRemaining % 10;
             document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + answer_seconds + '.' + answer_tenths + ' seconds';
+            console.log(answer_seconds, answer_tenths);
         }
         showAnswer(""); // Clear answer display
     }
