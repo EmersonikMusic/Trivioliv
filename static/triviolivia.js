@@ -315,7 +315,6 @@ const mainGameFunction = async () => {
             await delay(100); // Check every 100 milliseconds
         }
         document.body.style.backgroundColor = category_colors[globalData[i].category_name];
-        document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek';
 
         let questionTimeRemaining = time_per_question;
         let answerTimeRemaining = time_per_answer;
@@ -329,7 +328,7 @@ const mainGameFunction = async () => {
             }
             await delay(1000); // Update every second
             questionTimeRemaining--;
-            document.getElementById("demo").innerHTML = "Question time remaining: " + questionTimeRemaining + " seconds";
+            document.getElementById("demo").innerHTML =  document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek          Question time remaining: " + questionTimeRemaining + " seconds";
 
         }
         showQuestion(""); // Clear question display
@@ -342,12 +341,13 @@ const mainGameFunction = async () => {
             }
             await delay(1000); // Update every second
             answerTimeRemaining--;
-            document.getElementById("demo").innerHTML = "Answer time remaining: " + answerTimeRemaining + " seconds";
+            document.getElementById("demo").innerHTML = document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek          Answer time remaining: " + answerTimeRemaining + " seconds";
         }
         showAnswer(""); // Clear answer display
     }
     game_started = false;
-    document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
+    showQuestion("Thanks for playing!");
+    document.getElementById("demo").innerHTML = 'Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
 };
 
 
