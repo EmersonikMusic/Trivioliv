@@ -344,7 +344,7 @@ const mainGameFunction = async () => {
             answerTimeRemaining--;
             let answer_seconds = Math.floor(answerTimeRemaining / 10);
             let answer_tenths = answerTimeRemaining % 10;
-            document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + answer_seconds + '.' + question_tenths + ' seconds';
+            document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + answer_seconds + '.' + answer_tenths + ' seconds';
         }
         showAnswer(""); // Clear answer display
     }
