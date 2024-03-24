@@ -316,8 +316,8 @@ const mainGameFunction = async () => {
         }
         document.body.style.backgroundColor = category_colors[globalData[i].category_name];
 
-        let questionTimeRemaining = time_per_question;
-        let answerTimeRemaining = time_per_answer;
+        let questionTimeRemaining = time_per_question * 10; // Convert to tenths of a second
+        let answerTimeRemaining = time_per_answer * 10; // Convert to tenths of a second
         
         showQuestion(globalData[i].text);
 
@@ -326,10 +326,11 @@ const mainGameFunction = async () => {
                 await delay(100);
                 continue;
             }
-            await delay(1000); // Update every second
+            await delay(100); // Update ten times a second
             questionTimeRemaining--;
-            document.getElementById("demo").innerHTML =  document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - Question time remaining: ' + questionTimeRemaining + ' seconds';
-
+            let seconds = Math.floor(questionTimeRemaining / 10);
+            let tenths = questionTimeRemaining % 10;
+            document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - Question time remaining: ' + seconds + '.' + tenths + ' seconds';
         }
         showQuestion(""); // Clear question display
         showAnswer(globalData[i].answer);
@@ -339,9 +340,11 @@ const mainGameFunction = async () => {
                 await delay(100);
                 continue;
             }
-            await delay(1000); // Update every second
+            await delay(100); // Update ten times a second
             answerTimeRemaining--;
-            document.getElementById("demo").innerHTML = document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - Answer time remaining: ' + answerTimeRemaining + ' seconds';
+            let seconds = Math.floor(answerTimeRemaining / 10);
+            let tenths = answerTimeRemaining % 10;
+            document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - Answer time remaining: ' + seconds + '.' + tenths + ' seconds';
         }
         showAnswer(""); // Clear answer display
     }
@@ -349,6 +352,7 @@ const mainGameFunction = async () => {
     showQuestion("Thanks for playing!");
     document.getElementById("demo").innerHTML = 'Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
 };
+
 
 
 // Function to pause the game
