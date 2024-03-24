@@ -262,7 +262,7 @@ function change_time_per_question(clicked_id) {
 
 function change_time_per_answer(clicked_id) {
     time_per_answer = clicked_id;
-    document.getElementById("demo").innerHTML = 'Answers are now displayed for ' + time_per_question + ' seconds.';
+    document.getElementById("demo").innerHTML = 'Answers are now displayed for ' + time_per_answer + ' seconds.';
     console.log(time_per_answer);
 }
 
