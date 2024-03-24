@@ -321,11 +321,11 @@ const mainGameFunction = async () => {
         let answerTimeRemaining = time_per_answer;
 
         while (questionTimeRemaining > 0) {
+            showQuestion(globalData[i].text);
             if (pauseFlag) {
                 await delay(100);
                 continue;
             }
-            showQuestion(globalData[i].text);
             await delay(100); // Update every 1/10 second
             document.getElementById("demo").innerHTML = " - Remaining Time: " + questionTimeRemaining + " seconds";
             questionTimeRemaining--;
