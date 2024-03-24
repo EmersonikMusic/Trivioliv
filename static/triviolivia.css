@@ -81,7 +81,7 @@ input[type='checkbox'] {
   text-align: center; 
   padding: .25rem; 
   color: #DDD; 
-  background: dimgrey; 
+  background: rgba(0, 0, 0, .5);
   cursor: pointer; 
   /* border-radius: 4px;  */
   transition: all 0.5s ease-out; 
@@ -114,7 +114,7 @@ input[type='checkbox'] {
   border-bottom-left-radius: 0; 
 } 
 .collapsible-content .content-inner { 
-    background: #262626;
+    background: rgba(0, 0, 0, .5);
     padding: 10px; 
 } 
 .collapsible-content p { 
@@ -507,14 +507,18 @@ background-color: rgba(0, 0, 0, 0.5);
 
 .question-container {
     padding: 10px 70px;
-    font-size: 4vw;
+    display: flex;
+    font-size: 5vw;
     font-family: 'American Typewriter', sans-serif;
+    height: 60%;
+    align-items: center;
 }
 
 .answer-container {
     padding: 10px 70px;
     font-size: 4vw;
     font-family: 'American Typewriter', sans-serif;
+    height: 30%;
 }
 
 
