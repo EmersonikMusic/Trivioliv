@@ -328,7 +328,7 @@ const mainGameFunction = async () => {
             }
             await delay(1000); // Update every second
             questionTimeRemaining--;
-            document.getElementById("demo").innerHTML =  document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek          Question time remaining: " + questionTimeRemaining + " seconds';
+            document.getElementById("demo").innerHTML =  document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek          Question time remaining: ' + questionTimeRemaining + ' seconds';
 
         }
         showQuestion(""); // Clear question display
@@ -341,7 +341,7 @@ const mainGameFunction = async () => {
             }
             await delay(1000); // Update every second
             answerTimeRemaining--;
-            document.getElementById("demo").innerHTML = document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek          Answer time remaining: " + answerTimeRemaining + " seconds';
+            document.getElementById("demo").innerHTML = document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek          Answer time remaining: ' + answerTimeRemaining + ' seconds';
         }
         showAnswer(""); // Clear answer display
     }
