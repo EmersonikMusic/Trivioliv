@@ -531,17 +531,14 @@ function updateLabel(labelId, value, unit) {
 //Function to change START GAME text
 function changeButtonText() {
     var button = document.getElementById('start-pause');
-    if (pauseFlag === false && game_started === false) {
-        button.textContent = 'START GAME';
+    if (pauseFlag === false) {
+        button.textContent = 'PAUSE GAME';
+        pauseFlag = true;
     } else if (pauseFlag === true && game_started === true) {
         button.textContent = 'RESUME GAME';
         pauseFlag = false;
         console.log('Game paused.');
         document.getElementById("demo").innerHTML = 'Game paused. Press RESUME GAME to continue.';
-    } else if 
-        (pauseFlag === false) {
-            button.textContent = 'PAUSE GAME';
-            pauseFlag = true;
     } else {
         button.textContent = 'START GAME';
         pauseFlag = false;
