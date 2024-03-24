@@ -507,21 +507,21 @@ background-color: rgba(0, 0, 0, 0.5);
 }
 
 .question-container {
-    padding: 10px 70px;
-    display: flex;
-    font-size: 5vh;
+    padding: 10px 50px;
+    /* display: flex; */
+    font-size: 5vw;
     font-family: 'American Typewriter', sans-serif;
     height: 60%;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .answer-container {
-    padding: 10px 70px;
-    display: flex;
-    font-size: 5vh;
+    padding: 10px 50px;
+    /* display: flex; */
+    font-size: 5vw;
     font-family: 'American Typewriter', sans-serif;
     height: 30%;
-    flex-direction: column;
+    /* flex-direction: column; */
 }
 
 
