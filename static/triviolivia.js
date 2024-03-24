@@ -352,7 +352,7 @@ const mainGameFunction = async () => {
     }
     game_started = false;
     showQuestion("Thanks for playing!");
-    document.getElementById("demo").innerHTML = 'Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
+    document.getElementById("demo").innerHTML = 'Press START GAME to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
 };
 
 
@@ -539,6 +539,8 @@ function changeButtonText() {
         pauseFlag = false;
         console.log('Game paused.');
         document.getElementById("demo").innerHTML = 'Game paused. Press RESUME GAME to continue.';
+    } else if (pauseFlag === false && game_started === false) {
+            button.textContent = 'START GAME';
     } else {
         button.textContent = 'START GAME';
         pauseFlag = false;
