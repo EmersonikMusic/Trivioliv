@@ -43,8 +43,10 @@
 
         <!--Side Menu-->
         <div class="side-column" id="side-column">
+            <div id="start-game" class="start-game">
+                <button onclick="dontFetchDataIfAllDeselected()" id="start-pause" type="button">START GAME</button>
+            </div>
             <div class="options-menu">
-                <h2>Customize Game</h2>
                 <!--Categories menu-->
                 <div class="wrap-collabsible"> 
                     <input id="collapsible-categories" class="toggle" type="checkbox"> 
@@ -124,9 +126,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="start-game" class="start-game">
-                    <button onclick="dontFetchDataIfAllDeselected()" id="start-pause" type="button">START GAME</button>
                 </div>
             </div>
         </div>
