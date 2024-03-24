@@ -330,7 +330,7 @@ const mainGameFunction = async () => {
             questionTimeRemaining--;
             let seconds = Math.floor(questionTimeRemaining / 10);
             let tenths = questionTimeRemaining % 10;
-            document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - ' + seconds + '.' + tenths + ' seconds';
+            document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + seconds + '.' + tenths + ' seconds';
         }
         showQuestion(""); // Clear question display
         showAnswer(globalData[i].answer);
@@ -344,7 +344,7 @@ const mainGameFunction = async () => {
             answerTimeRemaining--;
             let seconds = Math.floor(answerTimeRemaining / 10);
             let tenths = answerTimeRemaining % 10;
-            document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - ' + seconds + '.' + tenths + ' seconds';
+            document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + seconds + '.' + tenths + ' seconds';
         }
         showAnswer(""); // Clear answer display
     }
