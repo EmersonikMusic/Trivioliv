@@ -145,7 +145,7 @@ function fetchQuestionsAndStartGame() {
         const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
         moddedUrl = urlWithParams;
         menu_hidden = true;
-        hide_menu();
+        // hide_menu();
         fetchData(moddedUrl);
         mainGameFunction();
     }
