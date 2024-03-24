@@ -197,6 +197,7 @@ input[type='checkbox'] {
     display: flex;
     flex-direction: column;
     width: 100%;
+    position: relative;
 }
 
 
@@ -271,6 +272,8 @@ footer {
     padding: 10px 0;
     justify-content: center;
     margin-top: auto; /* Pushes it to the bottom of the flex container */
+    position: absolute;
+    bottom: 0;
 
   }
 
