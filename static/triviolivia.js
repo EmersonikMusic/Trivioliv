@@ -531,7 +531,10 @@ function updateLabel(labelId, value, unit) {
 //Function to change START GAME text
 function changeButtonText() {
     var button = document.getElementById('start-pause');
-    if (pauseFlag === false) {
+    if (game_started === false) {
+        button.textContent = 'START GAME';
+        pauseFlag = false;
+    } else if (pauseFlag === false) {
         button.textContent = 'PAUSE GAME';
         pauseFlag = true;
     } else if (pauseFlag === true && game_started === true) {
