@@ -17,54 +17,54 @@ var era_list = [];
 
 // Declaring of mapping of category, difficulty, and era numbers to their respective names
 var category_number_identities = {
-    1:'Art',
-    2:'Economics',
-    3:'Food',
-    4:'Games',
-    5:'Geography',
-    6:'History',
-    7:'Human body',
-    8:'Language',
-    9:'Literature',
-    10:'Math',
-    11:'Miscellaneous',
-    12:'Movies',
-    13:'Music',
-    14:'Nature',
-    15:'Philosophy',
-    16:'Politics',
-    17:'Pop culture',
-    18:'Science',
-    19:'Sports',
-    20:'Technology',
-    21:'Television',
-    22:'Theater',
-    23:'Theology',
-    24:'Video games',
-    25:'Law'
+    1: 'Art',
+    2: 'Economics',
+    3: 'Food',
+    4: 'Games',
+    5: 'Geography',
+    6: 'History',
+    7: 'Human body',
+    8: 'Language',
+    9: 'Literature',
+    10: 'Math',
+    11: 'Miscellaneous',
+    12: 'Movies',
+    13: 'Music',
+    14: 'Nature',
+    15: 'Philosophy',
+    16: 'Politics',
+    17: 'Pop culture',
+    18: 'Science',
+    19: 'Sports',
+    20: 'Technology',
+    21: 'Television',
+    22: 'Theater',
+    23: 'Theology',
+    24: 'Video games',
+    25: 'Law'
 }
 
 var difficulty_number_identities = {
-    5:'Genius',
-    4:'Sharp',
-    3:'Average',
-    2:'Easy',
-    1:'Casual'
+    5: 'Genius',
+    4: 'Sharp',
+    3: 'Average',
+    2: 'Easy',
+    1: 'Casual'
 }
 
 var era_number_identities = {
-    1:'Pre-1500',
-    2:'1500-1800',
-    3:'1800-1900',
-    4:'1900-1950',
-    5:'1950s',
-    6:'1960s',
-    7:'1970s',
-    8:'1980s',
-    9:'1990s',
-    10:'2000s',
-    11:'2010s',
-    12:'2020s'
+    1: 'Pre-1500',
+    2: '1500-1800',
+    3: '1800-1900',
+    4: '1900-1950',
+    5: '1950s',
+    6: '1960s',
+    7: '1970s',
+    8: '1980s',
+    9: '1990s',
+    10: '2000s',
+    11: '2010s',
+    12: '2020s'
 }
 
 // Mapping of category names to their associated colors
@@ -107,10 +107,10 @@ let globalData;
 
 // Async JS that kind of scares me, honestly
 async function fetchData(moddedUrl) {
-  const response = await fetch(moddedUrl);
-  const data = await response.json();
-  globalData = data;
-  console.log(globalData);
+    const response = await fetch(moddedUrl);
+    const data = await response.json();
+    globalData = data;
+    console.log(globalData);
 }
 
 // Function to not fetch JSON data if any of cat/dif/era are all deselected
@@ -180,15 +180,33 @@ function confirm_reset() {
 //Function for indicator light toggle
 function toggleIndicator(button) {
     if (button.classList.contains('active')) {
-      button.classList.remove('active');
-      button.classList.add('inactive');
-      console.log(button);
+        button.classList.remove('active');
+        button.classList.add('inactive');
+        console.log(button);
     } else {
-      button.classList.remove('inactive');
-      button.classList.add('active');
-      console.log(button);
+        button.classList.remove('inactive');
+        button.classList.add('active');
+        console.log(button);
     }
-  }
+}
+
+//Function to hide or show menu sections
+  const checkboxes = document.querySelectorAll('.toggle');
+
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      if (this.checked) {
+        checkboxes.forEach(otherCheckbox => {
+          if (otherCheckbox !== this) {
+            otherCheckbox.checked = false;
+            otherCheckbox.nextElementSibling.classList.remove('active');
+          }
+        });
+      }
+      this.nextElementSibling.classList.toggle('active', this.checked);
+    });
+  });
+
 
 //Functions to toggle categories, difficulties, and eras
 function toggle_categories(clicked_id) {
@@ -289,7 +307,7 @@ const mainGameFunction = async () => {
     document.getElementById("demo").innerHTML = 'Game starts now!';
     await delay(1.2 * 1000);
     document.getElementById("demo").innerHTML = '';
-    
+
     for (let i = 0; i < number_of_questions; i++) {
         document.body.style.backgroundColor = category_colors[globalData[i].category_name];
         document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek';
@@ -297,7 +315,7 @@ const mainGameFunction = async () => {
         await delay(time_per_question * 1000);
         showAnswer(globalData[i].answer)
         await delay(time_per_answer * 1000);
-      }
+    }
     game_started = false;
     document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
 };
@@ -374,84 +392,84 @@ function enable_era(clicked_id) {
 //Functions for ALL/NONE buttons
 function allNoneCategoriesButton() {
     if (all_none_categories == true) {
-    for (var i = 0; i < categoryButtons.length; i++) {
-        categoryButtons[String(i)].classList.remove('active');
-        categoryButtons[String(i)].classList.add('inactive');
-        disable_category(String(i));
-        document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
-    }
-    all_none_categories = false;
+        for (var i = 0; i < categoryButtons.length; i++) {
+            categoryButtons[String(i)].classList.remove('active');
+            categoryButtons[String(i)].classList.add('inactive');
+            disable_category(String(i));
+            document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
+        }
+        all_none_categories = false;
     } else {
-    category_list = [];
-    for (var i = 0; i < categoryButtons.length; i++) {
-        categoryButtons[String(i)].classList.remove('inactive');
-        categoryButtons[String(i)].classList.add('active');
-        enable_category(String(i));
-    }
-    all_none_categories = true;
-    document.getElementById("demo").innerHTML = 'You have enabled all categories.';
+        category_list = [];
+        for (var i = 0; i < categoryButtons.length; i++) {
+            categoryButtons[String(i)].classList.remove('inactive');
+            categoryButtons[String(i)].classList.add('active');
+            enable_category(String(i));
+        }
+        all_none_categories = true;
+        document.getElementById("demo").innerHTML = 'You have enabled all categories.';
     }
     console.log(categoryButtons);
 }
 
 function allNoneDifficultiesButton() {
     if (all_none_difficulties == true) {
-    for (var i = 0; i < difficultyButtons.length; i++) {
-        difficultyButtons[String(i)].classList.remove('active');
-        difficultyButtons[String(i)].classList.add('inactive');
-        disable_difficulty(String(i+1));
-        document.getElementById("demo").innerHTML = 'You must select at least one difficulty before starting the game.';
-    }
-    all_none_difficulties = false;
+        for (var i = 0; i < difficultyButtons.length; i++) {
+            difficultyButtons[String(i)].classList.remove('active');
+            difficultyButtons[String(i)].classList.add('inactive');
+            disable_difficulty(String(i + 1));
+            document.getElementById("demo").innerHTML = 'You must select at least one difficulty before starting the game.';
+        }
+        all_none_difficulties = false;
     } else {
-    difficulty_list = [];
-    for (var i = 0; i < difficultyButtons.length; i++) {
-        difficultyButtons[String(i)].classList.remove('inactive');
-        difficultyButtons[String(i)].classList.add('active');
-        enable_difficulty(String(i+1));
+        difficulty_list = [];
+        for (var i = 0; i < difficultyButtons.length; i++) {
+            difficultyButtons[String(i)].classList.remove('inactive');
+            difficultyButtons[String(i)].classList.add('active');
+            enable_difficulty(String(i + 1));
+        }
+        all_none_difficulties = true;
+        document.getElementById("demo").innerHTML = 'You have enabled all difficulties.';
     }
-    all_none_difficulties = true;
-    document.getElementById("demo").innerHTML = 'You have enabled all difficulties.';
-    }
-} 
+}
 
 function allNoneErasButton() {
     if (all_none_eras == true) {
-    for (var i = 0; i < eraButtons.length; i++) {
-        eraButtons[String(i)].classList.remove('active');
-        eraButtons[String(i)].classList.add('inactive');
-        document.getElementById("demo").innerHTML = 'You must select at least one era before starting the game.';
-        disable_era(String(i+1));
-    }
-    all_none_eras = false;
+        for (var i = 0; i < eraButtons.length; i++) {
+            eraButtons[String(i)].classList.remove('active');
+            eraButtons[String(i)].classList.add('inactive');
+            document.getElementById("demo").innerHTML = 'You must select at least one era before starting the game.';
+            disable_era(String(i + 1));
+        }
+        all_none_eras = false;
     } else {
-    category_list = [];
-    for (var i = 0; i < eraButtons.length; i++) {
-        eraButtons[String(i)].classList.remove('inactive');
-        eraButtons[String(i)].classList.add('active');
-        enable_era(String(i+1));
+        category_list = [];
+        for (var i = 0; i < eraButtons.length; i++) {
+            eraButtons[String(i)].classList.remove('inactive');
+            eraButtons[String(i)].classList.add('active');
+            enable_era(String(i + 1));
+        }
+        all_none_eras = true;
+        document.getElementById("demo").innerHTML = 'You have enabled all eras.';
     }
-    all_none_eras = true;
-    document.getElementById("demo").innerHTML = 'You have enabled all eras.';
-    }
-} 
+}
 
 // Slider functions
 const questionSlider = document.getElementById('questionSlider');
 const perQuestionSlider = document.getElementById('perQuestionSlider');
 const perAnswerSlider = document.getElementById('perAnswerSlider');
 
-questionSlider.addEventListener('input', function() {
+questionSlider.addEventListener('input', function () {
     updateLabel('questionLabel', this.value, ' QUESTIONS');
     change_number_of_questions(this.value);
 });
 
-perQuestionSlider.addEventListener('input', function() {
+perQuestionSlider.addEventListener('input', function () {
     updateLabel('perQuestionLabel', this.value, 's / QUESTION');
     change_time_per_question(this.value);
 });
 
-perAnswerSlider.addEventListener('input', function() {
+perAnswerSlider.addEventListener('input', function () {
     updateLabel('perAnswerLabel', this.value, 's / ANSWER');
     change_time_per_answer(this.value);
 });

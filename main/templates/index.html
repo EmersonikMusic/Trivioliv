@@ -1,102 +1,139 @@
 {% extends 'base.html' %}
-{% load static %} 
+{% load static %}
 
 {% block content %}
 
 <link rel='stylesheet' href='{% static "triviolivia.css" %}'>
 <div id='top-area'>
-    <div id='big-buttons'>
-        <button onclick='dontFetchDataIfAllDeselected()' id='start-pause' type='button' style='background-color: rgb(0,0,0,0.5)'>START</button>
-        <button onclick='toggle_menu()' id='toggle_menu' type='button' style='background-color: rgb(0,0,0,0.5)'>OPTIONS</button>
-        <button onclick='confirm_reset()' id='reset' type='button' style='background-color: rgb(0,0,0,0.5)'>RESET</button>
+    <!-- <div id='big-buttons'>
+        <button onclick='dontFetchDataIfAllDeselected()' id='start-pause' type='button'
+            style='background-color: rgb(0,0,0,0.5)'>START</button>
+        <button onclick='toggle_menu()' id='toggle_menu' type='button'
+            style='background-color: rgb(0,0,0,0.5)'>OPTIONS</button>
+        <button onclick='confirm_reset()' id='reset' type='button'
+            style='background-color: rgb(0,0,0,0.5)'>RESET</button>
+    </div> -->
+</div>
+<!--Wrapper-->
+<div id="wrapper" class="wrapper">
+
+    <!-- Main Container -->
+    <div id="main-container" class="main-container">
+
+        <!--Game Area -->
+        <div id="game-area" class="game-area">
+            <div class="main-column">
+                <!--Main game container area-->
+                <div id="container_game" class="container-game">
+                    <div id='question-container' class="question-container"></div>
+                    <div id='answer-container' class="answer-container"></div>
+                </div>
+            </div>
+            <div id="demo" class="loading-bar-container">
+                <p id="demo"></p>
+            </div>
+        </div>
+        <!--Game Area End-->
+
+        <!--Side Menu-->
+        <div class="side-column" id="side-column">
+            <div class="options-menu">
+                <h2>Customize Game</h2>
+                <!--Categories menu-->
+                <div class="wrap-collabsible"> 
+                    <input id="collapsible-categories" class="toggle" type="checkbox"> 
+                    <label for="collapsible-categories" class="lbl-toggle">
+                        CATEGORIES
+                    </label>
+                    <div class="collapsible-content">
+                        <div class="content-inner">
+                            <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
+                            {% for category in categories %}
+                            <div id='{{ category.name | slugify }}'>
+                                <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                                    <span class="indicator"></span>
+                                    <span class="category-title">{{ category.name | upper }}</span>
+                                </button>
+                            </div>
+                            {% endfor %}
+                    </div>
+                    </div>
+                </div>
+                <!--Difficulties menu-->
+                <div class="wrap-collabsible"> 
+                <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
+                <label for="collapsible-difficulties" class="lbl-toggle">
+                    DIFFICULTIES
+                </label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                        <button class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE </button>
+                        {% for difficulty in difficulties %}
+                        <div id='{{ difficulty.name }}'>
+                            <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
+                                <span class="indicator"></span>
+                                <span class="difficulty-title">{{ difficulty.name | upper}}</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                </div>
+                <!--Eras menu-->
+                <div class="wrap-collabsible"> 
+                <input id="collapsible-eras" class="toggle" type="checkbox"> 
+                <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                    <button class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
+                    {% for era in eras %}
+                    <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
+                        <span class="indicator"></span>
+                        <span class="era-title">{{ era.name }}</span>
+                    </button>
+                    {% endfor %}
+                    </div>
+                </div>
+                </div>
+                <!--Settings menu-->
+                <div class="wrap-collabsible"> 
+                    <input id="collapsible-settings" class="toggle" type="checkbox" checked> 
+                    <label for="collapsible-settings" class="lbl-toggle">settings</label>
+                    <div class="collapsible-content">
+                        <div class="content-inner">
+                            <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
+                                <div class="slider-container">
+                                    <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
+                                    <input type="range" min="10" max="100" value="10" step="10" class="slider" id="questionSlider">
+                                </div>
+                                <div class="slider-container">
+                                    <div id="perQuestionLabel" class="slider-label">10s / QUESTION</div>
+                                    <input type="range" min="5" max="30" value="10" step="5" class="slider" id="perQuestionSlider">
+                                </div>
+                
+                                <div class="slider-container">
+                                    <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
+                                    <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="start-game" class="start-game">
+                    <button onclick="dontFetchDataIfAllDeselected()" id="start-pause" type="button">START GAME</button>
+                </div>
+            </div>
+        </div>
+        <!--Side Menu End-->
     </div>
 </div>
-<!-- Main Container -->
-<div class="container">
-     <!--Top area with START,OPTIONS,RESET buttons-->
-    <div class="main-column">
-        <!--Question info and feedback statement are and soon-to-be Q/A loading bar-->
-        
-        <!--Main game container area-->
-        <div id="container_game">
-            <div id='question-container' class="question-container"></div>
-            <div id='answer-container' class="answer-container"></div>
-        </div>
-        <div class="loading-bar-container">
-            <div id="demo"><p id="demo"></p></div>
-        </div>
-    </div>
-
-<div class="behind-options-menu">
-<div class="options-menu">
-    <div class="column-categories">
-            <div class="button-container left-indicator">
-                <!--Categories menu-->
-                <h2>CATEGORIES</h2>
-                    <button id="all-none-categories" class="all-none-categories" style="background-color: #BBBBBB;" onclick="allNoneCategoriesButton()">ALL/NONE</button>
-                    {% for category in categories %}
-                    <div id='{{ category.name | slugify }}'>
-                    <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
-                        <span class="indicator"></span>
-                        <span class= "category-title">{{ category.name | upper }}</span>
-                    </button>
-                    </div>
-                    {% endfor %}
-                <!--Options menu-->
-                <div id="menu" class="menu_visable">
-                </div>
-            </div>
-        </div>   
 
 
-        <div class="column-rest">
-            <!--Difficulties menu-->
-            <div id="menu_difficulty" class="button-container right-indicator">
-                <h2>DIFFICULTIES</h2>
-                    <button class="button all-none-rest" style="background-color: #BBBBBB;" onclick="allNoneDifficultiesButton()">ALL/NONE </button>            {% for difficulty in difficulties %}
-                    <div id='{{ difficulty.name }}'>
-                    <button onclick='toggle_difficulties(this.id), toggleIndicator(this)' id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
-                        <span class="indicator"></span>
-                        <span class="difficulty-title">{{ difficulty.name | upper}}</span>
-                    </button>
-                </div>
-                    {% endfor %}
-            </div>
 
-            <!--Eras menu-->
-            <div id="menu_eras" class="button-container right-indicator">
-                <h2>ERAS</h2>
-                <button class="button all-none-rest" style="background-color: #BBBBBB;" onclick="allNoneErasButton()">ALL/NONE</button>
-                {% for era in eras %}
-                <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
-                    <span class="indicator"></span>
-                    <span class="era-title">{{ era.name }}</span>
-                    </button>
-                {% endfor %}
-            </div>
-            
-            <!--Question and answer time menu-->
-            <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
-                
-                    <div class="slider-container">
-                        <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
-                        <input type="range" min="10" max="100" value="10" step="10" class="slider" id="questionSlider">
-                    </div>
-                    
-                    <div class="slider-container">
-                    <div id="perQuestionLabel" class="slider-label">10s / QUESTION</div>
-                        <input type="range" min="5" max="30" value="10" step="5" class="slider" id="perQuestionSlider">
-                    </div>
-                    
-                    <div class="slider-container">
-                        <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
-                        <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
-                    </div>
 
-            </div>      
-            
-            <!--Other buttons menu-->
-            <!-- <div id='other-buttons'>
+
+                <!--Other buttons menu-->
+                <!-- <div id='other-buttons'>
                 <br>
                 <button id='refetch-questions' type='button'>RATE QUESTION</button>
                 <button id='refetch-questions' type='button'>SUBMIT QUESTION</button>
@@ -107,15 +144,7 @@
             </div> -->
 
 
-
-
-        </div> 
-    </div>
-</div>
-</div>
-
-
 <!--The JavaScript-->
 <script src="{% static 'triviolivia.js' %}"></script>
 
-{% endblock %} 
+{% endblock %}
