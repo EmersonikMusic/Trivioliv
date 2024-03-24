@@ -507,11 +507,10 @@ function changeButtonText() {
         button.textContent = 'RESUME GAME';
         pauseFlag = false;
         console.log('Game paused.');
+        document.getElementById("demo").innerHTML = 'Game paused.';
     } else {
         button.textContent = 'START GAME';
         pauseFlag = false;
-        console.log('Game paused.');
-        document.getElementById("demo").innerHTML = 'Game paused.';
     }
     // Add your additional functionality here
     // For example, you might want to toggle game start/pause logic
