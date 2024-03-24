@@ -507,6 +507,7 @@ function changeButtonText() {
     } else {
         button.textContent = 'START GAME';
         pauseFlag = false;
+        console.log('Game paused.');
     }
     // Add your additional functionality here
     // For example, you might want to toggle game start/pause logic
