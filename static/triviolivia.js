@@ -9,6 +9,7 @@ var game_started = false;
 var game_paused = false;
 var menu_hidden = false;
 var current_question_category = null;
+let pauseFlag = false;
 
 // Declaring banned category/difficulty/era lists
 var category_list = [];
@@ -115,6 +116,7 @@ async function fetchData(moddedUrl) {
 
 // Function to not fetch JSON data if any of cat/dif/era are all deselected
 function dontFetchDataIfAllDeselected() {
+    changeButtonText();
     if (category_list.length > 24) {
         document.getElementById("demo").innerHTML = 'Cannot start game. You must select at least one category.';
     } else if (difficulty_list.length > 4) {
@@ -296,19 +298,23 @@ const showAnswer = (displayed_answer) => {
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-//Arrow function for main game start
 const mainGameFunction = async () => {
-    document.getElementById("demo").innerHTML = 'Put your game face on.';
+    document.getElementById("demo").innerHTML = 'Fetching questions.';
     await delay(1.2 * 1000);
-    document.getElementById("demo").innerHTML = 'Put your game face on..';
+    document.getElementById("demo").innerHTML = 'Fetching questions..';
     await delay(1.2 * 1000);
-    document.getElementById("demo").innerHTML = 'Put your game face on...';
+    document.getElementById("demo").innerHTML = 'Fetching questions...';
     await delay(1.2 * 1000);
     document.getElementById("demo").innerHTML = 'Game starts now!';
     await delay(1.2 * 1000);
     document.getElementById("demo").innerHTML = '';
 
     for (let i = 0; i < number_of_questions; i++) {
+        // Check if paused
+        while (pauseFlag) {
+            await delay(100); // Check every 100 milliseconds
+        }
+        
         document.body.style.backgroundColor = category_colors[globalData[i].category_name];
         document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek';
         showQuestion(globalData[i].text);
@@ -319,6 +325,19 @@ const mainGameFunction = async () => {
     game_started = false;
     document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
 };
+
+// Function to pause the game
+function pauseGame() {
+    pauseFlag = true;
+}
+
+// Function to resume the game
+function resumeGame() {
+    pauseFlag = false;
+    mainGameFunction(); // Resume execution
+}
+
+
 
 //Variables for ALL/NONE buttons
 var all_none_categories = true;
@@ -476,4 +495,19 @@ perAnswerSlider.addEventListener('input', function () {
 
 function updateLabel(labelId, value, unit) {
     document.getElementById(labelId).textContent = value + unit;
+}
+
+//Function to change START GAME text
+function changeButtonText() {
+    var button = document.getElementById('start-pause');
+    if (pauseFlag === false) {
+        button.textContent = 'PAUSE GAME';
+        pauseFlag = true;
+        document.getElementById("demo").innerHTML = 'Game paused.';
+    } else {
+        button.textContent = 'START GAME';
+        pauseFlag = false;
+    }
+    // Add your additional functionality here
+    // For example, you might want to toggle game start/pause logic
 }
