@@ -307,16 +307,23 @@ const mainGameFunction = async () => {
     await delay(1.2 * 1000);
     document.getElementById("demo").innerHTML = 'Game starts now!';
     await delay(1.2 * 1000);
-    document.getElementById("demo").innerHTML = '';
 
+    let previousText = ''; // To store the previous text content
+    
     for (let i = 0; i < number_of_questions; i++) {
         // Check if paused
         while (!pauseFlag) {
             await delay(100); // Check every 100 milliseconds
         }
         document.body.style.backgroundColor = category_colors[globalData[i].category_name];
-        document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek';
+        const newText = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek';
         
+        // Update text only if not paused or if text is different from the previous one
+        if (!pauseFlag || newText !== previousText) {
+            document.getElementById("demo").innerHTML = newText;
+            previousText = newText;
+        }
+
         while (!pauseFlag) {
             await delay(100); // Check every 100 milliseconds
         }
@@ -334,6 +341,7 @@ const mainGameFunction = async () => {
     game_started = false;
     document.getElementById("demo").innerHTML = 'Thanks for playing! Press START to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
 };
+
 
 // Function to pause the game
 function pauseGame() {
