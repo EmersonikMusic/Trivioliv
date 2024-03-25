@@ -95,10 +95,12 @@
                     <div class="content-inner">
                     <button class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
                     {% for era in eras %}
-                    <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
-                        <span class="indicator"></span>
-                        <span class="era-title">{{ era.name }}</span>
-                    </button>
+                    <div id='{{ era.name }}'>
+                        <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
+                            <span class="indicator"></span>
+                            <span class="era-title">{{ era.name }}</span>
+                        </button>
+                        </div>
                     {% endfor %}
                     </div>
                 </div>
