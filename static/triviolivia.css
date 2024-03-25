@@ -538,6 +538,7 @@ background-color: rgba(0, 0, 0, 0.5);
     font-family: 'American Typewriter', sans-serif;
     height: 50%;
     align-items: center;
+    text-align: center;
 }
 
 .answer-container {
@@ -547,6 +548,7 @@ background-color: rgba(0, 0, 0, 0.5);
     font-family: 'American Typewriter', sans-serif;
     height: 25%;
     flex-direction: column;
+    text-align: center;
 }
 
   .inactive .indicator  {
