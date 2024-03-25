@@ -70,31 +70,55 @@ var era_number_identities = {
 
 // Mapping of category names to their associated colors
 var category_colors = {
-    'Art': '#dd7e6b',
-    'Economics': '#598C58',
-    'Food': '#f28500',
-    'Games': '#cc5500',
-    'Geography': '#9a7b4f',
-    'History': '#f1c232',
-    'Human Body': '#d8965b',
-    'Language': '#6693f5',
-    'Law': '#6f3e33',
-    'Literature': '#d99d29',
-    'Math': '#65635c',
-    'Miscellaneous': '#12A898',
-    'Movies': '#660000',
-    'Music': '#1DB954',
-    'Nature': '#043927',
-    'Philosophy': '#975fac',
-    'Politics': '#351c75',
-    'Pop Culture': '#ff8fab',
-    'Science': '#06550d',
-    'Sports': '#131e3a',
-    'Technology': '#1f5967',
-    'Television': '#2d2c29',
-    'Theater': '#b70000',
-    'Theology': '#3C1321',
-    'Video Games': '#9900ff'
+'Art': 'background: linear-gradient(345deg, rgba(165,50,27,1) 0%, rgba(221,126,107,1) 100%)',
+
+'Economics': 'background: linear-gradient(345deg, rgba(17,68,16,1) 0%, rgba(89,140,88,1) 100%)',
+
+'Food': 'background: linear-gradient(345deg, rgba(127,43,11,1) 0%, rgba(242,133,0,1) 100%)',
+
+'Games': 'background: linear-gradient(345deg, rgba(103,38,24,1) 0%, rgba(204,85,0,1) 100%)',
+
+'Geography': 'background: linear-gradient(345deg, rgba(61,38,19,1) 0%, rgba(154,123,79,1) 100%)',
+
+'History': 'background: linear-gradient(345deg, rgba(241,194,50,1) 0%, rgba(241,154,50,1) 100%)',
+
+'Human Body': 'background: linear-gradient(345deg, rgba(106,77,20,1) 0%, rgba(180,130,32,1) 100%)',
+
+'Language': 'background: linear-gradient(345deg, rgba(28,60,133,1) 0%, rgba(102,147,245,1) 100%)',
+
+'Law': 'background: linear-gradient(345deg, rgba(189,76,51,1) 0%, rgba(111,62,51,1) 100%)',
+
+'Literature': 'background: linear-gradient(345deg, rgba(202,128,39,1) 0%, rgba(217,157,41,1) 100%)',
+
+'Math': 'background: linear-gradient(345deg, rgba(63,61,54,1) 0%, rgba(101,99,92,1) 100%)',
+
+'Miscellaneous': 'background: linear-gradient(345deg, rgba(13,109,122,1) 0%, rgba(18,168,152,1) 100%)',
+
+'Movies': 'background: linear-gradient(345deg, rgba(184,34,34,1) 0%, rgba(102,0,0,1) 100%)',
+
+'Music': 'background: linear-gradient(345deg, rgba(9,110,62,1) 0%, rgba(29,185,84,1) 100%)',
+
+'Nature': 'background: linear-gradient(345deg, rgba(8,83,27,1) 0%, rgba(4,57,39,1) 100%)',
+
+'Philosophy': 'background: linear-gradient(345deg, rgba(89,61,128,1) 0%, rgba(151,95,172,1) 100%)',
+
+'Politics': 'background: linear-gradient(345deg, rgba(84,30,140,1) 0%, rgba(53,28,117,1) 100%)',
+
+'Pop Culture': 'background: linear-gradient(345deg, rgba(233,85,148,1) 0%, rgba(255,143,171,1) 100%)',
+
+'Science': 'background: linear-gradient(345deg, rgba(6,85,83,1) 0%, rgba(11,103,56,1) 100%)',
+
+'Sports': 'background: linear-gradient(345deg, rgba(44,66,121,1) 0%, rgba(19,30,58,1) 100%)',
+
+'Technology': 'background: linear-gradient(345deg, rgba(22,134,161,1) 0%, rgba(31,89,103,1) 100%)',
+
+'Television': 'background: linear-gradient(345deg, rgba(45,44,41,1) 0%, rgba(87,81,78,1) 100%)',
+
+'Theatre': 'background: linear-gradient(345deg, rgba(183,75,0,1) 0%, rgba(183,0,0,1) 100%)',
+
+'Theology': 'background: linear-gradient(345deg, rgba(64,14,66,1) 0%, rgba(60,19,33,1) 100%)',
+
+'Video Games': 'background: linear-gradient(345deg, rgba(153,0,255,1) 0%, rgba(60,13,128,1) 100%)'
 }
 
 // Default message in bar
@@ -314,7 +338,7 @@ const mainGameFunction = async () => {
         while (!pauseFlag) {
             await delay(100); // Check every 100 milliseconds
         }
-        document.body.style.backgroundColor = category_colors[globalData[i].category_name];
+        document.body.style.background = category_colors[globalData[i].category_name];
 
         let questionTimeRemaining = time_per_question * 10; // Convert to tenths of a second
         let answerTimeRemaining = time_per_answer * 10; // Convert to tenths of a second

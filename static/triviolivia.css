@@ -1,7 +1,7 @@
 body {
     font-family: 'Calibri', sans-serif;
     font-size: 15px;
-    background: linear-gradient(345deg, rgba(69, 93, 214, 1) 0%, rgba(78, 50, 100, 1) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(40, 40, 40, 1) 100%);
     margin: 0;
     display: block
     /* overflow: hidden; */
@@ -23,7 +23,7 @@ button {
     /* align-items: center;
     justify-content: center; */
     box-sizing: border-box;
-    /* background-color: grey; */
+    background-color: rgba(0, 0, 0, 0);
     font-size: 11px;
     /* color: white; */
     text-align: left;
@@ -48,9 +48,9 @@ button:hover {
 }
 
 #start-game button {
-    width: 80%;
+    /* width: 80%; */
     margin: 20 0 30 0;
-    padding: 5px;
+    padding: 5 20;
     align-items: center;
     vertical-align: middle;
     height: 36px;
@@ -135,7 +135,7 @@ input[type='checkbox'] {
 .collapsible-content .content-inner { 
     background: rgba(0, 0, 0, .2);
     padding: 10px;
-    margin: 20px;
+    margin: 0 20;
     border-radius: 14px; 
 } 
 .collapsible-content p { 
@@ -206,9 +206,7 @@ input[type='checkbox'] {
     /* flex: 1; */
     height: 100%;
     flex-direction: column;
-    
   }
-
 
 
   .side-column {
@@ -217,7 +215,7 @@ input[type='checkbox'] {
     min-width: 180px;
     border-radius: 24px;
     border: 1px solid rgba(225, 225, 225, 0.2);
-    margin: 20 20 20 0;
+    margin: 0 20 20 0;
 }
 
   #main-container {
@@ -234,7 +232,7 @@ input[type='checkbox'] {
     width: 100%;
     border-radius: 25px;
     background-color: rgba(0, 0, 0, 0.25);
-    margin: 20px;
+    margin: 0 20 20 20;
     overflow: hidden;
     flex-wrap: nowrap;
     height: -webkit-fill-available;
@@ -276,28 +274,6 @@ footer {
     margin-right: 0px; /* Create space between indicator and text */
     border-right: 1px solid #2D2D2D;
     border-radius: 2px;
-  }
-
-  .left-indicator .indicator {
-    width: 8px; /* Reduce the indicator width to match smaller buttons */
-    height: 100%; /* Set the indicator's height to 100% of the button's height */
-    background-color: #00F829;
-    left: 0; /* Position the indicator at the left edge of the button */
-    top: 0; /* Align the indicator with the top of the button */
-    bottom: 0; /* Align the indicator with the bottom of the button */
-    margin-right: 0px; /* Create space between indicator and text */
-    border-right: 1px solid #2D2D2D;
-  }
-
-  .right-indicator .indicator {
-    width: 8px; /* Reduce the indicator width to match smaller buttons */
-    height: 100%; /* Set the indicator's height to 100% of the button's height */
-    background-color: #00F829;
-    right: 0; /* Position the indicator at the left edge of the button */
-    top: 0; /* Align the indicator with the top of the button */
-    bottom: 0; /* Align the indicator with the bottom of the button */
-    margin-left: 0px; /* Create space between indicator and text */
-    border-left: 1px solid #2D2D2D;
   }
 
   .inactive .indicator  {
@@ -555,18 +531,6 @@ background-color: rgba(0, 0, 0, 0.5);
     flex-direction: column;
 }
 
-
-.indicator {
-    width: 8px;
-    height: 100%;
-    background-color: #00F829;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    margin-right: 0px;
-    border-right: 1px solid #2D2D2D;
-  }
-
   .inactive .indicator  {
     background-color: red;
   }
@@ -574,17 +538,18 @@ background-color: rgba(0, 0, 0, 0.5);
   
 /* Slider stuff */
 .slider-container {
-    margin: 5px auto;
+    margin: 15px auto;
 }
 .slider-label {
     text-align: center;
+    padding-bottom: 15px;
 }
 .slider {
     width: 100%;
     -webkit-appearance: none;
-    height: 10px;
+    height: 6px;
     border-radius: 5px;
-    background-color: #444;
+    background-color: rgba(0,0,0,0.4);
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
