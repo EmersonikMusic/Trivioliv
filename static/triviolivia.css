@@ -161,10 +161,6 @@ input[type='checkbox'] {
     /* background-color: rgba(0,0,0,0.5); */
   }
 
-  .navbar-old {
-    display: none;
-  }
-
    /* .navbar button {
     background: none;
     text-align: right;
@@ -179,6 +175,8 @@ input[type='checkbox'] {
     padding: 0px 20px;
     /* background-color: rgba(0,0,0,0.5); */
     height: 60px;
+    flex-direction: row;
+    align-items: center;
   }
 
   .navbar button {
