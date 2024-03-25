@@ -1,5 +1,5 @@
 body {
-    font-family: 'Calibri', sans-serif;
+    font-family: "Montserrat", 'Calibri', sans-serif;
     font-size: 15px;
     background: linear-gradient(345deg, rgba(69, 93, 214, 1) 0%, rgba(78, 50, 100, 1) 100%);
     margin: 0;
@@ -535,7 +535,8 @@ background-color: rgba(0, 0, 0, 0.5);
     padding: 10px 50px;
     display: flex;
     font-size: 5vw;
-    font-family: 'American Typewriter', sans-serif;
+    font-family: "Montserrat",'American Typewriter', sans-serif;
+    font-weight: 500;
     height: 50%;
     align-items: center;
     text-align: center;
@@ -545,7 +546,8 @@ background-color: rgba(0, 0, 0, 0.5);
     padding: 10px 50px;
     display: flex;
     font-size: 5vw;
-    font-family: 'American Typewriter', sans-serif;
+    font-family: "Montserrat",'American Typewriter', sans-serif;
+    font-weight: 500;
     height: 25%;
     flex-direction: column;
     text-align: center;
