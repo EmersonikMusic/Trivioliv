@@ -80,7 +80,7 @@
                         <div id='{{ difficulty.name }}'>
                             <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
                                 <span class="indicator"></span>
-                                <span class="difficulty-title">{{ difficulty.name | upper}}</span>
+                                {{ difficulty.name | upper}}
                             </button>
                         </div>
                         {% endfor %}
@@ -98,7 +98,7 @@
                     <div id='{{ era.name }}'>
                         <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
                             <span class="indicator"></span>
-                            <span class="era-title">{{ era.name }}</span>
+                            {{ era.name }}
                         </button>
                         </div>
                     {% endfor %}
