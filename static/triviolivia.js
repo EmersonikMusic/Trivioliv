@@ -342,7 +342,7 @@ const mainGameFunction = async () => {
             progressBar.style.animationPlayState = "paused";
             progressBar.style.animation = "none";
             progressBar.offsetHeight; // Trigger reflow to reset animation
-            progressBar.style.animation = "depleteProgress 10s linear infinite";
+            progressBar.style.animation = "depleteProgress 5s linear infinite";
           }
         // Check if paused
         while (!pauseFlag) {
