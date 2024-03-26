@@ -334,16 +334,16 @@ const mainGameFunction = async () => {
     document.getElementById("demo").innerHTML = '';
 
     for (let i = 0; i < number_of_questions; i++) {
-        // if (isPaused) {
-        //     progressBar.style.animationPlayState = "running";
-        //     progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
-        //     isPaused = false;
-        //   } else {
-        //     progressBar.style.animationPlayState = "paused";
-        //     progressBar.style.animation = "none";
-        //     progressBar.offsetHeight; // Trigger reflow to reset animation
-        //     progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
-        //   }
+        if (isPaused) {
+            progressBar.style.animationPlayState = "running";
+            progressBar.style.animation = "replenishProgress " + time_per_answer + "s linear forwards, shrinkProgress " + time_per_question + "s linear forwards";
+            isPaused = false;
+          } else {
+            progressBar.style.animationPlayState = "paused";
+            progressBar.style.animation = "none";
+            progressBar.offsetHeight; // Trigger reflow to reset animation
+            progressBar.style.animation = "replenishProgress " + time_per_answer + "s linear forwards, shrinkProgress " + time_per_question + "s linear forwards";
+          }
         // Check if paused
         while (!pauseFlag) {
             await delay(100); // Check every 100 milliseconds
