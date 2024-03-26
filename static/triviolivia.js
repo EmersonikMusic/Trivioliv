@@ -336,13 +336,13 @@ const mainGameFunction = async () => {
     for (let i = 0; i < number_of_questions; i++) {
         if (isPaused) {
             progressBar.style.animationPlayState = "running";
-            progressBar.style.animation = "depleteProgress 10s linear infinite";
+            progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
             isPaused = false;
           } else {
             progressBar.style.animationPlayState = "paused";
             progressBar.style.animation = "none";
             progressBar.offsetHeight; // Trigger reflow to reset animation
-            progressBar.style.animation = "depleteProgress 5s linear infinite";
+            progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
           }
         // Check if paused
         while (!pauseFlag) {
