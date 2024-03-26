@@ -114,7 +114,7 @@ var category_colors = {
 
 'Television': 'linear-gradient(345deg, rgba(45,44,41,1) 0%, rgba(87,81,78,1) 100%)',
 
-'Theatre': 'linear-gradient(345deg, rgba(183,75,0,1) 0%, rgba(183,0,0,1) 100%)',
+'Theater': 'linear-gradient(345deg, rgba(183,75,0,1) 0%, rgba(183,0,0,1) 100%)',
 
 'Theology': 'linear-gradient(345deg, rgba(64,14,66,1) 0%, rgba(60,19,33,1) 100%)',
 
@@ -334,6 +334,13 @@ const mainGameFunction = async () => {
     document.getElementById("demo").innerHTML = '';
 
     for (let i = 0; i < number_of_questions; i++) {
+        if (isPaused) {
+            progressBar.style.animationPlayState = "running";
+            isPaused = false;
+          } else {
+            progressBar.style.animationPlayState = "paused";
+            isPaused = true;
+          }
         // Check if paused
         while (!pauseFlag) {
             await delay(100); // Check every 100 milliseconds
@@ -571,3 +578,41 @@ function changeButtonText() {
     // Add your additional functionality here
     // For example, you might want to toggle game start/pause logic
 }
+
+
+
+
+//Dynamic question and answer timer bar attempt
+ let progressBar = document.getElementById("progress");
+  let startButton = document.getElementById("startButton");
+  let pauseButton = document.getElementById("pauseButton");
+  let isPaused = true;
+
+  startButton.addEventListener("click", function() {
+    // if (isPaused) {
+    //   progressBar.style.animationPlayState = "running";
+    //   progressBar.style.animation = "depleteProgress 10s linear infinite";
+    //   isPaused = false;
+    // } else {
+    //   progressBar.style.animationPlayState = "paused";
+    //   progressBar.style.animation = "none";
+    //   progressBar.offsetHeight; // Trigger reflow to reset animation
+    //   progressBar.style.animation = "depleteProgress 10s linear infinite";
+    // }
+  });
+
+  pauseButton.addEventListener("click", function() {
+    if (isPaused) {
+      progressBar.style.animationPlayState = "running";
+      isPaused = false;
+    } else {
+      progressBar.style.animationPlayState = "paused";
+      isPaused = true;
+    }
+  });
+
+  progressBar.addEventListener("animationiteration", function() {
+    if (!isPaused) {
+      progressBar.style.animation = "replenishProgress " + time_per_question + "s linear forwards";
+    }
+  });

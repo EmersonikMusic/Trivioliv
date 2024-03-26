@@ -305,7 +305,7 @@ input[type='checkbox'] {
     text-align: left;
 }
 
-.loading-bar-container {
+/* .loading-bar-container {
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     width: 100%;
@@ -313,7 +313,7 @@ input[type='checkbox'] {
     justify-content: center;
     margin-top: auto;
     min-height: 19px;
-  }
+  } */
 
 
   /* 2024 NEW CSS ENDS */
@@ -512,14 +512,14 @@ h2 {
     cursor: pointer;
 }
 
-#demo {
+/* #demo {
+    font-size: 16px;
+} */
+
+.loader-text {
     font-size: 16px;
 }
 
-.demo-inner {
-/* LOADER ANIMATION */
-background-color: rgba(0, 0, 0, 0.5);
-}
 
 .container-game {
     height: -webkit-fill-available;
@@ -594,23 +594,55 @@ background-color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
 
+  
+.loading-bar-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    width: 100%;
+    /* padding: 10px 0; */
+    justify-content: center;
+    margin-top: auto;
+    /* min-height: 19px; */
+  }
 
-/* Define keyframes for the animation of START button */
-@keyframes glisten {
-    0% {
-      background-color: rgba(0,0,0,0.5); /* Initial color */
-    }
-    50% {
-      background-color: rgba(0,20,0,0.5); /* Color change midpoint */
-    }
-    100% {
-      background-color: rgba(0,0,0,0.5); /* Back to initial color */
-    }
+  /* Attempt at dynamic question and answer timer indicator */
+  #loading-bar {
+    display: flex;
+    width: 100%;
+    /* height: 20px; */
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
   }
-  
-  /* Apply the animation to the START button */
-  #big-buttons button:first-child {
-    animation: glisten 10s infinite; /* Run the animation every 10 seconds infinitely */
-    transition: background-color 0.3s; /* Smooth transition between colors */
+  #progress {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: depleteProgress 10s linear infinite paused;
   }
-  
+
+  #loading-text {
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    display: flex;
+    color: white;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    z-index: 1;
+  }
+
+  @keyframes depleteProgress {
+    0% { width: 100%; }
+    100% { width: 0%; }
+  }
+
+  @keyframes replenishProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
