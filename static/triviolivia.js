@@ -336,10 +336,13 @@ const mainGameFunction = async () => {
     for (let i = 0; i < number_of_questions; i++) {
         if (isPaused) {
             progressBar.style.animationPlayState = "running";
+            progressBar.style.animation = "depleteProgress 10s linear infinite";
             isPaused = false;
           } else {
             progressBar.style.animationPlayState = "paused";
-            isPaused = true;
+            progressBar.style.animation = "none";
+            progressBar.offsetHeight; // Trigger reflow to reset animation
+            progressBar.style.animation = "depleteProgress 10s linear infinite";
           }
         // Check if paused
         while (!pauseFlag) {
@@ -589,16 +592,16 @@ function changeButtonText() {
   let isPaused = true;
 
   startButton.addEventListener("click", function() {
-    // if (isPaused) {
-    //   progressBar.style.animationPlayState = "running";
-    //   progressBar.style.animation = "depleteProgress 10s linear infinite";
-    //   isPaused = false;
-    // } else {
-    //   progressBar.style.animationPlayState = "paused";
-    //   progressBar.style.animation = "none";
-    //   progressBar.offsetHeight; // Trigger reflow to reset animation
-    //   progressBar.style.animation = "depleteProgress 10s linear infinite";
-    // }
+    if (isPaused) {
+      progressBar.style.animationPlayState = "running";
+      progressBar.style.animation = "depleteProgress 10s linear infinite";
+      isPaused = false;
+    } else {
+      progressBar.style.animationPlayState = "paused";
+      progressBar.style.animation = "none";
+      progressBar.offsetHeight; // Trigger reflow to reset animation
+      progressBar.style.animation = "depleteProgress 10s linear infinite";
+    }
   });
 
   pauseButton.addEventListener("click", function() {
