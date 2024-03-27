@@ -597,12 +597,13 @@ h2 {
   
 .loading-bar-container {
     background-color: rgba(0, 0, 0, 0.5);
-    display: 100svh;
+    display: flex;
     width: 100%;
     /* padding: 10px 0; */
     justify-content: center;
     margin-top: auto;
     /* min-height: 19px; */
+    height: 100svh;
   }
 
   /* Attempt at dynamic question and answer timer indicator */
