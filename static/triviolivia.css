@@ -597,7 +597,7 @@ h2 {
   
 .loading-bar-container {
     background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
+    display: 100svh;
     width: 100%;
     /* padding: 10px 0; */
     justify-content: center;
