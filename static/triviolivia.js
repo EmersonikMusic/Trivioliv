@@ -594,13 +594,13 @@ function changeButtonText() {
   startButton.addEventListener("click", function() {
     if (isPaused) {
       progressBar.style.animationPlayState = "running";
-      progressBar.style.animation = "depleteProgress 10s linear infinite";
+      progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
       isPaused = false;
     } else {
       progressBar.style.animationPlayState = "paused";
       progressBar.style.animation = "none";
       progressBar.offsetHeight; // Trigger reflow to reset animation
-      progressBar.style.animation = "depleteProgress 10s linear infinite";
+      progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
     }
   });
 
@@ -616,7 +616,7 @@ function changeButtonText() {
 
   progressBar.addEventListener("animationiteration", function() {
     if (!isPaused) {
-        progressBar.style.animation = "replenishProgress " + time_per_answer + "s linear backwards, shrinkProgress " + time_per_question + "s linear forwards";
+        progressBar.style.animation = "replenishProgress " + time_per_answer + "s linear forwards, shrinkProgress " + time_per_question + "s linear forwards";
     }
   });
 
