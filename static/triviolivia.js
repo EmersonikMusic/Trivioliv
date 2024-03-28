@@ -280,13 +280,13 @@ function change_number_of_questions(clicked_id) {
 
 function change_time_per_question(clicked_id) {
     time_per_question = clicked_id;
-    document.getElementById("demo").innerHTML = 'Questions are now displayed for ' + time_per_question + ' seconds.';
+    document.getElementById("demo").innerHTML = 'Questions will display for ' + time_per_question + ' seconds.';
     console.log(time_per_question);
 }
 
 function change_time_per_answer(clicked_id) {
     time_per_answer = clicked_id;
-    document.getElementById("demo").innerHTML = 'Answers are now displayed for ' + time_per_answer + ' seconds.';
+    document.getElementById("demo").innerHTML = 'Answers will display for ' + time_per_answer + ' seconds.';
     console.log(time_per_answer);
 }
 
