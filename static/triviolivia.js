@@ -585,26 +585,24 @@ function changeButtonText() {
 }
 
 
-
-
 //Dynamic question and answer timer bar attempt
- let progressBar = document.getElementById("progress");
-  let startButton = document.getElementById("startButton");
-  let pauseButton = document.getElementById("pauseButton");
-  let isPaused = true;
+let progressBar = document.getElementById("progress");
+let startButton = document.getElementById("startButton");
+let pauseButton = document.getElementById("pauseButton");
+let isPaused = true;
 
-  startButton.addEventListener("click", function() {
+startButton.addEventListener("click", function() {
     if (isPaused) {
-      progressBar.style.animationPlayState = "running";
+      progressBar.style.animationPlayState = "paused";
       progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
       isPaused = false;
     } else {
-      progressBar.style.animationPlayState = "paused";
+      progressBar.style.animationPlayState = "running";
       progressBar.style.animation = "none";
       progressBar.offsetHeight; // Trigger reflow to reset animation
       progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
     }
-  });
+});
 
   pauseButton.addEventListener("click", function() {
     if (isPaused) {
