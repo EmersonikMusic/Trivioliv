@@ -383,10 +383,10 @@ const mainGameFunction = async () => {
         }
         showAnswer(""); // Clear answer display
     }
-    progressBar.style.animationPlayState = "paused";
     game_started = false;
-    pauseFlag = false
+    pauseFlag = false;
     showQuestion("Thanks for playing!");
+    progressBar.style.animationPlayState = "paused";
     isPaused = true;
     document.getElementById('start-pause').textContent = 'START GAME';
     document.getElementById("demo").innerHTML = 'Press START GAME to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
