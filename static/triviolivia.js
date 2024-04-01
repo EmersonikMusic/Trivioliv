@@ -41,8 +41,7 @@ var category_number_identities = {
     21: 'Television',
     22: 'Theater',
     23: 'Theology',
-    24: 'Video games',
-    25: 'Law'
+    24: 'Video games'
 }
 
 var difficulty_number_identities = {
