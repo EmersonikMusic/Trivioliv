@@ -476,7 +476,7 @@ function enable_era(clicked_id) {
 //Functions for ALL/NONE buttons
 function allNoneCategoriesButton() {
     if (all_none_categories == true) {
-        for (var i = 0; i < (categoryButtons.length + 1); i++) {
+        for (var i = 0; i < 25; i++) {
             categoryButtons[String(i)].classList.remove('active');
             categoryButtons[String(i)].classList.add('inactive');
             disable_category(String(i));
@@ -485,7 +485,7 @@ function allNoneCategoriesButton() {
         all_none_categories = false;
     } else {
         category_list = [];
-        for (var i = 0; i < (categoryButtons.length + 1).length; i++) {
+        for (var i = 0; i < 25; i++) {
             categoryButtons[String(i)].classList.remove('inactive');
             categoryButtons[String(i)].classList.add('active');
             enable_category(String(i));
