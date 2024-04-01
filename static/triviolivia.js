@@ -167,7 +167,7 @@ function fetchQuestionsAndStartGame() {
         if (era_list.length > 0) {
             queryParams.push('era=' + era_list.join(','));
         }
-        const urlWithParams = baseUrl + '?questions=10&' + queryParams.join('&');
+        const urlWithParams = baseUrl + '?questions=' + number_of_questions + '&' + queryParams.join('&');
         moddedUrl = urlWithParams;
         menu_hidden = true;
         // hide_menu();
