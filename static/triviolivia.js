@@ -520,7 +520,7 @@ function allNoneDifficultiesButton() {
 
 function allNoneErasButton() {
     if (all_none_eras == true) {
-        for (var i = 0; i < eraButtons.length; i++) {
+        for (var i = 1; i < eraButtons.length; i++) {
             eraButtons[String(i)].classList.remove('active');
             eraButtons[String(i)].classList.add('inactive');
             document.getElementById("demo").innerHTML = 'You must select at least one era before starting the game.';
@@ -529,7 +529,7 @@ function allNoneErasButton() {
         all_none_eras = false;
     } else {
         category_list = [];
-        for (var i = 0; i < eraButtons.length; i++) {
+        for (var i = 1; i < eraButtons.length; i++) {
             eraButtons[String(i)].classList.remove('inactive');
             eraButtons[String(i)].classList.add('active');
             enable_era(String(i + 1));
