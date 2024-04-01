@@ -16,6 +16,14 @@ var category_list = [];
 var difficulty_list = [];
 var era_list = [];
 
+// Declaring variables for ALL/NONE buttons
+var all_none_categories = true;
+var all_none_difficulties = true;
+var all_none_eras = true;
+var categoryButtons = document.querySelectorAll('.category');
+var difficultyButtons = document.querySelectorAll('.difficulty');
+var eraButtons = document.querySelectorAll('.era');
+
 // Declaring of mapping of category, difficulty, and era numbers to their respective names
 var category_number_identities = {
     1: 'Art',
@@ -405,16 +413,6 @@ function resumeGame() {
     mainGameFunction(); // Resume execution
 }
 
-
-
-//Variables for ALL/NONE buttons
-var all_none_categories = true;
-var all_none_difficulties = true;
-var all_none_eras = true;
-var categoryButtons = document.querySelectorAll('.category');
-var difficultyButtons = document.querySelectorAll('.difficulty');
-var eraButtons = document.querySelectorAll('.era');
-
 //Functions to disable and enable category, difficulty, era
 function disable_category(clicked_id) {
     if (!category_list.includes(clicked_id)) {
@@ -570,9 +568,11 @@ function changeButtonText() {
     var button = document.getElementById('start-pause');
     if (pauseFlag === false) {
         button.textContent = 'PAUSE GAME';
+        progressBar.style.animationPlayState = "paused";
         pauseFlag = true;
     } else if (pauseFlag === true && game_started === true) {
         button.textContent = 'RESUME GAME';
+        progressBar.style.animationPlayState = "running";
         pauseFlag = false;
         console.log('Game paused.');
         document.getElementById("demo").innerHTML = 'Game paused. Press RESUME GAME to continue.';
