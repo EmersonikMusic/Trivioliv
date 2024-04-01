@@ -621,3 +621,7 @@ function changeButtonText() {
 
 
 
+  const progressElement = document.getElementById('progress');
+  
+  progressElement.style.animationDuration = `${time_per_question}s`;
+  
