@@ -615,7 +615,7 @@ function changeButtonText() {
 
   progressBar.addEventListener("animationiteration", function() {
     if (!isPaused) {
-        progressBar.style.animation = "replenishProgress " + time_per_answer + "s linear backwards, shrinkProgress " + time_per_question + "s linear forwards";
+      progressBar.style.animation = "replenishProgress " + time_per_answer + "s linear reverse, shrinkProgress " + time_per_question + "s linear reverse";
     }
   });
 
