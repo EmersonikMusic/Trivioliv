@@ -4,7 +4,7 @@ const answerDisplay = document.querySelector('.answer-container')
 // Declaring game variables
 var number_of_questions = 10;
 var time_per_question = 10;
-var time_per_answer = 5;
+var time_per_answer = 10;
 var game_started = false;
 var game_paused = false;
 var menu_hidden = false;
