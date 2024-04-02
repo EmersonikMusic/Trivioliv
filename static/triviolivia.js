@@ -353,7 +353,7 @@ const mainGameFunction = async () => {
             progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
           }
         // Check if paused
-        while (!pauseFlag) {
+        while (pauseFlag) {
             await delay(100); // Check every 100 milliseconds
         }
         document.body.style.background = category_colors[globalData[i].category_name];
