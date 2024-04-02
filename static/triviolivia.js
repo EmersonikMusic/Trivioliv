@@ -1,7 +1,8 @@
+//Declaring quesiton and answer display
 const questionDisplay = document.querySelector('.question-container')
 const answerDisplay = document.querySelector('.answer-container')
 
-// Declaring game variables
+// Declaring game setting variables
 var number_of_questions = 2;
 var time_per_question = 10;
 var time_per_answer = 10;
@@ -128,14 +129,14 @@ var category_colors = {
 'Video Games': 'linear-gradient(345deg, rgba(153,0,255,1) 0%, rgba(60,13,128,1) 100%)'
 }
 
-// Default message in bar
-document.getElementById("demo").innerHTML = 'Press START GAME to play.'
-
 // Declaring variables for the base URL for fetching questions
 var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
 var moddedUrl = '';
 var queryParams = [];
 let globalData;
+
+// Default message in bar
+document.getElementById("demo").innerHTML = 'Press START GAME to play.'
 
 // Async JS that kind of scares me, honestly
 async function fetchData(moddedUrl) {
@@ -371,7 +372,7 @@ const mainGameFunction = async () => {
             questionTimeRemaining--;
             let question_seconds = Math.floor(questionTimeRemaining / 10);
             let question_tenths = questionTimeRemaining % 10;
-            document.getElementById("demo").innerHTML = globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + question_seconds + '.' + question_tenths + 's';
+            document.getElementById("demo").innerHTML = globalData[i].number.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + question_seconds + '.' + question_tenths + 's';
             console.log(question_seconds,question_tenths);
         }
         showQuestion(""); // Clear question display
