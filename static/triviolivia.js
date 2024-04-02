@@ -372,7 +372,7 @@ const mainGameFunction = async () => {
             questionTimeRemaining--;
             let question_seconds = Math.floor(questionTimeRemaining / 10);
             let question_tenths = questionTimeRemaining % 10;
-            document.getElementById("demo").innerHTML = i + globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + question_seconds + '.' + question_tenths + 's';
+            document.getElementById("demo").innerHTML = 'Q' + (i + 1) + ' - ' + globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + question_seconds + '.' + question_tenths + 's';
             console.log(question_seconds,question_tenths);
         }
         showQuestion(""); // Clear question display
@@ -387,7 +387,7 @@ const mainGameFunction = async () => {
             answerTimeRemaining--;
             let answer_seconds = Math.floor(answerTimeRemaining / 10);
             let answer_tenths = answerTimeRemaining % 10;
-            document.getElementById("demo").innerHTML = i + globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + answer_seconds + '.' + answer_tenths + 's';
+            document.getElementById("demo").innerHTML = 'Q' + (i + 1) + globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + answer_seconds + '.' + answer_tenths + 's';
             console.log(answer_seconds, answer_tenths);
         }
         showAnswer(""); // Clear answer display
