@@ -372,7 +372,7 @@ const mainGameFunction = async () => {
             questionTimeRemaining--;
             let question_seconds = Math.floor(questionTimeRemaining / 10);
             let question_tenths = questionTimeRemaining % 10;
-            document.getElementById("demo").innerHTML = globalData[i].number + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + question_seconds + '.' + question_tenths + 's';
+            document.getElementById("demo").innerHTML = globalData[i].number.string() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + question_seconds + '.' + question_tenths + 's';
             console.log(question_seconds,question_tenths);
         }
         showQuestion(""); // Clear question display
