@@ -342,7 +342,7 @@ const mainGameFunction = async () => {
     document.getElementById("demo").innerHTML = '';
 
     for (let i = 0; i < number_of_questions; i++) {
-        if (isPaused) {
+        if (!isPaused) {
             progressBar.style.animationPlayState = "running";
             progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
             isPaused = false;
@@ -353,7 +353,7 @@ const mainGameFunction = async () => {
             progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
           }
         // Check if paused
-        while (pauseFlag) {
+        while (!pauseFlag) {
             await delay(100); // Check every 100 milliseconds
         }
         document.body.style.background = category_colors[globalData[i].category_name];
