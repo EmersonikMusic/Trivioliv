@@ -594,11 +594,11 @@ let isPaused = true;
 
 startButton.addEventListener("click", function() {
     if (isPaused) {
-      progressBar.style.animationPlayState = "paused";
+    //   progressBar.style.animationPlayState = "paused";
       progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
       isPaused = false;
     } else {
-      progressBar.style.animationPlayState = "running";
+    //   progressBar.style.animationPlayState = "running";
       progressBar.style.animation = "none";
       progressBar.offsetHeight; // Trigger reflow to reset animation
       progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
