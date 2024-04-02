@@ -146,6 +146,13 @@ async function fetchData(moddedUrl) {
     console.log(globalData);
 }
 
+function startGameButton() {
+    if (game_started == true) {
+        pauseGame();
+    } else {
+        dontFetchDataIfAllDeselected();
+    }
+}
 // Function to not fetch JSON data if any of cat/dif/era are all deselected
 function dontFetchDataIfAllDeselected() {
     if (category_list.length > 23) {
