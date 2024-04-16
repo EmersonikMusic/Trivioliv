@@ -7,7 +7,6 @@ var number_of_questions = 10;
 var time_per_question = 10;
 var time_per_answer = 10;
 var game_started = false;
-// var game_paused = false;
 var menu_hidden = false;
 var current_question_category = null;
 let pauseFlag = false;
@@ -600,7 +599,7 @@ let pauseButton = document.getElementById("pauseButton");
 let isPaused = false;
 
 startButton.addEventListener("click", function() {
-    if (isPaused) {
+    if (!isPaused) {
     //   progressBar.style.animationPlayState = "paused";
       progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
       isPaused = false;
