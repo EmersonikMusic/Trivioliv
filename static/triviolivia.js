@@ -597,7 +597,7 @@ function changeButtonText() {
 let progressBar = document.getElementById("progress");
 let startButton = document.getElementById("startButton");
 let pauseButton = document.getElementById("pauseButton");
-let isPaused = true;
+let isPaused = false;
 
 startButton.addEventListener("click", function() {
     if (isPaused) {
