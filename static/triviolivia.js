@@ -316,8 +316,9 @@ const showQuestion = (displayed_question) => {
     div.style.opacity = 1;
     const messageElement = document.createElement('p')
     messageElement.textContent = displayed_question
-    questionDisplay.append(messageElement)
-    setTimeout(() => questionDisplay.removeChild(messageElement), time_per_question * 1000 + time_per_answer * 1000)
+    questionDisplay.replaceWith(messageElement)
+    // questionDisplay.append(messageElement)
+    // setTimeout(() => questionDisplay.removeChild(messageElement), time_per_question * 1000 + time_per_answer * 1000)
 }
 
 const showAnswer = (displayed_answer) => {
@@ -325,8 +326,9 @@ const showAnswer = (displayed_answer) => {
     div.style.opacity = 0.7;
     const messageElement = document.createElement('p')
     messageElement.textContent = displayed_answer
-    answerDisplay.append(messageElement)
-    setTimeout(() => answerDisplay.removeChild(messageElement), time_per_answer * 1000)
+    answerDisplay.replaceWith(messageElement)
+    // answerDisplay.append(messageElement)
+    // setTimeout(() => answerDisplay.removeChild(messageElement), time_per_answer * 1000)
 }
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -587,8 +589,6 @@ function changeButtonText() {
         button.textContent = 'START GAME';
         pauseFlag = false;
     }
-    // Add your additional functionality here
-    // For example, you might want to toggle game start/pause logic
 }
 
 
