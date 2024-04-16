@@ -599,10 +599,10 @@ function changeButtonText() {
 }
 
 startButton.addEventListener("click", function() {
-    if (isPaused) {
+    if (pauseFlag) {
     //   progressBar.style.animationPlayState = "paused";
       progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
-      isPaused = false;
+      pauseFlag = false;
     } else {
     //   progressBar.style.animationPlayState = "running";
       progressBar.style.animation = "none";
