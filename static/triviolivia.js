@@ -402,7 +402,7 @@ const mainGameFunction = async () => {
     pauseFlag = false;
     showQuestion("Thanks for playing!");
     progressBar.style.animationPlayState = "paused";
-    isPaused = true;
+    // isPaused = true;
     document.getElementById('start-pause').textContent = 'START GAME';
     document.getElementById("demo").innerHTML = 'Press START GAME to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024';
 };
@@ -599,7 +599,7 @@ let pauseButton = document.getElementById("pauseButton");
 let isPaused = false;
 
 startButton.addEventListener("click", function() {
-    if (!isPaused) {
+    if (isPaused) {
     //   progressBar.style.animationPlayState = "paused";
       progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
       isPaused = false;
