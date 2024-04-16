@@ -356,6 +356,7 @@ const mainGameFunction = async () => {
             console.log("pauseFlag: " + pauseFlag);
             console.log("isPaused: " + isPaused);
           } else {
+            isPaused = true;
             progressBar.style.animationPlayState = "paused";
             progressBar.style.animation = "none";
             progressBar.offsetHeight; // Trigger reflow to reset animation
