@@ -352,11 +352,11 @@ const mainGameFunction = async () => {
         if (!pauseFlag) {
             progressBar.style.animationPlayState = "running";
             progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
-            pauseFlag = true;
+            pauseFlag = false;
             console.log("pauseFlag: " + pauseFlag);
             console.log("isPaused: " + isPaused);
           } else {
-            pauseFlag = false;
+            pauseFlag = true;
             progressBar.style.animationPlayState = "paused";
             progressBar.style.animation = "none";
             progressBar.offsetHeight; // Trigger reflow to reset animation
