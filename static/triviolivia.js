@@ -349,7 +349,7 @@ const mainGameFunction = async () => {
     document.getElementById("demo").innerHTML = '';
 
     for (let i = 0; i < number_of_questions; i++) {
-        if (!pauseFlag) {
+        if (pauseFlag) {
             progressBar.style.animationPlayState = "running";
             progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
             pauseFlag = false;
