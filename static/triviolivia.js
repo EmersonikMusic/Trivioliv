@@ -575,11 +575,11 @@ function changeButtonText() {
     var button = document.getElementById('start-pause');
     if (pauseFlag === false) {
         button.textContent = 'PAUSE GAME';
-        progressBar.style.animationPlayState = "paused";
+        progressBar.style.animationPlayState = "running";
         pauseFlag = true;
     } else if (pauseFlag === true && game_started === true) {
         button.textContent = 'RESUME GAME';
-        progressBar.style.animationPlayState = "running";
+        progressBar.style.animationPlayState = "paused";
         pauseFlag = false;
         console.log('Game paused.');
         document.getElementById("demo").innerHTML = 'Game paused. Press RESUME GAME to continue.';
