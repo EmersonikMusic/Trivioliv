@@ -9,7 +9,7 @@ var time_per_answer = 10;
 var game_started = false;
 var menu_hidden = false;
 var current_question_category = null;
-let pauseFlag = false;
+let pauseFlag = true;
 
 // Declaring banned category/difficulty/era lists
 var category_list = [];
@@ -23,6 +23,12 @@ var all_none_eras = true;
 var categoryButtons = document.querySelectorAll('.category');
 var difficultyButtons = document.querySelectorAll('.difficulty');
 var eraButtons = document.querySelectorAll('.era');
+
+//Dynamic question and answer timer bar attempt
+let progressBar = document.getElementById("progress");
+let startButton = document.getElementById("startButton");
+let pauseButton = document.getElementById("pauseButton");
+let isPaused = true;
 
 // Declaring of mapping of category, difficulty, and era numbers to their respective names
 var category_number_identities = {
@@ -590,13 +596,6 @@ function changeButtonText() {
     // Add your additional functionality here
     // For example, you might want to toggle game start/pause logic
 }
-
-
-//Dynamic question and answer timer bar attempt
-let progressBar = document.getElementById("progress");
-let startButton = document.getElementById("startButton");
-let pauseButton = document.getElementById("pauseButton");
-let isPaused = false;
 
 startButton.addEventListener("click", function() {
     if (isPaused) {
