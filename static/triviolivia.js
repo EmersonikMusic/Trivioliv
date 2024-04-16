@@ -164,6 +164,9 @@ function dontFetchDataIfAllDeselected() {
 function fetchQuestionsAndStartGame() {
     if (game_started == true) {
        console.log('Button pressed.');
+       console.log("pauseFlag: " + pauseFlag);
+        console.log("game_paused: " + game_paused);
+        console.log("isPaused: " + isPaused);
     } else {
         game_started = true;
         globalData = [];
