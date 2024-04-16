@@ -312,21 +312,24 @@ let Question = class {
 
 //Arrow functions to show question and answer
 const showQuestion = (displayed_question) => {
+    answerDisplay = null
+    questionDisplay = null
     const div = document.getElementById('question-container');
     div.style.opacity = 1;
     const messageElement = document.createElement('p')
     messageElement.textContent = displayed_question
     questionDisplay.append(messageElement)
-    setTimeout(() => questionDisplay.removeChild(messageElement), time_per_question * 1000 + time_per_answer * 1000)
+    // setTimeout(() => questionDisplay.removeChild(messageElement), time_per_question * 1000 + time_per_answer * 1000)
 }
 
 const showAnswer = (displayed_answer) => {
+    answerDisplay = null
     const div = document.getElementById('question-container');
     div.style.opacity = 0.7;
     const messageElement = document.createElement('p')
     messageElement.textContent = displayed_answer
     answerDisplay.append(messageElement)
-    setTimeout(() => answerDisplay.removeChild(messageElement), time_per_answer * 1000)
+    // setTimeout(() => answerDisplay.removeChild(messageElement), time_per_answer * 1000)
 }
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
