@@ -24,12 +24,6 @@ var categoryButtons = document.querySelectorAll('.category');
 var difficultyButtons = document.querySelectorAll('.difficulty');
 var eraButtons = document.querySelectorAll('.era');
 
-//Dynamic question and answer timer bar attempt
-let progressBar = document.getElementById("progress");
-let startButton = document.getElementById("startButton");
-let pauseButton = document.getElementById("pauseButton");
-let isPaused = true;
-
 // Declaring of mapping of category, difficulty, and era numbers to their respective names
 var category_number_identities = {
     1: 'Art',
@@ -352,11 +346,10 @@ const mainGameFunction = async () => {
         if (!pauseFlag) {
             progressBar.style.animationPlayState = "running";
             progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
-            pauseFlag = false;
+            isPaused = false;
             console.log("pauseFlag: " + pauseFlag);
             console.log("isPaused: " + isPaused);
           } else {
-            pauseFlag = true;
             progressBar.style.animationPlayState = "paused";
             progressBar.style.animation = "none";
             progressBar.offsetHeight; // Trigger reflow to reset animation
@@ -598,11 +591,18 @@ function changeButtonText() {
     // For example, you might want to toggle game start/pause logic
 }
 
+
+//Dynamic question and answer timer bar attempt
+let progressBar = document.getElementById("progress");
+let startButton = document.getElementById("startButton");
+let pauseButton = document.getElementById("pauseButton");
+let isPaused = true;
+
 startButton.addEventListener("click", function() {
-    if (pauseFlag) {
+    if (isPaused) {
     //   progressBar.style.animationPlayState = "paused";
       progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
-      pauseFlag = false;
+      isPaused = false;
     } else {
     //   progressBar.style.animationPlayState = "running";
       progressBar.style.animation = "none";
