@@ -612,12 +612,12 @@ startButton.addEventListener("click", function() {
 });
 
   pauseButton.addEventListener("click", function() {
-    if (isPaused) {
+    if (!isPaused) {
       progressBar.style.animationPlayState = "running";
-    //   isPaused = false;
+      isPaused = false;
     } else {
       progressBar.style.animationPlayState = "paused";
-    //   isPaused = true;
+      isPaused = true;
     }
   });
 
