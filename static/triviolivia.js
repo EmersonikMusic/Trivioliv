@@ -7,7 +7,7 @@ var number_of_questions = 10;
 var time_per_question = 10;
 var time_per_answer = 10;
 var game_started = false;
-var game_paused = false;
+// var game_paused = false;
 var menu_hidden = false;
 var current_question_category = null;
 let pauseFlag = false;
@@ -165,7 +165,6 @@ function fetchQuestionsAndStartGame() {
     if (game_started == true) {
        console.log('Button pressed.');
        console.log("pauseFlag: " + pauseFlag);
-        console.log("game_paused: " + game_paused);
         console.log("isPaused: " + isPaused);
     } else {
         game_started = true;
@@ -350,7 +349,6 @@ const mainGameFunction = async () => {
             progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
             isPaused = false;
             console.log("pauseFlag: " + pauseFlag);
-            console.log("game_paused: " + game_paused);
             console.log("isPaused: " + isPaused);
           } else {
             progressBar.style.animationPlayState = "paused";
@@ -358,7 +356,6 @@ const mainGameFunction = async () => {
             progressBar.offsetHeight; // Trigger reflow to reset animation
             progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
             console.log("pauseFlag: " + pauseFlag);
-            console.log("game_paused: " + game_paused);
             console.log("isPaused: " + isPaused);
           }
         // Check if paused
