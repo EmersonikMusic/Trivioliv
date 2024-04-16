@@ -346,16 +346,23 @@ const mainGameFunction = async () => {
             progressBar.style.animationPlayState = "running";
             progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
             isPaused = false;
+            console.log("pauseFlag: " + pauseFlag);
+            console.log("game_paused: " + game_paused);
+            console.log("isPaused: " + isPaused);
           } else {
             progressBar.style.animationPlayState = "paused";
             progressBar.style.animation = "none";
             progressBar.offsetHeight; // Trigger reflow to reset animation
             progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
+            console.log("pauseFlag: " + pauseFlag);
+            console.log("game_paused: " + game_paused);
+            console.log("isPaused: " + isPaused);
           }
         // Check if paused
         while (!pauseFlag) {
             await delay(100); // Check every 100 milliseconds
         }
+
         document.body.style.background = category_colors[globalData[i].category_name];
 
         let questionTimeRemaining = time_per_question * 10; // Convert to tenths of a second
