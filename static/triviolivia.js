@@ -9,7 +9,7 @@ var time_per_answer = 10;
 var game_started = false;
 var menu_hidden = false;
 var current_question_category = null;
-let pauseFlag = true;
+let pauseFlag = false;
 
 // Declaring banned category/difficulty/era lists
 var category_list = [];
