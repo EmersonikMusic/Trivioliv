@@ -316,7 +316,7 @@ const showQuestion = (displayed_question) => {
     div.style.opacity = 1;
     const messageElement = document.createElement('p')
     messageElement.textContent = displayed_question
-    questionDisplay.append(messageElement)
+    questionDisplay.html(messageElement)
     setTimeout(() => questionDisplay.removeChild(messageElement), time_per_question * 1000 + time_per_answer * 1000)
 }
 
@@ -325,7 +325,7 @@ const showAnswer = (displayed_answer) => {
     div.style.opacity = 0.7;
     const messageElement = document.createElement('p')
     messageElement.textContent = displayed_answer
-    answerDisplay.append(messageElement)
+    answerDisplay.html(messageElement)
     setTimeout(() => answerDisplay.removeChild(messageElement), time_per_answer * 1000)
 }
 
