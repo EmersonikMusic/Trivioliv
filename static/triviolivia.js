@@ -605,7 +605,7 @@ startButton.addEventListener("click", function() {
     //   progressBar.style.animationPlayState = "running";
       progressBar.style.animation = "none";
       progressBar.offsetHeight; // Trigger reflow to reset animation
-      progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
+      progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
     }
 });
 
