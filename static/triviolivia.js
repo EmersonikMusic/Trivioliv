@@ -371,10 +371,10 @@ const mainGameFunction = async () => {
 
         while (questionTimeRemaining > 0) {
             if (!pauseFlag) {
-                await delay(100);
+                await delay(10);
                 continue;
             }
-            await delay(100); // Update ten times a second
+            await delay(10); // Update ten times a second
             questionTimeRemaining--;
             let question_seconds = Math.floor(questionTimeRemaining / 10);
             let question_tenths = questionTimeRemaining % 10;
@@ -386,10 +386,10 @@ const mainGameFunction = async () => {
 
         while (answerTimeRemaining > 0) {
             if (!pauseFlag) {
-                await delay(100);
+                await delay(10);
                 continue;
             }
-            await delay(100); // Update ten times a second
+            await delay(10); // Update ten times a second
             answerTimeRemaining--;
             let answer_seconds = Math.floor(answerTimeRemaining / 10);
             let answer_tenths = answerTimeRemaining % 10;
@@ -605,7 +605,7 @@ startButton.addEventListener("click", function() {
     //   progressBar.style.animationPlayState = "running";
       progressBar.style.animation = "none";
       progressBar.offsetHeight; // Trigger reflow to reset animation
-      progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
+      progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
     }
 });
 
