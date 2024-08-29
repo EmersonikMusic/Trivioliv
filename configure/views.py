@@ -4,13 +4,28 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from django.http import HttpResponse
 
 from .models import *
 from .forms import *
 
 import pandas as pd
+import csv
 
 # Create your views here.
+
+@login_required
+def export_to_csv(request):
+    questions = Question.objects.all()
+    response = HttpResponse('text/csv')
+    response['Content-Disposition'] = 'attachment; filename=questions_export.csv'
+    writer = csv.writer(response)
+    writer.writerow(['name','text','response','answer','score','difficulty','eras','category','subcategory','tags','author','date_created','active'])
+    question_fields = questions.values_list(['name','text','response','answer','score','difficulty','eras','category','subcategory','tags','author','date_created','active'])
+    for question in question_fields:
+        writer.writerow(question)
+    return(response)
+
 
 @login_required
 def main(request):
