@@ -23,8 +23,7 @@ def export_to_csv(request):
     writer = csv.writer(response)
     writer.writerow(                       ['text','response','answer','score','difficulty','category','subcategory','tags','author','date_created','active'])
     question_fields = questions.values_list('text','response','answer','score','difficulty','category__name','subcategory', 'tags','author','date_created','active')
-    for question in questions:
-        question.eras = question.eras.set("name")
+    for question in question_fields:
         writer.writerow(question)
     return(response)
 
