@@ -62,7 +62,7 @@ class Question(models.Model):
     answer = models.CharField(max_length=256)
     score = models.IntegerField(blank=True, null=True)
     difficulty = models.ForeignKey(Difficulty, on_delete=models.CASCADE, related_name="questions")
-    eras= models.ManyToManyField(Era, related_name="questions_for_era")
+    eras = models.ManyToManyField(Era, related_name="questions_for_era")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="questions")
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, related_name="questions",blank=True, null=True)
     tags = models.ManyToManyField(Tags, related_name="questions")
@@ -74,7 +74,7 @@ class Question(models.Model):
         return f"{self.name}"
     
     def get_eras(self):
-        return "\n".join([e.eras for e in self.eras.all()])
+        return ", ".join([e.name for e in self.eras.all()])
     
     class Meta:
         verbose_name_plural = "Questions"
