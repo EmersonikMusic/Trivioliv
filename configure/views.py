@@ -22,9 +22,8 @@ def export_to_csv(request):
     response['Content-Disposition'] = 'attachment; filename=questions_export.csv'
     writer = csv.writer(response)
     writer.writerow(['name','text','response','answer','score','difficulty','eras','category','subcategory','tags','author','date_created','active'])
-    # question_fields = questions.values_list('text','response','answer','score','difficulty','eras','category','subcategory','tags','author','date_created','active')
+    question_fields = questions.values_list('text','response','answer','score','difficulty','get_eras','category','subcategory','tags','author','date_created','active')
     for question in questions:
-        question['category'] = "Test Cat"
         writer.writerow(question)
     return(response)
 
