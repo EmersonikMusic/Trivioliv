@@ -16,7 +16,7 @@ import csv
 
 @login_required
 def export_to_csv(request):
-    questions = Question.objects.all()
+    questions = Question.objects.all().prefetch_related("questions_for_era")
 
     response = HttpResponse('text/csv')
     response['Content-Disposition'] = 'attachment; filename=questions_export.csv'
