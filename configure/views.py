@@ -17,12 +17,14 @@ import csv
 @login_required
 def export_to_csv(request):
     questions = Question.objects.all()
+
     response = HttpResponse('text/csv')
     response['Content-Disposition'] = 'attachment; filename=questions_export.csv'
     writer = csv.writer(response)
     writer.writerow(['name','text','response','answer','score','difficulty','eras','category','subcategory','tags','author','date_created','active'])
     question_fields = questions.values_list('name','text','response','answer','score','difficulty','eras','category','subcategory','tags','author','date_created','active')
     for question in question_fields:
+        question.category= Category.objects.get(id=question.cateogry)
         writer.writerow(question)
     return(response)
 

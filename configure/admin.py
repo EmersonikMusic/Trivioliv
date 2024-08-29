@@ -4,7 +4,7 @@ from .models import *
 # Register your models here.
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('text', 'category', 'difficulty','author')
+    list_display = ('text', 'category','subcategory','eras','difficulty','author')
 
 
 admin.site.register(Category)
