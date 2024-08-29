@@ -21,7 +21,7 @@ def export_to_csv(request):
     response = HttpResponse('text/csv')
     response['Content-Disposition'] = 'attachment; filename=questions_export.csv'
     writer = csv.writer(response)
-    writer.writerow(['name','text','response','answer','score','difficulty','eras','category','subcategory','tags','author','date_created','active'])
+    writer.writerow(                       ['text','response','answer','score','difficulty','category','subcategory','tags','author','date_created','active'])
     question_fields = questions.values_list('text','response','answer','score','difficulty','category','subcategory', 'tags','author','date_created','active')
     for question in questions:
         question.eras = question.get_eras
