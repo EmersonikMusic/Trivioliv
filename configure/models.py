@@ -73,5 +73,8 @@ class Question(models.Model):
     def __str__(self):
         return f"{self.name}"
     
+    def get_eras(self):
+        return "\n".join([e.eras for e in self.eras.all()])
+    
     class Meta:
         verbose_name_plural = "Questions"
