@@ -24,7 +24,7 @@ def export_to_csv(request):
     writer.writerow(['name','text','response','answer','score','difficulty','eras','category','subcategory','tags','author','date_created','active'])
     question_fields = questions.values_list('name','text','response','answer','score','difficulty','eras','category','subcategory','tags','author','date_created','active')
     for question in question_fields:
-        question.category= Category.objects.get(id=question.cateogry.id)
+        question.category= "Test Cat"
         writer.writerow(question)
     return(response)
 
