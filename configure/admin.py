@@ -7,7 +7,11 @@ import csv
 
 # Register your models here.
 
-class ExportCsvMixin:
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ('text', 'answer', 'category','subcategory','get_eras','difficulty','author')
+    list_filter = ('text', 'answer', 'category','subcategory','get_eras','difficulty','author')
+    actions = ["export_as_csv"]
+
     def export_as_csv(self, request, queryset):
 
         meta = self.model._meta
@@ -23,12 +27,8 @@ class ExportCsvMixin:
 
         return response
 
-    export_as_csv.short_description = "Export Selected"
 
-class QuestionAdmin(admin.ModelAdmin, ExportCsvMixin):
-    list_display = ('text', 'answer', 'category','subcategory','get_eras','difficulty','author')
-    list_filter = ('text', 'answer', 'category','subcategory','get_eras','difficulty','author')
-    actions = ["export_as_csv"]
+    export_as_csv.short_description = "Export Selected"
 
 
 admin.site.register(Category)
