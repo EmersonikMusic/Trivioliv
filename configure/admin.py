@@ -9,7 +9,7 @@ import csv
 
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('text', 'answer', 'category','subcategory','get_eras','difficulty','author')
-    list_filter = ('text', 'answer', 'category','subcategory','get_eras','difficulty','author')
+    list_filter = ('text', 'answer', 'category','subcategory','difficulty','author')
     actions = ["export_as_csv"]
 
     def export_as_csv(self, request, queryset):
