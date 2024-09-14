@@ -215,6 +215,17 @@ function confirm_reset() {
     //Reset function call
 }
 
+//Attempt at reset game function
+function reset_game() {
+    //Set all game variables to fresh settings but based on whatever settings are active.
+}
+
+
+//Attempt at reset all settings function
+function reset_all_settings() {
+    //Set all game variables to default settings.
+}
+
 //Function for indicator light toggle
 function toggleIndicator(button) {
     if (button.classList.contains('active')) {
