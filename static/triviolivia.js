@@ -11,6 +11,9 @@ var menu_hidden = false;
 var current_question_category = null;
 let pauseFlag = false;
 
+//Attempt at game reset function
+var game_reset_trigger = false;
+
 // Declaring banned category/difficulty/era lists
 var category_list = [];
 var difficulty_list = [];
