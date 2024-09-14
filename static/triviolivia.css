@@ -41,15 +41,23 @@ button {
 
 #start-game button {
     width: 100%;
-    margin: 25 20 10;
-    padding: 5px 50px;
-    align-items: center;
-    vertical-align: middle;
-    height: 36px;
-    font-size: 15px;
-    outline: 1px solid;
+    margin: 25px 20px 10px;
+    padding: 10px 50px;
+    height: 40px;
+    font-size: 16px;
     color: white;
+    background-color: #ff7f50; /* Bright Coral */
+    border: 2px solid #ff4500; /* Darker Coral Border */
     border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+/* Hover effect for animation and brightness */
+#start-game button:hover {
+    background-color: #ff6347; /* Lighter Tomato Red */
+    transform: scale(1.05); /* Slight zoom on hover */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
 }
 
 #start-game button:hover {
