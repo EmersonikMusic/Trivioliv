@@ -623,12 +623,6 @@ startButton.addEventListener("click", function() {
       progressBar.offsetHeight; // Trigger reflow to reset animation
       progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
     }
-    categoryButtons[String(i)].classList.remove('active');
-    categoryButtons[String(i)].classList.add('inactive');
-    difficultyButtons[String(i)].classList.remove('active');
-    difficultyButtons[String(i)].classList.add('inactive');
-    eraButtons[String(i)].classList.remove('active');
-    eraButtons[String(i)].classList.add('inactive');
 });
 
   pauseButton.addEventListener("click", function() {
