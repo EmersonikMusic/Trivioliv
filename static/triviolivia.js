@@ -218,6 +218,7 @@ function confirm_reset() {
 //Attempt at reset game function
 function reset_game() {
     game_started = false
+    console.log("game restarted")
     //Set all game variables to fresh settings but based on whatever settings are active.
 }
 
