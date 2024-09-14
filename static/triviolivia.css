@@ -57,6 +57,29 @@ button {
     background: rgba(0, 0, 0, .2);
 }
 
+#reset-game {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#reset-game button {
+    width: 100%;
+    margin: 25 20 10;
+    padding: 5px 50px;
+    align-items: center;
+    vertical-align: middle;
+    height: 36px;
+    font-size: 15px;
+    outline: 1px solid;
+    color: white;
+    border-radius: 10px;
+}
+
+#reset-game button:hover {
+    /* opacity: 80%; */
+    background: rgba(0, 0, 0, .2);
+}
 /* 2024 NEW CSS STARTS */
 
 
