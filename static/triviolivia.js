@@ -613,6 +613,12 @@ let pauseButton = document.getElementById("pauseButton");
 let isPaused = true;
 
 startButton.addEventListener("click", function() {
+    categoryButtons[String(i)].classList.remove('active');
+    categoryButtons[String(i)].classList.add('inactive');
+    difficultyButtons[String(i)].classList.remove('active');
+    difficultyButtons[String(i)].classList.add('inactive');
+    eraButtons[String(i)].classList.remove('active');
+    eraButtons[String(i)].classList.add('inactive');
     if (isPaused) {
     //   progressBar.style.animationPlayState = "paused";
       progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
