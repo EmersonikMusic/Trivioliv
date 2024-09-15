@@ -2102,7 +2102,7 @@ const mainGameFunction = async () => {
 
         // Code to change character appearance as function of current category
         const character = document.getElementById('character');
-        character.innerHTML = contentDict["nature"];
+        character.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
         
         
         let questionTimeRemaining = time_per_question * 10; // Convert to tenths of a second
