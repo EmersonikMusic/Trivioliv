@@ -379,7 +379,7 @@ const mainGameFunction = async () => {
         }
 
         document.body.style.background = category_colors[globalData[i].category_name];
-        
+        character.innerHTML = "";
         
         
         let questionTimeRemaining = time_per_question * 10; // Convert to tenths of a second
