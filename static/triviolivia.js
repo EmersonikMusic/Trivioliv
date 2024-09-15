@@ -137,19 +137,11 @@ let globalData;
 // Default message in bar
 document.getElementById("demo").innerHTML = 'Press START GAME to play.'
 
-// Function attempt to shuffle order of question array
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-    }
-}
-
 // Async JS that kind of scares me, honestly
 async function fetchData(moddedUrl) {
     const response = await fetch(moddedUrl);
     const data = await response.json();
-    globalData = shuffleArray(data)
+    globalData = data;
     console.log(globalData);
 }
 
