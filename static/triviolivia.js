@@ -380,6 +380,14 @@ const mainGameFunction = async () => {
 
         document.body.style.background = category_colors[globalData[i].category_name];
 
+        const svg_dictionary = [
+            { name: "art", svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /></svg>' },
+            { name: "nature", svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="80" height="80" x="10" y="10" stroke="black" stroke-width="3" fill="green" /></svg>' },
+            { name: "art", svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><line x1="10" y1="90" x2="90" y2="10" stroke="blue" stroke-width="5" /></svg>' }
+        ];
+
+        document.character = svg_dictionary[globalData[i].category_name]
+
         // Attempt at character replace upon question change
         function changeToSVG() {
             // Define the SVG content as a string
