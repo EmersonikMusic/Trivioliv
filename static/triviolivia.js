@@ -141,12 +141,6 @@ document.getElementById("demo").innerHTML = 'Press START GAME to play.'
 async function fetchData(moddedUrl) {
     const response = await fetch(moddedUrl);
     const data = await response.json();
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-        }
-    }
     globalData = data.slice(); // Create a copy of the array
     shuffleArray(globalData); // Shuffle the copy
     console.log(globalData);
@@ -201,6 +195,14 @@ function toggle_menu() {
     } else {
         menu_hidden = true;
         hide_menu();
+    }
+}
+
+// Function to shuffle returned array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
     }
 }
 
