@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change SVG Example</title>
+</head>
+<body>
+    <div id="svgContainer"></div>
+
+    <script>
+        // Example SVG data (could be file paths or inline SVGs)
+        const svgPaths = {
+            "category1": "path/to/svg1.svg",
+            "category2": "path/to/svg2.svg",
+            "category3": "path/to/svg3.svg"
+        };
+
+        // Example globalData
+        const globalData = [
+            { category_name: "category1" },
+            { category_name: "category2" },
+            { category_name: "category3" }
+        ];
+
+        // Function to update the SVG content of a div
+        function updateSVGContent(index) {
+            const svgContainer = document.getElementById('svgContainer');
+            const categoryName = globalData[index].category_name;
+            const svgPath = svgPaths[categoryName];
+
+            // Fetch and set SVG content
+            fetch(svgPath)
+                .then(response => response.text())
+                .then(svgContent => {
+                    svgContainer.innerHTML = svgContent;
+                })
+                .catch(error => console.error('Error loading SVG:', error));
+        }
+
+        // Example usage: update the SVG content based on the first item in globalData
+        updateSVGContent(0);
+    </script>
+</body>
+</html>
