@@ -363,6 +363,7 @@ const mainGameFunction = async () => {
         }
 
         document.body.style.background = category_colors[globalData[i].category_name];
+        document.character = none;
         
         let questionTimeRemaining = time_per_question * 10; // Convert to tenths of a second
         let answerTimeRemaining = time_per_answer * 10; // Convert to tenths of a second
