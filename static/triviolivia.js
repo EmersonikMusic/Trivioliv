@@ -11,9 +11,6 @@ var menu_hidden = false;
 var current_question_category = null;
 let pauseFlag = false;
 
-//Attempt at game reset function
-var game_reset_trigger = false;
-
 // Declaring banned category/difficulty/era lists
 var category_list = [];
 var difficulty_list = [];
@@ -213,19 +210,6 @@ function confirm_reset() {
     document.getElementById("demo").innerHTML = 'Are you sure you want to reset the game?';
     //Yes/No?
     //Reset function call
-}
-
-//Attempt at reset game function
-function reset_game() {
-    game_started = false
-    console.log("game restarted")
-    //Set all game variables to fresh settings but based on whatever settings are active.
-}
-
-
-//Attempt at reset all settings function
-function reset_all_settings() {
-    //Set all game variables to default settings.
 }
 
 //Function for indicator light toggle
