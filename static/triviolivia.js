@@ -379,31 +379,7 @@ const mainGameFunction = async () => {
         }
 
         document.body.style.background = category_colors[globalData[i].category_name];
-
-        // Attempt at character replace upon question change
-
-        const svgArray = [
-            { name: "SVG1", svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /></svg>' },
-            { name: "SVG2", svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="80" height="80" x="10" y="10" stroke="black" stroke-width="3" fill="green" /></svg>' },
-            { name: "SVG3", svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><line x1="10" y1="90" x2="90" y2="10" stroke="blue" stroke-width="5" /></svg>' }
-        ];
-
-        function changeToSVG() {
-            // Define the SVG content as a string
-            const svgContent = svgArray.SVG1;
-            
-            // Get the div element by its ID
-            const characterDiv = document.getElementById('character');
-            
-            // Set the innerHTML of the div to the SVG content
-            characterDiv.innerHTML = svgContent;
-
-            // Log to console for verification
-            console.log('SVG content has been set.');
-        }
-
-        // Call the function to change the content
-        changeToSVG();
+        
         
         
         let questionTimeRemaining = time_per_question * 10; // Convert to tenths of a second
