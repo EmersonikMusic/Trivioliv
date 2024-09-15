@@ -669,3 +669,18 @@ h2 {
     0% { width: 0%; }
     100% { width: 100%; }
   }
+
+
+
+
+  #character {
+    display: flex;
+    justify-content: center; /* Align horizontally (centered) */
+    align-items: flex-end;   /* Align vertically (to the bottom) */
+    height: 100%;            /* Ensure the container uses full height */
+  }
+  
+  #character svg {
+    max-width: 100%; /* Ensure the SVG scales within the container */
+    max-height: 100%; /* Ensure the SVG respects container height */
+  }
