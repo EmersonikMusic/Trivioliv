@@ -630,4 +630,5 @@ startButton.addEventListener("click", function() {
   const progressElement = document.getElementById('progress');
   
   progressElement.style.animationDuration = `${time_per_question}s`;
+  progressElement.style.animationDuration = `${time_per_answer}s`;
   
