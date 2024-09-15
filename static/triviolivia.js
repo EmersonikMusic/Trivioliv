@@ -386,7 +386,7 @@ const mainGameFunction = async () => {
             const svgContent = fetch('NATURE.svg')
       .then(response => response.text())
       .then(svgContent => {
-        document.getElementById('character').innerHTML = svgContent;
+        document.getElementById(document.character).innerHTML = svgContent;
       })
       .catch(error => console.error('Error loading SVG:', error));
             
