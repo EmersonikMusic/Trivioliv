@@ -382,7 +382,7 @@ const mainGameFunction = async () => {
 
         const svg_dictionary = [
             { name: "art", svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" /></svg>' },
-            { name: "nature", svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="80" height="80" x="10" y="10" stroke="black" stroke-width="3" fill="green" /></svg>' },
+            { name: "Art", svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="80" height="80" x="10" y="10" stroke="black" stroke-width="3" fill="green" /></svg>' },
             { name: "art", svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><line x1="10" y1="90" x2="90" y2="10" stroke="blue" stroke-width="5" /></svg>' }
         ];
 
