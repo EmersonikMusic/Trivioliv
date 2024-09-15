@@ -141,7 +141,7 @@ document.getElementById("demo").innerHTML = 'Press START GAME to play.'
 async function fetchData(moddedUrl) {
     const response = await fetch(moddedUrl);
     const data = await response.json();
-    globalData = data;
+    globalData = shuffleArray(data)
     console.log(globalData);
 }
 
