@@ -379,6 +379,8 @@ const mainGameFunction = async () => {
         }
 
         document.body.style.background = category_colors[globalData[i].category_name];
+
+        const character = document.getElementById('character');
         character.innerHTML = "";
         
         
