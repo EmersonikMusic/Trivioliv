@@ -157,6 +157,13 @@ function dontFetchDataIfAllDeselected() {
     } else {
         changeButtonText();
         fetchQuestionsAndStartGame();
+        const hideAllMenus = () => {
+            checkboxes.forEach(checkbox => {
+              checkbox.checked = false;
+              checkbox.nextElementSibling.classList.remove('active');
+            });
+          };
+        hideAllMenus();
     }
 }
 
