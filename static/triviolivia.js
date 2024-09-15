@@ -383,7 +383,7 @@ const mainGameFunction = async () => {
         // Attempt at character replace upon question change
         function changeToSVG() {
             // Define the SVG content as a string
-            const svgContent = fetch('NATURE.svg')
+            const svgContent = fetch(NATURE.svg)
       .then(response => response.text())
       .then(svgContent => {
         document.getElementById(document.character).innerHTML = svgContent;
