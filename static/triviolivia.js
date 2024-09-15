@@ -141,7 +141,14 @@ document.getElementById("demo").innerHTML = 'Press START GAME to play.'
 async function fetchData(moddedUrl) {
     const response = await fetch(moddedUrl);
     const data = await response.json();
-    globalData = data;
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+        }
+    }
+    globalData = data.slice(); // Create a copy of the array
+    shuffleArray(globalData); // Shuffle the copy
     console.log(globalData);
 }
 
@@ -363,6 +370,7 @@ const mainGameFunction = async () => {
         }
 
         document.body.style.background = category_colors[globalData[i].category_name];
+        
         
         let questionTimeRemaining = time_per_question * 10; // Convert to tenths of a second
         let answerTimeRemaining = time_per_answer * 10; // Convert to tenths of a second
