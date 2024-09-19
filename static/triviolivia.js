@@ -1774,7 +1774,7 @@ var category_number_identities = {
 
 var difficulty_number_identities = {
     5: 'Genius',
-    4: 'Sharp',
+    4: 'Hard',
     3: 'Average',
     2: 'Easy',
     1: 'Casual'
