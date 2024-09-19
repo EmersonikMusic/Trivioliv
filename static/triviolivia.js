@@ -1869,7 +1869,7 @@ async function fetchData(moddedUrl) {
 
 // Function to not fetch JSON data if any of cat/dif/era are all deselected
 function dontFetchDataIfAllDeselected() {
-    if (category_list.length > 23) {
+    if (category_list.length > 24) {
         document.getElementById("demo").innerHTML = 'Cannot start game. You must select at least one category.';
     } else if (difficulty_list.length > 4) {
         document.getElementById("demo").innerHTML = 'Cannot start game. You must select at least one difficulty.';
