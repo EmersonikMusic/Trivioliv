@@ -11,7 +11,7 @@
             <h1>TRIVIOLIVIA<span class="smaller-font">.com</span><span class="somewhat-smaller-font"> &nbsp;&nbsp;EARTH'S DEEPEST TRIVIA SOURCE</span></h1>
         </div>
         <div class="login">
-            <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">About Us</button></a>
+            <a class="nav-link" href="login.html"><button id="nav-configure" class="nav-button">About Us</button></a>
             {% if user.is_authenticated %}
             <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
             <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
