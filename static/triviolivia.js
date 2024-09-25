@@ -1718,6 +1718,9 @@ fill: #4e0b1b;
 </svg>`
 };
 
+// Unsure
+const progressElement = document.getElementById('progress');
+
 //Declaring quesiton and answer display
 const questionDisplay = document.querySelector('.question-container')
 const answerDisplay = document.querySelector('.answer-container')
@@ -2378,10 +2381,6 @@ startButton.addEventListener("click", function() {
         progressBar.style.animation = "replenishProgress " + time_per_answer + "s linear forwards, shrinkProgress " + time_per_question + "s linear forwards";
     }
   });
-
-
-
-  const progressElement = document.getElementById('progress');
   
 
   
