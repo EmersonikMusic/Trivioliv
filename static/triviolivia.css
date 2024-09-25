@@ -569,7 +569,7 @@ h2 {
 .question-container {
     padding: 10px 50px;
     display: flex;
-    font-size: 5vw;
+    font-size: clamp(1rem, 5vw, 3rem); /* Ensures the font size scales between 1rem and 3rem */
     font-family: "Montserrat",'American Typewriter', sans-serif;
     font-weight: 500;
     height: 50%;
@@ -580,13 +580,14 @@ h2 {
 .answer-container {
     padding: 10px 50px;
     display: flex;
-    font-size: 5vw;
+    font-size: clamp(1rem, 5vw, 3rem); /* Same scaling behavior */
     font-family: "Montserrat",'American Typewriter', sans-serif;
     font-weight: 500;
     height: 25%;
     flex-direction: column;
     text-align: center;
 }
+
 
   .inactive .indicator  {
     background-color: red;
