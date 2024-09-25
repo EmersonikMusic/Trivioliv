@@ -2077,6 +2077,7 @@ const showAnswer = (displayed_answer) => {
 
 
 
+
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 const mainGameFunction = async () => {
