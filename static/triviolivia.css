@@ -523,34 +523,17 @@ h2 {
 } */
 
 
-#start-pause-button {
+#start-pause button {
     width: 255px;
-    height: 50px; /* Increased height for a more prominent look */
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 25px; /* More rounded for a smoother feel */
+    height: 30px;
+    font-size: 26px;
+    border-radius: 10px;
     margin: 1px auto;
     color: #fff;
-    background: linear-gradient(45deg, #32CD32, #006400); /* Gradient background for a stylish look */
-    border: none;
+    background-color: green;
+    border-style: none;
     cursor: pointer;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Adds depth with a shadow */
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
-    text-transform: uppercase; /* Uppercase text for a modern style */
 }
-
-/* Add hover and active states for interactivity */
-#start-pause-button:hover {
-    background: linear-gradient(45deg, #006400, #32CD32); /* Reverse gradient on hover */
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); /* Bigger shadow on hover */
-    transform: translateY(-2px); /* Slight upward movement on hover */
-}
-
-#start-pause-button:active {
-    transform: translateY(2px); /* Button moves down when clicked */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Reduced shadow on click */
-}
-
 
 #settings button {
     width: 255px;
