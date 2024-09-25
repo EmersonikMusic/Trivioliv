@@ -2382,14 +2382,4 @@ startButton.addEventListener("click", function() {
     }
   });
   
-
-  // Event listener for visibility change
-document.addEventListener("visibilitychange", function() {
-  if (document.hidden) {
-      pauseGame();
-  } else {
-      resumeGame();
-  }
-});
-  
   
