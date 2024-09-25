@@ -2135,7 +2135,7 @@ const mainGameFunction = async () => {
             document.getElementById("demo").innerHTML = 'Q' + (i + 1) + ' - ' + globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + question_seconds + '.' + question_tenths + 's';
             console.log(question_seconds,question_tenths);
         }
-        showQuestion(""); // Clear question display
+        //showQuestion(""); // Clear question display
         showAnswer(globalData[i].answer);
 
         while (answerTimeRemaining > 0) {
