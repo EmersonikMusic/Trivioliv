@@ -2047,24 +2047,33 @@ let Question = class {
     }
 }
 
-//Arrow functions to show question and answer
+// Arrow functions to show question and answer
 const showQuestion = (displayed_question) => {
-    const div = document.getElementById('question-container');
-    div.style.opacity = 1;
-    const messageElement = document.createElement('p')
-    messageElement.textContent = displayed_question
-    questionDisplay.append(messageElement)
-    setTimeout(() => questionDisplay.removeChild(messageElement), time_per_question * 1000 + time_per_answer * 1000)
+  const div = document.getElementById('question-container');
+  div.style.opacity = 1;
+
+  // Clear any existing question
+  questionDisplay.innerHTML = '';
+
+  // Create and display the new question
+  const messageElement = document.createElement('p');
+  messageElement.textContent = displayed_question;
+  questionDisplay.append(messageElement);
 }
 
 const showAnswer = (displayed_answer) => {
-    const div = document.getElementById('question-container');
-    div.style.opacity = 0.7;
-    const messageElement = document.createElement('p')
-    messageElement.textContent = displayed_answer
-    answerDisplay.append(messageElement)
-    setTimeout(() => answerDisplay.removeChild(messageElement), time_per_answer * 1000)
+  const div = document.getElementById('question-container');
+  div.style.opacity = 0.7;
+
+  // Clear any existing answer
+  answerDisplay.innerHTML = '';
+
+  // Create and display the new answer
+  const messageElement = document.createElement('p');
+  messageElement.textContent = displayed_answer;
+  answerDisplay.append(messageElement);
 }
+
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
