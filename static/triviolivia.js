@@ -2052,7 +2052,7 @@ const showQuestion = (displayed_question) => {
   const div = document.getElementById('question-container');
   div.style.opacity = 1;
 
-  // Clear any existing question and answer
+  // Clear the existing question and answer only when a new question is shown
   questionDisplay.innerHTML = '';
   answerDisplay.innerHTML = '';
 
@@ -2066,7 +2066,7 @@ const showAnswer = (displayed_answer) => {
   const div = document.getElementById('question-container');
   div.style.opacity = 0.7;
 
-  // Clear any existing answer (but not the question)
+  // Clear the previous answer only (not the question)
   answerDisplay.innerHTML = '';
 
   // Create and display the new answer
