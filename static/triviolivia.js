@@ -2351,17 +2351,22 @@ let pauseButton = document.getElementById("pauseButton");
 let isPaused = true;
 
 startButton.addEventListener("click", function() {
-    if (isPaused) {
-    //   progressBar.style.animationPlayState = "paused";
+  if (isPaused) {
+      // Start the progress bar animation for the question
       progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
+      progressBar.style.animationDirection = "normal"; // Ensure the animation plays forward
       isPaused = false;
-    } else {
-    //   progressBar.style.animationPlayState = "running";
+  } else {
+      // Stop the current animation and reset it
       progressBar.style.animation = "none";
       progressBar.offsetHeight; // Trigger reflow to reset animation
+      
+      // Reverse the animation when showing an answer
       progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
-    }
+      progressBar.style.animationDirection = "reverse"; // Set animation to reverse
+  }
 });
+
 
   pauseButton.addEventListener("click", function() {
     if (!isPaused) {
