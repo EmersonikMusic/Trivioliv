@@ -8,8 +8,12 @@
     <!--Navbar-->
     <nav class="navbar">
         <div class="title">
-            <h1>TRIVIOLIVIA<span class="smaller-font">.com</span><span class="somewhat-smaller-font"> &nbsp;&nbsp;EARTH'S DEEPEST TRIVIA SOURCE</span></h1>
-        </div>
+          <h1>
+            <a href="https://www.triviolivia.herokuapp.com" style="text-decoration: none; color: inherit;">
+              TRIVIOLIVIA<span class="smaller-font">.com</span>
+              <span class="somewhat-smaller-font">&nbsp;&nbsp;EARTH'S DEEPEST TRIVIA SOURCE</span>
+            </a>
+          </h1>        </div>
         <div class="login">
             {% if user.is_authenticated %}
             <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
