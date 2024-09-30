@@ -1859,7 +1859,7 @@ var queryParams = [];
 let globalData;
 
 // Default message in bar
-document.getElementById("demo").innerHTML = 'Press START GAME to play.'
+document.getElementById("demo").innerHTML = 'Press <span id="start-game" style="color: blue; text-decoration: underline; cursor: pointer;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play.'
 
 // Async JS that kind of scares me, honestly
 async function fetchData(moddedUrl) {
