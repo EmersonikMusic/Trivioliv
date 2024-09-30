@@ -40,18 +40,21 @@ button {
 }
 
 #start-game button {
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Centers text horizontally */
+    align-items: center; /* Centers text vertically */
     width: 100%;
-    margin: 25 20 10;
+    margin: 25px 20px 10px; /* Added 'px' for margin values */
     padding: 5px 30px;
-    align-items: center;
-    vertical-align: middle;
     height: 36px;
     font-size: 15px;
     outline: 1px solid;
     color: white;
     border-radius: 10px;
     white-space: nowrap; /* Prevents text from wrapping */
+    text-align: center; /* Centers text in case of inline content */
 }
+
 
 #start-game button:hover {
     /* opacity: 80%; */
