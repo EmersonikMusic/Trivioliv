@@ -50,8 +50,7 @@ button {
     outline: 1px solid;
     color: white;
     border-radius: 10px;
-    display: inline;
-    
+    white-space: nowrap; /* Prevents text from wrapping */
 }
 
 #start-game button:hover {
