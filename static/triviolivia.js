@@ -2161,7 +2161,7 @@ const mainGameFunction = async () => {
     progressBar.style.animationPlayState = "paused";
     // isPaused = true;
     document.getElementById('start-pause').textContent = 'START GAME';
-    document.getElementById("demo").innerHTML = 'Press START GAME to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024. Contact us at mark.mazurek@triviolivia.com';
+    document.getElementById("demo").innerHTML = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024. Contact us at mark.mazurek@triviolivia.com';
 };
 
 
