@@ -50,6 +50,8 @@ button {
     outline: 1px solid;
     color: white;
     border-radius: 10px;
+    display: inline;
+    
 }
 
 #start-game button:hover {
