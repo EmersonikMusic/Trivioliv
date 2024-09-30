@@ -2159,7 +2159,6 @@ const mainGameFunction = async () => {
     pauseFlag = false;
     showQuestion("Thanks for playing!");
     progressBar.style.animationPlayState = "paused";
-    // isPaused = true;
     document.getElementById('start-pause').textContent = 'START GAME';
     document.getElementById("demo").innerHTML = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024. Contact us at mark.mazurek@triviolivia.com';
 };
@@ -2356,8 +2355,8 @@ let isPaused = true;
 startButton.addEventListener("click", function() {
     if (isPaused) {
     //   progressBar.style.animationPlayState = "paused";
-      progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
       isPaused = false;
+      progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
     } else {
     //   progressBar.style.animationPlayState = "running";
       progressBar.style.animation = "none";
@@ -2368,11 +2367,12 @@ startButton.addEventListener("click", function() {
 
   pauseButton.addEventListener("click", function() {
     if (!isPaused) {
-      progressBar.style.animationPlayState = "running";
       isPaused = false;
+      progressBar.style.animationPlayState = "running";
     } else {
-      progressBar.style.animationPlayState = "paused";
       isPaused = true;
+      progressBar.style.animationPlayState = "paused";
+      
     }
   });
 
