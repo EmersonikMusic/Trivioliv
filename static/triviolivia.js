@@ -2355,8 +2355,8 @@ let isPaused = true;
 startButton.addEventListener("click", function() {
     if (isPaused) {
     //   progressBar.style.animationPlayState = "paused";
-      isPaused = false;
       progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
+      isPaused = false;
     } else {
     //   progressBar.style.animationPlayState = "running";
       progressBar.style.animation = "none";
@@ -2367,12 +2367,11 @@ startButton.addEventListener("click", function() {
 
   pauseButton.addEventListener("click", function() {
     if (!isPaused) {
-      isPaused = false;
       progressBar.style.animationPlayState = "running";
+      isPaused = false;
     } else {
-      isPaused = true;
       progressBar.style.animationPlayState = "paused";
-      
+      isPaused = true;
     }
   });
 
