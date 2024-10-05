@@ -1750,7 +1750,7 @@ var eraButtons = document.querySelectorAll('.era');
 // Declaring of mapping of category, difficulty, and era numbers to their respective names
 var category_number_identities = {
     1: 'Art',
-    2: 'Economics',
+    2: 'Economy',
     3: 'Food',
     4: 'Games',
     5: 'Geography',
@@ -1803,7 +1803,7 @@ var era_number_identities = {
 var category_colors = {
 'Art': 'linear-gradient(345deg, rgba(165,50,27,1) 0%, rgba(221,126,107,1) 100%)',
 
-'Economics': 'linear-gradient(345deg, rgba(17,68,16,1) 0%, rgba(89,140,88,1) 100%)',
+'Economy': 'linear-gradient(345deg, rgba(17,68,16,1) 0%, rgba(89,140,88,1) 100%)',
 
 'Food': 'linear-gradient(345deg, rgba(127,43,11,1) 0%, rgba(242,133,0,1) 100%)',
 
