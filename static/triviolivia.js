@@ -2381,4 +2381,10 @@ startButton.addEventListener("click", function() {
     }
   });
   
-  
+  // Makes pressing space bar start/pause the game
+  document.addEventListener('keydown', function(event) {
+    if (event.code === 'Space') {  // Checks if the spacebar is pressed
+      event.preventDefault();  // Prevents the page from scrolling when pressing space
+      document.getElementById('start-pause').click();  // Simulates a button click
+    }
+  });
