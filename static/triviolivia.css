@@ -40,35 +40,19 @@ button {
 }
 
 #start-game button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Centers text horizontally */
+    align-items: center; /* Centers text vertically */
     width: 100%;
-    margin: 25px 20px 10px;
+    margin: 25px 20px 10px; /* Added 'px' for margin values */
     padding: 5px 30px;
     height: 36px;
     font-size: 15px;
     outline: 1px solid;
     color: white;
     border-radius: 10px;
-    white-space: nowrap;
-    text-align: center;
-    background-color: rgba(0, 0, 0, .2); /* Base background color */
-    transition: all 0.2s ease;
-    animation: pulse 2s infinite ease-in-out; /* Animation applied */
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-        background-color: rgba(0, 0, 0, .4); /* Original background color */
-        box-shadow: none;
-    }
-    50% {
-        transform: scale(1.1); /* Slightly bigger */
-        background-color: rgba(0, 0, 0, .2); /* Brighter color */
-        box-shadow: 0 0 10px rgba(0, 0, 0, .1); /* Add glowing effect */
-    }
+    white-space: nowrap; /* Prevents text from wrapping */
+    text-align: center; /* Centers text in case of inline content */
 }
 
 
