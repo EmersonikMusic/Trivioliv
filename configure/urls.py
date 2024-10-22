@@ -17,6 +17,7 @@ urlpatterns = [
     path('question/deleteall/', views.delete_all, name='delete-all'),
     path('question/search/', views.search_questions, name='search-questions'),
     path('question/export', views.export_to_csv, name='export-to-csv'),
+    path('question/listify', views.listify_eras, name='listify-eras'),
     
     path('category/', CategoryListView.as_view(), name='category-list'),
     path('category/create/', CategoryCreateView.as_view(), name='category-create'),

@@ -15,7 +15,7 @@ import csv
 # Create your views here.
 
 @login_required
-def export_to_csv(request):
+def listify_eras(request):
     questions = Question.objects.all()
     era_not_assigned = Era.objects.get(name="Not Assigned")
     for question in questions:
@@ -28,9 +28,12 @@ def export_to_csv(request):
             question.save()
             question.eras_list = ", ".join([e.name for e in question.eras.all()])
         
+        print(question.text)
         question.save()
-        
-    print("run")
+
+@login_required
+def export_to_csv(request):
+
     question_list = Question.objects.all()
     for q in question_list:
         print(q.eras_list)
