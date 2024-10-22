@@ -30,7 +30,7 @@ def listify_eras(request):
         
         print(question.text)
         question.save()
-
+    return(redirect('configure:question-list'))
 @login_required
 def export_to_csv(request):
 
