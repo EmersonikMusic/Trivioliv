@@ -63,6 +63,7 @@ class Question(models.Model):
     score = models.IntegerField(blank=True, null=True)
     difficulty = models.ForeignKey(Difficulty, on_delete=models.CASCADE, related_name="questions")
     eras = models.ManyToManyField(Era, related_name="questions_for_era")
+    eras_list= models.CharField(blank=True, null=True, max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="questions")
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, related_name="questions",blank=True, null=True)
     tags = models.ManyToManyField(Tags, related_name="questions")

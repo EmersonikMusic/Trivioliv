@@ -16,17 +16,33 @@ import csv
 
 @login_required
 def export_to_csv(request):
-    questions = Question.objects.all().prefetch_related("questions_for_era")
-
+    questions = Question.objects.all()
+    era_not_assigned = Era.objects.get(name="Not Assigned")
+    for question in questions:
+        
+        question.eras_list = ", ".join([e.name for e in question.eras.all()])
+    
+        if not question.eras_list:
+            print('Triggered')
+            question.eras.add(era_not_assigned)
+            question.save()
+            question.eras_list = ", ".join([e.name for e in question.eras.all()])
+        
+        question.save()
+        
+    print("run")
+    question_list = Question.objects.all()
+    for q in question_list:
+        print(q.eras_list)
     response = HttpResponse('text/csv')
     response['Content-Disposition'] = 'attachment; filename=questions_export.csv'
     writer = csv.writer(response)
     writer.writerow(                       ['text','response','answer','score','difficulty','category','subcategory', 'eras'])
-    question_fields = questions.values_list('text','response','answer','score','difficulty__name','category__name','subcategory__name')
-    for question in question_fields:
-        writer.writerow(question)
+    question_fields = question_list.values_list('text','response','answer','score','difficulty__name','category__name','subcategory__name','eras_list')
+    
+    for q in question_fields:
+        writer.writerow(q)
     return(response)
-
 
 @login_required
 def main(request):
