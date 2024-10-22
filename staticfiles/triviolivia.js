@@ -63,6 +63,8 @@ var category_colors = {
     'Movies': '#660000',
     'Music': '#0b5394',
     'Nature': '#93c47d',
+    'Performing Arts': '#7f6000',
+    'Performing arts': '#7f6000',
     'Philosophy': '#76a5af',
     'Politics': '#351c75',
     'Pop Culture': '#cc4125',

@@ -40,6 +40,34 @@ button {
 }
 
 #start-game button {
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Centers text horizontally */
+    align-items: center; /* Centers text vertically */
+    width: 100%;
+    margin: 25px 20px 10px; /* Added 'px' for margin values */
+    padding: 5px 30px;
+    height: 36px;
+    font-size: 15px;
+    outline: 1px solid;
+    color: white;
+    border-radius: 10px;
+    white-space: nowrap; /* Prevents text from wrapping */
+    text-align: center; /* Centers text in case of inline content */
+}
+
+
+#start-game button:hover {
+    /* opacity: 80%; */
+    background: rgba(0, 0, 0, .2);
+}
+
+#reset-game {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#reset-game button {
     width: 100%;
     margin: 25 20 10;
     padding: 5px 50px;
@@ -52,13 +80,24 @@ button {
     border-radius: 10px;
 }
 
-#start-game button:hover {
+#reset-game button:hover {
     /* opacity: 80%; */
     background: rgba(0, 0, 0, .2);
 }
-
 /* 2024 NEW CSS STARTS */
 
+
+#character {
+    animation: bobbing 2s infinite ease-in-out;
+        }
+        @keyframes bobbing {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
 
 
 /* COLLAPSE/EXPAND DIV CSS */
@@ -391,7 +430,7 @@ h2 {
     background-color: #dd7e6b;
 }
 
-#economics button {
+#economy button {
     background-color: #598C58;
 }
 
