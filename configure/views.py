@@ -208,7 +208,7 @@ class EraListView(ListView):
 class EraCreateView(CreateView):
     model = Era
     template_name = 'configure/era_create.html'
-    fields = ['name', 'description','title']
+    fields = ['name', 'description']
 
     def get_success_url(self):
         return reverse('configure:era-list')
