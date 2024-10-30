@@ -1772,7 +1772,7 @@ var category_number_identities = {
     21: 'Television',
     22: 'Performing Arts',
     23: 'Theology',
-    24: 'Video games',
+    24: 'Video Games',
     33: 'Law'
 }
 
