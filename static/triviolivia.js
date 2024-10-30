@@ -1751,7 +1751,7 @@ var eraButtons = document.querySelectorAll('.era');
 var category_number_identities = {
     1: 'Art',
     2: 'Economy',
-    3: 'Food',
+    3: 'Food & Drink',
     4: 'Games',
     5: 'Geography',
     6: 'History',
@@ -1805,7 +1805,7 @@ var category_colors = {
 
 'Economy': 'linear-gradient(345deg, rgba(17,68,16,1) 0%, rgba(89,140,88,1) 100%)',
 
-'Food': 'linear-gradient(345deg, rgba(127,43,11,1) 0%, rgba(242,133,0,1) 100%)',
+'Food & Drink': 'linear-gradient(345deg, rgba(127,43,11,1) 0%, rgba(242,133,0,1) 100%)',
 
 'Games': 'linear-gradient(345deg, rgba(103,38,24,1) 0%, rgba(204,85,0,1) 100%)',
 
