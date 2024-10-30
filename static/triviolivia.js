@@ -1755,7 +1755,7 @@ var category_number_identities = {
     4: 'Games',
     5: 'Geography',
     6: 'History',
-    7: 'Human body',
+    7: 'Human Body',
     8: 'Language',
     9: 'Literature',
     10: 'Math',
@@ -1770,7 +1770,7 @@ var category_number_identities = {
     19: 'Sports',
     20: 'Technology',
     21: 'Television',
-    22: 'Performing arts',
+    22: 'Performing Arts',
     23: 'Theology',
     24: 'Video games',
     33: 'Law'
