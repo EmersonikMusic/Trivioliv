@@ -1,6 +1,6 @@
 // Dictionary holding HTML content
 const contentDict = {
-    'food': `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 609.8">
+    'food & drink': `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 609.8">
     <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
     <defs>
       <style>
