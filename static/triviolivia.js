@@ -6085,7 +6085,7 @@ fill: #4e0b1b;
 // Unsure
 const progressElement = document.getElementById('progress');
 
-//Declaring quesiton and answer display
+// Declaring quesiton and answer display
 const questionDisplay = document.querySelector('.question-container')
 const answerDisplay = document.querySelector('.answer-container')
 
@@ -6129,7 +6129,7 @@ var category_number_identities = {
     14: 'Nature',
     15: 'Philosophy',
     16: 'Politics',
-    17: 'Pop culture',
+    17: 'Pop Culture',
     18: 'Science',
     19: 'Sports',
     20: 'Technology',
