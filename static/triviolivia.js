@@ -6460,6 +6460,9 @@ const showAnswer = (displayed_answer) => {
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 const mainGameFunction = async () => {
+
+    await fetchData(moddedUrl);
+
     document.getElementById("demo").innerHTML = 'Fetching questions.';
     await delay(1.6 * 1000);
     document.getElementById("demo").innerHTML = 'Fetching questions..';
@@ -6469,9 +6472,7 @@ const mainGameFunction = async () => {
     document.getElementById("demo").innerHTML = 'Game starts now!';
     await delay(1.6 * 1000);
     document.getElementById("demo").innerHTML = '';
-
-    await fetchData(moddedUrl);
-
+    
     for (let i = 0; i < number_of_questions; i++) {
         if (!pauseFlag) {
             progressBar.style.animationPlayState = "running";
