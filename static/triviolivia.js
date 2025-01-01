@@ -6785,7 +6785,7 @@ startButton.addEventListener("click", function() {
     game_started = false;
     menu_hidden = false;
     current_question_category = null;
-    pauseFlag = true;
+    pauseFlag = false;
     category_list = [];
     difficulty_list = [];
     era_list = [];
