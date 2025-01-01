@@ -6758,7 +6758,7 @@ startButton.addEventListener("click", function() {
   });
 
   progressBar.addEventListener("animationiteration", function() {
-    if (!isPaused) {
+    if (isPaused) {
         progressBar.style.animation = "replenishProgress " + time_per_answer + "s linear forwards, shrinkProgress " + time_per_question + "s linear forwards";
     }
   });
