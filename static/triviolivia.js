@@ -6290,10 +6290,6 @@ function fetchQuestionsAndStartGame() {
         menu_hidden = true;
         // hide_menu();
         fetchData(moddedUrl);
-        checkIfDataReturned = async () => {
-          await fetchData(moddedUrl)
-          ;
-        checkIfDataReturned();
         mainGameFunction();
     }
 }
@@ -6826,4 +6822,3 @@ startButton.addEventListener("click", function() {
   
     console.log("Game reset completed.");
   }
-}
