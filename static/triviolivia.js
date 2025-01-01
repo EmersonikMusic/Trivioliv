@@ -6826,3 +6826,4 @@ startButton.addEventListener("click", function() {
   
     console.log("Game reset completed.");
   }
+}
