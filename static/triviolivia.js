@@ -6465,15 +6465,15 @@ const mainGameFunction = async () => {
 
     await fetchData(moddedUrl);
 
-    // document.getElementById("demo").innerHTML = 'Fetching questions.';
-    // await delay(1.6 * 1000);
-    // document.getElementById("demo").innerHTML = 'Fetching questions..';
-    // await delay(1.6 * 1000);
-    // document.getElementById("demo").innerHTML = 'Fetching questions...';
-    // await delay(1.6 * 1000);
-    // document.getElementById("demo").innerHTML = 'Game starts now!';
-    // await delay(1.6 * 1000);
-    // document.getElementById("demo").innerHTML = '';
+    document.getElementById("demo").innerHTML = 'Question fetched!';
+    await delay(1 * 1000);
+    document.getElementById("demo").innerHTML = 'Game starts in 3.';
+    await delay(1 * 1000);
+    document.getElementById("demo").innerHTML = 'Game starts in 2..';
+    await delay(1 * 1000);
+    document.getElementById("demo").innerHTML = 'Game starts 1...!';
+    await delay(1 * 1000);
+    document.getElementById("demo").innerHTML = 'Go!';
 
     for (let i = 0; i < number_of_questions; i++) {
         if (!pauseFlag) {
