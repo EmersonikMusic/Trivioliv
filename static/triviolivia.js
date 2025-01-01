@@ -6474,6 +6474,7 @@ const mainGameFunction = async () => {
     document.getElementById("demo").innerHTML = 'Game starts in 1...';
     await delay(1 * 1000);
     document.getElementById("demo").innerHTML = 'Go!';
+    await delay(1 * 1000);
 
     for (let i = 0; i < number_of_questions; i++) {
         if (!pauseFlag) {
