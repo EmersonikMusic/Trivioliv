@@ -6777,7 +6777,11 @@ startButton.addEventListener("click", function() {
     menu_hidden = false;
     current_question_category = null;
     pauseFlag = false;
-    isPaused = true;
+
+    baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
+    moddedUrl = '';
+    queryParams = [];
+    globalData = [];
 
     fetchQuestionsAndStartGame();
   
@@ -6808,7 +6812,11 @@ startButton.addEventListener("click", function() {
     category_list = [];
     difficulty_list = [];
     era_list = [];
-    isPaused = true;
+
+    baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
+    moddedUrl = '';
+    queryParams = [];
+    globalData = [];
   
     console.log("Game reset completed.");
   }
