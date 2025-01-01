@@ -6776,7 +6776,9 @@ startButton.addEventListener("click", function() {
 
     all_none_categories = false;
     allNoneCategoriesButton();
+    all_none_difficulties = false;
     allNoneDifficultiesButton();
+    all_none_eras = false;
     allNoneErasButton();
 
   
