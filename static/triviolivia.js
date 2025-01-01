@@ -6783,7 +6783,7 @@ startButton.addEventListener("click", function() {
     queryParams = [];
     globalData = [];
 
-    dontFetchDataIfAllDeselected()
+    dontFetchDataIfAllDeselected();
   
     console.log("Refetch request completed");
   }
