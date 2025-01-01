@@ -6771,7 +6771,7 @@ startButton.addEventListener("click", function() {
 
   // Reset button attempt
 
-  function restartGame() {
+  function resetAllSettings() {
     console.log("Resetting the game to its original settings...");
 
 
