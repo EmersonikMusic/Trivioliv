@@ -6773,7 +6773,6 @@ startButton.addEventListener("click", function() {
   function restartGame() {
     console.log("Resetting the game to its original settings...");
 
-    allNoneCategoriesButton();
     allCategoriesReset()
     allNoneDifficultiesButton();
     allNoneErasButton();
@@ -6786,7 +6785,7 @@ startButton.addEventListener("click", function() {
     game_started = false;
     menu_hidden = false;
     current_question_category = null;
-    pauseFlag = false;
+    pauseFlag = true;
     category_list = [];
     difficulty_list = [];
     era_list = [];
