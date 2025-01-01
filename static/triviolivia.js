@@ -6255,6 +6255,7 @@ function dontFetchDataIfAllDeselected() {
     } else if (era_list.length > 11) {
         document.getElementById("demo").innerHTML = 'Cannot start game. You must select at least one era.';
     } else {
+        changeButtonText();
         fetchQuestionsAndStartGame();
         const hideAllMenus = () => {
             checkboxes.forEach(checkbox => {
@@ -6263,7 +6264,6 @@ function dontFetchDataIfAllDeselected() {
             });
           };
         hideAllMenus();
-        changeButtonText();
     }
 }
 
@@ -6490,6 +6490,7 @@ const mainGameFunction = async () => {
             progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
             console.log("pauseFlag: " + pauseFlag);
             console.log("isPaused: " + isPaused);
+            document.getElementById("demo").innerHTML = 'Game paused.';
           }
         // Check if paused
         while (!pauseFlag) {
