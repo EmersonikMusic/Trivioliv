@@ -39,6 +39,10 @@ button {
     justify-content: center;
 }
 
+#pause-only {
+    display: none;
+}
+
 #start-game button {
     display: flex; /* Enables flexbox layout */
     justify-content: center; /* Centers text horizontally */
