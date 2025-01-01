@@ -6770,17 +6770,17 @@ startButton.addEventListener("click", function() {
   function refetchQuestions() {
     console.log("Refetching questions with currently selected game settings...");
 
-    // number_of_questions = 10;
-    // time_per_question = 5;
-    // time_per_answer = 5;
-    // game_started = false;
-    // menu_hidden = false;
-    // current_question_category = null;
+    number_of_questions = 10;
+    time_per_question = 5;
+    time_per_answer = 5;
+    game_started = false;
+    menu_hidden = false;
+    current_question_category = null;
     // pauseFlag = false;
 
     fetchQuestionsAndStartGame();
   
-    console.log("Refetch completed");
+    console.log("Refetch request completed");
   }
 
 
