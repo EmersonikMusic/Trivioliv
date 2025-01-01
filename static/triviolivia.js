@@ -6773,7 +6773,7 @@ startButton.addEventListener("click", function() {
   function restartGame() {
     console.log("Resetting the game to its original settings...");
 
-    allCategoriesReset();
+    allNoneCategoriesButton()
     allNoneDifficultiesButton();
     allNoneErasButton();
 
@@ -6792,16 +6792,3 @@ startButton.addEventListener("click", function() {
   
     console.log("Game reset completed.");
   }
-
-
-
-  //Functions for ALL/NONE buttons
-function allCategoriesReset() {
-    category_list = [];
-    for (var i = 0; i < eraButtons.length; i++) {
-        eraButtons[String(i)].classList.remove('inactive');
-        eraButtons[String(i)].classList.add('active');
-        enable_era(String(i + 1));
-  }
-  console.log(categoryButtons);
-}
