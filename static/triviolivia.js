@@ -6767,7 +6767,7 @@ startButton.addEventListener("click", function() {
 
 
 // Refetch questions button function
-  function refetchQuestions() {
+  function refetchAndRestart() {
     console.log("Refetching questions with currently selected game settings...");
 
     number_of_questions = 10;
@@ -6783,7 +6783,7 @@ startButton.addEventListener("click", function() {
     queryParams = [];
     globalData = [];
 
-    fetchQuestionsAndStartGame();
+    dontFetchDataIfAllDeselected()
   
     console.log("Refetch request completed");
   }
