@@ -6490,7 +6490,6 @@ const mainGameFunction = async () => {
             progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
             console.log("pauseFlag: " + pauseFlag);
             console.log("isPaused: " + isPaused);
-            document.getElementById("demo").innerHTML = 'Game paused.';
           }
         // Check if paused
         while (!pauseFlag) {
@@ -6721,7 +6720,7 @@ function changeButtonText() {
         progressBar.style.animationPlayState = "paused";
         pauseFlag = false;
         console.log('Game paused.');
-        document.getElementById("demo").innerHTML = 'Game paused. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
+        document.getElementById("demo").innerHTML = 'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
     } else {
         button.textContent = 'START GAME';
         pauseFlag = false;
