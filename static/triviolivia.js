@@ -6804,9 +6804,6 @@ startButton.addEventListener("click", function() {
 
     document.getElementById("demo").innerHTML = 'You have enabled all categories, difficulties, and eras. Press START GAME to restart.';
   
-    number_of_questions = 10;
-    time_per_question = 5;
-    time_per_answer = 5;
     game_started = false;
     menu_hidden = false;
     current_question_category = null;
