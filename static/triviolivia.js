@@ -6465,13 +6465,13 @@ const mainGameFunction = async () => {
 
     await fetchData(moddedUrl);
 
-    document.getElementById("demo").innerHTML = 'Question fetched!';
+    document.getElementById("demo").innerHTML = 'Questions fetched!';
     await delay(1 * 1000);
     document.getElementById("demo").innerHTML = 'Game starts in 3.';
     await delay(1 * 1000);
     document.getElementById("demo").innerHTML = 'Game starts in 2..';
     await delay(1 * 1000);
-    document.getElementById("demo").innerHTML = 'Game starts 1...!';
+    document.getElementById("demo").innerHTML = 'Game starts in 1...';
     await delay(1 * 1000);
     document.getElementById("demo").innerHTML = 'Go!';
 
