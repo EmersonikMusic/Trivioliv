@@ -6773,7 +6773,9 @@ startButton.addEventListener("click", function() {
   function restartGame() {
     console.log("Resetting the game to its original settings...");
 
-    allNoneCategoriesButton()
+
+    all_none_categories = false;
+    allNoneCategoriesButton();
     allNoneDifficultiesButton();
     allNoneErasButton();
 
