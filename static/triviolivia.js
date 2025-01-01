@@ -6781,6 +6781,8 @@ startButton.addEventListener("click", function() {
     all_none_eras = false;
     allNoneErasButton();
 
+    document.getElementById("demo").innerHTML = 'You have enabled all categories, difficulties, and eras.';
+
   
     // Declaring game setting variables
     number_of_questions = 10;
