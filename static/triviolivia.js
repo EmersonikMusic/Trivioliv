@@ -6255,7 +6255,6 @@ function dontFetchDataIfAllDeselected() {
     } else if (era_list.length > 11) {
         document.getElementById("demo").innerHTML = 'Cannot start game. You must select at least one era.';
     } else {
-        changeButtonText();
         fetchQuestionsAndStartGame();
         const hideAllMenus = () => {
             checkboxes.forEach(checkbox => {
@@ -6264,6 +6263,7 @@ function dontFetchDataIfAllDeselected() {
             });
           };
         hideAllMenus();
+        changeButtonText();
     }
 }
 
