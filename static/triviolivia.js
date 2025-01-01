@@ -6289,7 +6289,7 @@ function fetchQuestionsAndStartGame() {
         moddedUrl = urlWithParams;
         menu_hidden = true;
         // hide_menu();
-        fetchData(moddedUrl);
+        //fetchData(moddedUrl);
         mainGameFunction();
     }
 }
@@ -6820,5 +6820,5 @@ startButton.addEventListener("click", function() {
     queryParams = [];
     globalData = [];
   
-    console.log("Game reset completed.");
+    console.log("Game settings reset completed.");
   }
