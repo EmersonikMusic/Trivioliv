@@ -6720,7 +6720,7 @@ function changeButtonText() {
         progressBar.style.animationPlayState = "paused";
         pauseFlag = false;
         console.log('Game paused.');
-        document.getElementById("demo").innerHTML = 'Game paused. Press RESUME GAME to continue.';
+        document.getElementById("demo").innerHTML = 'Game paused. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
     } else {
         button.textContent = 'START GAME';
         pauseFlag = false;
@@ -6803,7 +6803,7 @@ startButton.addEventListener("click", function() {
     all_none_eras = false;
     allNoneErasButton();
 
-    document.getElementById("demo").innerHTML = 'You have enabled all categories, difficulties, and eras. Press START GAME to restart.';
+    document.getElementById("demo").innerHTML = 'You have enabled all categories, difficulties, and eras. Press REFRESH AND RESTART.';
   
     game_started = false;
     menu_hidden = false;
