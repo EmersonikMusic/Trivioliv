@@ -6776,7 +6776,8 @@ startButton.addEventListener("click", function() {
     game_started = false;
     menu_hidden = false;
     current_question_category = null;
-    // pauseFlag = false;
+    pauseFlag = false;
+    isPaused = true;
 
     fetchQuestionsAndStartGame();
   
@@ -6807,6 +6808,7 @@ startButton.addEventListener("click", function() {
     category_list = [];
     difficulty_list = [];
     era_list = [];
+    isPaused = true;
   
     console.log("Game reset completed.");
   }
