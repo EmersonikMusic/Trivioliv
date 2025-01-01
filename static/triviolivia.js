@@ -6772,6 +6772,11 @@ startButton.addEventListener("click", function() {
 
   function restartGame() {
     console.log("Resetting the game to its original settings...");
+
+    allNoneCategoriesButton();
+    allNoneDifficultiesButton();
+    allNoneErasButton();
+
   
     // Declaring game setting variables
     number_of_questions = 10;
