@@ -6082,6 +6082,17 @@ fill: #4e0b1b;
 </svg>`
 };
 
+// Default settings used to restart the app via button click
+const defaultSettings = {
+  number_of_questions : 10,
+  time_per_question : 5,
+  time_per_answer : 5,
+  game_started : false,
+  menu_hidden : false,
+  current_question_category : null,
+  pauseFlag : false
+};
+
 // Unsure
 const progressElement = document.getElementById('progress');
 
@@ -6752,3 +6763,27 @@ startButton.addEventListener("click", function() {
       document.getElementById('start-game').click();  // Simulates a button click
     }
   });
+
+
+
+
+
+  // Reset button attempt
+
+  function restartGame() {
+    console.log("Resetting the game to its original settings...");
+  
+    // Declaring game setting variables
+    number_of_questions = 10;
+    time_per_question = 5;
+    time_per_answer = 5;
+    game_started = false;
+    menu_hidden = false;
+    current_question_category = null;
+    pauseFlag = false;
+    category_list = [];
+    difficulty_list = [];
+    era_list = [];
+  
+    console.log("Game reset completed.");
+  }
