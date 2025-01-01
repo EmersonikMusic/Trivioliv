@@ -6768,12 +6768,29 @@ startButton.addEventListener("click", function() {
 
 
 
+// Refetch questions button function
+  function refetchQuestions() {
+    console.log("Refetching questions with currently selected game settings...");
 
-  // Reset button attempt
+    number_of_questions = 10;
+    time_per_question = 5;
+    time_per_answer = 5;
+    game_started = false;
+    menu_hidden = false;
+    current_question_category = null;
+    pauseFlag = false;
 
+    fetchQuestionsAndStartGame();
+  
+    console.log("Refetch completed");
+  }
+
+
+
+
+  // Reset button
   function resetAllSettings() {
     console.log("Resetting the game to its original settings...");
-
 
     all_none_categories = false;
     allNoneCategoriesButton();
@@ -6782,10 +6799,8 @@ startButton.addEventListener("click", function() {
     all_none_eras = false;
     allNoneErasButton();
 
-    document.getElementById("demo").innerHTML = 'You have enabled all categories, difficulties, and eras. Press START GAME to play.';
-
+    document.getElementById("demo").innerHTML = 'You have enabled all categories, difficulties, and eras. Press START GAME to restart.';
   
-    // Declaring game setting variables
     number_of_questions = 10;
     time_per_question = 5;
     time_per_answer = 5;
