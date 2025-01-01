@@ -6290,6 +6290,10 @@ function fetchQuestionsAndStartGame() {
         menu_hidden = true;
         // hide_menu();
         fetchData(moddedUrl);
+        checkIfDataReturned = async () => {
+          await fetchData(moddedUrl)
+          ;
+        checkIfDataReturned();
         mainGameFunction();
     }
 }
@@ -6460,6 +6464,8 @@ const showAnswer = (displayed_answer) => {
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 const mainGameFunction = async () => {
+
+    document.getElementById("demo").innerHTML = 'Fetching questions...';
 
     await fetchData(moddedUrl);
 
