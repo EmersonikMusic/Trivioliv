@@ -6272,7 +6272,7 @@ function fetchQuestionsAndStartGame() {
     if (game_started == true) {
        console.log('Button pressed.');
        console.log("pauseFlag: " + pauseFlag);
-        console.log("isPaused: " + isPaused);
+       console.log("isPaused: " + isPaused);
     } else {
         game_started = true;
         globalData = [];
@@ -6803,7 +6803,7 @@ startButton.addEventListener("click", function() {
     all_none_eras = false;
     allNoneErasButton();
 
-    document.getElementById("demo").innerHTML = 'You have enabled all categories, difficulties, and eras. Press REFRESH AND RESTART.';
+    document.getElementById("demo").innerHTML = 'You have enabled all categories, difficulties, and eras. Press REFETCH AND RESTART.';
   
     game_started = false;
     menu_hidden = false;
