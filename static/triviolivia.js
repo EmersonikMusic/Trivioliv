@@ -6510,10 +6510,10 @@ const mainGameFunction = async () => {
 
         while (questionTimeRemaining > 0) {
             if (!pauseFlag) {
-                await delay(10);
+                await delay(100);
                 continue;
             }
-            await delay(10); // Update ten times a second
+            await delay(100); // Update ten times a second
             questionTimeRemaining--;
             let question_seconds = Math.floor(questionTimeRemaining / 10);
             let question_tenths = questionTimeRemaining % 10;
@@ -6525,10 +6525,10 @@ const mainGameFunction = async () => {
 
         while (answerTimeRemaining > 0) {
             if (!pauseFlag) {
-                await delay(10);
+                await delay(100);
                 continue;
             }
-            await delay(10); // Update ten times a second
+            await delay(100); // Update ten times a second
             answerTimeRemaining--;
             let answer_seconds = Math.floor(answerTimeRemaining / 10);
             let answer_tenths = answerTimeRemaining % 10;
