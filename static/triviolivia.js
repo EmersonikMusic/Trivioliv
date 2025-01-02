@@ -6803,7 +6803,7 @@ startButton.addEventListener("click", function() {
     all_none_eras = false;
     allNoneErasButton();
 
-    document.getElementById("demo").innerHTML = 'You have enabled all categories, difficulties, and eras. Press REFETCH AND RESTART.';
+    document.getElementById("demo").innerHTML = 'You have enabled all categories, difficulties, and eras. Press <span id="refetch-and-restart" style="cursor: pointer; display: inline;" onclick="refetchAndRestart()">REFETCH AND RESTART</span>.';
   
     game_started = false;
     menu_hidden = false;
