@@ -6509,7 +6509,7 @@ const mainGameFunction = async () => {
         showQuestion(globalData[i].text);
 
         while (questionTimeRemaining > 0) {
-            if (!pauseFlag) {
+            if (!isPaused) {
                 await delay(100);
                 continue;
             }
@@ -6524,7 +6524,7 @@ const mainGameFunction = async () => {
         showAnswer(globalData[i].answer);
 
         while (answerTimeRemaining > 0) {
-            if (!pauseFlag) {
+            if (!isPaused) {
                 await delay(100);
                 continue;
             }
@@ -6544,7 +6544,6 @@ const mainGameFunction = async () => {
     document.getElementById('start-pause').textContent = 'START GAME';
     document.getElementById("demo").innerHTML = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024. Contact us at mark.mazurek@triviolivia.com';
 };
-
 
 
 // Function to pause the game
