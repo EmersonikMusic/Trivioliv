@@ -6509,7 +6509,7 @@ const mainGameFunction = async () => {
         showQuestion(globalData[i].text);
 
         while (questionTimeRemaining > 0) {
-            if (!pauseFlag) {
+            if (pauseFlag) {
                 await delay(100);
                 continue;
             }
@@ -6524,7 +6524,7 @@ const mainGameFunction = async () => {
         showAnswer(globalData[i].answer);
 
         while (answerTimeRemaining > 0) {
-            if (!pauseFlag) {
+            if (pauseFlag) {
                 await delay(100);
                 continue;
             }
