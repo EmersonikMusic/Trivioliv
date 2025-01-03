@@ -6313,14 +6313,6 @@ function shuffleArray(array) {
     }
 }
 
-// function hide_menu() {
-//     document.getElementById("menu").style.left = "-1000px";
-// }
-
-// function show_menu() {
-//     document.getElementById("menu").style.left = "0px";
-// }
-
 //Future function of reset functionality
 function confirm_reset() {
     document.getElementById("demo").innerHTML = 'Are you sure you want to reset the game?';

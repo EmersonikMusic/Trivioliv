@@ -579,25 +579,28 @@ h2 {
     display: flex;
     justify-content: center; /* Centers flex children horizontally */
     text-align: center;
-    font-size: 5vw;
-    font-family: "Montserrat",'American Typewriter', sans-serif;
+    font-size: min(5vw, 5vh); /* Adjusts font size based on both width and height */
+    font-family: "Montserrat", 'American Typewriter', sans-serif;
     font-weight: 500;
     height: 50%;
     align-items: center;
-    text-align: center;
-    
+    overflow-wrap: break-word; /* Prevents text from overflowing */
+    word-break: break-word;
 }
 
 .answer-container {
     padding: 10px 50px;
     display: flex;
-    font-size: 5vw;
-    font-family: "Montserrat",'American Typewriter', sans-serif;
+    font-size: min(5vw, 5vh); /* Adjusts font size based on both width and height */
+    font-family: "Montserrat", 'American Typewriter', sans-serif;
     font-weight: 500;
     height: 25%;
     flex-direction: column;
     text-align: center;
+    overflow-wrap: break-word; /* Prevents text from overflowing */
+    word-break: break-word;
 }
+
 
   .inactive .indicator  {
     background-color: red;
