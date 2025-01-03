@@ -3,8 +3,8 @@ body {
     font-size: 15px;
     background: linear-gradient(345deg, rgba(69, 93, 214, 1) 0%, rgba(78, 50, 100, 1) 100%);
     margin: 0;
-    display: block
-    /* overflow: hidden; */
+    display: block;
+    overflow: visible;
 }
 
 * {
