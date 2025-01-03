@@ -6294,16 +6294,16 @@ function fetchQuestionsAndStartGame() {
     }
 }
 
-// Function to toggle, hide, and show options menu
-function toggle_menu() {
-    if (menu_hidden == true) {
-        menu_hidden = false;
-        show_menu();
-    } else {
-        menu_hidden = true;
-        hide_menu();
-    }
-}
+// // Function to toggle, hide, and show options menu
+// function toggle_menu() {
+//     if (menu_hidden == true) {
+//         menu_hidden = false;
+//         show_menu();
+//     } else {
+//         menu_hidden = true;
+//         hide_menu();
+//     }
+// }
 
 // Function to shuffle returned array
 function shuffleArray(array) {
@@ -6313,13 +6313,13 @@ function shuffleArray(array) {
     }
 }
 
-function hide_menu() {
-    document.getElementById("menu").style.left = "-1000px";
-}
+// function hide_menu() {
+//     document.getElementById("menu").style.left = "-1000px";
+// }
 
-function show_menu() {
-    document.getElementById("menu").style.left = "0px";
-}
+// function show_menu() {
+//     document.getElementById("menu").style.left = "0px";
+// }
 
 //Future function of reset functionality
 function confirm_reset() {
