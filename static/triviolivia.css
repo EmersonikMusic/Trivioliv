@@ -574,32 +574,25 @@ h2 {
     justify-content: center;
 }
 
-.question-container {
+.question-container, .answer-container {
     padding: 10px 50px;
     display: flex;
-    justify-content: center; /* Centers flex children horizontally */
-    text-align: center;
-    font-size: 5vw;
-    font-family: "Montserrat",'American Typewriter', sans-serif;
-    font-weight: 500;
-    height: 50%;
+    justify-content: center;
     align-items: center;
     text-align: center;
-    
+    font-size: clamp(16px, 5vw, 8vh); /* Scales dynamically within a safe range */
+    font-family: "Montserrat", 'American Typewriter', sans-serif;
+    font-weight: 500;
+}
+
+.question-container {
+    height: 50%; /* Keeps the container responsive */
 }
 
 .answer-container {
-    padding: 10px 50px;
-    display: flex;
-    justify-content: center; /* Centers flex children horizontally */
-    text-align: center;
-    font-size: 5vw;
-    font-family: "Montserrat",'American Typewriter', sans-serif;
-    font-weight: 500;
-    height: 25%;
-    flex-direction: column;
-    text-align: center;
+    height: 25%; /* Keeps the container responsive */
 }
+
 
   .inactive .indicator  {
     background-color: red;
