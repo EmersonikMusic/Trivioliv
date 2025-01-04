@@ -655,7 +655,7 @@ h2 {
   #loading-text {
     display: flex;
     color: white;
-    font-size: clamp(16px, 5vw, 8vh); /* Scales dynamically within a safe range */
+    font-size: 14px;
     font-family: Arial, sans-serif;
     text-align: center;
     z-index: 1;
