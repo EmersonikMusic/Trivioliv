@@ -313,17 +313,7 @@ input[type='checkbox'] {
     height: 90%;
     align-self: stretch;
     flex-direction: column;
-    /* width: 100%; */
 }
-
-
-/* footer { */
-    /* margin-top: auto; /* Push footer to the bottom
-}
-
- .column-rest .button {
-    flex-direction: row-reverse;
-    } */
 
   .indicator {
     width: 2px; /* Reduce the indicator width to match smaller buttons */
@@ -665,7 +655,7 @@ h2 {
   #loading-text {
     display: flex;
     color: white;
-    font-size: 14px;
+    font-size: clamp(16px, 5vw, 8vh); /* Scales dynamically within a safe range */
     font-family: Arial, sans-serif;
     text-align: center;
     z-index: 1;
