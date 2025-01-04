@@ -3,13 +3,13 @@ body {
     font-size: 15px;
     background: linear-gradient(345deg, rgba(69, 93, 214, 1) 0%, rgba(78, 50, 100, 1) 100%);
     margin: 0;
-    display: block;
-    overflow: visible;
+    display: block
+    /* overflow: hidden; */
 }
 
 * {
     color: #ffffff;
-    box-sizing: border-box; /* Ensures padding and border are included in element's total size */
+    /* text-align: left; */
 }
 
 a {
@@ -575,36 +575,31 @@ h2 {
 }
 
 .question-container {
-    font-size: larger;
     padding: 10px 50px;
     display: flex;
     justify-content: center; /* Centers flex children horizontally */
-    align-items: center; /* Centers flex children vertically */
     text-align: center;
-    font-size: calc(2vw + 2vh); /* Scales font size with both width and height */
-    font-family: "Montserrat", 'American Typewriter', sans-serif;
+    font-size: 5vw;
+    font-family: "Montserrat",'American Typewriter', sans-serif;
     font-weight: 500;
-    height: auto; /* Allows the height to adjust based on content */
-    flex-grow: 1; /* Ensures the container grows to fill available space */
-    word-wrap: break-word;
+    height: 50%;
+    align-items: center;
+    text-align: center;
+    
 }
 
 .answer-container {
-    font-size: larger;
     padding: 10px 50px;
     display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centers flex children vertically */
-    align-items: center; /* Centers flex children horizontally */
+    justify-content: center; /* Centers flex children horizontally */
     text-align: center;
-    font-size: calc(1.8vw + 1.8vh); /* Scales font size with both width and height */
-    font-family: "Montserrat", 'American Typewriter', sans-serif;
+    font-size: 5vw;
+    font-family: "Montserrat",'American Typewriter', sans-serif;
     font-weight: 500;
-    height: auto; /* Allows the height to adjust based on content */
-    flex-grow: 1; /* Ensures the container grows to fill available space */
-    word-wrap: break-word;
+    height: 25%;
+    flex-direction: column;
+    text-align: center;
 }
-
 
   .inactive .indicator  {
     background-color: red;
