@@ -4192,7 +4192,7 @@ const contentDict = {
     </g>
   </svg>`,
 
-  
+
     'human body': `
     <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 308.5 491.4">
     <defs>
@@ -6572,17 +6572,6 @@ fill: #4e0b1b;
 </g>
 </g>
 </svg>`
-};
-
-// Default settings used to restart the app via button click
-const defaultSettings = {
-  number_of_questions : 10,
-  time_per_question : 5,
-  time_per_answer : 5,
-  game_started : false,
-  menu_hidden : false,
-  current_question_category : null,
-  pauseFlag : false
 };
 
 // Unsure
