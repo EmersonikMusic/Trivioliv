@@ -7265,7 +7265,7 @@ startButton.addEventListener("click", function() {
 
 
   // Reset button
-  function resetAllSettings() {
+  function resetSettings() {
     console.log("Resetting the game to its original settings...");
 
     all_none_categories = false;
