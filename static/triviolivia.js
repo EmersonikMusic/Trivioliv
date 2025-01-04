@@ -6577,7 +6577,7 @@ fill: #4e0b1b;
 // Unsure
 const progressElement = document.getElementById('progress');
 
-// Declaring quesiton and answer display
+// Declaring question and answer display
 const questionDisplay = document.querySelector('.question-container')
 const answerDisplay = document.querySelector('.answer-container')
 
@@ -6769,22 +6769,9 @@ function fetchQuestionsAndStartGame() {
         const urlWithParams = baseUrl + '?questions=' + number_of_questions + '&' + queryParams.join('&');
         moddedUrl = urlWithParams;
         menu_hidden = true;
-        // hide_menu();
-        //fetchData(moddedUrl);
         mainGameFunction();
     }
 }
-
-// // Function to toggle, hide, and show options menu
-// function toggle_menu() {
-//     if (menu_hidden == true) {
-//         menu_hidden = false;
-//         show_menu();
-//     } else {
-//         menu_hidden = true;
-//         hide_menu();
-//     }
-// }
 
 // Function to shuffle returned array
 function shuffleArray(array) {
@@ -6794,14 +6781,14 @@ function shuffleArray(array) {
     }
 }
 
-//Future function of reset functionality
+// Future function of reset functionality
 function confirm_reset() {
     document.getElementById("demo").innerHTML = 'Are you sure you want to reset the game?';
     //Yes/No?
     //Reset function call
 }
 
-//Function for indicator light toggle
+// Function for indicator light toggle
 function toggleIndicator(button) {
     if (button.classList.contains('active')) {
         button.classList.remove('active');
