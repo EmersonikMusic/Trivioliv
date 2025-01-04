@@ -6915,8 +6915,6 @@ const showAnswer = (displayed_answer) => {
 }
 
 
-
-
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 const mainGameFunction = async () => {
@@ -6961,7 +6959,6 @@ const mainGameFunction = async () => {
         // Code to change character appearance as function of current category
         const character = document.getElementById('character');
         character.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
-        
         
         let questionTimeRemaining = time_per_question * 10; // Convert to tenths of a second
         let answerTimeRemaining = time_per_answer * 10; // Convert to tenths of a second
@@ -7239,6 +7236,7 @@ startButton.addEventListener("click", function() {
     menu_hidden = false;
     current_question_category = null;
     pauseFlag = false;
+    globalData = [];
 
     baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
     moddedUrl = '';
@@ -7251,7 +7249,7 @@ startButton.addEventListener("click", function() {
   }
 
 
-  // Reset button
+  // Reset settings button
   function resetSettings() {
     console.log("Resetting the game to its original settings...");
 
