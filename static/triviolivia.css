@@ -676,7 +676,7 @@ h2 {
     display: none;
     position: fixed;
     width: 80%;
-    max-height: 80vh; /* Restricts the height to 80% of the viewport */
+    max-height: 70vh; /* Restricts the height to 70% of the viewport */
     overflow-y: auto; /* Makes the card scrollable if content exceeds height */
     top: 50%;
     left: 50%;
