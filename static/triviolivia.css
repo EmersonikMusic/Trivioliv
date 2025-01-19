@@ -678,9 +678,9 @@ h2 {
     width: 80%;
     max-height: 70vh; /* Restricts the height to 70% of the container */
     overflow-y: auto; /* Makes the card scrollable if content exceeds height */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 50%; /* Centers vertically within the container */
+    left: 50%; /* Positions the left edge at 50% of the container's width */
+    transform: translate(-50%, -50%); /* Centers the card horizontally and vertically */
     padding: 20px;
     background: rgba(0, 0, 0, 0.5);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
