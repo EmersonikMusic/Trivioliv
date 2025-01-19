@@ -674,7 +674,7 @@ h2 {
 
   #about-us-card {
     display: none;
-    position: absolute; /* Positions relative to the nearest positioned ancestor (#container-game) */
+    position: relative; /* Positions relative to the nearest positioned ancestor (#container-game) */
     width: 80%;
     max-height: 70vh; /* Restricts the height to 70% of the container */
     overflow-y: auto; /* Makes the card scrollable if content exceeds height */
