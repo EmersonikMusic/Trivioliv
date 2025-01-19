@@ -7277,3 +7277,24 @@ startButton.addEventListener("click", function() {
   
     console.log("Game settings reset completed.");
   }
+
+
+
+
+
+
+
+  // About Us stuff
+  function displayAboutUs() {
+    const card = document.getElementById('about-us-card');
+    const overlay = document.getElementById('overlay');
+    card.style.display = 'block';
+    overlay.style.display = 'block';
+}
+
+function closeAboutUs() {
+    const card = document.getElementById('about-us-card');
+    const overlay = document.getElementById('overlay');
+    card.style.display = 'none';
+    overlay.style.display = 'none';
+}

@@ -65,9 +65,16 @@
               <button onclick="refetchAndRestart()" id="refetch-and-restart" type="button">REFETCH AND RESTART</button>
             </div>
 
-             <div id="about-us" class="pause-only">
+            <div id="about-us" class="pause-only">
               <button onclick="displayAboutUs()" id="about-us" type="button">ABOUT US</button>
-            </div>
+          </div>
+      
+          <div id="overlay" onclick="closeAboutUs()"></div>
+      
+          <div id="about-us-card">
+              <p>Welcome to our website! We are dedicated to providing the best services and experiences to our customers. Thank you for choosing us!</p>
+              <button onclick="closeAboutUs()">Close</button>
+          </div>
 
             <!-- <div id="reset-settings" class="pause-only">
               <button onclick="resetSettings()" id="reset-settings" type="button">RESET SETTINGS</button>
