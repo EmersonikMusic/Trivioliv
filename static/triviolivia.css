@@ -672,20 +672,22 @@ h2 {
   }
 
 
-        #about-us-card {
-            display: none;
-            position: fixed;
-            width: 80%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            z-index: 1000;
-            text-align: left;
-        }
+  #about-us-card {
+    display: none;
+    position: fixed;
+    width: 80%;
+    max-height: 80vh; /* Restricts the height to 80% of the viewport */
+    overflow-y: auto; /* Makes the card scrollable if content exceeds height */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+    text-align: left;
+}
 
         #about-us-card button {
             margin-top: 10px;
