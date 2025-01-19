@@ -151,8 +151,9 @@
                                         title='{{ category.title }}' 
                                         class="button active category {{ category.title }} {{ category.id }}">
                                     <span class="indicator"></span>
-                                    {{ category.name | upper }}
                                     <span class="hover-text">{{ category.title }}</span>
+                                    {{ category.name | upper }}
+                                    
                                 </button>
                             </div>
                             {% endfor %}
