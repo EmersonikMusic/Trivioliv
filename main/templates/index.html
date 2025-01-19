@@ -146,9 +146,13 @@
                             <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
                             {% for category in categories %}
                             <div id='{{ category.name | slugify }}'>
-                                <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                                <button onclick='toggle_categories(this.id), toggleIndicator(this)' 
+                                        id='{{ category.id }}' 
+                                        title='{{ category.title }}' 
+                                        class="button active category {{ category.title }} {{ category.id }}">
                                     <span class="indicator"></span>
                                     {{ category.name | upper }}
+                                    <span class="hover-text">{{ category.title }}</span>
                                 </button>
                             </div>
                             {% endfor %}
