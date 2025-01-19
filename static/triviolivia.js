@@ -7280,10 +7280,6 @@ startButton.addEventListener("click", function() {
 
 
 
-
-
-
-
   // About Us stuff
   function displayAboutUs() {
     const card = document.getElementById('about-us-card');
