@@ -682,7 +682,7 @@ h2 {
     left: 50%; /* Positions the left edge at 50% of the container's width */
     transform: translate(-50%, -50%); /* Centers the card horizontally and vertically */
     padding: 20px;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     z-index: 1000;
