@@ -228,7 +228,11 @@
 
 
 
-<svg src="{% static 'SVGs/TO_OG.svg'}"></svg>
+  {% load static %}
+  <svg>
+      <use xlink:href="{% static 'SVGs/TO_OG.svg#symbol-id' %}"></use>
+  </svg>
+  
 
 
 
