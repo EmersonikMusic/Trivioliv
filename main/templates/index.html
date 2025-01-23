@@ -150,6 +150,11 @@
                         <div class="content-inner">
                             <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
                             
+                            <script>
+                                // Ensure category_list is defined
+                                let category_list = [];
+                            </script>
+                            
                             {% for category in categories %}
     <div id='{{ category.name | slugify }}'>
         {% if category.description == 'Default' %}
