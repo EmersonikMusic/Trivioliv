@@ -7198,6 +7198,21 @@ function changeButtonText() {
 }
 
 
+// New function to disable banned categories
+function disableBannedCategories() {}
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Dynamic question and answer timer bar attempt
 let progressBar = document.getElementById("progress");
 let startButton = document.getElementById("startButton");
