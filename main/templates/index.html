@@ -172,6 +172,18 @@
                             {% else %}
 
                             {% for category in categories %}
+    
+                            
+                            <script src="{% static 'triviolivia.js' %}"></script>
+
+<script>
+    // Ensure the category_list array is initialized in your external script.
+    if (typeof category_list === 'undefined') {
+        var category_list = [];
+    }
+</script>
+
+{% for category in categories %}
     <div id='{{ category.name | slugify }}'>
         {% if category.description == 'Default' %}
             <!-- Active category -->
@@ -181,16 +193,18 @@
             </button>
         {% else %}
             <!-- Inactive category -->
-            <button id='{{ category.id }}' title='{{ category.title }}' class='button inactive category {{ category.title }} {{ category.id }}' disabled>
+            <button id='{{ category.id }}' title='{{ category.title }}' class="button inactive category {{ category.title }} {{ category.id }}" disabled>
                 <span class="indicator"></span>
                 <s>{{ category.name | upper }}</s>
             </button>
             <script>
-                // Add the category ID to the list
-                category_list.push("{{ category.id }}");
+                // Push non-'Default' categories into category_list
+                category_list.push({"{{ category.id }}"});
             </script>
         {% endif %}
     </div>
+{% endfor %}
+
 {% endfor %}
 
 
@@ -276,6 +290,6 @@
         <!--Side Menu End-->
     </div>
 
-<script src="{% static 'triviolivia.js' %}"></script>
+<!-- <script src="{% static 'triviolivia.js' %}"></script> -->
 
 {% endblock %}
