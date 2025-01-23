@@ -7295,7 +7295,7 @@ startButton.addEventListener("click", function() {
     menu_hidden = false;
     current_question_category = null;
     pauseFlag = false;
-    category_list = [];
+    // category_list = [];
     difficulty_list = [];
     era_list = [];
 
