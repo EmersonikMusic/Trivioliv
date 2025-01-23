@@ -165,12 +165,7 @@
                 <s>{{ category.name | upper }}</s>
             </button>
             <script>
-                category_list.push({
-                    id: "{{ category.id }}",
-                    name: "{{ category.name }}",
-                    title: "{{ category.title }}",
-                    description: "{{ category.description }}"
-                });
+                category_list.push("{{ category.id }}");
             </script>
         {% endif %}
     </div>
