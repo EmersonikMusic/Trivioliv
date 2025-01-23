@@ -31,13 +31,6 @@
         </div> 
     </nav>
 
-
-    <script>
-        category_list = [];
-    </script>
-
-
-
     <!-- Main Container -->
     <div id="main-container" class="main-container">
         <div id="main-container-inner" class="main-container-inner">
@@ -156,9 +149,6 @@
                     <div class="collapsible-content">
                         <div class="content-inner">
                             <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
-
-                            {% if user.is_authenticated %}
-
                             {% for category in categories %}
                             <div id='{{ category.name | slugify }}'>
                                 <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
@@ -167,51 +157,6 @@
                                 </button>
                             </div>
                             {% endfor %}
-
-
-                            {% else %}
-
-                            {% for category in categories %}
-    
-                            
-                            <script src="{% static 'triviolivia.js' %}"></script>
-
-<script>
-    // Ensure the category_list array is initialized in your external script.
-    if (typeof category_list === 'undefined') {
-        var category_list = [];
-    }
-</script>
-
-{% for category in categories %}
-    <div id='{{ category.name | slugify }}'>
-        {% if category.description == 'Default' %}
-            <!-- Active category -->
-            <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
-                <span class="indicator"></span>
-                {{ category.name | upper }}
-            </button>
-        {% else %}
-            <!-- Inactive category -->
-            <button id='{{ category.id }}' title='{{ category.title }}' class="button inactive category {{ category.title }} {{ category.id }}" disabled>
-                <span class="indicator"></span>
-                <s>{{ category.name | upper }}</s>
-            </button>
-            <script>
-                // Push non-'Default' categories into category_list
-                category_list.push("{{ category.id }}");
-            </script>
-        {% endif %}
-    </div>
-{% endfor %}
-
-{% endfor %}
-
-
-{% endif %}
-
-
-
                     </div>
                     </div>
                 </div>
@@ -290,6 +235,6 @@
         <!--Side Menu End-->
     </div>
 
-<!-- <script src="{% static 'triviolivia.js' %}"></script> -->
+<script src="{% static 'triviolivia.js' %}"></script>
 
 {% endblock %}
