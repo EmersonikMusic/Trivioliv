@@ -151,23 +151,12 @@
                             <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
                             {% for category in categories %}
                             <div id='{{ category.name | slugify }}'>
-                                {% if category.description == 'Default' %}
-                                    <!-- Active category -->
-                                    <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class='button active category {{ category.title }} {{ category.id }}''>
-                                        <span class="indicator"></span>
-                                        {{ category.name | upper }}
-                                    </button>
-                                {% else %}
-                                    <!-- Inactive category -->
-                                    <button id='{{ category.id }}' title='{{ category.title }}' class='button inactive category {{ category.title }} {{ category.id }}' disabled>
-                                        <span class="indicator"></span>
-                                        <s>{{ category.name | upper }}</s>
-                                    </button>
-                                {% endif %}
+                                <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                                    <span class="indicator"></span>
+                                    {{ category.name | upper }}
+                                </button>
                             </div>
-                        {% endfor %}
-                        
-                        
+                            {% endfor %}
                     </div>
                     </div>
                 </div>
