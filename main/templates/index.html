@@ -150,13 +150,16 @@
                         <div class="content-inner">
                             <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
                             {% for category in categories %}
-                            <div id='{{ category.name | slugify }}'>
-                                <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
-                                    <span class="indicator"></span>
-                                    {{ category.name | upper }}
-                                </button>
-                            </div>
-                            {% endfor %}
+                            {% if category.description == 'Default' %}
+                                <div id='{{ category.name | slugify }}'>
+                                    <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                                        <span class="indicator"></span>
+                                        {{ category.name | upper }}
+                                    </button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        
                     </div>
                     </div>
                 </div>
