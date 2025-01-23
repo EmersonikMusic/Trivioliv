@@ -6632,6 +6632,20 @@ var category_number_identities = {
     33: 'Law'
 }
 
+// Does nothing right now
+var loginwalled_categories = {
+  3: 'Food & Drink',
+  4: 'Games',
+  11: 'Miscellaneous',
+  15: 'Philosophy',
+  16: 'Politics',
+  17: 'Pop Culture',
+  22: 'Performing Arts',
+  23: 'Theology',
+  24: 'Video Games',
+  33: 'Law'
+}
+
 var difficulty_number_identities = {
     5: 'Genius',
     4: 'Hard',
