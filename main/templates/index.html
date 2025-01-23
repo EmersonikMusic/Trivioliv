@@ -154,7 +154,7 @@
                                 // Ensure category_list is defined
                                 let category_list = [];
                             </script>
-                            
+
                             {% for category in categories %}
     <div id='{{ category.name | slugify }}'>
         {% if category.description == 'Default' %}
@@ -169,9 +169,9 @@
                 <span class="indicator"></span>
                 <s>{{ category.name | upper }}</s>
             </button>
-            <script>
-                category_list.push("{{ category.id }}");
-            </script>
+            
+            <script src="{% static 'triviolivia.js' %}"></script>
+            
         {% endif %}
     </div>
 {% endfor %}
@@ -255,6 +255,6 @@
         <!--Side Menu End-->
     </div>
 
-<script src="{% static 'triviolivia.js' %}"></script>
+
 
 {% endblock %}
