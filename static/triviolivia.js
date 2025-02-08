@@ -7335,48 +7335,52 @@ function closeAboutUs() {
 
 // Fullscreen mode attempt
 function toggleFullscreen() {
-  let elem = document.documentElement; // Fullscreen for the whole page
+  let elem = document.documentElement; // The whole page
 
-  if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
-    // Exit fullscreen
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
-    }
-
-    // Reset mobile styles
-    document.body.style.height = "";
-    document.body.style.width = "";
-    document.body.style.overflow = "";
+  // Check if fullscreen is active
+  if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+    exitFullscreen();
   } else {
-    // Enter fullscreen
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) {
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen();
-    }
-
-    // Special handling for iPhones & iPads
-    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-      document.body.style.height = "100vh";
-      document.body.style.width = "100vw";
-      document.body.style.overflow = "hidden";
-    }
+    enterFullscreen(elem);
   }
 }
 
-// Enable fullscreen via gesture on iOS (Safari fullscreen hack)
-document.addEventListener("touchend", () => {
-  if (!document.fullscreenElement && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
-    document.documentElement.requestFullscreen?.();
+function enterFullscreen(element) {
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.mozRequestFullScreen) { // Firefox
+    element.mozRequestFullScreen();
+  } else if (element.webkitRequestFullscreen) { // Chrome, Safari, Edge, Opera
+    element.webkitRequestFullscreen();
+  } else if (element.msRequestFullscreen) { // IE11
+    element.msRequestFullscreen();
   }
-});
+
+  // 🔥 iOS Safari workaround (iPhones/iPads)
+  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    document.body.style.position = "fixed";
+    document.body.style.width = "100vw";
+    document.body.style.height = "100vh";
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function exitFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) { // Firefox
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) { // Chrome, Safari, Edge, Opera
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { // IE11
+    document.msExitFullscreen();
+  }
+
+  // 🔥 Reset iOS Safari styles
+  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    document.body.style.position = "";
+    document.body.style.width = "";
+    document.body.style.height = "";
+    document.body.style.overflow = "";
+  }
+}
