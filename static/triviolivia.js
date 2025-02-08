@@ -7335,7 +7335,7 @@ function closeAboutUs() {
 
 // Fullscreen mode attempt
 function toggleFullscreen() {
-  let elem = document.documentElement; // Fullscreen for the entire page
+  let elem = document.documentElement; // Fullscreen for the whole page
 
   if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
     // Exit fullscreen
@@ -7348,6 +7348,11 @@ function toggleFullscreen() {
     } else if (document.msExitFullscreen) {
       document.msExitFullscreen();
     }
+
+    // Reset mobile styles
+    document.body.style.height = "";
+    document.body.style.width = "";
+    document.body.style.overflow = "";
   } else {
     // Enter fullscreen
     if (elem.requestFullscreen) {
@@ -7359,5 +7364,19 @@ function toggleFullscreen() {
     } else if (elem.msRequestFullscreen) {
       elem.msRequestFullscreen();
     }
+
+    // Special handling for iPhones & iPads
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+      document.body.style.height = "100vh";
+      document.body.style.width = "100vw";
+      document.body.style.overflow = "hidden";
+    }
   }
 }
+
+// Enable fullscreen via gesture on iOS (Safari fullscreen hack)
+document.addEventListener("touchend", () => {
+  if (!document.fullscreenElement && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    document.documentElement.requestFullscreen?.();
+  }
+});
