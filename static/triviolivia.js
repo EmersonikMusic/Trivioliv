@@ -6937,7 +6937,7 @@ const mainGameFunction = async () => {
   try {
       const fetchPromise = fetchData(moddedUrl);
       const timeoutPromise = new Promise((_, reject) =>
-          setTimeout(() => reject(new Error('timeout')), 10000)
+          setTimeout(() => reject(new Error('timeout')), 20000)
       );
 
       await Promise.race([fetchPromise, timeoutPromise]);
