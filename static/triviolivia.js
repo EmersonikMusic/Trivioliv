@@ -6932,89 +6932,101 @@ const showAnswer = (displayed_answer) => {
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 const mainGameFunction = async () => {
+  document.getElementById("demo").innerHTML = 'Fetching questions...';
 
-    document.getElementById("demo").innerHTML = 'Fetching questions...';
+  try {
+      const data = await fetchData(moddedUrl);
+      if (!data) throw new Error("No data received");
 
-    await fetchData(moddedUrl);
+      document.getElementById("demo").innerHTML = 'Questions fetched!';
+      await delay(1000);
+      document.getElementById("demo").innerHTML = 'Game starts in 3.';
+      await delay(1000);
+      document.getElementById("demo").innerHTML = 'Game starts in 2..';
+      await delay(1000);
+      document.getElementById("demo").innerHTML = 'Game starts in 1...';
+      await delay(1000);
+      document.getElementById("demo").innerHTML = 'Go!';
+      await delay(1000);
+  } catch (error) {
+      console.error("Error fetching questions:", error);
+      document.getElementById("demo").innerHTML =
+          'Could not fetch questions with current settings or due to connection problems. Please try again.';
+      return;
+  }
 
-    document.getElementById("demo").innerHTML = 'Questions fetched!';
-    await delay(1 * 1000);
-    document.getElementById("demo").innerHTML = 'Game starts in 3.';
-    await delay(1 * 1000);
-    document.getElementById("demo").innerHTML = 'Game starts in 2..';
-    await delay(1 * 1000);
-    document.getElementById("demo").innerHTML = 'Game starts in 1...';
-    await delay(1 * 1000);
-    document.getElementById("demo").innerHTML = 'Go!';
-    await delay(1 * 1000);
+  for (let i = 0; i < number_of_questions; i++) {
+      if (!pauseFlag) {
+          progressBar.style.animationPlayState = "running";
+          progressBar.style.animation = `depleteProgress ${time_per_question}s linear infinite`;
+          isPaused = false;
+          console.log("pauseFlag:", pauseFlag);
+          console.log("isPaused:", isPaused);
+      } else {
+          progressBar.style.animationPlayState = "paused";
+          progressBar.style.animation = "none";
+          progressBar.offsetHeight; // Trigger reflow
+          progressBar.style.animation = `depleteProgress ${time_per_answer}s linear infinite`;
+          console.log("pauseFlag:", pauseFlag);
+          console.log("isPaused:", isPaused);
+      }
 
-    for (let i = 0; i < number_of_questions; i++) {
-        if (!pauseFlag) {
-            progressBar.style.animationPlayState = "running";
-            progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
-            isPaused = false;
-            console.log("pauseFlag: " + pauseFlag);
-            console.log("isPaused: " + isPaused);
-          } else {
-            progressBar.style.animationPlayState = "paused";
-            progressBar.style.animation = "none";
-            progressBar.offsetHeight; // Trigger reflow to reset animation
-            progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
-            console.log("pauseFlag: " + pauseFlag);
-            console.log("isPaused: " + isPaused);
+      while (!pauseFlag) {
+          await delay(100);
+      }
+
+      document.body.style.background = category_colors[globalData[i].category_name];
+
+      const character = document.getElementById('character');
+      character.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
+
+      let questionTimeRemaining = time_per_question * 10;
+      let answerTimeRemaining = time_per_answer * 10;
+
+      showQuestion(globalData[i].text);
+
+      while (questionTimeRemaining > 0) {
+          if (!pauseFlag) {
+              await delay(100);
+              continue;
           }
-        // Check if paused
-        while (!pauseFlag) {
-            await delay(100); // Check every 10 milliseconds
-        }
+          await delay(100);
+          questionTimeRemaining--;
+          let question_seconds = Math.floor(questionTimeRemaining / 10);
+          let question_tenths = questionTimeRemaining % 10;
+          document.getElementById("demo").innerHTML =
+              `Q${i + 1} - ${globalData[i].category_name.toUpperCase()} - ${globalData[i].difficulty_name.toUpperCase()} - Mark Mazurek - ${question_seconds}.${question_tenths}s`;
+          console.log(question_seconds);
+      }
 
-        document.body.style.background = category_colors[globalData[i].category_name];
+      showAnswer(globalData[i].answer);
 
-        // Code to change character appearance as function of current category
-        const character = document.getElementById('character');
-        character.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
-        
-        let questionTimeRemaining = time_per_question * 10; // Convert to tenths of a second
-        let answerTimeRemaining = time_per_answer * 10; // Convert to tenths of a second
-        
-        showQuestion(globalData[i].text);
+      while (answerTimeRemaining > 0) {
+          if (!pauseFlag) {
+              await delay(100);
+              continue;
+          }
+          await delay(100);
+          answerTimeRemaining--;
+          let answer_seconds = Math.floor(answerTimeRemaining / 10);
+          let answer_tenths = answerTimeRemaining % 10;
+          document.getElementById("demo").innerHTML =
+              `Q${i + 1} - ${globalData[i].category_name.toUpperCase()} - ${globalData[i].difficulty_name.toUpperCase()} - Mark Mazurek - ${answer_seconds}.${answer_tenths}s`;
+          console.log(answer_seconds);
+      }
 
-        while (questionTimeRemaining > 0) {
-            if (!pauseFlag) {
-                await delay(100);
-                continue;
-            }
-            await delay(100); // Update ten times a second
-            questionTimeRemaining--;
-            let question_seconds = Math.floor(questionTimeRemaining / 10);
-            let question_tenths = questionTimeRemaining % 10;
-            document.getElementById("demo").innerHTML = 'Q' + (i + 1) + ' - ' + globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + question_seconds + '.' + question_tenths + 's';
-            console.log(question_seconds);
-        }
-        //showQuestion(""); // Clear question display
-        showAnswer(globalData[i].answer);
+      showAnswer("");
+  }
 
-        while (answerTimeRemaining > 0) {
-            if (!pauseFlag) {
-                await delay(100);
-                continue;
-            }
-            await delay(100); // Update ten times a second
-            answerTimeRemaining--;
-            let answer_seconds = Math.floor(answerTimeRemaining / 10);
-            let answer_tenths = answerTimeRemaining % 10;
-            document.getElementById("demo").innerHTML = 'Q' + (i + 1) + ' - ' + globalData[i].category_name.toUpperCase() + ' - ' + globalData[i].difficulty_name.toUpperCase() + ' - Mark Mazurek - ' + answer_seconds + '.' + answer_tenths + 's';
-            console.log(answer_seconds);
-        }
-        showAnswer(""); // Clear answer display
-    }
-    game_started = false;
-    pauseFlag = false;
-    showQuestion("Thanks for playing!");
-    progressBar.style.animationPlayState = "paused";
-    document.getElementById('start-pause').textContent = 'START GAME';
-    document.getElementById("demo").innerHTML = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024. Contact us at mark.mazurek@triviolivia.com';
+  game_started = false;
+  pauseFlag = false;
+  showQuestion("Thanks for playing!");
+  progressBar.style.animationPlayState = "paused";
+  document.getElementById('start-pause').textContent = 'START GAME';
+  document.getElementById("demo").innerHTML =
+      'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024. Contact us at mark.mazurek@triviolivia.com';
 };
+
 
 
 // Function to pause the game
