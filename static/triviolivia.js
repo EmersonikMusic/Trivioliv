@@ -6935,40 +6935,39 @@ const mainGameFunction = async () => {
   document.getElementById("demo").innerHTML = 'Fetching questions...';
 
   try {
-      const data = await fetchData(moddedUrl);
-      if (!data) throw new Error("No data received");
+      const fetchPromise = fetchData(moddedUrl);
+      const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('timeout')), 10000)
+      );
+
+      await Promise.race([fetchPromise, timeoutPromise]);
 
       document.getElementById("demo").innerHTML = 'Questions fetched!';
       await delay(1000);
-      document.getElementById("demo").innerHTML = 'Game starts in 3.';
-      await delay(1000);
-      document.getElementById("demo").innerHTML = 'Game starts in 2..';
-      await delay(1000);
-      document.getElementById("demo").innerHTML = 'Game starts in 1...';
-      await delay(1000);
-      document.getElementById("demo").innerHTML = 'Go!';
-      await delay(1000);
   } catch (error) {
-      console.error("Error fetching questions:", error);
-      document.getElementById("demo").innerHTML =
-          'Could not fetch questions with current settings or due to connection problems. Please try again.';
-      return;
+      document.getElementById("demo").innerHTML = 'Could not fetch questions due to settings or connection problems. Please try again or change settings.';
+      return; // Stop execution if fetch fails
   }
+
+  document.getElementById("demo").innerHTML = 'Game starts in 3.';
+  await delay(1000);
+  document.getElementById("demo").innerHTML = 'Game starts in 2..';
+  await delay(1000);
+  document.getElementById("demo").innerHTML = 'Game starts in 1...';
+  await delay(1000);
+  document.getElementById("demo").innerHTML = 'Go!';
+  await delay(1000);
 
   for (let i = 0; i < number_of_questions; i++) {
       if (!pauseFlag) {
           progressBar.style.animationPlayState = "running";
           progressBar.style.animation = `depleteProgress ${time_per_question}s linear infinite`;
           isPaused = false;
-          console.log("pauseFlag:", pauseFlag);
-          console.log("isPaused:", isPaused);
       } else {
           progressBar.style.animationPlayState = "paused";
           progressBar.style.animation = "none";
           progressBar.offsetHeight; // Trigger reflow
           progressBar.style.animation = `depleteProgress ${time_per_answer}s linear infinite`;
-          console.log("pauseFlag:", pauseFlag);
-          console.log("isPaused:", isPaused);
       }
 
       while (!pauseFlag) {
@@ -6994,9 +6993,7 @@ const mainGameFunction = async () => {
           questionTimeRemaining--;
           let question_seconds = Math.floor(questionTimeRemaining / 10);
           let question_tenths = questionTimeRemaining % 10;
-          document.getElementById("demo").innerHTML =
-              `Q${i + 1} - ${globalData[i].category_name.toUpperCase()} - ${globalData[i].difficulty_name.toUpperCase()} - Mark Mazurek - ${question_seconds}.${question_tenths}s`;
-          console.log(question_seconds);
+          document.getElementById("demo").innerHTML = `Q${i + 1} - ${globalData[i].category_name.toUpperCase()} - ${globalData[i].difficulty_name.toUpperCase()} - Mark Mazurek - ${question_seconds}.${question_tenths}s`;
       }
 
       showAnswer(globalData[i].answer);
@@ -7010,9 +7007,7 @@ const mainGameFunction = async () => {
           answerTimeRemaining--;
           let answer_seconds = Math.floor(answerTimeRemaining / 10);
           let answer_tenths = answerTimeRemaining % 10;
-          document.getElementById("demo").innerHTML =
-              `Q${i + 1} - ${globalData[i].category_name.toUpperCase()} - ${globalData[i].difficulty_name.toUpperCase()} - Mark Mazurek - ${answer_seconds}.${answer_tenths}s`;
-          console.log(answer_seconds);
+          document.getElementById("demo").innerHTML = `Q${i + 1} - ${globalData[i].category_name.toUpperCase()} - ${globalData[i].difficulty_name.toUpperCase()} - Mark Mazurek - ${answer_seconds}.${answer_tenths}s`;
       }
 
       showAnswer("");
@@ -7023,8 +7018,7 @@ const mainGameFunction = async () => {
   showQuestion("Thanks for playing!");
   progressBar.style.animationPlayState = "paused";
   document.getElementById('start-pause').textContent = 'START GAME';
-  document.getElementById("demo").innerHTML =
-      'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024. Contact us at mark.mazurek@triviolivia.com';
+  document.getElementById("demo").innerHTML = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024. Contact us at mark.mazurek@triviolivia.com';
 };
 
 
