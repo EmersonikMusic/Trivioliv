@@ -6934,25 +6934,6 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 const mainGameFunction = async () => {
   document.getElementById("demo").innerHTML = 'Fetching questions...';
 
-  const questionArea = document.getElementById("question-area"); // Assuming this is where questions are displayed
-  let loading = true;
-
-  // Function to show a simple loading animation (dot cycle)
-  const loadingAnimation = () => {
-      let dots = "";
-      const interval = setInterval(() => {
-          dots = dots.length < 3 ? dots + "." : "";
-          if (!loading) {
-              clearInterval(interval);
-              questionArea.innerHTML = ""; // Clear loading animation
-          } else {
-              questionArea.innerHTML = `Loading questions${dots}`;
-          }
-      }, 500);
-  };
-
-  loadingAnimation();
-
   try {
       const fetchPromise = fetchData(moddedUrl);
       const timeoutPromise = new Promise((_, reject) =>
@@ -6961,14 +6942,9 @@ const mainGameFunction = async () => {
 
       await Promise.race([fetchPromise, timeoutPromise]);
 
-      loading = false;
-      questionArea.innerHTML = ""; // Clear loading animation
-
       document.getElementById("demo").innerHTML = 'Questions fetched!';
       await delay(1000);
   } catch (error) {
-      loading = false;
-      questionArea.innerHTML = ""; // Clear loading animation
       document.getElementById("demo").innerHTML = 'Could not fetch questions due to settings or connection problems. Please try again or change settings.';
       return; // Stop execution if fetch fails
   }
@@ -7044,7 +7020,6 @@ const mainGameFunction = async () => {
   document.getElementById('start-pause').textContent = 'START GAME';
   document.getElementById("demo").innerHTML = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2024. Contact us at mark.mazurek@triviolivia.com';
 };
-
 
 
 
