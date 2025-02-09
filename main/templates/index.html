@@ -128,7 +128,9 @@
                 <div class="loading-bar-area">Loading Bar Area</div>
             </div>
             <div class="options-menu d-flex flex-column flex-md-column flex-sm-row">
-                <button class="btn btn-primary start-game-btn">START GAME</button>
+                <div id="start-game" class="start-game">
+                    <button onclick="dontFetchDataIfAllDeselected()" id="start-pause" type="button">START GAME</button>
+                </div>
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">CATEGORIES</button>
                     <ul class="dropdown-menu">
