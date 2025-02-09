@@ -7335,13 +7335,21 @@ function closeAboutUs() {
 
 // Fullscreen mode attempt
 function toggleFullscreen() {
-  let elem = document.documentElement; // The whole page
+  let elem = document.documentElement;
 
-  // Check if fullscreen is active
-  if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
-    exitFullscreen();
+  // Check if the device is iPhone or iPad (Safari fullscreen is restricted)
+  let isiOS = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  if (!isiOS) {
+    // Normal fullscreen API for desktop & Android
+    if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+      exitFullscreen();
+    } else {
+      enterFullscreen(elem);
+    }
   } else {
-    enterFullscreen(elem);
+    // iOS workaround (hides Safari UI elements)
+    simulateFullscreenOniOS();
   }
 }
 
@@ -7355,14 +7363,6 @@ function enterFullscreen(element) {
   } else if (element.msRequestFullscreen) { // IE11
     element.msRequestFullscreen();
   }
-
-  // 🔥 iOS Safari workaround (iPhones/iPads)
-  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-    document.body.style.position = "fixed";
-    document.body.style.width = "100vw";
-    document.body.style.height = "100vh";
-    document.body.style.overflow = "hidden";
-  }
 }
 
 function exitFullscreen() {
@@ -7375,12 +7375,15 @@ function exitFullscreen() {
   } else if (document.msExitFullscreen) { // IE11
     document.msExitFullscreen();
   }
+}
 
-  // 🔥 Reset iOS Safari styles
-  if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-    document.body.style.position = "";
-    document.body.style.width = "";
-    document.body.style.height = "";
-    document.body.style.overflow = "";
-  }
+function simulateFullscreenOniOS() {
+  // Hides the Safari UI (works when the user scrolls down a little)
+  document.documentElement.style.height = "100%";
+  document.documentElement.style.overflow = "hidden";
+  document.body.style.height = "100%";
+  document.body.style.overflow = "hidden";
+
+  // Trigger iOS fullscreen-like behavior
+  window.scrollTo(0, 1); // Hides the address bar when possible
 }
