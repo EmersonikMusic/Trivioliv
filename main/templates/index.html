@@ -156,34 +156,25 @@
                     <button onclick="dontFetchDataIfAllDeselected()" id="start-pause" type="button">START GAME</button>
                 </div>
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">CATEGORIES</button>
-                    <ul class="dropdown-menu">
-                        <li><button class="dropdown-item">Art</button></li>
-                        <li><button class="dropdown-item">Economy</button></li>
-                        <li><button class="dropdown-item">Food</button></li>
-                        <li><button class="dropdown-item">Games</button></li>
-                        <li><button class="dropdown-item">Geography</button></li>
-                        <li><button class="dropdown-item">History</button></li>
-                        <li><button class="dropdown-item">Human Body</button></li>
-                        <li><button class="dropdown-item">Language</button></li>
-                        <li><button class="dropdown-item">Law</button></li>
-                        <li><button class="dropdown-item">Literature</button></li>
-                        <li><button class="dropdown-item">Math</button></li>
-                        <li><button class="dropdown-item">Miscellaneous</button></li>
-                        <li><button class="dropdown-item">Movies</button></li>
-                        <li><button class="dropdown-item">Music</button></li>
-                        <li><button class="dropdown-item">Nature</button></li>
-                        <li><button class="dropdown-item">Performing Arts</button></li>
-                        <li><button class="dropdown-item">Philosophy</button></li>
-                        <li><button class="dropdown-item">Politics</button></li>
-                        <li><button class="dropdown-item">Pop Culture</button></li>
-                        <li><button class="dropdown-item">Science</button></li>
-                        <li><button class="dropdown-item">Sports</button></li>
-                        <li><button class="dropdown-item">Technology</button></li>
-                        <li><button class="dropdown-item">Television</button></li>
-                        <li><button class="dropdown-item">Theology</button></li>
-                        <li><button class="dropdown-item">Video Games</button></li>
-                    </ul>
+                    <!--Categories menu-->
+                <div class="wrap-collabsible"> 
+                    <input id="collapsible-categories" class="toggle" type="checkbox"> 
+                    <label for="collapsible-categories" class="lbl-toggle">
+                        CATEGORIES
+                    </label>
+                    <div class="collapsible-content">
+                        <div class="content-inner">
+                            <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
+                            {% for category in categories %}
+                            <div id='{{ category.name | slugify }}'>
+                                <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                                    <span class="indicator"></span>
+                                    {{ category.name | upper }}
+                                </button>
+                            </div>
+                            {% endfor %}
+                    </div>
+                    </div>
                 </div>
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">DIFFICULTIES</button>
