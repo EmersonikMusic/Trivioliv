@@ -110,11 +110,16 @@
             <div class="text-left">
                 <span>TRIVIOLIVIA.com - Earth's deepest trivia source</span>
             </div>
-            <div class="text-right">
-                <button class="btn btn-light">CONFIGURE</button>
-                <button class="btn btn-light">SIGN IN</button>
-                <button class="btn btn-light">MAKE ACCOUNT</button>
-            </div>
+            <div class="login">
+                {% if user.is_authenticated %}
+                <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
+                <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
+                <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
+                {% else %}
+                    <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">Register</button></a>
+                    <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">Login</button></a>
+                {% endif %}
+            </div> 
         </div>
         <div class="content-wrapper d-md-flex">
             <div class="game-area">
