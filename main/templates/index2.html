@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrivioLivia Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ06R3e5ZlVJqDlI9gQ65zRlFFmh3bnYhbggWyOMFUzZclRPf/ZYmFYkk8R7" crossorigin="anonymous">
+    <style>
+        /* Full screen layout */
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .top-banner, .game-area, .loading-bar {
+            width: 100%;
+            transition: width 0.3s ease-in-out;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background-color: lightcoral;
+        }
+
+        /* Game Area - Make it fill the available vertical space */
+        .game-area {
+            display: flex;
+            height: calc(100vh - 80px); /* 100vh minus the height of the top banner */
+            background-color: lightgreen;
+            position: relative;
+        }
+
+        /* QA Area takes up most of the space */
+        .qa-area {
+            display: flex;
+            flex-direction: column;
+            flex: 5; /* Takes up most of the space */
+            background-color: lightblue;
+            padding: 10px;
+        }
+
+        /* Character Area takes up only the right sixth */
+        .character-area {
+            flex: 1; /* 1/6th of the game area */
+            background-color: lightgoldenrodyellow;
+            padding: 10px;
+        }
+
+        /* Question Area and Answer Area should fill almost all vertical space */
+        .question-area, .answer-area {
+            flex: 1; /* Both areas take equal space */
+            background-color: lightyellow;
+            padding: 10px;
+            margin-bottom: 10px; /* Adds space between the areas */
+        }
+
+        .question-area {
+            background-color: lightcyan;
+        }
+
+        /* Options Menu - Hidden off the right side */
+        .options-menu {
+            position: fixed;
+            top: 0;
+            right: -300px; /* Hidden off-screen initially */
+            width: 300px;
+            height: 100vh;
+            background-color: lightpink;
+            transition: right 0.3s ease-in-out; /* Slide effect */
+            padding: 20px;
+        }
+
+        /* Toggle button to show/hide options menu */
+        .toggle-menu-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: right 0.3s ease-in-out; /* Same slide effect as menu */
+        }
+
+        /* Loading Bar */
+        .loading-bar {
+            position: absolute;
+            bottom: 0;
+            background-color: lightpink;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Grid system for container, row, col */
+        .container, .row, .col {
+            background-color: lightgray; /* Background color for the bootstrap grid system */
+        }
+
+        /* Specific row background colors */
+        .top-banner .row {
+            background-color: lightyellow;
+        }
+
+        .game-area .row {
+            background-color: lightcyan;
+        }
+
+        /* Style for top-banner to ensure proper alignment */
+        .top-banner .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-banner .container h4 {
+            margin: 0;
+        }
+
+        .top-banner .container .auth-links a {
+            color: white;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Top Banner -->
+    <div class="top-banner bg-primary text-white py-2">
+        <div class="container">
+            <h4>TRIVIOLIVIA</h4>
+            <div class="auth-links">
+                <a href="#">Log in</a> | <a href="#">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Area -->
+    <div class="game-area">
+        <!-- QA Area -->
+        <div class="qa-area">
+            <!-- Question Area -->
+            <div class="question-area">
+                <h5>Question Area</h5>
+                <p>Your question will appear here.</p>
+            </div>
+            <!-- Answer Area -->
+            <div class="answer-area">
+                <h5>Answer Area</h5>
+                <p>Your answers will appear here.</p>
+            </div>
+        </div>
+
+        <!-- Character Area -->
+        <div class="character-area">
+            <h5>Character Area</h5>
+            <p>Your character information will be shown here.</p>
+        </div>
+
+        <!-- Toggle Button to Show/Hide Options Menu -->
+        <button class="toggle-menu-btn" onclick="toggleMenu()">☰ Options</button>
+
+        <!-- Options Menu -->
+        <div class="options-menu">
+            <div class="row mb-3">
+                <div class="col">
+                    <button class="btn btn-secondary w-100">START GAME</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <button class="btn btn-secondary w-100">CATEGORIES</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <button class="btn btn-secondary w-100">DIFFICULTIES</button>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <button class="btn btn-secondary w-100">ERAS</button>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col">
+                    <button class="btn btn-secondary w-100">SETTINGS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Bar -->
+    <div class="loading-bar">
+        <div class="row">
+            <div class="col">
+                <span>Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-kaI3bGqV3E5CO5y7vO0xtS1imZy9J0d7z0CkVOW2Y0PYXv2J1lW2jrhV9cbD03nS" crossorigin="anonymous"></script>
+    <script>
+        // Toggle the options menu to slide in and out
+        function toggleMenu() {
+            const optionsMenu = document.querySelector('.options-menu');
+            const toggleBtn = document.querySelector('.toggle-menu-btn');
+            const gameArea = document.querySelector('.game-area');
+            const topBanner = document.querySelector('.top-banner');
+            const loadingBar = document.querySelector('.loading-bar');
+            const currentRight = optionsMenu.style.right;
+
+            if (currentRight === '0px') {
+                optionsMenu.style.right = '-300px'; // Hide the menu
+                toggleBtn.style.right = '20px'; // Reset the button position
+                gameArea.style.width = '100%'; // Reset the game area width
+                topBanner.style.width = '100%'; // Reset the top banner width
+                loadingBar.style.width = '100%'; // Reset the loading bar width
+            } else {
+                optionsMenu.style.right = '0px'; // Show the menu
+                toggleBtn.style.right = '320px'; // Move the button with the menu
+                gameArea.style.width = 'calc(100% - 300px)'; // Shrink the game area
+                topBanner.style.width = 'calc(100% - 300px)'; // Shrink the top banner
+                loadingBar.style.width = 'calc(100% - 300px)'; // Shrink the loading bar
+            }
+        }
+    </script>
+</body>
+</html>
