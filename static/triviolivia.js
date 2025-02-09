@@ -7337,19 +7337,19 @@ function closeAboutUs() {
 function toggleFullscreen() {
   let elem = document.documentElement;
 
-  // Check if the device is iPhone or iPad (Safari fullscreen is restricted)
+  // Detect iOS devices (Safari or Chrome)
   let isiOS = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
 
   if (!isiOS) {
-    // Normal fullscreen API for desktop & Android
+    // Use the Fullscreen API for Android and Desktop
     if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
       exitFullscreen();
     } else {
       enterFullscreen(elem);
     }
   } else {
-    // iOS workaround (hides Safari UI elements)
-    simulateFullscreenOniOS();
+    // For iPhone and iPad, simulate fullscreen using layout tricks
+    simulateFullscreenOnMobile();
   }
 }
 
@@ -7377,13 +7377,19 @@ function exitFullscreen() {
   }
 }
 
-function simulateFullscreenOniOS() {
-  // Hides the Safari UI (works when the user scrolls down a little)
+function simulateFullscreenOnMobile() {
+  // Hide Safari and Chrome UI on iOS by simulating fullscreen
   document.documentElement.style.height = "100%";
   document.documentElement.style.overflow = "hidden";
   document.body.style.height = "100%";
   document.body.style.overflow = "hidden";
 
-  // Trigger iOS fullscreen-like behavior
-  window.scrollTo(0, 1); // Hides the address bar when possible
+  // Hide the address bar in Safari and Chrome (scroll trick)
+  window.scrollTo(0, 1);
+
+  // Optionally, show a prompt to add to home screen for a more app-like experience
+  if (window.matchMedia("(display-mode: standalone)").matches) {
+    // If the page is added to the home screen, we can assume it's "fullscreen"
+    document.body.style.marginTop = "0px";
+  }
 }
