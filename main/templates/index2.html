@@ -1,0 +1,257 @@
+<!-- {% extends 'base.html' %}
+{% load static %}
+
+{% block content %} -->
+
+<link rel='stylesheet' href='{% static "triviolivia.css" %}'>
+
+<head>
+  <link rel="icon" type="image/x-icon" href="{% static 'SVGs/favicon.svg' %}">
+  <title>TRIVIOLIVIA - Earth's deepest trivia source</title>
+</head>
+
+
+
+<!-- Google analytics tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7JY71BDXF0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7JY71BDXF0');
+</script>
+
+
+
+    <!--Navbar-->
+    <nav class="navbar">
+        <div class="title">
+<h1>
+  <a href="" style="text-decoration: none; color: inherit;">
+    TRIVIOLIVIA<span class="smaller-font">.com</span>
+    <span class="somewhat-smaller-font">&nbsp;&nbsp;EARTH'S DEEPEST TRIVIA SOURCE</span>
+  </a>
+</h1>        </div>
+        <div class="login">
+            {% if user.is_authenticated %}
+            <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
+            <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
+            <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
+            {% else %}
+                <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">Register</button></a>
+                <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">Login</button></a>
+            {% endif %}
+        </div> 
+    </nav>
+
+    <!-- Main Container -->
+    <div id="main-container" class="main-container">
+        <div id="main-container-inner" class="main-container-inner">
+            <!--Game Area -->
+            <div id="game-area" class="game-area">
+
+
+              <!-- Card -->
+              <div id="overlay" onclick="closeAboutUs()"></div>
+      
+              <div id="about-us-card">
+                  <p>
+    
+                    <div class="container">
+                      <h2>WELCOME TO YOUR ENDLESS TRIVIA WORLD!</h2>
+                      <p>Who are we? Here at Triviolivia, we are a team of trivia fans who love learning, writing, and playing trivia. We believe that learning should be entertaining and stimulating. Our platform is designed for trivia experts, young learners, and everyone in between.</p>
+              
+                      <p>How do I play? Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="closeAboutUs(), dontFetchDataIfAllDeselected()">START GAME</span> to play a game with today’s unlocked categories or create an account to unlock them all for free!</p>
+              
+                      <p>What sets us apart? Triviolivia is not just another trivia game. It’s a free and fully customizable source of endless trivia questions and answers across:</p>
+                      <ul>
+                          <li>25 categories</li>
+                          <li>5 difficulty levels</li>
+                          <li>12 eras</li>
+                      </ul>
+                      <p>Let us handle the questions and answers. How you use them is up to you.</p>
+              
+                      <ul>
+                        <li>Need some fresh questions for your dated trivia board game? We got you.</li>
+                        <li>Want to make better use of your kid’s screen time? We got you.</li>
+                        <li>Forget to prepare for hosting bar trivia night? We got you.</li>
+                        <li>Are you a trivia wizard but not into politics, theater, or math? We got you.</li>
+                        <li>Are you music, movie, and video game expert but only after the year 2000? We got you.</li>
+                        <li>Love sports trivia? We got you.</li>
+                        <li>Hate sports trivia? We got you.</li>
+                        <li>Want to see if you know more about technology than your cousin knows about history? We got you.</li>
+                        <li>Want a balanced trivia showdown between your five year old brainiac and her boomer grandpa? We got you.</li>
+                        <li>Training for a Jeopardy run? We got you.</li>
+                        <li>Tired of AI hallucination questions? We got you.</li>
+                        <li>Want to just eventually know everything? Start by knowing that we got you.</li>                    
+                      </ul>
+              
+                      <p>How do I contribute? Our meticulously crafted and curated questions are designed to entertain, educate, challenge, and spark curiosity. We’re always looking for new questions. Submit yours for a chance to be credited or stay anonymous!</p>
+              
+                      <p>What next?</p>
+                      <div class="links">
+                        <ul>
+                          <li><a href="#">Suggest Improvements</a></li>
+                          <li><a href="#">Donate to Patreon</a></li>
+                          <li><a href="#">Share on Social Media</a></li>
+                          </ul>
+                      </div>
+                      <p>Good luck. Have fun. Nerd up!</p>
+
+                      <br>
+              
+                      <div class="footer">
+                          <p>With love,</p>
+                          <p>The Triviolivia Team</p>
+                      </div>
+                  </div>
+                  </p>
+                  <!-- <button onclick="closeAboutUs()">Close</button> -->
+              </div>
+
+
+                <!--Main game container area-->
+                <div id="container-game" class="container-game">
+                    <div id='question-container' class="question-container"></div>
+                    <div id='answer-container' class="answer-container"></div>
+
+                    
+                      <!-- <button id="startButton">Start/Restart</button>
+                      <button id="pauseButton">Pause/Resume</button>-->
+                </div>
+            </div>
+             <!-- dynamic loading bar attempt -->
+             <div id="loading-bar-container" class="loading-bar-container">
+                <div id="loading-bar">
+                    <div id="loading-text">
+                        <p id="demo" class="loader-text"></p>
+                    </div>
+                    <div id="progress"></div>
+                </div>
+            </div>
+            <!--Game Area End-->
+            <!-- <div id="demo" class="loading-bar-container">
+                    <p id="demo"></p>
+            </div> -->
+        </div>
+
+        <!--Side Menu-->
+        <div class="side-column" id="side-column">
+            <div id="start-game" class="start-game">
+                <button onclick="dontFetchDataIfAllDeselected()" id="start-pause" type="button">START GAME</button>
+            </div>
+            <div id="refetch-and-restart" class="pause-only">
+              <button onclick="refetchAndRestart()" id="refetch-and-restart" type="button">REFETCH AND RESTART</button>
+            </div>
+
+            <button onclick="toggleFullscreen()">TOGGLE FULLSCREEN</button>
+
+
+            <div id="about-us" class="pause-only">
+              <button onclick="displayAboutUs()" id="about-us" type="button">ABOUT US</button>
+          </div>
+      
+
+            <!-- <div id="reset-settings" class="pause-only">
+              <button onclick="resetSettings()" id="reset-settings" type="button">RESET SETTINGS</button>
+            </div> -->
+            <div class="options-menu">
+                <!--Categories menu-->
+                <div class="wrap-collabsible"> 
+                    <input id="collapsible-categories" class="toggle" type="checkbox"> 
+                    <label for="collapsible-categories" class="lbl-toggle">
+                        CATEGORIES
+                    </label>
+                    <div class="collapsible-content">
+                        <div class="content-inner">
+                            <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
+                            {% for category in categories %}
+                            <div id='{{ category.name | slugify }}'>
+                                <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                                    <span class="indicator"></span>
+                                    {{ category.name | upper }}
+                                </button>
+                            </div>
+                            {% endfor %}
+                    </div>
+                    </div>
+                </div>
+                <!--Difficulties menu-->
+                <div class="wrap-collabsible"> 
+                <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
+                <label for="collapsible-difficulties" class="lbl-toggle">
+                    DIFFICULTIES
+                </label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                        <button class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE </button>
+                        {% for difficulty in difficulties %}
+                        <div id='{{ difficulty.name }}'>
+                            <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
+                                <span class="indicator"></span>
+                                {{ difficulty.name | upper}}
+                            </button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                </div>
+                <!--Eras menu-->
+                <div class="wrap-collabsible"> 
+                <input id="collapsible-eras" class="toggle" type="checkbox"> 
+                <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                    <button class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
+                    {% for era in eras %}
+                    <div id='{{ era.name }}'>
+                        <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
+                            <span class="indicator"></span>
+                            {{ era.name }}
+                        </button>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                </div>
+                <!--Settings menu-->
+                <div class="wrap-collabsible"> 
+                    <input id="collapsible-settings" class="toggle" type="checkbox"> 
+                    <label for="collapsible-settings" class="lbl-toggle">settings</label>
+                    <div class="collapsible-content">
+                        <div class="content-inner">
+                            <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
+                                <div class="slider-container">
+                                    <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
+                                    <input type="range" min="10" max="100" value="10" step="10" class="slider" id="questionSlider">
+                                </div>
+                                <div class="slider-container">
+                                    <div id="perQuestionLabel" class="slider-label">5s / QUESTION</div>
+                                    <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
+                                </div>
+                
+                                <div class="slider-container">
+                                    <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
+                                    <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?xml version="1.0" encoding="UTF-8"?>
+
+            
+          {% load static %}
+          <div id="character">
+              <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
+          </div>
+
+        </div>
+        <!--Side Menu End-->
+    </div>
+
+<script src="{% static 'triviolivia.js' %}"></script>
+
+{% endblock %}
