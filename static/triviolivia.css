@@ -699,3 +699,21 @@ h2 {
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
+
+
+
+        @media screen and (max-width: 768px) and (orientation: portrait) {
+            #main-container {
+                flex-direction: column;
+                height: 100vh;
+            }
+        
+            .game-area {
+                height: 70vh;
+            }
+        
+            .options-menu {
+                height: 30vh;
+                overflow-y: auto; /* Allows scrolling if needed */
+            }
+        }
