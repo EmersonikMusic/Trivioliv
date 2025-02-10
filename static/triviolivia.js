@@ -1,4 +1,11 @@
 // Dictionary holding HTML content
+
+const svgPaths = {
+  history: "{% static 'SVGs/TO_HISTORY.svg' %}",
+  television: "{% static 'SVGs/TO_TELEVISION.svg' %}",
+};
+
+
 const contentDict = {
 
     'history' : `<img src="${svgPaths.history}" alt="Character">`,
