@@ -3,7 +3,7 @@
 
 const contentDict = {
 
-    'theater' : `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
+    'performing arts' : `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <defs>
       <style>
         .st0 {
@@ -540,7 +540,7 @@ const contentDict = {
     </g>
   </svg>`,
 
-  
+
 
     'math' : `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <defs>
