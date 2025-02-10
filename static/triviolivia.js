@@ -4,6 +4,7 @@
 const contentDict = {
 
     'history' : `<img src="${svgPaths.history}" alt="Character">`,
+    'language' : `<img src="${svgPaths.language}" alt="Character">`,
     'television' : `<img src="${svgPaths.television}" alt="Character">`,
 
 
