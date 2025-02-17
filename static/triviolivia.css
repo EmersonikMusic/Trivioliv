@@ -1,10 +1,15 @@
-body {
+html, body {
     font-family: "Montserrat", 'Calibri', sans-serif;
     font-size: 15px;
     background: linear-gradient(345deg, rgba(69, 93, 214, 1) 0%, rgba(78, 50, 100, 1) 100%);
+    background-attachment: fixed; /* Ensures full-screen background */
     margin: 0;
-    display: block
-    /* overflow: hidden; */
+    padding: 0;
+    width: 100%;
+    min-height: 100vh; /* Ensures background extends to the bottom */
+    overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+    display: flex;
+    flex-direction: column;
 }
 
 * {
@@ -631,8 +636,12 @@ h2 {
     display: flex;
     width: 100%;
     justify-content: center;
+    align-items: center;
     margin-top: auto;
-  }
+    min-height: 24px; /* Ensures visibility on mobile */
+    position: relative;
+    overflow: hidden;
+}
 
   /* Attempt at dynamic question and answer timer indicator */
   #loading-bar {
@@ -641,8 +650,10 @@ h2 {
     position: relative;
     overflow: hidden;
     justify-content: center;
-  }
-  #progress {
+    min-height: 19px;
+}
+
+#progress {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -650,7 +661,7 @@ h2 {
     left: 0;
     top: 0;
     animation: depleteProgress 10s linear infinite paused;
-  }
+}
 
   #loading-text {
     display: flex;
@@ -701,7 +712,11 @@ h2 {
         }
 
 
-
+        @media (max-width: 768px) {
+            .loading-bar-container {
+                min-height: 28px; /* Adjusts for mobile visibility */
+            }
+        }
 
 
 
