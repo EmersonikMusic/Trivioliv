@@ -1,14 +1,10 @@
-html, body {
+body {
     font-family: "Montserrat", 'Calibri', sans-serif;
     font-size: 15px;
     background: linear-gradient(345deg, rgba(69, 93, 214, 1) 0%, rgba(78, 50, 100, 1) 100%);
     margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden; /* Prevents scrolling */
-    display: flex;
-    flex-direction: column;
+    display: block
+    /* overflow: hidden; */
 }
 
 * {
@@ -408,6 +404,7 @@ h2 {
     top: 65px;
 }
 
+
 #start-pause button {
     width: 255px;
     height: 30px;
@@ -513,30 +510,36 @@ h2 {
 }
 
   
-#loading-bar-container {
+.loading-bar-container {
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     width: 100%;
-    position: fixed; /* Ensures it stays visible */
-    bottom: 0; /* Keeps it at the bottom */
-    left: 0;
+    height: 25px; /* Fixed height to ensure visibility */
     justify-content: center;
-    height: 20px; /* Adjusted height for visibility */
-    z-index: 9999; /* Ensures it's above other elements */
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Ensures it stays on top */
 }
 
   /* Attempt at dynamic question and answer timer indicator */
   #loading-bar {
     display: flex;
-    width: 100%;
+    width: 90%; /* Allows some margin on mobile */
+    height: 100%;
     position: relative;
+    overflow: hidden;
     justify-content: center;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
 }
 
 #progress {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 255, 0, 0.7); /* Bright color for visibility */
     position: absolute;
     left: 0;
     top: 0;
@@ -550,12 +553,15 @@ h2 {
     font-family: Arial, sans-serif;
     text-align: center;
     z-index: 1;
+    position: absolute;
+    width: 100%;
+    justify-content: center;
 }
 
-  @keyframes depleteProgress {
+@keyframes depleteProgress {
     0% { width: 100%; }
     100% { width: 0%; }
-  }
+}
 
   @keyframes replenishProgress {
     0% { width: 0%; }
