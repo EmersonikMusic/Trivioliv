@@ -1,15 +1,10 @@
-html, body {
+body {
     font-family: "Montserrat", 'Calibri', sans-serif;
     font-size: 15px;
     background: linear-gradient(345deg, rgba(69, 93, 214, 1) 0%, rgba(78, 50, 100, 1) 100%);
-    background-attachment: fixed; /* Ensures full-screen background */
     margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100vh; /* Ensures background extends to the bottom */
-    overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
-    display: flex;
-    flex-direction: column;
+    display: block
+    /* overflow: hidden; */
 }
 
 * {
@@ -232,18 +227,6 @@ input[type='checkbox'] {
     width: 100%;
   }
 
-  nav {
-    /* background-color: rgba(0,0,0,0.5); */
-  }
-
-   /* .navbar button {
-    background: none;
-    text-align: right;
-    font-size: 12px;
-    padding: 0px 10px;
-  } */
-
-
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -421,111 +404,6 @@ h2 {
     top: 65px;
 }
 
-/* #all-none-categories button {
-    background-color: white;
-} */
-
-/* #art button {
-    background-color: #dd7e6b;
-}
-
-#economy button {
-    background-color: #598C58;
-}
-
-#food button {
-    background-color: #F28500;
-}
-
-#games button {
-    background-color: #cc5500;
-}
-
-#geography button {
-    background-color: #9a7b4f;
-}
-
-#history button {
-    background-color: #f1c232;
-} 
-
-#human-body button {
-    background-color: #d8965b;
-}
-
-#language button {
-    background-color: #6693f5;
-}
-
-#law button {
-    background-color: #6f3e33;
-}
-
-#literature button {
-    background-color: #d99d29;
-}
-
-#math button {
-    background-color: #65635c;
-}
-
-#miscellaneous button {
-    background-color: #12A898;
-}
-
-#movies button {
-    background-color: #660000;
-}
-
-#music button {
-    background-color: #1DB954;
-}
-
-#nature button {
-    background-color: #043927;
-}
-
-#philosophy button {
-    background-color: #975fac;
-}
-
-#politics button {
-    background-color: #351c75;
-}
-
-#pop-culture button {
-    background-color: #ff8fab;
-}
-
-#science button {
-    background-color: #06550d;
-}
-
-#sports button {
-    background-color: #131e3a;
-}
-
-#technology button {
-    background-color: #1f5967;
-}
-
-#television button {
-    background-color: #2d2c29;
-}
-
-#theater button {
-    background-color: #b70000;
-}
-
-#theology button {
-    background-color: #3C1321;    
-}
-
-#video-games button {
-    background-color: #9900ff;
-} */
-
-
 #start-pause button {
     width: 255px;
     height: 30px;
@@ -636,12 +514,8 @@ h2 {
     display: flex;
     width: 100%;
     justify-content: center;
-    align-items: center;
     margin-top: auto;
-    min-height: 24px; /* Ensures visibility on mobile */
-    position: relative;
-    overflow: hidden;
-}
+  }
 
   /* Attempt at dynamic question and answer timer indicator */
   #loading-bar {
@@ -650,10 +524,8 @@ h2 {
     position: relative;
     overflow: hidden;
     justify-content: center;
-    min-height: 19px;
-}
-
-#progress {
+  }
+  #progress {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -661,7 +533,7 @@ h2 {
     left: 0;
     top: 0;
     animation: depleteProgress 10s linear infinite paused;
-}
+  }
 
   #loading-text {
     display: flex;
@@ -712,11 +584,7 @@ h2 {
         }
 
 
-        @media (max-width: 768px) {
-            .loading-bar-container {
-                min-height: 28px; /* Adjusts for mobile visibility */
-            }
-        }
+
 
 
 
