@@ -125,7 +125,7 @@ input[type='checkbox'] {
   transition: all .25s ease-out; 
   flex-direction: row;
   align-items: center;
-  height: 5%;
+  height: 3%;
   margin: 0px 20px;
   padding: 10px 20px;
 } 
