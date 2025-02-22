@@ -28,6 +28,7 @@
         var button = event.target;
         var buttonText = button.innerText || button.textContent || 'unknown-button';
         var category = 'General Button Click'; // Default category
+        var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
 
         // Determine button category based on class
         if (button.classList.contains('category')) {
@@ -40,9 +41,9 @@
             category = 'Navigation';
         }
 
-        gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked', {
+        gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked_' + state, {
             'event_category': category,
-            'event_label': buttonText
+            'event_label': buttonText + ' (' + state.toUpperCase() + ')'
         });
     }
 
@@ -52,6 +53,7 @@
         });
     });
 </script>
+
 
 
 
