@@ -30,6 +30,12 @@
         var category = 'General Button Click'; // Default category
         var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
 
+        // Special case for ALL/NONE buttons
+        if (buttonText.includes('ALL/NONE')) {
+            // If ALL/NONE button clicked, toggle state between 'on' and 'off'
+            state = (button.classList.contains('active') ? 'off' : 'on');
+        }
+
         // Determine button category based on class
         if (button.classList.contains('category')) {
             category = 'Category Selection';
@@ -53,6 +59,7 @@
         });
     });
 </script>
+
 
 
 
