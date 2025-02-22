@@ -22,7 +22,6 @@
   gtag('config', 'G-7JY71BDXF0');
 </script>
 
-<!-- Google Analytics Event Tracking -->
 <script>
     function trackButtonClick(event) {
         var button = event.target;
@@ -30,7 +29,29 @@
         var category = 'General Button Click'; // Default category
         var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
 
-        // Determine button category based on class
+        // Track All/None buttons for Categories, Difficulties, and Eras
+        if (button.id.includes('all-none')) {
+            var groupName = '';
+            if (button.id.includes('categories')) {
+                groupName = 'Categories';
+            } else if (button.id.includes('difficulties')) {
+                groupName = 'Difficulties';
+            } else if (button.id.includes('eras')) {
+                groupName = 'Eras';
+            }
+
+            // Check if the button is enabling or disabling all options
+            var action = button.classList.contains('active') ? 'enabled' : 'disabled';
+
+            gtag('event', groupName + '_all_none_' + action, {
+                'event_category': groupName + ' Selection',
+                'event_label': groupName + ' ALL/NONE (' + action.toUpperCase() + ')'
+            });
+
+            return; // Skip normal button tracking for these buttons
+        }
+
+        // Default behavior for other buttons
         if (button.classList.contains('category')) {
             category = 'Category Selection';
         } else if (button.classList.contains('difficulty')) {
@@ -53,6 +74,7 @@
         });
     });
 </script>
+
 
 
 
@@ -225,7 +247,7 @@
                 </label>
                 <div class="collapsible-content">
                     <div class="content-inner">
-                        <button class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE </button>
+                        <button id="all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE </button>
                         {% for difficulty in difficulties %}
                         <div id='{{ difficulty.name }}'>
                             <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
@@ -245,7 +267,7 @@
                 <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
                 <div class="collapsible-content">
                     <div class="content-inner">
-                    <button class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
+                    <button id="all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
                     {% for era in eras %}
                     <div id='{{ era.name }}'>
                         <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
