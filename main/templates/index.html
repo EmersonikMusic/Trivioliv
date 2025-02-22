@@ -29,61 +29,22 @@
         var buttonText = button.innerText || button.textContent || 'unknown-button';
         var category = 'General Button Click'; // Default category
         var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
-        var buttonCategory = ''; // Will hold category name (e.g., categories, difficulties, or eras)
-        var action = ''; // Will be either 'all' or 'none' for ALL/NONE buttons
 
-        // Handle ALL/NONE buttons specifically
-        if (buttonText.includes('ALL/NONE')) {
-            // Determine the category of the ALL/NONE button
-            if (button.closest('.wrap-collabsible') && button.closest('.wrap-collabsible').querySelector('input[id="collapsible-categories"]')) {
-                buttonCategory = 'categories';
-            } else if (button.closest('.wrap-collabsible') && button.closest('.wrap-collabsible').querySelector('input[id="collapsible-difficulties"]')) {
-                buttonCategory = 'difficulties';
-            } else if (button.closest('.wrap-collabsible') && button.closest('.wrap-collabsible').querySelector('input[id="collapsible-eras"]')) {
-                buttonCategory = 'eras';
-            }
-
-            // Determine whether 'ALL' or 'NONE' was clicked
-            action = buttonText.includes('ALL') ? 'ALL' : 'NONE';
-
-            // Check whether the button is enabling or disabling (whether any buttons are selected in the category)
-            var allButtons = document.querySelectorAll('#' + buttonCategory + ' button');
-            var anyActive = Array.from(allButtons).some(function(button) {
-                return button.classList.contains('active');
-            });
-
-            // If 'ALL' is clicked, it should enable all, if 'NONE' is clicked, it should disable all
-            var actionStatus = action === 'ALL' ? 'ENABLED' : 'DISABLED';
-            if (anyActive && action === 'NONE') {
-                actionStatus = 'DISABLED'; // If any buttons were active, this disables all
-            } else if (!anyActive && action === 'ALL') {
-                actionStatus = 'ENABLED'; // If no buttons were active, this enables all
-            }
-
-            // Track the event with the appropriate action status
-            gtag('event', action + '_' + buttonCategory + '_clicked', {
-                'event_category': 'Button Action',
-                'event_label': action + '_' + buttonCategory + '_' + actionStatus
-            });
-
-        } else {
-            // Handle other button types (non-ALL/NONE)
-            var state = button.classList.contains('active') ? 'on' : 'off';
-            if (button.classList.contains('category')) {
-                category = 'Category Selection';
-            } else if (button.classList.contains('difficulty')) {
-                category = 'Difficulty Selection';
-            } else if (button.classList.contains('era')) {
-                category = 'Era Selection';
-            } else if (button.classList.contains('nav-button')) {
-                category = 'Navigation';
-            }
-
-            gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked_' + state, {
-                'event_category': category,
-                'event_label': buttonText.replace(/\s+/g, '_') + '_' + state.toUpperCase()
-            });
+        // Determine button category based on class
+        if (button.classList.contains('category')) {
+            category = 'Category Selection';
+        } else if (button.classList.contains('difficulty')) {
+            category = 'Difficulty Selection';
+        } else if (button.classList.contains('era')) {
+            category = 'Era Selection';
+        } else if (button.classList.contains('nav-button')) {
+            category = 'Navigation';
         }
+
+        gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked_' + state, {
+            'event_category': category,
+            'event_label': buttonText + ' (' + state.toUpperCase() + ')'
+        });
     }
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -92,10 +53,6 @@
         });
     });
 </script>
-
-
-
-
 
 
 
