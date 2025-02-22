@@ -25,19 +25,34 @@
 <!-- Google Analytics Event Tracking -->
 <script>
     function trackButtonClick(event) {
-      var buttonId = event.target.id || 'unknown-button';
-      gtag('event', buttonId + '_clicked', {
-        'event_category': 'Button Click',
-        'event_label': buttonId
-      });
+        var button = event.target;
+        var buttonText = button.innerText || button.textContent || 'unknown-button';
+        var category = 'General Button Click'; // Default category
+
+        // Determine button category based on class
+        if (button.classList.contains('category')) {
+            category = 'Category Selection';
+        } else if (button.classList.contains('difficulty')) {
+            category = 'Difficulty Selection';
+        } else if (button.classList.contains('era')) {
+            category = 'Era Selection';
+        } else if (button.classList.contains('nav-button')) {
+            category = 'Navigation';
+        }
+
+        gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked', {
+            'event_category': category,
+            'event_label': buttonText
+        });
     }
-  
+
     document.addEventListener("DOMContentLoaded", function() {
-      document.querySelectorAll("button").forEach(function(button) {
-        button.addEventListener("click", trackButtonClick);
-      });
+        document.querySelectorAll("button").forEach(function(button) {
+            button.addEventListener("click", trackButtonClick);
+        });
     });
-  </script>
+</script>
+
 
 
     <!--Navbar-->
@@ -189,7 +204,7 @@
                             <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
                             {% for category in categories %}
                             <div id='{{ category.name | slugify }}'>
-                                <button onclick='toggle_categories(this.id), toggleIndicator(this)' buttonid='{{ category.id }}' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                                <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
                                     <span class="indicator"></span>
                                     {{ category.name | upper }}
                                 </button>
