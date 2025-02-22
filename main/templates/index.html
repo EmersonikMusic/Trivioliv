@@ -22,6 +22,22 @@
   gtag('config', 'G-7JY71BDXF0');
 </script>
 
+<!-- Google Analytics Event Tracking -->
+<script>
+    function trackButtonClick(event) {
+      var buttonId = event.target.id || 'unknown-button';
+      gtag('event', 'click', {
+        'event_category': 'Button Click',
+        'event_label': buttonId
+      });
+    }
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll("button").forEach(function(button) {
+        button.addEventListener("click", trackButtonClick);
+      });
+    });
+  </script>
 
 
     <!--Navbar-->
