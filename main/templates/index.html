@@ -29,7 +29,7 @@
         var buttonText = button.innerText || button.textContent || 'unknown-button';
         var category = 'General Button Click'; // Default category
         var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
-        var buttonCategory = ''; // Will hold category name (e.g., categories, difficulties, eras)
+        var buttonCategory = ''; // Will hold category name (e.g., categories, difficulties, or eras)
         var action = ''; // Will be either 'all' or 'none' for ALL/NONE buttons
 
         // Handle ALL/NONE buttons specifically
@@ -45,28 +45,40 @@
 
             // Determine whether 'ALL' or 'NONE' was clicked
             action = buttonText.includes('ALL') ? 'ALL' : 'NONE';
-        }
 
-        // Determine button category for other buttons (non-ALL/NONE buttons)
-        if (button.classList.contains('category')) {
-            category = 'Category Selection';
-        } else if (button.classList.contains('difficulty')) {
-            category = 'Difficulty Selection';
-        } else if (button.classList.contains('era')) {
-            category = 'Era Selection';
-        } else if (button.classList.contains('nav-button')) {
-            category = 'Navigation';
-        }
-
-        // Send event to Google Analytics with the appropriate event label
-        if (action) {
-            // If it's an ALL/NONE button, log the specific action (ALL/NONE) and the category
-            gtag('event', action + '_' + buttonCategory + '_clicked', {
-                'event_category': category,
-                'event_label': action + '_' + buttonCategory + '_' + state.toUpperCase()
+            // Check whether the button is enabling or disabling (whether any buttons are selected in the category)
+            var allButtons = document.querySelectorAll('#' + buttonCategory + ' button');
+            var anyActive = Array.from(allButtons).some(function(button) {
+                return button.classList.contains('active');
             });
+
+            // If 'ALL' is clicked, it should enable all, if 'NONE' is clicked, it should disable all
+            var actionStatus = action === 'ALL' ? 'ENABLED' : 'DISABLED';
+            if (anyActive && action === 'NONE') {
+                actionStatus = 'DISABLED'; // If any buttons were active, this disables all
+            } else if (!anyActive && action === 'ALL') {
+                actionStatus = 'ENABLED'; // If no buttons were active, this enables all
+            }
+
+            // Track the event with the appropriate action status
+            gtag('event', action + '_' + buttonCategory + '_clicked', {
+                'event_category': 'Button Action',
+                'event_label': action + '_' + buttonCategory + '_' + actionStatus
+            });
+
         } else {
-            // For non-ALL/NONE buttons, the usual tracking
+            // Handle other button types (non-ALL/NONE)
+            var state = button.classList.contains('active') ? 'on' : 'off';
+            if (button.classList.contains('category')) {
+                category = 'Category Selection';
+            } else if (button.classList.contains('difficulty')) {
+                category = 'Difficulty Selection';
+            } else if (button.classList.contains('era')) {
+                category = 'Era Selection';
+            } else if (button.classList.contains('nav-button')) {
+                category = 'Navigation';
+            }
+
             gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked_' + state, {
                 'event_category': category,
                 'event_label': buttonText.replace(/\s+/g, '_') + '_' + state.toUpperCase()
@@ -80,6 +92,7 @@
         });
     });
 </script>
+
 
 
 
