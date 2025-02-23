@@ -1,7 +1,6 @@
 // Dictionary holding HTML content
 const contentDict = {
-
-    'performing arts' : `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
+  "performing arts": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <defs>
       <style>
         .st0 {
@@ -538,9 +537,7 @@ const contentDict = {
     </g>
   </svg>`,
 
-
-
-    'math' : `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
+  math: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <defs>
       <style>
         .st0 {
@@ -1239,7 +1236,7 @@ const contentDict = {
     <path class="st40" d="M222.5,300.6c-2.3.3,11.8,26.2-17.6,36.2,3.9.5,7.2,1.1,10.4,1.7,5.9-4.5,8.9-9.6,9.9-14,.5,1.3,1.6-15.3-2.7-23.9Z"/>
   </svg>`,
 
-    'history' : `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
+  history: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <style>
       .st0 {
         fill: #1e131b;
@@ -1816,9 +1813,7 @@ const contentDict = {
   </g>
 </svg>`,
 
-
-
-    'language' : `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
+  language: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <!-- Generator: Adobe Illustrator 29.1.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 142)  -->
     <defs>
       <style>
@@ -2314,9 +2309,7 @@ const contentDict = {
     <path class="st28" d="M189.7,319c.5.3,2.1,0,2.2,0,1.3.3,2.6,1.1,4,.9.2,1.3.4.9.4.9,1.1,9.2-2.6,9.2-10.2,6.4,1-1.7,1.6-8.1,3.6-8.2Z"/>
   </svg>`,
 
-
-
-    'television' : `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
+  television: `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <defs>
       <style>
         .st0 {
@@ -2695,8 +2688,7 @@ const contentDict = {
     </g>
   </svg>`,
 
-
-    'politics' : `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 374 550">
+  politics: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 374 550">
     <defs>
     <style>
       .st0 {
@@ -3186,8 +3178,7 @@ const contentDict = {
   <path class="st34" d="M123.4,404.4c-1.1,1.1-1.1,2.9-.1,4.1s2.6,1.2,3.7.1,1.1-2.9.1-4.1-2.6-1.2-3.7-.1Z"/>
 </svg>`,
 
-
-    'video games' : `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 492.7">
+  "video games": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 492.7">
     <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
     <defs>
       <style>
@@ -3602,8 +3593,7 @@ const contentDict = {
     <path class="st31" d="M224,307.1c-1-9.1,9.3-16.5,9.6-25.7,0-.5.1-4.1-.2-4.1-.2,1.2-.4,2.5-.6,3.7-.9,6.2-14.8,14.8-13.8,21,2,13,4,13.8,2.1,26.4,2,.1,3.3-17.8,2.9-21.4Z"/>
   </svg>`,
 
-
-    'sports' : `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 310 491">
+  sports: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 310 491">
     <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
     <defs>
       <style>
@@ -4231,8 +4221,7 @@ const contentDict = {
     <path class="st70" d="M99.8,424.5c-.5,14.3-1.1,28.9-.2,43.1-2.9,0-11.4-4-14.4-4-1-19.3,5.7-46.2,7.8-64.8.8,3.4,6.8,6.7,7.2,8.5-.3,5.6-1.1,11.9-.5,17.2Z"/>
   </svg>`,
 
-
-    'science' : `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 492.7">
+  science: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 492.7">
     <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
     <defs>
       <style>
@@ -4843,9 +4832,7 @@ const contentDict = {
     <path class="st62" d="M164.5,289.6c2-.7,5.1-5.5,5-6,1,4-3,7.8-5.6,8-11.4,1-13.3-1.3-17.4-3s-5-2-5-4c0,.2,4.3,2.6,9,4s10.8,2.2,14,1Z"/>
   </svg>`,
 
-
-
-    'music' : `
+  music: `
     <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 333 554.8">
     <style>
       .st0 {
@@ -5354,7 +5341,7 @@ const contentDict = {
   <path class="st4" d="M137.9,344"/>
 </svg>
     `,
-    'literature': `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 492.7">
+  literature: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 492.7">
     <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
     <defs>
       <style>
@@ -5776,9 +5763,7 @@ const contentDict = {
     <path class="st36" d="M141.1,113.3"/>
   </svg>`,
 
-
-
-    'geography': `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 492.7">
+  geography: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 492.7">
     <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
     <defs>
       <style>
@@ -6290,7 +6275,7 @@ const contentDict = {
     </g>
     <path class="st28" d="M189.3,339c.5.3,2.4,0,2.5,0,1.5.4,2.9,1.2,4.5,1,.3,1.4.5.9.5,1,1.2,10.2-2.9,10.2-11.5,7,1.2-1.8,1.8-9,4-9Z"/>
   </svg>`,
-    'food & drink': `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 609.8">
+  "food & drink": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 609.8">
     <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
     <defs>
       <style>
@@ -6887,8 +6872,7 @@ const contentDict = {
     </g>
   </svg>`,
 
-
-    'human body': `
+  "human body": `
     <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 310 491">
   <defs>
     <style>
@@ -7540,9 +7524,7 @@ const contentDict = {
   </g>
 </svg>`,
 
-
-
-    'nature': `
+  nature: `
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 390.8 556.2">
 <defs>
 <style>
@@ -8100,8 +8082,7 @@ fill: #4e0b1b;
 </g>
 </g>
 </svg>`,
-    'default': 
-        `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 310 491">
+  default: `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 310 491">
 <defs>
 <style>
 .cls-1 {
@@ -8515,7 +8496,7 @@ fill: #4e0b1b;
 </g>
 </g>
 </svg>`,
-    'art': `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 374 550">
+  art: `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 374 550">
 <defs>
 <style>
 .cls-1 {
@@ -9257,15 +9238,15 @@ fill: #4e0b1b;
 </g>
 </g>
 </g>
-</svg>`
+</svg>`,
 };
 
 // Unsure
-const progressElement = document.getElementById('progress');
+const progressElement = document.getElementById("progress");
 
 // Declaring question and answer display
-const questionDisplay = document.querySelector('.question-container')
-const answerDisplay = document.querySelector('.answer-container')
+const questionDisplay = document.querySelector(".question-container");
+const answerDisplay = document.querySelector(".answer-container");
 
 // Declaring game setting variables
 var number_of_questions = 10;
@@ -9285,625 +9266,664 @@ var era_list = [];
 var all_none_categories = true;
 var all_none_difficulties = true;
 var all_none_eras = true;
-var categoryButtons = document.querySelectorAll('.category');
-var difficultyButtons = document.querySelectorAll('.difficulty');
-var eraButtons = document.querySelectorAll('.era');
+var categoryButtons = document.querySelectorAll(".category");
+var difficultyButtons = document.querySelectorAll(".difficulty");
+var eraButtons = document.querySelectorAll(".era");
 
 // Declaring of mapping of category, difficulty, and era numbers to their respective names
 var category_number_identities = {
-    1: 'Art',
-    2: 'Economy',
-    3: 'Food & Drink',
-    4: 'Games',
-    5: 'Geography',
-    6: 'History',
-    7: 'Human Body',
-    8: 'Language',
-    9: 'Literature',
-    10: 'Math',
-    11: 'Miscellaneous',
-    12: 'Movies',
-    13: 'Music',
-    14: 'Nature',
-    15: 'Philosophy',
-    16: 'Politics',
-    17: 'Pop Culture',
-    18: 'Science',
-    19: 'Sports',
-    20: 'Technology',
-    21: 'Television',
-    22: 'Performing Arts',
-    23: 'Theology',
-    24: 'Video Games',
-    33: 'Law'
-}
+  1: "Art",
+  2: "Economy",
+  3: "Food & Drink",
+  4: "Games",
+  5: "Geography",
+  6: "History",
+  7: "Human Body",
+  8: "Language",
+  9: "Literature",
+  10: "Math",
+  11: "Miscellaneous",
+  12: "Movies",
+  13: "Music",
+  14: "Nature",
+  15: "Philosophy",
+  16: "Politics",
+  17: "Pop Culture",
+  18: "Science",
+  19: "Sports",
+  20: "Technology",
+  21: "Television",
+  22: "Performing Arts",
+  23: "Theology",
+  24: "Video Games",
+  33: "Law",
+};
 
 // Does nothing right now
 var loginwalled_categories = {
-  3: 'Food & Drink',
-  4: 'Games',
-  11: 'Miscellaneous',
-  15: 'Philosophy',
-  16: 'Politics',
-  17: 'Pop Culture',
-  22: 'Performing Arts',
-  23: 'Theology',
-  24: 'Video Games',
-  33: 'Law'
-}
+  3: "Food & Drink",
+  4: "Games",
+  11: "Miscellaneous",
+  15: "Philosophy",
+  16: "Politics",
+  17: "Pop Culture",
+  22: "Performing Arts",
+  23: "Theology",
+  24: "Video Games",
+  33: "Law",
+};
 
 var difficulty_number_identities = {
-    5: 'Genius',
-    4: 'Hard',
-    3: 'Average',
-    2: 'Easy',
-    1: 'Casual'
-}
+  5: "Genius",
+  4: "Hard",
+  3: "Average",
+  2: "Easy",
+  1: "Casual",
+};
 
 var era_number_identities = {
-    1: 'Pre-1500',
-    2: '1500-1800',
-    3: '1800-1900',
-    4: '1900-1950',
-    5: '1950s',
-    6: '1960s',
-    7: '1970s',
-    8: '1980s',
-    9: '1990s',
-    10: '2000s',
-    11: '2010s',
-    12: '2020s'
-}
+  1: "Pre-1500",
+  2: "1500-1800",
+  3: "1800-1900",
+  4: "1900-1950",
+  5: "1950s",
+  6: "1960s",
+  7: "1970s",
+  8: "1980s",
+  9: "1990s",
+  10: "2000s",
+  11: "2010s",
+  12: "2020s",
+};
 
 // Mapping of category names to their associated colors
 var category_colors = {
-'Art': 'linear-gradient(345deg, rgba(165,50,27,1) 0%, rgba(221,126,107,1) 100%)',
+  Art: "linear-gradient(345deg, rgba(165,50,27,1) 0%, rgba(221,126,107,1) 100%)",
 
-'Economy': 'linear-gradient(345deg, rgba(17,68,16,1) 0%, rgba(89,140,88,1) 100%)',
+  Economy:
+    "linear-gradient(345deg, rgba(17,68,16,1) 0%, rgba(89,140,88,1) 100%)",
 
-'Food & Drink': 'linear-gradient(345deg, rgba(127,43,11,1) 0%, rgba(242,133,0,1) 100%)',
+  "Food & Drink":
+    "linear-gradient(345deg, rgba(127,43,11,1) 0%, rgba(242,133,0,1) 100%)",
 
-'Games': 'linear-gradient(345deg, rgba(103,38,24,1) 0%, rgba(204,85,0,1) 100%)',
+  Games: "linear-gradient(345deg, rgba(103,38,24,1) 0%, rgba(204,85,0,1) 100%)",
 
-'Geography': 'linear-gradient(345deg, rgba(61,38,19,1) 0%, rgba(154,123,79,1) 100%)',
+  Geography:
+    "linear-gradient(345deg, rgba(61,38,19,1) 0%, rgba(154,123,79,1) 100%)",
 
-'History': 'linear-gradient(345deg, rgba(241,194,50,1) 0%, rgba(241,154,50,1) 100%)',
+  History:
+    "linear-gradient(345deg, rgba(241,194,50,1) 0%, rgba(241,154,50,1) 100%)",
 
-'Human Body': 'linear-gradient(345deg, rgba(106,77,20,1) 0%, rgba(180,130,32,1) 100%)',
+  "Human Body":
+    "linear-gradient(345deg, rgba(106,77,20,1) 0%, rgba(180,130,32,1) 100%)",
 
-'Language': 'linear-gradient(345deg, rgba(28,60,133,1) 0%, rgba(102,147,245,1) 100%)',
+  Language:
+    "linear-gradient(345deg, rgba(28,60,133,1) 0%, rgba(102,147,245,1) 100%)",
 
-'Law': 'linear-gradient(345deg, rgba(189,76,51,1) 0%, rgba(111,62,51,1) 100%)',
+  Law: "linear-gradient(345deg, rgba(189,76,51,1) 0%, rgba(111,62,51,1) 100%)",
 
-'Literature': 'linear-gradient(345deg, rgba(202,128,39,1) 0%, rgba(217,157,41,1) 100%)',
+  Literature:
+    "linear-gradient(345deg, rgba(202,128,39,1) 0%, rgba(217,157,41,1) 100%)",
 
-'Math': 'linear-gradient(345deg, rgba(63,61,54,1) 0%, rgba(101,99,92,1) 100%)',
+  Math: "linear-gradient(345deg, rgba(63,61,54,1) 0%, rgba(101,99,92,1) 100%)",
 
-'Miscellaneous': 'linear-gradient(345deg, rgba(13,109,122,1) 0%, rgba(18,168,152,1) 100%)',
+  Miscellaneous:
+    "linear-gradient(345deg, rgba(13,109,122,1) 0%, rgba(18,168,152,1) 100%)",
 
-'Movies': 'linear-gradient(345deg, rgba(184,34,34,1) 0%, rgba(102,0,0,1) 100%)',
+  Movies: "linear-gradient(345deg, rgba(184,34,34,1) 0%, rgba(102,0,0,1) 100%)",
 
-'Music': 'linear-gradient(345deg, rgba(9,110,62,1) 0%, rgba(29,185,84,1) 100%)',
+  Music: "linear-gradient(345deg, rgba(9,110,62,1) 0%, rgba(29,185,84,1) 100%)",
 
-'Nature': 'linear-gradient(345deg, rgba(8,83,27,1) 0%, rgba(4,57,39,1) 100%)',
+  Nature: "linear-gradient(345deg, rgba(8,83,27,1) 0%, rgba(4,57,39,1) 100%)",
 
-'Philosophy': 'linear-gradient(345deg, rgba(89,61,128,1) 0%, rgba(151,95,172,1) 100%)',
+  Philosophy:
+    "linear-gradient(345deg, rgba(89,61,128,1) 0%, rgba(151,95,172,1) 100%)",
 
-'Politics': 'linear-gradient(345deg, rgba(84,30,140,1) 0%, rgba(53,28,117,1) 100%)',
+  Politics:
+    "linear-gradient(345deg, rgba(84,30,140,1) 0%, rgba(53,28,117,1) 100%)",
 
-'Pop Culture': 'linear-gradient(345deg, rgba(233,85,148,1) 0%, rgba(255,143,171,1) 100%)',
+  "Pop Culture":
+    "linear-gradient(345deg, rgba(233,85,148,1) 0%, rgba(255,143,171,1) 100%)",
 
-'Science': 'linear-gradient(345deg, rgba(6,85,83,1) 0%, rgba(11,103,56,1) 100%)',
+  Science:
+    "linear-gradient(345deg, rgba(6,85,83,1) 0%, rgba(11,103,56,1) 100%)",
 
-'Sports': 'linear-gradient(345deg, rgba(44,66,121,1) 0%, rgba(19,30,58,1) 100%)',
+  Sports:
+    "linear-gradient(345deg, rgba(44,66,121,1) 0%, rgba(19,30,58,1) 100%)",
 
-'Technology': 'linear-gradient(345deg, rgba(22,134,161,1) 0%, rgba(31,89,103,1) 100%)',
+  Technology:
+    "linear-gradient(345deg, rgba(22,134,161,1) 0%, rgba(31,89,103,1) 100%)",
 
-'Television': 'linear-gradient(345deg, rgba(45,44,41,1) 0%, rgba(87,81,78,1) 100%)',
+  Television:
+    "linear-gradient(345deg, rgba(45,44,41,1) 0%, rgba(87,81,78,1) 100%)",
 
-'Performing Arts': 'linear-gradient(345deg, rgba(183,75,0,1) 0%, rgba(183,0,0,1) 100%)',
+  "Performing Arts":
+    "linear-gradient(345deg, rgba(183,75,0,1) 0%, rgba(183,0,0,1) 100%)",
 
-'Theology': 'linear-gradient(345deg, rgba(64,14,66,1) 0%, rgba(60,19,33,1) 100%)',
+  Theology:
+    "linear-gradient(345deg, rgba(64,14,66,1) 0%, rgba(60,19,33,1) 100%)",
 
-'Video Games': 'linear-gradient(345deg, rgba(153,0,255,1) 0%, rgba(60,13,128,1) 100%)'
-}
+  "Video Games":
+    "linear-gradient(345deg, rgba(153,0,255,1) 0%, rgba(60,13,128,1) 100%)",
+};
 
 // Declaring variables for the base URL for fetching questions
-var baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
-var moddedUrl = '';
+var baseUrl = "https://triviolivia.herokuapp.com/api/questions";
+var moddedUrl = "";
 var queryParams = [];
 let globalData;
 
 // Default message in bar
-document.getElementById("demo").innerHTML = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play.';
+document.getElementById("demo").innerHTML =
+  'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play.';
 
 // Async JS that kind of scares me, honestly
 async function fetchData(moddedUrl) {
-    const response = await fetch(moddedUrl);
-    const data = await response.json();
-    globalData = data.slice(); // Create a copy of the array
-    shuffleArray(globalData); // Shuffle the copy
-    console.log(globalData);
+  const response = await fetch(moddedUrl);
+  const data = await response.json();
+  globalData = data.slice(); // Create a copy of the array
+  shuffleArray(globalData); // Shuffle the copy
+  console.log(globalData);
 }
 
 // Function to not fetch JSON data if any of cat/dif/era are all deselected
 function dontFetchDataIfAllDeselected() {
-    console.log(category_list);
-    if (category_list.length > 24) {
-        document.getElementById("demo").innerHTML = 'Cannot start game. You must select at least one category.';
-    } else if (difficulty_list.length > 4) {
-        document.getElementById("demo").innerHTML = 'Cannot start game. You must select at least one difficulty.';
-    } else if (era_list.length > 11) {
-        document.getElementById("demo").innerHTML = 'Cannot start game. You must select at least one era.';
-    } else {
-        changeButtonText();
-        fetchQuestionsAndStartGame();
-        const hideAllMenus = () => {
-            checkboxes.forEach(checkbox => {
-              checkbox.checked = false;
-              checkbox.nextElementSibling.classList.remove('active');
-            });
-          };
-        hideAllMenus();
-    }
+  console.log(category_list);
+  if (category_list.length > 24) {
+    document.getElementById("demo").innerHTML =
+      "Cannot start game. You must select at least one category.";
+  } else if (difficulty_list.length > 4) {
+    document.getElementById("demo").innerHTML =
+      "Cannot start game. You must select at least one difficulty.";
+  } else if (era_list.length > 11) {
+    document.getElementById("demo").innerHTML =
+      "Cannot start game. You must select at least one era.";
+  } else {
+    changeButtonText();
+    fetchQuestionsAndStartGame();
+    const hideAllMenus = () => {
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+        checkbox.nextElementSibling.classList.remove("active");
+      });
+    };
+    hideAllMenus();
+  }
 }
 
 // Function to fetch JSON data asynchronously
 function fetchQuestionsAndStartGame() {
-    if (game_started == true) {
-       console.log('Button pressed.');
-       console.log("pauseFlag: " + pauseFlag);
-       console.log("isPaused: " + isPaused);
-    } else {
-        game_started = true;
-        globalData = [];
-        if (category_list.length > 0) {
-            queryParams.push('category=' + category_list.join(','));
-        }
-        if (difficulty_list.length > 0) {
-            queryParams.push('difficulty=' + difficulty_list.join(','));
-        }
-        if (era_list.length > 0) {
-            queryParams.push('era=' + era_list.join(','));
-        }
-        const urlWithParams = baseUrl + '?questions=' + number_of_questions + '&' + queryParams.join('&');
-        moddedUrl = urlWithParams;
-        menu_hidden = true;
-        mainGameFunction();
+  if (game_started == true) {
+    console.log("Button pressed.");
+    console.log("pauseFlag: " + pauseFlag);
+    console.log("isPaused: " + isPaused);
+  } else {
+    game_started = true;
+    globalData = [];
+    if (category_list.length > 0) {
+      queryParams.push("category=" + category_list.join(","));
     }
+    if (difficulty_list.length > 0) {
+      queryParams.push("difficulty=" + difficulty_list.join(","));
+    }
+    if (era_list.length > 0) {
+      queryParams.push("era=" + era_list.join(","));
+    }
+    const urlWithParams =
+      baseUrl +
+      "?questions=" +
+      number_of_questions +
+      "&" +
+      queryParams.join("&");
+    moddedUrl = urlWithParams;
+    menu_hidden = true;
+    mainGameFunction();
+  }
 }
 
 // Function to shuffle returned array
 function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-    }
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+  }
 }
 
 // Future function of reset functionality
 function confirm_reset() {
-    document.getElementById("demo").innerHTML = 'Are you sure you want to reset the game?';
-    //Yes/No?
-    //Reset function call
+  document.getElementById("demo").innerHTML =
+    "Are you sure you want to reset the game?";
+  //Yes/No?
+  //Reset function call
 }
 
 // Function for indicator light toggle
 function toggleIndicator(button) {
-    if (button.classList.contains('active')) {
-        button.classList.remove('active');
-        button.classList.add('inactive');
-        console.log(button);
-    } else {
-        button.classList.remove('inactive');
-        button.classList.add('active');
-        console.log(button);
-    }
+  if (button.classList.contains("active")) {
+    button.classList.remove("active");
+    button.classList.add("inactive");
+    console.log(button);
+  } else {
+    button.classList.remove("inactive");
+    button.classList.add("active");
+    console.log(button);
+  }
 }
 
 //Function to hide or show menu sections
-  const checkboxes = document.querySelectorAll('.toggle');
+const checkboxes = document.querySelectorAll(".toggle");
 
-  checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
-      if (this.checked) {
-        checkboxes.forEach(otherCheckbox => {
-          if (otherCheckbox !== this) {
-            otherCheckbox.checked = false;
-            otherCheckbox.nextElementSibling.classList.remove('active');
-          }
-        });
-      }
-      this.nextElementSibling.classList.toggle('active', this.checked);
-    });
+checkboxes.forEach((checkbox) => {
+  checkbox.addEventListener("change", function () {
+    if (this.checked) {
+      checkboxes.forEach((otherCheckbox) => {
+        if (otherCheckbox !== this) {
+          otherCheckbox.checked = false;
+          otherCheckbox.nextElementSibling.classList.remove("active");
+        }
+      });
+    }
+    this.nextElementSibling.classList.toggle("active", this.checked);
   });
-
+});
 
 //Functions to toggle categories, difficulties, and eras
 function toggle_categories(clicked_id) {
-    if (!category_list.includes(clicked_id)) {
-        document.getElementById("demo").innerHTML = 'You have disabled the ' + category_number_identities[clicked_id] + ' category.';
-        category_list.push(clicked_id);
-        console.log(category_list);
-
-    } else {
-        document.getElementById("demo").innerHTML = 'You have enabled the ' + category_number_identities[clicked_id] + ' category.';
-        category_list.splice(category_list.indexOf(clicked_id), 1);
-        console.log(category_list);
-    }
+  if (!category_list.includes(clicked_id)) {
+    document.getElementById("demo").innerHTML =
+      "You have disabled the " +
+      category_number_identities[clicked_id] +
+      " category.";
+    category_list.push(clicked_id);
+    console.log(category_list);
+  } else {
+    document.getElementById("demo").innerHTML =
+      "You have enabled the " +
+      category_number_identities[clicked_id] +
+      " category.";
+    category_list.splice(category_list.indexOf(clicked_id), 1);
+    console.log(category_list);
+  }
 }
 
 function toggle_difficulties(clicked_id) {
-    if (!difficulty_list.includes(clicked_id)) {
-        document.getElementById("demo").innerHTML = 'You have disabled the ' + difficulty_number_identities[clicked_id] + ' difficulty.';
-        difficulty_list.push(clicked_id);
-        console.log(difficulty_list);
-    } else {
-        document.getElementById("demo").innerHTML = 'You have enabled the ' + difficulty_number_identities[clicked_id] + ' difficulty.';
-        difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
-        console.log(difficulty_list);
-    }
+  if (!difficulty_list.includes(clicked_id)) {
+    document.getElementById("demo").innerHTML =
+      "You have disabled the " +
+      difficulty_number_identities[clicked_id] +
+      " difficulty.";
+    difficulty_list.push(clicked_id);
+    console.log(difficulty_list);
+  } else {
+    document.getElementById("demo").innerHTML =
+      "You have enabled the " +
+      difficulty_number_identities[clicked_id] +
+      " difficulty.";
+    difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
+    console.log(difficulty_list);
+  }
 }
 
 function toggle_eras(clicked_id) {
-    if (!era_list.includes(clicked_id)) {
-        document.getElementById("demo").innerHTML = 'You have disabled the ' + era_number_identities[clicked_id] + ' era.';
-        era_list.push(clicked_id);
-        console.log(era_list);
-    } else {
-        document.getElementById("demo").innerHTML = 'You have enabled the ' + era_number_identities[clicked_id] + ' era.';
-        era_list.splice(era_list.indexOf(clicked_id), 1);
-        console.log(era_list);
-    }
+  if (!era_list.includes(clicked_id)) {
+    document.getElementById("demo").innerHTML =
+      "You have disabled the " + era_number_identities[clicked_id] + " era.";
+    era_list.push(clicked_id);
+    console.log(era_list);
+  } else {
+    document.getElementById("demo").innerHTML =
+      "You have enabled the " + era_number_identities[clicked_id] + " era.";
+    era_list.splice(era_list.indexOf(clicked_id), 1);
+    console.log(era_list);
+  }
 }
 
 //Functions to change number of questions, time per question, and time per answer
 function change_number_of_questions(clicked_id) {
-    number_of_questions = parseInt(clicked_id);
-    document.getElementById("demo").innerHTML = 'Game set to ' + number_of_questions + ' questions.';
+  number_of_questions = parseInt(clicked_id);
+  document.getElementById("demo").innerHTML =
+    "Game set to " + number_of_questions + " questions.";
 }
 
 function change_time_per_question(clicked_id) {
-    time_per_question = clicked_id;
-    document.getElementById("demo").innerHTML = 'Questions will display for ' + time_per_question + ' seconds.';
-    console.log(time_per_question);
+  time_per_question = clicked_id;
+  document.getElementById("demo").innerHTML =
+    "Questions will display for " + time_per_question + " seconds.";
+  console.log(time_per_question);
 }
 
 function change_time_per_answer(clicked_id) {
-    time_per_answer = clicked_id;
-    document.getElementById("demo").innerHTML = 'Answers will display for ' + time_per_answer + ' seconds.';
-    console.log(time_per_answer);
+  time_per_answer = clicked_id;
+  document.getElementById("demo").innerHTML =
+    "Answers will display for " + time_per_answer + " seconds.";
+  console.log(time_per_answer);
 }
 
 //Question class declaration
 let Question = class {
-    constructor(number, category, difficulty, question, answer) {
-        this.number = number;
-        this.category = category;
-        this.difficulty = difficulty;
-        this.question = question;
-        this.answer = answer;
-    }
-}
+  constructor(number, category, difficulty, question, answer) {
+    this.number = number;
+    this.category = category;
+    this.difficulty = difficulty;
+    this.question = question;
+    this.answer = answer;
+  }
+};
 
 // Arrow functions to show question and answer
 const showQuestion = (displayed_question) => {
-  const div = document.getElementById('question-container');
+  const div = document.getElementById("question-container");
   div.style.opacity = 1;
 
   // Clear the existing question and answer only when a new question is shown
-  questionDisplay.innerHTML = '';
-  answerDisplay.innerHTML = '';
+  questionDisplay.innerHTML = "";
+  answerDisplay.innerHTML = "";
 
   // Create and display the new question
-  const messageElement = document.createElement('p');
+  const messageElement = document.createElement("p");
   messageElement.textContent = displayed_question;
   questionDisplay.append(messageElement);
-}
+};
 
 const showAnswer = (displayed_answer) => {
-  const div = document.getElementById('question-container');
+  const div = document.getElementById("question-container");
   div.style.opacity = 0.7;
 
   // Clear the previous answer only (not the question)
-  answerDisplay.innerHTML = '';
+  answerDisplay.innerHTML = "";
 
   // Create and display the new answer
-  const messageElement = document.createElement('p');
+  const messageElement = document.createElement("p");
   messageElement.textContent = displayed_answer;
   answerDisplay.append(messageElement);
-}
+};
 
-
-const delay = ms => new Promise(res => setTimeout(res, ms));
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const mainGameFunction = async () => {
-  document.getElementById("demo").innerHTML = 'Fetching questions...';
+  document.getElementById("demo").innerHTML = "Fetching questions...";
 
   try {
-      const fetchPromise = fetchData(moddedUrl);
-      const timeoutPromise = new Promise((_, reject) =>
-          setTimeout(() => reject(new Error('timeout')), 20000)
-      );
+    const fetchPromise = fetchData(moddedUrl);
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("timeout")), 20000)
+    );
 
-      await Promise.race([fetchPromise, timeoutPromise]);
+    await Promise.race([fetchPromise, timeoutPromise]);
 
-      document.getElementById("demo").innerHTML = 'Questions fetched!';
-      await delay(1000);
+    document.getElementById("demo").innerHTML = "Questions fetched!";
+    await delay(1000);
   } catch (error) {
-      document.getElementById("demo").innerHTML = 'Could not fetch questions due to settings or connection problems. Please try again or change settings.';
-      return; // Stop execution if fetch fails
+    document.getElementById("demo").innerHTML =
+      "Could not fetch questions due to settings or connection problems. Please try again or change settings.";
+    return; // Stop execution if fetch fails
   }
 
-  document.getElementById("demo").innerHTML = 'Game starts in 3.';
+  document.getElementById("demo").innerHTML = "Game starts in 3.";
   await delay(1000);
-  document.getElementById("demo").innerHTML = 'Game starts in 2..';
+  document.getElementById("demo").innerHTML = "Game starts in 2..";
   await delay(1000);
-  document.getElementById("demo").innerHTML = 'Game starts in 1...';
+  document.getElementById("demo").innerHTML = "Game starts in 1...";
   await delay(1000);
-  document.getElementById("demo").innerHTML = 'Go!';
+  document.getElementById("demo").innerHTML = "Go!";
   await delay(1000);
 
   for (let i = 0; i < number_of_questions; i++) {
+    if (!pauseFlag) {
+      progressBar.style.animationPlayState = "running";
+      progressBar.style.animation = `depleteProgress ${time_per_question}s linear infinite`;
+      isPaused = false;
+    } else {
+      progressBar.style.animationPlayState = "paused";
+      progressBar.style.animation = "none";
+      progressBar.offsetHeight; // Trigger reflow
+      progressBar.style.animation = `depleteProgress ${time_per_answer}s linear infinite`;
+    }
+
+    while (!pauseFlag) {
+      await delay(100);
+    }
+
+    document.body.style.background =
+      category_colors[globalData[i].category_name];
+
+    const character = document.getElementById("character");
+    character.innerHTML =
+      contentDict[globalData[i].category_name.toLowerCase()];
+
+    let questionTimeRemaining = time_per_question * 10;
+    let answerTimeRemaining = time_per_answer * 10;
+
+    showQuestion(globalData[i].text);
+
+    while (questionTimeRemaining > 0) {
       if (!pauseFlag) {
-          progressBar.style.animationPlayState = "running";
-          progressBar.style.animation = `depleteProgress ${time_per_question}s linear infinite`;
-          isPaused = false;
-      } else {
-          progressBar.style.animationPlayState = "paused";
-          progressBar.style.animation = "none";
-          progressBar.offsetHeight; // Trigger reflow
-          progressBar.style.animation = `depleteProgress ${time_per_answer}s linear infinite`;
+        await delay(100);
+        continue;
       }
+      await delay(100);
+      questionTimeRemaining--;
+      let question_seconds = Math.floor(questionTimeRemaining / 10);
+      let question_tenths = questionTimeRemaining % 10;
+      document.getElementById("demo").innerHTML = `Q${i + 1} - ${globalData[
+        i
+      ].category_name.toUpperCase()} - ${globalData[
+        i
+      ].difficulty_name.toUpperCase()} - Mark Mazurek - ${question_seconds}.${question_tenths}s`;
+    }
 
-      while (!pauseFlag) {
-          await delay(100);
+    showAnswer(globalData[i].answer);
+
+    while (answerTimeRemaining > 0) {
+      if (!pauseFlag) {
+        await delay(100);
+        continue;
       }
+      await delay(100);
+      answerTimeRemaining--;
+      let answer_seconds = Math.floor(answerTimeRemaining / 10);
+      let answer_tenths = answerTimeRemaining % 10;
+      document.getElementById("demo").innerHTML = `Q${i + 1} - ${globalData[
+        i
+      ].category_name.toUpperCase()} - ${globalData[
+        i
+      ].difficulty_name.toUpperCase()} - Mark Mazurek - ${answer_seconds}.${answer_tenths}s`;
+    }
 
-      document.body.style.background = category_colors[globalData[i].category_name];
-
-      const character = document.getElementById('character');
-      character.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
-
-      let questionTimeRemaining = time_per_question * 10;
-      let answerTimeRemaining = time_per_answer * 10;
-
-      showQuestion(globalData[i].text);
-
-      while (questionTimeRemaining > 0) {
-          if (!pauseFlag) {
-              await delay(100);
-              continue;
-          }
-          await delay(100);
-          questionTimeRemaining--;
-          let question_seconds = Math.floor(questionTimeRemaining / 10);
-          let question_tenths = questionTimeRemaining % 10;
-          document.getElementById("demo").innerHTML = `Q${i + 1} - ${globalData[i].category_name.toUpperCase()} - ${globalData[i].difficulty_name.toUpperCase()} - Mark Mazurek - ${question_seconds}.${question_tenths}s`;
-      }
-
-      showAnswer(globalData[i].answer);
-
-      while (answerTimeRemaining > 0) {
-          if (!pauseFlag) {
-              await delay(100);
-              continue;
-          }
-          await delay(100);
-          answerTimeRemaining--;
-          let answer_seconds = Math.floor(answerTimeRemaining / 10);
-          let answer_tenths = answerTimeRemaining % 10;
-          document.getElementById("demo").innerHTML = `Q${i + 1} - ${globalData[i].category_name.toUpperCase()} - ${globalData[i].difficulty_name.toUpperCase()} - Mark Mazurek - ${answer_seconds}.${answer_tenths}s`;
-      }
-
-      showAnswer("");
+    showAnswer("");
   }
 
   game_started = false;
   pauseFlag = false;
   showQuestion("Thanks for playing!");
   progressBar.style.animationPlayState = "paused";
-  document.getElementById('start-pause').textContent = 'START GAME';
-  document.getElementById("demo").innerHTML = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2025. Contact us at mark.mazurek@triviolivia.com';
+  document.getElementById("start-pause").textContent = "START GAME";
+  document.getElementById("demo").innerHTML =
+    'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2025. Contact us at mark.mazurek@triviolivia.com';
 };
-
-
 
 // Function to pause the game
 function pauseGame() {
-    pauseFlag = true;
+  pauseFlag = true;
 }
 
 // Function to resume the game
 function resumeGame() {
-    pauseFlag = false;
-    mainGameFunction(); // Resume execution
+  pauseFlag = false;
+  mainGameFunction(); // Resume execution
 }
 
 //Functions to disable and enable category, difficulty, era
 function disable_category(clicked_id) {
-    if (!category_list.includes(clicked_id)) {
-        category_list.push(clicked_id);
-        console.log(category_list);
-
-    } else {
-        console.log(category_list);
-    }
+  if (!category_list.includes(clicked_id)) {
+    category_list.push(clicked_id);
+    console.log(category_list);
+  } else {
+    console.log(category_list);
+  }
 }
 
 function enable_category(clicked_id) {
-    if (!category_list.includes(clicked_id)) {
-        console.log(category_list);
-
-    } else {
-        category_list.splice(category_list.indexOf(clicked_id), 1);
-        console.log(category_list);
-    }
+  if (!category_list.includes(clicked_id)) {
+    console.log(category_list);
+  } else {
+    category_list.splice(category_list.indexOf(clicked_id), 1);
+    console.log(category_list);
+  }
 }
 
 function disable_difficulty(clicked_id) {
-    if (!difficulty_list.includes(clicked_id)) {
-        difficulty_list.push(clicked_id);
-        console.log(difficulty_list);
-
-    } else {
-        console.log(difficulty_list);
-    }
+  if (!difficulty_list.includes(clicked_id)) {
+    difficulty_list.push(clicked_id);
+    console.log(difficulty_list);
+  } else {
+    console.log(difficulty_list);
+  }
 }
 
 function enable_difficulty(clicked_id) {
-    if (!difficulty_list.includes(clicked_id)) {
-        console.log(difficulty_list);
-
-    } else {
-        difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
-        console.log(difficulty_list);
-    }
+  if (!difficulty_list.includes(clicked_id)) {
+    console.log(difficulty_list);
+  } else {
+    difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
+    console.log(difficulty_list);
+  }
 }
 
 function disable_era(clicked_id) {
-    if (!era_list.includes(clicked_id)) {
-        era_list.push(clicked_id);
-        console.log(era_list);
-
-    } else {
-        console.log(era_list);
-    }
+  if (!era_list.includes(clicked_id)) {
+    era_list.push(clicked_id);
+    console.log(era_list);
+  } else {
+    console.log(era_list);
+  }
 }
 
 function enable_era(clicked_id) {
-    if (!era_list.includes(clicked_id)) {
-        console.log(era_list);
-
-    } else {
-        era_list.splice(era_list.indexOf(clicked_id), 1);
-        console.log(era_list);
-    }
+  if (!era_list.includes(clicked_id)) {
+    console.log(era_list);
+  } else {
+    era_list.splice(era_list.indexOf(clicked_id), 1);
+    console.log(era_list);
+  }
 }
 
 //Functions for ALL/NONE buttons
 function allNoneCategoriesButton() {
-    if (all_none_categories == true) {
-        for (var i = 0; i < categoryButtons.length; i++) {
-            categoryButtons[String(i)].classList.remove('active');
-            categoryButtons[String(i)].classList.add('inactive');
-            disable_category(String(i+1));
-            document.getElementById("demo").innerHTML = 'You must select at least one category before starting the game.';
-        }
-        all_none_categories = false;
-    } else {
-        category_list = [];
-        for (var i = 0; i < categoryButtons.length; i++) {
-            categoryButtons[String(i)].classList.remove('inactive');
-            categoryButtons[String(i)].classList.add('active');
-            enable_category(String(i+1));
-        }
-        all_none_categories = true;
-        document.getElementById("demo").innerHTML = 'You have enabled all categories.';
+  if (all_none_categories == true) {
+    for (var i = 0; i < categoryButtons.length; i++) {
+      categoryButtons[String(i)].classList.remove("active");
+      categoryButtons[String(i)].classList.add("inactive");
+      disable_category(String(i + 1));
+      document.getElementById("demo").innerHTML =
+        "You must select at least one category before starting the game.";
     }
-    console.log(categoryButtons);
+    all_none_categories = false;
+  } else {
+    category_list = [];
+    for (var i = 0; i < categoryButtons.length; i++) {
+      categoryButtons[String(i)].classList.remove("inactive");
+      categoryButtons[String(i)].classList.add("active");
+      enable_category(String(i + 1));
+    }
+    all_none_categories = true;
+    document.getElementById("demo").innerHTML =
+      "You have enabled all categories.";
+  }
+  console.log(categoryButtons);
 }
 
 function allNoneDifficultiesButton() {
-    if (all_none_difficulties == true) {
-        for (var i = 0; i < difficultyButtons.length; i++) {
-            difficultyButtons[String(i)].classList.remove('active');
-            difficultyButtons[String(i)].classList.add('inactive');
-            disable_difficulty(String(i + 1));
-            document.getElementById("demo").innerHTML = 'You must select at least one difficulty before starting the game.';
-        }
-        all_none_difficulties = false;
-    } else {
-        difficulty_list = [];
-        for (var i = 0; i < difficultyButtons.length; i++) {
-            difficultyButtons[String(i)].classList.remove('inactive');
-            difficultyButtons[String(i)].classList.add('active');
-            enable_difficulty(String(i + 1));
-        }
-        all_none_difficulties = true;
-        document.getElementById("demo").innerHTML = 'You have enabled all difficulties.';
+  if (all_none_difficulties == true) {
+    for (var i = 0; i < difficultyButtons.length; i++) {
+      difficultyButtons[String(i)].classList.remove("active");
+      difficultyButtons[String(i)].classList.add("inactive");
+      disable_difficulty(String(i + 1));
+      document.getElementById("demo").innerHTML =
+        "You must select at least one difficulty before starting the game.";
     }
+    all_none_difficulties = false;
+  } else {
+    difficulty_list = [];
+    for (var i = 0; i < difficultyButtons.length; i++) {
+      difficultyButtons[String(i)].classList.remove("inactive");
+      difficultyButtons[String(i)].classList.add("active");
+      enable_difficulty(String(i + 1));
+    }
+    all_none_difficulties = true;
+    document.getElementById("demo").innerHTML =
+      "You have enabled all difficulties.";
+  }
 }
 
 function allNoneErasButton() {
-    if (all_none_eras == true) {
-        for (var i = 0; i < eraButtons.length; i++) {
-            eraButtons[String(i)].classList.remove('active');
-            eraButtons[String(i)].classList.add('inactive');
-            document.getElementById("demo").innerHTML = 'You must select at least one era before starting the game.';
-            disable_era(String(i + 1));
-        }
-        all_none_eras = false;
-    } else {
-        category_list = [];
-        for (var i = 0; i < eraButtons.length; i++) {
-            eraButtons[String(i)].classList.remove('inactive');
-            eraButtons[String(i)].classList.add('active');
-            enable_era(String(i + 1));
-        }
-        all_none_eras = true;
-        document.getElementById("demo").innerHTML = 'You have enabled all eras.';
+  if (all_none_eras == true) {
+    for (var i = 0; i < eraButtons.length; i++) {
+      eraButtons[String(i)].classList.remove("active");
+      eraButtons[String(i)].classList.add("inactive");
+      document.getElementById("demo").innerHTML =
+        "You must select at least one era before starting the game.";
+      disable_era(String(i + 1));
     }
+    all_none_eras = false;
+  } else {
+    category_list = [];
+    for (var i = 0; i < eraButtons.length; i++) {
+      eraButtons[String(i)].classList.remove("inactive");
+      eraButtons[String(i)].classList.add("active");
+      enable_era(String(i + 1));
+    }
+    all_none_eras = true;
+    document.getElementById("demo").innerHTML = "You have enabled all eras.";
+  }
 }
 
 // Slider functions
-const questionSlider = document.getElementById('questionSlider');
-const perQuestionSlider = document.getElementById('perQuestionSlider');
-const perAnswerSlider = document.getElementById('perAnswerSlider');
+const questionSlider = document.getElementById("questionSlider");
+const perQuestionSlider = document.getElementById("perQuestionSlider");
+const perAnswerSlider = document.getElementById("perAnswerSlider");
 
-questionSlider.addEventListener('input', function () {
-    updateLabel('questionLabel', this.value, ' QUESTIONS');
-    change_number_of_questions(this.value);
+questionSlider.addEventListener("input", function () {
+  updateLabel("questionLabel", this.value, " QUESTIONS");
+  change_number_of_questions(this.value);
 });
 
-perQuestionSlider.addEventListener('input', function () {
-    updateLabel('perQuestionLabel', this.value, 's / QUESTION');
-    change_time_per_question(this.value);
+perQuestionSlider.addEventListener("input", function () {
+  updateLabel("perQuestionLabel", this.value, "s / QUESTION");
+  change_time_per_question(this.value);
 });
 
-perAnswerSlider.addEventListener('input', function () {
-    updateLabel('perAnswerLabel', this.value, 's / ANSWER');
-    change_time_per_answer(this.value);
+perAnswerSlider.addEventListener("input", function () {
+  updateLabel("perAnswerLabel", this.value, "s / ANSWER");
+  change_time_per_answer(this.value);
 });
 
 function updateLabel(labelId, value, unit) {
-    document.getElementById(labelId).textContent = value + unit;
+  document.getElementById(labelId).textContent = value + unit;
 }
 
 //Function to change START GAME text
 function changeButtonText() {
-    var button = document.getElementById('start-pause');
-    if (pauseFlag === false) {
-        button.textContent = 'PAUSE GAME';
-        progressBar.style.animationPlayState = "running";
-        pauseFlag = true;
-    } else if (pauseFlag === true && game_started === true) {
-        button.textContent = 'RESUME GAME';
-        progressBar.style.animationPlayState = "paused";
-        pauseFlag = false;
-        console.log('Game paused.');
-        document.getElementById("demo").innerHTML = 'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
-    } else {
-        button.textContent = 'START GAME';
-        pauseFlag = false;
-    }
+  var button = document.getElementById("start-pause");
+  if (pauseFlag === false) {
+    button.textContent = "PAUSE GAME";
+    progressBar.style.animationPlayState = "running";
+    pauseFlag = true;
+  } else if (pauseFlag === true && game_started === true) {
+    button.textContent = "RESUME GAME";
+    progressBar.style.animationPlayState = "paused";
+    pauseFlag = false;
+    console.log("Game paused.");
+    document.getElementById("demo").innerHTML =
+      'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
+  } else {
+    button.textContent = "START GAME";
+    pauseFlag = false;
+  }
 }
-
 
 // New function to disable banned categories
 function disableBannedCategories() {}
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Dynamic question and answer timer bar attempt
 let progressBar = document.getElementById("progress");
@@ -9911,113 +9931,115 @@ let startButton = document.getElementById("startButton");
 let pauseButton = document.getElementById("pauseButton");
 let isPaused = true;
 
-startButton.addEventListener("click", function() {
-    if (isPaused) {
+startButton.addEventListener("click", function () {
+  if (isPaused) {
     //   progressBar.style.animationPlayState = "paused";
-      progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
-      isPaused = false;
-    } else {
+    progressBar.style.animation =
+      "depleteProgress " + time_per_question + "s linear infinite";
+    isPaused = false;
+  } else {
     //   progressBar.style.animationPlayState = "running";
-      progressBar.style.animation = "none";
-      progressBar.offsetHeight; // Trigger reflow to reset animation
-      progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
-    }
+    progressBar.style.animation = "none";
+    progressBar.offsetHeight; // Trigger reflow to reset animation
+    progressBar.style.animation =
+      "depleteProgress " + time_per_answer + "s linear infinite";
+  }
 });
 
-  pauseButton.addEventListener("click", function() {
-    if (!isPaused) {
-      progressBar.style.animationPlayState = "running";
-      isPaused = false;
-    } else {
-      progressBar.style.animationPlayState = "paused";
-      isPaused = true;
-    }
-  });
+pauseButton.addEventListener("click", function () {
+  if (!isPaused) {
+    progressBar.style.animationPlayState = "running";
+    isPaused = false;
+  } else {
+    progressBar.style.animationPlayState = "paused";
+    isPaused = true;
+  }
+});
 
-  progressBar.addEventListener("animationiteration", function() {
-    if (!isPaused) {
-        progressBar.style.animation = "replenishProgress " + time_per_answer + "s linear forwards, shrinkProgress " + time_per_question + "s linear forwards";
-    }
-  });
-  
-  // Makes pressing space bar start/pause the game
-  document.addEventListener('keydown', function(event) {
-    if (event.code === 'Space') {  // Checks if the spacebar is pressed
-      event.preventDefault();  // Prevents the page from scrolling when pressing space
-      document.getElementById('start-game').click();  // Simulates a button click
-    }
-  });
+progressBar.addEventListener("animationiteration", function () {
+  if (!isPaused) {
+    progressBar.style.animation =
+      "replenishProgress " +
+      time_per_answer +
+      "s linear forwards, shrinkProgress " +
+      time_per_question +
+      "s linear forwards";
+  }
+});
 
+// Makes pressing space bar start/pause the game
+document.addEventListener("keydown", function (event) {
+  if (event.code === "Space") {
+    // Checks if the spacebar is pressed
+    event.preventDefault(); // Prevents the page from scrolling when pressing space
+    document.getElementById("start-game").click(); // Simulates a button click
+  }
+});
 
 // Refetch questions button function
-  function refetchAndRestart() {
-    console.log("Refetching questions with currently selected game settings...");
+function refetchAndRestart() {
+  console.log("Refetching questions with currently selected game settings...");
 
-    game_started = false;
-    menu_hidden = false;
-    current_question_category = null;
-    pauseFlag = false;
-    globalData = [];
+  game_started = false;
+  menu_hidden = false;
+  current_question_category = null;
+  pauseFlag = false;
+  globalData = [];
 
-    baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
-    moddedUrl = '';
-    queryParams = [];
-    globalData = [];
+  baseUrl = "https://triviolivia.herokuapp.com/api/questions";
+  moddedUrl = "";
+  queryParams = [];
+  globalData = [];
 
-    dontFetchDataIfAllDeselected();
-  
-    console.log("Refetch request completed");
-  }
+  dontFetchDataIfAllDeselected();
 
+  console.log("Refetch request completed");
+}
 
-  // Reset settings button
-  function resetSettings() {
-    console.log("Resetting the game to its original settings...");
+// Reset settings button
+function resetSettings() {
+  console.log("Resetting the game to its original settings...");
 
-    all_none_categories = false;
-    allNoneCategoriesButton();
-    all_none_difficulties = false;
-    allNoneDifficultiesButton();
-    all_none_eras = false;
-    allNoneErasButton();
+  all_none_categories = false;
+  allNoneCategoriesButton();
+  all_none_difficulties = false;
+  allNoneDifficultiesButton();
+  all_none_eras = false;
+  allNoneErasButton();
 
-    document.getElementById("demo").innerHTML = 'You have enabled all categories, difficulties, and eras. Press <span id="refetch-and-restart" style="cursor: pointer; display: inline;" onclick="refetchAndRestart()">REFETCH AND RESTART</span> to play again.';
-  
-    game_started = false;
-    menu_hidden = false;
-    current_question_category = null;
-    pauseFlag = false;
-    category_list = [];
-    difficulty_list = [];
-    era_list = [];
+  document.getElementById("demo").innerHTML =
+    'You have enabled all categories, difficulties, and eras. Press <span id="refetch-and-restart" style="cursor: pointer; display: inline;" onclick="refetchAndRestart()">REFETCH AND RESTART</span> to play again.';
 
-    baseUrl = 'https://triviolivia.herokuapp.com/api/questions';
-    moddedUrl = '';
-    queryParams = [];
-    globalData = [];
-  
-    console.log("Game settings reset completed.");
-  }
+  game_started = false;
+  menu_hidden = false;
+  current_question_category = null;
+  pauseFlag = false;
+  category_list = [];
+  difficulty_list = [];
+  era_list = [];
 
+  baseUrl = "https://triviolivia.herokuapp.com/api/questions";
+  moddedUrl = "";
+  queryParams = [];
+  globalData = [];
 
+  console.log("Game settings reset completed.");
+}
 
-  // About Us stuff
-  function displayAboutUs() {
-    const card = document.getElementById('about-us-card');
-    const overlay = document.getElementById('overlay');
-    card.style.display = 'block';
-    overlay.style.display = 'block';
+// About Us stuff
+function displayAboutUs() {
+  const card = document.getElementById("about-us-card");
+  const overlay = document.getElementById("overlay");
+  card.style.display = "block";
+  overlay.style.display = "block";
 }
 
 function closeAboutUs() {
-    const card = document.getElementById('about-us-card');
-    const overlay = document.getElementById('overlay');
-    card.style.display = 'none';
-    overlay.style.display = 'none';
+  const card = document.getElementById("about-us-card");
+  const overlay = document.getElementById("overlay");
+  card.style.display = "none";
+  overlay.style.display = "none";
 }
-
-
-
 
 // Fullscreen mode attempt
 function toggleFullscreen() {
@@ -10028,7 +10050,12 @@ function toggleFullscreen() {
 
   if (!isiOS) {
     // Use the Fullscreen API for Android and Desktop
-    if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+    if (
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    ) {
       exitFullscreen();
     } else {
       enterFullscreen(elem);
@@ -10042,11 +10069,14 @@ function toggleFullscreen() {
 function enterFullscreen(element) {
   if (element.requestFullscreen) {
     element.requestFullscreen();
-  } else if (element.mozRequestFullScreen) { // Firefox
+  } else if (element.mozRequestFullScreen) {
+    // Firefox
     element.mozRequestFullScreen();
-  } else if (element.webkitRequestFullscreen) { // Chrome, Safari, Edge, Opera
+  } else if (element.webkitRequestFullscreen) {
+    // Chrome, Safari, Edge, Opera
     element.webkitRequestFullscreen();
-  } else if (element.msRequestFullscreen) { // IE11
+  } else if (element.msRequestFullscreen) {
+    // IE11
     element.msRequestFullscreen();
   }
 }
@@ -10054,11 +10084,14 @@ function enterFullscreen(element) {
 function exitFullscreen() {
   if (document.exitFullscreen) {
     document.exitFullscreen();
-  } else if (document.mozCancelFullScreen) { // Firefox
+  } else if (document.mozCancelFullScreen) {
+    // Firefox
     document.mozCancelFullScreen();
-  } else if (document.webkitExitFullscreen) { // Chrome, Safari, Edge, Opera
+  } else if (document.webkitExitFullscreen) {
+    // Chrome, Safari, Edge, Opera
     document.webkitExitFullscreen();
-  } else if (document.msExitFullscreen) { // IE11
+  } else if (document.msExitFullscreen) {
+    // IE11
     document.msExitFullscreen();
   }
 }
