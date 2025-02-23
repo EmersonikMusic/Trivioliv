@@ -29,6 +29,7 @@
         var category = 'General Button Click'; // Default category
         var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
 
+        // Track All/None buttons for Categories, Difficulties, and Eras
         if (button.id.includes('all-none')) {
             var groupName = '';
             var allActive = false;
@@ -36,18 +37,22 @@
 
             if (button.id.includes('categories')) {
                 groupName = 'Categories';
+                // Check if all category buttons are active
                 allActive = document.querySelectorAll('.category').length === document.querySelectorAll('.category.active').length;
                 allDisabled = document.querySelectorAll('.category.active').length === 0;
             } else if (button.id.includes('difficulties')) {
                 groupName = 'Difficulties';
+                // Check if all difficulty buttons are active
                 allActive = document.querySelectorAll('.difficulty').length === document.querySelectorAll('.difficulty.active').length;
                 allDisabled = document.querySelectorAll('.difficulty.active').length === 0;
             } else if (button.id.includes('eras')) {
                 groupName = 'Eras';
+                // Check if all era buttons are active
                 allActive = document.querySelectorAll('.era').length === document.querySelectorAll('.era.active').length;
                 allDisabled = document.querySelectorAll('.era.active').length === 0;
             }
 
+            // Determine action based on state of all options
             if (allActive) {
                 gtag('event', groupName + '_all', {
                     'event_category': groupName + ' Selection',
@@ -59,9 +64,11 @@
                     'event_label': groupName + ' NONE (disabled)'
                 });
             }
-            return;
+
+            return; // Skip normal button tracking for these buttons
         }
 
+        // Default behavior for other buttons
         if (button.classList.contains('category')) {
             category = 'Category Selection';
         } else if (button.classList.contains('difficulty')) {
@@ -83,32 +90,7 @@
             button.addEventListener("click", trackButtonClick);
         });
     });
-
-    async function mainGameFunction() {
-        document.getElementById("demo").innerHTML = 'Fetching questions...';
-        try {
-            const fetchPromise = fetchData(moddedUrl);
-            const timeoutPromise = new Promise((_, reject) =>
-                setTimeout(() => reject(new Error('timeout')), 20000)
-            );
-            await Promise.race([fetchPromise, timeoutPromise]);
-            document.getElementById("demo").innerHTML = 'Questions fetched!';
-            await delay(1000);
-
-            // Track the question fetch event
-            globalData.forEach((question, index) => {
-                gtag('event', 'Question_Fetched', {
-                    'event_category': 'Game',
-                    'event_label': `Q${index + 1} - ID: ${question.id}`
-                });
-            });
-        } catch (error) {
-            document.getElementById("demo").innerHTML = 'Could not fetch questions due to settings or connection problems. Please try again or change settings.';
-            return;
-        }
-    }
 </script>
-
 
 
 
