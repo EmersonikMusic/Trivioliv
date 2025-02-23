@@ -10112,3 +10112,23 @@ function simulateFullscreenOnMobile() {
     document.body.style.marginTop = "0px";
   }
 }
+
+
+// Attempt at hiding fullscreen button if user on mobile or tablet
+function isMobileOrTablet() {
+  return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (isMobileOrTablet()) {
+      document.getElementById("fullscreen-btn").style.display = "none";
+  }
+});
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+  } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+  }
+}
