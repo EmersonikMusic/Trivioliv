@@ -10071,7 +10071,7 @@ function displayAboutUs() {
 }
 
 function closeAboutUs() {
-  pauseGame();
+  resumeGame();
   const card = document.getElementById("about-us-card");
   const overlay = document.getElementById("overlay");
   card.style.display = "none";
