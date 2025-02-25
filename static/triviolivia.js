@@ -9641,14 +9641,6 @@ const showAnswer = (displayed_answer) => {
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const mainGameFunction = async () => {
-
-  showQuestion(
-    <div class="loader">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-    </div>);
-
   document.getElementById("demo").innerHTML = "Fetching questions...";
 
   try {
