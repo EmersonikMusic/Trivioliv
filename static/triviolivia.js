@@ -9640,8 +9640,41 @@ const showAnswer = (displayed_answer) => {
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
+
+
+
+// Loading animation display function
+function displayLoadingAnimation() {
+  const container = document.getElementById('question-container');
+  
+  // Remove any existing loader to prevent duplicates
+  const existingLoader = container.querySelector('.loader');
+  if (existingLoader) {
+      existingLoader.remove();
+  }
+
+  // Create loader div
+  const loader = document.createElement('div');
+  loader.classList.add('loader');
+
+  // Create three dots
+  for (let i = 0; i < 3; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      loader.appendChild(dot);
+  }
+
+  // Append loader to container
+  container.appendChild(loader);
+}
+
+
+
 const mainGameFunction = async () => {
   document.getElementById("demo").innerHTML = "Fetching questions...";
+
+
+  displayLoadingAnimation()
 
   try {
     const fetchPromise = fetchData(moddedUrl);
