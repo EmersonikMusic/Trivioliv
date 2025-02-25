@@ -9645,10 +9645,6 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 // Loading animation display function
 function displayLoadingAnimation() {
-
-  questionDisplay.innerHTML = "";
-  answerDisplay.innerHTML = "";
-  
   const container = document.getElementById('question-container');
   
   // Remove any existing loader to prevent duplicates
@@ -9677,7 +9673,9 @@ function displayLoadingAnimation() {
 const mainGameFunction = async () => {
   document.getElementById("demo").innerHTML = "Fetching questions...";
 
-
+  questionDisplay.innerHTML = "";
+  answerDisplay.innerHTML = "";
+  
   displayLoadingAnimation()
 
   try {
