@@ -594,8 +594,8 @@ h2 {
             gap: 10px;
         }
         .dot {
-            width: 20px;
-            height: 20px;
+            width: 40px;
+            height: 40px;
             background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             animation: bounce 1.5s infinite ease-in-out;
