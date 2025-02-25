@@ -9675,7 +9675,7 @@ const mainGameFunction = async () => {
 
   questionDisplay.innerHTML = "";
   answerDisplay.innerHTML = "";
-  
+
   displayLoadingAnimation()
 
   try {
@@ -10063,6 +10063,7 @@ function resetSettings() {
 
 // About Us stuff
 function displayAboutUs() {
+  pauseGame();
   const card = document.getElementById("about-us-card");
   const overlay = document.getElementById("overlay");
   card.style.display = "block";
@@ -10070,6 +10071,7 @@ function displayAboutUs() {
 }
 
 function closeAboutUs() {
+  pauseGame();
   const card = document.getElementById("about-us-card");
   const overlay = document.getElementById("overlay");
   card.style.display = "none";
