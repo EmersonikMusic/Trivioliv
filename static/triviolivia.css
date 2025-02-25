@@ -589,13 +589,6 @@ h2 {
 
 
 /* Loading animation stuff */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: #111;
-        }
         .loader {
             display: flex;
             gap: 10px;
