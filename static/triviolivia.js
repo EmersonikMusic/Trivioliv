@@ -9645,6 +9645,10 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 // Loading animation display function
 function displayLoadingAnimation() {
+
+  questionDisplay.innerHTML = "";
+  answerDisplay.innerHTML = "";
+  
   const container = document.getElementById('question-container');
   
   // Remove any existing loader to prevent duplicates
