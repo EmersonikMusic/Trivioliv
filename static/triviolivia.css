@@ -608,3 +608,22 @@ h2 {
             0%, 100% { transform: translateY(0); opacity: 0.3; }
             50% { transform: translateY(-15px); opacity: 1; }
         }
+
+/* Character stuff */
+        #character {
+            display: flex;
+            justify-content: center; /* Centers the image horizontally */
+            align-items: flex-end;   /* Aligns the image to the bottom */
+            height: 100%;            /* Ensures the container takes up the full height */
+            width: 100%;             /* Ensures the container takes up the full width */
+            overflow: hidden;        /* Prevents any overflow */
+        }
+        
+        #character img {
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+            width: auto;
+            object-fit: contain; /* Ensures the whole SVG is visible */
+        }
+        
