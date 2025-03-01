@@ -9417,12 +9417,6 @@ let globalData;
 document.getElementById("demo").innerHTML =
   'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play.';
 
-//Dynamic question and answer timer bar attempt
-let progressBar = document.getElementById("progress");
-let startButton = document.getElementById("startButton");
-let pauseButton = document.getElementById("pauseButton");
-let isPaused = true;
-
 // Async JS that kind of scares me, honestly
 async function fetchData(moddedUrl) {
   const response = await fetch(moddedUrl);
@@ -9965,6 +9959,12 @@ function changeButtonText() {
 
 // New function to disable banned categories
 function disableBannedCategories() {}
+
+//Dynamic question and answer timer bar attempt
+let progressBar = document.getElementById("progress");
+let startButton = document.getElementById("startButton");
+let pauseButton = document.getElementById("pauseButton");
+let isPaused = true;
 
 startButton.addEventListener("click", function () {
   if (isPaused) {
