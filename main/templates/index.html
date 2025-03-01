@@ -550,8 +550,47 @@ input[type='checkbox'] {
                 </div>
 
                 
-                        <div class="menu-button">ERAS</div>
-                        <div class="menu-button">DIFFICULTIES</div>
+                        <!--Difficulties menu-->
+                <div class="wrap-collabsible"> 
+                  <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
+                  <label for="collapsible-difficulties" class="lbl-toggle">
+                      DIFFICULTIES
+                  </label>
+                  <div class="collapsible-content">
+                      <div class="content-inner">
+                          <button id="all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE </button>
+                          {% for difficulty in difficulties %}
+                          <div id='{{ difficulty.name }}'>
+                              <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
+                                  <span class="indicator"></span>
+                                  {{ difficulty.name | upper}}
+                              </button>
+                          </div>
+                          {% endfor %}
+                      </div>
+                  </div>
+                  </div>
+  
+  
+                  <!--Eras menu-->
+                  <div class="wrap-collabsible"> 
+                  <input id="collapsible-eras" class="toggle" type="checkbox"> 
+                  <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
+                  <div class="collapsible-content">
+                      <div class="content-inner">
+                      <button id="all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
+                      {% for era in eras %}
+                      <div id='{{ era.name }}'>
+                          <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
+                              <span class="indicator"></span>
+                              {{ era.name }}
+                          </button>
+                          </div>
+                      {% endfor %}
+                      </div>
+                  </div>
+                  </div>
+                  
                     </div>
                     <div class="character-container desktop-character">
                         <!-- SVG will be injected via JavaScript -->
