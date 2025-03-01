@@ -9613,7 +9613,7 @@ let Question = class {
 // Arrow functions to show question and answer
 const showQuestion = (displayed_question) => {
   const div = document.getElementById("question-container");
-  div.style.opacity = 1;
+  // div.style.opacity = 1;
 
   // Clear the existing question and answer only when a new question is shown
   questionDisplay.innerHTML = "";
