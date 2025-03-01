@@ -392,6 +392,48 @@ input[type='checkbox'] {
 
 
 
+
+
+/* Attempt at dynamic question and answer timer indicator */
+#loading-bar {
+    display: flex;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+  }
+  #progress {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: depleteProgress 10s linear infinite paused;
+  }
+
+  #loading-text {
+    display: flex;
+    color: white;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    z-index: 1;
+  }
+
+  @keyframes depleteProgress {
+    0% { width: 100%; }
+    100% { width: 0%; }
+  }
+
+  @keyframes replenishProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+
+
+  
+
     </style>
 </head>
 <body>
