@@ -609,7 +609,10 @@ input[type='checkbox'] {
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="#">Login</a></li>
                                 <li><a class="dropdown-item" href="#">Make an Account</a></li>
-                                <li><a class="dropdown-item" href="#">About Us</a></li>
+                                <li>
+                                  <div id="about-us" class="pause-only">
+                                  <button onclick="displayAboutUs()" id="about-us" type="button">ABOUT US</button>
+                              </div></li>
                             </ul>
                         </div>
                     </div>
@@ -691,18 +694,11 @@ input[type='checkbox'] {
                                   <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
                               </div>
                           </div>
-
-                          <div id="refetch-and-restart" class="pause-only">
-                              <button onclick="refetchAndRestart()" id="refetch-and-restart" type="button">REFETCH AND RESTART</button>
-                            </div>
                 
                             <button id="fullscreen-btn" onclick="toggleFullscreen()">TOGGLE FULLSCREEN</button>
 
                 
-                
-                            <div id="about-us" class="pause-only">
-                              <button onclick="displayAboutUs()" id="about-us" type="button">ABOUT US</button>
-                          </div>
+  
 
                           
                       </div>
@@ -777,7 +773,7 @@ input[type='checkbox'] {
                   <div id="character">
                     <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
                 </div>
-                
+
                     </div>
                     
                 </div>
