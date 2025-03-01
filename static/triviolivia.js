@@ -9719,7 +9719,7 @@ const mainGameFunction = async () => {
       await delay(100);
     }
 
-    document.body.style.backgroundColor = 
+    document.body.style.background =
       category_colors[globalData[i].category_name];
 
     const character = document.getElementById("character");
