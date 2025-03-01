@@ -661,38 +661,18 @@ input[type='checkbox'] {
                 
                 <!-- Mobile Menu Bar (visible only on small screens) -->
                 <div class="menu-container mobile-menu">
-                    <div class="mobile-buttons">
-
-                        <div id="start-pause" class="menu-button">
-                            <button onclick="dontFetchDataIfAllDeselected()" id="start-pause" type="button">START GAME</button>
-                        </div>
-
-                        <div class="menu-button">CATEGORIES</div>
-
-                        <div id="refetch-and-restart" class="menu-button">
-                            <button onclick="refetchAndRestart()" id="refetch-and-restart" type="button">REFETCH</button>
-                          </div>
-
-                        <div class="menu-button">DIFFICULTIES</div>
-                        <div class="menu-button">SETTINGS</div>
-                        <div class="menu-button">ERAS</div>
-
-                    </div>
-                    
-                    {% load static %}
-                    <div class="character-container">
-                    <div id="character">
-                      <?xml version="1.0" encoding="UTF-8"?>
-
-            
-          {% load static %}
-          <div id="character">
-              <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
-          </div>
-                    </div>
-                    </div>
-
-                </div>
+                  <div class="mobile-buttons">
+                      <div class="menu-button">PAUSE GAME</div>
+                      <div class="menu-button">CATEGROIES</div>
+                      <div class="menu-button">REFETCH</div>
+                      <div class="menu-button">DIFFICULTIES</div>
+                      <div class="menu-button">SETTINGS</div>
+                      <div class="menu-button">ERAS</div>
+                  </div>
+                  <div class="character-container mobile-character">
+                      <!-- SVG will be injected via JavaScript -->
+                  </div>
+              </div>
 
             </div>
             
