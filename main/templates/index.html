@@ -421,6 +421,7 @@ input[type='checkbox'] {
                     <div class="answer-container">
                         Answer area
                     </div>
+
                     <div id="loading-bar-container" class="loading-bar-container">
                         <div id="loading-bar">
                             <div id="loading-text">
@@ -429,13 +430,14 @@ input[type='checkbox'] {
                             <div id="progress"></div>
                         </div>
                     </div>
+
                 </div>
                 
                 <!-- Mobile Menu Bar (visible only on small screens) -->
                 <div class="menu-container mobile-menu">
                     <div class="mobile-buttons">
 
-                        <div id="start-game" class="menu-button">
+                        <div id="start-pause" class="menu-button">
                             <button onclick="dontFetchDataIfAllDeselected()" id="start-pause" type="button">START GAME</button>
                         </div>
 
@@ -478,7 +480,7 @@ input[type='checkbox'] {
             <div class="col-md-3 d-flex flex-column h-100 pl-0">
                 <div class="menu-container desktop-menu">
                     <div class="desktop-buttons">
-                        <div id="start-game" class="menu-button">
+                        <div id="start-pause" class="menu-button">
                             <button onclick="dontFetchDataIfAllDeselected()" id="start-pause" type="button">START GAME</button>
                         </div>
                         <div id="refetch-and-restart" class="menu-button">
