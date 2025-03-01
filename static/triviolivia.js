@@ -9648,10 +9648,10 @@ function displayLoadingAnimation() {
   const container = document.getElementById('question-container');
   
   // Remove any existing loader to prevent duplicates
-  // const existingLoader = container.querySelector('.loader');
-  // if (existingLoader) {
-  //     existingLoader.remove();
-  // }
+  const existingLoader = container.querySelector('.loader');
+  if (existingLoader) {
+      existingLoader.remove();
+  }
 
   // Create loader div
   const loader = document.createElement('div');
