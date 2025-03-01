@@ -614,6 +614,31 @@ input[type='checkbox'] {
 
 
 
+/* Indicator light attempt */
+.indicator {
+    width: 2px; /* Reduce the indicator width to match smaller buttons */
+    height: 100%; /* Set the indicator's height to 100% of the button's height */
+    background-color: #00F829;
+    left: 0; /* Position the indicator at the left edge of the button */
+    top: 0; /* Align the indicator with the top of the button */
+    bottom: 0; /* Align the indicator with the bottom of the button */
+    margin-right: 0px; /* Create space between indicator and text */
+    border-right: 1px solid #2D2D2D;
+    border-radius: 2px;
+    margin-right: 6px;
+  }
+
+  .inactive .indicator  {
+    background-color: red;
+  }
+
+.button .category-title, .difficulty-title, .era-title {
+    margin: auto;
+    padding-left: 10px;
+    text-align: left;
+}
+
+
 
     </style>
 </head>
