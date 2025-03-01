@@ -549,6 +549,48 @@ input[type='checkbox'] {
             0%, 100% { transform: translateY(0); opacity: 0.3; }
             50% { transform: translateY(-15px); opacity: 1; }
         }
+
+
+
+
+
+/* Slider stuff */
+.slider-container {
+    margin: 15px auto;
+}
+.slider-label {
+    text-align: center;
+    padding-bottom: 15px;
+}
+.slider {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.4);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #FFF;
+    cursor: pointer;
+}
+.slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #FFF;
+    cursor: pointer;
+}
+
+
     </style>
 </head>
 <body>
