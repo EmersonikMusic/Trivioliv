@@ -9943,7 +9943,7 @@ function updateLabel(labelId, value, unit) {
 
 //Function to change START GAME text
 function changeButtonText() {
-  var button = document.getElementById("start-pause");
+  var button = document.getElementById("start-pause", "start-pause2");
   if (pauseFlag === false) {
     button.textContent = "PAUSE GAME";
     progressBar.style.animationPlayState = "running";

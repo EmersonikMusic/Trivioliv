@@ -716,7 +716,11 @@ input[type='checkbox'] {
                 <!-- Mobile Menu Bar (visible only on small screens) -->
                 <div class="menu-container mobile-menu">
                   <div class="mobile-buttons">
-                      <div class="menu-button">START GAME</div>
+
+                    <div id="start-pause2" class="menu-button">
+                      <button onclick="dontFetchDataIfAllDeselected()" id="start-pause2" type="button">START GAME</button>
+                  </div>
+
                       <div class="menu-button">CATEGROIES</div>
                       <div class="menu-button">REFETCH</div>
                       <div class="menu-button">DIFFICULTIES</div>
