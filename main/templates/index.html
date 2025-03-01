@@ -3,680 +3,673 @@
 
 {% block content %} -->
 
+<head>
+  <link rel="icon" type="image/x-icon" href="{% static 'SVGs/favicon.svg' %}">
+  <title>TRIVIOLIVIA.com - Earth's Deepest Trivia Source</title>
+</head>
+
+
+
+<!-- Google analytics tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7JY71BDXF0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7JY71BDXF0');
+</script>
+
+<script>
+    function trackButtonClick(event) {
+        var button = event.target;
+        var buttonText = button.innerText || button.textContent || 'unknown-button';
+        var category = 'General Button Click'; // Default category
+        var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
+
+        // Track All/None buttons for Categories, Difficulties, and Eras
+        if (button.id.includes('all-none')) {
+            var groupName = '';
+            var allActive = false;
+            var allDisabled = false;
+
+            if (button.id.includes('categories')) {
+                groupName = 'Categories';
+                // Check if all category buttons are active
+                allActive = document.querySelectorAll('.category').length === document.querySelectorAll('.category.active').length;
+                allDisabled = document.querySelectorAll('.category.active').length === 0;
+            } else if (button.id.includes('difficulties')) {
+                groupName = 'Difficulties';
+                // Check if all difficulty buttons are active
+                allActive = document.querySelectorAll('.difficulty').length === document.querySelectorAll('.difficulty.active').length;
+                allDisabled = document.querySelectorAll('.difficulty.active').length === 0;
+            } else if (button.id.includes('eras')) {
+                groupName = 'Eras';
+                // Check if all era buttons are active
+                allActive = document.querySelectorAll('.era').length === document.querySelectorAll('.era.active').length;
+                allDisabled = document.querySelectorAll('.era.active').length === 0;
+            }
+
+            // Determine action based on state of all options
+            if (allActive) {
+                gtag('event', groupName + '_all', {
+                    'event_category': groupName + ' Selection',
+                    'event_label': groupName + ' ALL (enabled)'
+                });
+            } else if (allDisabled) {
+                gtag('event', groupName + '_none', {
+                    'event_category': groupName + ' Selection',
+                    'event_label': groupName + ' NONE (disabled)'
+                });
+            }
+
+            return; // Skip normal button tracking for these buttons
+        }
+
+        // Default behavior for other buttons
+        if (button.classList.contains('category')) {
+            category = 'Category Selection';
+        } else if (button.classList.contains('difficulty')) {
+            category = 'Difficulty Selection';
+        } else if (button.classList.contains('era')) {
+            category = 'Era Selection';
+        } else if (button.classList.contains('nav-button')) {
+            category = 'Navigation';
+        }
+
+        gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked_' + state, {
+            'event_category': category,
+            'event_label': buttonText + ' (' + state.toUpperCase() + ')'
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("button").forEach(function(button) {
+            button.addEventListener("click", trackButtonClick);
+        });
+    });
+</script>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="{% static 'SVGs/favicon.svg' %}">
-  <title>TRIVIOLIVIA.com - Earth's Deepest Trivia Source</title>
-  
-  <!-- Bootstrap CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-  
-  <style>
-    /* Fixed body and html styling */
-    body, html {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        background: #6f2da8;
-        font-family: "Montserrat", 'Calibri', sans-serif;
-        color: white;
-        word-break: break-word;
-        overflow-wrap: break-word;
-        hyphens: none;
-        /* Remove overflow: hidden which causes issues on mobile */
-    }
-
-    /* Make sure container-fluid fills the height properly */
-    .container-fluid {
-        min-height: 100vh; /* Use min-height instead of height */
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Fix row height */
-    .row.h-100 {
-        flex: 1;
-    }
-
-    .header {
-        background-color: rgba(0, 0, 0, 0.2);
-        color: white;
-        padding: 10px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-radius: 12px 12px 0 0;
-        font-weight: bold;
-        font-size: 1.2rem;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-    
-    .hamburger-menu {
-        cursor: pointer;
-    }
-    
-    .hamburger-btn {
-        background: transparent;
-        border: none;
-        padding: 8px 12px;
-        transition: background-color 0.2s;
-        border-radius: 5px;
-    }
-    
-    .hamburger-btn:hover {
-        background-color: rgba(148, 125, 196, 0.3);
-    }
-    
-    .hamburger-icon-bar {
-        display: block;
-        width: 30px;
-        height: 5px;
-        margin: 6px 0;
-        border-radius: 25px;
-        background-color: white;
-    }
-    
-    .dropdown-menu {
-        background-color: rgba(0, 0, 0, 0.7);
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        border: none;
-    }
-    
-    .dropdown-item {
-        color: white;
-        padding: 10px 15px;
-        transition: background-color 0.3s;
-    }
-    
-    .dropdown-item:hover {
-        background-color: rgba(0, 0, 0, 0.7);
-        color: white;
-    }
-
-    /* Fix game area to use flexible height */
-    .game-area {
-        background-color: rgba(0, 0, 0, 0.3);
-        color: white;
-        flex: 1; /* Use flex instead of fixed height */
-        border-radius: 12px;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .question-container {
-        flex: 3;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 15px;
-        /* Dynamic font sizing */
-        font-size: clamp(16px, 5vw, 8vh);
-        /* background-color: rgba(0,0,0, 0.4); */
-        margin: 10px;
-        border-radius: 10px;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-        hyphens: none;
-    }
-
-    .answer-container {
-        flex: 3;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 15px;
-        /* Dynamic font sizing */
-        font-size: clamp(16px, 5vw, 8vh);
-        /* background-color: rgba(0,0,0, 0.4); */
-        margin: 10px;
-        border-radius: 10px;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-        hyphens: none;
-    }
-
-    /* Fix loading bar container */
-    .loading-bar-container {
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        margin-top: auto; /* Keep this but ensure parent uses flex */
-        position: relative; /* Ensure positioned elements work */
-        bottom: 0; /* Stick to bottom */
-    }
-
-    .menu-container {
-        background-color: rgba(0,0,0, 0.3);
-        color: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        display: flex;
-    }
-
-    /* Improve mobile menu positioning */
-    .mobile-menu {
-        height: auto; /* Remove fixed height */
-        min-height: 80px; /* Set minimum height instead */
-        margin-top: 8px;
-        margin-bottom: 8px; /* Add bottom margin */
-        flex-direction: row;
-        position: sticky; /* Make it stick to bottom on scroll */
-        bottom: 0;
-        display: flex;
-        width: 100%;
-    }
-
-    .mobile-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        width: 70%;
-    }
-
-    /* Fix mobile character container */
-    .mobile-character {
-        width: 30%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: auto; /* Auto height */
-        min-height: 80px; /* Minimum height */
-        padding: 5px;
-    }
-
-    /* Desktop-specific styles */
-    .desktop-menu {
-        height: 100%;
-        flex-direction: column;
-        padding: 15px;
-    }
-
-    .desktop-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        align-items: center;
-    }
-
-    .desktop-character {
-        margin-top: auto;
-    }
-
-    .menu-button {
-        cursor: pointer;
-        text-align: center;
-        font-weight: bold;
-        transition: background-color 0.3s;
-        color: white;
-    }
-
-    button {
-        display: flex;
-        flex-wrap: nowrap;
-        box-sizing: border-box;
-        background-color: rgba(0, 0, 0, 0);
-        font-size: 11px;
-        text-align: left;
-        height: 20px;
-        padding: 0px;
-        margin: 1px 0;
-        border: none;
-        font-weight: 950;
-        cursor: pointer;
-        border-radius: 2px;
-    }
-
-    /* Mobile button styles */
-    .mobile-menu .menu-button {
-        flex-basis: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 33.33%;
-        color: white;
-    }
-
-    /* Desktop button styles */
-    .desktop-menu .menu-button {
-        width: 100%;
-        padding: 8px;
-        background-color: rgba(0,0,0, 0.5);
-        border-radius: 8px;
-        transition: all 0.3s;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        margin-bottom: 0;
-        color: white;
-    }
-
-    .desktop-menu .menu-button:hover {
-        background-color: rgba(0,0,0, 0.7);
-        transform: scale(1.05);
-    }
-
-    .mobile-menu .menu-button:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        border-radius: 8px;
-    }
-
-    .character-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
-
-    /* Animation for the character */
-    @keyframes bob {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-8px); }
-        100% { transform: translateY(0); }
-    }
-
-    .character-svg {
-        animation: bob 2s infinite ease-in-out;
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
-    }
-    
-    /* Desktop character container specific */
-    .desktop-character {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        padding: 10px;
-    }
-
-    /* Media queries to handle different screen sizes better */
-    @media (max-width: 767px) {
-        .desktop-menu {
-            display: none;
-        }
-        
-        /* Ensure proper alignment for bottom elements */
-        .col-md-9.d-flex.flex-column.h-100 {
-            height: auto !important;
-            min-height: 70vh; /* Use minimum height */
-            display: flex !important;
-            flex-direction: column !important;
-        }
-        
-        /* Make sure main game area takes up available space */
-        .game-area {
-            flex: 1 1 auto;
-        }
-    }
-
-    @media (min-width: 768px) {
-        .mobile-menu {
-            display: none;
-        }
-    }
-
-    /* Fix for iOS Safari and other mobile browsers */
-    @supports (-webkit-touch-callout: none) {
-        /* CSS specific to iOS devices */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRIVIOLIVIA</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
         body, html {
-            height: -webkit-fill-available;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #6f2da8;
+            font-family: "Montserrat", 'Calibri', sans-serif;
+            color: white;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: none;
+
         }
-        
+
         .container-fluid {
-            min-height: -webkit-fill-available;
+            height: 100vh;
+            padding: 0;
+        }
+
+        .header {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 12px 12px 0 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         
+        .hamburger-menu {
+            cursor: pointer;
+        }
+        
+        .hamburger-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 12px;
+            transition: background-color 0.2s;
+            border-radius: 5px;
+        }
+        
+        .hamburger-btn:hover {
+            background-color: rgba(148, 125, 196, 0.3);
+        }
+        
+        .hamburger-icon-bar {
+            display: block;
+            width: 30px;
+            height: 5px;
+            margin: 6px 0;
+            border-radius: 25px;
+            background-color: white;
+        }
+        
+        .dropdown-menu {
+          background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: none;
+        }
+        
+        .dropdown-item {
+            color: white;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+        }
+        
+        .dropdown-item:hover {
+          background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+        }
+
+        .game-area {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            height: calc(100% - 30px);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .question-container {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    /* Dynamic font sizing */
+    font-size: clamp(16px, 5vw, 8vh);
+    /* background-color: rgba(0,0,0, 0.4); */
+    margin: 10px;
+    border-radius: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: none;
+}
+
+.answer-container {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    /* Dynamic font sizing */
+    font-size: clamp(16px, 5vw, 8vh);
+    /* background-color: rgba(0,0,0, 0.4); */
+    margin: 10px;
+    border-radius: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: none;
+}
+
+.loading-bar-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: auto;
+  }
+
+
+        .menu-container {
+            background-color: rgba(0,0,0, 0.3);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+        }
+
+        /* Mobile-specific styles */
         .mobile-menu {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
+            height: 25vh;
+            margin-top: 8px;
+            flex-direction: row;
         }
-    }
 
-    /* COLLAPSE/EXPAND DIV CSS */
-
-    input[type='checkbox'] { 
-        display: none; 
-    } 
-
-    .wrap-collabsible { 
-        margin: 6px 0;
-    } 
-
-    .lbl-toggle { 
-      display: flex; 
-      font-weight: 100; 
-      text-transform: uppercase; 
-      /* padding: .25rem;  */
-      color: #DDD; 
-      background: rgba(0, 0, 0, 0);
-      cursor: pointer; 
-      transition: all .25s ease-out; 
-      flex-direction: row;
-      align-items: center;
-      height: 3%;
-      margin: 0px 20px;
-      padding: 10px 20px;
-    } 
-
-    .lbl-toggle:hover { 
-        color: #FFF;
-        border-radius: 14px;
-        background: rgba(0, 0, 0, .2); 
-    }
-
-    .lbl-toggle::before { 
-      content: ' '; 
-      display: inline-block; 
-      border-top: 5px solid transparent; 
-      border-bottom: 5px solid transparent; 
-      border-left: 5px solid currentColor; 
-      vertical-align: middle; 
-      margin-right: .7rem; 
-      transform: translateY(-2px); 
-      transition: transform .2s ease-out; 
-    } 
-    .toggle:checked + .lbl-toggle::before { 
-      transform: rotate(90deg) translateX(-3px); 
-    } 
-
-    .collapsible-content { 
-      max-height: 0px; 
-      overflow: hidden; 
-      transition: max-height .5s ease-in-out; 
-      transition-delay: 0.26s;
-
-      /* unsure about this one */
-      display: flex;
-      flex-direction: column;
-      flex-wrap: nowrap;
-      align-items: stretch;
-    } 
-
-    .toggle:checked + .lbl-toggle { 
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-        border-top-right-radius: 14px;
-        border-top-left-radius: 14px;
-        background: rgba(0, 0, 0, .2);
-    } 
-
-    .content-inner { 
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-    }
-
-    .content-inner button {
-        color: rgba(225, 225, 225, 1);
-        display: flex;
-        vertical-align: middle;
-        /* background: rgba(0, 0, 0, .1); */
-        border-radius: 8px;
-        width: 100%;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .content-inner button:hover{
-        background: rgba(0, 0, 0, .25);
-    }
-    .content-inner button.all-none-btn {
-        background-color: rgba(0, 0, 0, .5);
-        display: flex;
-        padding-left: 8px;
-        border-radius: 6px;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .collapsible-content .content-inner { 
-        background: rgba(0, 0, 0, .2);
-        padding: 10 20;
-        margin: 0 20;
-        border-bottom-right-radius: 14px; 
-        border-bottom-left-radius: 14px; 
-    } 
-    .collapsible-content p { 
-        margin-bottom: 0; 
-    }
-    
-    .toggle:checked + .lbl-toggle + .collapsible-content { 
-        max-height: 100vh;
-        overflow: scroll;
-      } 
-
-    .hide {
-        display: none;
-    }
-    
-    /* COLLAPSE/EXPAND DIV CSS END */
-
-    /* Attempt at dynamic question and answer timer indicator */
-      #loading-bar {
-        display: flex;
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-        justify-content: center;
-      }
-      #progress {
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        position: absolute;
-        left: 0;
-        top: 0;
-        animation: depleteProgress 10s linear infinite paused;
-      }
-
-      #loading-text {
-        display: flex;
-        color: white;
-        /* font-size: 14px; */
-        font-family: Arial, sans-serif;
-        text-align: center;
-        vertical-align: middle;
-        z-index: 1;
-      }
-
-      @keyframes depleteProgress {
-        0% { width: 100%; }
-        100% { width: 0%; }
-      }
-
-      @keyframes replenishProgress {
-        0% { width: 0%; }
-        100% { width: 100%; }
-      }
-
-    /* Loading animation stuff */
-    .loader {
-        display: flex;
-        gap: 10px;
-    }
-    .dot {
-        width: 40px;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        animation: bounce 1.5s infinite ease-in-out;
-    }
-    .dot:nth-child(1) { animation-delay: 0s; }
-    .dot:nth-child(2) { animation-delay: 0.2s; }
-    .dot:nth-child(3) { animation-delay: 0.4s; }
-    
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); opacity: 0.3; }
-        50% { transform: translateY(-15px); opacity: 1; }
-    }
-
-    /* Slider stuff */
-    .slider-container {
-        margin: 5px auto;
-    }
-    .slider-label {
-        text-align: center;
-        padding-bottom: 5px;
-    }
-    .slider {
-        width: 100%;
-        -webkit-appearance: none;
-        height: 6px;
-        border-radius: 5px;
-        background-color: rgba(0,0,0,0.4);
-        outline: none;
-        opacity: 0.7;
-        -webkit-transition: .2s;
-        transition: opacity .2s;
-    }
-    .slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        background-color: #FFF;
-        cursor: pointer;
-    }
-    .slider::-moz-range-thumb {
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        background-color: #FFF;
-        cursor: pointer;
-    }
-
-    /* Indicator light attempt */
-    .indicator {
-        width: 2px; /* Reduce the indicator width to match smaller buttons */
-        height: 100%; /* Set the indicator's height to 100% of the button's height */
-        background-color: #00F829;
-        left: 0; /* Position the indicator at the left edge of the button */
-        top: 0; /* Align the indicator with the top of the button */
-        bottom: 0; /* Align the indicator with the bottom of the button */
-        margin-right: 0px; /* Create space between indicator and text */
-        border-right: 1px solid #2D2D2D;
-        border-radius: 2px;
-        margin-right: 6px;
-    }
-
-    .inactive .indicator {
-        background-color: red;
-    }
-
-    .button .category-title, .difficulty-title, .era-title {
-        margin: auto;
-        padding-left: 10px;
-        text-align: left;
-    }
-
-    /* Character animation */
-    #character {
-        animation: bobbing 2s infinite ease-in-out;
-    }
-    @keyframes bobbing {
-        0%, 100% {
-            transform: translateY(0);
+        .mobile-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            width: 70%;
         }
-        50% {
-            transform: translateY(-10px);
+
+        .mobile-character {
+            width: 30%;
+            height: 100%;
         }
-    }
-  </style>
+
+        /* Desktop-specific styles */
+        .desktop-menu {
+            height: 100%;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        .desktop-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .desktop-character {
+            margin-top: auto;
+        }
+
+        .menu-button {
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            color: white;
+        }
+
+        button {
+    display: flex;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 11px;
+    text-align: left;
+    height: 20px;
+    padding: 0px;
+    margin: 1px 0;
+    border: none;
+    font-weight: 950;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+        /* Mobile button styles */
+        .mobile-menu .menu-button {
+            flex-basis: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 33.33%;
+            color: white;
+        }
+
+        /* Desktop button styles */
+        .desktop-menu .menu-button {
+            width: 100%;
+            padding: 8px;
+            background-color: rgba(0,0,0, 0.5);
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0;
+            color: white;
+        }
+
+        .desktop-menu .menu-button:hover {
+            background-color: rgba(0,0,0, 0.7);
+            transform: scale(1.05);
+        }
+
+        .mobile-menu .menu-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .character-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Animation for the character */
+        @keyframes bob {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
+        .character-svg {
+            animation: bob 2s infinite ease-in-out;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+        }
+        
+        /* Mobile character container specific */
+        .mobile-character {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 5px;
+        }
+        
+        /* Desktop character container specific */
+        .desktop-character {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu {
+                display: none;
+            }
+            
+            .game-area {
+                height: 100%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .desktop-menu {
+                display: none;
+            }
+        }
+
+
+
+
+        /* COLLAPSE/EXPAND DIV CSS */
+
+input[type='checkbox'] { 
+    display: none; 
+} 
+
+.wrap-collabsible { 
+    margin: 6px 0;
+} 
+
+.lbl-toggle { 
+  display: flex; 
+  font-weight: 100; 
+  text-transform: uppercase; 
+  /* padding: .25rem;  */
+  color: #DDD; 
+  background: rgba(0, 0, 0, 0);
+  cursor: pointer; 
+  transition: all .25s ease-out; 
+  flex-direction: row;
+  align-items: center;
+  height: 3%;
+  margin: 0px 20px;
+  padding: 10px 20px;
+} 
+
+.lbl-toggle:hover { 
+    color: #FFF;
+    border-radius: 14px;
+    background: rgba(0, 0, 0, .2); 
+}
+
+.lbl-toggle::before { 
+  content: ' '; 
+  display: inline-block; 
+  border-top: 5px solid transparent; 
+  border-bottom: 5px solid transparent; 
+  border-left: 5px solid currentColor; 
+  vertical-align: middle; 
+  margin-right: .7rem; 
+  transform: translateY(-2px); 
+  transition: transform .2s ease-out; 
+} 
+.toggle:checked + .lbl-toggle::before { 
+  transform: rotate(90deg) translateX(-3px); 
+} 
+
+.collapsible-content { 
+  max-height: 0px; 
+  overflow: hidden; 
+  transition: max-height .5s ease-in-out; 
+  transition-delay: 0.26s;
+
+  /* unsure about this one */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+} 
+
+.toggle:checked + .lbl-toggle { 
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 14px;
+    border-top-left-radius: 14px;
+    background: rgba(0, 0, 0, .2);
+} 
+
+.content-inner { 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.content-inner button {
+    color: rgba(225, 225, 225, 1);
+    display: flex;
+    vertical-align: middle;
+    /* background: rgba(0, 0, 0, .1); */
+    border-radius: 8px;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.content-inner button:hover{
+    background: rgba(0, 0, 0, .25);
+}
+.content-inner button.all-none-btn {
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    padding-left: 8px;
+    border-radius: 6px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.collapsible-content .content-inner { 
+    background: rgba(0, 0, 0, .2);
+    padding: 10 20;
+    margin: 0 20;
+    border-bottom-right-radius: 14px; 
+    border-bottom-left-radius: 14px; 
+} 
+.collapsible-content p { 
+    margin-bottom: 0; 
+}
+ 
+.toggle:checked + .lbl-toggle + .collapsible-content { 
+    max-height: 100vh;
+    overflow: scroll;
+  } 
+
+.hide {
+    display: none;
+}
+ 
+/* COLLAPSE/EXPAND DIV CSS END */
+
+
+
+
+
+/* Attempt at dynamic question and answer timer indicator */
+  #loading-bar {
+    display: flex;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+  }
+  #progress {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: depleteProgress 10s linear infinite paused;
+  }
+
+  #loading-text {
+    display: flex;
+    color: white;
+    /* font-size: 14px; */
+    font-family: Arial, sans-serif;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 1;
+  }
+
+  @keyframes depleteProgress {
+    0% { width: 100%; }
+    100% { width: 0%; }
+  }
+
+  @keyframes replenishProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+
+
+
+
+  /* Loading animation stuff */
+        .loader {
+            display: flex;
+            gap: 10px;
+        }
+        .dot {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.3; }
+            50% { transform: translateY(-15px); opacity: 1; }
+        }
+
+
+
+
+
+/* Slider stuff */
+.slider-container {
+    margin: 5px auto;
+}
+.slider-label {
+    text-align: center;
+    padding-bottom: 5px;
+}
+.slider {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.4);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #FFF;
+    cursor: pointer;
+}
+.slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #FFF;
+    cursor: pointer;
+}
+
+
+
+/* Indicator light attempt */
+.indicator {
+    width: 2px; /* Reduce the indicator width to match smaller buttons */
+    height: 100%; /* Set the indicator's height to 100% of the button's height */
+    background-color: #00F829;
+    left: 0; /* Position the indicator at the left edge of the button */
+    top: 0; /* Align the indicator with the top of the button */
+    bottom: 0; /* Align the indicator with the bottom of the button */
+    margin-right: 0px; /* Create space between indicator and text */
+    border-right: 1px solid #2D2D2D;
+    border-radius: 2px;
+    margin-right: 6px;
+  }
+
+  .inactive .indicator  {
+    background-color: red;
+  }
+
+.button .category-title, .difficulty-title, .era-title {
+    margin: auto;
+    padding-left: 10px;
+    text-align: left;
+}
+
+
+
+
+Character
+#character {
+    animation: bobbing 2s infinite ease-in-out;
+        }
+        @keyframes bobbing {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        #character2 {
+    animation: bobbing 2s infinite ease-in-out;
+        }
+        @keyframes bobbing {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+    </style>
 </head>
 <body>
-    <!-- Google analytics tag -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7JY71BDXF0"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-7JY71BDXF0');
-    </script>
-
-    <script>
-        function trackButtonClick(event) {
-            var button = event.target;
-            var buttonText = button.innerText || button.textContent || 'unknown-button';
-            var category = 'General Button Click'; // Default category
-            var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
-
-            // Track All/None buttons for Categories, Difficulties, and Eras
-            if (button.id.includes('all-none')) {
-                var groupName = '';
-                var allActive = false;
-                var allDisabled = false;
-
-                if (button.id.includes('categories')) {
-                    groupName = 'Categories';
-                    // Check if all category buttons are active
-                    allActive = document.querySelectorAll('.category').length === document.querySelectorAll('.category.active').length;
-                    allDisabled = document.querySelectorAll('.category.active').length === 0;
-                } else if (button.id.includes('difficulties')) {
-                    groupName = 'Difficulties';
-                    // Check if all difficulty buttons are active
-                    allActive = document.querySelectorAll('.difficulty').length === document.querySelectorAll('.difficulty.active').length;
-                    allDisabled = document.querySelectorAll('.difficulty.active').length === 0;
-                } else if (button.id.includes('eras')) {
-                    groupName = 'Eras';
-                    // Check if all era buttons are active
-                    allActive = document.querySelectorAll('.era').length === document.querySelectorAll('.era.active').length;
-                    allDisabled = document.querySelectorAll('.era.active').length === 0;
-                }
-
-                // Determine action based on state of all options
-                if (allActive) {
-                    gtag('event', groupName + '_all', {
-                        'event_category': groupName + ' Selection',
-                        'event_label': groupName + ' ALL (enabled)'
-                    });
-                } else if (allDisabled) {
-                    gtag('event', groupName + '_none', {
-                        'event_category': groupName + ' Selection',
-                        'event_label': groupName + ' NONE (disabled)'
-                    });
-                }
-
-                return; // Skip normal button tracking for these buttons
-            }
-
-            // Default behavior for other buttons
-            if (button.classList.contains('category')) {
-                category = 'Category Selection';
-            } else if (button.classList.contains('difficulty')) {
-                category = 'Difficulty Selection';
-            } else if (button.classList.contains('era')) {
-                category = 'Era Selection';
-            } else if (button.classList.contains('nav-button')) {
-                category = 'Navigation';
-            }
-
-            gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked_' + state, {
-                'event_category': category,
-                'event_label': buttonText + ' (' + state.toUpperCase() + ')'
-            });
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll("button").forEach(function(button) {
-                button.addEventListener("click", trackButtonClick);
-            });
-        });
-    </script>
-
     <div class="container-fluid p-1">
         <div class="row h-100 g-2">
             <!-- Main Game Area -->
@@ -701,6 +694,7 @@
                         </div>
                     </div>
                     <div class="question-container">
+
                         Welcome to<br>
                         Earth's Deepest Trivia Source!
                     </div>
@@ -716,6 +710,7 @@
                             <div id="progress"></div>
                         </div>
                     </div>
+
                 </div>
                 
                 <!-- Mobile Menu Bar (visible only on small screens) -->
@@ -730,8 +725,10 @@
                   </div>
                   <div class="character-container mobile-character" id="character2">
                       <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
+
                   </div>
-                </div>
+              </div>
+
             </div>
             
             <!-- Side Menu (visible only on larger screens) -->
@@ -745,96 +742,112 @@
                             <button onclick="refetchAndRestart()" id="refetch-and-restart" type="button">REFETCH</button>
                           </div>
                         
-                        <!--Settings menu-->
-                        <div class="wrap-collabsible"> 
-                          <input id="collapsible-settings" class="toggle" type="checkbox"> 
-                          <label for="collapsible-settings" class="lbl-toggle">settings</label>
-                          <div class="collapsible-content">
-                              <div class="content-inner">
-                                  <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
-                                      <div class="slider-container">
-                                          <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
-                                          <input type="range" min="10" max="100" value="10" step="10" class="slider" id="questionSlider">
-                                      </div>
-                                      <div class="slider-container">
-                                          <div id="perQuestionLabel" class="slider-label">5s / QUESTION</div>
-                                          <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
-                                      </div>
-                                      <div class="slider-container">
-                                          <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
-                                          <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
-                                      </div>
-                                  </div>
-                                  <button id="fullscreen-btn" class="menu-button" onclick="toggleFullscreen()">TOGGLE FULLSCREEN</button>
+
+
+
+                          <!--Settings menu-->
+                <div class="wrap-collabsible"> 
+                  <input id="collapsible-settings" class="toggle" type="checkbox"> 
+                  <label for="collapsible-settings" class="lbl-toggle">settings</label>
+                  <div class="collapsible-content">
+                      <div class="content-inner">
+                          <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
+                              <div class="slider-container">
+                                  <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
+                                  <input type="range" min="10" max="100" value="10" step="10" class="slider" id="questionSlider">
+                              </div>
+                              <div class="slider-container">
+                                  <div id="perQuestionLabel" class="slider-label">5s / QUESTION</div>
+                                  <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
+                              </div>
+              
+                              <div class="slider-container">
+                                  <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
+                                  <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
                               </div>
                           </div>
+                
+                            <button id="fullscreen-btn" class="menu-button" onclick="toggleFullscreen()">TOGGLE FULLSCREEN</button>
+
+                
+  
+
+                          
                       </div>
+                  </div>
+              </div>
+          </div>
+
 
                         <!--Categories menu-->
-                        <div class="wrap-collabsible"> 
-                            <input id="collapsible-categories" class="toggle" type="checkbox"> 
-                            <label for="collapsible-categories" class="lbl-toggle">
-                                CATEGORIES
-                            </label>
-                            <div class="collapsible-content">
-                                <div class="content-inner">
-                                    <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
-                                    {% for category in categories %}
-                                    <div id='{{ category.name | slugify }}'>
-                                        <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
-                                            <span class="indicator"></span>
-                                            {{ category.name | upper }}
-                                        </button>
-                                    </div>
-                                    {% endfor %}
-                                </div>
+                <div class="wrap-collabsible"> 
+                    <input id="collapsible-categories" class="toggle" type="checkbox"> 
+                    <label for="collapsible-categories" class="lbl-toggle">
+                        CATEGORIES
+                    </label>
+                    <div class="collapsible-content">
+                        <div class="content-inner">
+                            <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
+                            {% for category in categories %}
+                            <div id='{{ category.name | slugify }}'>
+                                <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                                    <span class="indicator"></span>
+                                    {{ category.name | upper }}
+                                </button>
                             </div>
-                        </div>
+                            {% endfor %}
+                    </div>
+                    </div>
+                </div>
+
                 
                         <!--Difficulties menu-->
-                        <div class="wrap-collabsible"> 
-                          <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
-                          <label for="collapsible-difficulties" class="lbl-toggle">
-                              DIFFICULTIES
-                          </label>
-                          <div class="collapsible-content">
-                              <div class="content-inner">
-                                  <button id="all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE </button>
-                                  {% for difficulty in difficulties %}
-                                  <div id='{{ difficulty.name }}'>
-                                      <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
-                                          <span class="indicator"></span>
-                                          {{ difficulty.name | upper}}
-                                      </button>
-                                  </div>
-                                  {% endfor %}
-                              </div>
+                <div class="wrap-collabsible"> 
+                  <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
+                  <label for="collapsible-difficulties" class="lbl-toggle">
+                      DIFFICULTIES
+                  </label>
+                  <div class="collapsible-content">
+                      <div class="content-inner">
+                          <button id="all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE </button>
+                          {% for difficulty in difficulties %}
+                          <div id='{{ difficulty.name }}'>
+                              <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
+                                  <span class="indicator"></span>
+                                  {{ difficulty.name | upper}}
+                              </button>
                           </div>
-                        </div>
+                          {% endfor %}
+                      </div>
+                  </div>
+                  </div>
   
-                        <!--Eras menu-->
-                        <div class="wrap-collabsible"> 
-                          <input id="collapsible-eras" class="toggle" type="checkbox"> 
-                          <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
-                          <div class="collapsible-content">
-                              <div class="content-inner">
-                                <button id="all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
-                                {% for era in eras %}
-                                <div id='{{ era.name }}'>
-                                    <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
-                                        <span class="indicator"></span>
-                                        {{ era.name }}
-                                    </button>
-                                </div>
-                                {% endfor %}
-                              </div>
+  
+                  <!--Eras menu-->
+                  <div class="wrap-collabsible"> 
+                  <input id="collapsible-eras" class="toggle" type="checkbox"> 
+                  <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
+                  <div class="collapsible-content">
+                      <div class="content-inner">
+                      <button id="all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
+                      {% for era in eras %}
+                      <div id='{{ era.name }}'>
+                          <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
+                              <span class="indicator"></span>
+                              {{ era.name }}
+                          </button>
                           </div>
-                        </div>
+                      {% endfor %}
+                      </div>
+                  </div>
+                  </div>
 
-                        <div id="character">
-                            <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
-                        </div>
+                  <div id="character">
+                    <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
+                </div>
+
                     </div>
+                    
                 </div>
             </div>
         </div>
