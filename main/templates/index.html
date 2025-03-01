@@ -183,30 +183,32 @@
         }
 
         .question-container {
-            flex: 3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 15px;
-            font-size: 2rem;
-            /* background-color: rgba(0,0,0, 0.4); */
-            margin: 10px;
-            border-radius: 10px;
-        }
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    font-size: clamp(1rem, 5vw, 2rem);
+    /* background-color: rgba(0,0,0, 0.4); */
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-        .answer-container {
-            flex: 3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 15px;
-            font-size: 2rem;
-            /* background-color: rgba(0,0,0, 0.4); */
-            margin: 10px;
-            border-radius: 10px;
-        }
+.answer-container {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    font-size: clamp(1rem, 5vw, 2rem);
+    /* background-color: rgba(0,0,0, 0.4); */
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
         .loading-bar-container {
             background-color: rgba(0,0,0, 0.7);
