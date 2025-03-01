@@ -9726,6 +9726,10 @@ const mainGameFunction = async () => {
     character.innerHTML =
       contentDict[globalData[i].category_name.toLowerCase()];
 
+      const character2 = document.getElementById("character2");
+    character2.innerHTML =
+      contentDict[globalData[i].category_name.toLowerCase()];
+
     let questionTimeRemaining = time_per_question * 10;
     let answerTimeRemaining = time_per_answer * 10;
 
