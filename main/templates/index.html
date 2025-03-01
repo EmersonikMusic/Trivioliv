@@ -3,6 +3,93 @@
 
 {% block content %} -->
 
+<head>
+  <link rel="icon" type="image/x-icon" href="{% static 'SVGs/favicon.svg' %}">
+  <title>TRIVIOLIVIA.com - Earth's deepest trivia source</title>
+</head>
+
+
+
+<!-- Google analytics tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7JY71BDXF0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7JY71BDXF0');
+</script>
+
+<script>
+    function trackButtonClick(event) {
+        var button = event.target;
+        var buttonText = button.innerText || button.textContent || 'unknown-button';
+        var category = 'General Button Click'; // Default category
+        var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
+
+        // Track All/None buttons for Categories, Difficulties, and Eras
+        if (button.id.includes('all-none')) {
+            var groupName = '';
+            var allActive = false;
+            var allDisabled = false;
+
+            if (button.id.includes('categories')) {
+                groupName = 'Categories';
+                // Check if all category buttons are active
+                allActive = document.querySelectorAll('.category').length === document.querySelectorAll('.category.active').length;
+                allDisabled = document.querySelectorAll('.category.active').length === 0;
+            } else if (button.id.includes('difficulties')) {
+                groupName = 'Difficulties';
+                // Check if all difficulty buttons are active
+                allActive = document.querySelectorAll('.difficulty').length === document.querySelectorAll('.difficulty.active').length;
+                allDisabled = document.querySelectorAll('.difficulty.active').length === 0;
+            } else if (button.id.includes('eras')) {
+                groupName = 'Eras';
+                // Check if all era buttons are active
+                allActive = document.querySelectorAll('.era').length === document.querySelectorAll('.era.active').length;
+                allDisabled = document.querySelectorAll('.era.active').length === 0;
+            }
+
+            // Determine action based on state of all options
+            if (allActive) {
+                gtag('event', groupName + '_all', {
+                    'event_category': groupName + ' Selection',
+                    'event_label': groupName + ' ALL (enabled)'
+                });
+            } else if (allDisabled) {
+                gtag('event', groupName + '_none', {
+                    'event_category': groupName + ' Selection',
+                    'event_label': groupName + ' NONE (disabled)'
+                });
+            }
+
+            return; // Skip normal button tracking for these buttons
+        }
+
+        // Default behavior for other buttons
+        if (button.classList.contains('category')) {
+            category = 'Category Selection';
+        } else if (button.classList.contains('difficulty')) {
+            category = 'Difficulty Selection';
+        } else if (button.classList.contains('era')) {
+            category = 'Era Selection';
+        } else if (button.classList.contains('nav-button')) {
+            category = 'Navigation';
+        }
+
+        gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked_' + state, {
+            'event_category': category,
+            'event_label': buttonText + ' (' + state.toUpperCase() + ')'
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("button").forEach(function(button) {
+            button.addEventListener("click", trackButtonClick);
+        });
+    });
+</script>
+
 
 <!DOCTYPE html>
 <html lang="en">
