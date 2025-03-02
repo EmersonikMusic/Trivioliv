@@ -132,48 +132,69 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         
-        .hamburger-menu {
-            cursor: pointer;
-        }
-        
-        .hamburger-btn {
-            background: transparent;
-            border: none;
-            padding: 8px 12px;
-            transition: background-color 0.2s;
-            border-radius: 5px;
-        }
-        
-        .hamburger-btn:hover {
-            background-color: rgba(148, 125, 196, 0.3);
-        }
-        
-        .hamburger-icon-bar {
-            display: block;
-            width: 30px;
-            height: 5px;
-            margin: 6px 0;
-            border-radius: 25px;
-            background-color: white;
-        }
-        
-        .dropdown-menu {
-          background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            border: none;
-        }
-        
-        .dropdown-item {
-            color: white;
-            padding: 10px 15px;
-            transition: background-color 0.3s;
-        }
-        
-        .dropdown-item:hover {
-          background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-        }
+        /* Updated hamburger menu styles */
+.hamburger-menu {
+    cursor: pointer;
+}
+
+.hamburger-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    transition: background-color 0.2s;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+    width: 38px;
+}
+
+.hamburger-btn:hover {
+    background-color: rgba(148, 125, 196, 0.3);
+}
+
+.hamburger-icon-bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 2px 0;
+    border-radius: 3px;
+    background-color: white;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Optional: Add animation when active */
+.hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+}
+
+.hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+}
+
+.dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: none;
+}
+
+.dropdown-item {
+    color: white;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+}
 
         .game-area {
             background-color: rgba(0, 0, 0, 0.3);
