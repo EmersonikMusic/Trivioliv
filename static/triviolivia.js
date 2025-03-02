@@ -11807,9 +11807,9 @@ const mainGameFunction = async () => {
   pauseFlag = false;
   showQuestion("Thanks for playing!");
   progressBar.style.animationPlayState = "paused";
-  document.getElementById("start-pause").textContent = "START GAME";
+  document.getElementById("start-pause").textContent = "START";
   document.getElementById("demo").innerHTML =
-    'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2025. Contact us at mark.mazurek@triviolivia.com';
+    'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Brought to you by MARKADE GAMES and CREATIVENDEAVORS Copyright &copy; 2025. Contact us at mark.mazurek@triviolivia.com';
 };
 
 // Function to pause the game
@@ -11987,7 +11987,7 @@ function changeButtonText() {
     document.getElementById("demo").innerHTML =
       'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
   } else {
-    button.textContent = "START GAME";
+    button.textContent = "START";
     pauseFlag = false;
   }
 }
