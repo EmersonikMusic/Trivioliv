@@ -9726,7 +9726,7 @@ const mainGameFunction = async () => {
     character.innerHTML =
       contentDict[globalData[i].category_name.toLowerCase()];
 
-      const character2 = document.getElementById("character");
+      const character2 = document.getElementById("character2");
     character.innerHTML =
       contentDict[globalData[i].category_name.toLowerCase()];
 
