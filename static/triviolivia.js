@@ -11750,9 +11750,8 @@ const mainGameFunction = async () => {
       await delay(100);
     }
 
-    // Set the background on both html and body elements
-document.documentElement.style.background = category_colors[globalData[i].category_name];
-document.body.style.background = category_colors[globalData[i].category_name];
+    document.body.style.background =
+      category_colors[globalData[i].category_name];
 
     const character = document.getElementById("character");
     character.innerHTML =
