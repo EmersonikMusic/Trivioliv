@@ -95,7 +95,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">    <title>TRIVIOLIVIA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRIVIOLIVIA</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -171,9 +172,9 @@
         }
 
         .container-fluid {
-            height: 100vh;
-            padding: 0;
-        }
+    height: 100vh; /* Fallback */
+    height: calc(var(--vh, 1vh) * 100);
+}
 
         .header {
             background-color: rgba(0, 0, 0, 0.2);
@@ -255,8 +256,7 @@
         .game-area {
             background-color: rgba(0, 0, 0, 0.3);
             color: white;
-            height: calc(100% - 30px);
-            border-radius: 12px;
+            height: calc(var(--vh, 1vh) * 70);            border-radius: 12px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -811,12 +811,6 @@ input[type='checkbox'] {
             vertical-align: baseline;
             letter-spacing: 0;
         }
-
-
-
-
-
-        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     </style>
 </head>
 <body>
