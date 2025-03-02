@@ -880,6 +880,29 @@ input[type='checkbox'] {
         </div>
     </div>
 
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const hamburgerBtn = document.getElementById('hamburgerMenuBtn');
+          const dropdownMenu = document.getElementById('hamburgerDropdown');
+          
+          hamburgerBtn.addEventListener('click', function() {
+              const expanded = this.getAttribute('aria-expanded') === 'true';
+              this.setAttribute('aria-expanded', !expanded);
+              dropdownMenu.classList.toggle('show');
+          });
+          
+          // Close the dropdown when clicking outside
+          window.addEventListener('click', function(event) {
+              if (!hamburgerBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                  hamburgerBtn.setAttribute('aria-expanded', 'false');
+                  dropdownMenu.classList.remove('show');
+              }
+          });
+      });
+      </script>
+
+      
     <!-- Bootstrap JS (Popper.js included) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
