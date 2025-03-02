@@ -11760,15 +11760,19 @@ const mainGameFunction = async () => {
       const character2 = document.getElementById("character2");
 character2.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
 character2.style.display = "block";
-character2.style.width = "100%";
-character2.style.height = "100%";
 
-// Make sure SVG scales properly
+// Ensure SVG maintains its original dimensions
 const svg = character2.querySelector("svg");
 if (svg) {
-  svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
-  svg.style.width = "100%";
-  svg.style.height = "100%";
+  // Preserve original aspect ratio without scaling to fit container
+  svg.setAttribute("preserveAspectRatio", "xMidYMid");
+  
+  // Remove any width/height styles that might cause stretching
+  svg.style.width = "auto";
+  svg.style.height = "auto";
+  
+  // Ensure the SVG is visible but not stretched
+  svg.style.maxWidth = "100%";
 }
 
     let questionTimeRemaining = time_per_question * 10;
