@@ -816,9 +816,23 @@ input[type='checkbox'] {
             letter-spacing: 0;
         }
 
-      /* Mobile fix - replace your current mobile media query with this */
-@media (max-width: 767px) {
-    /* Reset core elements */
+    /* Replace the current media queries with these */
+@media (min-width: 992px) {
+    .mobile-menu {
+        display: none;
+    }
+    
+    .game-area {
+        height: 100%;
+    }
+}
+
+@media (max-width: 991px) {
+    .desktop-menu {
+        display: none;
+    }
+    
+    /* Include any other mobile-specific styles you need here */
     body, html {
         height: 100%;
         margin: 0;
@@ -848,7 +862,7 @@ input[type='checkbox'] {
         margin: 0;
     }
     
-    /* Column takes up full width on mobile */
+    /* Column takes up full width on mobile/tablet */
     .col-md-9 {
         width: 100%;
         padding: 0;
@@ -868,20 +882,6 @@ input[type='checkbox'] {
         padding-bottom: 0; /* Removed bottom padding */
     }
     
-    /* Content areas flex to fill game area */
-    .question-container, .answer-container {
-        flex: 1;
-        overflow-y: auto;
-        min-height: 0; /* Critical for flex child to respect parent boundaries */
-        padding-bottom: 0; /* Removed extra padding */
-    }
-    
-    /* Make sure loading bar sits flush at the bottom of the game area */
-    .loading-bar-container {
-        margin-top: auto;
-        margin-bottom: 0;
-    }
-    
     /* Fixed mobile menu at bottom */
     .mobile-menu {
         position: fixed;
@@ -899,11 +899,6 @@ input[type='checkbox'] {
     /* Hide desktop menu completely */
     .col-md-3 {
         display: none;
-    }
-    
-    /* Make sure loading bar stays at bottom of game area */
-    .loading-bar-container {
-        margin-top: auto;
     }
 }
     </style>
