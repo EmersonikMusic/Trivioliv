@@ -954,29 +954,30 @@ input[type='checkbox'] {
                 </div>
                 
                 <!-- Mobile Menu Bar (visible only on small screens) -->
-                <div class="menu-container mobile-menu">
-                  <div class="mobile-buttons">
-
-                   
-                      <div button id="start-pause2" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
-
-                      <div class="menu-button">CATEGORIES</div>
-                      
-                      
-                      
-                        <div button id="refetch-and-restart2" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
-                    
-
-
-                      <div class="menu-button">DIFFICULTIES</div>
-                      <div class="menu-button">SETTINGS</div>
-                      <div class="menu-button">ERAS</div>
-                  </div>
-                  <div class="character-container mobile-character" id="character2">
-                      <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
-
-                  </div>
-              </div>
+<div class="menu-container mobile-menu">
+    <div class="mobile-buttons">
+        <!-- START/PAUSE button -->
+        <div button id="start-pause2" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
+        
+        <!-- CATEGORIES button - add onclick to toggle the checkbox -->
+        <div button onclick="document.getElementById('collapsible-categories').click()" type="button" class="menu-button">CATEGORIES</div>
+        
+        <!-- REFETCH button -->
+        <div button id="refetch-and-restart2" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
+        
+        <!-- DIFFICULTIES button - add onclick to toggle the checkbox -->
+        <div button onclick="document.getElementById('collapsible-difficulties').click()" type="button" class="menu-button">DIFFICULTIES</div>
+        
+        <!-- SETTINGS button - add onclick to toggle the checkbox -->
+        <div button onclick="document.getElementById('collapsible-settings').click()" type="button" class="menu-button">SETTINGS</div>
+        
+        <!-- ERAS button - add onclick to toggle the checkbox -->
+        <div button onclick="document.getElementById('collapsible-eras').click()" type="button" class="menu-button">ERAS</div>
+    </div>
+    <div class="character-container mobile-character" id="character2">
+        <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
+    </div>
+</div>
 
             </div>
             
