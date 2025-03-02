@@ -959,25 +959,156 @@ input[type='checkbox'] {
         <!-- START/PAUSE button -->
         <div button id="start-pause2" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
         
-        <!-- CATEGORIES button - add onclick to toggle the checkbox -->
-        <div button onclick="document.getElementById('collapsible-categories').click()" type="button" class="menu-button">CATEGORIES</div>
+        <!-- CATEGORIES dropdown -->
+        <div class="mobile-dropdown">
+            <div button type="button" class="menu-button" onclick="toggleMobileDropdown('mobile-categories')">CATEGORIES</div>
+            <div id="mobile-categories" class="mobile-dropdown-content">
+                <button id="mobile-all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
+                {% for category in categories %}
+                <div id='mobile-{{ category.name | slugify }}'>
+                    <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                        <span class="indicator"></span>
+                        {{ category.name | upper }}
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
         
         <!-- REFETCH button -->
         <div button id="refetch-and-restart2" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
         
-        <!-- DIFFICULTIES button - add onclick to toggle the checkbox -->
-        <div button onclick="document.getElementById('collapsible-difficulties').click()" type="button" class="menu-button">DIFFICULTIES</div>
+        <!-- DIFFICULTIES dropdown -->
+        <div class="mobile-dropdown">
+            <div button type="button" class="menu-button" onclick="toggleMobileDropdown('mobile-difficulties')">DIFFICULTIES</div>
+            <div id="mobile-difficulties" class="mobile-dropdown-content">
+                <button id="mobile-all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE</button>
+                {% for difficulty in difficulties %}
+                <div id='mobile-{{ difficulty.name }}'>
+                    <button onclick='toggle_difficulties(this.id), toggleIndicator(this)' id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
+                        <span class="indicator"></span>
+                        {{ difficulty.name | upper}}
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
         
-        <!-- SETTINGS button - add onclick to toggle the checkbox -->
-        <div button onclick="document.getElementById('collapsible-settings').click()" type="button" class="menu-button">SETTINGS</div>
+        <!-- SETTINGS dropdown -->
+        <div class="mobile-dropdown">
+            <div button type="button" class="menu-button" onclick="toggleMobileDropdown('mobile-settings')">SETTINGS</div>
+            <div id="mobile-settings" class="mobile-dropdown-content">
+                <div class="slider-container">
+                    <div id="mobileQuestionLabel" class="slider-label">10 QUESTIONS</div>
+                    <input type="range" min="10" max="100" value="10" step="10" class="slider" id="mobileQuestionSlider" oninput="updateSliderValue('questionSlider', this.value); document.getElementById('mobileQuestionLabel').textContent = this.value + ' QUESTIONS';">
+                </div>
+                <div class="slider-container">
+                    <div id="mobilePerQuestionLabel" class="slider-label">5s / QUESTION</div>
+                    <input type="range" min="1" max="30" value="5" step="5" class="slider" id="mobilePerQuestionSlider" oninput="updateSliderValue('perQuestionSlider', this.value); document.getElementById('mobilePerQuestionLabel').textContent = this.value + 's / QUESTION';">
+                </div>
+                <div class="slider-container">
+                    <div id="mobilePerAnswerLabel" class="slider-label">5s / ANSWER</div>
+                    <input type="range" min="1" max="30" value="5" step="5" class="slider" id="mobilePerAnswerSlider" oninput="updateSliderValue('perAnswerSlider', this.value); document.getElementById('mobilePerAnswerLabel').textContent = this.value + 's / ANSWER';">
+                </div>
+                <button id="mobile-fullscreen-btn" class="menu-button" onclick="toggleFullscreen()">TOGGLE FULLSCREEN</button>
+            </div>
+        </div>
         
-        <!-- ERAS button - add onclick to toggle the checkbox -->
-        <div button onclick="document.getElementById('collapsible-eras').click()" type="button" class="menu-button">ERAS</div>
+        <!-- ERAS dropdown -->
+        <div class="mobile-dropdown">
+            <div button type="button" class="menu-button" onclick="toggleMobileDropdown('mobile-eras')">ERAS</div>
+            <div id="mobile-eras" class="mobile-dropdown-content">
+                <button id="mobile-all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
+                {% for era in eras %}
+                <div id='mobile-{{ era.name }}'>
+                    <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
+                        <span class="indicator"></span>
+                        {{ era.name }}
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
+    
     <div class="character-container mobile-character" id="character2">
         <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
     </div>
 </div>
+
+<!-- JavaScript for mobile dropdown functionality -->
+<script>
+function toggleMobileDropdown(id) {
+    // Close all dropdowns first
+    const dropdowns = document.getElementsByClassName('mobile-dropdown-content');
+    for (let i = 0; i < dropdowns.length; i++) {
+        if (dropdowns[i].id !== id && dropdowns[i].classList.contains('show')) {
+            dropdowns[i].classList.remove('show');
+        }
+    }
+    
+    // Toggle the selected dropdown
+    document.getElementById(id).classList.toggle('show');
+}
+
+// Function to sync slider values between mobile and desktop
+function updateSliderValue(desktopSliderId, value) {
+    const desktopSlider = document.getElementById(desktopSliderId);
+    if (desktopSlider) {
+        desktopSlider.value = value;
+        
+        // Trigger the input event to update any listeners
+        const event = new Event('input', { bubbles: true });
+        desktopSlider.dispatchEvent(event);
+    }
+}
+
+// Close dropdowns when clicking outside
+window.onclick = function(event) {
+    if (!event.target.matches('.menu-button')) {
+        const dropdowns = document.getElementsByClassName('mobile-dropdown-content');
+        for (let i = 0; i < dropdowns.length; i++) {
+            if (dropdowns[i].classList.contains('show')) {
+                dropdowns[i].classList.remove('show');
+            }
+        }
+    }
+}
+</script>
+
+<!-- CSS for mobile dropdown styling -->
+<style>
+.mobile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.mobile-dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    background-color: #f9f9f9;
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.mobile-dropdown-content.show {
+    display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .mobile-dropdown-content {
+        width: 100vw;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+</style>
 
             </div>
             
