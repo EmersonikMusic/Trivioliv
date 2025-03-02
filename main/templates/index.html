@@ -421,10 +421,10 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: visible;
+    overflow: visible; /* Changed from hidden to visible */
     height: 100%;
     width: 100%;
-    position: relative; /* Add positioning context */
+    vertical-align: bottom;
 }
 
         /* Animation for the character */
@@ -441,18 +441,6 @@ p {
             width: auto;
             height: auto;
         }
-
-        .character-svg, 
-#character img, 
-#character2 img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain; /* Ensures the image maintains aspect ratio */
-    position: relative; /* Ensure proper positioning */
-    z-index: 5; /* Make sure it's above background elements */
-}
         
         /* Mobile character container specific */
         .mobile-character {
@@ -460,11 +448,9 @@ p {
     align-items: center;
     justify-content: center;
     height: 100%;
-    width: 30%;
     padding: 5px;
-    overflow: visible; /* Ensure overflow is visible, not hidden */
-    position: relative; /* Add positioning context */
-    z-index: 10; /* Ensure it appears above other elements */
+    width: 30%;
+    overflow: visible; /* Changed from hidden to visible */
 }
         
         /* Desktop character container specific */
