@@ -11758,8 +11758,18 @@ const mainGameFunction = async () => {
       contentDict[globalData[i].category_name.toLowerCase()];
 
       const character2 = document.getElementById("character2");
-    character2.innerHTML =
-      contentDict[globalData[i].category_name.toLowerCase()];
+character2.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
+character2.style.display = "block";
+character2.style.width = "100%";
+character2.style.height = "100%";
+
+// Make sure SVG scales properly
+const svg = character2.querySelector("svg");
+if (svg) {
+  svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+  svg.style.width = "100%";
+  svg.style.height = "100%";
+}
 
     let questionTimeRemaining = time_per_question * 10;
     let answerTimeRemaining = time_per_answer * 10;
