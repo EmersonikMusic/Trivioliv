@@ -1,0 +1,1978 @@
+
+<!-- saved from url=(0034)https://triviolivia.herokuapp.com/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="icon" type="image/x-icon" href="https://triviolivia.herokuapp.com/static/SVGs/favicon.svg">
+  <title>TRIVIOLIVIA.com - Earth's Deepest Trivia Source</title>
+<script async="" src="./TRIVIOLIVIA.com - Earth&#39;s Deepest Trivia Source_files/js"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7JY71BDXF0');
+</script><script>
+    function trackButtonClick(event) {
+        var button = event.target;
+        var buttonText = button.innerText || button.textContent || 'unknown-button';
+        var category = 'General Button Click'; // Default category
+        var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
+
+        // Track All/None buttons for Categories, Difficulties, and Eras
+        if (button.id.includes('all-none')) {
+            var groupName = '';
+            var allActive = false;
+            var allDisabled = false;
+
+            if (button.id.includes('categories')) {
+                groupName = 'Categories';
+                // Check if all category buttons are active
+                allActive = document.querySelectorAll('.category').length === document.querySelectorAll('.category.active').length;
+                allDisabled = document.querySelectorAll('.category.active').length === 0;
+            } else if (button.id.includes('difficulties')) {
+                groupName = 'Difficulties';
+                // Check if all difficulty buttons are active
+                allActive = document.querySelectorAll('.difficulty').length === document.querySelectorAll('.difficulty.active').length;
+                allDisabled = document.querySelectorAll('.difficulty.active').length === 0;
+            } else if (button.id.includes('eras')) {
+                groupName = 'Eras';
+                // Check if all era buttons are active
+                allActive = document.querySelectorAll('.era').length === document.querySelectorAll('.era.active').length;
+                allDisabled = document.querySelectorAll('.era.active').length === 0;
+            }
+
+            // Determine action based on state of all options
+            if (allActive) {
+                gtag('event', groupName + '_all', {
+                    'event_category': groupName + ' Selection',
+                    'event_label': groupName + ' ALL (enabled)'
+                });
+            } else if (allDisabled) {
+                gtag('event', groupName + '_none', {
+                    'event_category': groupName + ' Selection',
+                    'event_label': groupName + ' NONE (disabled)'
+                });
+            }
+
+            return; // Skip normal button tracking for these buttons
+        }
+
+        // Default behavior for other buttons
+        if (button.classList.contains('category')) {
+            category = 'Category Selection';
+        } else if (button.classList.contains('difficulty')) {
+            category = 'Difficulty Selection';
+        } else if (button.classList.contains('era')) {
+            category = 'Era Selection';
+        } else if (button.classList.contains('nav-button')) {
+            category = 'Navigation';
+        }
+
+        gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked_' + state, {
+            'event_category': category,
+            'event_label': buttonText + ' (' + state.toUpperCase() + ')'
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("button").forEach(function(button) {
+            button.addEventListener("click", trackButtonClick);
+        });
+    });
+</script><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TRIVIOLIVIA</title><link href="./TRIVIOLIVIA.com - Earth&#39;s Deepest Trivia Source_files/bootstrap.min.css" rel="stylesheet"><style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #6f2da8;
+            font-family: "Montserrat", 'Calibri', sans-serif;
+            color: white;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: none;
+
+        }
+
+        .container-fluid {
+            height: 100vh;
+            padding: 0;
+        }
+
+        .header {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 12px 12px 0 0;
+            font-weight: bold;
+            font-size: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Updated hamburger menu styles */
+.hamburger-menu {
+    cursor: pointer;
+}
+
+.hamburger-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    transition: background-color 0.2s;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+    width: 38px;
+}
+
+.hamburger-btn:hover {
+    background-color: rgba(148, 125, 196, 0.3);
+}
+
+.hamburger-icon-bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 2px 0;
+    border-radius: 3px;
+    background-color: white;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Optional: Add animation when active */
+.hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+}
+
+.hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+}
+
+.dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: none;
+}
+
+.dropdown-item {
+    color: white;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+}
+
+        .game-area {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            height: calc(100% - 30px);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .question-container {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    /* Dynamic font sizing */
+    font-size: clamp(16px, 5vw, 8vh);
+    /* background-color: rgba(0,0,0, 0.4); */
+    margin: 10px;
+    border-radius: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: none;
+}
+
+.answer-container {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    /* Dynamic font sizing */
+    font-size: clamp(16px, 5vw, 8vh);
+    /* background-color: rgba(0,0,0, 0.4); */
+    margin: 10px;
+    border-radius: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: none;
+}
+
+.loading-bar-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: auto;
+  }
+
+
+        .menu-container {
+            background-color: rgba(0,0,0, 0.3);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+        }
+
+        /* Mobile-specific styles */
+        .mobile-menu {
+            height: 25vh;
+            margin-top: 8px;
+            flex-direction: row;
+        }
+
+        .mobile-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            width: 70%;
+        }
+
+        .mobile-character {
+            width: 30%;
+            height: 100%;
+        }
+
+        /* Desktop-specific styles */
+        .desktop-menu {
+            height: 100%;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        .desktop-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .desktop-character {
+            margin-top: auto;
+        }
+
+        .menu-button {
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            color: white;
+        }
+
+        button {
+    display: flex;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 11px;
+    text-align: left;
+    height: 20px;
+    padding: 0px;
+    margin: 1px 0;
+    border: none;
+    font-weight: 950;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+        /* Mobile button styles */
+        .mobile-menu .menu-button {
+            flex-basis: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 33.33%;
+            color: white;
+        }
+
+        /* Desktop button styles */
+        .desktop-menu .menu-button {
+            width: 100%;
+            padding: 8px;
+            background-color: rgba(0,0,0, 0.5);
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0;
+            color: white;
+        }
+
+        .desktop-menu .menu-button:hover {
+            background-color: rgba(0,0,0, 0.7);
+            transform: scale(1.05);
+        }
+
+        .mobile-menu .menu-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .character-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible; /* Changed from hidden to visible */
+    height: 100%;
+    width: 100%;
+}
+
+        /* Animation for the character */
+        @keyframes bob {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
+        .character-svg {
+            animation: bob 2s infinite ease-in-out;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+        }
+        
+        /* Mobile character container specific */
+        .mobile-character {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 5px;
+    width: 30%;
+    overflow: visible; /* Changed from hidden to visible */
+}
+        
+        /* Desktop character container specific */
+        .desktop-character {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu {
+                display: none;
+            }
+            
+            .game-area {
+                height: 100%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .desktop-menu {
+                display: none;
+            }
+        }
+
+
+
+
+        /* COLLAPSE/EXPAND DIV CSS */
+
+input[type='checkbox'] { 
+    display: none; 
+} 
+
+.wrap-collabsible { 
+    margin: 0px 0;
+} 
+
+.lbl-toggle { 
+  display: flex; 
+  font-weight: 100; 
+  text-transform: uppercase; 
+  /* padding: .25rem;  */
+  color: #DDD; 
+  background: rgba(0, 0, 0, 0);
+  cursor: pointer; 
+  transition: all .25s ease-out; 
+  flex-direction: row;
+  align-items: center;
+  height: 3%;
+  margin: 0px 20px;
+  padding: 10px 20px;
+} 
+
+.lbl-toggle:hover { 
+    color: #FFF;
+    border-radius: 14px;
+    background: rgba(0, 0, 0, .2); 
+}
+
+.lbl-toggle::before { 
+  content: ' '; 
+  display: inline-block; 
+  border-top: 5px solid transparent; 
+  border-bottom: 5px solid transparent; 
+  border-left: 5px solid currentColor; 
+  vertical-align: middle; 
+  margin-right: .7rem; 
+  transform: translateY(-2px); 
+  transition: transform .2s ease-out; 
+} 
+.toggle:checked + .lbl-toggle::before { 
+  transform: rotate(90deg) translateX(-3px); 
+} 
+
+.collapsible-content { 
+  max-height: 0px; 
+  overflow: hidden; 
+  transition: max-height .5s ease-in-out; 
+  transition-delay: 0.26s;
+
+  /* unsure about this one */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+} 
+
+.toggle:checked + .lbl-toggle { 
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 14px;
+    border-top-left-radius: 14px;
+    background: rgba(0, 0, 0, .2);
+} 
+
+.content-inner { 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.content-inner button {
+    color: rgba(225, 225, 225, 1);
+    display: flex;
+    vertical-align: middle;
+    /* background: rgba(0, 0, 0, .1); */
+    border-radius: 8px;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.content-inner button:hover{
+    background: rgba(0, 0, 0, .25);
+}
+.content-inner button.all-none-btn {
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    padding-left: 8px;
+    border-radius: 6px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.collapsible-content .content-inner { 
+    background: rgba(0, 0, 0, .2);
+    padding: 10 20;
+    margin: 0 20;
+    border-bottom-right-radius: 14px; 
+    border-bottom-left-radius: 14px; 
+} 
+.collapsible-content p { 
+    margin-bottom: 0; 
+}
+ 
+.toggle:checked + .lbl-toggle + .collapsible-content { 
+    max-height: 100vh;
+    overflow: scroll;
+  } 
+
+.hide {
+    display: none;
+}
+ 
+/* COLLAPSE/EXPAND DIV CSS END */
+
+
+
+
+
+/* Attempt at dynamic question and answer timer indicator */
+  #loading-bar {
+    display: flex;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+  }
+  #progress {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: depleteProgress 10s linear infinite paused;
+  }
+
+  #loading-text {
+    display: flex;
+    color: white;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 1;
+  }
+
+  @keyframes depleteProgress {
+    0% { width: 100%; }
+    100% { width: 0%; }
+  }
+
+  @keyframes replenishProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+
+
+
+
+  /* Loading animation stuff */
+        .loader {
+            display: flex;
+            gap: 10px;
+        }
+        .dot {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.3; }
+            50% { transform: translateY(-15px); opacity: 1; }
+        }
+
+
+
+
+
+/* Slider stuff */
+.slider-container {
+    margin: 5px auto;
+}
+.slider-label {
+    text-align: center;
+    padding-bottom: 5px;
+}
+.slider {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.4);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #FFF;
+    cursor: pointer;
+}
+.slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #FFF;
+    cursor: pointer;
+}
+
+
+
+/* Indicator light attempt */
+.indicator {
+    width: 2px; /* Reduce the indicator width to match smaller buttons */
+    height: 100%; /* Set the indicator's height to 100% of the button's height */
+    background-color: #00F829;
+    left: 0; /* Position the indicator at the left edge of the button */
+    top: 0; /* Align the indicator with the top of the button */
+    bottom: 0; /* Align the indicator with the bottom of the button */
+    margin-right: 0px; /* Create space between indicator and text */
+    border-right: 1px solid #2D2D2D;
+    border-radius: 2px;
+    margin-right: 6px;
+  }
+
+  .inactive .indicator  {
+    background-color: red;
+  }
+
+.button .category-title, .difficulty-title, .era-title {
+    margin: auto;
+    padding-left: 10px;
+    text-align: left;
+}
+
+
+
+
+/* Character animations*/
+#character {
+    animation: bobbing 2s infinite ease-in-out;
+        }
+        @keyframes bobbing {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        #character2 {
+    animation: bobbing 2s infinite ease-in-out;
+        }
+        @keyframes bobbing {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-2px);
+            }
+        }
+
+    </style><style>                      .htmx-indicator{opacity:0;transition: opacity 200ms ease-in;}                      .htmx-request .htmx-indicator{opacity:1}                      .htmx-request.htmx-indicator{opacity:1}                    </style></head>
+
+
+
+<!-- Google analytics tag -->
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    <!-- Bootstrap CSS -->
+    
+    
+
+<body style="background: linear-gradient(345deg, rgb(153, 0, 255) 0%, rgb(60, 13, 128) 100%);">
+    <div class="container-fluid p-1">
+        <div class="row h-100 g-2">
+            <!-- Main Game Area -->
+            <div class="col-md-9 d-flex flex-column h-100">
+                <div class="game-area">
+                  <div class="header">
+                    <div>TRIVIOLIVIA.com</div>
+                    <div class="hamburger-menu dropdown">
+                        <button class="hamburger-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="hamburger-icon-bar"></span>
+                            <span class="hamburger-icon-bar"></span>
+                            <span class="hamburger-icon-bar"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="https://triviolivia.herokuapp.com/#">Login</a></li>
+                            <li><a class="dropdown-item" href="https://triviolivia.herokuapp.com/#">Make an Account</a></li>
+                            <li><a class="dropdown-item" href="https://triviolivia.herokuapp.com/#">About Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                    <div class="question-container"><p>Which video game features Bacterions as the enemy?</p></div>
+                    <div class="answer-container"><p>Gradius.</p></div>
+
+                    <div id="loading-bar-container" class="loading-bar-container">
+                        <div id="loading-bar">
+                            <div id="loading-text">
+                                <p id="demo" class="loader-text">Q5 - VIDEO GAMES - GENIUS - Mark Mazurek - 1.3s</p>
+                            </div>
+                            <div id="progress" style="animation: 5s linear 0s infinite normal none running depleteProgress;"></div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Mobile Menu Bar (visible only on small screens) -->
+                <div class="menu-container mobile-menu">
+                  <div class="mobile-buttons">
+
+                   
+                      <div button="" id="start-pause2" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
+
+                      <div class="menu-button">CATEGORIES</div>
+                      
+                      
+                      
+                        <div button="" id="refetch-and-restart2" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
+                    
+
+
+                      <div class="menu-button">DIFFICULTIES</div>
+                      <div class="menu-button">SETTINGS</div>
+                      <div class="menu-button">ERAS</div>
+                  </div>
+                  <div class="character-container mobile-character" id="character2"><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 492.7">
+    <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
+    <defs>
+      <style>
+        .st0 {
+          fill: #c45f41;
+        }
+  
+        .st1 {
+          fill: #c05e58;
+        }
+  
+        .st2 {
+          fill: #232323;
+        }
+  
+        .st3 {
+          fill: #83373c;
+        }
+  
+        .st4 {
+          fill: #2ecda6;
+        }
+  
+        .st5 {
+          fill: #443430;
+        }
+  
+        .st6 {
+          fill: #8e3226;
+        }
+  
+        .st7 {
+          fill: #f7b750;
+        }
+  
+        .st8 {
+          fill: #a34737;
+        }
+  
+        .st9 {
+          fill: #a1a2a3;
+        }
+  
+        .st10 {
+          fill: #4f342e;
+        }
+  
+        .st11 {
+          fill: #23110a;
+        }
+  
+        .st12 {
+          fill: #281a26;
+        }
+  
+        .st13 {
+          fill: #f0935d;
+        }
+  
+        .st14 {
+          fill: #bdeded;
+        }
+  
+        .st15 {
+          fill: #c12e4b;
+        }
+  
+        .st16 {
+          fill: #261715;
+        }
+  
+        .st17 {
+          fill: #e5fdfe;
+        }
+  
+        .st18 {
+          fill: #2e643c;
+        }
+  
+        .st19 {
+          fill: #fbfbfc;
+        }
+  
+        .st20 {
+          fill: #281f30;
+        }
+  
+        .st21 {
+          fill: #994990;
+        }
+  
+        .st22 {
+          opacity: .2;
+        }
+  
+        .st22, .st23 {
+          fill: #7aebe9;
+        }
+  
+        .st24 {
+          fill: #c9892d;
+        }
+  
+        .st25 {
+          fill: #e6794d;
+        }
+  
+        .st26 {
+          fill: #27151d;
+        }
+  
+        .st27 {
+          fill: #511407;
+        }
+  
+        .st28 {
+          fill: #c392c2;
+        }
+  
+        .st29 {
+          fill: #bf5a41;
+        }
+  
+        .st30 {
+          fill: #7a2780;
+        }
+  
+        .st31 {
+          fill: #661b6a;
+        }
+  
+        .st32 {
+          fill: #90eaeb;
+        }
+  
+        .st33 {
+          fill: #17ae9d;
+        }
+  
+        .st34 {
+          fill: #d53a5c;
+        }
+  
+        .st35 {
+          fill: #462226;
+        }
+  
+        .st36 {
+          fill: #4d3340;
+        }
+  
+        .st37 {
+          fill: #793e59;
+        }
+  
+        .st38 {
+          fill: #95409b;
+        }
+  
+        .st39 {
+          fill: #29999b;
+        }
+  
+        .st40 {
+          fill: #d8f6fb;
+        }
+  
+        .st41 {
+          fill: #353535;
+        }
+  
+        .st42 {
+          fill: #120f12;
+        }
+  
+        .st43 {
+          display: none;
+        }
+  
+        .st44 {
+          fill: #3e0e15;
+        }
+  
+        .st45 {
+          fill: #320532;
+        }
+  
+        .st46 {
+          fill: #1d121b;
+        }
+  
+        .st47 {
+          fill: #4e0b1b;
+        }
+  
+        .st48 {
+          fill: #b175a7;
+        }
+      </style>
+    </defs>
+    <g>
+      <path class="st13" d="M192.5,116.6l5,23s2.5,3.6,4,3c4.1-1.7,7-9,7-17s-4-14-4-14l-12,5Z"></path>
+      <g>
+        <g id="Background" class="st43">
+          <path class="st9" d="M132.6,477.3c-76.7,0-153.3,0-230,0V-34.7h512v512c-62.8,0-125.7,0-188.5,0q1-6,2-12c4.7-1.7,10.2-4,14.5-6.5,3.4-2,7.1-3.8,8.5-7.7-.6-6.9-2.4-13.6-4-20.2,78.7-56.2,100.3-140.9,35-218.5.4-.1,3.7,0,8.7-3,11.3-6.9,14-20.6,8.7-32.2,19.7-4.1,26.7-27,11.5-40.5,1.3-4.6,0-9.7-3.5-13,18.1-14.9,14.3-39.8-6.5-49.5,3.4-16.5-13-29.2-28.5-28,4-21.1-13.4-38.6-33.7-28.2C221.8-.2,193-8.7,170.3,3.3c-20.8-21.1-68.8-14-83,12-16.5-13.3-43.4,1.7-37.7,22.7q-5.9,5.1-11.7,10.2c-15.4,1.6-25.4,19.2-18.2,33.2-16.5,8.4-18.6,31.5-2,41-18.5,4.8-26.8,31.5-8,41.5-3.3,17.4,13.6,21.6,14,23-2.9,8-1.6,15.4,4,21.7-35.1,28.1-51.5,75.2-45,119.2,7.3,49.2,46.1,86.2,86.5,111.2-.7,4.4-1.8,8.7-1.5,13.2,2.5,2.9,4.9,4.7,8,6.7,14.7,9.9,38.1,13.2,55.5,15l1.5,3Z"></path>
+        </g>
+        <g>
+          <g>
+            <path class="st42" d="M227.6,117.3c-3.1-1.8-1.7,4.8-11,5.5,0-7.6-1.4-10.5-7-15.7l.7-.7c2.3.7,15.4,6.4,16,7,.9,1,.8,2.4,1.2,4Z"></path>
+            <path class="st42" d="M227.6,117.3c.5,1.8.2,4.9,1,5.5-1.1.3-8.9,8-12.5,7.5.5-2.2.5-5.2.5-7.5,9.3-.7,7.9-7.3,11-5.5Z"></path>
+          </g>
+          <g>
+            <path class="st42" d="M75.1,49.8c-1.6,2-3.6,3.8-5,6,.2-1.4.7-2.8.5-4.2-1.5-.5-10.1-7.2-10.5-7.7-.3-.4-2-8.5-2-9.2.1-4,3-8.2,6-10.7-6.2,13.7,9.6,19.6,10.5,22.2.5,1.5-1.2,3.5.5,3.7Z"></path>
+            <path class="st42" d="M289.6,64.3c4.3,7.1,2.9,10.5,0,18.2,4.7,1.1,5.4.4,10,2.7l-.2,1c-1-2-.7,1.7-6-1.5-1.2,5.6-7.4-2.5-4.7,5.2-6.7,3.1-2.3-17,2-18,.3-.9-5.6-11.4-1-7.7Z"></path>
+            <path class="st12" d="M40.1,160.8c-.3.1-1.6,1.8-5.2,3-.6-.1-4.6-10.4-4.7-11-1.7-8.4,2.7-11.1,3.5-12.5q7-4.6,14-9.2-.5-4.6-1-9.2c.1-2.9-8.4-7.2-14-11-2.2-4.6-1.1-10.3,2-14.5,8.9-4,19.9-1.7,20-8.2,0-.5-2.2-6-2.5-10.2-.8-11.2,14.7-13.4,16-14.7.5-.6,1.8-5.9,2-7.2,1.4-2.2,3.4-4,5-6,2.3-2.9,3.7-.4,2-9.2,16.2-18,15.2-11.2,37.7-8.2,3.4-.8,3.3-15.3,10.5-16.5,10-1.7,12.6,10.8,8.5,14-3.8,3-3.4-2.7-7-8-4,23.7-18.5,15.8-36.5,13.5-8.9,6.1-4.7,10.6-5.7,13.7-.3.8-8,7.4-8.5,8.5-3.1,6.7,5.4,5.5-17.5,17.5-2.5,6.2,9.5,17-7.2,24.2-4.8,2.1-17.4,2.3-14,6.5,2.8,3.4,16,6.3,16.7,18.2,1.5,23.8-28.2,10.7-14,36.7Z"></path>
+            <path class="st12" d="M292.1,157.3c-.2-.1-.3-.3-.5-.5-.3-19.2-12.8-13.1-20.2-18-4.8-3.2-8.2-20.3,14.7-19.2,5.8,8.3-14.6,6.7-12.5,11,.5,1,15.8,6.4,18,9,3.1,3.8,3.1,14.6.5,17.7Z"></path>
+            <path class="st46" d="M33.6,140.3c-.8,1.4-5.2,4.1-3.5,12.5-6-2.2-15.7-2.8-14.5-11.2,1.9-13.6,16.5-1.2,18-1.2Z"></path>
+            <path class="st46" d="M46.6,121.8q.5,4.6,1,9.2-7,4.6-14,9.2c.6-1,2.3-2.2,2.5-2.7,2.1-5.6-4.6-9.8-4-15.5l14.5-.2Z"></path>
+            <g>
+              <path class="st42" d="M79.1,117.3q-.6,5-1.2,10c-3.2-2.1-6.9-1.7-8.7-5.5l10-4.5Z"></path>
+              <path class="st33" d="M90.6,113.3c-1.4,3.7-2.8,5.7-3,10-3.5,2-1.2-8.9,3.5-12.2q-.2,1.1-.5,2.2Z"></path>
+            </g>
+            <g>
+              <path class="st46" d="M302.6,141.6c1.6-17.5-7.8-17.6-8.5-18.5-3.1-4.3,5.8-3.9,10.5-9.5,7.1-8.4,5-23.2-5-28.2l-.2,1c-1-2-.7,1.7-6-1.5-1.2,5.6-7.4-2.5-4.7,5.2-6.7,3.1-2.3-17,2-18,.3-.9-5.6-11.4-1-7.7-4-6.7-11.3-9.8-18.7-6.5-2.9-.6,1-6.1-10.2-12.2,8.8-16.2-11.8-29.4-22.2-14.2-18.4-20.7-44.2-29.9-70-16-17.5-19.9-50.6-17.5-68.7.2-1.8,1.7,0,4.2-13.2,9.7-2.1,0-10.4-11.3-22.2-1.5-6.2,13.7,9.6,19.6,10.5,22.2.5,1.5-1.2,3.5.5,3.7,2.3-2.9,3.7-.4,2-9.2,16.2-18,15.2-11.2,37.7-8.2,3.4-.8,3.3-15.3,10.5-16.5,10-1.7,12.6,10.8,8.5,14-3.8,3-3.4-2.7-7-8-4,23.7-18.5,15.8-36.5,13.5-8.9,6.1-4.7,10.6-5.7,13.7-.3.8-8,7.4-8.5,8.5-3.1,6.7,5.4,5.5-17.5,17.5-2.5,6.2,9.5,17-7.2,24.2-4.8,2.1-17.4,2.3-14,6.5,2.8,3.4,16,6.3,16.7,18.2,1.5,23.8-28.2,10.7-14,36.7-.3.1-1.6,1.8-5.2,3-.6-.1-4.6-10.4-4.7-11-6-2.2-15.7-2.8-14.5-11.2,1.9-13.6,16.5-1.2,18-1.2.6-1,2.3-2.2,2.5-2.7,2.1-5.6-4.6-9.8-4-15.5l14.5-.2c.1-2.9-8.4-7.2-14-11-2.2-4.6-1.1-10.3,2-14.5,8.9-4,19.9-1.7,20-8.2,0-.5-2.2-6-2.5-10.2-.8,0-1.6,0-2.3.1.7,0,1.5,0,2.3-.1-.8-11.2,14.7-13.4,16-14.7.5-.6,1.8-5.9,2-7.2.2-1.4.7-2.8.5-4.2-1.5-.5-10.1-7.2-10.5-7.7-1.2.2-2.4.9-3.5,1.5-.6.9-1.1,1.8-1.5,2.7.4-.9.9-1.8,1.5-2.7-8,4.4-5.4,3.6-9.2,11.5-19.2-1.6-26.4,17.1-12.7,30.2-2.7.9-5.4,1.2-8,2.2-2.1.9-3.3,1.4-5,3-9.5,8.9-5.1,21.5,6,26.2.7,1.9-4.1,4.6,0,14-18.9-2.2-25.7,19.2-8,27.5-3.8,9.2,3,21.4,13.2,17.7,8.3,8.1-2.1,8.2-.2,19.7,1.4,9,14.2,14.7,21.7,9.2,10.7,4.5,5.5,5.2,9.2,10.2,4.7,6.5,16.4,5.9,21.7.2,1.4.3.7,14.1,20,11.5,4.7-8.2,6.2-2.5,13.5-6,5.4-2.6,5.4-9.9,10.7-5,2.9-4.1,4.5-9.1,8.5-12.5,0-.7.1-.9.5-1.5-7.7-1.4-26.9-15.7-33.1-21.2-10.4-9.2-16.6-17.4-16.4-31.5.2-.6-.4-8.4-1.5-10.7-.4-.9-.3-9.4,0-17-3.5,2-1.2-8.9,3.5-12.2q-.2,1.1-.5,2.2c.2-.4,1.4-3.3,1.5-3.5,1.4-2.6,2.5-7,6.5-5.7q-1-1.4-2-2.7c1.1-9.4,7.9-32.2,17.5-36.5,5.6-2.5,11,1.2,17.7-8.5,22.9,12.9,31.8-2.3,33.5-3,6.9-2.6,8.8,5.3,9.2,5.7,7.9,9,16.1,5.6,23,18,2.7,4.9,3.6,11.3,6.5,16,1.2,2-.8,16.6.4,19.5,4.6,10.3,4,21,1.1,25.7,6.7-10.7,1.7,3.7,8-2,.6-1.3,2.4-5.3,2.5-6,.5-2.2.5-5.2.5-7.5,0-7.6-1.4-10.5-7-15.7l.8-.8c2.3.7,15.4,6.4,16,7,.9,1,.8,2.4,1.2,4,.5,1.8.2,4.9,1,5.5,11.7-2.8,17.1,19,3.2,30.5-10.8,8.9-16.5-2.4-23.2,7.7-.3.5-.9,4.7-5.5,11.2-6.2,8.9-16.6,15.4-26,20.5,1.2,2.9,1.7,6,2.5,9,.7,2.4,1.9,5.2,2,5.5,5.7.6,7.9,6.6,11,8.5.6.4,3.6.9,4.7,1,7,13.8,25.6,10.6,30-4,9.6,10.2,24.4,12.2,28.5-4,7.3,0,12.5.8,17.5-5.5,18.4,2,25.3-16.4,12.2-28.7q3.1-4.1,6.2-8.2c6.2,1.5,12,.1,15.2-5.5,4.1-7.1,2.1-14.6-4.5-19.2ZM54,50.6c-.3.8-.5,1.6-.7,2.4.2-.8.4-1.6.7-2.4ZM37.3,59.8c.6-.2,1.1-.4,1.7-.5.6,0,1.2-.1,1.7-.1-.6,0-1.2,0-1.7.1-.6,0-1.1.2-1.7.5-.4.2-.8.4-1.2.6.4-.3.8-.5,1.2-.6ZM32.6,66.2c.1-.5.3-1.1.4-1.6-.2.5-.3,1-.4,1.6-.2.8-.2,1.6-.1,2.5,0-.8,0-1.7.1-2.5ZM292.1,157.3c-.2-.1-.3-.3-.5-.5-.3-19.2-12.8-13.1-20.2-18-4.8-3.2-8.2-20.3,14.7-19.2,5.8,8.3-14.6,6.7-12.5,11,.5,1,15.8,6.4,18,9,3.1,3.8,3.1,14.6.5,17.7Z"></path>
+              <g>
+                <path class="st12" d="M181.3,17.3c12.6-1.2,21.7,20.4,45.5,12.5,11.5,15.3,21.3,10.6,16.2,29.2,2.6,1.3,12.5,10,13.2,10.2,5.5,2,21.8-2.9,16.7,17.2,4.7,1.6,21.4,8.2,23.5,12,2.4,4.4.7,13-4.2,14.7-11.6,4-.9-9.6-1.2-11.2-12.5-11.5-29.9-.8-23-24.5l-13.2-1.2c-8.4-11.1-13.2-8.1-16.2-11.7-8-9.7,12.5-22.6-19.7-18.2q-1.2-4.2-2.5-8.5c-12.3.4-23-6.6-32.5-13.5-4.2-.3-17.2,8.1-14.2-.7.6-1.9,9.6-6,11.7-6.2Z"></path>
+                <path class="st45" d="M228.3,35.8c3.1-.2-2.6,2.2-3.5,2.5-12,4.4-3.5-2,3.5-2.5Z"></path>
+              </g>
+            </g>
+          </g>
+          <g>
+            <g>
+              <path class="st25" d="M205.6,163.3c-6.4,16.8-49,37.4-61.2,37-15.6-.5-46.6-25.9-50.2-42.2,5.5,1.1,11.2,1.2,16.5-.2.6.9,3,3,6.5,8.5,7,11,11.1,22.4,27,20.5,12.7-1.5,15.7-10.1,19.5-14.5,3.2-3.7,6.8-7.3,10-11,3.6.9,7.6,1.5,11.2,1,2.1-.3,11.8-4.1,10.7-6,2.3-1.1,8.3-5.6,10-7.5,2,4.5,1.8,9.8,0,14.5Z"></path>
+              <path class="st1" d="M195.6,156.3c1.1,1.9-8.6,5.7-10.7,6-3.6.5-7.7-.1-11.2-1,.4-.5.6-1.4,1-2,6.8,1.4,14.8,0,21-3Z"></path>
+              <g>
+                <path class="st25" d="M203.1,172.3c-1.7-1.6,4.7-6.1,2.5-9,1.8-4.7,2-10,0-14.5,1.7-1.8,5.9-9.8,6.9-12.2.6-1.3,3.4-5.6,3.6-6.3,3.6.5,11.4-7.2,12.5-7.5,11.7-2.8,17.1,19,3.2,30.5-10.8,8.9-16.5-2.4-23.2,7.7-.3.5-.9,4.7-5.5,11.2Z"></path>
+                <path class="st8" d="M230.6,141.8c1.9,7-4.8,7.9-7.2,6.5-2.5-1.4-3.7-10.3-2.2-13.5,4.2,1.7,8.6,10.7,9.5,7Z"></path>
+                <path class="st27" d="M230.6,141.8c-.9,3.7-5.3-5.3-9.5-7,2-4.5,16.9-7.5,14.2,4.5-1.4-9.8-9.5-5.7-9.7-4.7-.2.8,4.1,4.1,5,7.2Z"></path>
+              </g>
+              <path class="st13" d="M172.6,159.8c-1.7.4-3.3,2-5.5,2.5-19,4.1-34.9,5.3-52.5-4.5-1-.5-2-1-3-1.5,14.5-3,25.1-19.2,24.7-33.5,21.2-1.9,7.5,3.4,18.2,22.7,4.4,8,10.1,10.7,18,14.2Z"></path>
+              <g>
+                <path class="st47" d="M111.6,156.3c1,.5,2,1,3,1.5,2.3,3.6,7.4,6.7,11,10,.2.2,1,2.6,2.5,4.2.7.7,1.7,1.2,2.5,1.7-3.9,1.9-9.8-5.6-13.5-7.5-3.5-5.5-5.9-7.6-6.5-8.5,0,0,0-.7-.5-1.5.5,0,1,0,1.5,0Z"></path>
+                <path class="st47" d="M174.6,159.3c-.4.6-.6,1.5-1,2-3.2,3.7-6.8,7.3-10,11-1.5.2-6.1,1.2-7,1.5,2.3-2.6,4.7-5,7-7.5,1.2-1.2,2.7-2.5,3.5-4,2.2-.5,3.8-2.1,5.5-2.5l2-.5Z"></path>
+                <path class="st34" d="M163.6,172.3c-3.8,4.4-6.8,13-19.5,14.5-9.5-.5-18.3-11.2-13-12.5,11.9,7.1,20.2,1.4,25.5-.5.9-.3,5.5-1.3,7-1.5Z"></path>
+                <path class="st15" d="M130.6,173.8c.6.4.5.5.5.5-5.3,1.3,3.5,12,13,12.5-15.9,1.9-20-9.5-27-20.5,3.7,1.9,9.6,9.4,13.5,7.5Z"></path>
+                <path class="st15" d="M167.1,162.3c-.8,1.5-2.3,2.8-3.5,4-12.3,4.4-25.5,5.6-38,1.5-3.6-3.3-8.7-6.4-11-10,17.6,9.8,33.5,8.6,52.5,4.5Z"></path>
+                <path class="st19" d="M163.6,166.3c-2.3,2.5-4.7,4.9-7,7.5-5.3,1.9-13.6,7.6-25.5.5,0,0,0-.1-.5-.5-.8-.6-1.8-1.1-2.5-1.7-1.5-1.6-2.3-4.1-2.5-4.2,12.5,4.1,25.7,2.9,38-1.5Z"></path>
+              </g>
+            </g>
+            <g>
+              <g>
+                <path class="st19" d="M188.6,134.8c1.8-1.9,1-1.5,1.5-3.5,0-.4,0-1,0-1.5,0-.1,1.3-.4,0-3,3,.6,7,4.5,7,6.5,0,7.3-19.7,8.3-28.2,1-4.3-3.7-.8-2.3.7-3.5,3.3-2.4,5.5-8.7,15.2-7,5.3.9-3.6,0-5.7,3.7-4,7.3,4.3,12.8,9.5,7.2Z"></path>
+                <path class="st17" d="M190.1,126.8c1.3,2.6,0,2.9,0,3l-1.5,1.5c-6.6,1.4-5-5.9,1.5-4.5Z"></path>
+                <path class="st23" d="M190.1,131.3c-.5,2,.3,1.6-1.5,3.5-3-1.7,0-1.5.5-3.5h1Z"></path>
+                <path class="st18" d="M190.1,131.3h-1c-.2,0-.3,0-.5,0l1.5-1.5c0,.5,0,1.1,0,1.5Z"></path>
+              </g>
+              <g>
+                <path class="st46" d="M101.5,102.6c-6.8,8.7-8.2,31.1-8,30,.5.7-4.6,20.7-5,20-4-7-10-22-2-38s9.4-11.7,15-12Z"></path>
+                <path class="st13" d="M205.6,138.3c4.8-11-8.2-5-8.5-5,0,7.3-19.7,8.3-28.2,1-4.3-3.7-.8-2.3.8-3.5-.6-4.6,3.2-8.1,6.9-10.2s6-1,9-1,7,3,9.6,5.7c.8,1,14-18.9,14.2-19,.2,0,1.8-4,1.8-4.7-.2-1.8-5.8-6.5-7-8.5-2.9-4.7-3.8-11.1-6.5-16-6.9-12.4-15.1-9-23-18-.4-.5-2.4-8.3-9.2-5.7-1.7.7-10.6,15.9-33.5,3-6.7,9.7-12.1,6-17.7,8.5-8.6,10.8-21.6,44.5-21.4,44.2-1,4-3.1,9-3.1,13.6-.5,3.7-.6,13-1,14-4,9-1,19,0,21,.1.3,14.7-.3,21.6-1.3.5,0,1,0,1.5,0,14.5-3,25.1-19.2,24.7-33.5,21.2-1.9,7.5,3.4,18.2,22.7,4.4,8,10.1,10.7,18,14.2l2-.5c6.8,1.4,14.8,0,21-3,2.3-1.1,8.3-5.6,10-7.5,1.7-1.8,6.9-10.1,8-12.5-6.3,5.7-1.2-8.6-8,2ZM128.1,127.3c-1.9-.4-.6,3.1-1,3.7-.9,1.3-3.3-1.6-4,1.2,0,.6.1,1.6,0,2,5,1.1-4,12-5.8,12-1.4,0-2.7-5-7-4.5-2,.2-10.5-1.6-15.4-9,.5-2.8,1-7.6,1.1-8,.1-.3-.2-1.6.5-2.7,4.3-7.5,20.8-9.1,28.5-8.7,2.1,4,3.2,9.5,3,14ZM176.2,93.3c-1.2,0-2.4,0-3.5.2,1.1-.1,2.3-.2,3.5-.2ZM166.3,95c-.5.2-1,.5-1.3.8.4-.3.8-.6,1.3-.8Z"></path>
+                <path class="st19" d="M113.1,124.3c-16.7,4,1.1,19.8,5,7.5.6-2,.6-3.5.5-5.5.5,0,3.4,2.9,4,4.5,0,.3.5,1.4.5,1.5,0,.3,0,.6,0,1s0,.8,0,1c-1.7,5.9-18.6,5.3-25.5,3s-2.8-3.5-2.5-5.5c.9-6.8,16.1-10.5,18-7.5Z"></path>
+                <path class="st25" d="M125.1,113.3c-7.7-.3-24.2,1.3-28.5,8.7-.7,1.2-.4,2.4-.5,2.7,6.8-9.9,27.7-7.3,26.5,6,0,.2.9,1.7,0,4.5-3.3,4.8-19.2,3.6-25,2-.4-.1-2.7-1.1-1.5.5,3.4,4.8,11.7,7.1,14.4,7.8,4,1,5.4,1.2,6.8.7,8.2-2.7,10.2-14.7,10.7-19s-.9-10-3-14Z"></path>
+                <path class="st14" d="M118.1,131.8c-2.2,2.7-4.9,1.4-3.5-2,2-.5,2.9-3.5,4-3.5,0,2,.1,3.5-.5,5.5Z"></path>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+      <path class="st42" d="M92.5,138.6"></path>
+      <path class="st0" d="M89.5,147.6c5,5.2,13.7,9.7,20.6,8.7.6.8.5,1.4.5,1.5-5.3,1.5-11,1.4-16.5.2,3.7,16.3,34.7,41.8,50.2,42.2,12.3.4,54.9-20.2,61.2-37,2.2,2.9-4.2,7.4-2.5,9-6.2,8.9-16.6,15.4-26,20.5-10.8,5.9-26.1,13.2-38.5,11-7.7-1.4-28.1-14-34.2-19.5-9.8-8.7-17.9-23.6-17.8-37.7,0,0,2.9,1,3,1Z"></path>
+      <path class="st0" d="M101.6,98.3c-1.7.9-7.5,10.1-9.1,11.3,1.1-9.4,11-42,21.6-44.8s-4.5,4.5-10.5,24.2c-.9,2.9-.9,6.3-2,9.2Z"></path>
+      <g>
+        <path class="st25" d="M140.6,156.8c-4.1-.2-7.8-2.9-10.5-5.5-1.9-10.3,3.4-.9,5.7.5,6.2,3.7,18-.3,4.7,5Z"></path>
+        <path class="st27" d="M130.1,151.3c2.7,2.6,6.4,5.3,10.5,5.5,3.7.2,14.5-5.7,8.7-1-10.8,8.8-26.9-6.9-21-7,.5,0,.4,1.2,1.7,2.5Z"></path>
+      </g>
+      <path class="st25" d="M174.6,106.3c3-.3.8.7-3.1,2.3-6.1,2.5-10,7-6.9,20.5.1.5-.4.4-.7.7q-4.6-1.5-9.2-3c-.4-15.9,5.9-19.2,20-20.5Z"></path>
+      <path class="st0" d="M228.5,151.6l1,2c1,2-3,3-3,3-1.2.4-2,1-3,0l1-5c1-2,3.7-.5,4,0Z"></path>
+      <path class="st25" d="M211.5,101.6c-.2-3.9-4.1-3.8-7-8-2.4-3.5-3.9-11.5-4-12-3-10-12-14-12-14,0,0,14,17,9,40-.6-.1-4.1-2.2-4.9-2.3-5.5.7-1.1,1.7,1.5,6.2,3.4,6,5.2,13.4,3.5,20.2,0,.3,0,1.8,0,1.8,0,0-1,2.2-2,3-5,4-14.9,2.8-18,2-2-.5-5-2-5-2,0,0,3,9,20,9s14.4-12.9,15-16c.9-4.5,0-10-3-16-.1-.2,7.1-10.1,7-12Z"></path>
+      <g>
+        <path d="M91.5,111c0,.3.5,0,1-.4,6-4,9-6,11-7,4-2,6.6-2.1,7-2.1,3.7-1.2,17.6,3.6,12.7-3.7-4.5-6.7-17.1-1.6-22.5,1.2-1.7.9-9.3,7.6-9.3,12.1Z"></path>
+        <path d="M191.8,106c.6.6.8-2.4.2-4-4.1-10.9-27.4-9-28.7-4.2-2,7.1,10.4,1.2,21.5,4,2.8.9,3.8.9,7,4.2Z"></path>
+      </g>
+      <g>
+        <path class="st14" d="M229.5,159.6c0-2,0-5-1-6s-1.8-2-3-1-1.8,4.6-2,7c0,.8.4,3.4,1.1,4,2,1.5,3.3,1.3,4,.2,2-3.2,1-2.8,1-4.2Z"></path>
+        <path class="st23" d="M230.1,158.8c-.2-2.8-.5-4.8-1.6-5.2-3-1-1,3-4,5s-.6,3.3,0,4c3.4,4.1,5.8-1,5.6-3.8Z"></path>
+      </g>
+      <path class="st0" d="M198,122.6c0,.3-.4.6-.5.4-4-7.3-17.2-9.1-22.3-6.7-3.1,1.5,7.5-8.2,17.3-3.6,4.9,2.3,5.2,7.9,5.5,10Z"></path>
+      <path class="st11" d="M204.3,126.4c-4.4,1.3-7.2.8-8.8-.8-.4-.4-.8-.7-1.1-1.1-6.9-9.9-25.9-4.9-24.9,6.3,3.3-2.4,5.5-8.7,15.2-7,5.3.9-3.6,0-5.7,3.7-4,7.3,4.3,12.8,9.5,7.2-3-1.7,0-1.5.5-3.5-.2,0-.3,0-.5,0-6.6,1.4-5-5.9,1.5-4.5,3,.6,7,4.5,7,6.5.4,1.3-.6,2.4-.6,2.3,1-1,2-3,1-3.7,2.3,0,6.7-5.5,6.7-5.5Z"></path>
+      <path class="st0" d="M95.5,123.6s4.3-5.6,8-7c5.6-2.2,19-4,22-3s-11.7-4.6-21.2-1c-1.3.5-3.5,1.7-4.8,3-4,4-4,8-4,8Z"></path>
+      <path class="st11" d="M96.7,124h0c-3.2,2.7-7.4.4-7.4.4,0,0,1.4,3.6,4.7,4.3.1,0,.3,0,.5.1,0,1.8,0,2.3.6,3,.9-6.8,16.1-10.5,18-7.5.1.1.2.2.3.3.2.3.2.4,0,.5.2,0,.2-.2,0-.5,0,0-.2-.2-.3-.3-16.7,4,1.1,19.8,5,7.5-2.2,2.7-4.9,1.4-3.5-2-.9-.3-1.5-.5-2.1-.7.5.2,1.2.4,2.1.7,2-.5,2.9-3.5,4-3.5.5,0,3.4,2.9,4,4.5,1.2-12.9-18.4-15.7-25.8-6.8Z"></path>
+      <g>
+        <g>
+          <path class="st7" d="M183.3,474.3c-17.2,1.6-91.2-26.6-87-9.8.2,1,4.2,17.7,8,21,7,6,43,8,67,7,14.3,0,54-11.1,55-16.2,1-4.8,1-6,2-12-14.1,5.2-30.1,8.6-45,10Z"></path>
+          <path class="st24" d="M156.6,492.7l-1.3-10.7s2.7,10.7,4,10.7h-2.7Z"></path>
+        </g>
+        <g>
+          <path class="st38" d="M221.4,325.4s.6-6.6.6-6.8,0-6,0-6c9,2,12,1,12,1,0,0,15-17.3,16.4-21.2.8-2.1,5-16,3.6-22.2-2.2-8.6-5.3-16.9-11.1-23.7-11.1-13-38.9-10.9-47.9-16.9-2.1,4.4-28.3,26.7-34.6,22.6.8,7-20.6,1.6-20.6.9-.3-3.3-5.9-13.4-6.8-17.5-.9-4,2.6-8,0-8-5.4,0-18.1,4.2-24.6,4.6-7.5.6-11.2.9-18.2,5-10.2,5.9-20.9,23-18.2,28.2,3.5,6.9,12.5,17.9,19.5,23.9,1.9,1.6,3.8-.9,4.9-2.9-3.3,7.7-9.1,19.8-7.9,29.9,1.4,11.4,6.9,18,11,21,2.7,2.1,9,4,9,4,0,0,5,5.2-1,15-2.4,4-10,14.2-19,37.3-4.9,19.1-8.8,38.4-11.5,58-.3,2.1,0,4.4-1,6.5,14.7,9.9,38.1,13.2,55.5,15,17.2,1.8,34.7,2.6,52,1,14.9-1.4,30.9-4.8,45-10,4.7-1.7,10.2-4,14.5-6.5-2.2-15.6-5.7-30.9-10-46-3.2-11.3-6.5-22.5-12-33-7.4-5.9-5.1-31.1-3.9-43l4.4-10.3Z"></path>
+          <path class="st31" d="M217.4,329.4c0,0,0,.1,0,.2,0-.2,0-.2,0-.2Z"></path>
+          <path class="st31" d="M217.5,329.6c0,.2,0,.6,0,1.1.1-.5.1-.8,0-1.1Z"></path>
+        </g>
+        <path class="st38" d="M84.3,325.5"></path>
+        <path class="st31" d="M220.8,376.8c-4.9-7-4.7-26.6-3.5-39.5,2.3-3,4.3-6.8,5-10.2,1-3.6.4-15.8-2.8-24.7-1.6.2,4.6,12.7-.8,23.9-2.1,3-4.9,6.9-9.4,9.9-2.2,1.3-4.8,2.6-7.9,3.6-5.9,1.6-13.7,1.7-24.2-1.3.6.2,35.3,40.1,43,56,7.5,15.4,16.2,62.8,15,67,.5-.1,6.8-3.4,10-5s-2.7-48.6-24.5-79.7Z"></path>
+        <path class="st31" d="M114.3,342.8c5,0,10-3,10-3-6,3-16,1.7-16,1.7,0,0,1.1,1.8,1,5-.1,3.3-1.5,8.1-4,12.3-4,7-7.1,12.9-9.6,17.9-2.8,4.8-4.9,10.2-6.1,13.6-.9,2.3-1.3,3.5-1.3,3.5-4.9,19.1-9.3,45.1-12,64.7,6.6,4,7,4,7,4,0,0-3.2-21.9,2-42.4,7.5-29,19.6-41.2,23-46.6,15-24,6-30.7,6-30.7Z"></path>
+        <path class="st38" d="M84.4,325.4"></path>
+      </g>
+      <path class="st31" d="M231,422.5c-4.4-14.3-6.6-17.7-11-32-4.9,8.4-10.7,11.8-19.5,13.4-4.9.9,12.7-31.8,4.5-36.4-22.6-12.5-78.1-8.6-92-10-3.6-.4,6.1,47,2.6,46.4-4.5,1.7-9.5,1.8-14.2,1-3.7-.6-10.6-3.6-13.2-6.4-2.4,4.7-2.6,10.2-3.9,15.1-.5,1.7-1.2,5.4-1.3,5.9,2.2,6.6,9.1,14,15,18s16.9,8.9,26.8,11.1c4.7,1.1,12.3-16.6,17.2-16.1,15,1.5,20.5,2.8,35,0,3.2-.6,13.9,14.7,16.9,13.9,7.3-1.9,14.1-4.3,20.1-6.9,4.9-2.5,19.4-9.4,17-17Z"></path>
+    </g>
+    <path class="st20" d="M211.7,132.9c-.2,1.4-.3,2.7-.5,4.1.2,0,.4-.2.5-.3,0-.2,0-.4,0-.6-.1-1,0-2.1,0-3.2Z"></path>
+    <g>
+      <path class="st25" d="M182.6,213.6c-.3-2.1-.6-4.2-1-6.2,0-.3-1.3-3.1-2-5.5-7.6,9.7-17.8,17.6-29.3,22.2-5.3-4.6-13-12.2-12.2-14.5-1,3-4,24-5,27-3.9,11.6,10.1,17,17,17,18,0,30.5-9.2,30-12-.4-.7,1.9-2.2.8-3.5.8-.3,1.5-.8,2.2-1.5.9-.9,0-20-.5-23Z"></path>
+      <path class="st6" d="M179.6,201.8c-9.1,11.6-21.8,20.5-36,24.5-2.4-3.1-5.4-6-6-10-.5-2.9.2-7.9.5-11,0-.7.1-.9.5-1.5,12.4,2.2,27.7-5.1,38.5-11,1.2,2.9,1.7,6,2.5,9Z"></path>
+    </g>
+    <g>
+      <path class="st39" d="M175.1,205.2c9.4-1.5,18.3-5.4,26-11,7.2-5.2,14-11.7,17.7-19.8,1.3-2.9,2.5-6.2,2.3-9.5-.2-3.8-6.2-3.6-6,.2s0,.9,0,1.3.1-.6,0-.2,0,.2,0,.3c0,.3-.1.6-.2,1-.1.6-.3,1.2-.5,1.8s-.2.6-.3.9c-.2.4.2-.4,0,0s-.2.4-.3.7c-1.4,3.2-3.2,6-5.4,8.7-5.4,6.4-12.5,11.6-20,15.3-4.2,2-8.8,3.6-13.5,4.3s-3,1.4-2.9,3.1,1.5,3.1,3.1,2.9h0Z"></path>
+      <g>
+        <path class="st46" d="M177.6,201.8c-.3,0-.6,0-.7,0-.5,0,.3-.5,0-1.2-.1,0-.3,0-.4,0-.5,1.4-2.6,2.1-4.4,2.9-14.6,6.2-22.4-.9-15.8-4.5,2.5-1.3,4.2-1.3,6.9-1.6,1.3-.1,3.8-.3,5.1-.2-20.7-5.8-23,12.6-12,13.9,5.3.6,17.1-3.6,20.2-8.6.3,0,.7,0,1-.1,0-.2,0-.5,0-.7Z"></path>
+        <path class="st12" d="M172.3,203.5c-1.6-.7-4.3,0-5.9-.1.7-2.6-3.9-2-3-5.9,1.3-.1,3.8-.3,5.1-.2,5.4.4,7.4,3.2,8.2,3.4-.5,1.4-2.6,2.1-4.4,2.9Z"></path>
+        <path class="st46" d="M156.4,199c1.8,2.7,6.8,4.2,9.9,4.4,1.6.1,4.3-.6,5.9.1-14.6,6.2-22.4-.9-15.8-4.5Z"></path>
+        <path class="st12" d="M166.4,203.4c-3.1-.2-8.1-1.6-9.9-4.4,2.5-1.3,4.2-1.3,6.9-1.6-.9,4,3.7,3.3,3,5.9Z"></path>
+        <path class="st21" d="M177.6,201.1c0-.2,0-.4,0-.6-.2,0-.4,0-.6,0,.2.7-.5,1.1,0,1.2,0,0,.3,0,.7,0,0-.2,0-.4,0-.7Z"></path>
+      </g>
+    </g>
+    <path class="st39" d="M218,58.5"></path>
+    <g>
+      <g>
+        <path class="st39" d="M97.3,69.3c7.5-10.5,15.9-20.8,19.8-24.7-1.4-1.1-2.2-9.7-9-5-6.1,4.3-14.7,13.7-20.9,21.5-.2-.3-.4-.6-.6-1-1,1.8-2.1,3.8-3.1,5.8-2.5,3.4-4.2,6-4.4,6.8-13.5,10.4-17.6,22.4-19,40.1-6.6,5.4-3.7,39.2-.5,45.3,3.6,6.8,9.7,4.7,15.1,5.9-1.1-17.1-4.9-38.8-1.9-56,1.3-7.3,9.3-12.3,9.3-12.3.3-4.2,7.3-15.3,15.2-26.2.2-.3.2-.3,0,0ZM62.4,109.2c1.6-12.8,5.9-22.8,14.7-31.6-5.1,11.4-4,20.1-4.8,25.6-3.3,3.7-9.4,7.7-9.9,6Z"></path>
+        <path class="st48" d="M233.8,58.2c-2.3-3.8-4.8-10.7-12.8-18.8-11-11.5-29.2-20.1-43.5-22.4-2.4-.4-3.2-.4-3.4-.4-1.1.2-13.5-.8-24,1-4.8.8-15.7,6.2-20.5,8.5-5.7,2.7-13.2,7.5-18,12.1-1.4,1.3-12.4,13.4-12.4,13.4,0,0,22.2-16.8,41.9-23.1,17.4-5.6,29.7-4.7,46.7,2.4,4.4,4,10.3,6.7,15.3,10.3,2.8,2,5.3,5.3,8.2,7.3.7.5,6.5,4.7,7.8,5.8.8,1.3,2.6,3.8,3.1,4.5,2.7,4,5.8,10.3,6.1,10.7,1.4-2.7,4.7-7.3,5.8-10.1,0-.2,0-.8,0-1.2Z"></path>
+        <path class="st30" d="M211.1,48.5c.2.3,12,18.1,12,18.1,0,0-7-11-11.5-14.4-21.1-16.1-46.9-26.9-70.9-18.8-8.2,2.8-24.3,12.7-30.9,19.4-2.9-.3-22.7,9.8-22.7,9.8,0,0,14.9-18.4,39-31,42-22,66.9.4,72,4,2.8,2,10,9,13,12.9Z"></path>
+      </g>
+      <g>
+        <path class="st40" d="M71.8,129.3c-.2-5.5-2.7-2-10.4-2.8-1.9-10.6,2-15.6,10.2-18.7.7.7.4,19.8.2,21.5Z"></path>
+        <path class="st32" d="M71.8,129.3c-1.1,9.5-8.9,5.4-10.4-2.8,7.7.8,10.2-2.7,10.4,2.8Z"></path>
+      </g>
+      <path class="st39" d="M252.6,110.4c-1.5-6.3,3.9-25.8-13.7-37.4-.5-2.4-1.1-4.7-1.8-6.9-2.1-6.5-9.1-18.5-11.1-20.5,1,2,2.7,17.7,1.3,20.4-.3-.5-5.3-9.4-8.3-12.4s-18-16-20-17c2,2,17.7,21.1,18.9,23.3,9.1,15.7,8.5,29.9,9.1,35.7,3.8.7,7.6,1.2,10.3.3.7.2,3.1,1.4,3.7,1.7,1-7-.7-17.9-1.1-18.8,7.4,1.8,10.8,18.3,10.8,26.6,0,8.8-6.5-5.4-9.4-7.6,1.3,3.1,1.1,4.9,1.4,7.9.7,7.5.6,15.1.5,22.6,0,6.4-1.1,25.4-2.4,35.1q.5.6.9,1.1c12.9,1.6,15.5-8.5,16.5-21.8,2.2-28.8-5.3-30.6-5.7-32.3ZM215.4,57.4c0,0,0,0,0-.1,0,0,.1-.1.2-.1,0,0-.1,0-.2.1,0,0,0,0,0,.1,0,.1,0,.2,0,.4,0-.2,0-.3,0-.4ZM217.6,58.9s0,0,0,0c0,0,0,0,0,0Z"></path>
+      <path class="st31" d="M235.8,156.2c.8-18.3-1.5-33.8-1.4-43.9q-.7.3-1.4.6c-.1-8.8-3.6-13.6-2.9-18.4-3.5-.3-13.8-2.1-16,3-.3,2.2,0,12.6,0,14,0,2.6-.6,18.3-1,22,0,1.1-5.6,22.2-6,32,11.2,9.3,13.7,10,22.1,10s1.2-1,1.9-1c3-3,4.6-15.7,4.7-18.3ZM218.3,112.9c0,.4,0,.8-.1,1.2,0-.4,0-.8.1-1.2,0-.2,0-.3.1-.4,0,0-.1.2-.1.4ZM219.2,112.1c0,0,0,.1-.1.1,0,0,0,0,.1-.1.2-2,.3-3.5.4-4.7-.1,1.3-.2,2.8-.4,4.7ZM219.8,106c0-.4,0-.8.1-1.3,0,.4,0,.8-.1,1.3ZM220,103.5c0-.4,0-.8.1-1.2,0,.4,0,.8-.1,1.2Z"></path>
+      <path class="st31" d="M88,156.5c0-.6-.3-1.6-.7-2.7-.8-3.1-1.6-6.3-1.3-9.3.5-4.9,3-9,3-9,0-9,0-15,3-24,.4-1.2-.3-1.8,0-3,2.1-8.4,3.8-13.7,4.6-15.8.4-.5.5-.9.4-1.2-2.4.4-11,1-15,4,0,0-3,2-4,3-1.6,1.6-3.7,3.7-5,8,.2,0-.3,1.6-.3,1.3-2.7,16.7-3.7,31.7,1.9,56,.3,1.4.9,4.5,1.4,6.7s-.4,1.8,0,2c12,7,20,2,20,2-2.1-4.1-5.8-9.2-7.3-14.1-.2-1.4-.4-2.8-.7-3.9Z"></path>
+      <path class="st21" d="M87,93.5c.6,0-3.9,6.6-4.7,9.9-5.6,23.1-6.8,47.4-5.8,58.4.5,5.7,3.5,12.7,3.5,12.7l-4-2s-4.6-4.5-5-19c-.4-13,1.8-44.2,3-48,3.6-10.9,10.1-11.8,13-12Z"></path>
+      <path class="st48" d="M86,93.5s-7,3.4-11,14-3,56-3,56c0,0-3.5-17.9-3-29,.5-10.6,1.3-19.8,4-29.4,3-10.6,13-11.6,13-11.6Z"></path>
+      <path class="st21" d="M242.6,105.6c.4,7,.6,15.1.5,22.6-.2,11.7-1.1,35.5-1.4,36.2-7.7,18.1-23.7,9.1-23.7,9.1,9-18,9-24,10-29,3.6-18,2.2-22.2,2.3-32.2,0-2.8-3.3-17.8-3.3-17.8,0,0,15.1,2.2,15.6,11Z"></path>
+      <path class="st48" d="M231,94.5c2.6.8,5.7,1,8.3,2,1.7.6,1,.5,1.9,1.1,1.3,3.1,1.4,4.9,1.8,7.9.4,3-.3,44.7-1,45-.1-8.8-5.5-45.3-15-56s3.2-.3,4,0Z"></path>
+      <path class="st21" d="M163,15.6s0,0,0,0c0,0-15-1-31,5-10,3.6-23.7,11.7-31.9,20,0,0,0,0,0,0-8,10-19.5,28.1-17,26,37-31,45.7-38.2,57-44s12-7,37.4-5.6c-4.8-.8-9.6-1.3-14.5-1.4Z"></path>
+      <path class="st32" d="M244,161.5c.2-2.3,6.6-1.7,7.7-7.2,1.8-8.6-2.7-35.3-2.7-35.3l-.7-8.4s8.2,10.2,7,34.3c-.7,13.5-1.6,17.1-11.3,16.6Z"></path>
+      <path class="st40" d="M244,161.5s-1.4-.7-1.3-2.8c.3-5.2.9-7.9,4.3-18.2,4-12,2-21,2-21,0,0,3,11,4,19,.5,4.2.1,14.6-1,17-2.5,5.3-8,6-8,6Z"></path>
+    </g>
+    <g>
+      <path class="st22" d="M129.5,125.6c0,15.7-15.3,27-28,27s-19-10.3-19-26,9.3-22,22-22,25,5.3,25,21Z"></path>
+      <path class="st22" d="M208.5,126.8c0,22.8-17.9,29.8-32.8,29.8s-22.2-11.3-22.2-28.7,10.9-24.3,25.7-24.3,29.3,5.8,29.3,23.2Z"></path>
+      <g>
+        <path d="M213.5,135.6c5.8-9.6-3.8-18.8-5-22-3-8-6.8-10-10-11s-6-1-13-1-29-3-34.5,13.7c-7.2-3.1-12.6-2.6-20-1-1.5-2.7-5.5-11.7-20.5-12.7-1.9-.1-9.2-.7-16,1-8,2-7.9,2.9-10,5-2.2,2.2-4.6,9.8-5,18-.3,7,2,17,3,19s3,6,5.8,7.5c13.2,7.5,15,5,21.2,4.5,15-1,26.3-18.5,26-32.8,21.2-1.9,7.5,3.4,18.2,22.7,2.6,4.6,9.8,11,16.8,13s14.8,1.8,23-2c13-6,17-17,20-22ZM127.3,128.3c-.3,7.5-3.3,13.5-8.1,17.3-6.2,5-15.2,6.5-24.9,3.7-5.8-1.7-7.8-6.3-8.8-8.7-4-10,0-24,1-27,1.9-5.8,10.4-7.7,16-8,8.6-.5,17.3.2,21.7,8.7,2.1,4,3.2,9.5,3,14ZM160.3,146.6c-3.5-4.7-5.4-13.9-5.5-19.7-.4-15.9,5.2-19.1,20-20.5,5.6-.5,11.5-.9,17,0,.8.1,2.4.4,3,.5,2.1.6,4.2,1.3,5.8,2.8s4.4,6,6,16.9c.5,3.4,0,8-1.7,12.7,0,0,0,0,0,0-8.9,20.4-36.1,18.5-44.5,7.2Z"></path>
+        <path class="st41" d="M214.1,106.1c0-1-1.6-.6-2-.7-2.6-.7-8.2-.1-8.6.3,4.7,4.4,2.9,14.9,7,19s3.5,0,3.5-7.1c-.4-1.6,0-7,0-11.5Z"></path>
+        <g>
+          <path class="st2" d="M80.8,116.3l-10,4.5c-.5-1.1-2.6-9.7-1.2-10.5,22.8-3.4,17.7-10.3,11.2,6Z"></path>
+          <path d="M80.8,116.3q-.6,5-1.2,10c-3.2-2.1-6.9-1.7-8.7-5.5l10-4.5Z"></path>
+        </g>
+        <path d="M213.5,121.6c-4.4-.5-6-2-6-2l1,3c0,.5.5,2.5,1,4.4l-2.1.7,2.1,6.9c2-2,5.8-2,5.4-3.8-.9-4.3.3-9-1.4-9.2Z"></path>
+      </g>
+    </g>
+    <path class="st46" d="M115.7,61.6c.1,0,.2,0,.3,0,8.9-1.7,16-15,26-7.7,9.2,6.7,21-9,31.9-12.6,2.1-.7,21,1.9,23.1,1.3,0-2-5-10-13-12s-15,5-17,3-5-3-5-3c0,0-14-7-22.1,3.7-1.3,1.1-6.6-3.5-10.9-4-7.8-.9-16,3.2-21.5,11.9-1,1.5-5.5,10.3-1.4,16.9.6.9-6.1.5-11.1,7.5-3.7,5.2-5.9,14-5,14,1.6,0,24.1-18.8,25.7-18.9Z"></path>
+    <g>
+      <path class="st28" d="M158.7,250.2c-11.7,0-24.2-5.5-24.7-16.6s1-7,1-7l-9,2-8,2c3.1,19.3,22,35,40.7,35s35.2-15.7,38.3-35c0,0-4.6-3-6-4s-8-5-8-5c0,0,.2,6.5,0,9-1,11.1-12.6,19.6-24.3,19.6Z"></path>
+      <path class="st48" d="M122.9,238.7c3.1.3,6.1-.3,9-1.5s.9-1.4.5-2.1-1.3-.9-2.1-.5c-.2,0-.2,0,0,0,0,0-.2,0-.3.1-.1,0-.3.1-.4.2-.3.1-.7.2-1,.3-.6.2-1.3.3-1.9.4s-.6,0-.3,0c-.1,0-.3,0-.4,0-.3,0-.7,0-1,0-.7,0-1.4,0-2.1,0s-1.5.7-1.5,1.5.7,1.4,1.5,1.5h0Z"></path>
+      <path class="st48" d="M130.1,248.3c1.9-.3,3.7-1.3,4.8-2.8s.4-.6.4-1.1-.2-.8-.4-1.1-.7-.5-1.1-.4-.8.1-1.1.4-.7.8-1.1,1.1l.3-.2c-.4.3-.9.6-1.4.8l.4-.2c-.5.2-1.1.4-1.6.4s-.7.4-.9.7-.3.8-.2,1.2.3.7.7.9l.4.2c.3,0,.5,0,.8,0h0Z"></path>
+      <path class="st48" d="M139.1,256.2c.9-1.6,1.9-3.2,2.9-4.8s.1-1.7-.5-2.1-1.6-.2-2.1.5c-1,1.5-2,3.1-2.9,4.8s-.2,1.7.5,2.1,1.7.2,2.1-.5h0Z"></path>
+      <path class="st48" d="M151.8,260.9c0-1.2,0-2.4.1-3.6s0-.6.1-.9c0,.3,0,0,0-.2,0-.1,0-.3,0-.4.1-.6.2-1.2.4-1.8s-.2-1.7-1-1.8-1.7.2-1.8,1c-.6,2.5-.9,5.2-.8,7.8s.7,1.5,1.5,1.5,1.5-.7,1.5-1.5h0Z"></path>
+      <path class="st48" d="M166.2,261.8c.1-2.5,0-5.1-.3-7.6s-.1-.8-.4-1.1-.7-.5-1.1-.4c-.7,0-1.6.7-1.5,1.5.3,2.5.4,5.1.3,7.6s.7,1.5,1.5,1.5,1.5-.7,1.5-1.5h0Z"></path>
+      <path class="st48" d="M179.3,255.6c-.2-.2-.3-.4-.5-.6s-.2-.2-.3-.4-.2-.2,0,0,0,0,0,0c-.3-.4-.7-.9-1-1.4-.6-.9-1.2-1.9-1.7-2.9s-1.4-1-2.1-.5-.9,1.3-.5,2.1c1.1,2.1,2.4,4.1,4,5.9s1.6.6,2.1,0,.5-1.5,0-2.1h0Z"></path>
+      <path class="st48" d="M186.3,246.9c-.3,0-.6-.1-.9-.2s-.3,0-.4-.1c-.3,0,.3.1,0,0s-.1,0-.2,0c-.3-.1-.5-.3-.8-.4s-.2-.2-.4-.2c-.2-.2.3.2,0,0s-.1-.1-.2-.2c-.2-.2-.4-.4-.6-.6s-.2-.2-.3-.4c.3.4,0,0,0-.1-.2-.2-.3-.5-.4-.7s0-.1-.1-.2c0-.1-.1-.3,0,0,0-.2-.1-.3-.2-.4-.2-.7-1-1.3-1.8-1s-1.3,1-1,1.8c1,2.9,3.5,5.2,6.5,5.8s.8,0,1.2-.2.6-.5.7-.9c.2-.7-.2-1.7-1-1.8h0Z"></path>
+      <path class="st48" d="M191.5,238.3c-.3,0-.6,0-.8,0,0,0,.3,0,.1,0s-.1,0-.2,0c-.1,0-.3,0-.4,0-.3,0-.5-.1-.8-.2s-.1,0-.2,0c-.2,0,0,0,0,0-.1,0-.3-.1-.4-.2-.2-.1-.5-.2-.7-.4s-.2-.2-.3-.2,0,0-.1-.1c-.2-.1.3.2,0,0-.4-.4-.8-.7-1.2-1.2s-.7-.4-1.1-.4-.8.2-1.1.4-.5.7-.4,1.1.2.7.4,1.1c1.7,2.1,4.3,3.3,7,3.3s1.5-.7,1.5-1.5-.7-1.5-1.5-1.5h0Z"></path>
+      <path class="st48" d="M193.6,231.6c-.3,0-.6-.2-.9-.3s.3.1,0,0-.1,0-.2,0c-.1,0-.3-.1-.4-.2-.3-.1-.5-.3-.8-.5s-.2-.2-.4-.3-.1-.1-.2-.2c.1,0,.2.2,0,0-.5-.4-.9-.8-1.3-1.3s0-.1-.1-.2c-.1-.2,0,0,0,0,0-.1-.2-.2-.3-.4-.2-.3-.4-.5-.5-.8-.4-.7-1.4-1-2.1-.5s-.9,1.3-.5,2.1c1.4,2.6,3.9,4.5,6.7,5.4s1.7-.3,1.8-1-.2-1.6-1-1.8h0Z"></path>
+    </g>
+    <g>
+      <path class="st38" d="M93.7,268.3s0,0,0,0c-5.6-8.9,6.8-29.7,18.1-36.9-21.6,1-35,9.5-37,10.4-23.1,11.2-17.5,53.7-33.4,56.3.1,1.2,10.1,8.3,10.7,8.7,6.9,3.7,15.6,5.3,22.9,7.8,10.5,3.6,13,5,13,5,0,0-1.3-6,0-5s0-.9.2-2.9c2.9-20.7,8.7-37.4,5.4-43.4Z"></path>
+      <path class="st0" d="M287.5,396.5c-1.5,11.2-8.7,18.5-20,17.9-16.5-.9-40.6-21.6-42-39.7.4-1.7-.8-3.9,1-2.2,1.6,1.5,6.1,21.5,30,30.5,38.9,14.7,23.7-23.2,25.9-24.3,4.3-2.2,5.1,15,5.1,17.9Z"></path>
+      <path class="st0" d="M84.4,370.7c-.6,2.8-2.1,4.8-2,11.4-16.6,15.9-30.7,22.7-53.7,23.8-2.6-3.4-3.5-5.2-4.4-9.4,3.5,10,39.4-9.6,45.7-13.9,5.2-3.5,9.5-8.1,14.4-11.9Z"></path>
+      <path class="st0" d="M83.4,389.6c-12.8,15.3-29.1,22.4-48.8,21.8-2.4-2.2-3.3-2.1-5.9-5.5,23-1.2,37.1-7.9,53.7-23.8,1.4,5.2.9,7.1,1,7.4Z"></path>
+      <path class="st0" d="M261,302.5c.6,2.7,1.8,7,2.5,9.6-4.2,3.5-22.8,5.8-23.4,11.7-.4,3.7,8.1,30.6,9.8,36.7,10.1,3.5,23.3,6.2,29.3,15.9-8.2-3.3-17.5-9.2-25.6-12.2-5.1-1.9-11.7-3-12.9-3.5v-.5c3.7-9-3-14.1-4.9-18.6-1.4-3.5-6.4-24.4-5.9-26.8.1-.5,1.8.3,1.5-1.2.3,0,.7,0,1,0,1.4,0,2.6-.3,3.9-.5,8.8-1,17.5-5.5,24.8-10.6Z"></path>
+      <path class="st6" d="M206.4,383.6c2.1-1.8,4.9-2.8,7.1-4.5,8.4-6.4-.8-1.2-5.4,0-5.1,1.4-13.8,2-15.9,4.5-1.1,0-6.7-1.1-7.1-1-.4.1,0,.7-.7,1.5-4.6-2.6-7.7-.9-7.3-6.4,14.4,7.7,29.6-3.7,41-12.2,0-1.4,0-2.8,0-4.2,1.7-4.6,3,11.4,3.4,18.1-4.2,3.7-9.9,3.9-15.1,4.2Z"></path>
+      <path class="st6" d="M206.4,383.6c-4.5.3-9.6,0-14.2,0,2-2.4,10.8-3.1,15.9-4.5,4.6-1.2,13.7-6.4,5.4,0-2.2,1.7-5,2.7-7.1,4.5Z"></path>
+      <path class="st29" d="M114.6,396c-3.8,3.9-7.5,8.6-13.2,8.9-3.7-.6-10.6-3.6-13.2-6.4-1.4-1.6-3.1-5.3-3.9-7.4,0-3.2,3.1,3.2,7.1,5.5,8.2,4.7,15,2.1,23.2-.5Z"></path>
+      <path class="st36" d="M128.3,340.9c-.3,1.3-1.5,2-2.2,3,12.2,3.6,25.2,4.3,37.8,3,.8,0,1.2-.4,2-.5,3.5-.5,9.6-1.2,11.7-3,.3.3,1.8,1.6,2.4,1.5.4,5-.9,12.1,1,11.9q2.9-.2,5.9-.5c.2,4.1,1.4,2.3,0,6,0,0-.9-.2-1,.2-.3,1-.7,7.1-1,7.4-.2.2-5.3,1.3-5.6,1.2-2-.7.5-15.2-1.5-15.9-17.4,3.1-35.2,2.2-52.7,1-1.5,13.6,3.2,16.3-6.1,13.1l-1.7-6.2c-2.2,0-6.1,0-8.1-.5l-.5-2.5c2.3.7,3.1.6,5.4,0,.4,0,.6-.3,1-.5.3-.1,1,.1,1.2,0,5.1-2.8,7.7-15.1,4.2-13.9.1,0-.7-.4,1.7-1.5.5-.2,4,.8,5.4-5-3.5.2-12.2-.8-11.5,2.5-.6,0-1.4,0-2,0,.7-1-1.6-3.2,1-6,3.4-3.7,14.7-2.8,13.2,5Z"></path>
+      <path class="st26" d="M189.3,340.9c-1.4,0-4,.4-3.7,2.5,11.6,2.8,16.7,3.3,1,3.5-.8-1.8-4.8-1.3-6.6-2-.6.1-2.2-1.1-2.4-1.5-2.2-2.9-2.1-7,1.5-8.4.9.7-5,3.7-.7,4,.6,0,12.6-2.7,9.5-5.5,2.3.5,1.2,5.8,1.5,7.4Z"></path>
+      <path class="st35" d="M187.9,333.5c3.1,2.7-8.9,5.5-9.5,5.5-4.2-.3,1.6-3.3.7-4,.4-.2,8.4-1.6,8.8-1.5Z"></path>
+      <path class="st6" d="M231.3,313.7c.3,1.5-1.3.7-1.5,1.2-.6,2.4,4.4,23.3,5.9,26.8,1.8,4.5,8.6,9.6,4.9,18.6-2.3-6.2-17.1-37.5-17.6-39.7-.7-3-1-8-1-8,0,0,6.4,1.2,9.3,1.1Z"></path>
+      <path class="st6" d="M78.5,313.2c-1.3,0-2.6-.4-3.9-.5-7.7-.8-15.6-2.3-22.5-6-1.2,1.5-1.4,4.4-2,6,6.1,3,17.4,24.1,16.1,32-.3,1.9-4.8,19-5.4,19.8-.6.8-2.8.3-2.4,1.7,2-.6,3.9-1.3,5.9-2,.4-.1,2.9-.4,4.6-1q.9-.7,1.7-1.5,9-21.6,18.1-43.2c-.5-1.7-.7-8.1.3-11.1.9-2.7-7.7,5.8-10.5,5.6Z"></path>
+      <path class="st6" d="M127.8,379.1c0,0,.9.9,1,1.2-.5,1.6-18.6,5.2-2.9,9.7,0,6.3-4.6,11.8-10.3,13.9-4.5,1.7-9.5,1.8-14.2,1,5.7-.3,9.4-5.1,13.2-8.9,3.2-1.3-6.1-1.8-12-3.5-8-2.3-25.8-9.8-6.3-4.5,30.2.2,10.6.4-7.1-15.1,12,6.6,25.1,11.2,38.6,6.2Z"></path>
+      <path class="st10" d="M114.1,341.9c.6,0,1.4,0,2,0,7.4,1.1-5.1,2.7-7.6,4-6.9,3.5-6.3,12.5.2,14.4l.5,2.5c-7.9-1.9-14.1-12.5-6.3-17.4,1.9-1.2,9.1-3.3,11.2-3.5Z"></path>
+      <path class="st26" d="M115.1,336c-2.6,2.8-.3,4.9-1,6-2.1.1-9.3,2.3-11.2,3.5l-3.9,1c1-1.2,1.7-2,2.9-3,10.6-.8,8.3-2.6,9.8-4.5,1-1.3,1.9-2.7,2.9-4,0,.5-.2,1,.5,1Z"></path>
+      <g>
+        <path class="st26" d="M205.9,345.9c6.4,6.4,4.8,14.1-1.7,19.3-17.1,13.9-26.2,0-27.1,12.4-.4,5.6,2.7,3.9,7.3,6.4-1.8,1.8-.9,4.2-5.4,6.9-.8-1.3-1-3-1.7-3.5-2.7-1.8-6.7,2.5-12.2-7.9q-12.7.2-25.4.5c-6.1,10-7.3,5.3-13.9,9.9-2.5-.7-8.1-3.3-7.9-4.4s3.3-1.7,4.1-2.1c5.1-2.1,5.2-6.1,5.1-6.2-.8-2.7-3.3-7.3-6.5-6.8-1.2.2,2.7,4.6-9.3,1.5-12.9-3.3-22.8-13.3-12.5-25.8l3.9-1c-7.8,4.9-1.6,15.5,6.3,17.4,1.9.5,5.9.4,8.1.5l1.7,6.2c9.3,3.2,4.6.4,6.1-13.1,17.5,1.2,35.3,2.1,52.7-1,1.9.7-.5,15.2,1.5,15.9.3,0,5.4-1,5.6-1.2.3-.4.7-6.5,1-7.4.1-.4,1-.2,1-.2,11.6,1.9,18.5-5.7,17.6-17.4.4.3,1.2.7,1.5,1Z"></path>
+        <path class="st3" d="M148,370c4.1-2.1,9.1,2.6,5.9,4-1.1.5-10.8-1.4-5.9-4Z"></path>
+        <path class="st44" d="M148.1,363.8c.6-.3,8-.8,6.6,2.2-1.1,2.4-11.1,0-6.6-2.2Z"></path>
+      </g>
+      <g>
+        <path class="st25" d="M283.6,373.2c-6.1-20.5-14.2-40.4-20-61-4.2,3.5-22.8,5.8-23.4,11.7-.4,3.7,8.1,30.6,9.8,36.7,10.1,3.5,23.3,6.2,29.3,15.9-8.2-3.3-17.5-9.2-25.6-12.2-5.1-1.9-11.7-3-12.9-3.5-10.1-3.5-13.6-5.6-22.7-11.4-3.3-2.9-2.9-4.9-4.2-6.9-.9-1.5-1.3-2.3-2.4-4,0,0,0-1-1-2-2.3.8-4.7,1.3-6.9,1.2,2.2,0,4.7-.5,6.9-1.2,0,0-.4-.7-.5-1-3.3-.6-10.6-5-13.2-4.5-.2,0-.4,0-.5,0-1.2.7-1.4,3.4-1,4.7.5,1.7,9.2,6,11.2,7.7,0,0,.4.8.5,1,0,0,.2,0,.4-.1-.2,0-.4.1-.4.1-.2.1-.4,1.6-1,1.5,6.4,6.4,4.8,14.1-1.7,19.3-17.1,13.9-26.2,0-27.1,12.4,14.4,7.7,29.6-3.7,41-12.2,0-1.4,0-2.8,0-4.2h0c1.7-4.6,3,11.4,3.4,18.1-4.2,3.7-9.9,3.9-15.1,4.2-4.5.3-9.6,0-14.2,0-1.1,0-6.7-1.1-7.1-1-.4.1,0,.7-.7,1.5-1.8,1.8-.9,4.2-5.4,6.9,5.5,9,10.2,12.8,21.5,12.9,8.8-1.7,13.6-2.6,18.6-10.9,3.2-5.3,4.8-12.4,6.3-18.4.4-1.7-.8-3.9,1-2.2,1.6,1.5,6.1,21.5,30,30.5,38.9,14.7,23.7-23.2,25.9-24.3,4.3-2.2,5.1,15,5.1,17.9,1.2-9-1.4-15-3.9-23.3ZM211.8,343.9c-.3-.1-.7-.2-1.2-.2.5,0,.9,0,1.2.2.5.2,1,.7,1.5,1.4-.5-.7-1-1.2-1.5-1.4ZM214.4,347.3c.2.4.4.8.5,1.2-.2-.4-.4-.8-.5-1.2Z"></path>
+        <path class="st25" d="M120.7,370.7c-1.2.2,2.7,4.6-9.3,1.5-12.9-3.3-22.8-13.3-12.5-25.8,1-1.2,1.7-2,2.9-3,1.3-1.1,3.4-2.8,4.9-3.5.9-.4,4.6-1.5,4.9-1,1-1.3,1.9-2.7,2.9-4-.3-7.3-6-2.1-9.3,0-1.5.9-1.9.9-2,1-.8.6-2.9,2-3.4,2.5-4,3.5-9.1,10.1-10.5,15.4-5.9,2-13.7,7.9-18.8,7.9q-.9.7-1.7,1.5c-1.7.6-4.2.8-4.6,1-2,.7-3.9,1.4-5.9,2-.4-1.4,1.9-.9,2.4-1.7.6-.8,4.9-17.9,5.4-19.8,6.7-28.1-10-29-16.1-32-6.2,17.3-18.4,46.5-22.9,60.5-3.1,9.4-5.1,13.2-2.9,23.3,3.5,10,39.4-9.6,45.7-13.9,5.2-3.5,9.5-8.1,14.4-11.9-.6,2.8-2.1,4.8-2,11.4,1.4,5.2.9,7.1,1,7.4,0,0,.9,1.4,1,1.5,0-3.2,3.1,3.2,7.1,5.5,8.2,4.7,15,2.1,23.2-.5,3.2-1.3-6.1-1.8-12-3.5-8-2.3-25.8-9.8-6.3-4.5,30.2.2,10.6.4-7.1-15.1,12,6.6,25.1,11.2,38.6,6.2-.8-2.7-3.9-9-7.1-8.4Z"></path>
+      </g>
+      <path class="st26" d="M111.7,339c-1.4,1.9.8,3.7-9.8,4.5,1.3-1.1,3.4-2.8,4.9-3.5.9-.4,4.6-1.5,4.9-1Z"></path>
+      <path class="st4" d="M115.6,346.9q-.2,6.4-.5,12.9c-.4.2-.6.4-1,.5-3.5.3-7.1-.5-8.3-4.2-3-9.3,6.5-8.2,9.8-9.2Z"></path>
+      <path class="st16" d="M120.5,345.9c-.4.1-2.6.3-4.9,1-3.3,1-12.7-.1-9.8,9.2,1.2,3.7,4.8,4.5,8.3,4.2-2.3.6-3.1.7-5.4,0-6.6-1.9-7.2-10.9-.2-14.4,2.4-1.2,15-2.8,7.6-4-.7-3.3,7.9-2.3,11.5-2.5-1.3,5.8-4.9,4.8-5.4,5-2.4,1-1.6,1.5-1.7,1.5Z"></path>
+      <path class="st37" d="M115.1,359.8q.2-6.4.5-12.9c2.3-.7,4.4-.9,4.9-1,3.6-1.3.9,11.1-4.2,13.9-.3.1-.9-.1-1.2,0Z"></path>
+      <path class="st37" d="M186.9,356.3q-2.9.2-5.9.5c-3.5-14.6,5.5-8.9,5.9-8.2.2.5,0,6,0,7.7Z"></path>
+      <g>
+        <path class="st5" d="M189.3,340.9c3.4,0,12,1.8,15.1,4,.9,11.7-6,19.3-17.6,17.4,1.4-3.7.2-1.8,0-6,0-1.7.2-7.2,0-7.7-.3-.7-9.4-6.4-5.9,8.2-1.9.2-.6-6.9-1-11.9,1.8.7,5.8.2,6.6,2,15.7-.2,10.6-.7-1-3.5-.4-2.1,2.3-2.5,3.7-2.5Z"></path>
+        <path class="st4" d="M188.6,347.4c13.6-2.6,11.7,16.3-.7,11.2q.4-5.6.7-11.2Z"></path>
+      </g>
+      <g>
+        <path class="st6" d="M193.2,396c4.9-.9,7.9-1.9,8.3-2,12.1-1.1,2.7,7.1-7.1,6.4-.7,0-9.3-2.2-9.8-2.5-2.4-1.3,4.2-1.2,8.5-2Z"></path>
+        <path class="st6" d="M201.5,394c-.4,0-3.4,1.1-8.3,2-1.7-2.9-6-5.5-9-6.9-2.1-2.5,11.3-.5,17.3,5Z"></path>
+      </g>
+    </g>
+    <path class="st31" d="M96.2,287.8c1.6-3.6,1.9-8,1.9-8,0,0,0-.1,0-.2-4,4-10,5-10,5,1.8,3.1,3,3,1.4,4.8-5.2,7.4-9.4,13.8-14.4,23.2,2,0,6.9,2.2,8,3,2.4,1.6,5.2,3.5,6,3-.8-10.7,1.7-18.4,6-28,.4-.9.8-1.8,1.1-2.7Z"></path>
+    <path class="st38" d="M263.8,292.6c-2.3-3.3-6.6-29.4-18.3-42.8-.1.5-.2,1.1-.3,1.6-1.8,6.7-4.4,12.9-7.7,18.8,1,14.4-7.1,29-8.6,43.4,11,1,22.1-1.9,29-7s9.6-9,12-10.1c-1.8-1.7-4.7-1.6-6.2-3.9Z"></path>
+    <path class="st31" d="M224,307.1c-1-9.1,9.3-16.5,9.6-25.7,0-.5.1-4.1-.2-4.1-.2,1.2-.4,2.5-.6,3.7-.9,6.2-14.8,14.8-13.8,21,2,13,4,13.8,2.1,26.4,2,.1,3.3-17.8,2.9-21.4Z"></path>
+  </svg></div>
+              </div>
+
+            </div>
+            
+            <!-- Side Menu (visible only on larger screens) -->
+            <div class="col-md-3 d-flex flex-column h-100 pl-0">
+                <div class="menu-container desktop-menu">
+                    <div class="desktop-buttons">
+                        <div button="" id="start-pause" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">PAUSE GAME</div>
+
+                        <div button="" id="refetch-and-restart" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
+
+                        
+
+
+
+                          <!--Settings menu-->
+                <div class="wrap-collabsible"> 
+                  <input id="collapsible-settings" class="toggle" type="checkbox"> 
+                  <label for="collapsible-settings" class="lbl-toggle">settings</label>
+                  <div class="collapsible-content">
+                      <div class="content-inner">
+                          <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
+                              <div class="slider-container">
+                                  <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
+                                  <input type="range" min="10" max="100" value="10" step="10" class="slider" id="questionSlider">
+                              </div>
+                              <div class="slider-container">
+                                  <div id="perQuestionLabel" class="slider-label">5s / QUESTION</div>
+                                  <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
+                              </div>
+              
+                              <div class="slider-container">
+                                  <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
+                                  <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
+                              </div>
+                          </div>
+                
+                            <button id="fullscreen-btn" class="menu-button" onclick="toggleFullscreen()">TOGGLE FULLSCREEN</button>
+
+                
+  
+
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+                        <!--Categories menu-->
+                <div class="wrap-collabsible"> 
+                    <input id="collapsible-categories" class="toggle" type="checkbox"> 
+                    <label for="collapsible-categories" class="lbl-toggle">
+                        CATEGORIES
+                    </label>
+                    <div class="collapsible-content">
+                        <div class="content-inner">
+                            <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
+                            
+                            <div id="art">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="1" title="" class="button active category  1">
+                                    <span class="indicator"></span>
+                                    ART
+                                </button>
+                            </div>
+                            
+                            <div id="economy">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="2" title="" class="button active category  2">
+                                    <span class="indicator"></span>
+                                    ECONOMY
+                                </button>
+                            </div>
+                            
+                            <div id="food-drink">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="3" title="" class="button active category  3">
+                                    <span class="indicator"></span>
+                                    FOOD &amp; DRINK
+                                </button>
+                            </div>
+                            
+                            <div id="games">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="4" title="" class="button active category  4">
+                                    <span class="indicator"></span>
+                                    GAMES
+                                </button>
+                            </div>
+                            
+                            <div id="geography">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="5" title="" class="button active category  5">
+                                    <span class="indicator"></span>
+                                    GEOGRAPHY
+                                </button>
+                            </div>
+                            
+                            <div id="history">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="6" title="" class="button active category  6">
+                                    <span class="indicator"></span>
+                                    HISTORY
+                                </button>
+                            </div>
+                            
+                            <div id="human-body">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="7" title="" class="button active category  7">
+                                    <span class="indicator"></span>
+                                    HUMAN BODY
+                                </button>
+                            </div>
+                            
+                            <div id="language">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="8" title="" class="button active category  8">
+                                    <span class="indicator"></span>
+                                    LANGUAGE
+                                </button>
+                            </div>
+                            
+                            <div id="literature">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="9" title="" class="button active category  9">
+                                    <span class="indicator"></span>
+                                    LITERATURE
+                                </button>
+                            </div>
+                            
+                            <div id="math">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="10" title="" class="button active category  10">
+                                    <span class="indicator"></span>
+                                    MATH
+                                </button>
+                            </div>
+                            
+                            <div id="miscellaneous">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="11" title="" class="button active category  11">
+                                    <span class="indicator"></span>
+                                    MISCELLANEOUS
+                                </button>
+                            </div>
+                            
+                            <div id="movies">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="12" title="" class="button active category  12">
+                                    <span class="indicator"></span>
+                                    MOVIES
+                                </button>
+                            </div>
+                            
+                            <div id="music">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="13" title="" class="button active category  13">
+                                    <span class="indicator"></span>
+                                    MUSIC
+                                </button>
+                            </div>
+                            
+                            <div id="nature">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="14" title="" class="button active category  14">
+                                    <span class="indicator"></span>
+                                    NATURE
+                                </button>
+                            </div>
+                            
+                            <div id="performing-arts">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="22" title="" class="button active category  22">
+                                    <span class="indicator"></span>
+                                    PERFORMING ARTS
+                                </button>
+                            </div>
+                            
+                            <div id="philosophy">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="15" title="" class="button active category  15">
+                                    <span class="indicator"></span>
+                                    PHILOSOPHY
+                                </button>
+                            </div>
+                            
+                            <div id="politics">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="16" title="" class="button active category  16">
+                                    <span class="indicator"></span>
+                                    POLITICS
+                                </button>
+                            </div>
+                            
+                            <div id="pop-culture">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="17" title="" class="button active category  17">
+                                    <span class="indicator"></span>
+                                    POP CULTURE
+                                </button>
+                            </div>
+                            
+                            <div id="science">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="18" title="" class="button active category  18">
+                                    <span class="indicator"></span>
+                                    SCIENCE
+                                </button>
+                            </div>
+                            
+                            <div id="sports">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="19" title="" class="button active category  19">
+                                    <span class="indicator"></span>
+                                    SPORTS
+                                </button>
+                            </div>
+                            
+                            <div id="technology">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="20" title="" class="button active category  20">
+                                    <span class="indicator"></span>
+                                    TECHNOLOGY
+                                </button>
+                            </div>
+                            
+                            <div id="television">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="21" title="" class="button active category  21">
+                                    <span class="indicator"></span>
+                                    TELEVISION
+                                </button>
+                            </div>
+                            
+                            <div id="theology">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="23" title="" class="button active category  23">
+                                    <span class="indicator"></span>
+                                    THEOLOGY
+                                </button>
+                            </div>
+                            
+                            <div id="video-games">
+                                <button onclick="toggle_categories(this.id), toggleIndicator(this)" id="24" title="" class="button active category  24">
+                                    <span class="indicator"></span>
+                                    VIDEO GAMES
+                                </button>
+                            </div>
+                            
+                    </div>
+                    </div>
+                </div>
+
+                
+                        <!--Difficulties menu-->
+                <div class="wrap-collabsible"> 
+                  <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
+                  <label for="collapsible-difficulties" class="lbl-toggle">
+                      DIFFICULTIES
+                  </label>
+                  <div class="collapsible-content">
+                      <div class="content-inner">
+                          <button id="all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE </button>
+                          
+                          <div id="Casual">
+                              <button onclick="toggle_difficulties(this.id), toggleIndicator(this)" id="1" type="button" class="button active difficulty  1">
+                                  <span class="indicator"></span>
+                                  CASUAL
+                              </button>
+                          </div>
+                          
+                          <div id="Easy">
+                              <button onclick="toggle_difficulties(this.id), toggleIndicator(this)" id="2" type="button" class="button active difficulty  2">
+                                  <span class="indicator"></span>
+                                  EASY
+                              </button>
+                          </div>
+                          
+                          <div id="Average">
+                              <button onclick="toggle_difficulties(this.id), toggleIndicator(this)" id="3" type="button" class="button active difficulty  3">
+                                  <span class="indicator"></span>
+                                  AVERAGE
+                              </button>
+                          </div>
+                          
+                          <div id="Hard">
+                              <button onclick="toggle_difficulties(this.id), toggleIndicator(this)" id="4" type="button" class="button active difficulty  4">
+                                  <span class="indicator"></span>
+                                  HARD
+                              </button>
+                          </div>
+                          
+                          <div id="Genius">
+                              <button onclick="toggle_difficulties(this.id), toggleIndicator(this)" id="5" type="button" class="button active difficulty  5">
+                                  <span class="indicator"></span>
+                                  GENIUS
+                              </button>
+                          </div>
+                          
+                      </div>
+                  </div>
+                  </div>
+  
+  
+                  <!--Eras menu-->
+                  <div class="wrap-collabsible"> 
+                  <input id="collapsible-eras" class="toggle" type="checkbox"> 
+                  <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
+                  <div class="collapsible-content">
+                      <div class="content-inner">
+                      <button id="all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
+                      
+                      <div id="Pre-1500">
+                          <button onclick="toggle_eras(this.id), toggleIndicator(this)" id="1" type="button" class="button active era  1">
+                              <span class="indicator"></span>
+                              Pre-1500
+                          </button>
+                          </div>
+                      
+                      <div id="1500-1800">
+                          <button onclick="toggle_eras(this.id), toggleIndicator(this)" id="2" type="button" class="button active era  2">
+                              <span class="indicator"></span>
+                              1500-1800
+                          </button>
+                          </div>
+                      
+                      <div id="1800-1900">
+                          <button onclick="toggle_eras(this.id), toggleIndicator(this)" id="3" type="button" class="button active era  3">
+                              <span class="indicator"></span>
+                              1800-1900
+                          </button>
+                          </div>
+                      
+                      <div id="1900-1950">
+                          <button onclick="toggle_eras(this.id), toggleIndicator(this)" id="4" type="button" class="button active era  4">
+                              <span class="indicator"></span>
+                              1900-1950
+                          </button>
+                          </div>
+                      
+                      <div id="1950s">
+                          <button onclick="toggle_eras(this.id), toggleIndicator(this)" id="5" type="button" class="button active era  5">
+                              <span class="indicator"></span>
+                              1950s
+                          </button>
+                          </div>
+                      
+                      <div id="1960s">
+                          <button onclick="toggle_eras(this.id), toggleIndicator(this)" id="6" type="button" class="button active era  6">
+                              <span class="indicator"></span>
+                              1960s
+                          </button>
+                          </div>
+                      
+                      <div id="1970s">
+                          <button onclick="toggle_eras(this.id), toggleIndicator(this)" id="7" type="button" class="button active era  7">
+                              <span class="indicator"></span>
+                              1970s
+                          </button>
+                          </div>
+                      
+                      <div id="1980s">
+                          <button onclick="toggle_eras(this.id), toggleIndicator(this)" id="8" type="button" class="button active era  8">
+                              <span class="indicator"></span>
+                              1980s
+                          </button>
+                          </div>
+                      
+                      <div id="1990s">
+                          <button onclick="toggle_eras(this.id), toggleIndicator(this)" id="9" type="button" class="button active era  9">
+                              <span class="indicator"></span>
+                              1990s
+                          </button>
+                          </div>
+                      
+                      <div id="2000s">
+                          <button onclick="toggle_eras(this.id), toggleIndicator(this)" id="10" type="button" class="button active era  10">
+                              <span class="indicator"></span>
+                              2000s
+                          </button>
+                          </div>
+                      
+                      <div id="2010s">
+                          <button onclick="toggle_eras(this.id), toggleIndicator(this)" id="11" type="button" class="button active era  11">
+                              <span class="indicator"></span>
+                              2010s
+                          </button>
+                          </div>
+                      
+                      <div id="2020s">
+                          <button onclick="toggle_eras(this.id), toggleIndicator(this)" id="12" type="button" class="button active era  12">
+                              <span class="indicator"></span>
+                              2020s
+                          </button>
+                          </div>
+                      
+                      </div>
+                  </div>
+                  </div>
+
+                  <div id="character"><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 492.7">
+    <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
+    <defs>
+      <style>
+        .st0 {
+          fill: #c45f41;
+        }
+  
+        .st1 {
+          fill: #c05e58;
+        }
+  
+        .st2 {
+          fill: #232323;
+        }
+  
+        .st3 {
+          fill: #83373c;
+        }
+  
+        .st4 {
+          fill: #2ecda6;
+        }
+  
+        .st5 {
+          fill: #443430;
+        }
+  
+        .st6 {
+          fill: #8e3226;
+        }
+  
+        .st7 {
+          fill: #f7b750;
+        }
+  
+        .st8 {
+          fill: #a34737;
+        }
+  
+        .st9 {
+          fill: #a1a2a3;
+        }
+  
+        .st10 {
+          fill: #4f342e;
+        }
+  
+        .st11 {
+          fill: #23110a;
+        }
+  
+        .st12 {
+          fill: #281a26;
+        }
+  
+        .st13 {
+          fill: #f0935d;
+        }
+  
+        .st14 {
+          fill: #bdeded;
+        }
+  
+        .st15 {
+          fill: #c12e4b;
+        }
+  
+        .st16 {
+          fill: #261715;
+        }
+  
+        .st17 {
+          fill: #e5fdfe;
+        }
+  
+        .st18 {
+          fill: #2e643c;
+        }
+  
+        .st19 {
+          fill: #fbfbfc;
+        }
+  
+        .st20 {
+          fill: #281f30;
+        }
+  
+        .st21 {
+          fill: #994990;
+        }
+  
+        .st22 {
+          opacity: .2;
+        }
+  
+        .st22, .st23 {
+          fill: #7aebe9;
+        }
+  
+        .st24 {
+          fill: #c9892d;
+        }
+  
+        .st25 {
+          fill: #e6794d;
+        }
+  
+        .st26 {
+          fill: #27151d;
+        }
+  
+        .st27 {
+          fill: #511407;
+        }
+  
+        .st28 {
+          fill: #c392c2;
+        }
+  
+        .st29 {
+          fill: #bf5a41;
+        }
+  
+        .st30 {
+          fill: #7a2780;
+        }
+  
+        .st31 {
+          fill: #661b6a;
+        }
+  
+        .st32 {
+          fill: #90eaeb;
+        }
+  
+        .st33 {
+          fill: #17ae9d;
+        }
+  
+        .st34 {
+          fill: #d53a5c;
+        }
+  
+        .st35 {
+          fill: #462226;
+        }
+  
+        .st36 {
+          fill: #4d3340;
+        }
+  
+        .st37 {
+          fill: #793e59;
+        }
+  
+        .st38 {
+          fill: #95409b;
+        }
+  
+        .st39 {
+          fill: #29999b;
+        }
+  
+        .st40 {
+          fill: #d8f6fb;
+        }
+  
+        .st41 {
+          fill: #353535;
+        }
+  
+        .st42 {
+          fill: #120f12;
+        }
+  
+        .st43 {
+          display: none;
+        }
+  
+        .st44 {
+          fill: #3e0e15;
+        }
+  
+        .st45 {
+          fill: #320532;
+        }
+  
+        .st46 {
+          fill: #1d121b;
+        }
+  
+        .st47 {
+          fill: #4e0b1b;
+        }
+  
+        .st48 {
+          fill: #b175a7;
+        }
+      </style>
+    </defs>
+    <g>
+      <path class="st13" d="M192.5,116.6l5,23s2.5,3.6,4,3c4.1-1.7,7-9,7-17s-4-14-4-14l-12,5Z"></path>
+      <g>
+        <g id="Background" class="st43">
+          <path class="st9" d="M132.6,477.3c-76.7,0-153.3,0-230,0V-34.7h512v512c-62.8,0-125.7,0-188.5,0q1-6,2-12c4.7-1.7,10.2-4,14.5-6.5,3.4-2,7.1-3.8,8.5-7.7-.6-6.9-2.4-13.6-4-20.2,78.7-56.2,100.3-140.9,35-218.5.4-.1,3.7,0,8.7-3,11.3-6.9,14-20.6,8.7-32.2,19.7-4.1,26.7-27,11.5-40.5,1.3-4.6,0-9.7-3.5-13,18.1-14.9,14.3-39.8-6.5-49.5,3.4-16.5-13-29.2-28.5-28,4-21.1-13.4-38.6-33.7-28.2C221.8-.2,193-8.7,170.3,3.3c-20.8-21.1-68.8-14-83,12-16.5-13.3-43.4,1.7-37.7,22.7q-5.9,5.1-11.7,10.2c-15.4,1.6-25.4,19.2-18.2,33.2-16.5,8.4-18.6,31.5-2,41-18.5,4.8-26.8,31.5-8,41.5-3.3,17.4,13.6,21.6,14,23-2.9,8-1.6,15.4,4,21.7-35.1,28.1-51.5,75.2-45,119.2,7.3,49.2,46.1,86.2,86.5,111.2-.7,4.4-1.8,8.7-1.5,13.2,2.5,2.9,4.9,4.7,8,6.7,14.7,9.9,38.1,13.2,55.5,15l1.5,3Z"></path>
+        </g>
+        <g>
+          <g>
+            <path class="st42" d="M227.6,117.3c-3.1-1.8-1.7,4.8-11,5.5,0-7.6-1.4-10.5-7-15.7l.7-.7c2.3.7,15.4,6.4,16,7,.9,1,.8,2.4,1.2,4Z"></path>
+            <path class="st42" d="M227.6,117.3c.5,1.8.2,4.9,1,5.5-1.1.3-8.9,8-12.5,7.5.5-2.2.5-5.2.5-7.5,9.3-.7,7.9-7.3,11-5.5Z"></path>
+          </g>
+          <g>
+            <path class="st42" d="M75.1,49.8c-1.6,2-3.6,3.8-5,6,.2-1.4.7-2.8.5-4.2-1.5-.5-10.1-7.2-10.5-7.7-.3-.4-2-8.5-2-9.2.1-4,3-8.2,6-10.7-6.2,13.7,9.6,19.6,10.5,22.2.5,1.5-1.2,3.5.5,3.7Z"></path>
+            <path class="st42" d="M289.6,64.3c4.3,7.1,2.9,10.5,0,18.2,4.7,1.1,5.4.4,10,2.7l-.2,1c-1-2-.7,1.7-6-1.5-1.2,5.6-7.4-2.5-4.7,5.2-6.7,3.1-2.3-17,2-18,.3-.9-5.6-11.4-1-7.7Z"></path>
+            <path class="st12" d="M40.1,160.8c-.3.1-1.6,1.8-5.2,3-.6-.1-4.6-10.4-4.7-11-1.7-8.4,2.7-11.1,3.5-12.5q7-4.6,14-9.2-.5-4.6-1-9.2c.1-2.9-8.4-7.2-14-11-2.2-4.6-1.1-10.3,2-14.5,8.9-4,19.9-1.7,20-8.2,0-.5-2.2-6-2.5-10.2-.8-11.2,14.7-13.4,16-14.7.5-.6,1.8-5.9,2-7.2,1.4-2.2,3.4-4,5-6,2.3-2.9,3.7-.4,2-9.2,16.2-18,15.2-11.2,37.7-8.2,3.4-.8,3.3-15.3,10.5-16.5,10-1.7,12.6,10.8,8.5,14-3.8,3-3.4-2.7-7-8-4,23.7-18.5,15.8-36.5,13.5-8.9,6.1-4.7,10.6-5.7,13.7-.3.8-8,7.4-8.5,8.5-3.1,6.7,5.4,5.5-17.5,17.5-2.5,6.2,9.5,17-7.2,24.2-4.8,2.1-17.4,2.3-14,6.5,2.8,3.4,16,6.3,16.7,18.2,1.5,23.8-28.2,10.7-14,36.7Z"></path>
+            <path class="st12" d="M292.1,157.3c-.2-.1-.3-.3-.5-.5-.3-19.2-12.8-13.1-20.2-18-4.8-3.2-8.2-20.3,14.7-19.2,5.8,8.3-14.6,6.7-12.5,11,.5,1,15.8,6.4,18,9,3.1,3.8,3.1,14.6.5,17.7Z"></path>
+            <path class="st46" d="M33.6,140.3c-.8,1.4-5.2,4.1-3.5,12.5-6-2.2-15.7-2.8-14.5-11.2,1.9-13.6,16.5-1.2,18-1.2Z"></path>
+            <path class="st46" d="M46.6,121.8q.5,4.6,1,9.2-7,4.6-14,9.2c.6-1,2.3-2.2,2.5-2.7,2.1-5.6-4.6-9.8-4-15.5l14.5-.2Z"></path>
+            <g>
+              <path class="st42" d="M79.1,117.3q-.6,5-1.2,10c-3.2-2.1-6.9-1.7-8.7-5.5l10-4.5Z"></path>
+              <path class="st33" d="M90.6,113.3c-1.4,3.7-2.8,5.7-3,10-3.5,2-1.2-8.9,3.5-12.2q-.2,1.1-.5,2.2Z"></path>
+            </g>
+            <g>
+              <path class="st46" d="M302.6,141.6c1.6-17.5-7.8-17.6-8.5-18.5-3.1-4.3,5.8-3.9,10.5-9.5,7.1-8.4,5-23.2-5-28.2l-.2,1c-1-2-.7,1.7-6-1.5-1.2,5.6-7.4-2.5-4.7,5.2-6.7,3.1-2.3-17,2-18,.3-.9-5.6-11.4-1-7.7-4-6.7-11.3-9.8-18.7-6.5-2.9-.6,1-6.1-10.2-12.2,8.8-16.2-11.8-29.4-22.2-14.2-18.4-20.7-44.2-29.9-70-16-17.5-19.9-50.6-17.5-68.7.2-1.8,1.7,0,4.2-13.2,9.7-2.1,0-10.4-11.3-22.2-1.5-6.2,13.7,9.6,19.6,10.5,22.2.5,1.5-1.2,3.5.5,3.7,2.3-2.9,3.7-.4,2-9.2,16.2-18,15.2-11.2,37.7-8.2,3.4-.8,3.3-15.3,10.5-16.5,10-1.7,12.6,10.8,8.5,14-3.8,3-3.4-2.7-7-8-4,23.7-18.5,15.8-36.5,13.5-8.9,6.1-4.7,10.6-5.7,13.7-.3.8-8,7.4-8.5,8.5-3.1,6.7,5.4,5.5-17.5,17.5-2.5,6.2,9.5,17-7.2,24.2-4.8,2.1-17.4,2.3-14,6.5,2.8,3.4,16,6.3,16.7,18.2,1.5,23.8-28.2,10.7-14,36.7-.3.1-1.6,1.8-5.2,3-.6-.1-4.6-10.4-4.7-11-6-2.2-15.7-2.8-14.5-11.2,1.9-13.6,16.5-1.2,18-1.2.6-1,2.3-2.2,2.5-2.7,2.1-5.6-4.6-9.8-4-15.5l14.5-.2c.1-2.9-8.4-7.2-14-11-2.2-4.6-1.1-10.3,2-14.5,8.9-4,19.9-1.7,20-8.2,0-.5-2.2-6-2.5-10.2-.8,0-1.6,0-2.3.1.7,0,1.5,0,2.3-.1-.8-11.2,14.7-13.4,16-14.7.5-.6,1.8-5.9,2-7.2.2-1.4.7-2.8.5-4.2-1.5-.5-10.1-7.2-10.5-7.7-1.2.2-2.4.9-3.5,1.5-.6.9-1.1,1.8-1.5,2.7.4-.9.9-1.8,1.5-2.7-8,4.4-5.4,3.6-9.2,11.5-19.2-1.6-26.4,17.1-12.7,30.2-2.7.9-5.4,1.2-8,2.2-2.1.9-3.3,1.4-5,3-9.5,8.9-5.1,21.5,6,26.2.7,1.9-4.1,4.6,0,14-18.9-2.2-25.7,19.2-8,27.5-3.8,9.2,3,21.4,13.2,17.7,8.3,8.1-2.1,8.2-.2,19.7,1.4,9,14.2,14.7,21.7,9.2,10.7,4.5,5.5,5.2,9.2,10.2,4.7,6.5,16.4,5.9,21.7.2,1.4.3.7,14.1,20,11.5,4.7-8.2,6.2-2.5,13.5-6,5.4-2.6,5.4-9.9,10.7-5,2.9-4.1,4.5-9.1,8.5-12.5,0-.7.1-.9.5-1.5-7.7-1.4-26.9-15.7-33.1-21.2-10.4-9.2-16.6-17.4-16.4-31.5.2-.6-.4-8.4-1.5-10.7-.4-.9-.3-9.4,0-17-3.5,2-1.2-8.9,3.5-12.2q-.2,1.1-.5,2.2c.2-.4,1.4-3.3,1.5-3.5,1.4-2.6,2.5-7,6.5-5.7q-1-1.4-2-2.7c1.1-9.4,7.9-32.2,17.5-36.5,5.6-2.5,11,1.2,17.7-8.5,22.9,12.9,31.8-2.3,33.5-3,6.9-2.6,8.8,5.3,9.2,5.7,7.9,9,16.1,5.6,23,18,2.7,4.9,3.6,11.3,6.5,16,1.2,2-.8,16.6.4,19.5,4.6,10.3,4,21,1.1,25.7,6.7-10.7,1.7,3.7,8-2,.6-1.3,2.4-5.3,2.5-6,.5-2.2.5-5.2.5-7.5,0-7.6-1.4-10.5-7-15.7l.8-.8c2.3.7,15.4,6.4,16,7,.9,1,.8,2.4,1.2,4,.5,1.8.2,4.9,1,5.5,11.7-2.8,17.1,19,3.2,30.5-10.8,8.9-16.5-2.4-23.2,7.7-.3.5-.9,4.7-5.5,11.2-6.2,8.9-16.6,15.4-26,20.5,1.2,2.9,1.7,6,2.5,9,.7,2.4,1.9,5.2,2,5.5,5.7.6,7.9,6.6,11,8.5.6.4,3.6.9,4.7,1,7,13.8,25.6,10.6,30-4,9.6,10.2,24.4,12.2,28.5-4,7.3,0,12.5.8,17.5-5.5,18.4,2,25.3-16.4,12.2-28.7q3.1-4.1,6.2-8.2c6.2,1.5,12,.1,15.2-5.5,4.1-7.1,2.1-14.6-4.5-19.2ZM54,50.6c-.3.8-.5,1.6-.7,2.4.2-.8.4-1.6.7-2.4ZM37.3,59.8c.6-.2,1.1-.4,1.7-.5.6,0,1.2-.1,1.7-.1-.6,0-1.2,0-1.7.1-.6,0-1.1.2-1.7.5-.4.2-.8.4-1.2.6.4-.3.8-.5,1.2-.6ZM32.6,66.2c.1-.5.3-1.1.4-1.6-.2.5-.3,1-.4,1.6-.2.8-.2,1.6-.1,2.5,0-.8,0-1.7.1-2.5ZM292.1,157.3c-.2-.1-.3-.3-.5-.5-.3-19.2-12.8-13.1-20.2-18-4.8-3.2-8.2-20.3,14.7-19.2,5.8,8.3-14.6,6.7-12.5,11,.5,1,15.8,6.4,18,9,3.1,3.8,3.1,14.6.5,17.7Z"></path>
+              <g>
+                <path class="st12" d="M181.3,17.3c12.6-1.2,21.7,20.4,45.5,12.5,11.5,15.3,21.3,10.6,16.2,29.2,2.6,1.3,12.5,10,13.2,10.2,5.5,2,21.8-2.9,16.7,17.2,4.7,1.6,21.4,8.2,23.5,12,2.4,4.4.7,13-4.2,14.7-11.6,4-.9-9.6-1.2-11.2-12.5-11.5-29.9-.8-23-24.5l-13.2-1.2c-8.4-11.1-13.2-8.1-16.2-11.7-8-9.7,12.5-22.6-19.7-18.2q-1.2-4.2-2.5-8.5c-12.3.4-23-6.6-32.5-13.5-4.2-.3-17.2,8.1-14.2-.7.6-1.9,9.6-6,11.7-6.2Z"></path>
+                <path class="st45" d="M228.3,35.8c3.1-.2-2.6,2.2-3.5,2.5-12,4.4-3.5-2,3.5-2.5Z"></path>
+              </g>
+            </g>
+          </g>
+          <g>
+            <g>
+              <path class="st25" d="M205.6,163.3c-6.4,16.8-49,37.4-61.2,37-15.6-.5-46.6-25.9-50.2-42.2,5.5,1.1,11.2,1.2,16.5-.2.6.9,3,3,6.5,8.5,7,11,11.1,22.4,27,20.5,12.7-1.5,15.7-10.1,19.5-14.5,3.2-3.7,6.8-7.3,10-11,3.6.9,7.6,1.5,11.2,1,2.1-.3,11.8-4.1,10.7-6,2.3-1.1,8.3-5.6,10-7.5,2,4.5,1.8,9.8,0,14.5Z"></path>
+              <path class="st1" d="M195.6,156.3c1.1,1.9-8.6,5.7-10.7,6-3.6.5-7.7-.1-11.2-1,.4-.5.6-1.4,1-2,6.8,1.4,14.8,0,21-3Z"></path>
+              <g>
+                <path class="st25" d="M203.1,172.3c-1.7-1.6,4.7-6.1,2.5-9,1.8-4.7,2-10,0-14.5,1.7-1.8,5.9-9.8,6.9-12.2.6-1.3,3.4-5.6,3.6-6.3,3.6.5,11.4-7.2,12.5-7.5,11.7-2.8,17.1,19,3.2,30.5-10.8,8.9-16.5-2.4-23.2,7.7-.3.5-.9,4.7-5.5,11.2Z"></path>
+                <path class="st8" d="M230.6,141.8c1.9,7-4.8,7.9-7.2,6.5-2.5-1.4-3.7-10.3-2.2-13.5,4.2,1.7,8.6,10.7,9.5,7Z"></path>
+                <path class="st27" d="M230.6,141.8c-.9,3.7-5.3-5.3-9.5-7,2-4.5,16.9-7.5,14.2,4.5-1.4-9.8-9.5-5.7-9.7-4.7-.2.8,4.1,4.1,5,7.2Z"></path>
+              </g>
+              <path class="st13" d="M172.6,159.8c-1.7.4-3.3,2-5.5,2.5-19,4.1-34.9,5.3-52.5-4.5-1-.5-2-1-3-1.5,14.5-3,25.1-19.2,24.7-33.5,21.2-1.9,7.5,3.4,18.2,22.7,4.4,8,10.1,10.7,18,14.2Z"></path>
+              <g>
+                <path class="st47" d="M111.6,156.3c1,.5,2,1,3,1.5,2.3,3.6,7.4,6.7,11,10,.2.2,1,2.6,2.5,4.2.7.7,1.7,1.2,2.5,1.7-3.9,1.9-9.8-5.6-13.5-7.5-3.5-5.5-5.9-7.6-6.5-8.5,0,0,0-.7-.5-1.5.5,0,1,0,1.5,0Z"></path>
+                <path class="st47" d="M174.6,159.3c-.4.6-.6,1.5-1,2-3.2,3.7-6.8,7.3-10,11-1.5.2-6.1,1.2-7,1.5,2.3-2.6,4.7-5,7-7.5,1.2-1.2,2.7-2.5,3.5-4,2.2-.5,3.8-2.1,5.5-2.5l2-.5Z"></path>
+                <path class="st34" d="M163.6,172.3c-3.8,4.4-6.8,13-19.5,14.5-9.5-.5-18.3-11.2-13-12.5,11.9,7.1,20.2,1.4,25.5-.5.9-.3,5.5-1.3,7-1.5Z"></path>
+                <path class="st15" d="M130.6,173.8c.6.4.5.5.5.5-5.3,1.3,3.5,12,13,12.5-15.9,1.9-20-9.5-27-20.5,3.7,1.9,9.6,9.4,13.5,7.5Z"></path>
+                <path class="st15" d="M167.1,162.3c-.8,1.5-2.3,2.8-3.5,4-12.3,4.4-25.5,5.6-38,1.5-3.6-3.3-8.7-6.4-11-10,17.6,9.8,33.5,8.6,52.5,4.5Z"></path>
+                <path class="st19" d="M163.6,166.3c-2.3,2.5-4.7,4.9-7,7.5-5.3,1.9-13.6,7.6-25.5.5,0,0,0-.1-.5-.5-.8-.6-1.8-1.1-2.5-1.7-1.5-1.6-2.3-4.1-2.5-4.2,12.5,4.1,25.7,2.9,38-1.5Z"></path>
+              </g>
+            </g>
+            <g>
+              <g>
+                <path class="st19" d="M188.6,134.8c1.8-1.9,1-1.5,1.5-3.5,0-.4,0-1,0-1.5,0-.1,1.3-.4,0-3,3,.6,7,4.5,7,6.5,0,7.3-19.7,8.3-28.2,1-4.3-3.7-.8-2.3.7-3.5,3.3-2.4,5.5-8.7,15.2-7,5.3.9-3.6,0-5.7,3.7-4,7.3,4.3,12.8,9.5,7.2Z"></path>
+                <path class="st17" d="M190.1,126.8c1.3,2.6,0,2.9,0,3l-1.5,1.5c-6.6,1.4-5-5.9,1.5-4.5Z"></path>
+                <path class="st23" d="M190.1,131.3c-.5,2,.3,1.6-1.5,3.5-3-1.7,0-1.5.5-3.5h1Z"></path>
+                <path class="st18" d="M190.1,131.3h-1c-.2,0-.3,0-.5,0l1.5-1.5c0,.5,0,1.1,0,1.5Z"></path>
+              </g>
+              <g>
+                <path class="st46" d="M101.5,102.6c-6.8,8.7-8.2,31.1-8,30,.5.7-4.6,20.7-5,20-4-7-10-22-2-38s9.4-11.7,15-12Z"></path>
+                <path class="st13" d="M205.6,138.3c4.8-11-8.2-5-8.5-5,0,7.3-19.7,8.3-28.2,1-4.3-3.7-.8-2.3.8-3.5-.6-4.6,3.2-8.1,6.9-10.2s6-1,9-1,7,3,9.6,5.7c.8,1,14-18.9,14.2-19,.2,0,1.8-4,1.8-4.7-.2-1.8-5.8-6.5-7-8.5-2.9-4.7-3.8-11.1-6.5-16-6.9-12.4-15.1-9-23-18-.4-.5-2.4-8.3-9.2-5.7-1.7.7-10.6,15.9-33.5,3-6.7,9.7-12.1,6-17.7,8.5-8.6,10.8-21.6,44.5-21.4,44.2-1,4-3.1,9-3.1,13.6-.5,3.7-.6,13-1,14-4,9-1,19,0,21,.1.3,14.7-.3,21.6-1.3.5,0,1,0,1.5,0,14.5-3,25.1-19.2,24.7-33.5,21.2-1.9,7.5,3.4,18.2,22.7,4.4,8,10.1,10.7,18,14.2l2-.5c6.8,1.4,14.8,0,21-3,2.3-1.1,8.3-5.6,10-7.5,1.7-1.8,6.9-10.1,8-12.5-6.3,5.7-1.2-8.6-8,2ZM128.1,127.3c-1.9-.4-.6,3.1-1,3.7-.9,1.3-3.3-1.6-4,1.2,0,.6.1,1.6,0,2,5,1.1-4,12-5.8,12-1.4,0-2.7-5-7-4.5-2,.2-10.5-1.6-15.4-9,.5-2.8,1-7.6,1.1-8,.1-.3-.2-1.6.5-2.7,4.3-7.5,20.8-9.1,28.5-8.7,2.1,4,3.2,9.5,3,14ZM176.2,93.3c-1.2,0-2.4,0-3.5.2,1.1-.1,2.3-.2,3.5-.2ZM166.3,95c-.5.2-1,.5-1.3.8.4-.3.8-.6,1.3-.8Z"></path>
+                <path class="st19" d="M113.1,124.3c-16.7,4,1.1,19.8,5,7.5.6-2,.6-3.5.5-5.5.5,0,3.4,2.9,4,4.5,0,.3.5,1.4.5,1.5,0,.3,0,.6,0,1s0,.8,0,1c-1.7,5.9-18.6,5.3-25.5,3s-2.8-3.5-2.5-5.5c.9-6.8,16.1-10.5,18-7.5Z"></path>
+                <path class="st25" d="M125.1,113.3c-7.7-.3-24.2,1.3-28.5,8.7-.7,1.2-.4,2.4-.5,2.7,6.8-9.9,27.7-7.3,26.5,6,0,.2.9,1.7,0,4.5-3.3,4.8-19.2,3.6-25,2-.4-.1-2.7-1.1-1.5.5,3.4,4.8,11.7,7.1,14.4,7.8,4,1,5.4,1.2,6.8.7,8.2-2.7,10.2-14.7,10.7-19s-.9-10-3-14Z"></path>
+                <path class="st14" d="M118.1,131.8c-2.2,2.7-4.9,1.4-3.5-2,2-.5,2.9-3.5,4-3.5,0,2,.1,3.5-.5,5.5Z"></path>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+      <path class="st42" d="M92.5,138.6"></path>
+      <path class="st0" d="M89.5,147.6c5,5.2,13.7,9.7,20.6,8.7.6.8.5,1.4.5,1.5-5.3,1.5-11,1.4-16.5.2,3.7,16.3,34.7,41.8,50.2,42.2,12.3.4,54.9-20.2,61.2-37,2.2,2.9-4.2,7.4-2.5,9-6.2,8.9-16.6,15.4-26,20.5-10.8,5.9-26.1,13.2-38.5,11-7.7-1.4-28.1-14-34.2-19.5-9.8-8.7-17.9-23.6-17.8-37.7,0,0,2.9,1,3,1Z"></path>
+      <path class="st0" d="M101.6,98.3c-1.7.9-7.5,10.1-9.1,11.3,1.1-9.4,11-42,21.6-44.8s-4.5,4.5-10.5,24.2c-.9,2.9-.9,6.3-2,9.2Z"></path>
+      <g>
+        <path class="st25" d="M140.6,156.8c-4.1-.2-7.8-2.9-10.5-5.5-1.9-10.3,3.4-.9,5.7.5,6.2,3.7,18-.3,4.7,5Z"></path>
+        <path class="st27" d="M130.1,151.3c2.7,2.6,6.4,5.3,10.5,5.5,3.7.2,14.5-5.7,8.7-1-10.8,8.8-26.9-6.9-21-7,.5,0,.4,1.2,1.7,2.5Z"></path>
+      </g>
+      <path class="st25" d="M174.6,106.3c3-.3.8.7-3.1,2.3-6.1,2.5-10,7-6.9,20.5.1.5-.4.4-.7.7q-4.6-1.5-9.2-3c-.4-15.9,5.9-19.2,20-20.5Z"></path>
+      <path class="st0" d="M228.5,151.6l1,2c1,2-3,3-3,3-1.2.4-2,1-3,0l1-5c1-2,3.7-.5,4,0Z"></path>
+      <path class="st25" d="M211.5,101.6c-.2-3.9-4.1-3.8-7-8-2.4-3.5-3.9-11.5-4-12-3-10-12-14-12-14,0,0,14,17,9,40-.6-.1-4.1-2.2-4.9-2.3-5.5.7-1.1,1.7,1.5,6.2,3.4,6,5.2,13.4,3.5,20.2,0,.3,0,1.8,0,1.8,0,0-1,2.2-2,3-5,4-14.9,2.8-18,2-2-.5-5-2-5-2,0,0,3,9,20,9s14.4-12.9,15-16c.9-4.5,0-10-3-16-.1-.2,7.1-10.1,7-12Z"></path>
+      <g>
+        <path d="M91.5,111c0,.3.5,0,1-.4,6-4,9-6,11-7,4-2,6.6-2.1,7-2.1,3.7-1.2,17.6,3.6,12.7-3.7-4.5-6.7-17.1-1.6-22.5,1.2-1.7.9-9.3,7.6-9.3,12.1Z"></path>
+        <path d="M191.8,106c.6.6.8-2.4.2-4-4.1-10.9-27.4-9-28.7-4.2-2,7.1,10.4,1.2,21.5,4,2.8.9,3.8.9,7,4.2Z"></path>
+      </g>
+      <g>
+        <path class="st14" d="M229.5,159.6c0-2,0-5-1-6s-1.8-2-3-1-1.8,4.6-2,7c0,.8.4,3.4,1.1,4,2,1.5,3.3,1.3,4,.2,2-3.2,1-2.8,1-4.2Z"></path>
+        <path class="st23" d="M230.1,158.8c-.2-2.8-.5-4.8-1.6-5.2-3-1-1,3-4,5s-.6,3.3,0,4c3.4,4.1,5.8-1,5.6-3.8Z"></path>
+      </g>
+      <path class="st0" d="M198,122.6c0,.3-.4.6-.5.4-4-7.3-17.2-9.1-22.3-6.7-3.1,1.5,7.5-8.2,17.3-3.6,4.9,2.3,5.2,7.9,5.5,10Z"></path>
+      <path class="st11" d="M204.3,126.4c-4.4,1.3-7.2.8-8.8-.8-.4-.4-.8-.7-1.1-1.1-6.9-9.9-25.9-4.9-24.9,6.3,3.3-2.4,5.5-8.7,15.2-7,5.3.9-3.6,0-5.7,3.7-4,7.3,4.3,12.8,9.5,7.2-3-1.7,0-1.5.5-3.5-.2,0-.3,0-.5,0-6.6,1.4-5-5.9,1.5-4.5,3,.6,7,4.5,7,6.5.4,1.3-.6,2.4-.6,2.3,1-1,2-3,1-3.7,2.3,0,6.7-5.5,6.7-5.5Z"></path>
+      <path class="st0" d="M95.5,123.6s4.3-5.6,8-7c5.6-2.2,19-4,22-3s-11.7-4.6-21.2-1c-1.3.5-3.5,1.7-4.8,3-4,4-4,8-4,8Z"></path>
+      <path class="st11" d="M96.7,124h0c-3.2,2.7-7.4.4-7.4.4,0,0,1.4,3.6,4.7,4.3.1,0,.3,0,.5.1,0,1.8,0,2.3.6,3,.9-6.8,16.1-10.5,18-7.5.1.1.2.2.3.3.2.3.2.4,0,.5.2,0,.2-.2,0-.5,0,0-.2-.2-.3-.3-16.7,4,1.1,19.8,5,7.5-2.2,2.7-4.9,1.4-3.5-2-.9-.3-1.5-.5-2.1-.7.5.2,1.2.4,2.1.7,2-.5,2.9-3.5,4-3.5.5,0,3.4,2.9,4,4.5,1.2-12.9-18.4-15.7-25.8-6.8Z"></path>
+      <g>
+        <g>
+          <path class="st7" d="M183.3,474.3c-17.2,1.6-91.2-26.6-87-9.8.2,1,4.2,17.7,8,21,7,6,43,8,67,7,14.3,0,54-11.1,55-16.2,1-4.8,1-6,2-12-14.1,5.2-30.1,8.6-45,10Z"></path>
+          <path class="st24" d="M156.6,492.7l-1.3-10.7s2.7,10.7,4,10.7h-2.7Z"></path>
+        </g>
+        <g>
+          <path class="st38" d="M221.4,325.4s.6-6.6.6-6.8,0-6,0-6c9,2,12,1,12,1,0,0,15-17.3,16.4-21.2.8-2.1,5-16,3.6-22.2-2.2-8.6-5.3-16.9-11.1-23.7-11.1-13-38.9-10.9-47.9-16.9-2.1,4.4-28.3,26.7-34.6,22.6.8,7-20.6,1.6-20.6.9-.3-3.3-5.9-13.4-6.8-17.5-.9-4,2.6-8,0-8-5.4,0-18.1,4.2-24.6,4.6-7.5.6-11.2.9-18.2,5-10.2,5.9-20.9,23-18.2,28.2,3.5,6.9,12.5,17.9,19.5,23.9,1.9,1.6,3.8-.9,4.9-2.9-3.3,7.7-9.1,19.8-7.9,29.9,1.4,11.4,6.9,18,11,21,2.7,2.1,9,4,9,4,0,0,5,5.2-1,15-2.4,4-10,14.2-19,37.3-4.9,19.1-8.8,38.4-11.5,58-.3,2.1,0,4.4-1,6.5,14.7,9.9,38.1,13.2,55.5,15,17.2,1.8,34.7,2.6,52,1,14.9-1.4,30.9-4.8,45-10,4.7-1.7,10.2-4,14.5-6.5-2.2-15.6-5.7-30.9-10-46-3.2-11.3-6.5-22.5-12-33-7.4-5.9-5.1-31.1-3.9-43l4.4-10.3Z"></path>
+          <path class="st31" d="M217.4,329.4c0,0,0,.1,0,.2,0-.2,0-.2,0-.2Z"></path>
+          <path class="st31" d="M217.5,329.6c0,.2,0,.6,0,1.1.1-.5.1-.8,0-1.1Z"></path>
+        </g>
+        <path class="st38" d="M84.3,325.5"></path>
+        <path class="st31" d="M220.8,376.8c-4.9-7-4.7-26.6-3.5-39.5,2.3-3,4.3-6.8,5-10.2,1-3.6.4-15.8-2.8-24.7-1.6.2,4.6,12.7-.8,23.9-2.1,3-4.9,6.9-9.4,9.9-2.2,1.3-4.8,2.6-7.9,3.6-5.9,1.6-13.7,1.7-24.2-1.3.6.2,35.3,40.1,43,56,7.5,15.4,16.2,62.8,15,67,.5-.1,6.8-3.4,10-5s-2.7-48.6-24.5-79.7Z"></path>
+        <path class="st31" d="M114.3,342.8c5,0,10-3,10-3-6,3-16,1.7-16,1.7,0,0,1.1,1.8,1,5-.1,3.3-1.5,8.1-4,12.3-4,7-7.1,12.9-9.6,17.9-2.8,4.8-4.9,10.2-6.1,13.6-.9,2.3-1.3,3.5-1.3,3.5-4.9,19.1-9.3,45.1-12,64.7,6.6,4,7,4,7,4,0,0-3.2-21.9,2-42.4,7.5-29,19.6-41.2,23-46.6,15-24,6-30.7,6-30.7Z"></path>
+        <path class="st38" d="M84.4,325.4"></path>
+      </g>
+      <path class="st31" d="M231,422.5c-4.4-14.3-6.6-17.7-11-32-4.9,8.4-10.7,11.8-19.5,13.4-4.9.9,12.7-31.8,4.5-36.4-22.6-12.5-78.1-8.6-92-10-3.6-.4,6.1,47,2.6,46.4-4.5,1.7-9.5,1.8-14.2,1-3.7-.6-10.6-3.6-13.2-6.4-2.4,4.7-2.6,10.2-3.9,15.1-.5,1.7-1.2,5.4-1.3,5.9,2.2,6.6,9.1,14,15,18s16.9,8.9,26.8,11.1c4.7,1.1,12.3-16.6,17.2-16.1,15,1.5,20.5,2.8,35,0,3.2-.6,13.9,14.7,16.9,13.9,7.3-1.9,14.1-4.3,20.1-6.9,4.9-2.5,19.4-9.4,17-17Z"></path>
+    </g>
+    <path class="st20" d="M211.7,132.9c-.2,1.4-.3,2.7-.5,4.1.2,0,.4-.2.5-.3,0-.2,0-.4,0-.6-.1-1,0-2.1,0-3.2Z"></path>
+    <g>
+      <path class="st25" d="M182.6,213.6c-.3-2.1-.6-4.2-1-6.2,0-.3-1.3-3.1-2-5.5-7.6,9.7-17.8,17.6-29.3,22.2-5.3-4.6-13-12.2-12.2-14.5-1,3-4,24-5,27-3.9,11.6,10.1,17,17,17,18,0,30.5-9.2,30-12-.4-.7,1.9-2.2.8-3.5.8-.3,1.5-.8,2.2-1.5.9-.9,0-20-.5-23Z"></path>
+      <path class="st6" d="M179.6,201.8c-9.1,11.6-21.8,20.5-36,24.5-2.4-3.1-5.4-6-6-10-.5-2.9.2-7.9.5-11,0-.7.1-.9.5-1.5,12.4,2.2,27.7-5.1,38.5-11,1.2,2.9,1.7,6,2.5,9Z"></path>
+    </g>
+    <g>
+      <path class="st39" d="M175.1,205.2c9.4-1.5,18.3-5.4,26-11,7.2-5.2,14-11.7,17.7-19.8,1.3-2.9,2.5-6.2,2.3-9.5-.2-3.8-6.2-3.6-6,.2s0,.9,0,1.3.1-.6,0-.2,0,.2,0,.3c0,.3-.1.6-.2,1-.1.6-.3,1.2-.5,1.8s-.2.6-.3.9c-.2.4.2-.4,0,0s-.2.4-.3.7c-1.4,3.2-3.2,6-5.4,8.7-5.4,6.4-12.5,11.6-20,15.3-4.2,2-8.8,3.6-13.5,4.3s-3,1.4-2.9,3.1,1.5,3.1,3.1,2.9h0Z"></path>
+      <g>
+        <path class="st46" d="M177.6,201.8c-.3,0-.6,0-.7,0-.5,0,.3-.5,0-1.2-.1,0-.3,0-.4,0-.5,1.4-2.6,2.1-4.4,2.9-14.6,6.2-22.4-.9-15.8-4.5,2.5-1.3,4.2-1.3,6.9-1.6,1.3-.1,3.8-.3,5.1-.2-20.7-5.8-23,12.6-12,13.9,5.3.6,17.1-3.6,20.2-8.6.3,0,.7,0,1-.1,0-.2,0-.5,0-.7Z"></path>
+        <path class="st12" d="M172.3,203.5c-1.6-.7-4.3,0-5.9-.1.7-2.6-3.9-2-3-5.9,1.3-.1,3.8-.3,5.1-.2,5.4.4,7.4,3.2,8.2,3.4-.5,1.4-2.6,2.1-4.4,2.9Z"></path>
+        <path class="st46" d="M156.4,199c1.8,2.7,6.8,4.2,9.9,4.4,1.6.1,4.3-.6,5.9.1-14.6,6.2-22.4-.9-15.8-4.5Z"></path>
+        <path class="st12" d="M166.4,203.4c-3.1-.2-8.1-1.6-9.9-4.4,2.5-1.3,4.2-1.3,6.9-1.6-.9,4,3.7,3.3,3,5.9Z"></path>
+        <path class="st21" d="M177.6,201.1c0-.2,0-.4,0-.6-.2,0-.4,0-.6,0,.2.7-.5,1.1,0,1.2,0,0,.3,0,.7,0,0-.2,0-.4,0-.7Z"></path>
+      </g>
+    </g>
+    <path class="st39" d="M218,58.5"></path>
+    <g>
+      <g>
+        <path class="st39" d="M97.3,69.3c7.5-10.5,15.9-20.8,19.8-24.7-1.4-1.1-2.2-9.7-9-5-6.1,4.3-14.7,13.7-20.9,21.5-.2-.3-.4-.6-.6-1-1,1.8-2.1,3.8-3.1,5.8-2.5,3.4-4.2,6-4.4,6.8-13.5,10.4-17.6,22.4-19,40.1-6.6,5.4-3.7,39.2-.5,45.3,3.6,6.8,9.7,4.7,15.1,5.9-1.1-17.1-4.9-38.8-1.9-56,1.3-7.3,9.3-12.3,9.3-12.3.3-4.2,7.3-15.3,15.2-26.2.2-.3.2-.3,0,0ZM62.4,109.2c1.6-12.8,5.9-22.8,14.7-31.6-5.1,11.4-4,20.1-4.8,25.6-3.3,3.7-9.4,7.7-9.9,6Z"></path>
+        <path class="st48" d="M233.8,58.2c-2.3-3.8-4.8-10.7-12.8-18.8-11-11.5-29.2-20.1-43.5-22.4-2.4-.4-3.2-.4-3.4-.4-1.1.2-13.5-.8-24,1-4.8.8-15.7,6.2-20.5,8.5-5.7,2.7-13.2,7.5-18,12.1-1.4,1.3-12.4,13.4-12.4,13.4,0,0,22.2-16.8,41.9-23.1,17.4-5.6,29.7-4.7,46.7,2.4,4.4,4,10.3,6.7,15.3,10.3,2.8,2,5.3,5.3,8.2,7.3.7.5,6.5,4.7,7.8,5.8.8,1.3,2.6,3.8,3.1,4.5,2.7,4,5.8,10.3,6.1,10.7,1.4-2.7,4.7-7.3,5.8-10.1,0-.2,0-.8,0-1.2Z"></path>
+        <path class="st30" d="M211.1,48.5c.2.3,12,18.1,12,18.1,0,0-7-11-11.5-14.4-21.1-16.1-46.9-26.9-70.9-18.8-8.2,2.8-24.3,12.7-30.9,19.4-2.9-.3-22.7,9.8-22.7,9.8,0,0,14.9-18.4,39-31,42-22,66.9.4,72,4,2.8,2,10,9,13,12.9Z"></path>
+      </g>
+      <g>
+        <path class="st40" d="M71.8,129.3c-.2-5.5-2.7-2-10.4-2.8-1.9-10.6,2-15.6,10.2-18.7.7.7.4,19.8.2,21.5Z"></path>
+        <path class="st32" d="M71.8,129.3c-1.1,9.5-8.9,5.4-10.4-2.8,7.7.8,10.2-2.7,10.4,2.8Z"></path>
+      </g>
+      <path class="st39" d="M252.6,110.4c-1.5-6.3,3.9-25.8-13.7-37.4-.5-2.4-1.1-4.7-1.8-6.9-2.1-6.5-9.1-18.5-11.1-20.5,1,2,2.7,17.7,1.3,20.4-.3-.5-5.3-9.4-8.3-12.4s-18-16-20-17c2,2,17.7,21.1,18.9,23.3,9.1,15.7,8.5,29.9,9.1,35.7,3.8.7,7.6,1.2,10.3.3.7.2,3.1,1.4,3.7,1.7,1-7-.7-17.9-1.1-18.8,7.4,1.8,10.8,18.3,10.8,26.6,0,8.8-6.5-5.4-9.4-7.6,1.3,3.1,1.1,4.9,1.4,7.9.7,7.5.6,15.1.5,22.6,0,6.4-1.1,25.4-2.4,35.1q.5.6.9,1.1c12.9,1.6,15.5-8.5,16.5-21.8,2.2-28.8-5.3-30.6-5.7-32.3ZM215.4,57.4c0,0,0,0,0-.1,0,0,.1-.1.2-.1,0,0-.1,0-.2.1,0,0,0,0,0,.1,0,.1,0,.2,0,.4,0-.2,0-.3,0-.4ZM217.6,58.9s0,0,0,0c0,0,0,0,0,0Z"></path>
+      <path class="st31" d="M235.8,156.2c.8-18.3-1.5-33.8-1.4-43.9q-.7.3-1.4.6c-.1-8.8-3.6-13.6-2.9-18.4-3.5-.3-13.8-2.1-16,3-.3,2.2,0,12.6,0,14,0,2.6-.6,18.3-1,22,0,1.1-5.6,22.2-6,32,11.2,9.3,13.7,10,22.1,10s1.2-1,1.9-1c3-3,4.6-15.7,4.7-18.3ZM218.3,112.9c0,.4,0,.8-.1,1.2,0-.4,0-.8.1-1.2,0-.2,0-.3.1-.4,0,0-.1.2-.1.4ZM219.2,112.1c0,0,0,.1-.1.1,0,0,0,0,.1-.1.2-2,.3-3.5.4-4.7-.1,1.3-.2,2.8-.4,4.7ZM219.8,106c0-.4,0-.8.1-1.3,0,.4,0,.8-.1,1.3ZM220,103.5c0-.4,0-.8.1-1.2,0,.4,0,.8-.1,1.2Z"></path>
+      <path class="st31" d="M88,156.5c0-.6-.3-1.6-.7-2.7-.8-3.1-1.6-6.3-1.3-9.3.5-4.9,3-9,3-9,0-9,0-15,3-24,.4-1.2-.3-1.8,0-3,2.1-8.4,3.8-13.7,4.6-15.8.4-.5.5-.9.4-1.2-2.4.4-11,1-15,4,0,0-3,2-4,3-1.6,1.6-3.7,3.7-5,8,.2,0-.3,1.6-.3,1.3-2.7,16.7-3.7,31.7,1.9,56,.3,1.4.9,4.5,1.4,6.7s-.4,1.8,0,2c12,7,20,2,20,2-2.1-4.1-5.8-9.2-7.3-14.1-.2-1.4-.4-2.8-.7-3.9Z"></path>
+      <path class="st21" d="M87,93.5c.6,0-3.9,6.6-4.7,9.9-5.6,23.1-6.8,47.4-5.8,58.4.5,5.7,3.5,12.7,3.5,12.7l-4-2s-4.6-4.5-5-19c-.4-13,1.8-44.2,3-48,3.6-10.9,10.1-11.8,13-12Z"></path>
+      <path class="st48" d="M86,93.5s-7,3.4-11,14-3,56-3,56c0,0-3.5-17.9-3-29,.5-10.6,1.3-19.8,4-29.4,3-10.6,13-11.6,13-11.6Z"></path>
+      <path class="st21" d="M242.6,105.6c.4,7,.6,15.1.5,22.6-.2,11.7-1.1,35.5-1.4,36.2-7.7,18.1-23.7,9.1-23.7,9.1,9-18,9-24,10-29,3.6-18,2.2-22.2,2.3-32.2,0-2.8-3.3-17.8-3.3-17.8,0,0,15.1,2.2,15.6,11Z"></path>
+      <path class="st48" d="M231,94.5c2.6.8,5.7,1,8.3,2,1.7.6,1,.5,1.9,1.1,1.3,3.1,1.4,4.9,1.8,7.9.4,3-.3,44.7-1,45-.1-8.8-5.5-45.3-15-56s3.2-.3,4,0Z"></path>
+      <path class="st21" d="M163,15.6s0,0,0,0c0,0-15-1-31,5-10,3.6-23.7,11.7-31.9,20,0,0,0,0,0,0-8,10-19.5,28.1-17,26,37-31,45.7-38.2,57-44s12-7,37.4-5.6c-4.8-.8-9.6-1.3-14.5-1.4Z"></path>
+      <path class="st32" d="M244,161.5c.2-2.3,6.6-1.7,7.7-7.2,1.8-8.6-2.7-35.3-2.7-35.3l-.7-8.4s8.2,10.2,7,34.3c-.7,13.5-1.6,17.1-11.3,16.6Z"></path>
+      <path class="st40" d="M244,161.5s-1.4-.7-1.3-2.8c.3-5.2.9-7.9,4.3-18.2,4-12,2-21,2-21,0,0,3,11,4,19,.5,4.2.1,14.6-1,17-2.5,5.3-8,6-8,6Z"></path>
+    </g>
+    <g>
+      <path class="st22" d="M129.5,125.6c0,15.7-15.3,27-28,27s-19-10.3-19-26,9.3-22,22-22,25,5.3,25,21Z"></path>
+      <path class="st22" d="M208.5,126.8c0,22.8-17.9,29.8-32.8,29.8s-22.2-11.3-22.2-28.7,10.9-24.3,25.7-24.3,29.3,5.8,29.3,23.2Z"></path>
+      <g>
+        <path d="M213.5,135.6c5.8-9.6-3.8-18.8-5-22-3-8-6.8-10-10-11s-6-1-13-1-29-3-34.5,13.7c-7.2-3.1-12.6-2.6-20-1-1.5-2.7-5.5-11.7-20.5-12.7-1.9-.1-9.2-.7-16,1-8,2-7.9,2.9-10,5-2.2,2.2-4.6,9.8-5,18-.3,7,2,17,3,19s3,6,5.8,7.5c13.2,7.5,15,5,21.2,4.5,15-1,26.3-18.5,26-32.8,21.2-1.9,7.5,3.4,18.2,22.7,2.6,4.6,9.8,11,16.8,13s14.8,1.8,23-2c13-6,17-17,20-22ZM127.3,128.3c-.3,7.5-3.3,13.5-8.1,17.3-6.2,5-15.2,6.5-24.9,3.7-5.8-1.7-7.8-6.3-8.8-8.7-4-10,0-24,1-27,1.9-5.8,10.4-7.7,16-8,8.6-.5,17.3.2,21.7,8.7,2.1,4,3.2,9.5,3,14ZM160.3,146.6c-3.5-4.7-5.4-13.9-5.5-19.7-.4-15.9,5.2-19.1,20-20.5,5.6-.5,11.5-.9,17,0,.8.1,2.4.4,3,.5,2.1.6,4.2,1.3,5.8,2.8s4.4,6,6,16.9c.5,3.4,0,8-1.7,12.7,0,0,0,0,0,0-8.9,20.4-36.1,18.5-44.5,7.2Z"></path>
+        <path class="st41" d="M214.1,106.1c0-1-1.6-.6-2-.7-2.6-.7-8.2-.1-8.6.3,4.7,4.4,2.9,14.9,7,19s3.5,0,3.5-7.1c-.4-1.6,0-7,0-11.5Z"></path>
+        <g>
+          <path class="st2" d="M80.8,116.3l-10,4.5c-.5-1.1-2.6-9.7-1.2-10.5,22.8-3.4,17.7-10.3,11.2,6Z"></path>
+          <path d="M80.8,116.3q-.6,5-1.2,10c-3.2-2.1-6.9-1.7-8.7-5.5l10-4.5Z"></path>
+        </g>
+        <path d="M213.5,121.6c-4.4-.5-6-2-6-2l1,3c0,.5.5,2.5,1,4.4l-2.1.7,2.1,6.9c2-2,5.8-2,5.4-3.8-.9-4.3.3-9-1.4-9.2Z"></path>
+      </g>
+    </g>
+    <path class="st46" d="M115.7,61.6c.1,0,.2,0,.3,0,8.9-1.7,16-15,26-7.7,9.2,6.7,21-9,31.9-12.6,2.1-.7,21,1.9,23.1,1.3,0-2-5-10-13-12s-15,5-17,3-5-3-5-3c0,0-14-7-22.1,3.7-1.3,1.1-6.6-3.5-10.9-4-7.8-.9-16,3.2-21.5,11.9-1,1.5-5.5,10.3-1.4,16.9.6.9-6.1.5-11.1,7.5-3.7,5.2-5.9,14-5,14,1.6,0,24.1-18.8,25.7-18.9Z"></path>
+    <g>
+      <path class="st28" d="M158.7,250.2c-11.7,0-24.2-5.5-24.7-16.6s1-7,1-7l-9,2-8,2c3.1,19.3,22,35,40.7,35s35.2-15.7,38.3-35c0,0-4.6-3-6-4s-8-5-8-5c0,0,.2,6.5,0,9-1,11.1-12.6,19.6-24.3,19.6Z"></path>
+      <path class="st48" d="M122.9,238.7c3.1.3,6.1-.3,9-1.5s.9-1.4.5-2.1-1.3-.9-2.1-.5c-.2,0-.2,0,0,0,0,0-.2,0-.3.1-.1,0-.3.1-.4.2-.3.1-.7.2-1,.3-.6.2-1.3.3-1.9.4s-.6,0-.3,0c-.1,0-.3,0-.4,0-.3,0-.7,0-1,0-.7,0-1.4,0-2.1,0s-1.5.7-1.5,1.5.7,1.4,1.5,1.5h0Z"></path>
+      <path class="st48" d="M130.1,248.3c1.9-.3,3.7-1.3,4.8-2.8s.4-.6.4-1.1-.2-.8-.4-1.1-.7-.5-1.1-.4-.8.1-1.1.4-.7.8-1.1,1.1l.3-.2c-.4.3-.9.6-1.4.8l.4-.2c-.5.2-1.1.4-1.6.4s-.7.4-.9.7-.3.8-.2,1.2.3.7.7.9l.4.2c.3,0,.5,0,.8,0h0Z"></path>
+      <path class="st48" d="M139.1,256.2c.9-1.6,1.9-3.2,2.9-4.8s.1-1.7-.5-2.1-1.6-.2-2.1.5c-1,1.5-2,3.1-2.9,4.8s-.2,1.7.5,2.1,1.7.2,2.1-.5h0Z"></path>
+      <path class="st48" d="M151.8,260.9c0-1.2,0-2.4.1-3.6s0-.6.1-.9c0,.3,0,0,0-.2,0-.1,0-.3,0-.4.1-.6.2-1.2.4-1.8s-.2-1.7-1-1.8-1.7.2-1.8,1c-.6,2.5-.9,5.2-.8,7.8s.7,1.5,1.5,1.5,1.5-.7,1.5-1.5h0Z"></path>
+      <path class="st48" d="M166.2,261.8c.1-2.5,0-5.1-.3-7.6s-.1-.8-.4-1.1-.7-.5-1.1-.4c-.7,0-1.6.7-1.5,1.5.3,2.5.4,5.1.3,7.6s.7,1.5,1.5,1.5,1.5-.7,1.5-1.5h0Z"></path>
+      <path class="st48" d="M179.3,255.6c-.2-.2-.3-.4-.5-.6s-.2-.2-.3-.4-.2-.2,0,0,0,0,0,0c-.3-.4-.7-.9-1-1.4-.6-.9-1.2-1.9-1.7-2.9s-1.4-1-2.1-.5-.9,1.3-.5,2.1c1.1,2.1,2.4,4.1,4,5.9s1.6.6,2.1,0,.5-1.5,0-2.1h0Z"></path>
+      <path class="st48" d="M186.3,246.9c-.3,0-.6-.1-.9-.2s-.3,0-.4-.1c-.3,0,.3.1,0,0s-.1,0-.2,0c-.3-.1-.5-.3-.8-.4s-.2-.2-.4-.2c-.2-.2.3.2,0,0s-.1-.1-.2-.2c-.2-.2-.4-.4-.6-.6s-.2-.2-.3-.4c.3.4,0,0,0-.1-.2-.2-.3-.5-.4-.7s0-.1-.1-.2c0-.1-.1-.3,0,0,0-.2-.1-.3-.2-.4-.2-.7-1-1.3-1.8-1s-1.3,1-1,1.8c1,2.9,3.5,5.2,6.5,5.8s.8,0,1.2-.2.6-.5.7-.9c.2-.7-.2-1.7-1-1.8h0Z"></path>
+      <path class="st48" d="M191.5,238.3c-.3,0-.6,0-.8,0,0,0,.3,0,.1,0s-.1,0-.2,0c-.1,0-.3,0-.4,0-.3,0-.5-.1-.8-.2s-.1,0-.2,0c-.2,0,0,0,0,0-.1,0-.3-.1-.4-.2-.2-.1-.5-.2-.7-.4s-.2-.2-.3-.2,0,0-.1-.1c-.2-.1.3.2,0,0-.4-.4-.8-.7-1.2-1.2s-.7-.4-1.1-.4-.8.2-1.1.4-.5.7-.4,1.1.2.7.4,1.1c1.7,2.1,4.3,3.3,7,3.3s1.5-.7,1.5-1.5-.7-1.5-1.5-1.5h0Z"></path>
+      <path class="st48" d="M193.6,231.6c-.3,0-.6-.2-.9-.3s.3.1,0,0-.1,0-.2,0c-.1,0-.3-.1-.4-.2-.3-.1-.5-.3-.8-.5s-.2-.2-.4-.3-.1-.1-.2-.2c.1,0,.2.2,0,0-.5-.4-.9-.8-1.3-1.3s0-.1-.1-.2c-.1-.2,0,0,0,0,0-.1-.2-.2-.3-.4-.2-.3-.4-.5-.5-.8-.4-.7-1.4-1-2.1-.5s-.9,1.3-.5,2.1c1.4,2.6,3.9,4.5,6.7,5.4s1.7-.3,1.8-1-.2-1.6-1-1.8h0Z"></path>
+    </g>
+    <g>
+      <path class="st38" d="M93.7,268.3s0,0,0,0c-5.6-8.9,6.8-29.7,18.1-36.9-21.6,1-35,9.5-37,10.4-23.1,11.2-17.5,53.7-33.4,56.3.1,1.2,10.1,8.3,10.7,8.7,6.9,3.7,15.6,5.3,22.9,7.8,10.5,3.6,13,5,13,5,0,0-1.3-6,0-5s0-.9.2-2.9c2.9-20.7,8.7-37.4,5.4-43.4Z"></path>
+      <path class="st0" d="M287.5,396.5c-1.5,11.2-8.7,18.5-20,17.9-16.5-.9-40.6-21.6-42-39.7.4-1.7-.8-3.9,1-2.2,1.6,1.5,6.1,21.5,30,30.5,38.9,14.7,23.7-23.2,25.9-24.3,4.3-2.2,5.1,15,5.1,17.9Z"></path>
+      <path class="st0" d="M84.4,370.7c-.6,2.8-2.1,4.8-2,11.4-16.6,15.9-30.7,22.7-53.7,23.8-2.6-3.4-3.5-5.2-4.4-9.4,3.5,10,39.4-9.6,45.7-13.9,5.2-3.5,9.5-8.1,14.4-11.9Z"></path>
+      <path class="st0" d="M83.4,389.6c-12.8,15.3-29.1,22.4-48.8,21.8-2.4-2.2-3.3-2.1-5.9-5.5,23-1.2,37.1-7.9,53.7-23.8,1.4,5.2.9,7.1,1,7.4Z"></path>
+      <path class="st0" d="M261,302.5c.6,2.7,1.8,7,2.5,9.6-4.2,3.5-22.8,5.8-23.4,11.7-.4,3.7,8.1,30.6,9.8,36.7,10.1,3.5,23.3,6.2,29.3,15.9-8.2-3.3-17.5-9.2-25.6-12.2-5.1-1.9-11.7-3-12.9-3.5v-.5c3.7-9-3-14.1-4.9-18.6-1.4-3.5-6.4-24.4-5.9-26.8.1-.5,1.8.3,1.5-1.2.3,0,.7,0,1,0,1.4,0,2.6-.3,3.9-.5,8.8-1,17.5-5.5,24.8-10.6Z"></path>
+      <path class="st6" d="M206.4,383.6c2.1-1.8,4.9-2.8,7.1-4.5,8.4-6.4-.8-1.2-5.4,0-5.1,1.4-13.8,2-15.9,4.5-1.1,0-6.7-1.1-7.1-1-.4.1,0,.7-.7,1.5-4.6-2.6-7.7-.9-7.3-6.4,14.4,7.7,29.6-3.7,41-12.2,0-1.4,0-2.8,0-4.2,1.7-4.6,3,11.4,3.4,18.1-4.2,3.7-9.9,3.9-15.1,4.2Z"></path>
+      <path class="st6" d="M206.4,383.6c-4.5.3-9.6,0-14.2,0,2-2.4,10.8-3.1,15.9-4.5,4.6-1.2,13.7-6.4,5.4,0-2.2,1.7-5,2.7-7.1,4.5Z"></path>
+      <path class="st29" d="M114.6,396c-3.8,3.9-7.5,8.6-13.2,8.9-3.7-.6-10.6-3.6-13.2-6.4-1.4-1.6-3.1-5.3-3.9-7.4,0-3.2,3.1,3.2,7.1,5.5,8.2,4.7,15,2.1,23.2-.5Z"></path>
+      <path class="st36" d="M128.3,340.9c-.3,1.3-1.5,2-2.2,3,12.2,3.6,25.2,4.3,37.8,3,.8,0,1.2-.4,2-.5,3.5-.5,9.6-1.2,11.7-3,.3.3,1.8,1.6,2.4,1.5.4,5-.9,12.1,1,11.9q2.9-.2,5.9-.5c.2,4.1,1.4,2.3,0,6,0,0-.9-.2-1,.2-.3,1-.7,7.1-1,7.4-.2.2-5.3,1.3-5.6,1.2-2-.7.5-15.2-1.5-15.9-17.4,3.1-35.2,2.2-52.7,1-1.5,13.6,3.2,16.3-6.1,13.1l-1.7-6.2c-2.2,0-6.1,0-8.1-.5l-.5-2.5c2.3.7,3.1.6,5.4,0,.4,0,.6-.3,1-.5.3-.1,1,.1,1.2,0,5.1-2.8,7.7-15.1,4.2-13.9.1,0-.7-.4,1.7-1.5.5-.2,4,.8,5.4-5-3.5.2-12.2-.8-11.5,2.5-.6,0-1.4,0-2,0,.7-1-1.6-3.2,1-6,3.4-3.7,14.7-2.8,13.2,5Z"></path>
+      <path class="st26" d="M189.3,340.9c-1.4,0-4,.4-3.7,2.5,11.6,2.8,16.7,3.3,1,3.5-.8-1.8-4.8-1.3-6.6-2-.6.1-2.2-1.1-2.4-1.5-2.2-2.9-2.1-7,1.5-8.4.9.7-5,3.7-.7,4,.6,0,12.6-2.7,9.5-5.5,2.3.5,1.2,5.8,1.5,7.4Z"></path>
+      <path class="st35" d="M187.9,333.5c3.1,2.7-8.9,5.5-9.5,5.5-4.2-.3,1.6-3.3.7-4,.4-.2,8.4-1.6,8.8-1.5Z"></path>
+      <path class="st6" d="M231.3,313.7c.3,1.5-1.3.7-1.5,1.2-.6,2.4,4.4,23.3,5.9,26.8,1.8,4.5,8.6,9.6,4.9,18.6-2.3-6.2-17.1-37.5-17.6-39.7-.7-3-1-8-1-8,0,0,6.4,1.2,9.3,1.1Z"></path>
+      <path class="st6" d="M78.5,313.2c-1.3,0-2.6-.4-3.9-.5-7.7-.8-15.6-2.3-22.5-6-1.2,1.5-1.4,4.4-2,6,6.1,3,17.4,24.1,16.1,32-.3,1.9-4.8,19-5.4,19.8-.6.8-2.8.3-2.4,1.7,2-.6,3.9-1.3,5.9-2,.4-.1,2.9-.4,4.6-1q.9-.7,1.7-1.5,9-21.6,18.1-43.2c-.5-1.7-.7-8.1.3-11.1.9-2.7-7.7,5.8-10.5,5.6Z"></path>
+      <path class="st6" d="M127.8,379.1c0,0,.9.9,1,1.2-.5,1.6-18.6,5.2-2.9,9.7,0,6.3-4.6,11.8-10.3,13.9-4.5,1.7-9.5,1.8-14.2,1,5.7-.3,9.4-5.1,13.2-8.9,3.2-1.3-6.1-1.8-12-3.5-8-2.3-25.8-9.8-6.3-4.5,30.2.2,10.6.4-7.1-15.1,12,6.6,25.1,11.2,38.6,6.2Z"></path>
+      <path class="st10" d="M114.1,341.9c.6,0,1.4,0,2,0,7.4,1.1-5.1,2.7-7.6,4-6.9,3.5-6.3,12.5.2,14.4l.5,2.5c-7.9-1.9-14.1-12.5-6.3-17.4,1.9-1.2,9.1-3.3,11.2-3.5Z"></path>
+      <path class="st26" d="M115.1,336c-2.6,2.8-.3,4.9-1,6-2.1.1-9.3,2.3-11.2,3.5l-3.9,1c1-1.2,1.7-2,2.9-3,10.6-.8,8.3-2.6,9.8-4.5,1-1.3,1.9-2.7,2.9-4,0,.5-.2,1,.5,1Z"></path>
+      <g>
+        <path class="st26" d="M205.9,345.9c6.4,6.4,4.8,14.1-1.7,19.3-17.1,13.9-26.2,0-27.1,12.4-.4,5.6,2.7,3.9,7.3,6.4-1.8,1.8-.9,4.2-5.4,6.9-.8-1.3-1-3-1.7-3.5-2.7-1.8-6.7,2.5-12.2-7.9q-12.7.2-25.4.5c-6.1,10-7.3,5.3-13.9,9.9-2.5-.7-8.1-3.3-7.9-4.4s3.3-1.7,4.1-2.1c5.1-2.1,5.2-6.1,5.1-6.2-.8-2.7-3.3-7.3-6.5-6.8-1.2.2,2.7,4.6-9.3,1.5-12.9-3.3-22.8-13.3-12.5-25.8l3.9-1c-7.8,4.9-1.6,15.5,6.3,17.4,1.9.5,5.9.4,8.1.5l1.7,6.2c9.3,3.2,4.6.4,6.1-13.1,17.5,1.2,35.3,2.1,52.7-1,1.9.7-.5,15.2,1.5,15.9.3,0,5.4-1,5.6-1.2.3-.4.7-6.5,1-7.4.1-.4,1-.2,1-.2,11.6,1.9,18.5-5.7,17.6-17.4.4.3,1.2.7,1.5,1Z"></path>
+        <path class="st3" d="M148,370c4.1-2.1,9.1,2.6,5.9,4-1.1.5-10.8-1.4-5.9-4Z"></path>
+        <path class="st44" d="M148.1,363.8c.6-.3,8-.8,6.6,2.2-1.1,2.4-11.1,0-6.6-2.2Z"></path>
+      </g>
+      <g>
+        <path class="st25" d="M283.6,373.2c-6.1-20.5-14.2-40.4-20-61-4.2,3.5-22.8,5.8-23.4,11.7-.4,3.7,8.1,30.6,9.8,36.7,10.1,3.5,23.3,6.2,29.3,15.9-8.2-3.3-17.5-9.2-25.6-12.2-5.1-1.9-11.7-3-12.9-3.5-10.1-3.5-13.6-5.6-22.7-11.4-3.3-2.9-2.9-4.9-4.2-6.9-.9-1.5-1.3-2.3-2.4-4,0,0,0-1-1-2-2.3.8-4.7,1.3-6.9,1.2,2.2,0,4.7-.5,6.9-1.2,0,0-.4-.7-.5-1-3.3-.6-10.6-5-13.2-4.5-.2,0-.4,0-.5,0-1.2.7-1.4,3.4-1,4.7.5,1.7,9.2,6,11.2,7.7,0,0,.4.8.5,1,0,0,.2,0,.4-.1-.2,0-.4.1-.4.1-.2.1-.4,1.6-1,1.5,6.4,6.4,4.8,14.1-1.7,19.3-17.1,13.9-26.2,0-27.1,12.4,14.4,7.7,29.6-3.7,41-12.2,0-1.4,0-2.8,0-4.2h0c1.7-4.6,3,11.4,3.4,18.1-4.2,3.7-9.9,3.9-15.1,4.2-4.5.3-9.6,0-14.2,0-1.1,0-6.7-1.1-7.1-1-.4.1,0,.7-.7,1.5-1.8,1.8-.9,4.2-5.4,6.9,5.5,9,10.2,12.8,21.5,12.9,8.8-1.7,13.6-2.6,18.6-10.9,3.2-5.3,4.8-12.4,6.3-18.4.4-1.7-.8-3.9,1-2.2,1.6,1.5,6.1,21.5,30,30.5,38.9,14.7,23.7-23.2,25.9-24.3,4.3-2.2,5.1,15,5.1,17.9,1.2-9-1.4-15-3.9-23.3ZM211.8,343.9c-.3-.1-.7-.2-1.2-.2.5,0,.9,0,1.2.2.5.2,1,.7,1.5,1.4-.5-.7-1-1.2-1.5-1.4ZM214.4,347.3c.2.4.4.8.5,1.2-.2-.4-.4-.8-.5-1.2Z"></path>
+        <path class="st25" d="M120.7,370.7c-1.2.2,2.7,4.6-9.3,1.5-12.9-3.3-22.8-13.3-12.5-25.8,1-1.2,1.7-2,2.9-3,1.3-1.1,3.4-2.8,4.9-3.5.9-.4,4.6-1.5,4.9-1,1-1.3,1.9-2.7,2.9-4-.3-7.3-6-2.1-9.3,0-1.5.9-1.9.9-2,1-.8.6-2.9,2-3.4,2.5-4,3.5-9.1,10.1-10.5,15.4-5.9,2-13.7,7.9-18.8,7.9q-.9.7-1.7,1.5c-1.7.6-4.2.8-4.6,1-2,.7-3.9,1.4-5.9,2-.4-1.4,1.9-.9,2.4-1.7.6-.8,4.9-17.9,5.4-19.8,6.7-28.1-10-29-16.1-32-6.2,17.3-18.4,46.5-22.9,60.5-3.1,9.4-5.1,13.2-2.9,23.3,3.5,10,39.4-9.6,45.7-13.9,5.2-3.5,9.5-8.1,14.4-11.9-.6,2.8-2.1,4.8-2,11.4,1.4,5.2.9,7.1,1,7.4,0,0,.9,1.4,1,1.5,0-3.2,3.1,3.2,7.1,5.5,8.2,4.7,15,2.1,23.2-.5,3.2-1.3-6.1-1.8-12-3.5-8-2.3-25.8-9.8-6.3-4.5,30.2.2,10.6.4-7.1-15.1,12,6.6,25.1,11.2,38.6,6.2-.8-2.7-3.9-9-7.1-8.4Z"></path>
+      </g>
+      <path class="st26" d="M111.7,339c-1.4,1.9.8,3.7-9.8,4.5,1.3-1.1,3.4-2.8,4.9-3.5.9-.4,4.6-1.5,4.9-1Z"></path>
+      <path class="st4" d="M115.6,346.9q-.2,6.4-.5,12.9c-.4.2-.6.4-1,.5-3.5.3-7.1-.5-8.3-4.2-3-9.3,6.5-8.2,9.8-9.2Z"></path>
+      <path class="st16" d="M120.5,345.9c-.4.1-2.6.3-4.9,1-3.3,1-12.7-.1-9.8,9.2,1.2,3.7,4.8,4.5,8.3,4.2-2.3.6-3.1.7-5.4,0-6.6-1.9-7.2-10.9-.2-14.4,2.4-1.2,15-2.8,7.6-4-.7-3.3,7.9-2.3,11.5-2.5-1.3,5.8-4.9,4.8-5.4,5-2.4,1-1.6,1.5-1.7,1.5Z"></path>
+      <path class="st37" d="M115.1,359.8q.2-6.4.5-12.9c2.3-.7,4.4-.9,4.9-1,3.6-1.3.9,11.1-4.2,13.9-.3.1-.9-.1-1.2,0Z"></path>
+      <path class="st37" d="M186.9,356.3q-2.9.2-5.9.5c-3.5-14.6,5.5-8.9,5.9-8.2.2.5,0,6,0,7.7Z"></path>
+      <g>
+        <path class="st5" d="M189.3,340.9c3.4,0,12,1.8,15.1,4,.9,11.7-6,19.3-17.6,17.4,1.4-3.7.2-1.8,0-6,0-1.7.2-7.2,0-7.7-.3-.7-9.4-6.4-5.9,8.2-1.9.2-.6-6.9-1-11.9,1.8.7,5.8.2,6.6,2,15.7-.2,10.6-.7-1-3.5-.4-2.1,2.3-2.5,3.7-2.5Z"></path>
+        <path class="st4" d="M188.6,347.4c13.6-2.6,11.7,16.3-.7,11.2q.4-5.6.7-11.2Z"></path>
+      </g>
+      <g>
+        <path class="st6" d="M193.2,396c4.9-.9,7.9-1.9,8.3-2,12.1-1.1,2.7,7.1-7.1,6.4-.7,0-9.3-2.2-9.8-2.5-2.4-1.3,4.2-1.2,8.5-2Z"></path>
+        <path class="st6" d="M201.5,394c-.4,0-3.4,1.1-8.3,2-1.7-2.9-6-5.5-9-6.9-2.1-2.5,11.3-.5,17.3,5Z"></path>
+      </g>
+    </g>
+    <path class="st31" d="M96.2,287.8c1.6-3.6,1.9-8,1.9-8,0,0,0-.1,0-.2-4,4-10,5-10,5,1.8,3.1,3,3,1.4,4.8-5.2,7.4-9.4,13.8-14.4,23.2,2,0,6.9,2.2,8,3,2.4,1.6,5.2,3.5,6,3-.8-10.7,1.7-18.4,6-28,.4-.9.8-1.8,1.1-2.7Z"></path>
+    <path class="st38" d="M263.8,292.6c-2.3-3.3-6.6-29.4-18.3-42.8-.1.5-.2,1.1-.3,1.6-1.8,6.7-4.4,12.9-7.7,18.8,1,14.4-7.1,29-8.6,43.4,11,1,22.1-1.9,29-7s9.6-9,12-10.1c-1.8-1.7-4.7-1.6-6.2-3.9Z"></path>
+    <path class="st31" d="M224,307.1c-1-9.1,9.3-16.5,9.6-25.7,0-.5.1-4.1-.2-4.1-.2,1.2-.4,2.5-.6,3.7-.9,6.2-14.8,14.8-13.8,21,2,13,4,13.8,2.1,26.4,2,.1,3.3-17.8,2.9-21.4Z"></path>
+  </svg></div>
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    
+
+    <!-- Bootstrap JS (Popper.js included) -->
+    <script src="./TRIVIOLIVIA.com - Earth&#39;s Deepest Trivia Source_files/bootstrap.bundle.min.js"></script>
+
+
+
+
+<script src="./TRIVIOLIVIA.com - Earth&#39;s Deepest Trivia Source_files/triviolivia.js"></script>
+
+
+
+
+<script src="./TRIVIOLIVIA.com - Earth&#39;s Deepest Trivia Source_files/htmx.org@1.8.5"></script>
+<script src="./TRIVIOLIVIA.com - Earth&#39;s Deepest Trivia Source_files/bootstrap.bundle(1).min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="./TRIVIOLIVIA.com - Earth&#39;s Deepest Trivia Source_files/ws.js"></script>
+
+</body></html>
