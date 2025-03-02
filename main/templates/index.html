@@ -729,17 +729,16 @@ input[type='checkbox'] {
                 <div class="game-area">
                   <div class="header">
                     <div>TRIVIOLIVIA.com</div>
-                    <div class="hamburger-menu dropdown">
-                        <button class="hamburger-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="hamburger-icon-bar"></span>
-                            <span class="hamburger-icon-bar"></span>
-                            <span class="hamburger-icon-bar"></span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="#">Login</a></li>
-                            <li><a class="dropdown-item" href="#">Make an Account</a></li>
-                            <li><a class="dropdown-item" href="#">About Us</a></li>
-                        </ul>
+                    <div class="login">
+                      {% if user.is_authenticated %}
+                      <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
+                      <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
+                      <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
+                      {% else %}
+                          <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">Register</button></a>
+                          <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">Login</button></a>
+                      {% endif %}
+                  </div> 
                     </div>
                 </div>
                     <div class="question-container">
