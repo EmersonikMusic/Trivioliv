@@ -4,1020 +4,1178 @@
 {% block content %} -->
 
 <head>
-  <link rel="icon" type="image/x-icon" href="{% static 'SVGs/favicon.svg' %}">
-  <title>TRIVIOLIVIA.com - Earth's Deepest Trivia Source</title>
-</head>
-
-
-
-<!-- Google analytics tag -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7JY71BDXF0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7JY71BDXF0');
-</script>
-
-<script>
-    function trackButtonClick(event) {
-        var button = event.target;
-        var buttonText = button.innerText || button.textContent || 'unknown-button';
-        var category = 'General Button Click'; // Default category
-        var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
-
-        // Track All/None buttons for Categories, Difficulties, and Eras
-        if (button.id.includes('all-none')) {
-            var groupName = '';
-            var allActive = false;
-            var allDisabled = false;
-
-            if (button.id.includes('categories')) {
-                groupName = 'Categories';
-                // Check if all category buttons are active
-                allActive = document.querySelectorAll('.category').length === document.querySelectorAll('.category.active').length;
-                allDisabled = document.querySelectorAll('.category.active').length === 0;
-            } else if (button.id.includes('difficulties')) {
-                groupName = 'Difficulties';
-                // Check if all difficulty buttons are active
-                allActive = document.querySelectorAll('.difficulty').length === document.querySelectorAll('.difficulty.active').length;
-                allDisabled = document.querySelectorAll('.difficulty.active').length === 0;
-            } else if (button.id.includes('eras')) {
-                groupName = 'Eras';
-                // Check if all era buttons are active
-                allActive = document.querySelectorAll('.era').length === document.querySelectorAll('.era.active').length;
-                allDisabled = document.querySelectorAll('.era.active').length === 0;
-            }
-
-            // Determine action based on state of all options
-            if (allActive) {
-                gtag('event', groupName + '_all', {
-                    'event_category': groupName + ' Selection',
-                    'event_label': groupName + ' ALL (enabled)'
-                });
-            } else if (allDisabled) {
-                gtag('event', groupName + '_none', {
-                    'event_category': groupName + ' Selection',
-                    'event_label': groupName + ' NONE (disabled)'
-                });
-            }
-
-            return; // Skip normal button tracking for these buttons
-        }
-
-        // Default behavior for other buttons
-        if (button.classList.contains('category')) {
-            category = 'Category Selection';
-        } else if (button.classList.contains('difficulty')) {
-            category = 'Difficulty Selection';
-        } else if (button.classList.contains('era')) {
-            category = 'Era Selection';
-        } else if (button.classList.contains('nav-button')) {
-            category = 'Navigation';
-        }
-
-        gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked_' + state, {
-            'event_category': category,
-            'event_label': buttonText + ' (' + state.toUpperCase() + ')'
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll("button").forEach(function(button) {
-            button.addEventListener("click", trackButtonClick);
-        });
-    });
-</script>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRIVIOLIVIA</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-  /* Modern CSS Reset */
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+    <link rel="icon" type="image/x-icon" href="{% static 'SVGs/favicon.svg' %}">
+    <title>TRIVIOLIVIA.com - Earth's Deepest Trivia Source</title>
+    <!-- Updated viewport meta tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+    <!-- Added meta tags for better mobile experience -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  </head>
   
-  html {
-    font-size: 16px;
-    scroll-behavior: smooth;
-  }
+  <!-- Google analytics tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7JY71BDXF0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
   
-  body {
-    line-height: 1.5;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+    gtag('config', 'G-7JY71BDXF0');
+  </script>
   
-  img, picture, video, canvas, svg {
-    display: block;
-    max-width: 100%;
-  }
+  <script>
+      function trackButtonClick(event) {
+          var button = event.target;
+          var buttonText = button.innerText || button.textContent || 'unknown-button';
+          var category = 'General Button Click'; // Default category
+          var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
   
-  input, button, textarea, select {
-    font: inherit;
-  }
+          // Track All/None buttons for Categories, Difficulties, and Eras
+          if (button.id.includes('all-none')) {
+              var groupName = '';
+              var allActive = false;
+              var allDisabled = false;
   
-  p, h1, h2, h3, h4, h5, h6 {
-    overflow-wrap: break-word;
-  }
+              if (button.id.includes('categories')) {
+                  groupName = 'Categories';
+                  // Check if all category buttons are active
+                  allActive = document.querySelectorAll('.category').length === document.querySelectorAll('.category.active').length;
+                  allDisabled = document.querySelectorAll('.category.active').length === 0;
+              } else if (button.id.includes('difficulties')) {
+                  groupName = 'Difficulties';
+                  // Check if all difficulty buttons are active
+                  allActive = document.querySelectorAll('.difficulty').length === document.querySelectorAll('.difficulty.active').length;
+                  allDisabled = document.querySelectorAll('.difficulty.active').length === 0;
+              } else if (button.id.includes('eras')) {
+                  groupName = 'Eras';
+                  // Check if all era buttons are active
+                  allActive = document.querySelectorAll('.era').length === document.querySelectorAll('.era.active').length;
+                  allDisabled = document.querySelectorAll('.era.active').length === 0;
+              }
   
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
+              // Determine action based on state of all options
+              if (allActive) {
+                  gtag('event', groupName + '_all', {
+                      'event_category': groupName + ' Selection',
+                      'event_label': groupName + ' ALL (enabled)'
+                  });
+              } else if (allDisabled) {
+                  gtag('event', groupName + '_none', {
+                      'event_category': groupName + ' Selection',
+                      'event_label': groupName + ' NONE (disabled)'
+                  });
+              }
   
-  ul, ol {
-    list-style: none;
-  }
+              return; // Skip normal button tracking for these buttons
+          }
   
-  /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
-  @media (prefers-reduced-motion: reduce) {
-    html:focus-within {
-      scroll-behavior: auto;
+          // Default behavior for other buttons
+          if (button.classList.contains('category')) {
+              category = 'Category Selection';
+          } else if (button.classList.contains('difficulty')) {
+              category = 'Difficulty Selection';
+          } else if (button.classList.contains('era')) {
+              category = 'Era Selection';
+          } else if (button.classList.contains('nav-button')) {
+              category = 'Navigation';
+          }
+  
+          gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked_' + state, {
+              'event_category': category,
+              'event_label': buttonText + ' (' + state.toUpperCase() + ')'
+          });
+      }
+  
+      document.addEventListener("DOMContentLoaded", function() {
+          document.querySelectorAll("button").forEach(function(button) {
+              button.addEventListener("click", trackButtonClick);
+          });
+      });
+  </script>
+  
+  
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+      <title>TRIVIOLIVIA</title>
+      <!-- Bootstrap CSS -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+      <style>
+    /* Modern CSS Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
     
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
     }
-  }
-
-
-
-        body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background: #6f2da8;
-            font-family: "Montserrat", 'Calibri', sans-serif;
-            color: white;
-            word-break: break-word;
-            overflow-wrap: break-word;
-            hyphens: none;
-
-        }
-
-        .container-fluid {
-            height: 100vh;
-            padding: 0;
-        }
-
-        .header {
-            background-color: rgba(0, 0, 0, 0.2);
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 12px 12px 0 0;
-            font-weight: bold;
-            font-size: 2rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Updated hamburger menu styles */
-.hamburger-menu {
-    cursor: pointer;
-}
-
-.hamburger-btn {
-    background: transparent;
-    border: none;
-    padding: 8px 12px;
-    transition: background-color 0.2s;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 38px;
-    width: 38px;
-}
-
-.hamburger-btn:hover {
-    background-color: rgba(148, 125, 196, 0.3);
-}
-
-.hamburger-icon-bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 2px 0;
-    border-radius: 3px;
-    background-color: white;
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Optional: Add animation when active */
-.hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(1) {
-    transform: translateY(5px) rotate(45deg);
-}
-
-.hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(3) {
-    transform: translateY(-5px) rotate(-45deg);
-}
-
-.dropdown-menu {
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    border: none;
-}
-
-.dropdown-item {
-    color: white;
-    padding: 10px 15px;
-    transition: background-color 0.3s;
-}
-
-.dropdown-item:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-}
-
-        .game-area {
-            background-color: rgba(0, 0, 0, 0.3);
-            color: white;
-            height: calc(100% - 30px);
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .question-container {
-    flex: 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 15px;
-    /* Dynamic font sizing */
-    font-size: clamp(16px, 5vw, 8vh);
-    /* background-color: rgba(0,0,0, 0.4); */
-    margin: 10px;
-    border-radius: 10px;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: none;
-}
-
-.answer-container {
-    flex: 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 15px;
-    /* Dynamic font sizing */
-    font-size: clamp(16px, 5vw, 8vh);
-    /* background-color: rgba(0,0,0, 0.4); */
-    margin: 10px;
-    border-radius: 10px;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: none;
-}
-
-.loading-bar-container {
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin-top: auto;
-  }
-
-p {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-
-        .menu-container {
-            background-color: rgba(0,0,0, 0.3);
-            color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            display: flex;
-        }
-
-        /* Mobile-specific styles */
-        .mobile-menu {
-            height: 25vh;
-            margin-top: 8px;
-            flex-direction: row;
-        }
-
-        .mobile-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            width: 70%;
-        }
-
-        .mobile-character {
-            width: 30%;
-            height: 100%;
-        }
-
-        /* Desktop-specific styles */
-        .desktop-menu {
-            height: 100%;
-            flex-direction: column;
-            padding: 15px;
-        }
-
-        .desktop-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            align-items: center;
-        }
-
-        .desktop-character {
-            margin-top: auto;
-            vertical-align: bottom;
-        }
-
-        .menu-button {
-            cursor: pointer;
-            text-align: center;
-            font-weight: bold;
-            transition: background-color 0.3s;
-            color: white;
-        }
-
-        button {
-    display: flex;
-    flex-wrap: nowrap;
-    box-sizing: border-box;
-    background-color: rgba(0, 0, 0, 0);
-    font-size: 11px;
-    text-align: left;
-    height: 20px;
-    padding: 0px;
-    margin: 1px 0;
-    border: none;
-    font-weight: 950;
-    cursor: pointer;
-    border-radius: 2px;
-    color: white;
-}
-
-        /* Mobile button styles */
-        .mobile-menu .menu-button {
-            flex-basis: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 33.33%;
-            color: white;
-        }
-
-        /* Desktop button styles */
-        .desktop-menu .menu-button {
-            width: 100%;
-            padding: 8px;
-            background-color: rgba(0,0,0, 0.5);
-            border-radius: 8px;
-            transition: all 0.3s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            margin-bottom: 0;
-            color: white;
-        }
-
-        .desktop-menu .menu-button:hover {
-            background-color: rgba(0,0,0, 0.7);
-            transform: scale(1.05);
-        }
-
-        .mobile-menu .menu-button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-        }
-
-        .character-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: visible; /* Changed from hidden to visible */
-    height: 100%;
-    width: 100%;
-    vertical-align: bottom;
-}
-
-        /* Animation for the character */
-        @keyframes bob {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0); }
-        }
-
-        .character-svg {
-            animation: bob 2s infinite ease-in-out;
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-        }
-        
-        /* Mobile character container specific */
-        .mobile-character {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding: 5px;
-    width: 30%;
-    overflow: visible; /* Changed from hidden to visible */
-}
-        
-        /* Desktop character container specific */
-        .desktop-character {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            padding: 10px;
-        }
-
-        @media (min-width: 768px) {
-            .mobile-menu {
-                display: none;
-            }
-            
-            .game-area {
-                height: 100%;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .desktop-menu {
-                display: none;
-            }
-        }
-
-
-
-
-        /* COLLAPSE/EXPAND DIV CSS */
-
-input[type='checkbox'] { 
-    display: none; 
-} 
-
-.wrap-collabsible { 
-    margin: 0px 0;
-} 
-
-.lbl-toggle { 
-  display: flex; 
-  font-weight: 100; 
-  text-transform: uppercase; 
-  /* padding: .25rem;  */
-  color: #DDD; 
-  background: rgba(0, 0, 0, 0);
-  cursor: pointer; 
-  transition: all .25s ease-out; 
-  flex-direction: row;
-  align-items: center;
-  margin: 0px 20px;
-  padding: 10px 20px;
-} 
-
-.lbl-toggle:hover { 
-    color: #FFF;
-    border-radius: 14px;
-    background: rgba(0, 0, 0, .2); 
-}
-
-.lbl-toggle::before { 
-  content: ' '; 
-  display: inline-block; 
-  border-top: 5px solid transparent; 
-  border-bottom: 5px solid transparent; 
-  border-left: 5px solid currentColor; 
-  vertical-align: middle; 
-  margin-right: .7rem; 
-  transform: translateY(-2px); 
-  transition: transform .2s ease-out; 
-} 
-.toggle:checked + .lbl-toggle::before { 
-  transform: rotate(90deg) translateX(-3px); 
-} 
-
-.collapsible-content { 
-  max-height: 0px; 
-  overflow: hidden; 
-  transition: max-height .5s ease-in-out; 
-  transition-delay: 0.26s;
-
-  /* unsure about this one */
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: stretch;
-} 
-
-.toggle:checked + .lbl-toggle { 
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 14px;
-    border-top-left-radius: 14px;
-    background: rgba(0, 0, 0, .2);
-} 
-
-.content-inner { 
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-}
-
-.content-inner button {
-    color: rgba(225, 225, 225, 1);
-    display: flex;
-    vertical-align: middle;
-    /* background: rgba(0, 0, 0, .1); */
-    border-radius: 8px;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-}
-
-.content-inner button:hover{
-    background: rgba(0, 0, 0, .25);
-}
-.content-inner button.all-none-btn {
-    background-color: rgba(0, 0, 0, .5);
-    display: flex;
-    padding-left: 8px;
-    border-radius: 6px;
-    flex-direction: row;
-    align-items: center;
-}
-
-.collapsible-content .content-inner { 
-    background: rgba(0, 0, 0, .2);
-    padding: 10 20;
-    margin: 0 20;
-    border-bottom-right-radius: 14px; 
-    border-bottom-left-radius: 14px; 
-} 
-.collapsible-content p { 
-    margin-bottom: 0; 
-}
- 
-.toggle:checked + .lbl-toggle + .collapsible-content { 
-    max-height: 100vh;
-    overflow: scroll;
-  } 
-
-.hide {
-    display: none;
-}
- 
-/* COLLAPSE/EXPAND DIV CSS END */
-
-
-
-
-
-/* Attempt at dynamic question and answer timer indicator */
-  #loading-bar {
-    display: flex;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    justify-content: center;
-  }
-  #progress {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: absolute;
-    left: 0;
-    top: 0;
-    animation: depleteProgress 10s linear infinite paused;
-  }
-
-  #loading-text {
-    display: flex;
-    color: white;
-    font-size: 14px;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    vertical-align: middle;
-    z-index: 1;
-  }
-
-  @keyframes depleteProgress {
-    0% { width: 100%; }
-    100% { width: 0%; }
-  }
-
-  @keyframes replenishProgress {
-    0% { width: 0%; }
-    100% { width: 100%; }
-  }
-
-
-
-
-  /* Loading animation stuff */
-  .loader {
-            display: flex;
-            gap: 20px;
-        }
-        .dot {
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: bounce 1.5s infinite ease-in-out;
-        }
-        .dot:nth-child(1) { animation-delay: 0s; }
-        .dot:nth-child(2) { animation-delay: 0.2s; }
-        .dot:nth-child(3) { animation-delay: 0.4s; }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); opacity: 0.3; }
-            50% { transform: translateY(-20px); opacity: 1; }
-        }
-
-
-
-
-
-/* Slider stuff */
-.slider-container {
-    margin: 5px auto;
-}
-.slider-label {
-    text-align: center;
-    padding-bottom: 5px;
-}
-.slider {
-    width: 100%;
-    -webkit-appearance: none;
-    height: 6px;
-    border-radius: 5px;
-    background-color: rgba(0,0,0,0.4);
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: #FFF;
-    cursor: pointer;
-}
-.slider::-moz-range-thumb {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: #FFF;
-    cursor: pointer;
-}
-
-
-
-/* Indicator light attempt */
-.indicator {
-    width: 2px; /* Reduce the indicator width to match smaller buttons */
-    height: 100%; /* Set the indicator's height to 100% of the button's height */
-    background-color: #00F829;
-    left: 0; /* Position the indicator at the left edge of the button */
-    top: 0; /* Align the indicator with the top of the button */
-    bottom: 0; /* Align the indicator with the bottom of the button */
-    margin-right: 0px; /* Create space between indicator and text */
-    border-right: 1px solid #2D2D2D;
-    border-radius: 2px;
-    margin-right: 6px;
-  }
-
-  .inactive .indicator  {
-    background-color: red;
-  }
-
-.button .category-title, .difficulty-title, .era-title {
-    margin: auto;
-    padding-left: 10px;
-    text-align: left;
-}
-
-
-
-
-/* Character animations*/
-#character {
-    animation: bobbing 2s infinite ease-in-out;
-        }
-        @keyframes bobbing {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        #character2 {
-    animation: bobbing 2s infinite ease-in-out;
-        }
-        @keyframes bobbing {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-2px);
-            }
-        }
-
-        /* Loading animation */
-        .loader {
-            display: flex;
-            gap: 10px;
-        }
-        .dot {
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: bounce 1.5s infinite ease-in-out;
-        }
-        .dot:nth-child(1) { animation-delay: 0s; }
-        .dot:nth-child(2) { animation-delay: 0.2s; }
-        .dot:nth-child(3) { animation-delay: 0.4s; }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); opacity: 0.3; }
-            50% { transform: translateY(-15px); opacity: 1; }
-        }
-
-
-/* Logo stuff */
-        .logo-container {
-            text-align: center;
-        }
-        
-        .logo {
-            display: inline-block;
-        }
-        
-        .main-text {
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(45deg, white, white);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .main-text:hover {
-            transform: scale(1.05);
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-        }
-        
-        .domain {
-            font-size: 0.9rem;
-            font-weight: 800;
-            color: white;
-            vertical-align: baseline;
-            letter-spacing: 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="container-fluid p-1">
-        <div class="row h-100 g-2">
-            <!-- Main Game Area -->
-            <div class="col-md-9 d-flex flex-column h-100">
-                <div class="game-area">
-                  <div class="header">
-                    <div class="logo-container">
-                        <div class="logo">
-                            <span class="main-text">TRIVIOLIVIA</span><span class="domain">.com</span>
-                        </div>
-                    </div>
-                    <div class="hamburger-menu dropdown">
-                        <div class="login">
-                            {% if user.is_authenticated %}
-                            <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
-                            <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
-                            <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
-                            {% else %}
-                                <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">Register</button></a>
-                                <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">Login</button></a>
-                            {% endif %}
-                        </div> 
-                    </div>
-                </div>
-                    <div class="question-container">
-
-                        Welcome to<br>
-                        Earth's Deepest Trivia Source!<br>
-                        (in beta)
-                    </div>
-                    <div class="answer-container">
-                        
-                    </div>
-
-                    <div id="loading-bar-container" class="loading-bar-container">
-                        <div id="loading-bar">
-                            <div id="loading-text">
-                                <p id="demo" class="loader-text"></p>
-                            </div>
-                            <div id="progress"></div>
-                        </div>
-                    </div>
-
-                </div>
-                
-                <!-- Mobile Menu Bar (visible only on small screens) -->
-                <div class="menu-container mobile-menu">
-                  <div class="mobile-buttons">
-
-                   
-                      <div button id="start-pause2" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
-
-                      <div class="menu-button">CATEGORIES</div>
-                      
-                      
-                      
-                        <div button id="refetch-and-restart2" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
-                    
-
-
-                      <div class="menu-button">DIFFICULTIES</div>
-                      <div class="menu-button">SETTINGS</div>
-                      <div class="menu-button">ERAS</div>
+    
+    /* Updated body/html style */
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #6f2da8;
+      font-family: "Montserrat", 'Calibri', sans-serif;
+      color: white;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      hyphens: none;
+      /* Removed overflow: hidden */
+    }
+  
+    /* Added for mobile */
+    @media (max-width: 767px) {
+      body, html {
+        overflow-y: auto;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+      }
+      
+      .container-fluid {
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+    
+    /* iOS Safari Height Fix */
+    @supports (-webkit-touch-callout: none) {
+      .container-fluid {
+        height: -webkit-fill-available;
+      }
+      
+      .game-area {
+        height: calc(100% - 30px);
+        max-height: -webkit-fill-available;
+      }
+    }
+    
+    /* Add Safe Area Insets for Modern Devices */
+    @supports (padding: max(0px)) {
+      .container-fluid {
+        padding-left: max(1px, env(safe-area-inset-left));
+        padding-right: max(1px, env(safe-area-inset-right));
+        padding-bottom: max(1px, env(safe-area-inset-bottom));
+      }
+    }
+    
+    img, picture, video, canvas, svg {
+      display: block;
+      max-width: 100%;
+    }
+    
+    input, button, textarea, select {
+      font: inherit;
+    }
+    
+    p, h1, h2, h3, h4, h5, h6 {
+      overflow-wrap: break-word;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    ul, ol {
+      list-style: none;
+    }
+    
+    /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+    @media (prefers-reduced-motion: reduce) {
+      html:focus-within {
+        scroll-behavior: auto;
+      }
+      
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  
+    .container-fluid {
+      height: 100vh;
+      padding: 0;
+    }
+  
+    .header {
+      background-color: rgba(0, 0, 0, 0.2);
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      display: -webkit-flex;
+      justify-content: space-between;
+      -webkit-justify-content: space-between;
+      align-items: center;
+      -webkit-align-items: center;
+      border-radius: 12px 12px 0 0;
+      font-weight: bold;
+      font-size: 2rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+          
+    /* Updated hamburger menu styles */
+    .hamburger-menu {
+      cursor: pointer;
+    }
+  
+    .hamburger-btn {
+      background: transparent;
+      border: none;
+      padding: 8px 12px;
+      transition: background-color 0.2s;
+      border-radius: 5px;
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      justify-content: center;
+      -webkit-justify-content: center;
+      align-items: center;
+      -webkit-align-items: center;
+      height: 38px;
+      width: 38px;
+    }
+  
+    .hamburger-btn:hover {
+      background-color: rgba(148, 125, 196, 0.3);
+    }
+  
+    .hamburger-icon-bar {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 2px 0;
+      border-radius: 3px;
+      background-color: white;
+      transition: transform 0.3s ease-in-out;
+      -webkit-transition: -webkit-transform 0.3s ease-in-out;
+    }
+  
+    /* Optional: Add animation when active */
+    .hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(1) {
+      transform: translateY(5px) rotate(45deg);
+      -webkit-transform: translateY(5px) rotate(45deg);
+    }
+  
+    .hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(2) {
+      opacity: 0;
+    }
+  
+    .hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(3) {
+      transform: translateY(-5px) rotate(-45deg);
+      -webkit-transform: translateY(-5px) rotate(-45deg);
+    }
+  
+    .dropdown-menu {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      border: none;
+    }
+  
+    .dropdown-item {
+      color: white;
+      padding: 10px 15px;
+      transition: background-color 0.3s;
+      -webkit-transition: background-color 0.3s;
+    }
+  
+    .dropdown-item:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+    }
+  
+    .game-area {
+      background-color: rgba(0, 0, 0, 0.3);
+      color: white;
+      height: calc(100% - 30px);
+      border-radius: 12px;
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+  
+    .question-container {
+      flex: 3;
+      display: flex;
+      display: -webkit-flex;
+      justify-content: center;
+      -webkit-justify-content: center;
+      align-items: center;
+      -webkit-align-items: center;
+      text-align: center;
+      padding: 15px;
+      /* Dynamic font sizing */
+      font-size: clamp(16px, 5vw, 8vh);
+      /* background-color: rgba(0,0,0, 0.4); */
+      margin: 10px;
+      border-radius: 10px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: none;
+    }
+  
+    .answer-container {
+      flex: 3;
+      display: flex;
+      display: -webkit-flex;
+      justify-content: center;
+      -webkit-justify-content: center;
+      align-items: center;
+      -webkit-align-items: center;
+      text-align: center;
+      padding: 15px;
+      /* Dynamic font sizing */
+      font-size: clamp(16px, 5vw, 8vh);
+      /* background-color: rgba(0,0,0, 0.4); */
+      margin: 10px;
+      border-radius: 10px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: none;
+    }
+  
+    .loading-bar-container {
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      display: -webkit-flex;
+      width: 100%;
+      justify-content: center;
+      -webkit-justify-content: center;
+      margin-top: auto;
+    }
+  
+    p {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  
+    .menu-container {
+      background-color: rgba(0,0,0, 0.3);
+      color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      display: -webkit-flex;
+    }
+  
+    /* Mobile-specific styles */
+    .mobile-menu {
+      height: 25vh;
+      margin-top: 8px;
+      flex-direction: row;
+      -webkit-flex-direction: row;
+    }
+  
+    /* Flexbox Safari Compatibility */
+    .mobile-buttons {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      width: 70%;
+    }
+  
+    .desktop-buttons {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: column;
+      flex-direction: column;
+      gap: 5px;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+  
+    .mobile-character {
+      width: 30%;
+      height: 100%;
+    }
+  
+    /* Desktop-specific styles */
+    .desktop-menu {
+      height: 100%;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      padding: 15px;
+    }
+  
+    .desktop-character {
+      margin-top: auto;
+      vertical-align: bottom;
+    }
+  
+    .menu-button {
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      -webkit-transition: background-color 0.3s;
+      color: white;
+    }
+  
+    /* Better Touch Handling */
+    button, .menu-button, .lbl-toggle, .slider::-webkit-slider-thumb {
+      -webkit-tap-highlight-color: transparent;
+    }
+  
+    button {
+      display: flex;
+      display: -webkit-flex;
+      flex-wrap: nowrap;
+      -webkit-flex-wrap: nowrap;
+      box-sizing: border-box;
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 11px;
+      text-align: left;
+      height: 20px;
+      padding: 0px;
+      margin: 1px 0;
+      border: none;
+      font-weight: 950;
+      cursor: pointer;
+      border-radius: 2px;
+      color: white;
+    }
+  
+    /* Mobile button styles */
+    .mobile-menu .menu-button {
+      flex-basis: 50%;
+      display: flex;
+      display: -webkit-flex;
+      justify-content: center;
+      -webkit-justify-content: center;
+      align-items: center;
+      -webkit-align-items: center;
+      height: 33.33%;
+      color: white;
+    }
+  
+    /* Desktop button styles */
+    .desktop-menu .menu-button {
+      width: 100%;
+      padding: 8px;
+      background-color: rgba(0,0,0, 0.5);
+      border-radius: 8px;
+      transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      margin-bottom: 0;
+      color: white;
+    }
+  
+    .desktop-menu .menu-button:hover {
+      background-color: rgba(0,0,0, 0.7);
+      transform: scale(1.05);
+      -webkit-transform: scale(1.05);
+    }
+  
+    .mobile-menu .menu-button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+    }
+  
+    .character-container {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-align-items: center;
+      align-items: center;
+      overflow: visible; /* Changed from hidden to visible */
+      height: 100%;
+      width: 100%;
+      vertical-align: bottom;
+    }
+  
+    /* Animation for the character - added webkit versions */
+    @keyframes bob {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+  
+    @-webkit-keyframes bob {
+      0% { -webkit-transform: translateY(0); transform: translateY(0); }
+      50% { -webkit-transform: translateY(-8px); transform: translateY(-8px); }
+      100% { -webkit-transform: translateY(0); transform: translateY(0); }
+    }
+  
+    .character-svg {
+      animation: bob 2s infinite ease-in-out;
+      -webkit-animation: bob 2s infinite ease-in-out;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+    }
+    
+    /* Mobile character container specific */
+    .mobile-character {
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      justify-content: center;
+      -webkit-justify-content: center;
+      height: 100%;
+      padding: 5px;
+      width: 30%;
+      overflow: visible; /* Changed from hidden to visible */
+    }
+    
+    /* Desktop character container specific */
+    .desktop-character {
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+      -webkit-align-items: center;
+      justify-content: center;
+      -webkit-justify-content: center;
+      height: 100%;
+      padding: 10px;
+    }
+  
+    @media (min-width: 768px) {
+      .mobile-menu {
+        display: none;
+      }
+      
+      .game-area {
+        height: 100%;
+      }
+    }
+  
+    @media (max-width: 767px) {
+      .desktop-menu {
+        display: none;
+      }
+    }
+  
+  
+  
+  
+    /* COLLAPSE/EXPAND DIV CSS */
+  
+    input[type='checkbox'] { 
+      display: none; 
+    } 
+  
+    .wrap-collabsible { 
+      margin: 0px 0;
+    } 
+  
+    .lbl-toggle { 
+      display: flex;
+      display: -webkit-flex;
+      font-weight: 100; 
+      text-transform: uppercase; 
+      /* padding: .25rem;  */
+      color: #DDD; 
+      background: rgba(0, 0, 0, 0);
+      cursor: pointer; 
+      transition: all .25s ease-out;
+      -webkit-transition: all .25s ease-out;
+      flex-direction: row;
+      -webkit-flex-direction: row;
+      align-items: center;
+      -webkit-align-items: center;
+      margin: 0px 20px;
+      padding: 10px 20px;
+    } 
+  
+    .lbl-toggle:hover { 
+      color: #FFF;
+      border-radius: 14px;
+      background: rgba(0, 0, 0, .2); 
+    }
+  
+    .lbl-toggle::before { 
+      content: ' '; 
+      display: inline-block; 
+      border-top: 5px solid transparent; 
+      border-bottom: 5px solid transparent; 
+      border-left: 5px solid currentColor; 
+      vertical-align: middle; 
+      margin-right: .7rem; 
+      transform: translateY(-2px);
+      -webkit-transform: translateY(-2px);
+      transition: transform .2s ease-out;
+      -webkit-transition: -webkit-transform .2s ease-out;
+    } 
+    .toggle:checked + .lbl-toggle::before { 
+      transform: rotate(90deg) translateX(-3px);
+      -webkit-transform: rotate(90deg) translateX(-3px);
+    } 
+  
+    .collapsible-content { 
+      max-height: 0px; 
+      overflow: hidden; 
+      transition: max-height .5s ease-in-out;
+      -webkit-transition: max-height .5s ease-in-out;
+      transition-delay: 0.26s;
+      -webkit-transition-delay: 0.26s;
+  
+      /* unsure about this one */
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      flex-wrap: nowrap;
+      -webkit-flex-wrap: nowrap;
+      align-items: stretch;
+      -webkit-align-items: stretch;
+    } 
+  
+    .toggle:checked + .lbl-toggle { 
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 14px;
+      border-top-left-radius: 14px;
+      background: rgba(0, 0, 0, .2);
+    } 
+  
+    .content-inner { 
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      -webkit-flex-direction: column;
+      flex-wrap: nowrap;
+      -webkit-flex-wrap: nowrap;
+    }
+  
+    .content-inner button {
+      color: rgba(225, 225, 225, 1);
+      display: flex;
+      display: -webkit-flex;
+      vertical-align: middle;
+      /* background: rgba(0, 0, 0, .1); */
+      border-radius: 8px;
+      width: 100%;
+      flex-direction: row;
+      -webkit-flex-direction: row;
+      align-items: center;
+      -webkit-align-items: center;
+    }
+  
+    .content-inner button:hover{
+      background: rgba(0, 0, 0, .25);
+    }
+    .content-inner button.all-none-btn {
+      background-color: rgba(0, 0, 0, .5);
+      display: flex;
+      display: -webkit-flex;
+      padding-left: 8px;
+      border-radius: 6px;
+      flex-direction: row;
+      -webkit-flex-direction: row;
+      align-items: center;
+      -webkit-align-items: center;
+    }
+  
+    .collapsible-content .content-inner { 
+      background: rgba(0, 0, 0, .2);
+      padding: 10 20;
+      margin: 0 20;
+      border-bottom-right-radius: 14px; 
+      border-bottom-left-radius: 14px; 
+    } 
+    .collapsible-content p { 
+      margin-bottom: 0; 
+    }
+   
+    .toggle:checked + .lbl-toggle + .collapsible-content { 
+      max-height: 100vh;
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
+    } 
+  
+    .hide {
+      display: none;
+    }
+   
+    /* COLLAPSE/EXPAND DIV CSS END */
+  
+  
+  
+  
+  
+    /* Attempt at dynamic question and answer timer indicator */
+    #loading-bar {
+      display: flex;
+      display: -webkit-flex;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      justify-content: center;
+      -webkit-justify-content: center;
+    }
+    #progress {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      left: 0;
+      top: 0;
+      animation: depleteProgress 10s linear infinite paused;
+      -webkit-animation: depleteProgress 10s linear infinite paused;
+    }
+  
+    #loading-text {
+      display: flex;
+      display: -webkit-flex;
+      color: white;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      vertical-align: middle;
+      z-index: 1;
+    }
+  
+    @keyframes depleteProgress {
+      0% { width: 100%; }
+      100% { width: 0%; }
+    }
+  
+    @-webkit-keyframes depleteProgress {
+      0% { width: 100%; }
+      100% { width: 0%; }
+    }
+  
+    @keyframes replenishProgress {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+  
+    @-webkit-keyframes replenishProgress {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+  
+  
+  
+  
+    /* Loading animation stuff */
+    .loader {
+      display: flex;
+      display: -webkit-flex;
+      gap: 20px;
+    }
+    .dot {
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      animation: bounce 1.5s infinite ease-in-out;
+      -webkit-animation: bounce 1.5s infinite ease-in-out;
+    }
+    .dot:nth-child(1) { 
+      animation-delay: 0s; 
+      -webkit-animation-delay: 0s;
+    }
+    .dot:nth-child(2) { 
+      animation-delay: 0.2s; 
+      -webkit-animation-delay: 0.2s;
+    }
+    .dot:nth-child(3) { 
+      animation-delay: 0.4s; 
+      -webkit-animation-delay: 0.4s;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); opacity: 0.3; }
+      50% { transform: translateY(-20px); opacity: 1; }
+    }
+  
+    @-webkit-keyframes bounce {
+      0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); opacity: 0.3; }
+      50% { -webkit-transform: translateY(-20px); transform: translateY(-20px); opacity: 1; }
+    }
+  
+  
+  
+  
+  
+    /* Slider stuff */
+    .slider-container {
+      margin: 5px auto;
+    }
+    .slider-label {
+      text-align: center;
+      padding-bottom: 5px;
+    }
+    .slider {
+      width: 100%;
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 5px;
+      background-color: rgba(0,0,0,0.4);
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: #FFF;
+      cursor: pointer;
+    }
+    .slider::-moz-range-thumb {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: #FFF;
+      cursor: pointer;
+    }
+  
+  
+  
+    /* Indicator light attempt */
+    .indicator {
+      width: 2px; /* Reduce the indicator width to match smaller buttons */
+      height: 100%; /* Set the indicator's height to 100% of the button's height */
+      background-color: #00F829;
+      left: 0; /* Position the indicator at the left edge of the button */
+      top: 0; /* Align the indicator with the top of the button */
+      bottom: 0; /* Align the indicator with the bottom of the button */
+      margin-right: 0px; /* Create space between indicator and text */
+      border-right: 1px solid #2D2D2D;
+      border-radius: 2px;
+      margin-right: 6px;
+    }
+  
+    .inactive .indicator  {
+      background-color: red;
+    }
+  
+    .button .category-title, .difficulty-title, .era-title {
+      margin: auto;
+      padding-left: 10px;
+      text-align: left;
+    }
+  
+  
+  
+  
+    /* Character animations*/
+    #character {
+      animation: bobbing 2s infinite ease-in-out;
+      -webkit-animation: bobbing 2s infinite ease-in-out;
+    }
+    @keyframes bobbing {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    @-webkit-keyframes bobbing {
+      0%, 100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+      50% {
+        -webkit-transform: translateY(-10px);
+        transform: translateY(-10px);
+      }
+    }
+  
+    #character2 {
+      animation: bobbing 2s infinite ease-in-out;
+      -webkit-animation: bobbing 2s infinite ease-in-out;
+    }
+  
+    /* Loading animation */
+    .loader {
+      display: flex;
+      display: -webkit-flex;
+      gap: 10px;
+    }
+    .dot {
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      animation: bounce 1.5s infinite ease-in-out;
+      -webkit-animation: bounce 1.5s infinite ease-in-out;
+    }
+    .dot:nth-child(1) { 
+      animation-delay: 0s; 
+      -webkit-animation-delay: 0s;
+    }
+    .dot:nth-child(2) { 
+      animation-delay: 0.2s; 
+      -webkit-animation-delay: 0.2s;
+    }
+    .dot:nth-child(3) { 
+      animation-delay: 0.4s; 
+      -webkit-animation-delay: 0.4s;
+    }
+  
+  
+    /* Logo stuff */
+    .logo-container {
+      text-align: center;
+    }
+    
+    .logo {
+      display: inline-block;
+    }
+    
+    .main-text {
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(45deg, white, white);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+      -webkit-transition: all 0.3s ease;
+    }
+    
+    .main-text:hover {
+      transform: scale(1.05);
+      -webkit-transform: scale(1.05);
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    }
+    
+    .domain {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: white;
+      vertical-align: baseline;
+      letter-spacing: 0;
+    }
+      </style>
+  </head>
+  <body>
+      <div class="container-fluid p-1">
+          <div class="row h-100 g-2">
+              <!-- Main Game Area -->
+              <div class="col-md-9 d-flex flex-column h-100">
+                  <div class="game-area">
+                    <div class="header">
+                      <div class="logo-container">
+                          <div class="logo">
+                              <span class="main-text">TRIVIOLIVIA</span><span class="domain">.com</span>
+                          </div>
+                      </div>
+                      <div class="hamburger-menu dropdown">
+                          <div class="login">
+                              {% if user.is_authenticated %}
+                              <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
+                              <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
+                              <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
+                              {% else %}
+                                  <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">Register</button></a>
+                                  <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">Login</button></a>
+                              {% endif %}
+                          </div> 
+                      </div>
                   </div>
-                  <div class="character-container mobile-character" id="character2">
-                      <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
-
-                  </div>
-              </div>
-
-            </div>
-            
-            <!-- Side Menu (visible only on larger screens) -->
-            <div class="col-md-3 d-flex flex-column h-100 pl-0">
-                <div class="menu-container desktop-menu">
-                    <div class="desktop-buttons">
-                        <div button id="start-pause" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
-
-                        <div button id="refetch-and-restart" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
-
-                        
-
-
-
+                      <div class="question-container">
+  
+                          Welcome to<br>
+                          Earth's Deepest Trivia Source!<br>
+                          (in beta)
+                      </div>
+                      <div class="answer-container">
                           
-          </div>
-
-
-                        <!--Categories menu-->
-                <div class="wrap-collabsible"> 
-                    <input id="collapsible-categories" class="toggle" type="checkbox"> 
-                    <label for="collapsible-categories" class="lbl-toggle">
-                        CATEGORIES
+                      </div>
+  
+                      <div id="loading-bar-container" class="loading-bar-container">
+                          <div id="loading-bar">
+                              <div id="loading-text">
+                                  <p id="demo" class="loader-text"></p>
+                              </div>
+                              <div id="progress"></div>
+                          </div>
+                      </div>
+  
+                  </div>
+                  
+                  <!-- Mobile Menu Bar (visible only on small screens) -->
+                  <div class="menu-container mobile-menu">
+                    <div class="mobile-buttons">
+  
+                     
+                        <div button id="start-pause2" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
+  
+                        <div class="menu-button">CATEGORIES</div>
+                        
+                        
+                        
+                          <div button id="refetch-and-restart2" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
+                      
+  
+  
+                        <div class="menu-button">DIFFICULTIES</div>
+                        <div class="menu-button">SETTINGS</div>
+                        <div class="menu-button">ERAS</div>
+                    </div>
+                    <div class="character-container mobile-character" id="character2">
+                        <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
+  
+                    </div>
+                </div>
+  
+              </div>
+              
+              <!-- Side Menu (visible only on larger screens) -->
+              <div class="col-md-3 d-flex flex-column h-100 pl-0">
+                  <div class="menu-container desktop-menu">
+                      <div class="desktop-buttons">
+                          <div button id="start-pause" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
+  
+                          <div button id="refetch-and-restart" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
+  
+                          
+  
+  
+  
+                            
+            </div>
+  
+  
+                          <!--Categories menu-->
+                  <div class="wrap-collabsible"> 
+                      <input id="collapsible-categories" class="toggle" type="checkbox"> 
+                      <label for="collapsible-categories" class="lbl-toggle">
+                          CATEGORIES
+                      </label>
+                      <div class="collapsible-content">
+                          <div class="content-inner">
+                              <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
+                              {% for category in categories %}
+                              <div id='{{ category.name | slugify }}'>
+                                  <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                                      <span class="indicator"></span>
+                                      {{ category.name | upper }}
+                                  </button>
+                              </div>
+                              {% endfor %}
+                      </div>
+                      </div>
+                  </div>
+  
+                  
+                          <!--Difficulties menu-->
+                  <div class="wrap-collabsible"> 
+                    <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
+                    <label for="collapsible-difficulties" class="lbl-toggle">
+                        DIFFICULTIES
                     </label>
                     <div class="collapsible-content">
                         <div class="content-inner">
-                            <button id="all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
-                            {% for category in categories %}
-                            <div id='{{ category.name | slugify }}'>
-                                <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                            <button id="all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE </button>
+                            {% for difficulty in difficulties %}
+                            <div id='{{ difficulty.name }}'>
+                                <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
                                     <span class="indicator"></span>
-                                    {{ category.name | upper }}
+                                    {{ difficulty.name | upper}}
                                 </button>
                             </div>
                             {% endfor %}
+                        </div>
                     </div>
                     </div>
-                </div>
-
-                
-                        <!--Difficulties menu-->
-                <div class="wrap-collabsible"> 
-                  <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
-                  <label for="collapsible-difficulties" class="lbl-toggle">
-                      DIFFICULTIES
-                  </label>
-                  <div class="collapsible-content">
-                      <div class="content-inner">
-                          <button id="all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE </button>
-                          {% for difficulty in difficulties %}
-                          <div id='{{ difficulty.name }}'>
-                              <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
-                                  <span class="indicator"></span>
-                                  {{ difficulty.name | upper}}
-                              </button>
-                          </div>
-                          {% endfor %}
-                      </div>
-                  </div>
-                  </div>
+    
+    
+                    <!--Eras menu-->
+                    <div class="wrap-collabsible"> 
+                    <input id="collapsible-eras" class="toggle" type="checkbox"> 
+                    <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
+                    <div class="collapsible-content">
+                        <div class="content-inner">
+                        <button id="all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
+                        {% for era in eras %}
+                        <div id='{{ era.name }}'>
+                            <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
+                                <span class="indicator"></span>
+                                {{ era.name }}
+                            </button>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                    </div>
   
   
-                  <!--Eras menu-->
-                  <div class="wrap-collabsible"> 
-                  <input id="collapsible-eras" class="toggle" type="checkbox"> 
-                  <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
-                  <div class="collapsible-content">
-                      <div class="content-inner">
-                      <button id="all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
-                      {% for era in eras %}
-                      <div id='{{ era.name }}'>
-                          <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
-                              <span class="indicator"></span>
-                              {{ era.name }}
-                          </button>
+                    <!--Settings menu-->
+            <div class="wrap-collabsible"> 
+              <input id="collapsible-settings" class="toggle" type="checkbox"> 
+              <label for="collapsible-settings" class="lbl-toggle">settings</label>
+              <div class="collapsible-content">
+                  <div class="content-inner">
+                      <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
+                          <div class="slider-container">
+                              <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
+                              <input type="range" min="10" max="100" value="10" step="10" class="slider" id="questionSlider">
                           </div>
-                      {% endfor %}
+                          <div class="slider-container">
+                              <div id="perQuestionLabel" class="slider-label">5s / QUESTION</div>
+                              <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
+                          </div>
+          
+                          <div class="slider-container">
+                              <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
+                              <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
+                          </div>
                       </div>
+            
+                        <button id="fullscreen-btn" class="menu-button" onclick="toggleFullscreen()">TOGGLE FULLSCREEN</button>
+  
+            
+  
+  
+                      
                   </div>
+              </div>
+          </div>
+          
+  
+                    <div id="character">
+                      <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
                   </div>
-
-
-                  <!--Settings menu-->
-          <div class="wrap-collabsible"> 
-            <input id="collapsible-settings" class="toggle" type="checkbox"> 
-            <label for="collapsible-settings" class="lbl-toggle">settings</label>
-            <div class="collapsible-content">
-                <div class="content-inner">
-                    <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
-                        <div class="slider-container">
-                            <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
-                            <input type="range" min="10" max="100" value="10" step="10" class="slider" id="questionSlider">
-                        </div>
-                        <div class="slider-container">
-                            <div id="perQuestionLabel" class="slider-label">5s / QUESTION</div>
-                            <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
-                        </div>
-        
-                        <div class="slider-container">
-                            <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
-                            <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
-                        </div>
-                    </div>
-          
-                      <button id="fullscreen-btn" class="menu-button" onclick="toggleFullscreen()">TOGGLE FULLSCREEN</button>
-
-          
-
-
-                    
-                </div>
-            </div>
-        </div>
-        
-
-                  <div id="character">
-                    <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
-                </div>
-
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS (Popper.js included) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-
-
-<script src="{% static 'triviolivia.js' %}"></script>
-
-
-{% endblock %}
+  
+                      </div>
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+      <!-- Bootstrap JS (Popper.js included) -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  </body>
+  </html>
+  
+  
+  <script src="{% static 'triviolivia.js' %}"></script>
+  
+  
+  {% endblock %}
