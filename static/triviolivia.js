@@ -11767,7 +11767,7 @@ character2.style.height = "100%";
 const svg = character2.querySelector("svg");
 if (svg) {
   svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
-  svg.style.width = "100%";
+  svg.style.width = "30%";
   svg.style.height = "100%";
 }
 
