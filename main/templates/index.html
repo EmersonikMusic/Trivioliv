@@ -1039,6 +1039,10 @@ input[type='checkbox'] {
 <!-- JavaScript for mobile dropdown functionality -->
 <script>
 function toggleMobileDropdown(id) {
+    // Get the clicked button and dropdown
+    const dropdownContent = document.getElementById(id);
+    const buttonElement = event.currentTarget;
+    
     // Close all dropdowns first
     const dropdowns = document.getElementsByClassName('mobile-dropdown-content');
     for (let i = 0; i < dropdowns.length; i++) {
@@ -1047,8 +1051,34 @@ function toggleMobileDropdown(id) {
         }
     }
     
+    // Position the dropdown relative to the button
+    if (!dropdownContent.classList.contains('show')) {
+        const buttonRect = buttonElement.getBoundingClientRect();
+        dropdownContent.style.top = (buttonRect.bottom + window.scrollY) + 'px';
+    }
+    
     // Toggle the selected dropdown
-    document.getElementById(id).classList.toggle('show');
+    dropdownContent.classList.toggle('show');
+    
+    // Scroll to ensure dropdown is visible if needed
+    if (dropdownContent.classList.contains('show')) {
+        setTimeout(() => {
+            const dropdownRect = dropdownContent.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            
+            // If dropdown extends beyond viewport, scroll to show it
+            if (dropdownRect.bottom > viewportHeight) {
+                const scrollAmount = Math.min(
+                    dropdownRect.bottom - viewportHeight + 20,
+                    buttonRect.top - 20
+                );
+                window.scrollBy({
+                    top: scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }, 50);
+    }
 }
 
 // Function to sync slider values between mobile and desktop
@@ -1085,27 +1115,41 @@ window.onclick = function(event) {
 
 .mobile-dropdown-content {
     display: none;
-    position: absolute;
+    position: fixed;
     left: 0;
+    right: 0;
     background-color: #f9f9f9;
-    min-width: 250px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1000;
-    max-height: 70vh;
+    max-height: 60vh;
     overflow-y: auto;
-    padding: 10px;
+    padding: 15px;
+    width: 100%;
+    top: auto; /* Position will be set by JavaScript */
 }
 
 .mobile-dropdown-content.show {
     display: block;
 }
 
+/* Add some spacing between buttons in dropdown menus */
+.mobile-dropdown-content .button,
+.mobile-dropdown-content .all-none-btn {
+    margin: 5px 0;
+    width: 100%;
+    text-align: left;
+    padding: 8px 10px;
+}
+
+/* Make sure sliders are visible and have proper spacing */
+.mobile-dropdown-content .slider-container {
+    margin: 15px 0;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .mobile-dropdown-content {
-        width: 100vw;
-        left: 50%;
-        transform: translateX(-50%);
+    .mobile-dropdown {
+        position: static; /* Allow for better positioning of dropdown */
     }
 }
 </style>
