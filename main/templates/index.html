@@ -385,6 +385,24 @@ p {
     color: white;
 }
 
+
+.login-button {
+    display: flex;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 11px;
+    text-align: right;
+    height: 20px;
+    padding: 0px;
+    margin: 1px 0;
+    border: none;
+    font-weight: 950;
+    cursor: pointer;
+    border-radius: 2px;
+    color: white;
+}
+
         /* Mobile button styles */
         .mobile-menu .menu-button {
             flex-basis: 50%;
@@ -922,7 +940,7 @@ input[type='checkbox'] {
                         </div>
                     </div>
                     <div class="hamburger-menu dropdown">
-                        <div class="login">
+                        <div class="login-button">
                             {% if user.is_authenticated %}
                             <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
                             <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
