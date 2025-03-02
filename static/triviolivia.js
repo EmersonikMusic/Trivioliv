@@ -1,4 +1,6 @@
-// Dictionary holding HTML content
+document.body.style.background = "#7938cf";
+      
+      // Dictionary holding HTML content
 const contentDict = {
 
   "economy": `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
