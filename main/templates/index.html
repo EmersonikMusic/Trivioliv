@@ -814,54 +814,6 @@ input[type='checkbox'] {
         }
 
 
-
-
-
-/* CSS to try to make all mobile work */
-/* Add these styles to your existing CSS */
-
-/* Fix for mobile menu getting cut off */
-@media (max-width: 767px) {
-    .container-fluid {
-        height: auto;
-        min-height: 100vh;
-        padding-bottom: 10px;
-        overflow: auto;
-    }
-    
-    .row {
-        flex-wrap: nowrap;
-        flex-direction: column;
-    }
-    
-    .game-area {
-        flex: 1;
-        height: 70vh; /* Reduce height to leave room for menu */
-    }
-    
-    .mobile-menu {
-        position: relative;
-        margin-top: 10px;
-    }
-    
-    /* Fix for iOS Safari */
-    body, html {
-        overflow: auto;
-        position: relative;
-        height: 100%;
-    }
-}
-
-/* Add this to fix iOS 100vh issue with a fallback */
-@supports (-webkit-touch-callout: none) {
-    .container-fluid {
-        height: -webkit-fill-available;
-    }
-    
-    .game-area {
-        max-height: -webkit-fill-available;
-    }
-}
     </style>
 </head>
 <body>
