@@ -777,6 +777,42 @@ input[type='checkbox'] {
             50% { transform: translateY(-15px); opacity: 1; }
         }
 
+
+/* Logo stuff */
+        .logo-container {
+            text-align: center;
+        }
+        
+        .logo {
+            display: inline-block;
+        }
+        
+        .main-text {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ff5722;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .main-text:hover {
+            transform: scale(1.05);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .domain {
+            font-size: 0.9rem;
+            color: #999;
+            font-weight: 300;
+            vertical-align: baseline;
+            letter-spacing: 0;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
@@ -786,7 +822,11 @@ input[type='checkbox'] {
             <div class="col-md-9 d-flex flex-column h-100">
                 <div class="game-area">
                   <div class="header">
-                    <div>TRIVIOLIVIA.com</div>
+                    <div class="logo-container">
+                        <div class="logo">
+                            <span class="main-text">TRIVIOLIVIA</span><span class="domain">.com</span>
+                        </div>
+                    </div>
                     <div class="hamburger-menu dropdown">
                         <div class="login">
                             {% if user.is_authenticated %}
