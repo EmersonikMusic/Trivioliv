@@ -448,9 +448,11 @@ p {
     align-items: center;
     justify-content: center;
     height: 100%;
-    padding: 5px;
     width: 30%;
-    overflow: visible; /* Changed from hidden to visible */
+    padding: 5px;
+    overflow: visible; /* Ensure overflow is visible, not hidden */
+    position: relative; /* Add positioning context */
+    z-index: 10; /* Ensure it appears above other elements */
 }
         
         /* Desktop character container specific */
