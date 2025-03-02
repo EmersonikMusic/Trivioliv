@@ -255,16 +255,17 @@
     color: white;
 }
 
-.game-area {
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    color: white;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
+        .game-area {
+            height: calc(var(--vh, 1vh) * 70);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            height: calc(100% - 30px);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
 
         .question-container {
     flex: 3;
@@ -824,8 +825,6 @@ input[type='checkbox'] {
         overflow-y: auto;
         overflow-x: hidden;
         position: relative;
-        margin: 0;
-    padding: 0;
     }
     
     /* Fix the container height */
