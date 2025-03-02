@@ -9726,8 +9726,8 @@ const mainGameFunction = async () => {
     character.innerHTML =
       contentDict[globalData[i].category_name.toLowerCase()];
 
-      const character2 = document.getElementById("character2");
-    character2.innerHTML =
+      const character2 = document.getElementById("character");
+    character.innerHTML =
       contentDict[globalData[i].category_name.toLowerCase()];
 
     let questionTimeRemaining = time_per_question * 10;
@@ -9942,7 +9942,7 @@ function updateLabel(labelId, value, unit) {
 }
 
 //Function to change START GAME text
-function changeButtonText() {{
+function changeButtonText() {
   var button = document.getElementById("start-pause");
   if (pauseFlag === false) {
     button.textContent = "PAUSE GAME";
@@ -9960,25 +9960,6 @@ function changeButtonText() {{
     pauseFlag = false;
   }
 }
-{
-  var button = document.getElementById("start-pause2");
-  if (pauseFlag === false) {
-    button.textContent = "PAUSE GAME";
-    progressBar.style.animationPlayState = "running";
-    pauseFlag = true;
-  } else if (pauseFlag === true && game_started === true) {
-    button.textContent = "RESUME GAME";
-    progressBar.style.animationPlayState = "paused";
-    pauseFlag = false;
-    console.log("Game paused.");
-    document.getElementById("demo").innerHTML =
-      'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
-  } else {
-    button.textContent = "START GAME";
-    pauseFlag = false;
-  }
-}}
-
 
 // New function to disable banned categories
 function disableBannedCategories() {}
