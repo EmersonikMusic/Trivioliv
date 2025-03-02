@@ -863,9 +863,9 @@ input[type='checkbox'] {
         flex: 1;
         display: flex;
         flex-direction: column;
-        margin-bottom: 28vh; /* Increased space for the menu to prevent overlap */
+        margin-bottom: 26vh; /* Reduced spacing between areas */
         overflow: hidden;
-        padding-bottom: 10px; /* Additional padding at the bottom */
+        padding-bottom: 0; /* Removed bottom padding */
     }
     
     /* Content areas flex to fill game area */
@@ -873,12 +873,13 @@ input[type='checkbox'] {
         flex: 1;
         overflow-y: auto;
         min-height: 0; /* Critical for flex child to respect parent boundaries */
-        padding-bottom: 5px; /* Extra padding to keep content away from the bottom */
+        padding-bottom: 0; /* Removed extra padding */
     }
     
-    /* Make sure the bottom "Press START to play" text doesn't overlap with mobile menu */
+    /* Make sure loading bar sits flush at the bottom of the game area */
     .loading-bar-container {
-        margin-bottom: 5px;
+        margin-top: auto;
+        margin-bottom: 0;
     }
     
     /* Fixed mobile menu at bottom */
@@ -905,7 +906,6 @@ input[type='checkbox'] {
         margin-top: auto;
     }
 }
-
     </style>
 </head>
 <body>
