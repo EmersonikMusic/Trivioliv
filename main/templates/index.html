@@ -816,6 +816,61 @@ input[type='checkbox'] {
             letter-spacing: 0;
         }
 
+        /* Mobile fix - place this at the end of your CSS file */
+
+@media (max-width: 767px) {
+    /* First, let's fix the overflow issues */
+    body, html {
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+    }
+    
+    /* Fix the container height */
+    .container-fluid {
+        height: auto;
+        min-height: 100%;
+        padding-bottom: 28vh; /* Make room for the menu */
+        position: relative;
+        overflow: visible;
+    }
+    
+    /* Adjust the game area */
+    .game-area {
+        height: auto;
+        min-height: 65vh;
+        flex: 1;
+    }
+    
+    /* Position the mobile menu at the bottom */
+    .mobile-menu {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        height: 25vh;
+        margin: 0;
+        border-radius: 12px 12px 0 0;
+    }
+    
+    /* Ensure the row doesn't cause issues */
+    .row.h-100 {
+        height: auto !important;
+    }
+    
+    /* Make sure columns behave */
+    .col-md-9, .col-md-3 {
+        height: auto;
+    }
+    
+    /* Ensure question container doesn't overflow */
+    .question-container, .answer-container {
+        max-height: 40vh;
+        overflow-y: auto;
+    }
+}
 
     </style>
 </head>
