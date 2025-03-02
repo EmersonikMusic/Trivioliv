@@ -816,7 +816,7 @@ input[type='checkbox'] {
             letter-spacing: 0;
         }
 
-       /* Mobile fix - replace your current mobile media query with this */
+      /* Mobile fix - replace your current mobile media query with this */
 @media (max-width: 767px) {
     /* Reset core elements */
     body, html {
@@ -863,8 +863,9 @@ input[type='checkbox'] {
         flex: 1;
         display: flex;
         flex-direction: column;
-        margin-bottom: 25vh; /* Space for the menu */
+        margin-bottom: 28vh; /* Increased space for the menu to prevent overlap */
         overflow: hidden;
+        padding-bottom: 10px; /* Additional padding at the bottom */
     }
     
     /* Content areas flex to fill game area */
@@ -872,6 +873,12 @@ input[type='checkbox'] {
         flex: 1;
         overflow-y: auto;
         min-height: 0; /* Critical for flex child to respect parent boundaries */
+        padding-bottom: 5px; /* Extra padding to keep content away from the bottom */
+    }
+    
+    /* Make sure the bottom "Press START to play" text doesn't overlap with mobile menu */
+    .loading-bar-container {
+        margin-bottom: 5px;
     }
     
     /* Fixed mobile menu at bottom */
@@ -884,6 +891,8 @@ input[type='checkbox'] {
         margin: 0;
         border-radius: 12px 12px 0 0;
         z-index: 1000;
+        padding-top: 5px; /* Added padding to push content down slightly */
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Optional: add shadow to visually separate */
     }
     
     /* Hide desktop menu completely */
