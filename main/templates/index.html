@@ -351,11 +351,21 @@
         }
 
         .character-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible; /* Changed from hidden to visible */
+    height: 100%;
+    width: 100%;
+}
+
+.character-container img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Ensures the image maintains its aspect ratio */
+}
 
         /* Animation for the character */
         @keyframes bob {
@@ -374,12 +384,14 @@
         
         /* Mobile character container specific */
         .mobile-character {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            padding: 5px;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 5px;
+    width: 30%;
+    overflow: visible; /* Changed from hidden to visible */
+}
         
         /* Desktop character container specific */
         .desktop-character {
