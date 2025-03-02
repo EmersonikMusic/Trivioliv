@@ -11707,6 +11707,7 @@ const mainGameFunction = async () => {
   answerDisplay.innerHTML = "";
 
   // displayLoadingAnimation()
+  displayLoader();
 
   try {
     const fetchPromise = fetchData(moddedUrl);
@@ -12208,4 +12209,28 @@ function simulateFullscreenOnMobile() {
     // If the page is added to the home screen, we can assume it's "fullscreen"
     document.body.style.marginTop = "0px";
   }
+}
+
+
+// Display loader animation
+function displayLoader() {
+  // Get the question container
+  const questionContainer = document.querySelector('.question-container');
+  
+  // Clear any previous content
+  questionContainer.innerHTML = '';
+  
+  // Create the loader element
+  const loader = document.createElement('div');
+  loader.className = 'loader';
+  
+  // Create three dot elements
+  for (let i = 0; i < 3; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    loader.appendChild(dot);
+  }
+  
+  // Add the loader to the question container
+  questionContainer.appendChild(loader);
 }
