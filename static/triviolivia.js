@@ -11445,7 +11445,7 @@ let globalData;
 
 // Default message in bar
 document.getElementById("demo").innerHTML =
-  'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START GAME</span> to play.';
+  'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play.';
 
 // Async JS that kind of scares me, honestly
 async function fetchData(moddedUrl) {
