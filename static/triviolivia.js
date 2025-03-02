@@ -11760,7 +11760,7 @@ const mainGameFunction = async () => {
       const character2 = document.getElementById("character2");
 character2.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
 character2.style.display = "block";
-character2.style.width = "70%";
+character2.style.width = "60%";
 character2.style.height = "100%";
 
 // Make sure SVG scales properly
