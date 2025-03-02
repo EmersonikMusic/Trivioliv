@@ -816,7 +816,7 @@ input[type='checkbox'] {
             letter-spacing: 0;
         }
 
-      /* Mobile fix - replace your current mobile media query with this */
+       /* Mobile fix - replace your current mobile media query with this */
 @media (max-width: 767px) {
     /* Reset core elements */
     body, html {
@@ -828,29 +828,27 @@ input[type='checkbox'] {
         width: 100%;
         top: 0;
         left: 0;
-        background: #6f2da8; /* Match the app's background color */
     }
     
-    /* Main container setup with consistent padding */
+    /* Main container setup */
     .container-fluid {
         height: 100%;
         width: 100%;
         position: absolute;
         display: flex;
         flex-direction: column;
-        padding: 0; /* Remove default padding */
+        padding: 5px;
         overflow: hidden;
     }
     
-    /* Apply consistent padding to the row instead */
+    /* Row takes up all available space */
     .row.h-100 {
         flex: 1;
         width: 100%;
         margin: 0;
-        padding: 8px 8px 0 8px; /* Consistent padding on top and sides, none at bottom */
     }
     
-    /* Column takes up full width on mobile with proper padding */
+    /* Column takes up full width on mobile */
     .col-md-9 {
         width: 100%;
         padding: 0;
@@ -865,10 +863,8 @@ input[type='checkbox'] {
         flex: 1;
         display: flex;
         flex-direction: column;
-        margin-bottom: 26vh; /* Space for the menu */
+        margin-bottom: 25vh; /* Space for the menu */
         overflow: hidden;
-        border-radius: 12px;
-        background-color: rgba(0, 0, 0, 0.3);
     }
     
     /* Content areas flex to fill game area */
@@ -878,32 +874,29 @@ input[type='checkbox'] {
         min-height: 0; /* Critical for flex child to respect parent boundaries */
     }
     
-    /* Make sure loading bar sits flush at the bottom of the game area */
-    .loading-bar-container {
-        margin-top: auto;
-        margin-bottom: 0;
-    }
-    
-    /* Fixed mobile menu at bottom with consistent padding */
+    /* Fixed mobile menu at bottom */
     .mobile-menu {
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
         height: 25vh;
-        margin: 0 8px 8px 8px; /* Consistent padding on bottom and sides */
+        margin: 0;
         border-radius: 12px 12px 0 0;
         z-index: 1000;
-        padding-top: 5px; /* Added padding to push content down slightly */
-        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Optional: add shadow to visually separate */
-        background-color: rgba(0, 0, 0, 0.3); /* Ensure proper background */
     }
     
     /* Hide desktop menu completely */
     .col-md-3 {
         display: none;
     }
+    
+    /* Make sure loading bar stays at bottom of game area */
+    .loading-bar-container {
+        margin-top: auto;
+    }
 }
+
     </style>
 </head>
 <body>
