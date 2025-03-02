@@ -12235,3 +12235,48 @@ function displayLoader() {
   questionContainer.appendChild(loader);
 }
 
+
+// Fix for mobile viewport height issues
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to handle resize and orientation changes
+  function handleMobileLayout() {
+      // Only apply on mobile
+      if (window.innerWidth <= 767) {
+          // Get the real viewport height
+          let vh = window.innerHeight;
+          
+          // Set the height of game area to leave space for menu
+          let gameArea = document.querySelector('.game-area');
+          let mobileMenu = document.querySelector('.mobile-menu');
+          
+          // Calculate height based on viewport
+          let menuHeight = vh * 0.25; // 25vh
+          let gameHeight = vh - menuHeight - 20; // Subtract menu height and some padding
+          
+          // Apply heights
+          if (gameArea && mobileMenu) {
+              gameArea.style.height = gameHeight + 'px';
+              mobileMenu.style.height = menuHeight + 'px';
+          }
+      }
+  }
+  
+  // Initial call
+  handleMobileLayout();
+  
+  // Add event listeners
+  window.addEventListener('resize', handleMobileLayout);
+  window.addEventListener('orientationchange', handleMobileLayout);
+  
+  // Fix for iOS Safari when address bar appears/disappears
+  window.addEventListener('scroll', function() {
+      // Throttle to avoid performance issues
+      if (!this.ticking) {
+          window.requestAnimationFrame(function() {
+              handleMobileLayout();
+              this.ticking = false;
+          });
+          this.ticking = true;
+      }
+  });
+});
