@@ -9676,7 +9676,7 @@ const mainGameFunction = async () => {
   questionDisplay.innerHTML = "";
   answerDisplay.innerHTML = "";
 
-  // displayLoadingAnimation()
+  displayLoadingAnimation()
 
   try {
     const fetchPromise = fetchData(moddedUrl);
