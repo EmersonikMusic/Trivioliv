@@ -11677,11 +11677,11 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 function displayLoadingAnimation() {
   const container = document.getElementById('question-container');
   
-  // // Remove any existing loader to prevent duplicates
-  // const existingLoader = container.querySelector('.loader');
-  // if (existingLoader) {
-  //     existingLoader.remove();
-  // }
+  // Remove any existing loader to prevent duplicates
+  const existingLoader = container.querySelector('.loader');
+  if (existingLoader) {
+      existingLoader.remove();
+  }
 
   // Create loader div
   const loader = document.createElement('div');
@@ -11706,7 +11706,7 @@ const mainGameFunction = async () => {
   questionDisplay.innerHTML = "";
   answerDisplay.innerHTML = "";
 
-  displayLoadingAnimation()
+  // displayLoadingAnimation()
 
   try {
     const fetchPromise = fetchData(moddedUrl);
