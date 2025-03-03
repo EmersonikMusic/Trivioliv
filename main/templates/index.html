@@ -911,14 +911,14 @@ input[type='checkbox'] {
 
 
 /* Mobile menu dropdowns */
-/* Additional CSS for Mobile Menu Dropdowns */
+//* Mobile Menu Dropdown Styles */
 .mobile-dropdown {
   position: relative;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
 }
 
 .mobile-dropdown .wrap-collabsible {
@@ -927,7 +927,7 @@ input[type='checkbox'] {
   margin: 0;
 }
 
-.mobile-dropdown .lbl-toggle {
+.mobile-toggle-label {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -935,60 +935,65 @@ input[type='checkbox'] {
   height: 100%;
   margin: 0;
   padding: 0;
-  border-radius: 0;
-  background: transparent;
+  text-align: center;
 }
 
-.mobile-dropdown .lbl-toggle:hover {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+.mobile-toggle-label::before {
+  display: none; /* Hide the triangle icon on mobile */
 }
 
-.mobile-dropdown .collapsible-content {
+.mobile-collapsible-content {
   position: absolute;
-  top: -350px; /* Adjust as needed to position above buttons */
+  bottom: 100%; /* Position above the buttons */
   left: 0;
   width: 100vw;
-  z-index: 1010;
+  z-index: 1100;
   background: rgba(0, 0, 0, 0.9);
-  border-radius: 12px;
+  border-radius: 12px 12px 0 0;
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease-in-out;
 }
 
-.mobile-dropdown .toggle:checked + .lbl-toggle + .collapsible-content {
-  max-height: 350px; /* Adjust based on content height */
+.mobile-toggle:checked + .lbl-toggle + .mobile-collapsible-content {
+  max-height: 70vh; /* Allow more space for the dropdown content */
   overflow-y: auto;
 }
 
-.mobile-dropdown .content-inner {
-  max-height: 300px;
-  overflow-y: auto;
+.mobile-content-inner {
   padding: 10px;
+  max-height: 65vh;
+  overflow-y: auto;
 }
 
-.mobile-dropdown .button {
+.mobile-content-inner button {
   width: 100%;
   text-align: left;
-  padding: 8px 5px;
-  font-size: 12px;
-  margin: 3px 0;
-  border-radius: 4px;
+  padding: 10px 5px;
+  font-size: 14px;
+  margin: 5px 0;
+  border-radius: 6px;
+  height: auto;
+  display: flex;
+  align-items: center;
   background: rgba(0, 0, 0, 0.3);
 }
 
-.mobile-dropdown .slider-container {
-  margin: 10px 0;
+.mobile-content-inner .all-none-btn {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px 8px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
 }
 
-/* Sync mobile sliders with desktop sliders */
-#mobileQuestionSlider, #mobilePerQuestionSlider, #mobilePerAnswerSlider {
-  width: 100%;
+/* Slider styles for mobile */
+.mobile-content-inner .slider-container {
+  margin: 15px 0;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Make sure mobile menu can handle dropdowns */
+/* Ensure mobile menu has proper height for dropdowns */
 @media (max-width: 767px) {
   .mobile-menu {
     height: 25vh;
@@ -999,6 +1004,25 @@ input[type='checkbox'] {
   .mobile-buttons {
     overflow: visible;
     position: relative;
+    z-index: 1000;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+  
+  /* Ensure the dropdown menus appear above the game area */
+  .mobile-collapsible-content {
+    overflow-y: auto;
+    max-height: 70vh;
+    border-radius: 12px 12px 0 0;
+  }
+  
+  /* Hide any open desktop dropdowns when on mobile */
+  @media (max-width: 767px) {
+    .desktop-menu .collapsible-content {
+      display: none !important;
+    }
   }
 }
     </style>
@@ -1049,18 +1073,17 @@ input[type='checkbox'] {
                 </div>
                 
                 <!-- Mobile Menu Bar (visible only on small screens) -->
-                <!-- Mobile Menu Bar (visible only on small screens) -->
 <div class="menu-container mobile-menu">
     <div class="mobile-buttons">
       <div button id="start-pause2" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
-      
+  
       <!-- Mobile Categories dropdown -->
       <div class="menu-button mobile-dropdown">
         <div class="wrap-collabsible"> 
-          <input id="mobile-collapsible-categories" class="toggle" type="checkbox"> 
-          <label for="mobile-collapsible-categories" class="lbl-toggle">CATEGORIES</label>
-          <div class="collapsible-content">
-            <div class="content-inner">
+          <input id="mobile-collapsible-categories" class="toggle mobile-toggle" type="checkbox"> 
+          <label for="mobile-collapsible-categories" class="lbl-toggle mobile-toggle-label">CATEGORIES</label>
+          <div class="collapsible-content mobile-collapsible-content">
+            <div class="content-inner mobile-content-inner">
               <button id="mobile-all-none-categories" class="all-none-btn" onclick="allNoneCategoriesButton()">ALL/NONE</button>
               {% for category in categories %}
               <div id='mobile-{{ category.name | slugify }}'>
@@ -1076,14 +1099,14 @@ input[type='checkbox'] {
       </div>
       
       <div button id="refetch-and-restart2" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
-      
+  
       <!-- Mobile Difficulties dropdown -->
       <div class="menu-button mobile-dropdown">
         <div class="wrap-collabsible"> 
-          <input id="mobile-collapsible-difficulties" class="toggle" type="checkbox"> 
-          <label for="mobile-collapsible-difficulties" class="lbl-toggle">DIFFICULTIES</label>
-          <div class="collapsible-content">
-            <div class="content-inner">
+          <input id="mobile-collapsible-difficulties" class="toggle mobile-toggle" type="checkbox"> 
+          <label for="mobile-collapsible-difficulties" class="lbl-toggle mobile-toggle-label">DIFFICULTIES</label>
+          <div class="collapsible-content mobile-collapsible-content">
+            <div class="content-inner mobile-content-inner">
               <button id="mobile-all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE</button>
               {% for difficulty in difficulties %}
               <div id='mobile-{{ difficulty.name }}'>
@@ -1097,14 +1120,14 @@ input[type='checkbox'] {
           </div>
         </div>
       </div>
-      
+  
       <!-- Mobile Settings dropdown -->
       <div class="menu-button mobile-dropdown">
         <div class="wrap-collabsible"> 
-          <input id="mobile-collapsible-settings" class="toggle" type="checkbox"> 
-          <label for="mobile-collapsible-settings" class="lbl-toggle">SETTINGS</label>
-          <div class="collapsible-content">
-            <div class="content-inner">
+          <input id="mobile-collapsible-settings" class="toggle mobile-toggle" type="checkbox"> 
+          <label for="mobile-collapsible-settings" class="lbl-toggle mobile-toggle-label">SETTINGS</label>
+          <div class="collapsible-content mobile-collapsible-content">
+            <div class="content-inner mobile-content-inner">
               <div id="mobile_menu_question_time" class="menu_question_time">
                 <div class="slider-container">
                   <div id="mobileQuestionLabel" class="slider-label">10 QUESTIONS</div>
@@ -1124,14 +1147,14 @@ input[type='checkbox'] {
           </div>
         </div>
       </div>
-      
+  
       <!-- Mobile Eras dropdown -->
       <div class="menu-button mobile-dropdown">
         <div class="wrap-collabsible"> 
-          <input id="mobile-collapsible-eras" class="toggle" type="checkbox"> 
-          <label for="mobile-collapsible-eras" class="lbl-toggle">ERAS</label>
-          <div class="collapsible-content">
-            <div class="content-inner">
+          <input id="mobile-collapsible-eras" class="toggle mobile-toggle" type="checkbox"> 
+          <label for="mobile-collapsible-eras" class="lbl-toggle mobile-toggle-label">ERAS</label>
+          <div class="collapsible-content mobile-collapsible-content">
+            <div class="content-inner mobile-content-inner">
               <button id="mobile-all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
               {% for era in eras %}
               <div id='mobile-{{ era.name }}'>

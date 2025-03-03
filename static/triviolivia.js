@@ -12300,87 +12300,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-// Slider synching attempt by claude
-
-// Sync mobile and desktop sliders
+//Mobile menu dropdown and syncing?
+// Mobile dropdown handling
 document.addEventListener("DOMContentLoaded", function() {
-  // Question slider sync
-  const questionSlider = document.getElementById("questionSlider");
-  const mobileQuestionSlider = document.getElementById("mobileQuestionSlider");
-  const questionLabel = document.getElementById("questionLabel");
-  const mobileQuestionLabel = document.getElementById("mobileQuestionLabel");
-  
-  // Per question slider sync
-  const perQuestionSlider = document.getElementById("perQuestionSlider");
-  const mobilePerQuestionSlider = document.getElementById("mobilePerQuestionSlider");
-  const perQuestionLabel = document.getElementById("perQuestionLabel");
-  const mobilePerQuestionLabel = document.getElementById("mobilePerQuestionLabel");
-  
-  // Per answer slider sync
-  const perAnswerSlider = document.getElementById("perAnswerSlider");
-  const mobilePerAnswerSlider = document.getElementById("mobilePerAnswerSlider");
-  const perAnswerLabel = document.getElementById("perAnswerLabel");
-  const mobilePerAnswerLabel = document.getElementById("mobilePerAnswerLabel");
-  
-  // Question slider events
-  questionSlider.addEventListener("input", function() {
-    const value = this.value;
-    questionLabel.textContent = value + " QUESTIONS";
-    mobileQuestionSlider.value = value;
-    mobileQuestionLabel.textContent = value + " QUESTIONS";
-  });
-  
-  mobileQuestionSlider.addEventListener("input", function() {
-    const value = this.value;
-    mobileQuestionLabel.textContent = value + " QUESTIONS";
-    questionSlider.value = value;
-    questionLabel.textContent = value + " QUESTIONS";
-  });
-  
-  // Per question slider events
-  perQuestionSlider.addEventListener("input", function() {
-    const value = this.value;
-    perQuestionLabel.textContent = value + "s / QUESTION";
-    mobilePerQuestionSlider.value = value;
-    mobilePerQuestionLabel.textContent = value + "s / QUESTION";
-  });
-  
-  mobilePerQuestionSlider.addEventListener("input", function() {
-    const value = this.value;
-    mobilePerQuestionLabel.textContent = value + "s / QUESTION";
-    perQuestionSlider.value = value;
-    perQuestionLabel.textContent = value + "s / QUESTION";
-  });
-  
-  // Per answer slider events
-  perAnswerSlider.addEventListener("input", function() {
-    const value = this.value;
-    perAnswerLabel.textContent = value + "s / ANSWER";
-    mobilePerAnswerSlider.value = value;
-    mobilePerAnswerLabel.textContent = value + "s / ANSWER";
-  });
-  
-  mobilePerAnswerSlider.addEventListener("input", function() {
-    const value = this.value;
-    mobilePerAnswerLabel.textContent = value + "s / ANSWER";
-    perAnswerSlider.value = value;
-    perAnswerLabel.textContent = value + "s / ANSWER";
-  });
-  
-  // Initialize mobile sliders with desktop values
-  mobileQuestionSlider.value = questionSlider.value;
-  mobileQuestionLabel.textContent = questionLabel.textContent;
-  
-  mobilePerQuestionSlider.value = perQuestionSlider.value;
-  mobilePerQuestionLabel.textContent = perQuestionLabel.textContent;
-  
-  mobilePerAnswerSlider.value = perAnswerSlider.value;
-  mobilePerAnswerLabel.textContent = perAnswerLabel.textContent;
-});
-
-// Make sure only one mobile dropdown can be open at a time
-document.addEventListener("DOMContentLoaded", function() {
+  // Get all mobile toggle checkboxes
   const mobileToggles = [
     document.getElementById("mobile-collapsible-categories"),
     document.getElementById("mobile-collapsible-difficulties"),
@@ -12388,16 +12311,100 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("mobile-collapsible-eras")
   ];
   
+  // Ensure only one mobile menu is open at a time
   mobileToggles.forEach(toggle => {
-    toggle.addEventListener("change", function() {
-      if (this.checked) {
-        // Close all other toggles
-        mobileToggles.forEach(otherToggle => {
-          if (otherToggle !== this) {
-            otherToggle.checked = false;
-          }
-        });
-      }
-    });
+    if (toggle) {
+      toggle.addEventListener("change", function() {
+        if (this.checked) {
+          // Close all other toggles
+          mobileToggles.forEach(otherToggle => {
+            if (otherToggle && otherToggle !== this && otherToggle.checked) {
+              otherToggle.checked = false;
+            }
+          });
+        }
+      });
+    }
   });
+  
+  // Sync mobile sliders with desktop sliders
+  const setupSliderSync = (desktopId, mobileId, labelDesktopId, labelMobileId, unit) => {
+    const desktopSlider = document.getElementById(desktopId);
+    const mobileSlider = document.getElementById(mobileId);
+    const desktopLabel = document.getElementById(labelDesktopId);
+    const mobileLabel = document.getElementById(labelMobileId);
+    
+    if (desktopSlider && mobileSlider && desktopLabel && mobileLabel) {
+      // Set initial mobile values
+      mobileSlider.value = desktopSlider.value;
+      mobileLabel.textContent = desktopLabel.textContent;
+      
+      // Sync desktop to mobile
+      desktopSlider.addEventListener("input", function() {
+        const value = this.value;
+        mobileSlider.value = value;
+        mobileLabel.textContent = value + unit;
+      });
+      
+      // Sync mobile to desktop
+      mobileSlider.addEventListener("input", function() {
+        const value = this.value;
+        desktopSlider.value = value;
+        desktopLabel.textContent = value + unit;
+        mobileLabel.textContent = value + unit;
+        
+        // Trigger the corresponding function
+        if (desktopId === "questionSlider") {
+          change_number_of_questions(value);
+        } else if (desktopId === "perQuestionSlider") {
+          change_time_per_question(value);
+        } else if (desktopId === "perAnswerSlider") {
+          change_time_per_answer(value);
+        }
+      });
+    }
+  };
+  
+  // Setup syncing for all sliders
+  setupSliderSync("questionSlider", "mobileQuestionSlider", "questionLabel", "mobileQuestionLabel", " QUESTIONS");
+  setupSliderSync("perQuestionSlider", "mobilePerQuestionSlider", "perQuestionLabel", "mobilePerQuestionLabel", "s / QUESTION");
+  setupSliderSync("perAnswerSlider", "mobilePerAnswerSlider", "perAnswerLabel", "mobilePerAnswerLabel", "s / ANSWER");
+  
+  // Close mobile dropdowns when clicking outside
+  document.addEventListener("click", function(event) {
+    // Check if click is outside any dropdown
+    if (!event.target.closest(".mobile-dropdown") && !event.target.classList.contains("mobile-toggle-label")) {
+      mobileToggles.forEach(toggle => {
+        if (toggle && toggle.checked) {
+          toggle.checked = false;
+        }
+      });
+    }
+  });
+  
+  // Update the changeButtonText function to handle both desktop and mobile buttons
+  const originalChangeButtonText = window.changeButtonText;
+  window.changeButtonText = function() {
+    const desktopButton = document.getElementById("start-pause");
+    const mobileButton = document.getElementById("start-pause2");
+    
+    if (pauseFlag === false) {
+      if (desktopButton) desktopButton.textContent = "PAUSE GAME";
+      if (mobileButton) mobileButton.textContent = "PAUSE";
+      progressBar.style.animationPlayState = "running";
+      pauseFlag = true;
+    } else if (pauseFlag === true && game_started === true) {
+      if (desktopButton) desktopButton.textContent = "RESUME GAME";
+      if (mobileButton) mobileButton.textContent = "RESUME";
+      progressBar.style.animationPlayState = "paused";
+      pauseFlag = false;
+      console.log("Game paused.");
+      document.getElementById("demo").innerHTML =
+        'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
+    } else {
+      if (desktopButton) desktopButton.textContent = "START";
+      if (mobileButton) mobileButton.textContent = "START";
+      pauseFlag = false;
+    }
+  };
 });
