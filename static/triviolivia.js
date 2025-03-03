@@ -12296,3 +12296,108 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   });
 });
+
+
+
+
+
+// Slider synching attempt by claude
+
+// Sync mobile and desktop sliders
+document.addEventListener("DOMContentLoaded", function() {
+  // Question slider sync
+  const questionSlider = document.getElementById("questionSlider");
+  const mobileQuestionSlider = document.getElementById("mobileQuestionSlider");
+  const questionLabel = document.getElementById("questionLabel");
+  const mobileQuestionLabel = document.getElementById("mobileQuestionLabel");
+  
+  // Per question slider sync
+  const perQuestionSlider = document.getElementById("perQuestionSlider");
+  const mobilePerQuestionSlider = document.getElementById("mobilePerQuestionSlider");
+  const perQuestionLabel = document.getElementById("perQuestionLabel");
+  const mobilePerQuestionLabel = document.getElementById("mobilePerQuestionLabel");
+  
+  // Per answer slider sync
+  const perAnswerSlider = document.getElementById("perAnswerSlider");
+  const mobilePerAnswerSlider = document.getElementById("mobilePerAnswerSlider");
+  const perAnswerLabel = document.getElementById("perAnswerLabel");
+  const mobilePerAnswerLabel = document.getElementById("mobilePerAnswerLabel");
+  
+  // Question slider events
+  questionSlider.addEventListener("input", function() {
+    const value = this.value;
+    questionLabel.textContent = value + " QUESTIONS";
+    mobileQuestionSlider.value = value;
+    mobileQuestionLabel.textContent = value + " QUESTIONS";
+  });
+  
+  mobileQuestionSlider.addEventListener("input", function() {
+    const value = this.value;
+    mobileQuestionLabel.textContent = value + " QUESTIONS";
+    questionSlider.value = value;
+    questionLabel.textContent = value + " QUESTIONS";
+  });
+  
+  // Per question slider events
+  perQuestionSlider.addEventListener("input", function() {
+    const value = this.value;
+    perQuestionLabel.textContent = value + "s / QUESTION";
+    mobilePerQuestionSlider.value = value;
+    mobilePerQuestionLabel.textContent = value + "s / QUESTION";
+  });
+  
+  mobilePerQuestionSlider.addEventListener("input", function() {
+    const value = this.value;
+    mobilePerQuestionLabel.textContent = value + "s / QUESTION";
+    perQuestionSlider.value = value;
+    perQuestionLabel.textContent = value + "s / QUESTION";
+  });
+  
+  // Per answer slider events
+  perAnswerSlider.addEventListener("input", function() {
+    const value = this.value;
+    perAnswerLabel.textContent = value + "s / ANSWER";
+    mobilePerAnswerSlider.value = value;
+    mobilePerAnswerLabel.textContent = value + "s / ANSWER";
+  });
+  
+  mobilePerAnswerSlider.addEventListener("input", function() {
+    const value = this.value;
+    mobilePerAnswerLabel.textContent = value + "s / ANSWER";
+    perAnswerSlider.value = value;
+    perAnswerLabel.textContent = value + "s / ANSWER";
+  });
+  
+  // Initialize mobile sliders with desktop values
+  mobileQuestionSlider.value = questionSlider.value;
+  mobileQuestionLabel.textContent = questionLabel.textContent;
+  
+  mobilePerQuestionSlider.value = perQuestionSlider.value;
+  mobilePerQuestionLabel.textContent = perQuestionLabel.textContent;
+  
+  mobilePerAnswerSlider.value = perAnswerSlider.value;
+  mobilePerAnswerLabel.textContent = perAnswerLabel.textContent;
+});
+
+// Make sure only one mobile dropdown can be open at a time
+document.addEventListener("DOMContentLoaded", function() {
+  const mobileToggles = [
+    document.getElementById("mobile-collapsible-categories"),
+    document.getElementById("mobile-collapsible-difficulties"),
+    document.getElementById("mobile-collapsible-settings"),
+    document.getElementById("mobile-collapsible-eras")
+  ];
+  
+  mobileToggles.forEach(toggle => {
+    toggle.addEventListener("change", function() {
+      if (this.checked) {
+        // Close all other toggles
+        mobileToggles.forEach(otherToggle => {
+          if (otherToggle !== this) {
+            otherToggle.checked = false;
+          }
+        });
+      }
+    });
+  });
+});
