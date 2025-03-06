@@ -11992,11 +11992,11 @@ function updateLabel(labelId, value, unit) {
 function changeButtonText() {
   var button = document.getElementById("start-pause");
   if (pauseFlag === false) {
-    button.textContent = "PAUSE GAME";
+    button.textContent = "PAUSE";
     progressBar.style.animationPlayState = "running";
     pauseFlag = true;
   } else if (pauseFlag === true && game_started === true) {
-    button.textContent = "RESUME GAME";
+    button.textContent = "RESUME";
     progressBar.style.animationPlayState = "paused";
     pauseFlag = false;
     console.log("Game paused.");
