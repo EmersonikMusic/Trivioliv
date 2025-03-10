@@ -12908,48 +12908,65 @@ function enable_era(clicked_id) {
   }
 }
 
-//Functions for ALL/NONE buttons
+//Functions for ALL/NONE buttons - FIXED VERSION
 function allNoneCategoriesButton() {
   if (all_none_categories == true) {
-    for (var i = 0; i < categoryButtons.length; i++) {
-      categoryButtons[String(i)].classList.remove("active");
-      categoryButtons[String(i)].classList.add("inactive");
-      disable_category(String(i + 1));
-      document.getElementById("demo").innerHTML =
-        "You must select at least one category before starting the game.";
+    // Currently showing "ALL", so disable all categories
+    category_list = []; // Clear existing list
+    
+    // Loop through each category button and disable it
+    for (let i = 0; i < categoryButtons.length; i++) {
+      categoryButtons[i].classList.remove("active");
+      categoryButtons[i].classList.add("inactive");
+      disable_category(String(i + 1)); // Use existing function to maintain consistency
     }
+    
     all_none_categories = false;
+    document.getElementById("demo").innerHTML =
+      "You must select at least one category before starting the game.";
   } else {
-    category_list = [];
-    for (var i = 0; i < categoryButtons.length; i++) {
-      categoryButtons[String(i)].classList.remove("inactive");
-      categoryButtons[String(i)].classList.add("active");
-      enable_category(String(i + 1));
+    // Currently showing "NONE", so enable all categories
+    category_list = []; // Clear the list to enable all
+    
+    // Loop through each category button and enable it
+    for (let i = 0; i < categoryButtons.length; i++) {
+      categoryButtons[i].classList.remove("inactive");
+      categoryButtons[i].classList.add("active");
+      enable_category(String(i + 1)); // Use existing function to maintain consistency
     }
+    
     all_none_categories = true;
     document.getElementById("demo").innerHTML =
       "You have enabled all categories.";
   }
-  console.log(categoryButtons);
 }
 
 function allNoneDifficultiesButton() {
   if (all_none_difficulties == true) {
-    for (var i = 0; i < difficultyButtons.length; i++) {
-      difficultyButtons[String(i)].classList.remove("active");
-      difficultyButtons[String(i)].classList.add("inactive");
-      disable_difficulty(String(i + 1));
-      document.getElementById("demo").innerHTML =
-        "You must select at least one difficulty before starting the game.";
+    // Currently showing "ALL", so disable all difficulties
+    difficulty_list = []; // Clear existing list
+    
+    // Loop through each difficulty button and disable it
+    for (let i = 0; i < difficultyButtons.length; i++) {
+      difficultyButtons[i].classList.remove("active");
+      difficultyButtons[i].classList.add("inactive");
+      disable_difficulty(String(i + 1)); // Use existing function to maintain consistency
     }
+    
     all_none_difficulties = false;
+    document.getElementById("demo").innerHTML =
+      "You must select at least one difficulty before starting the game.";
   } else {
-    difficulty_list = [];
-    for (var i = 0; i < difficultyButtons.length; i++) {
-      difficultyButtons[String(i)].classList.remove("inactive");
-      difficultyButtons[String(i)].classList.add("active");
-      enable_difficulty(String(i + 1));
+    // Currently showing "NONE", so enable all difficulties
+    difficulty_list = []; // Clear the list to enable all
+    
+    // Loop through each difficulty button and enable it
+    for (let i = 0; i < difficultyButtons.length; i++) {
+      difficultyButtons[i].classList.remove("inactive");
+      difficultyButtons[i].classList.add("active");
+      enable_difficulty(String(i + 1)); // Use existing function to maintain consistency
     }
+    
     all_none_difficulties = true;
     document.getElementById("demo").innerHTML =
       "You have enabled all difficulties.";
@@ -12958,23 +12975,33 @@ function allNoneDifficultiesButton() {
 
 function allNoneErasButton() {
   if (all_none_eras == true) {
-    for (var i = 0; i < eraButtons.length; i++) {
-      eraButtons[String(i)].classList.remove("active");
-      eraButtons[String(i)].classList.add("inactive");
-      document.getElementById("demo").innerHTML =
-        "You must select at least one era before starting the game.";
-      disable_era(String(i + 1));
+    // Currently showing "ALL", so disable all eras
+    era_list = []; // Clear existing list
+    
+    // Loop through each era button and disable it
+    for (let i = 0; i < eraButtons.length; i++) {
+      eraButtons[i].classList.remove("active");
+      eraButtons[i].classList.add("inactive");
+      disable_era(String(i + 1)); // Use existing function to maintain consistency
     }
+    
     all_none_eras = false;
+    document.getElementById("demo").innerHTML =
+      "You must select at least one era before starting the game.";
   } else {
-    category_list = [];
-    for (var i = 0; i < eraButtons.length; i++) {
-      eraButtons[String(i)].classList.remove("inactive");
-      eraButtons[String(i)].classList.add("active");
-      enable_era(String(i + 1));
+    // Currently showing "NONE", so enable all eras
+    era_list = []; // Fixed: Changed from category_list to era_list
+    
+    // Loop through each era button and enable it
+    for (let i = 0; i < eraButtons.length; i++) {
+      eraButtons[i].classList.remove("inactive");
+      eraButtons[i].classList.add("active");
+      enable_era(String(i + 1)); // Use existing function to maintain consistency
     }
+    
     all_none_eras = true;
-    document.getElementById("demo").innerHTML = "You have enabled all eras.";
+    document.getElementById("demo").innerHTML =
+      "You have enabled all eras.";
   }
 }
 
@@ -13310,4 +13337,3 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   });
 });
-
