@@ -12545,44 +12545,14 @@ function confirm_reset() {
 
 // Function for indicator light toggle
 function toggleIndicator(button) {
-  // Find all buttons with the same data attribute
-  let dataAttribute = null;
-  
-  if (button.hasAttribute('data-category-id')) {
-    dataAttribute = `[data-category-id="${button.getAttribute('data-category-id')}"]`;
-  } else if (button.hasAttribute('data-difficulty-id')) {
-    dataAttribute = `[data-difficulty-id="${button.getAttribute('data-difficulty-id')}"]`;
-  } else if (button.hasAttribute('data-era-id')) {
-    dataAttribute = `[data-era-id="${button.getAttribute('data-era-id')}"]`;
-  }
-  
-  if (dataAttribute) {
-    const relatedButtons = document.querySelectorAll(dataAttribute);
-    
-    if (button.classList.contains("active")) {
-      // Update all related buttons
-      relatedButtons.forEach(btn => {
-        btn.classList.remove("active");
-        btn.classList.add("inactive");
-      });
-    } else {
-      // Update all related buttons
-      relatedButtons.forEach(btn => {
-        btn.classList.remove("inactive");
-        btn.classList.add("active");
-      });
-    }
+  if (button.classList.contains("active")) {
+    button.classList.remove("active");
+    button.classList.add("inactive");
+    console.log(button);
   } else {
-    // Fallback to original behavior if data attributes aren't found
-    if (button.classList.contains("active")) {
-      button.classList.remove("active");
-      button.classList.add("inactive");
-      console.log(button);
-    } else {
-      button.classList.remove("inactive");
-      button.classList.add("active");
-      console.log(button);
-    }
+    button.classList.remove("inactive");
+    button.classList.add("active");
+    console.log(button);
   }
 }
 
@@ -12605,9 +12575,9 @@ checkboxes.forEach((checkbox) => {
 
 //Functions to toggle categories, difficulties, and eras
 function toggle_categories(clicked_id) {
-  // Find all instances of this category button (desktop and mobile)
-  const categoryId = parseInt(clicked_id);
-  const categoryButtons = document.querySelectorAll(`[data-category-id="${categoryId}"]`);
+  // Find the button index for visual update (buttons are zero-indexed, IDs are 1-indexed)
+  const buttonIndex = parseInt(clicked_id) - 1;
+  const button = categoryButtons[buttonIndex];
   
   if (!category_list.includes(clicked_id)) {
     // Not in list (currently enabled) -> disable it
@@ -12617,11 +12587,11 @@ function toggle_categories(clicked_id) {
       " category.";
     category_list.push(clicked_id);
     
-    // Update all instances of this button
-    categoryButtons.forEach(button => {
+    // Update visual state
+    if (button) {
       button.classList.remove("active");
       button.classList.add("inactive");
-    });
+    }
     
     console.log("Category disabled:", clicked_id);
     console.log("Updated category list:", category_list);
@@ -12633,11 +12603,11 @@ function toggle_categories(clicked_id) {
       " category.";
     category_list.splice(category_list.indexOf(clicked_id), 1);
     
-    // Update all instances of this button
-    categoryButtons.forEach(button => {
+    // Update visual state
+    if (button) {
       button.classList.remove("inactive");
       button.classList.add("active");
-    });
+    }
     
     console.log("Category enabled:", clicked_id);
     console.log("Updated category list:", category_list);
@@ -12645,9 +12615,9 @@ function toggle_categories(clicked_id) {
 }
 
 function toggle_difficulties(clicked_id) {
-  // Find all instances of this difficulty button (desktop and mobile)
-  const difficultyId = parseInt(clicked_id);
-  const difficultyButtons = document.querySelectorAll(`[data-difficulty-id="${difficultyId}"]`);
+  // Find the button index for visual update (buttons are zero-indexed, IDs are 1-indexed)
+  const buttonIndex = parseInt(clicked_id) - 1;
+  const button = difficultyButtons[buttonIndex];
   
   if (!difficulty_list.includes(clicked_id)) {
     // Not in list (currently enabled) -> disable it
@@ -12657,11 +12627,11 @@ function toggle_difficulties(clicked_id) {
       " difficulty.";
     difficulty_list.push(clicked_id);
     
-    // Update all instances of this button
-    difficultyButtons.forEach(button => {
+    // Update visual state
+    if (button) {
       button.classList.remove("active");
       button.classList.add("inactive");
-    });
+    }
     
     console.log("Difficulty disabled:", clicked_id);
     console.log("Updated difficulty list:", difficulty_list);
@@ -12673,11 +12643,11 @@ function toggle_difficulties(clicked_id) {
       " difficulty.";
     difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
     
-    // Update all instances of this button
-    difficultyButtons.forEach(button => {
+    // Update visual state
+    if (button) {
       button.classList.remove("inactive");
       button.classList.add("active");
-    });
+    }
     
     console.log("Difficulty enabled:", clicked_id);
     console.log("Updated difficulty list:", difficulty_list);
@@ -12685,9 +12655,9 @@ function toggle_difficulties(clicked_id) {
 }
 
 function toggle_eras(clicked_id) {
-  // Find all instances of this era button (desktop and mobile)
-  const eraId = parseInt(clicked_id);
-  const eraButtons = document.querySelectorAll(`[data-era-id="${eraId}"]`);
+  // Find the button index for visual update (buttons are zero-indexed, IDs are 1-indexed)
+  const buttonIndex = parseInt(clicked_id) - 1;
+  const button = eraButtons[buttonIndex];
   
   if (!era_list.includes(clicked_id)) {
     // Not in list (currently enabled) -> disable it
@@ -12695,11 +12665,11 @@ function toggle_eras(clicked_id) {
       "You have disabled the " + era_number_identities[clicked_id] + " era.";
     era_list.push(clicked_id);
     
-    // Update all instances of this button
-    eraButtons.forEach(button => {
+    // Update visual state
+    if (button) {
       button.classList.remove("active");
       button.classList.add("inactive");
-    });
+    }
     
     console.log("Era disabled:", clicked_id);
     console.log("Updated era list:", era_list);
@@ -12709,11 +12679,11 @@ function toggle_eras(clicked_id) {
       "You have enabled the " + era_number_identities[clicked_id] + " era.";
     era_list.splice(era_list.indexOf(clicked_id), 1);
     
-    // Update all instances of this button
-    eraButtons.forEach(button => {
+    // Update visual state
+    if (button) {
       button.classList.remove("inactive");
       button.classList.add("active");
-    });
+    }
     
     console.log("Era enabled:", clicked_id);
     console.log("Updated era list:", era_list);
@@ -12782,6 +12752,9 @@ const showAnswer = (displayed_answer) => {
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
+
+
+
 // Loading animation display function
 function displayLoadingAnimation() {
   const container = document.getElementById('question-container');
@@ -12806,6 +12779,8 @@ function displayLoadingAnimation() {
   // Append loader to container
   container.appendChild(loader);
 }
+
+
 
 const mainGameFunction = async () => {
   document.getElementById("demo").innerHTML = "Fetching questions...";
@@ -12864,23 +12839,23 @@ const mainGameFunction = async () => {
     character.innerHTML =
       contentDict[globalData[i].category_name.toLowerCase()];
 
-    const character2 = document.getElementById("character2");
-    character2.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
-    character2.style.display = "block";
+      const character2 = document.getElementById("character2");
+character2.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
+character2.style.display = "block";
 
-    // Ensure SVG maintains its original dimensions
-    const svg = character2.querySelector("svg");
-    if (svg) {
-      // Preserve original aspect ratio without scaling to fit container
-      svg.setAttribute("preserveAspectRatio", "xMidYMid");
-      
-      // Remove any width/height styles that might cause stretching
-      svg.style.width = "auto";
-      svg.style.height = "auto";
-      
-      // Ensure the SVG is visible but not stretched
-      svg.style.maxWidth = "100%";
-    }
+// Ensure SVG maintains its original dimensions
+const svg = character2.querySelector("svg");
+if (svg) {
+  // Preserve original aspect ratio without scaling to fit container
+  svg.setAttribute("preserveAspectRatio", "xMidYMid");
+  
+  // Remove any width/height styles that might cause stretching
+  svg.style.width = "auto";
+  svg.style.height = "auto";
+  
+  // Ensure the SVG is visible but not stretched
+  svg.style.maxWidth = "100%";
+}
 
     let questionTimeRemaining = time_per_question * 10;
     let answerTimeRemaining = time_per_answer * 10;
@@ -13001,9 +12976,6 @@ function enable_era(clicked_id) {
 
 //Functions for ALL/NONE buttons - FIXED VERSION
 function allNoneCategoriesButton() {
-  // Find all category buttons in both desktop and mobile views
-  const allCategoryButtons = document.querySelectorAll("[data-category-id]");
-  
   if (all_none_categories == true) {
     // Currently showing "ALL", so disable all categories
     category_list = []; // Clear existing list
@@ -13013,11 +12985,11 @@ function allNoneCategoriesButton() {
       category_list.push(id);
     });
     
-    // Update visual state of all buttons
-    allCategoryButtons.forEach(button => {
-      button.classList.remove("active");
-      button.classList.add("inactive");
-    });
+    // Update visual state of buttons
+    for (let i = 0; i < categoryButtons.length; i++) {
+      categoryButtons[i].classList.remove("active");
+      categoryButtons[i].classList.add("inactive");
+    }
     
     all_none_categories = false;
     document.getElementById("demo").innerHTML =
@@ -13026,11 +12998,11 @@ function allNoneCategoriesButton() {
     // Currently showing "NONE", so enable all categories
     category_list = []; // Clear the list to enable all
     
-    // Update visual state of all buttons
-    allCategoryButtons.forEach(button => {
-      button.classList.remove("inactive");
-      button.classList.add("active");
-    });
+    // Update visual state of buttons
+    for (let i = 0; i < categoryButtons.length; i++) {
+      categoryButtons[i].classList.remove("inactive");
+      categoryButtons[i].classList.add("active");
+    }
     
     all_none_categories = true;
     document.getElementById("demo").innerHTML =
@@ -13040,9 +13012,6 @@ function allNoneCategoriesButton() {
 }
 
 function allNoneDifficultiesButton() {
-  // Find all difficulty buttons in both desktop and mobile views
-  const allDifficultyButtons = document.querySelectorAll("[data-difficulty-id]");
-  
   if (all_none_difficulties == true) {
     // Currently showing "ALL", so disable all difficulties
     difficulty_list = []; // Clear existing list
@@ -13052,11 +13021,11 @@ function allNoneDifficultiesButton() {
       difficulty_list.push(id);
     });
     
-    // Update visual state of all buttons
-    allDifficultyButtons.forEach(button => {
-      button.classList.remove("active");
-      button.classList.add("inactive");
-    });
+    // Update visual state of buttons
+    for (let i = 0; i < difficultyButtons.length; i++) {
+      difficultyButtons[i].classList.remove("active");
+      difficultyButtons[i].classList.add("inactive");
+    }
     
     all_none_difficulties = false;
     document.getElementById("demo").innerHTML =
@@ -13065,11 +13034,11 @@ function allNoneDifficultiesButton() {
     // Currently showing "NONE", so enable all difficulties
     difficulty_list = []; // Clear the list to enable all
     
-    // Update visual state of all buttons
-    allDifficultyButtons.forEach(button => {
-      button.classList.remove("inactive");
-      button.classList.add("active");
-    });
+    // Update visual state of buttons
+    for (let i = 0; i < difficultyButtons.length; i++) {
+      difficultyButtons[i].classList.remove("inactive");
+      difficultyButtons[i].classList.add("active");
+    }
     
     all_none_difficulties = true;
     document.getElementById("demo").innerHTML =
@@ -13079,9 +13048,6 @@ function allNoneDifficultiesButton() {
 }
 
 function allNoneErasButton() {
-  // Find all era buttons in both desktop and mobile views
-  const allEraButtons = document.querySelectorAll("[data-era-id]");
-  
   if (all_none_eras == true) {
     // Currently showing "ALL", so disable all eras
     era_list = []; // Clear existing list
@@ -13091,11 +13057,11 @@ function allNoneErasButton() {
       era_list.push(id);
     });
     
-    // Update visual state of all buttons
-    allEraButtons.forEach(button => {
-      button.classList.remove("active");
-      button.classList.add("inactive");
-    });
+    // Update visual state of buttons
+    for (let i = 0; i < eraButtons.length; i++) {
+      eraButtons[i].classList.remove("active");
+      eraButtons[i].classList.add("inactive");
+    }
     
     all_none_eras = false;
     document.getElementById("demo").innerHTML =
@@ -13104,11 +13070,11 @@ function allNoneErasButton() {
     // Currently showing "NONE", so enable all eras
     era_list = []; // Fixed: Changed from category_list to era_list
     
-    // Update visual state of all buttons
-    allEraButtons.forEach(button => {
-      button.classList.remove("inactive");
-      button.classList.add("active");
-    });
+    // Update visual state of buttons
+    for (let i = 0; i < eraButtons.length; i++) {
+      eraButtons[i].classList.remove("inactive");
+      eraButtons[i].classList.add("active");
+    }
     
     all_none_eras = true;
     document.getElementById("demo").innerHTML =
@@ -13143,37 +13109,49 @@ function updateLabel(labelId, value, unit) {
 
 //Function to change START GAME text
 function changeButtonText() {
-  var desktopButton = document.getElementById("start-pause");
-  var mobileButton = document.getElementById("start-pause2");
-  
+  var button = document.getElementById("start-pause");
   if (pauseFlag === false) {
-    // Update both buttons to PAUSE
-    const newText = "PAUSE";
-    desktopButton.textContent = newText;
-    if (mobileButton) mobileButton.textContent = newText;
-    
+    button.textContent = "PAUSE";
     progressBar.style.animationPlayState = "running";
     pauseFlag = true;
   } else if (pauseFlag === true && game_started === true) {
-    // Update both buttons to RESUME
-    const newText = "RESUME";
-    desktopButton.textContent = newText;
-    if (mobileButton) mobileButton.textContent = newText;
-    
+    button.textContent = "RESUME";
     progressBar.style.animationPlayState = "paused";
     pauseFlag = false;
     console.log("Game paused.");
     document.getElementById("demo").innerHTML =
-      'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME</span> to continue.';
+      'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
   } else {
-    // Update both buttons to START
-    const newText = "START";
-    desktopButton.textContent = newText;
-    if (mobileButton) mobileButton.textContent = newText;
-    
+    button.textContent = "START";
     pauseFlag = false;
   }
 }
+
+
+//Function SUGGESTED by CLAUDE to change both START GAME text
+// function changeButtonText() {
+//   var button = document.getElementById("start-pause");
+//   var button2 = document.getElementById("start-pause2");
+  
+//   if (pauseFlag === false) {
+//     button.textContent = "PAUSE GAME";
+//     button2.textContent = "PAUSE GAME";
+//     progressBar.style.animationPlayState = "running";
+//     pauseFlag = true;
+//   } else if (pauseFlag === true && game_started === true) {
+//     button.textContent = "RESUME GAME";
+//     button2.textContent = "RESUME GAME";
+//     progressBar.style.animationPlayState = "paused";
+//     pauseFlag = false;
+//     console.log("Game paused.");
+//     document.getElementById("demo").innerHTML =
+//       'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
+//   } else {
+//     button.textContent = "START GAME";
+//     button2.textContent = "START GAME";
+//     pauseFlag = false;
+//   }
+// }
 
 // New function to disable banned categories
 function disableBannedCategories() {}
@@ -13368,6 +13346,7 @@ function simulateFullscreenOnMobile() {
   }
 }
 
+
 // Display loader animation
 function displayLoader() {
   // Get the question container
@@ -13391,32 +13370,30 @@ function displayLoader() {
   questionContainer.appendChild(loader);
 }
 
+
 // Fix for mobile viewport height issues
 document.addEventListener('DOMContentLoaded', function() {
   // Function to handle resize and orientation changes
   function handleMobileLayout() {
-    // Only apply on mobile
-    if (window.innerWidth <= 767) {
-      // Get the real viewport height
-      let vh = window.innerHeight;
-      
-      // Set the height of game area to leave space for menu
-      let gameArea = document.querySelector('.game-area');
-      let mobileMenu = document.querySelector('.mobile-menu');
-      
-      // Calculate height based on viewport
-      let menuHeight = vh * 0.25; // 25vh
-      let gameHeight = vh - menuHeight - 20; // Subtract menu height and some padding
-      
-      // Apply heights
-      if (gameArea && mobileMenu) {
-        gameArea.style.height = gameHeight + 'px';
-        mobileMenu.style.height = menuHeight + 'px';
+      // Only apply on mobile
+      if (window.innerWidth <= 767) {
+          // Get the real viewport height
+          let vh = window.innerHeight;
+          
+          // Set the height of game area to leave space for menu
+          let gameArea = document.querySelector('.game-area');
+          let mobileMenu = document.querySelector('.mobile-menu');
+          
+          // Calculate height based on viewport
+          let menuHeight = vh * 0.25; // 25vh
+          let gameHeight = vh - menuHeight - 20; // Subtract menu height and some padding
+          
+          // Apply heights
+          if (gameArea && mobileMenu) {
+              gameArea.style.height = gameHeight + 'px';
+              mobileMenu.style.height = menuHeight + 'px';
+          }
       }
-    }
-    
-    // Make sure button states are synced after layout changes
-    syncButtonStates();
   }
   
   // Initial call
@@ -13428,121 +13405,13 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Fix for iOS Safari when address bar appears/disappears
   window.addEventListener('scroll', function() {
-    // Throttle to avoid performance issues
-    if (!this.ticking) {
-      window.requestAnimationFrame(function() {
-        handleMobileLayout();
-        this.ticking = false;
-      });
-      this.ticking = true;
-    }
+      // Throttle to avoid performance issues
+      if (!this.ticking) {
+          window.requestAnimationFrame(function() {
+              handleMobileLayout();
+              this.ticking = false;
+          });
+          this.ticking = true;
+      }
   });
-  
-  // Function to add data attributes to buttons on page load
-  function addDataAttributes() {
-    // Add data attributes to category buttons
-    document.querySelectorAll('.category').forEach(button => {
-      // Try to get ID from element ID or from onclick attribute
-      let categoryId;
-      if (button.id && !isNaN(button.id)) {
-        categoryId = button.id;
-      } else if (button.getAttribute('onclick')) {
-        const match = button.getAttribute('onclick').match(/toggle_categories\(['"]?(\d+)['"]?\)/);
-        if (match && match[1]) {
-          categoryId = match[1];
-        }
-      }
-      
-      if (categoryId) {
-        button.setAttribute('data-category-id', categoryId);
-      }
-    });
-    
-    // Add data attributes to difficulty buttons
-    document.querySelectorAll('.difficulty').forEach(button => {
-      // Try to get ID from element ID or from onclick attribute
-      let difficultyId;
-      if (button.id && !isNaN(button.id)) {
-        difficultyId = button.id;
-      } else if (button.getAttribute('onclick')) {
-        const match = button.getAttribute('onclick').match(/toggle_difficulties\(['"]?(\d+)['"]?\)/);
-        if (match && match[1]) {
-          difficultyId = match[1];
-        }
-      }
-      
-      if (difficultyId) {
-        button.setAttribute('data-difficulty-id', difficultyId);
-      }
-    });
-    
-    // Add data attributes to era buttons
-    document.querySelectorAll('.era').forEach(button => {
-      // Try to get ID from element ID or from onclick attribute
-      let eraId;
-      if (button.id && !isNaN(button.id)) {
-        eraId = button.id;
-      } else if (button.getAttribute('onclick')) {
-        const match = button.getAttribute('onclick').match(/toggle_eras\(['"]?(\d+)['"]?\)/);
-        if (match && match[1]) {
-          eraId = match[1];
-        }
-      }
-      
-      if (eraId) {
-        button.setAttribute('data-era-id', eraId);
-      }
-    });
-  }
-  
-  // Call the function to add data attributes
-  addDataAttributes();
 });
-
-// Function to sync the state of all buttons (desktop and mobile)
-function syncButtonStates() {
-  // Sync category buttons
-  Object.keys(category_number_identities).forEach(id => {
-    const isDisabled = category_list.includes(id);
-    const buttons = document.querySelectorAll(`[data-category-id="${id}"]`);
-    buttons.forEach(button => {
-      if (isDisabled) {
-        button.classList.remove('active');
-        button.classList.add('inactive');
-      } else {
-        button.classList.remove('inactive');
-        button.classList.add('active');
-      }
-    });
-  });
-  
-  // Sync difficulty buttons
-  Object.keys(difficulty_number_identities).forEach(id => {
-    const isDisabled = difficulty_list.includes(id);
-    const buttons = document.querySelectorAll(`[data-difficulty-id="${id}"]`);
-    buttons.forEach(button => {
-      if (isDisabled) {
-        button.classList.remove('active');
-        button.classList.add('inactive');
-      } else {
-        button.classList.remove('inactive');
-        button.classList.add('active');
-      }
-    });
-  });
-  
-  // Sync era buttons
-  Object.keys(era_number_identities).forEach(id => {
-    const isDisabled = era_list.includes(id);
-    const buttons = document.querySelectorAll(`[data-era-id="${id}"]`);
-    buttons.forEach(button => {
-      if (isDisabled) {
-        button.classList.remove('active');
-        button.classList.add('inactive');
-      } else {
-        button.classList.remove('inactive');
-        button.classList.add('active');
-      }
-    });
-  });
-}
