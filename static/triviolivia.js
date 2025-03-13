@@ -12287,7 +12287,299 @@ fill: #4e0b1b;
 </svg>`,
 };
 
-// Unsure
+//Function SUGGESTED by CLAUDE to change both START GAME text
+// function changeButtonText() {
+//   var button = document.getElementById("start-pause");
+//   var button2 = document.getElementById("start-pause2");
+  
+//   if (pauseFlag === false) {
+//     button.textContent = "PAUSE GAME";
+//     button2.textContent = "PAUSE GAME";
+//     progressBar.style.animationPlayState = "running";
+//     pauseFlag = true;
+//   } else if (pauseFlag === true && game_started === true) {
+//     button.textContent = "RESUME GAME";
+//     button2.textContent = "RESUME GAME";
+//     progressBar.style.animationPlayState = "paused";
+//     pauseFlag = false;
+//     console.log("Game paused.");
+//     document.getElementById("demo").innerHTML =
+//       'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
+//   } else {
+//     button.textContent = "START GAME";
+//     button2.textContent = "START GAME";
+//     pauseFlag = false;
+//   }
+// }
+
+// New function to disable banned categories
+function disableBannedCategories() {}
+
+//Dynamic question and answer timer bar attempt
+let progressBar = document.getElementById("progress");
+let startButton = document.getElementById("startButton");
+let pauseButton = document.getElementById("pauseButton");
+let isPaused = true;
+
+// FIXED: Updated to properly reflect the time_per_question and time_per_answer values
+startButton.addEventListener("click", function () {
+  if (isPaused) {
+    progressBar.style.animation = "none";
+    progressBar.offsetHeight; // Trigger reflow to reset animation
+    progressBar.style.animation = `depleteProgress ${time_per_question}s linear forwards`;
+    progressBar.style.animationPlayState = "running";
+    isPaused = false;
+  } else {
+    progressBar.style.animation = "none";
+    progressBar.offsetHeight; // Trigger reflow
+    progressBar.style.animation = `depleteProgress ${time_per_answer}s linear forwards`;
+    progressBar.style.animationPlayState = "running";
+  }
+});
+
+pauseButton.addEventListener("click", function () {
+  if (!isPaused) {
+    progressBar.style.animationPlayState = "running";
+    isPaused = false;
+  } else {
+    progressBar.style.animationPlayState = "paused";
+    isPaused = true;
+  }
+});
+
+// FIXED: Updated to properly reset animation with current time values
+progressBar.addEventListener("animationiteration", function () {
+  if (!isPaused) {
+    progressBar.style.animation = "none";
+    progressBar.offsetHeight; // Trigger reflow
+    if (game_started) {
+      // If in question mode, use question time
+      progressBar.style.animation = `depleteProgress ${time_per_question}s linear forwards`;
+    } else {
+      // If in answer mode, use answer time
+      progressBar.style.animation = `depleteProgress ${time_per_answer}s linear forwards`;
+    }
+    progressBar.style.animationPlayState = "running";
+  }
+});
+
+// Makes pressing space bar start/pause the game
+document.addEventListener("keydown", function (event) {
+  if (event.code === "Space") {
+    // Checks if the spacebar is pressed
+    event.preventDefault(); // Prevents the page from scrolling when pressing space
+    document.getElementById("start-game").click(); // Simulates a button click
+  }
+});
+
+// Refetch questions button function
+function refetchAndRestart() {
+  console.log("Refetching questions with currently selected game settings...");
+
+  game_started = false;
+  menu_hidden = false;
+  current_question_category = null;
+  pauseFlag = false;
+  globalData = [];
+
+  baseUrl = "https://triviolivia.herokuapp.com/api/questions";
+  moddedUrl = "";
+  queryParams = [];
+  globalData = [];
+
+  dontFetchDataIfAllDeselected();
+
+  console.log("Refetch request completed");
+}
+
+// Reset settings button
+function resetSettings() {
+  console.log("Resetting the game to its original settings...");
+
+  all_none_categories = false;
+  allNoneCategoriesButton();
+  all_none_difficulties = false;
+  allNoneDifficultiesButton();
+  all_none_eras = false;
+  allNoneErasButton();
+
+  document.getElementById("demo").innerHTML =
+    'You have enabled all categories, difficulties, and eras. Press <span id="refetch-and-restart" style="cursor: pointer; display: inline;" onclick="refetchAndRestart()">REFETCH AND RESTART</span> to play again.';
+
+  game_started = false;
+  menu_hidden = false;
+  current_question_category = null;
+  pauseFlag = false;
+  category_list = [];
+  difficulty_list = [];
+  era_list = [];
+
+  baseUrl = "https://triviolivia.herokuapp.com/api/questions";
+  moddedUrl = "";
+  queryParams = [];
+  globalData = [];
+
+  console.log("Game settings reset completed.");
+}
+
+// About Us stuff
+function displayAboutUs() {
+  pauseFlag = true;
+  const card = document.getElementById("about-us-card");
+  const overlay = document.getElementById("overlay");
+  card.style.display = "block";
+  overlay.style.display = "block";
+}
+
+function closeAboutUs() {
+  pauseFlag = false;
+  const card = document.getElementById("about-us-card");
+  const overlay = document.getElementById("overlay");
+  card.style.display = "none";
+  overlay.style.display = "none";
+}
+
+// Fullscreen mode attempt
+function toggleFullscreen() {
+  let elem = document.documentElement;
+
+  // Detect iOS devices (Safari or Chrome)
+  let isiOS = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  if (!isiOS) {
+    // Use the Fullscreen API for Android and Desktop
+    if (
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    ) {
+      exitFullscreen();
+    } else {
+      enterFullscreen(elem);
+    }
+  } else {
+    // For iPhone and iPad, simulate fullscreen using layout tricks
+    simulateFullscreenOnMobile();
+  }
+}
+
+function enterFullscreen(element) {
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.mozRequestFullScreen) {
+    // Firefox
+    element.mozRequestFullScreen();
+  } else if (element.webkitRequestFullscreen) {
+    // Chrome, Safari, Edge, Opera
+    element.webkitRequestFullscreen();
+  } else if (element.msRequestFullscreen) {
+    // IE11
+    element.msRequestFullscreen();
+  }
+}
+
+function exitFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    // Firefox
+    document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    // Chrome, Safari, Edge, Opera
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    // IE11
+    document.msExitFullscreen();
+  }
+}
+
+function simulateFullscreenOnMobile() {
+  // Hide Safari and Chrome UI on iOS by simulating fullscreen
+  document.documentElement.style.height = "100%";
+  document.documentElement.style.overflow = "hidden";
+  document.body.style.height = "100%";
+  document.body.style.overflow = "hidden";
+
+  // Hide the address bar in Safari and Chrome (scroll trick)
+  window.scrollTo(0, 1);
+
+  // Optionally, show a prompt to add to home screen for a more app-like experience
+  if (window.matchMedia("(display-mode: standalone)").matches) {
+    // If the page is added to the home screen, we can assume it's "fullscreen"
+    document.body.style.marginTop = "0px";
+  }
+}
+
+
+// Display loader animation
+function displayLoader() {
+  // Get the question container
+  const questionContainer = document.querySelector('.question-container');
+  
+  // Clear any previous content
+  questionContainer.innerHTML = '';
+  
+  // Create the loader element
+  const loader = document.createElement('div');
+  loader.className = 'loader';
+  
+  // Create three dot elements
+  for (let i = 0; i < 3; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    loader.appendChild(dot);
+  }
+  
+  // Add the loader to the question container
+  questionContainer.appendChild(loader);
+}
+
+
+// Fix for mobile viewport height issues
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to handle resize and orientation changes
+  function handleMobileLayout() {
+      // Only apply on mobile
+      if (window.innerWidth <= 767) {
+          // Get the real viewport height
+          let vh = window.innerHeight;
+          
+          // Set the height of game area to leave space for menu
+          let gameArea = document.querySelector('.game-area');
+          let mobileMenu = document.querySelector('.mobile-menu');
+          
+          // Calculate height based on viewport
+          let menuHeight = vh * 0.25; // 25vh
+          let gameHeight = vh - menuHeight - 20; // Subtract menu height and some padding
+          
+          // Apply heights
+          if (gameArea && mobileMenu) {
+              gameArea.style.height = gameHeight + 'px';
+              mobileMenu.style.height = menuHeight + 'px';
+          }
+      }
+  }
+  
+  // Initial call
+  handleMobileLayout();
+  
+  // Add event listeners
+  window.addEventListener('resize', handleMobileLayout);
+  window.addEventListener('orientationchange', handleMobileLayout);
+  
+  // Fix for iOS Safari when address bar appears/disappears
+  window.addEventListener('scroll', function() {
+      // Throttle to avoid performance issues
+      if (!this.ticking) {
+          window.requestAnimationFrame(function() {
+              handleMobileLayout();
+              this.ticking = false;
+          });
+          this.ticking = true;
+      }
+  });
+});// Unsure
 const progressElement = document.getElementById("progress");
 
 // Declaring question and answer display
@@ -12697,18 +12989,20 @@ function change_number_of_questions(clicked_id) {
     "Game set to " + number_of_questions + " questions.";
 }
 
+// FIXED: Added proper parseInt to ensure numeric value
 function change_time_per_question(clicked_id) {
-  time_per_question = clicked_id;
+  time_per_question = parseInt(clicked_id);
   document.getElementById("demo").innerHTML =
     "Questions will display for " + time_per_question + " seconds.";
-  console.log(time_per_question);
+  console.log("Time per question set to:", time_per_question);
 }
 
+// FIXED: Added proper parseInt to ensure numeric value
 function change_time_per_answer(clicked_id) {
-  time_per_answer = clicked_id;
+  time_per_answer = parseInt(clicked_id);
   document.getElementById("demo").innerHTML =
     "Answers will display for " + time_per_answer + " seconds.";
-  console.log(time_per_answer);
+  console.log("Time per answer set to:", time_per_answer);
 }
 
 //Question class declaration
@@ -12752,9 +13046,6 @@ const showAnswer = (displayed_answer) => {
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-
-
-
 // Loading animation display function
 function displayLoadingAnimation() {
   const container = document.getElementById('question-container');
@@ -12780,8 +13071,7 @@ function displayLoadingAnimation() {
   container.appendChild(loader);
 }
 
-
-
+// FIXED: Updated main game function to correctly handle timer animations
 const mainGameFunction = async () => {
   document.getElementById("demo").innerHTML = "Fetching questions...";
 
@@ -12817,15 +13107,18 @@ const mainGameFunction = async () => {
   await delay(1000);
 
   for (let i = 0; i < number_of_questions; i++) {
+    // FIXED: Reset and apply proper animation with current time values
     if (!pauseFlag) {
+      progressBar.style.animation = "none";
+      progressBar.offsetHeight; // Trigger reflow to reset animation
+      progressBar.style.animation = `depleteProgress ${time_per_question}s linear forwards`;
       progressBar.style.animationPlayState = "running";
-      progressBar.style.animation = `depleteProgress ${time_per_question}s linear infinite`;
       isPaused = false;
     } else {
-      progressBar.style.animationPlayState = "paused";
       progressBar.style.animation = "none";
       progressBar.offsetHeight; // Trigger reflow
-      progressBar.style.animation = `depleteProgress ${time_per_answer}s linear infinite`;
+      progressBar.style.animation = `depleteProgress ${time_per_answer}s linear forwards`;
+      progressBar.style.animationPlayState = "paused";
     }
 
     while (!pauseFlag) {
@@ -12839,24 +13132,25 @@ const mainGameFunction = async () => {
     character.innerHTML =
       contentDict[globalData[i].category_name.toLowerCase()];
 
-      const character2 = document.getElementById("character2");
-character2.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
-character2.style.display = "block";
+    const character2 = document.getElementById("character2");
+    character2.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
+    character2.style.display = "block";
 
-// Ensure SVG maintains its original dimensions
-const svg = character2.querySelector("svg");
-if (svg) {
-  // Preserve original aspect ratio without scaling to fit container
-  svg.setAttribute("preserveAspectRatio", "xMidYMid");
-  
-  // Remove any width/height styles that might cause stretching
-  svg.style.width = "auto";
-  svg.style.height = "auto";
-  
-  // Ensure the SVG is visible but not stretched
-  svg.style.maxWidth = "100%";
-}
+    // Ensure SVG maintains its original dimensions
+    const svg = character2.querySelector("svg");
+    if (svg) {
+      // Preserve original aspect ratio without scaling to fit container
+      svg.setAttribute("preserveAspectRatio", "xMidYMid");
+      
+      // Remove any width/height styles that might cause stretching
+      svg.style.width = "auto";
+      svg.style.height = "auto";
+      
+      // Ensure the SVG is visible but not stretched
+      svg.style.maxWidth = "100%";
+    }
 
+    // FIXED: Using the current time values for countdown
     let questionTimeRemaining = time_per_question * 10;
     let answerTimeRemaining = time_per_answer * 10;
 
@@ -12879,6 +13173,12 @@ if (svg) {
     }
 
     showAnswer(globalData[i].answer);
+
+    // FIXED: Reset animation for answer timer
+    progressBar.style.animation = "none";
+    progressBar.offsetHeight; // Trigger reflow
+    progressBar.style.animation = `depleteProgress ${time_per_answer}s linear forwards`;
+    progressBar.style.animationPlayState = "running";
 
     while (answerTimeRemaining > 0) {
       if (!pauseFlag) {
@@ -13126,292 +13426,3 @@ function changeButtonText() {
     pauseFlag = false;
   }
 }
-
-
-//Function SUGGESTED by CLAUDE to change both START GAME text
-// function changeButtonText() {
-//   var button = document.getElementById("start-pause");
-//   var button2 = document.getElementById("start-pause2");
-  
-//   if (pauseFlag === false) {
-//     button.textContent = "PAUSE GAME";
-//     button2.textContent = "PAUSE GAME";
-//     progressBar.style.animationPlayState = "running";
-//     pauseFlag = true;
-//   } else if (pauseFlag === true && game_started === true) {
-//     button.textContent = "RESUME GAME";
-//     button2.textContent = "RESUME GAME";
-//     progressBar.style.animationPlayState = "paused";
-//     pauseFlag = false;
-//     console.log("Game paused.");
-//     document.getElementById("demo").innerHTML =
-//       'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
-//   } else {
-//     button.textContent = "START GAME";
-//     button2.textContent = "START GAME";
-//     pauseFlag = false;
-//   }
-// }
-
-// New function to disable banned categories
-function disableBannedCategories() {}
-
-//Dynamic question and answer timer bar attempt
-let progressBar = document.getElementById("progress");
-let startButton = document.getElementById("startButton");
-let pauseButton = document.getElementById("pauseButton");
-let isPaused = true;
-
-startButton.addEventListener("click", function () {
-  if (isPaused) {
-    //   progressBar.style.animationPlayState = "paused";
-    progressBar.style.animation =
-      "depleteProgress " + time_per_question + "s linear infinite";
-    isPaused = false;
-  } else {
-    //   progressBar.style.animationPlayState = "running";
-    progressBar.style.animation = "none";
-    progressBar.offsetHeight; // Trigger reflow to reset animation
-    progressBar.style.animation =
-      "depleteProgress " + time_per_answer + "s linear infinite";
-  }
-});
-
-pauseButton.addEventListener("click", function () {
-  if (!isPaused) {
-    progressBar.style.animationPlayState = "running";
-    isPaused = false;
-  } else {
-    progressBar.style.animationPlayState = "paused";
-    isPaused = true;
-  }
-});
-
-progressBar.addEventListener("animationiteration", function () {
-  if (!isPaused) {
-    progressBar.style.animation =
-      "replenishProgress " +
-      time_per_answer +
-      "s linear forwards, shrinkProgress " +
-      time_per_question +
-      "s linear forwards";
-  }
-});
-
-// Makes pressing space bar start/pause the game
-document.addEventListener("keydown", function (event) {
-  if (event.code === "Space") {
-    // Checks if the spacebar is pressed
-    event.preventDefault(); // Prevents the page from scrolling when pressing space
-    document.getElementById("start-game").click(); // Simulates a button click
-  }
-});
-
-// Refetch questions button function
-function refetchAndRestart() {
-  console.log("Refetching questions with currently selected game settings...");
-
-  game_started = false;
-  menu_hidden = false;
-  current_question_category = null;
-  pauseFlag = false;
-  globalData = [];
-
-  baseUrl = "https://triviolivia.herokuapp.com/api/questions";
-  moddedUrl = "";
-  queryParams = [];
-  globalData = [];
-
-  dontFetchDataIfAllDeselected();
-
-  console.log("Refetch request completed");
-}
-
-// Reset settings button
-function resetSettings() {
-  console.log("Resetting the game to its original settings...");
-
-  all_none_categories = false;
-  allNoneCategoriesButton();
-  all_none_difficulties = false;
-  allNoneDifficultiesButton();
-  all_none_eras = false;
-  allNoneErasButton();
-
-  document.getElementById("demo").innerHTML =
-    'You have enabled all categories, difficulties, and eras. Press <span id="refetch-and-restart" style="cursor: pointer; display: inline;" onclick="refetchAndRestart()">REFETCH AND RESTART</span> to play again.';
-
-  game_started = false;
-  menu_hidden = false;
-  current_question_category = null;
-  pauseFlag = false;
-  category_list = [];
-  difficulty_list = [];
-  era_list = [];
-
-  baseUrl = "https://triviolivia.herokuapp.com/api/questions";
-  moddedUrl = "";
-  queryParams = [];
-  globalData = [];
-
-  console.log("Game settings reset completed.");
-}
-
-// About Us stuff
-function displayAboutUs() {
-  pauseFlag = true;
-  const card = document.getElementById("about-us-card");
-  const overlay = document.getElementById("overlay");
-  card.style.display = "block";
-  overlay.style.display = "block";
-}
-
-function closeAboutUs() {
-  pauseFlag = false;
-  const card = document.getElementById("about-us-card");
-  const overlay = document.getElementById("overlay");
-  card.style.display = "none";
-  overlay.style.display = "none";
-}
-
-// Fullscreen mode attempt
-function toggleFullscreen() {
-  let elem = document.documentElement;
-
-  // Detect iOS devices (Safari or Chrome)
-  let isiOS = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
-
-  if (!isiOS) {
-    // Use the Fullscreen API for Android and Desktop
-    if (
-      document.fullscreenElement ||
-      document.webkitFullscreenElement ||
-      document.mozFullScreenElement ||
-      document.msFullscreenElement
-    ) {
-      exitFullscreen();
-    } else {
-      enterFullscreen(elem);
-    }
-  } else {
-    // For iPhone and iPad, simulate fullscreen using layout tricks
-    simulateFullscreenOnMobile();
-  }
-}
-
-function enterFullscreen(element) {
-  if (element.requestFullscreen) {
-    element.requestFullscreen();
-  } else if (element.mozRequestFullScreen) {
-    // Firefox
-    element.mozRequestFullScreen();
-  } else if (element.webkitRequestFullscreen) {
-    // Chrome, Safari, Edge, Opera
-    element.webkitRequestFullscreen();
-  } else if (element.msRequestFullscreen) {
-    // IE11
-    element.msRequestFullscreen();
-  }
-}
-
-function exitFullscreen() {
-  if (document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if (document.mozCancelFullScreen) {
-    // Firefox
-    document.mozCancelFullScreen();
-  } else if (document.webkitExitFullscreen) {
-    // Chrome, Safari, Edge, Opera
-    document.webkitExitFullscreen();
-  } else if (document.msExitFullscreen) {
-    // IE11
-    document.msExitFullscreen();
-  }
-}
-
-function simulateFullscreenOnMobile() {
-  // Hide Safari and Chrome UI on iOS by simulating fullscreen
-  document.documentElement.style.height = "100%";
-  document.documentElement.style.overflow = "hidden";
-  document.body.style.height = "100%";
-  document.body.style.overflow = "hidden";
-
-  // Hide the address bar in Safari and Chrome (scroll trick)
-  window.scrollTo(0, 1);
-
-  // Optionally, show a prompt to add to home screen for a more app-like experience
-  if (window.matchMedia("(display-mode: standalone)").matches) {
-    // If the page is added to the home screen, we can assume it's "fullscreen"
-    document.body.style.marginTop = "0px";
-  }
-}
-
-
-// Display loader animation
-function displayLoader() {
-  // Get the question container
-  const questionContainer = document.querySelector('.question-container');
-  
-  // Clear any previous content
-  questionContainer.innerHTML = '';
-  
-  // Create the loader element
-  const loader = document.createElement('div');
-  loader.className = 'loader';
-  
-  // Create three dot elements
-  for (let i = 0; i < 3; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'dot';
-    loader.appendChild(dot);
-  }
-  
-  // Add the loader to the question container
-  questionContainer.appendChild(loader);
-}
-
-
-// Fix for mobile viewport height issues
-document.addEventListener('DOMContentLoaded', function() {
-  // Function to handle resize and orientation changes
-  function handleMobileLayout() {
-      // Only apply on mobile
-      if (window.innerWidth <= 767) {
-          // Get the real viewport height
-          let vh = window.innerHeight;
-          
-          // Set the height of game area to leave space for menu
-          let gameArea = document.querySelector('.game-area');
-          let mobileMenu = document.querySelector('.mobile-menu');
-          
-          // Calculate height based on viewport
-          let menuHeight = vh * 0.25; // 25vh
-          let gameHeight = vh - menuHeight - 20; // Subtract menu height and some padding
-          
-          // Apply heights
-          if (gameArea && mobileMenu) {
-              gameArea.style.height = gameHeight + 'px';
-              mobileMenu.style.height = menuHeight + 'px';
-          }
-      }
-  }
-  
-  // Initial call
-  handleMobileLayout();
-  
-  // Add event listeners
-  window.addEventListener('resize', handleMobileLayout);
-  window.addEventListener('orientationchange', handleMobileLayout);
-  
-  // Fix for iOS Safari when address bar appears/disappears
-  window.addEventListener('scroll', function() {
-      // Throttle to avoid performance issues
-      if (!this.ticking) {
-          window.requestAnimationFrame(function() {
-              handleMobileLayout();
-              this.ticking = false;
-          });
-          this.ticking = true;
-      }
-  });
-});
