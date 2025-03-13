@@ -1121,7 +1121,8 @@
                               <div class="content-inner">
                                 <button id="all-none-categories" class="all-none-btn button shared-button" onclick="allNoneCategoriesButton()">ALL/NONE</button>
                                 {% for category in categories %}
-                                <div id='mobile-{{ category.name | slugify }}'>
+                                <div>
+                                  <!-- Using the same ID as desktop to ensure consistent state -->
                                   <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
                                     <span class="indicator"></span>
                                     {{ category.name | upper }}
@@ -1144,7 +1145,8 @@
                               <div class="content-inner">
                                 <button id="all-none-difficulties" class="button all-none-btn shared-button" onclick="allNoneDifficultiesButton()">ALL/NONE</button>
                                 {% for difficulty in difficulties %}
-                                <div id='mobile-{{ difficulty.name }}'>
+                                <div>
+                                  <!-- Using the same ID structure as desktop for consistency -->
                                   <button onclick='toggle_difficulties(this.id), toggleIndicator(this)' id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
                                     <span class="indicator"></span>
                                     {{ difficulty.name | upper}}
@@ -1191,7 +1193,8 @@
                               <div class="content-inner">
                                 <button id="all-none-eras" class="button all-none-btn shared-button" onclick="allNoneErasButton()">ALL/NONE</button>
                                 {% for era in eras %}
-                                <div id='mobile-{{ era.name }}'>
+                                <div>
+                                  <!-- Using the same ID structure as desktop for consistency -->
                                   <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
                                     <span class="indicator"></span>
                                     {{ era.name }}
@@ -1327,12 +1330,84 @@
   
   <script src="{% static 'triviolivia.js' %}"></script>
   
-  <!-- Script to sync slider values between mobile and desktop -->
+  <!-- Script to ensure proper indicator functionality -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Function to sync slider values
-      function syncSliders() {
-        // No need to sync since we're using the same sliders
+      // Enhanced toggleIndicator function to ensure proper indicator state
+      window.toggleIndicator = function(button) {
+        // First check if the button has the indicator span
+        const indicator = button.querySelector('.indicator');
+        if (!indicator) return;
+        
+        // Set the indicator color based on the button's active state
+        if (button.classList.contains('active')) {
+          indicator.style.backgroundColor = '#00F829'; // Green for active
+        } else {
+          indicator.style.backgroundColor = 'red'; // Red for inactive
+        }
+      };
+      
+      // Initialize all indicators on page load
+      document.querySelectorAll('.button').forEach(function(button) {
+        toggleIndicator(button);
+      });
+      
+      // Function to handle the ALL/NONE button actions
+      function updateAllIndicators(selector) {
+        // Get all buttons matching the selector
+        const buttons = document.querySelectorAll(selector);
+        
+        // Check if any are active
+        const anyActive = Array.from(buttons).some(btn => btn.classList.contains('active'));
+        
+        // Update each button's indicator
+        buttons.forEach(function(button) {
+          toggleIndicator(button);
+        });
+      }
+      
+      // Override the existing all/none functions
+      window.allNoneCategoriesButton = function() {
+        // Call the original function if it exists
+        if (typeof originalAllNoneCategoriesButton === 'function') {
+          originalAllNoneCategoriesButton();
+        }
+        
+        // Update indicators for all category buttons
+        updateAllIndicators('.category');
+      };
+      
+      window.allNoneDifficultiesButton = function() {
+        // Call the original function if it exists
+        if (typeof originalAllNoneDifficultiesButton === 'function') {
+          originalAllNoneDifficultiesButton();
+        }
+        
+        // Update indicators for all difficulty buttons
+        updateAllIndicators('.difficulty');
+      };
+      
+      window.allNoneErasButton = function() {
+        // Call the original function if it exists
+        if (typeof originalAllNoneErasButton === 'function') {
+          originalAllNoneErasButton();
+        }
+        
+        // Update indicators for all era buttons
+        updateAllIndicators('.era');
+      };
+      
+      // Store references to the original functions if they exist
+      if (typeof window.allNoneCategoriesButton === 'function') {
+        window.originalAllNoneCategoriesButton = window.allNoneCategoriesButton;
+      }
+      
+      if (typeof window.allNoneDifficultiesButton === 'function') {
+        window.originalAllNoneDifficultiesButton = window.allNoneDifficultiesButton;
+      }
+      
+      if (typeof window.allNoneErasButton === 'function') {
+        window.originalAllNoneErasButton = window.allNoneErasButton;
       }
     });
   </script>
