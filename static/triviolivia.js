@@ -13427,3 +13427,183 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   });
 });
+
+
+
+
+
+// New code to make mobile indicator lights work
+// Improved toggleIndicator function that works across both mobile and desktop
+function toggleIndicator(element) {
+  // Toggle the inactive class on the button
+  element.classList.toggle('inactive');
+  
+  // Find the indicator span within this button
+  const indicator = element.querySelector('.indicator');
+  
+  // Check if we need to update the corresponding mobile/desktop button
+  // Extract the actual ID (without mobile- prefix if it exists)
+  const baseId = element.id;
+  
+  // Find and update the corresponding button in the other view (mobile/desktop)
+  let correspondingButton;
+  
+  // If this was triggered from a mobile button
+  if (element.closest('.mobile-dropdown')) {
+      // Find the corresponding desktop button
+      correspondingButton = document.querySelector(`.desktop-menu button#${baseId}`);
+  } 
+  // If this was triggered from a desktop button
+  else if (element.closest('.desktop-menu')) {
+      // Find the corresponding mobile button
+      correspondingButton = document.querySelector(`.mobile-dropdown button#${baseId}`);
+  }
+  
+  // If we found a corresponding button, update its inactive state to match
+  if (correspondingButton) {
+      if (element.classList.contains('inactive')) {
+          correspondingButton.classList.add('inactive');
+      } else {
+          correspondingButton.classList.remove('inactive');
+      }
+  }
+}
+
+// Improved category toggle function
+function toggle_categories(id) {
+  const button = document.getElementById(id);
+  
+  // Toggle active class which controls whether this category is included
+  button.classList.toggle('active');
+  
+  // Find and update corresponding button in the other view (mobile/desktop)
+  let correspondingButton;
+  
+  // If this was triggered from a mobile button
+  if (button.closest('.mobile-dropdown')) {
+      // Find the corresponding desktop button
+      correspondingButton = document.querySelector(`.desktop-menu button#${id}`);
+  } 
+  // If this was triggered from a desktop button
+  else if (button.closest('.desktop-menu')) {
+      // Find the corresponding mobile button
+      correspondingButton = document.querySelector(`.mobile-dropdown button#${id}`);
+  }
+  
+  // If we found a corresponding button, update its active state to match
+  if (correspondingButton) {
+      if (button.classList.contains('active')) {
+          correspondingButton.classList.add('active');
+      } else {
+          correspondingButton.classList.remove('active');
+      }
+  }
+}
+
+// Apply the same pattern to difficulties and eras
+function toggle_difficulties(id) {
+  const button = document.getElementById(id);
+  button.classList.toggle('active');
+  
+  let correspondingButton;
+  if (button.closest('.mobile-dropdown')) {
+      correspondingButton = document.querySelector(`.desktop-menu button#${id}`);
+  } else if (button.closest('.desktop-menu')) {
+      correspondingButton = document.querySelector(`.mobile-dropdown button#${id}`);
+  }
+  
+  if (correspondingButton) {
+      if (button.classList.contains('active')) {
+          correspondingButton.classList.add('active');
+      } else {
+          correspondingButton.classList.remove('active');
+      }
+  }
+}
+
+function toggle_eras(id) {
+  const button = document.getElementById(id);
+  button.classList.toggle('active');
+  
+  let correspondingButton;
+  if (button.closest('.mobile-dropdown')) {
+      correspondingButton = document.querySelector(`.desktop-menu button#${id}`);
+  } else if (button.closest('.desktop-menu')) {
+      correspondingButton = document.querySelector(`.mobile-dropdown button#${id}`);
+  }
+  
+  if (correspondingButton) {
+      if (button.classList.contains('active')) {
+          correspondingButton.classList.add('active');
+      } else {
+          correspondingButton.classList.remove('active');
+      }
+  }
+}
+
+// Improved all/none buttons
+function allNoneCategoriesButton() {
+  const categoryButtons = document.querySelectorAll('.category');
+  const allActive = document.querySelectorAll('.category.active').length === categoryButtons.length;
+  
+  categoryButtons.forEach(button => {
+      if (allActive) {
+          button.classList.remove('active');
+          button.classList.add('inactive');
+      } else {
+          button.classList.add('active');
+          button.classList.remove('inactive');
+      }
+  });
+}
+
+function allNoneDifficultiesButton() {
+  const difficultyButtons = document.querySelectorAll('.difficulty');
+  const allActive = document.querySelectorAll('.difficulty.active').length === difficultyButtons.length;
+  
+  difficultyButtons.forEach(button => {
+      if (allActive) {
+          button.classList.remove('active');
+          button.classList.add('inactive');
+      } else {
+          button.classList.add('active');
+          button.classList.remove('inactive');
+      }
+  });
+}
+
+function allNoneErasButton() {
+  const eraButtons = document.querySelectorAll('.era');
+  const allActive = document.querySelectorAll('.era.active').length === eraButtons.length;
+  
+  eraButtons.forEach(button => {
+      if (allActive) {
+          button.classList.remove('active');
+          button.classList.add('inactive');
+      } else {
+          button.classList.add('active');
+          button.classList.remove('inactive');
+      }
+  });
+}
+
+// Initialize event listeners once DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Ensure all buttons have correct initial state
+  const allButtons = document.querySelectorAll('.category, .difficulty, .era');
+  allButtons.forEach(button => {
+      // Add indicator if it doesn't exist
+      if (!button.querySelector('.indicator')) {
+          const indicator = document.createElement('span');
+          indicator.className = 'indicator';
+          button.prepend(indicator);
+      }
+      
+      // Make sure active and inactive classes are consistent
+      if (button.classList.contains('active')) {
+          button.classList.remove('inactive');
+      } else {
+          button.classList.add('inactive');
+      }
+  });
+});

@@ -1058,6 +1058,71 @@
       position: relative;
     }
   }
+
+
+
+
+
+  /* Ensure indicators are visible and consistent in both mobile and desktop views */
+.indicator {
+  width: 2px;
+  height: 100%;
+  background-color: #00F829; /* Green when active */
+  margin-right: 6px;
+  border-right: 1px solid #2D2D2D;
+  border-radius: 2px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+/* Style for inactive indicators */
+.inactive .indicator {
+  background-color: red;
+}
+
+/* More specific selector to overcome any specificity issues in mobile dropdowns */
+.mobile-dropdown .button .indicator,
+.mobile-dropdown button .indicator {
+  width: 2px;
+  height: 100%;
+  background-color: #00F829;
+  margin-right: 6px;
+  border-right: 1px solid #2D2D2D;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.mobile-dropdown .button.inactive .indicator,
+.mobile-dropdown button.inactive .indicator {
+  background-color: red;
+}
+
+/* Ensure buttons have consistent alignment */
+.button, 
+button.button {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Fix for dropdowns on mobile to ensure indicators are visible */
+.mobile-dropdown .content-inner button,
+.mobile-dropdown .content-inner .button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Ensure indicators maintain size in mobile view */
+@media (max-width: 767px) {
+  .indicator {
+    min-width: 2px;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+}
+
+
       </style>
   </head>
   <body>
