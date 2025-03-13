@@ -631,15 +631,25 @@
       z-index: 1;
     }
   
-    @keyframes depleteProgress {
-      0% { width: 100%; }
-      100% { width: 0%; }
-    }
-  
-    @keyframes replenishProgress {
-      0% { width: 0%; }
-      100% { width: 100%; }
-    }
+    /* Existing animation for question display (depleting from full to empty) */
+@keyframes depleteProgress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+/* New animation for answer display (growing from empty to full) */
+@keyframes growProgress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
   
   
   
