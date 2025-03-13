@@ -12816,88 +12816,100 @@ const mainGameFunction = async () => {
   document.getElementById("demo").innerHTML = "Go!";
   await delay(1000);
 
-  for (let i = 0; i < number_of_questions; i++) {
-    if (!pauseFlag) {
-      progressBar.style.animationPlayState = "running";
-      progressBar.style.animation = `depleteProgress ${time_per_question}s linear infinite`;
-      isPaused = false;
-    } else {
-      progressBar.style.animationPlayState = "paused";
-      progressBar.style.animation = "none";
-      progressBar.offsetHeight; // Trigger reflow
-      progressBar.style.animation = `depleteProgress ${time_per_answer}s linear infinite`;
-    }
-
-    while (!pauseFlag) {
-      await delay(100);
-    }
-
-    document.body.style.background =
-      category_colors[globalData[i].category_name];
-
-    const character = document.getElementById("character");
-    character.innerHTML =
-      contentDict[globalData[i].category_name.toLowerCase()];
-
-      const character2 = document.getElementById("character2");
-character2.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
-character2.style.display = "block";
-
-// Ensure SVG maintains its original dimensions
-const svg = character2.querySelector("svg");
-if (svg) {
-  // Preserve original aspect ratio without scaling to fit container
-  svg.setAttribute("preserveAspectRatio", "xMidYMid");
-  
-  // Remove any width/height styles that might cause stretching
-  svg.style.width = "auto";
-  svg.style.height = "auto";
-  
-  // Ensure the SVG is visible but not stretched
-  svg.style.maxWidth = "100%";
-}
-
-    let questionTimeRemaining = time_per_question * 10;
-    let answerTimeRemaining = time_per_answer * 10;
-
-    showQuestion(globalData[i].text);
-
-    while (questionTimeRemaining > 0) {
-      if (!pauseFlag) {
-        await delay(100);
-        continue;
-      }
-      await delay(100);
-      questionTimeRemaining--;
-      let question_seconds = Math.floor(questionTimeRemaining / 10);
-      let question_tenths = questionTimeRemaining % 10;
-      document.getElementById("demo").innerHTML = `Q${i + 1} - ${globalData[
-        i
-      ].category_name.toUpperCase()} - ${globalData[
-        i
-      ].difficulty_name.toUpperCase()} - Mark Mazurek - ${question_seconds}.${question_tenths}s`;
-    }
-
-    showAnswer(globalData[i].answer);
-
-    while (answerTimeRemaining > 0) {
-      if (!pauseFlag) {
-        await delay(100);
-        continue;
-      }
-      await delay(100);
-      answerTimeRemaining--;
-      let answer_seconds = Math.floor(answerTimeRemaining / 10);
-      let answer_tenths = answerTimeRemaining % 10;
-      document.getElementById("demo").innerHTML = `Q${i + 1} - ${globalData[
-        i
-      ].category_name.toUpperCase()} - ${globalData[
-        i
-      ].difficulty_name.toUpperCase()} - Mark Mazurek - ${answer_seconds}.${answer_tenths}s`;
-    }
-
-    showAnswer("");
+  // This is the updated portion of the mainGameFunction
+for (let i = 0; i < number_of_questions; i++) {
+  if (!pauseFlag) {
+    progressBar.style.animation = "none";
+    progressBar.offsetHeight; // Trigger reflow to reset animation
+    progressBar.style.animation = `depleteProgress ${time_per_question}s linear`;
+    progressBar.style.animationPlayState = "running";
+    isPaused = false;
+  } else {
+    progressBar.style.animationPlayState = "paused";
   }
+
+  while (!pauseFlag) {
+    await delay(100);
+  }
+
+  document.body.style.background =
+    category_colors[globalData[i].category_name];
+
+  const character = document.getElementById("character");
+  character.innerHTML =
+    contentDict[globalData[i].category_name.toLowerCase()];
+
+  const character2 = document.getElementById("character2");
+  character2.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
+  character2.style.display = "block";
+
+  // Ensure SVG maintains its original dimensions
+  const svg = character2.querySelector("svg");
+  if (svg) {
+    // Preserve original aspect ratio without scaling to fit container
+    svg.setAttribute("preserveAspectRatio", "xMidYMid");
+    
+    // Remove any width/height styles that might cause stretching
+    svg.style.width = "auto";
+    svg.style.height = "auto";
+    
+    // Ensure the SVG is visible but not stretched
+    svg.style.maxWidth = "100%";
+  }
+
+  let questionTimeRemaining = time_per_question * 10;
+  let answerTimeRemaining = time_per_answer * 10;
+
+  // Set up question timer animation
+  progressBar.style.animation = "none";
+  progressBar.offsetHeight; // Trigger reflow to reset animation
+  progressBar.style.animation = `depleteProgress ${time_per_question}s linear`;
+  progressBar.style.animationPlayState = "running";
+
+  showQuestion(globalData[i].text);
+
+  while (questionTimeRemaining > 0) {
+    if (!pauseFlag) {
+      await delay(100);
+      continue;
+    }
+    await delay(100);
+    questionTimeRemaining--;
+    let question_seconds = Math.floor(questionTimeRemaining / 10);
+    let question_tenths = questionTimeRemaining % 10;
+    document.getElementById("demo").innerHTML = `Q${i + 1} - ${globalData[
+      i
+    ].category_name.toUpperCase()} - ${globalData[
+      i
+    ].difficulty_name.toUpperCase()} - Mark Mazurek - ${question_seconds}.${question_tenths}s`;
+  }
+
+  // Set up answer timer animation with the correct time
+  progressBar.style.animation = "none";
+  progressBar.offsetHeight; // Trigger reflow to reset animation
+  progressBar.style.animation = `depleteProgress ${time_per_answer}s linear`;
+  progressBar.style.animationPlayState = "running";
+
+  showAnswer(globalData[i].answer);
+
+  while (answerTimeRemaining > 0) {
+    if (!pauseFlag) {
+      await delay(100);
+      continue;
+    }
+    await delay(100);
+    answerTimeRemaining--;
+    let answer_seconds = Math.floor(answerTimeRemaining / 10);
+    let answer_tenths = answerTimeRemaining % 10;
+    document.getElementById("demo").innerHTML = `Q${i + 1} - ${globalData[
+      i
+    ].category_name.toUpperCase()} - ${globalData[
+      i
+    ].difficulty_name.toUpperCase()} - Mark Mazurek - ${answer_seconds}.${answer_tenths}s`;
+  }
+
+  showAnswer("");
+}
 
   game_started = false;
   pauseFlag = false;
