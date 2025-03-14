@@ -3580,7 +3580,7 @@ const contentDict = {
     </g>
   </svg>`,
 
-  math: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
+  "math": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <defs>
       <style>
         .st0 {
@@ -4279,7 +4279,7 @@ const contentDict = {
     <path class="st40" d="M222.5,300.6c-2.3.3,11.8,26.2-17.6,36.2,3.9.5,7.2,1.1,10.4,1.7,5.9-4.5,8.9-9.6,9.9-14,.5,1.3,1.6-15.3-2.7-23.9Z"/>
   </svg>`,
 
-  history: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
+  "history": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <style>
       .st0 {
         fill: #1e131b;
@@ -4856,7 +4856,7 @@ const contentDict = {
   </g>
 </svg>`,
 
-  language: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
+  "language": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <!-- Generator: Adobe Illustrator 29.1.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 142)  -->
     <defs>
       <style>
@@ -5352,7 +5352,7 @@ const contentDict = {
     <path class="st28" d="M189.7,319c.5.3,2.1,0,2.2,0,1.3.3,2.6,1.1,4,.9.2,1.3.4.9.4.9,1.1,9.2-2.6,9.2-10.2,6.4,1-1.7,1.6-8.1,3.6-8.2Z"/>
   </svg>`,
 
-  television: `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
+  "television": `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <defs>
       <style>
         .st0 {
@@ -5731,7 +5731,7 @@ const contentDict = {
     </g>
   </svg>`,
 
-  politics: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 374 550">
+  "politics": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 374 550">
     <defs>
     <style>
       .st0 {
@@ -6636,7 +6636,7 @@ const contentDict = {
     <path class="st31" d="M224,307.1c-1-9.1,9.3-16.5,9.6-25.7,0-.5.1-4.1-.2-4.1-.2,1.2-.4,2.5-.6,3.7-.9,6.2-14.8,14.8-13.8,21,2,13,4,13.8,2.1,26.4,2,.1,3.3-17.8,2.9-21.4Z"/>
   </svg>`,
 
-  sports: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 310 491">
+  "sports": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 310 491">
     <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
     <defs>
       <style>
@@ -7264,7 +7264,7 @@ const contentDict = {
     <path class="st70" d="M99.8,424.5c-.5,14.3-1.1,28.9-.2,43.1-2.9,0-11.4-4-14.4-4-1-19.3,5.7-46.2,7.8-64.8.8,3.4,6.8,6.7,7.2,8.5-.3,5.6-1.1,11.9-.5,17.2Z"/>
   </svg>`,
 
-  science: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 492.7">
+  "science": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 492.7">
     <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
     <defs>
       <style>
@@ -7875,7 +7875,7 @@ const contentDict = {
     <path class="st62" d="M164.5,289.6c2-.7,5.1-5.5,5-6,1,4-3,7.8-5.6,8-11.4,1-13.3-1.3-17.4-3s-5-2-5-4c0,.2,4.3,2.6,9,4s10.8,2.2,14,1Z"/>
   </svg>`,
 
-  music: `
+  "music": `
     <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 333 554.8">
     <style>
       .st0 {
@@ -8384,7 +8384,7 @@ const contentDict = {
   <path class="st4" d="M137.9,344"/>
 </svg>
     `,
-  literature: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 492.7">
+  "literature": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 492.7">
     <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
     <defs>
       <style>
@@ -8806,7 +8806,7 @@ const contentDict = {
     <path class="st36" d="M141.1,113.3"/>
   </svg>`,
 
-  geography: `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 492.7">
+  "geography": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 492.7">
     <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
     <defs>
       <style>
@@ -9318,6 +9318,7 @@ const contentDict = {
     </g>
     <path class="st28" d="M189.3,339c.5.3,2.4,0,2.5,0,1.5.4,2.9,1.2,4.5,1,.3,1.4.5.9.5,1,1.2,10.2-2.9,10.2-11.5,7,1.2-1.8,1.8-9,4-9Z"/>
   </svg>`,
+
   "food & drink": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 317.7 609.8">
     <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  -->
     <defs>
@@ -10567,7 +10568,7 @@ const contentDict = {
   </g>
 </svg>`,
 
-  nature: `
+  "nature": `
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 390.8 556.2">
 <defs>
 <style>
@@ -11125,7 +11126,8 @@ fill: #4e0b1b;
 </g>
 </g>
 </svg>`,
-  default: `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 310 491">
+
+  "default": `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 310 491">
 <defs>
 <style>
 .cls-1 {
@@ -11539,7 +11541,8 @@ fill: #4e0b1b;
 </g>
 </g>
 </svg>`,
-  art: `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 374 550">
+
+  "art": `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 374 550">
 <defs>
 <style>
 .cls-1 {
@@ -13327,7 +13330,6 @@ function simulateFullscreenOnMobile() {
   }
 }
 
-
 // Display loader animation
 function displayLoader() {
   // Get the question container
@@ -13350,7 +13352,6 @@ function displayLoader() {
   // Add the loader to the question container
   questionContainer.appendChild(loader);
 }
-
 
 // Fix for mobile viewport height issues
 document.addEventListener('DOMContentLoaded', function() {
