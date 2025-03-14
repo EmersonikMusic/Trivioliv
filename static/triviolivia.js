@@ -526,7 +526,6 @@ const contentDict = {
     </g>
   </svg>`,
 
-
   "miscellaneous": `<?xml version="1.0" encoding="UTF-8"?>
   <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <defs>
@@ -3043,8 +3042,6 @@ const contentDict = {
     </g>
   </g>
 </svg>`,
-
-
 
   "performing arts": `<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 310 491">
     <defs>
@@ -12753,8 +12750,6 @@ const showAnswer = (displayed_answer) => {
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 
-
-
 // Loading animation display function
 function displayLoadingAnimation() {
   const container = document.getElementById('question-container');
@@ -12779,7 +12774,6 @@ function displayLoadingAnimation() {
   // Append loader to container
   container.appendChild(loader);
 }
-
 
 
 const mainGameFunction = async () => {
@@ -13138,32 +13132,6 @@ function changeButtonText() {
     pauseFlag = false;
   }
 }
-
-
-//Function SUGGESTED by CLAUDE to change both START GAME text
-// function changeButtonText() {
-//   var button = document.getElementById("start-pause");
-//   var button2 = document.getElementById("start-pause2");
-  
-//   if (pauseFlag === false) {
-//     button.textContent = "PAUSE GAME";
-//     button2.textContent = "PAUSE GAME";
-//     progressBar.style.animationPlayState = "running";
-//     pauseFlag = true;
-//   } else if (pauseFlag === true && game_started === true) {
-//     button.textContent = "RESUME GAME";
-//     button2.textContent = "RESUME GAME";
-//     progressBar.style.animationPlayState = "paused";
-//     pauseFlag = false;
-//     console.log("Game paused.");
-//     document.getElementById("demo").innerHTML =
-//       'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
-//   } else {
-//     button.textContent = "START GAME";
-//     button2.textContent = "START GAME";
-//     pauseFlag = false;
-//   }
-// }
 
 // New function to disable banned categories
 function disableBannedCategories() {}
