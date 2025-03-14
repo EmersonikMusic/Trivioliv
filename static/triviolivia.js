@@ -12571,10 +12571,10 @@ checkboxes.forEach((checkbox) => {
 });
 
 //Functions to toggle categories, difficulties, and eras
+// Fixed toggle_categories function
 function toggle_categories(clicked_id) {
-  // Find the button index for visual update (buttons are zero-indexed, IDs are 1-indexed)
-  const buttonIndex = parseInt(clicked_id) - 1;
-  const button = categoryButtons[buttonIndex];
+  // Find ALL buttons with this ID (both mobile and desktop versions)
+  const buttons = document.querySelectorAll(`button[id='${clicked_id}']`);
   
   if (!category_list.includes(clicked_id)) {
     // Not in list (currently enabled) -> disable it
@@ -12584,11 +12584,11 @@ function toggle_categories(clicked_id) {
       " category.";
     category_list.push(clicked_id);
     
-    // Update visual state
-    if (button) {
+    // Update visual state for ALL matching buttons
+    buttons.forEach(button => {
       button.classList.remove("active");
       button.classList.add("inactive");
-    }
+    });
     
     console.log("Category disabled:", clicked_id);
     console.log("Updated category list:", category_list);
@@ -12600,21 +12600,21 @@ function toggle_categories(clicked_id) {
       " category.";
     category_list.splice(category_list.indexOf(clicked_id), 1);
     
-    // Update visual state
-    if (button) {
+    // Update visual state for ALL matching buttons
+    buttons.forEach(button => {
       button.classList.remove("inactive");
       button.classList.add("active");
-    }
+    });
     
     console.log("Category enabled:", clicked_id);
     console.log("Updated category list:", category_list);
   }
 }
 
+// Fixed toggle_difficulties function
 function toggle_difficulties(clicked_id) {
-  // Find the button index for visual update (buttons are zero-indexed, IDs are 1-indexed)
-  const buttonIndex = parseInt(clicked_id) - 1;
-  const button = difficultyButtons[buttonIndex];
+  // Find ALL buttons with this ID (both mobile and desktop versions)
+  const buttons = document.querySelectorAll(`button[id='${clicked_id}']`);
   
   if (!difficulty_list.includes(clicked_id)) {
     // Not in list (currently enabled) -> disable it
@@ -12624,11 +12624,11 @@ function toggle_difficulties(clicked_id) {
       " difficulty.";
     difficulty_list.push(clicked_id);
     
-    // Update visual state
-    if (button) {
+    // Update visual state for ALL matching buttons
+    buttons.forEach(button => {
       button.classList.remove("active");
       button.classList.add("inactive");
-    }
+    });
     
     console.log("Difficulty disabled:", clicked_id);
     console.log("Updated difficulty list:", difficulty_list);
@@ -12640,21 +12640,21 @@ function toggle_difficulties(clicked_id) {
       " difficulty.";
     difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
     
-    // Update visual state
-    if (button) {
+    // Update visual state for ALL matching buttons
+    buttons.forEach(button => {
       button.classList.remove("inactive");
       button.classList.add("active");
-    }
+    });
     
     console.log("Difficulty enabled:", clicked_id);
     console.log("Updated difficulty list:", difficulty_list);
   }
 }
 
+// Fixed toggle_eras function
 function toggle_eras(clicked_id) {
-  // Find the button index for visual update (buttons are zero-indexed, IDs are 1-indexed)
-  const buttonIndex = parseInt(clicked_id) - 1;
-  const button = eraButtons[buttonIndex];
+  // Find ALL buttons with this ID (both mobile and desktop versions)
+  const buttons = document.querySelectorAll(`button[id='${clicked_id}']`);
   
   if (!era_list.includes(clicked_id)) {
     // Not in list (currently enabled) -> disable it
@@ -12662,11 +12662,11 @@ function toggle_eras(clicked_id) {
       "You have disabled the " + era_number_identities[clicked_id] + " era.";
     era_list.push(clicked_id);
     
-    // Update visual state
-    if (button) {
+    // Update visual state for ALL matching buttons
+    buttons.forEach(button => {
       button.classList.remove("active");
       button.classList.add("inactive");
-    }
+    });
     
     console.log("Era disabled:", clicked_id);
     console.log("Updated era list:", era_list);
@@ -12676,11 +12676,11 @@ function toggle_eras(clicked_id) {
       "You have enabled the " + era_number_identities[clicked_id] + " era.";
     era_list.splice(era_list.indexOf(clicked_id), 1);
     
-    // Update visual state
-    if (button) {
+    // Update visual state for ALL matching buttons
+    buttons.forEach(button => {
       button.classList.remove("inactive");
       button.classList.add("active");
-    }
+    });
     
     console.log("Era enabled:", clicked_id);
     console.log("Updated era list:", era_list);
@@ -12981,6 +12981,7 @@ function enable_era(clicked_id) {
 }
 
 //Functions for ALL/NONE buttons - FIXED VERSION
+// Fixed ALL/NONE Categories function
 function allNoneCategoriesButton() {
   if (all_none_categories == true) {
     // Currently showing "ALL", so disable all categories
@@ -12991,11 +12992,11 @@ function allNoneCategoriesButton() {
       category_list.push(id);
     });
     
-    // Update visual state of buttons
-    for (let i = 0; i < categoryButtons.length; i++) {
-      categoryButtons[i].classList.remove("active");
-      categoryButtons[i].classList.add("inactive");
-    }
+    // Update visual state of ALL buttons (both mobile and desktop)
+    document.querySelectorAll(".category").forEach(button => {
+      button.classList.remove("active");
+      button.classList.add("inactive");
+    });
     
     all_none_categories = false;
     document.getElementById("demo").innerHTML =
@@ -13004,11 +13005,11 @@ function allNoneCategoriesButton() {
     // Currently showing "NONE", so enable all categories
     category_list = []; // Clear the list to enable all
     
-    // Update visual state of buttons
-    for (let i = 0; i < categoryButtons.length; i++) {
-      categoryButtons[i].classList.remove("inactive");
-      categoryButtons[i].classList.add("active");
-    }
+    // Update visual state of ALL buttons (both mobile and desktop)
+    document.querySelectorAll(".category").forEach(button => {
+      button.classList.remove("inactive");
+      button.classList.add("active");
+    });
     
     all_none_categories = true;
     document.getElementById("demo").innerHTML =
@@ -13017,6 +13018,7 @@ function allNoneCategoriesButton() {
   console.log("Category list after ALL/NONE toggle:", category_list);
 }
 
+// Fixed ALL/NONE Difficulties function
 function allNoneDifficultiesButton() {
   if (all_none_difficulties == true) {
     // Currently showing "ALL", so disable all difficulties
@@ -13027,11 +13029,11 @@ function allNoneDifficultiesButton() {
       difficulty_list.push(id);
     });
     
-    // Update visual state of buttons
-    for (let i = 0; i < difficultyButtons.length; i++) {
-      difficultyButtons[i].classList.remove("active");
-      difficultyButtons[i].classList.add("inactive");
-    }
+    // Update visual state of ALL buttons (both mobile and desktop)
+    document.querySelectorAll(".difficulty").forEach(button => {
+      button.classList.remove("active");
+      button.classList.add("inactive");
+    });
     
     all_none_difficulties = false;
     document.getElementById("demo").innerHTML =
@@ -13040,11 +13042,11 @@ function allNoneDifficultiesButton() {
     // Currently showing "NONE", so enable all difficulties
     difficulty_list = []; // Clear the list to enable all
     
-    // Update visual state of buttons
-    for (let i = 0; i < difficultyButtons.length; i++) {
-      difficultyButtons[i].classList.remove("inactive");
-      difficultyButtons[i].classList.add("active");
-    }
+    // Update visual state of ALL buttons (both mobile and desktop)
+    document.querySelectorAll(".difficulty").forEach(button => {
+      button.classList.remove("inactive");
+      button.classList.add("active");
+    });
     
     all_none_difficulties = true;
     document.getElementById("demo").innerHTML =
@@ -13053,6 +13055,7 @@ function allNoneDifficultiesButton() {
   console.log("Difficulty list after ALL/NONE toggle:", difficulty_list);
 }
 
+// Fixed ALL/NONE Eras function
 function allNoneErasButton() {
   if (all_none_eras == true) {
     // Currently showing "ALL", so disable all eras
@@ -13063,11 +13066,11 @@ function allNoneErasButton() {
       era_list.push(id);
     });
     
-    // Update visual state of buttons
-    for (let i = 0; i < eraButtons.length; i++) {
-      eraButtons[i].classList.remove("active");
-      eraButtons[i].classList.add("inactive");
-    }
+    // Update visual state of ALL buttons (both mobile and desktop)
+    document.querySelectorAll(".era").forEach(button => {
+      button.classList.remove("active");
+      button.classList.add("inactive");
+    });
     
     all_none_eras = false;
     document.getElementById("demo").innerHTML =
@@ -13076,11 +13079,11 @@ function allNoneErasButton() {
     // Currently showing "NONE", so enable all eras
     era_list = []; // Fixed: Changed from category_list to era_list
     
-    // Update visual state of buttons
-    for (let i = 0; i < eraButtons.length; i++) {
-      eraButtons[i].classList.remove("inactive");
-      eraButtons[i].classList.add("active");
-    }
+    // Update visual state of ALL buttons (both mobile and desktop)
+    document.querySelectorAll(".era").forEach(button => {
+      button.classList.remove("inactive");
+      button.classList.add("active");
+    });
     
     all_none_eras = true;
     document.getElementById("demo").innerHTML =
