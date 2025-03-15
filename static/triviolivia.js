@@ -12925,15 +12925,10 @@ const mainGameFunction = async () => {
   pauseFlag = false;
   showQuestion("Thanks for playing!");
   progressBar.style.animationPlayState = "paused";
-  
-  // Set button text to RESTART GAME when game is over
-  var button = document.getElementById("start-pause");
-  var button2 = document.getElementById("start-pause2");
-  if (button) button.textContent = "RESTART GAME";
-  if (button2) button2.textContent = "RESTART GAME";
-  
+  document.getElementById("start-pause").textContent = "START";
   document.getElementById("demo").innerHTML =
-    'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESTART GAME</span> to play again. Copyright &copy; 2025. Contact us at <a href="mailto:example@email.com">mark.mazurek@triviolivia.com</a>';
+    'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Copyright &copy; 2025. Contact us at <a href="mailto:example@email.com">mark.mazurek@triviolivia.com</a>';
+};
 
 // Function to pause the game
 function pauseGame() {
@@ -13173,27 +13168,19 @@ function updateLabel(labelId, value, unit) {
 //Function to change START GAME text
 function changeButtonText() {
   var button = document.getElementById("start-pause");
-  var button2 = document.getElementById("start-pause2");
-  
   if (pauseFlag === false) {
-    // Game is running - show PAUSE
     button.textContent = "PAUSE";
-    if (button2) button2.textContent = "PAUSE";
     progressBar.style.animationPlayState = "running";
     pauseFlag = true;
   } else if (pauseFlag === true && game_started === true) {
-    // Game is paused - show RESUME GAME
-    button.textContent = "RESUME GAME";
-    if (button2) button2.textContent = "RESUME GAME";
+    button.textContent = "RESUME";
     progressBar.style.animationPlayState = "paused";
     pauseFlag = false;
     console.log("Game paused.");
     document.getElementById("demo").innerHTML =
       'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
   } else {
-    // Game hasn't started - show START
     button.textContent = "START";
-    if (button2) button2.textContent = "START";
     pauseFlag = false;
   }
 }
