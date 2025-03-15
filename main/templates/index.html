@@ -1055,6 +1055,59 @@
   }
 
 
+
+
+
+
+
+  /* Enhanced indicator styling for better visibility */
+.indicator {
+  width: 3px; /* Slightly wider for better visibility */
+  height: 100%; /* Full height of the button */
+  background-color: #00F829; /* Bright green for active state */
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin-right: 6px;
+  border-right: 1px solid #2D2D2D;
+  border-radius: 2px;
+  display: inline-block; /* Ensure proper display */
+}
+
+.inactive .indicator {
+  background-color: #FF3A30; /* Brighter red for better visibility */
+}
+
+/* Fix for mobile indicators */
+.mobile-dropdown .indicator {
+  display: inline-block;
+  margin-right: 6px;
+  min-height: 15px; /* Ensure minimum height */
+}
+
+/* Make sure buttons display indicators properly */
+.content-inner button,
+.mobile-dropdown .content-inner button {
+  display: flex;
+  align-items: center;
+  padding: 3px 0;
+  margin: 2px 0;
+  min-height: 22px; /* Ensure buttons have enough height */
+}
+
+/* Fix for any potential conflicts */
+.active .indicator {
+  background-color: #00F829 !important;
+}
+
+.inactive .indicator {
+  background-color: #FF3A30 !important;
+}
+
+
+
+
+
   
       </style>
   </head>

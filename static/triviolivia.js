@@ -12496,120 +12496,213 @@ checkboxes.forEach((checkbox) => {
 });
 
 //Functions to toggle categories, difficulties, and eras
+// Improved toggleIndicator function
+function toggleIndicator(button) {
+  // Check if the button is the one that was clicked directly
+  if (button.classList.contains("active")) {
+    button.classList.remove("active");
+    button.classList.add("inactive");
+  } else {
+    button.classList.remove("inactive");
+    button.classList.add("active");
+  }
+  
+  // Find and update all other buttons with the same ID (syncs desktop and mobile)
+  const buttonId = button.id;
+  const allMatchingButtons = document.querySelectorAll(`button[id='${buttonId}']`);
+  
+  allMatchingButtons.forEach(matchingButton => {
+    if (matchingButton !== button) { // Skip the button that was directly clicked
+      if (button.classList.contains("active")) {
+        matchingButton.classList.remove("inactive");
+        matchingButton.classList.add("active");
+      } else {
+        matchingButton.classList.remove("active");
+        matchingButton.classList.add("inactive");
+      }
+    }
+  });
+}
+
+// Improved toggle_categories function
 function toggle_categories(clicked_id) {
-  // Find the button index for visual update (buttons are zero-indexed, IDs are 1-indexed)
-  const buttonIndex = parseInt(clicked_id) - 1;
-  const button = categoryButtons[buttonIndex];
+  // For message display
+  const categoryName = category_number_identities[clicked_id];
   
   if (!category_list.includes(clicked_id)) {
     // Not in list (currently enabled) -> disable it
     document.getElementById("demo").innerHTML =
-      "You have disabled the " +
-      category_number_identities[clicked_id] +
-      " category.";
+      "You have disabled the " + categoryName + " category.";
     category_list.push(clicked_id);
-    
-    // Update visual state
-    if (button) {
-      button.classList.remove("active");
-      button.classList.add("inactive");
-    }
-    
     console.log("Category disabled:", clicked_id);
-    console.log("Updated category list:", category_list);
   } else {
     // In list (currently disabled) -> enable it
     document.getElementById("demo").innerHTML =
-      "You have enabled the " +
-      category_number_identities[clicked_id] +
-      " category.";
+      "You have enabled the " + categoryName + " category.";
     category_list.splice(category_list.indexOf(clicked_id), 1);
-    
-    // Update visual state
-    if (button) {
-      button.classList.remove("inactive");
-      button.classList.add("active");
-    }
-    
     console.log("Category enabled:", clicked_id);
-    console.log("Updated category list:", category_list);
   }
+  
+  console.log("Updated category list:", category_list);
 }
 
+// Improved toggle_difficulties function
 function toggle_difficulties(clicked_id) {
-  // Find the button index for visual update (buttons are zero-indexed, IDs are 1-indexed)
-  const buttonIndex = parseInt(clicked_id) - 1;
-  const button = difficultyButtons[buttonIndex];
+  // For message display
+  const difficultyName = difficulty_number_identities[clicked_id];
   
   if (!difficulty_list.includes(clicked_id)) {
     // Not in list (currently enabled) -> disable it
     document.getElementById("demo").innerHTML =
-      "You have disabled the " +
-      difficulty_number_identities[clicked_id] +
-      " difficulty.";
+      "You have disabled the " + difficultyName + " difficulty.";
     difficulty_list.push(clicked_id);
-    
-    // Update visual state
-    if (button) {
-      button.classList.remove("active");
-      button.classList.add("inactive");
-    }
-    
     console.log("Difficulty disabled:", clicked_id);
-    console.log("Updated difficulty list:", difficulty_list);
   } else {
     // In list (currently disabled) -> enable it
     document.getElementById("demo").innerHTML =
-      "You have enabled the " +
-      difficulty_number_identities[clicked_id] +
-      " difficulty.";
+      "You have enabled the " + difficultyName + " difficulty.";
     difficulty_list.splice(difficulty_list.indexOf(clicked_id), 1);
-    
-    // Update visual state
-    if (button) {
-      button.classList.remove("inactive");
-      button.classList.add("active");
-    }
-    
     console.log("Difficulty enabled:", clicked_id);
-    console.log("Updated difficulty list:", difficulty_list);
   }
+  
+  console.log("Updated difficulty list:", difficulty_list);
 }
 
+// Improved toggle_eras function
 function toggle_eras(clicked_id) {
-  // Find the button index for visual update (buttons are zero-indexed, IDs are 1-indexed)
-  const buttonIndex = parseInt(clicked_id) - 1;
-  const button = eraButtons[buttonIndex];
+  // For message display
+  const eraName = era_number_identities[clicked_id];
   
   if (!era_list.includes(clicked_id)) {
     // Not in list (currently enabled) -> disable it
     document.getElementById("demo").innerHTML =
-      "You have disabled the " + era_number_identities[clicked_id] + " era.";
+      "You have disabled the " + eraName + " era.";
     era_list.push(clicked_id);
-    
-    // Update visual state
-    if (button) {
-      button.classList.remove("active");
-      button.classList.add("inactive");
-    }
-    
     console.log("Era disabled:", clicked_id);
-    console.log("Updated era list:", era_list);
   } else {
     // In list (currently disabled) -> enable it
     document.getElementById("demo").innerHTML =
-      "You have enabled the " + era_number_identities[clicked_id] + " era.";
+      "You have enabled the " + eraName + " era.";
     era_list.splice(era_list.indexOf(clicked_id), 1);
+    console.log("Era enabled:", clicked_id);
+  }
+  
+  console.log("Updated era list:", era_list);
+}
+
+// Enhanced ALL/NONE buttons for better mobile support
+function allNoneCategoriesButton() {
+  const allCategoryButtons = document.querySelectorAll(".category");
+  
+  if (all_none_categories == true) {
+    // Currently showing "ALL", so disable all categories
+    category_list = []; // Clear existing list
     
-    // Update visual state
-    if (button) {
+    // Get all category IDs from identities object
+    Object.keys(category_number_identities).forEach(id => {
+      category_list.push(id);
+    });
+    
+    // Update visual state of all buttons
+    allCategoryButtons.forEach(button => {
+      button.classList.remove("active");
+      button.classList.add("inactive");
+    });
+    
+    all_none_categories = false;
+    document.getElementById("demo").innerHTML =
+      "You must select at least one category before starting the game.";
+  } else {
+    // Currently showing "NONE", so enable all categories
+    category_list = []; // Clear the list to enable all
+    
+    // Update visual state of all buttons
+    allCategoryButtons.forEach(button => {
       button.classList.remove("inactive");
       button.classList.add("active");
-    }
+    });
     
-    console.log("Era enabled:", clicked_id);
-    console.log("Updated era list:", era_list);
+    all_none_categories = true;
+    document.getElementById("demo").innerHTML =
+      "You have enabled all categories.";
   }
+  console.log("Category list after ALL/NONE toggle:", category_list);
+}
+
+function allNoneDifficultiesButton() {
+  const allDifficultyButtons = document.querySelectorAll(".difficulty");
+  
+  if (all_none_difficulties == true) {
+    // Currently showing "ALL", so disable all difficulties
+    difficulty_list = []; // Clear existing list
+    
+    // Get all difficulty IDs from identities object
+    Object.keys(difficulty_number_identities).forEach(id => {
+      difficulty_list.push(id);
+    });
+    
+    // Update visual state of all buttons
+    allDifficultyButtons.forEach(button => {
+      button.classList.remove("active");
+      button.classList.add("inactive");
+    });
+    
+    all_none_difficulties = false;
+    document.getElementById("demo").innerHTML =
+      "You must select at least one difficulty before starting the game.";
+  } else {
+    // Currently showing "NONE", so enable all difficulties
+    difficulty_list = []; // Clear the list to enable all
+    
+    // Update visual state of all buttons
+    allDifficultyButtons.forEach(button => {
+      button.classList.remove("inactive");
+      button.classList.add("active");
+    });
+    
+    all_none_difficulties = true;
+    document.getElementById("demo").innerHTML =
+      "You have enabled all difficulties.";
+  }
+  console.log("Difficulty list after ALL/NONE toggle:", difficulty_list);
+}
+
+function allNoneErasButton() {
+  const allEraButtons = document.querySelectorAll(".era");
+  
+  if (all_none_eras == true) {
+    // Currently showing "ALL", so disable all eras
+    era_list = []; // Clear existing list
+    
+    // Get all era IDs from identities object
+    Object.keys(era_number_identities).forEach(id => {
+      era_list.push(id);
+    });
+    
+    // Update visual state of all buttons
+    allEraButtons.forEach(button => {
+      button.classList.remove("active");
+      button.classList.add("inactive");
+    });
+    
+    all_none_eras = false;
+    document.getElementById("demo").innerHTML =
+      "You must select at least one era before starting the game.";
+  } else {
+    // Currently showing "NONE", so enable all eras
+    era_list = []; // Fixed: Changed from category_list to era_list
+    
+    // Update visual state of all buttons
+    allEraButtons.forEach(button => {
+      button.classList.remove("inactive");
+      button.classList.add("active");
+    });
+    
+    all_none_eras = true;
+    document.getElementById("demo").innerHTML =
+      "You have enabled all eras.";
+  }
+  console.log("Era list after ALL/NONE toggle:", era_list);
 }
 
 //Functions to change number of questions, time per question, and time per answer
@@ -13032,6 +13125,42 @@ perAnswerSlider.addEventListener("input", function () {
   change_time_per_answer(this.value);
 });
 
+
+
+
+
+// Add these lines after your existing slider event listeners
+const mobileQuestionSlider = document.getElementById("mobileQuestionSlider");
+const mobilePerQuestionSlider = document.getElementById("mobilePerQuestionSlider");
+const mobilePerAnswerSlider = document.getElementById("mobilePerAnswerSlider");
+
+// Add event listeners to mobile sliders
+if (mobileQuestionSlider) {
+  mobileQuestionSlider.addEventListener("input", function () {
+    updateLabel("mobileQuestionLabel", this.value, " QUESTIONS");
+    change_number_of_questions(this.value);
+  });
+}
+
+if (mobilePerQuestionSlider) {
+  mobilePerQuestionSlider.addEventListener("input", function () {
+    updateLabel("mobilePerQuestionLabel", this.value, "s / QUESTION");
+    change_time_per_question(this.value);
+  });
+}
+
+if (mobilePerAnswerSlider) {
+  mobilePerAnswerSlider.addEventListener("input", function () {
+    updateLabel("mobilePerAnswerLabel", this.value, "s / ANSWER");
+    change_time_per_answer(this.value);
+  });
+}
+
+
+
+
+
+
 function updateLabel(labelId, value, unit) {
   document.getElementById(labelId).textContent = value + unit;
 }
@@ -13315,4 +13444,104 @@ document.addEventListener('DOMContentLoaded', function() {
           this.ticking = true;
       }
   });
+});
+
+
+
+
+
+
+
+// Add this at the end of your JS file
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize the mobile sliders to match desktop values
+  const initialQuestionValue = document.getElementById("questionSlider")?.value || 10;
+  const initialPerQuestionValue = document.getElementById("perQuestionSlider")?.value || 5;
+  const initialPerAnswerValue = document.getElementById("perAnswerSlider")?.value || 5;
+  
+  // Set mobile slider values
+  const mobileQuestionSlider = document.getElementById("mobileQuestionSlider");
+  const mobilePerQuestionSlider = document.getElementById("mobilePerQuestionSlider");
+  const mobilePerAnswerSlider = document.getElementById("mobilePerAnswerSlider");
+  
+  if (mobileQuestionSlider) {
+    mobileQuestionSlider.value = initialQuestionValue;
+    updateLabel("mobileQuestionLabel", initialQuestionValue, " QUESTIONS");
+  }
+  
+  if (mobilePerQuestionSlider) {
+    mobilePerQuestionSlider.value = initialPerQuestionValue;
+    updateLabel("mobilePerQuestionLabel", initialPerQuestionValue, "s / QUESTION");
+  }
+  
+  if (mobilePerAnswerSlider) {
+    mobilePerAnswerSlider.value = initialPerAnswerValue;
+    updateLabel("mobilePerAnswerLabel", initialPerAnswerValue, "s / ANSWER");
+  }
+  
+  // Ensure all indicators are properly displayed initially
+  document.querySelectorAll('.button.active').forEach(button => {
+    const indicator = button.querySelector('.indicator');
+    if (indicator) {
+      indicator.style.backgroundColor = '#00F829';
+    }
+  });
+  
+  document.querySelectorAll('.button.inactive').forEach(button => {
+    const indicator = button.querySelector('.indicator');
+    if (indicator) {
+      indicator.style.backgroundColor = '#FF3A30';
+    }
+  });
+  
+  // Sync mobile and desktop button states
+  function syncButtonStates() {
+    // Sync categories
+    document.querySelectorAll('.category').forEach(button => {
+      const id = button.id;
+      const isDisabled = category_list.includes(id);
+      
+      if (isDisabled) {
+        button.classList.remove('active');
+        button.classList.add('inactive');
+      } else {
+        button.classList.remove('inactive');
+        button.classList.add('active');
+      }
+    });
+    
+    // Sync difficulties
+    document.querySelectorAll('.difficulty').forEach(button => {
+      const id = button.id;
+      const isDisabled = difficulty_list.includes(id);
+      
+      if (isDisabled) {
+        button.classList.remove('active');
+        button.classList.add('inactive');
+      } else {
+        button.classList.remove('inactive');
+        button.classList.add('active');
+      }
+    });
+    
+    // Sync eras
+    document.querySelectorAll('.era').forEach(button => {
+      const id = button.id;
+      const isDisabled = era_list.includes(id);
+      
+      if (isDisabled) {
+        button.classList.remove('active');
+        button.classList.add('inactive');
+      } else {
+        button.classList.remove('inactive');
+        button.classList.add('active');
+      }
+    });
+  }
+  
+  // Run initial sync
+  syncButtonStates();
+  
+  // Fix for mobile viewport height issues
+  handleMobileLayout();
 });
