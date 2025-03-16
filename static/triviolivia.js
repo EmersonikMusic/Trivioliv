@@ -13566,6 +13566,35 @@ var category_colors = {
     "linear-gradient(345deg, rgba(153,0,255,1) 0%, rgba(60,13,128,1) 100%)",
 };
 
+// Category summaries for hover display CURRENTLY DOES NOTHING
+var category_summaries = {
+    "Art": "Artists, Architecture, Sculpture, Photography, Painting, Museums, Styles, Terms, Typography, Theory, Techniques, Statues, Festivals, Digital Art, Awards, Colors, Design, Fashion, Heraldry, Logos",
+    "Economy": "Business, Currency, Stocks, Terms, Trade, Businesspeople, Cryptocurrency, Institutions, Finance, Economists, Marketing, Policies, Accounting, Events, Banking, Ecommerce, Brands, Investing, Unions",
+    "Food & Drink": "Origins, Foodstuffs, Brands, Ingredients, Restaurants, Alcohol, Cooking, National Dishes, Drinks, Terms, Diets, Agriculture, Cuisines, Producers, Nutrition, Processing, Restrictions, Spices",
+    "Games": "Board Games, Card Games, Tabletop Games, Puzzles, Games of Chance, Party Games, Schoolyard Games, Dexterity Games, Bar Games, Skill Toys, Genres",
+    "Geography": "Countries, Capitals, Regions, Territories, Bodies of Water, Cities, Landmarks, Cartography, Terms, Islands",
+    "History": "War, Events, Figures, Civilizations, Deaths, Royalty, Empires, Firsts, Periods, Quotes, Archaeology, Prehistory, Rulers, Terms, Artifacts, Explorers, Kingdoms, Names, Organizations, Places, Historians, Museums",
+    "Human Body": "Anatomy, Disease, Physiology, Systems, Organs, Terms, Pregnancy, Disorders, Tests, Conditions",
+    "Language": "Definitions, Terms, Languages, Translation, Codes, Shorthands, Slang, Words, Alphabets, Linguistics, Parts of Speech, Punctuation, Anagrams, Idioms, Sayings, Dialects, Sign Language",
+    "Law": "Terms, Cases, Laws, Enforcement, Courts, Prisons, Concepts, Codes, Institutions, Principles, Doctrines, Events, Firms, Branches, Figures",
+    "Literature": "Authors, Characters, Books, Details, Poetry, Lines, Awards, Stories, Literary Devices, Novellas, Terms, Fanbases, Genres, Publications, Publishers, Fables, Graphic Novels, Magazines, Quotes",
+    "Math": "Numbers, Problems, Mathematicians, Geometry, Terms, Units, Statistics, Concepts, Branches, Notation, Calculus, Instruments, Probability, Symbols",
+    "Miscellaneous": "Flags, Terms, Education, Buildings, Calendar, Journalism, Culture, Slogans, Organizations, Awards, Names, Products, Amusement Parks, Logos, Events, Symbols, Clothing, Fashion, Martial Arts, Quotes",
+    "Movies": "Characters, Actors, Awards, Films, Details, Directors, Box Office, Lines, Taglines, Cinematography, Studios, Festivals, Filmmaking, Franchises, Industry, Musicals, Screenwriters",
+    "Music": "Artists, Lyrics, Songs, Instruments, Composers, Albums, Concerts, Theory, Genres, Labels, Festivals, Aliases, Awards, Streaming, Anthems, Fanbases, Terms, Notation, Hardware, Producers, Music Videos",
+    "Nature": "Animals, Environment, Space, Plants, National Parks, Natural Processes, Terms, Natural Disasters, Geology, Weather, Life, Parks",
+    "Performing Arts": "Plays, Characters, Theaters, Playwrights, Opera, Musicals, Terms, Awards, Dance, Schools, Actors, Lines, Acting, Genres, Comedy, Performers, Podcasting, Circus, Magicians, Performing Arts",
+    "Philosophy": "Philosophers, Texts, Branches, Terms, Principles, Concepts, Journals, Schools, Ideologies, Logic, Movements, Argumentation, Activism, Metaphysics",
+    "Politics": "Politicians, Government, Geopolitics, Unions, Terms, Events, Movements, Parties, Elections, Treaties, Political Buildings, Revolutions, Activism, Institutions, International Politics, Alliances",
+    "Pop Culture": "Celebrities, Aliases, Comics, Scandals, Criminals, Deaths, Fashion, Magazines, Products, Traditions, Trends, Pseudoscience, Memes, Entertainment, Generations, Societies, Events, Websites, Lifestyle",
+    "Science": "Chemistry, Physics, Psychology, Biology, Scientists, Medicine, Biochemistry, Fields, Units, Astronomy, Geology, Sociology, Terms, Materials Science, Journals, Pathology, Research Centers, Techniques, Anthropology",
+    "Sports": "Teams, Olympics, Athletes, Leagues, Terms, Rules, Awards, Motorsports, World Cups, Events, Mascots, Records, Games, Equipment, Sports Entertainment, Stadiums, Fanbases, Positions, Governing Bodies, Martial Arts",
+    "Technology": "Internet, Software, Machines, Hardware, Vehicles, Companies, Programming, Terms, Inventors, Websites, Computers, Engineering, Weapons, Infrastructure, Advances, Names, Applications, Founders, AI",
+    "Television": "Characters, Details, Actors, Shows, Game Shows, Streaming, Reality TV, Producers, Theme Songs, News, Fanbases, Lines, Commercials, Terms, Animation, Broadcasting, Episodes, Events, Networks, Awards",
+    "Theology": "Mythology, World Religions, Holy Books, Places of Worship, Traditions, Holy Days, Astrology, Popes, Saints, Terms, Folklore, Leaders, Symbols, Apparel, Clergy, Events, Institutions, Irreligion, Titles",
+    "Video Games": "Games, Characters, Details, Consoles, Developers, Awards, Items, Genres, Publications, Hardware, Esports, Levels, Terms, Accessories, Conventions"
+}
+
 // Declaring variables for the base URL for fetching questions
 var baseUrl = "https://triviolivia.herokuapp.com/api/questions";
 var moddedUrl = "";
@@ -13687,7 +13716,7 @@ checkboxes.forEach((checkbox) => {
 });
 
 //Functions to toggle categories, difficulties, and eras
-// Improved toggleIndicator function
+// ToggleIndicator function
 function toggleIndicator(button) {
   // Check if the button is the one that was clicked directly
   if (button.classList.contains("active")) {
@@ -13715,7 +13744,7 @@ function toggleIndicator(button) {
   });
 }
 
-// Improved toggle_categories function
+// Toggle_categories function
 function toggle_categories(clicked_id) {
   // For message display
   const categoryName = category_number_identities[clicked_id];
@@ -13737,7 +13766,7 @@ function toggle_categories(clicked_id) {
   console.log("Updated category list:", category_list);
 }
 
-// Improved toggle_difficulties function
+// Toggle_difficulties function
 function toggle_difficulties(clicked_id) {
   // For message display
   const difficultyName = difficulty_number_identities[clicked_id];
@@ -13759,7 +13788,7 @@ function toggle_difficulties(clicked_id) {
   console.log("Updated difficulty list:", difficulty_list);
 }
 
-// Improved toggle_eras function
+// Toggle_eras function
 function toggle_eras(clicked_id) {
   // For message display
   const eraName = era_number_identities[clicked_id];
@@ -14317,9 +14346,6 @@ perAnswerSlider.addEventListener("input", function () {
 });
 
 
-
-
-
 // Add these lines after your existing slider event listeners
 const mobileQuestionSlider = document.getElementById("mobileQuestionSlider");
 const mobilePerQuestionSlider = document.getElementById("mobilePerQuestionSlider");
@@ -14346,10 +14372,6 @@ if (mobilePerAnswerSlider) {
     change_time_per_answer(this.value);
   });
 }
-
-
-
-
 
 
 function updateLabel(labelId, value, unit) {
@@ -14637,10 +14659,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-
-
-
-
 // Function to handle closing dropdowns when clicking outside
 function closeDropdownsOnClickOutside() {
   // Listen for clicks anywhere on the document
@@ -14671,12 +14689,7 @@ function closeDropdownsOnClickOutside() {
   });
 }
 
-
-
-
-
-
-// Add this at the end of your JS file
+// Slider syncing
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize the mobile sliders to match desktop values
   const initialQuestionValue = document.getElementById("questionSlider")?.value || 10;
