@@ -14727,6 +14727,42 @@ document.addEventListener('DOMContentLoaded', function() {
         button.classList.remove('inactive');
         button.classList.add('active');
       }
+
+
+
+      // Function to handle closing dropdowns when clicking outside
+function closeDropdownsOnClickOutside() {
+  // Listen for clicks anywhere on the document
+  document.addEventListener('click', function(event) {
+    // Get all currently open dropdowns (checked toggle inputs)
+    const openToggles = document.querySelectorAll('.mobile-dropdown .toggle:checked');
+    
+    // If no dropdowns are open, do nothing
+    if (openToggles.length === 0) return;
+    
+    // Don't interfere with clicks directly on the toggle labels
+    if (event.target.classList.contains('lbl-toggle') || 
+        event.target.closest('.lbl-toggle')) {
+      return;
+    }
+    
+    // Process each open dropdown
+    openToggles.forEach(toggle => {
+      // Get the dropdown content element
+      const contentElement = toggle.nextElementSibling.nextElementSibling;
+      
+      // If click was outside the dropdown content
+      if (!contentElement.contains(event.target)) {
+        // Close the dropdown
+        toggle.checked = false;
+      }
+    });
+  });
+}
+
+
+
+
     });
   }
   
@@ -14735,4 +14771,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Fix for mobile viewport height issues
   handleMobileLayout();
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Setup click-outside functionality for mobile dropdowns
+    closeDropdownsOnClickOutside();
+  });
+
+
+
+
+
 });
