@@ -803,25 +803,8 @@ input[type='checkbox'] {
   letter-spacing: 0;
 }
 
-/* Replace your current media queries with these updated ones */
-
-/* For devices LARGER than iPads (desktops/large laptops) */
-@media (min-width: 1025px) {
-  .mobile-menu {
-    display: none;
-  }
-  
-  .game-area {
-    height: 100%;
-  }
-}
-
-/* For iPads and smaller devices (iPads, tablets, phones) */
-@media (max-width: 1024px) {
-  .desktop-menu {
-    display: none;
-  }
-  
+/* Mobile fix - replace your current mobile media query with this */
+@media (max-width: 767px) {
   /* Reset core elements */
   body, html {
     height: 100%;
@@ -852,7 +835,7 @@ input[type='checkbox'] {
     margin: 0;
   }
   
-  /* Column takes up full width */
+  /* Column takes up full width on mobile */
   .col-md-9 {
     width: 100%;
     padding: 0;
@@ -867,9 +850,9 @@ input[type='checkbox'] {
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin-bottom: 26vh; /* Spacing between areas */
+    margin-bottom: 26vh; /* Reduced spacing between areas */
     overflow: hidden;
-    padding-bottom: 0;
+    padding-bottom: 0; /* Removed bottom padding */
   }
   
   /* Content areas flex to fill game area */
@@ -877,7 +860,7 @@ input[type='checkbox'] {
     flex: 1;
     overflow-y: auto;
     min-height: 0; /* Critical for flex child to respect parent boundaries */
-    padding-bottom: 0;
+    padding-bottom: 0; /* Removed extra padding */
   }
   
   /* Make sure loading bar sits flush at the bottom of the game area */
@@ -896,8 +879,8 @@ input[type='checkbox'] {
     margin: 0;
     border-radius: 12px 12px 0 0;
     z-index: 1000;
-    padding-top: 5px;
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+    padding-top: 5px; /* Added padding to push content down slightly */
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Optional: add shadow to visually separate */
   }
   
   /* Hide desktop menu completely */
@@ -905,58 +888,9 @@ input[type='checkbox'] {
     display: none;
   }
   
-  /* iPad-specific adjustments for better touch targets */
-  .mobile-menu .menu-button {
-    font-size: 1rem; /* Larger text for better readability */
-  }
-  
-  /* Ensure mobile dropdowns work well on larger screens */
-  .mobile-dropdown .collapsible-content {
-    width: 100vw;
-    max-height: 0;
-  }
-  
-  .mobile-dropdown .toggle:checked + .lbl-toggle + .collapsible-content {
-    max-height: 400px; /* Larger height for iPad screens */
-  }
-  
-  /* Larger touch targets for buttons on iPad */
-  .content-inner button {
-    min-height: 28px; /* Taller buttons for easier tapping */
-    padding: 5px 0;
-    margin: 3px 0;
-    font-size: 14px; /* Larger text */
-  }
-  
-  /* Slider adjustments for iPad */
-  .slider {
-    height: 8px; /* Slightly thicker slider */
-  }
-  
-  .slider::-webkit-slider-thumb {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-/* Extra adjustments for iPad Pro in landscape orientation */
-@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
-  .mobile-menu {
-    height: 20vh; /* Slightly smaller height in landscape to allow more content */
-  }
-  
-  .game-area {
-    margin-bottom: 21vh;
-  }
-  
-  /* Adjust font sizes for better readability in landscape */
-  .question-container, .answer-container {
-    font-size: clamp(18px, 4vw, 7vh);
+  /* Make sure loading bar stays at bottom of game area */
+  .loading-bar-container {
+    margin-top: auto;
   }
 }
 
