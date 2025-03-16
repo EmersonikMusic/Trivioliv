@@ -14117,23 +14117,8 @@ const mainGameFunction = async () => {
   showQuestion("Thanks for playing!");
   progressBar.style.animationPlayState = "paused";
   document.getElementById("start-pause").textContent = "START";
-document.getElementById("start-pause2").textContent = "START"; else if (pauseFlag === true && game_started === true) {
-    // Update both buttons
-    desktopButton.textContent = "RESUME";
-    mobileButton.textContent = "RESUME";
-    
-    progressBar.style.animationPlayState = "paused";
-    pauseFlag = false;
-    console.log("Game paused.");
-    document.getElementById("demo").innerHTML =
-      'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
-  } else {
-    // Update both buttons
-    desktopButton.textContent = "START";
-    mobileButton.textContent = "START";
-    
-    pauseFlag = false;
-  }
+  document.getElementById("demo").innerHTML =
+    'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Copyright &copy; 2025. Contact us at <a href="mailto:example@email.com">mark.mazurek@triviolivia.com</a>';
 };
 
 // Function to pause the game
@@ -14373,17 +14358,23 @@ function updateLabel(labelId, value, unit) {
 
 //Function to change START GAME text
 function changeButtonText() {
-  var desktopButton = document.getElementById("start-pause");
-  var mobileButton = document.getElementById("start-pause2");
-  
+  var button = document.getElementById("start-pause");
   if (pauseFlag === false) {
-    // Update both buttons
-    desktopButton.textContent = "PAUSE";
-    mobileButton.textContent = "PAUSE";
-    
+    button.textContent = "PAUSE";
     progressBar.style.animationPlayState = "running";
     pauseFlag = true;
+  } else if (pauseFlag === true && game_started === true) {
+    button.textContent = "RESUME";
+    progressBar.style.animationPlayState = "paused";
+    pauseFlag = false;
+    console.log("Game paused.");
+    document.getElementById("demo").innerHTML =
+      'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
+  } else {
+    button.textContent = "START";
+    pauseFlag = false;
   }
+}
 
 // New function to disable banned categories
 function disableBannedCategories() {}
