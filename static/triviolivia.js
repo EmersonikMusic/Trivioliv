@@ -1,5 +1,3 @@
-
-      
 // Dictionary holding HTML content
 const contentDict = {
 
