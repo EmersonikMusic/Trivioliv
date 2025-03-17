@@ -13951,7 +13951,7 @@ fill: #4e0b1b;
 </svg>`,
 };
 
-document.body.style.background = "#7938cf";
+document.body.style.background = "#4523a8";
 
 // Unsure
 const progressElement = document.getElementById("progress");
