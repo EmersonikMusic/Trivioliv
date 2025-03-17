@@ -1105,8 +1105,10 @@
 }
 
 
-/* Corrected triangle rotation for mobile dropdowns */
-.mobile-dropdown .lbl-toggle::before { 
+
+
+/* Updated triangle rotation for mobile dropdowns */
+.lbl-toggle::before { 
   content: ' '; 
   display: inline-block; 
   border-top: 5px solid transparent; 
@@ -1118,15 +1120,15 @@
   transition: transform .2s ease-out; 
 } 
 
-/* Rotate 90 degrees counter-clockwise to point up when open */
-.mobile-dropdown .toggle:checked + .lbl-toggle::before { 
-  transform: rotate(-90deg) translateX(-2px);
+/* Change from 90deg rotation to 180deg to point up when open */
+.toggle:checked + .lbl-toggle::before { 
+  transform: rotate(90deg) translateY(2px); 
 }
 
-/* Mobile dropdown animation - position right above the button area */
+/* Mobile dropdown animation */
 .mobile-dropdown .collapsible-content {
   position: absolute;
-  bottom: 100%; /* Position it right above the button */
+  top: -350px; /* Final position above the buttons */
   left: 0;
   width: 100vw;
   z-index: 1010;
@@ -1135,11 +1137,10 @@
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
   max-height: 0;
   overflow: hidden;
-  /* Add transform transition for the up/down animation */
+  /* Add transform transition to create the up/down animation */
   transition: max-height 0.5s ease-in-out, transform 0.5s ease-in-out;
-  /* Start position - hidden below the starting point */
-  transform: translateY(20px);
-  opacity: 0;
+  /* Start position - pushed down by 350px */
+  transform: translateY(350px);
 }
 
 .mobile-dropdown .toggle:checked + .lbl-toggle + .collapsible-content {
@@ -1147,8 +1148,8 @@
   overflow-y: auto;
   /* End position - animate upward to original position */
   transform: translateY(0);
-  opacity: 1;
 }
+
 
       </style>
   </head>
