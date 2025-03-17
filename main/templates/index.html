@@ -1104,6 +1104,53 @@
   background-color: #FF3A30 !important;
 }
 
+
+
+
+/* Updated triangle rotation for mobile dropdowns */
+.lbl-toggle::before { 
+  content: ' '; 
+  display: inline-block; 
+  border-top: 5px solid transparent; 
+  border-bottom: 5px solid transparent; 
+  border-left: 5px solid currentColor; 
+  vertical-align: middle; 
+  margin-right: .7rem; 
+  transform: translateY(-2px); 
+  transition: transform .2s ease-out; 
+} 
+
+/* Change from 90deg rotation to 180deg to point up when open */
+.toggle:checked + .lbl-toggle::before { 
+  transform: rotate(180deg) translateY(2px); 
+}
+
+/* Mobile dropdown animation */
+.mobile-dropdown .collapsible-content {
+  position: absolute;
+  top: -350px; /* Final position above the buttons */
+  left: 0;
+  width: 100vw;
+  z-index: 1010;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+  max-height: 0;
+  overflow: hidden;
+  /* Add transform transition to create the up/down animation */
+  transition: max-height 0.5s ease-in-out, transform 0.5s ease-in-out;
+  /* Start position - pushed down by 350px */
+  transform: translateY(350px);
+}
+
+.mobile-dropdown .toggle:checked + .lbl-toggle + .collapsible-content {
+  max-height: 350px; /* Adjust based on content height */
+  overflow-y: auto;
+  /* End position - animate upward to original position */
+  transform: translateY(0);
+}
+
+
       </style>
   </head>
   <body>
