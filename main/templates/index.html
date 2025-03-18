@@ -826,7 +826,7 @@
               letter-spacing: 0;
           }
   
-        /* Mobile fix - replace your current mobile media query with this */
+        /* Mobile fix */
   @media (max-width: 767px) {
       /* Reset core elements */
       body, html {
@@ -917,7 +917,24 @@
       }
   }
   
-  
+  @media (max-width: 767px) {
+    /* Update container padding to remove top padding */
+    .container-fluid {
+        padding: 0 5px 5px 5px; /* 0 top, 5px right, 5px bottom, 5px left */
+    }
+    
+    /* Optional: If the game area still appears to have too much space at the top */
+    .game-area {
+        border-radius: 0 0 12px 12px; /* Only round the bottom corners */
+        margin-top: 0; /* Ensure no top margin */
+    }
+    
+    /* Adjust header for mobile to be flush with top */
+    .header {
+        border-radius: 0; /* Remove top border radius from header */
+        margin-top: 0;
+    }
+}
   
   
   /* Mobile menu dropdowns - UPDATED */
