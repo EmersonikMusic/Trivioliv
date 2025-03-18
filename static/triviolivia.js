@@ -14933,20 +14933,31 @@ function updateLabel(labelId, value, unit) {
 
 //Function to change START GAME text
 function changeButtonText() {
-  var button = document.getElementById("start-pause");
+  var desktopButton = document.getElementById("start-pause");
+  var mobileButton = document.getElementById("start-pause2");
+  
   if (pauseFlag === false) {
-    button.textContent = "PAUSE";
+    // Update both desktop and mobile buttons
+    desktopButton.textContent = "PAUSE";
+    if (mobileButton) mobileButton.textContent = "PAUSE";
+    
     progressBar.style.animationPlayState = "running";
     pauseFlag = true;
   } else if (pauseFlag === true && game_started === true) {
-    button.textContent = "RESUME";
+    // Update both desktop and mobile buttons
+    desktopButton.textContent = "RESUME";
+    if (mobileButton) mobileButton.textContent = "RESUME";
+    
     progressBar.style.animationPlayState = "paused";
     pauseFlag = false;
     console.log("Game paused.");
     document.getElementById("demo").innerHTML =
       'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
   } else {
-    button.textContent = "START";
+    // Update both desktop and mobile buttons
+    desktopButton.textContent = "START";
+    if (mobileButton) mobileButton.textContent = "START";
+    
     pauseFlag = false;
   }
 }
