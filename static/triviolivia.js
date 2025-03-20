@@ -14149,7 +14149,7 @@ var category_summaries = {
 }
 
 // Declaring variables for the base URL for fetching questions
-var baseUrl = "https://triviolivia.com/api/questions";
+var baseUrl = "/api/questions";
 var moddedUrl = "";
 var queryParams = [];
 let globalData;
@@ -15026,7 +15026,7 @@ function refetchAndRestart() {
   pauseFlag = false;
   globalData = [];
 
-  baseUrl = "https://triviolivia.com/api/questions";
+  baseUrl = "/api/questions";
   moddedUrl = "";
   queryParams = [];
   globalData = [];
@@ -15058,7 +15058,7 @@ function resetSettings() {
   difficulty_list = [];
   era_list = [];
 
-  baseUrl = "https://triviolivia.com/api/questions";
+  baseUrl = "/api/questions";
   moddedUrl = "";
   queryParams = [];
   globalData = [];
