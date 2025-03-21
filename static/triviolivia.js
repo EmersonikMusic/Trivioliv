@@ -14565,6 +14565,7 @@ function displayLoadingAnimation() {
   container.appendChild(loader);
 }
 
+// Modified mainGameFunction with countdown progress animation
 const mainGameFunction = async () => {
   document.getElementById("demo").innerHTML = "Fetching questions...";
 
@@ -14590,6 +14591,12 @@ const mainGameFunction = async () => {
     return; // Stop execution if fetch fails
   }
 
+  // Reset and prepare the progress bar for countdown animation
+  progressBar.style.animation = "none";
+  progressBar.offsetHeight; // Trigger reflow to reset animation
+  progressBar.style.animation = "growProgress 3s linear forwards";
+  progressBar.style.animationPlayState = "running";
+
   document.getElementById("demo").innerHTML = "Game starts in 3.";
   await delay(1000);
   document.getElementById("demo").innerHTML = "Game starts in 2..";
@@ -14598,6 +14605,10 @@ const mainGameFunction = async () => {
   await delay(1000);
   document.getElementById("demo").innerHTML = "Go!";
   await delay(1000);
+
+  // Reset the progress bar for the game questions
+  progressBar.style.animation = "none";
+  progressBar.offsetHeight; // Trigger reflow to reset animation
 
   // This is the updated portion of the mainGameFunction
   for (let i = 0; i < number_of_questions; i++) {
