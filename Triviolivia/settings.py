@@ -36,6 +36,23 @@ CORS_ALLOWED_ORIGINS = [
     "https://triviolivia.com",
 ]
 
+# Optional: Allow credentials (cookies, etc.) to be sent with requests
+CORS_ALLOW_CREDENTIALS = True
+
+# Optional: Specify allowed HTTP methods
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
+]
+
+# New stuff from Claude
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # Application definition
 
 INSTALLED_APPS = [
