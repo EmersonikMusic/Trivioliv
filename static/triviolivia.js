@@ -14693,8 +14693,8 @@ const mainGameFunction = async () => {
   document.getElementById("demo").innerHTML = "Go!";
   await delay(1000);
 
-  // Enable only the Start/Pause button after countdown (for pause functionality)
-  enableStartPauseButton();
+  // Enable both buttons after countdown
+  enableBothButtons();
 
   // Reset the progress bar for the game questions
   progressBar.style.animation = "none";
