@@ -1326,8 +1326,16 @@
       transform: translateY(0);
     }
     
+    .title-settings {
+    margin: 20px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 40px;
+    text-align: center;
+    }
+
     .title-settings h1 {
-      font-size: 30px;
+      font-size: 40px;
       background: #E93E3A;
       background: linear-gradient(to top, #E93E3A 0%, #E93E3A 12%, #F3903F 36%, #FDC70C 71%, #FCEF44 100%);
       -webkit-background-clip: text;
@@ -1393,13 +1401,10 @@
                             </div>
                             <div id="progress"></div>
                         </div>
-                        <div class="container">
-                          <button class="gradient-button">Your Button Text</button>
-                          <!-- Other content in the container -->
-                        </div>
+
                         <div id="container_btn_pauseplay" class="game-button-container">
                           <div class="desktop-buttons">
-                            <div button id="start-pause" class="user-button" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
+                            
                             <div button id="refetch-and-restart" class="user-button" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
                           </div>                            
                         </div>
