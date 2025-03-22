@@ -14319,7 +14319,7 @@ function confirm_reset() {
 }
 
 // Function for indicator light toggle
-function toggleIndicator(button) {
+// function toggleIndicator(button) {
   if (button.classList.contains("active")) {
     button.classList.remove("active");
     button.classList.add("inactive");
@@ -14329,7 +14329,19 @@ function toggleIndicator(button) {
     button.classList.add("active");
     console.log(button);
   }
-}
+// }
+
+// TOGGLE MORGAN EDIT
+        function toggleCategory(container) {
+            const toggleSwitch = container.querySelector('.toggle-switch');
+            if (toggleSwitch.classList.contains('active')) {
+                toggleSwitch.classList.remove('active');
+                toggleSwitch.classList.add('inactive');
+            } else {
+                toggleSwitch.classList.remove('inactive');
+                toggleSwitch.classList.add('active');
+            }
+        }
 
 //Function to hide or show menu sections
 const checkboxes = document.querySelectorAll(".toggle");

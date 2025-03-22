@@ -115,7 +115,8 @@
         
         body {
           line-height: 1.5;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          font-family: 'DIN Condensed Bold', Arial, sans-serif;
+          /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
         }
@@ -164,7 +165,6 @@
                   padding: 0;
                   overflow: hidden;
                   background: #121212;
-                  font-family: "Montserrat", 'Calibri', sans-serif;
                   color: white;
                   word-break: break-word;
                   overflow-wrap: break-word;
@@ -179,6 +179,7 @@
                   padding: 0;
                   
               }
+            
       
               .header {
                   background-color: rgba(0, 0, 0, 0.2);
@@ -278,12 +279,13 @@
           padding: 15px;
           /* Dynamic font sizing */
           font-size: clamp(16px, 5vw, 8vh);
-          /* background-color: rgba(0,0,0, 0.4); */
+          background-color: rgba(0,0,0, 0.4);
           margin: 10px;
           border-radius: 10px;
           overflow-wrap: break-word;
           word-wrap: break-word;
           hyphens: none;
+          outline: 2px solid white;
       }
       
       .answer-container {
@@ -295,7 +297,7 @@
           padding: 15px;
           /* Dynamic font sizing */
           font-size: clamp(16px, 5vw, 8vh);
-          /* background-color: rgba(0,0,0, 0.4); */
+          background-color: rgba(0,0,0, 0.4);
           margin: 10px;
           border-radius: 10px;
           overflow-wrap: break-word;
@@ -307,9 +309,12 @@
       background-color: rgba(0, 0, 0, 0.5);
       border-radius: 20px;
       display: flex;
+      flex-direction: row;
       width: 100%;
       justify-content: center;
       margin: 20px;
+      /* margin-top: auto; */
+      /* margin-bottom: 0; */
     }
       
       p {
@@ -360,21 +365,19 @@
                 width: 100%; /* Adjust as needed */
                 box-sizing: border-box;  
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 gap: 5px;
                 align-items: center;
               }
     
               .user-button {
-                position: absolute;
-                top: 20px; /* Adjust for desired spacing from top */
-                right: 20px; /* Adjust for desired spacing from right */
                 background: linear-gradient(to right, #66256A, #954299);
                 border: 3px solid #481D51;
                 color: white; /* Assuming white text, adjust if needed */
                 padding: 10px 20px; /* Adjust padding as needed */
-                border-radius: 5px; /* Optional: for rounded corners */
+                border-radius: 15px; /* Optional: for rounded corners */
                 cursor: pointer;
+                font-size: 10px;
               }
       
               .desktop-character {
@@ -418,19 +421,19 @@
       
               /* Desktop button styles */
     
+    .desktop-menu .menu-button {
+      width: 30px;
+      padding: 8px;
+      background-color: rgba(0,0,0, 0.5);
+      border-radius: 8px;
+      transition: all 0.3s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      margin-bottom: 0;
+      color: white;
+
+    }
     
-    
-              
-              .desktop-menu .menu-button {
-                  width: 30px%;
-                  padding: 8px;
-                  background-color: rgba(0,0,0, 0.5);
-                  border-radius: 8px;
-                  transition: all 0.3s;
-                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                  margin-bottom: 0;
-                  color: white;
-              }
+  
       
               .desktop-menu .menu-button:hover {
                   background-color: rgba(0,0,0, 0.7);
@@ -557,6 +560,10 @@
         overflow: hidden; 
         transition: max-height .5s ease-in-out; 
         transition-delay: 0.26s;
+
+        /* background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 15px;
+        padding: 30px; */
       
         /* unsure about this one */
         display: flex;
@@ -571,6 +578,7 @@
           border-top-right-radius: 14px;
           border-top-left-radius: 14px;
           background: rgba(0, 0, 0, .2);
+          color: #8DD4DA;
       } 
       
       .content-inner { 
@@ -629,7 +637,7 @@
       
       
       /* Attempt at dynamic question and answer timer indicator */
-        #loading-bar {
+        .loading-bar {
           display: flex;
           width: 100%;
           position: relative;
@@ -702,13 +710,8 @@
       
       
       
-      /*Slider Stuff - MORGAN EDIT */
-  
-  .collapsible-content {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
-  padding: 30px;
-}
+/*Slider Stuff - MORGAN EDIT */  
+
 
 .menu_question_time {
   padding: 20px;
@@ -719,8 +722,6 @@
 }
 
 .slider-label {
-  font-family: 'DIN Condensed Bold', Arial, sans-serif;
-  font-size: 30px;
   color: #FFFFFF;
   text-align: left;
   padding-bottom: 15px;
@@ -833,7 +834,52 @@
   border-radius: 50%;
 }
     
-      
+ /* END OF SLIDER STUFF      */
+
+/* START OF CATEGORY TOGGLE STYLE */
+.toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            border-radius: 15px;
+            margin-right: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background-color: #8DD4DA;
+        }
+
+        .toggle-switch.inactive {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .toggle-dot {
+            position: absolute;
+            top: 3px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active .toggle-dot {
+            background-color: #FFFFFF;
+            left: 5px;
+        }
+
+        .toggle-switch.inactive .toggle-dot {
+            background-color: #8DD4DA;
+            left: 31px;
+        }
+
+        .category-label {
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        /* END OF TOGGLE STYLE */
+
     
       
       /* Indicator light attempt */
@@ -962,7 +1008,7 @@
           /* Main container setup */
           .container-fluid {
               height: 100%;
-              width: 100%;
+              /* width: 100%; MORGAN EDIT */
               position: absolute;
               display: flex;
               flex-direction: column;
@@ -1005,11 +1051,7 @@
               padding-bottom: 0; /* Removed extra padding */
           }
           
-          /* Make sure loading bar sits flush at the bottom of the game area */
-          .loading-bar-container {
-              margin-top: auto;
-              margin-bottom: 0;
-          }
+         
           
           /* Fixed mobile menu at bottom */
           .mobile-menu {
@@ -1031,9 +1073,7 @@
           }
           
           /* Make sure loading bar stays at bottom of game area */
-          .loading-bar-container {
-              margin-top: auto;
-          }
+         
       }
       
       @media (max-width: 767px) {
@@ -1286,7 +1326,10 @@
       transform: translateY(0);
     }
     
-    
+    .title-settings h1 {
+      font-size: 30px;
+      font-family: ;
+    }
     
     
     
@@ -1302,7 +1345,10 @@
                       <div class="logo-container">
                         <div class="logo">
                             <a href="https://www.triviolivia.com" style="text-decoration: none; color: inherit;">
-                                <span class="main-text">TRIVIOLIVIA</span><span class="domain">.com</span>
+                                <!-- <span class="main-text">TRIVIOLIVIA</span><span class="domain">.com</span> -->
+                                 <div id="logo-header" class="logo-header">
+                                  <img src="main/templates/images/TO_logo_sm_clr.svg" alt="triviolivia.com" />
+                                 </div>
                             </a>
                         </div>
                       </div>
@@ -1329,7 +1375,7 @@
                       </div>
   
                       <div id="loading-bar-container" class="loading-bar-container">
-                        <div id="loading-bar">
+                        <div id="loading-bar" class="loading-bar">
                             <div id="loading-text">
                                 <p id="demo" class="loader-text"></p>
                             </div>
@@ -1339,7 +1385,7 @@
                           <button class="gradient-button">Your Button Text</button>
                           <!-- Other content in the container -->
                         </div>
-                        <div id="container_btn_pauseplay" class="game-button container">
+                        <div id="container_btn_pauseplay" class="game-button-container">
                           <div class="desktop-buttons">
                             <div button id="start-pause" class="user-button" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
                             <div button id="refetch-and-restart" class="user-button" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
@@ -1456,7 +1502,7 @@
               <!-- Side Menu (visible only on larger screens) -->
               <div class="col-md-3 d-flex flex-column h-100 pl-0">
                   <div class="menu-container desktop-menu">
-                      <div class="desktop-buttons">
+                      <!-- <div class="desktop-buttons">
                           <div button id="start-pause" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
   
                           <div button id="refetch-and-restart" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
@@ -1466,9 +1512,11 @@
   
   
                             
-            </div>
-  
-  
+            </div> -->
+                      <div id="title-settings" class="title-settings">
+                        <h1>CUSTOMIZE YOUR GAME EXPERIENCE</h1>
+                      </div>
+
                           <!--Categories menu-->
                   <div class="wrap-collabsible"> 
                       <input id="collapsible-categories" class="toggle" type="checkbox"> 
@@ -1481,7 +1529,10 @@
                               {% for category in categories %}
                               <div id='{{ category.name | slugify }}'>
                                   <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
-                                      <span class="indicator"></span>
+                                      <!-- <span class="indicator"></span> MORGAN EDIT -->
+                                      <div class="toggle-switch active">
+                                        <div class="toggle-dot"></div>
+                                    </div>
                                       {{ category.name | upper }}
                                   </button>
                               </div>
