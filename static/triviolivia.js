@@ -15091,6 +15091,37 @@ function closeAboutUs() {
   overlay.style.display = "none";
 }
 
+//Function to change START GAME text
+function changeButtonText() {
+  var desktopButton = document.getElementById("start-pause");
+  var mobileButton = document.getElementById("start-pause2");
+  
+  if (pauseFlag === false) {
+    // Update both desktop and mobile buttons
+    desktopButton.textContent = "PAUSE";
+    if (mobileButton) mobileButton.textContent = "PAUSE";
+    
+    progressBar.style.animationPlayState = "running";
+    pauseFlag = true;
+  } else if (pauseFlag === true && game_started === true) {
+    // Update both desktop and mobile buttons
+    desktopButton.textContent = "RESUME";
+    if (mobileButton) mobileButton.textContent = "RESUME";
+    
+    progressBar.style.animationPlayState = "paused";
+    pauseFlag = false;
+    console.log("Game paused.");
+    document.getElementById("demo").innerHTML =
+      'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
+  } else {
+    // Update both desktop and mobile buttons
+    desktopButton.textContent = "START";
+    if (mobileButton) mobileButton.textContent = "START";
+    
+    pauseFlag = false;
+  }
+}
+
 // Fullscreen mode attempt
 function toggleFullscreen() {
   let elem = document.documentElement;
