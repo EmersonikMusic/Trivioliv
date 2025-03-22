@@ -14158,6 +14158,80 @@ let globalData;
 document.getElementById("demo").innerHTML =
   'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()"><b>START</b></span> to play.';
 
+// Function to disable both Start/Pause and Refetch buttons
+function disableBothButtons() {
+  // Desktop buttons
+  const startPauseBtn = document.getElementById("start-pause");
+  const refetchBtn = document.getElementById("refetch-and-restart");
+  
+  // Mobile buttons
+  const mobileStartPauseBtn = document.getElementById("start-pause2");
+  const mobileRefetchBtn = document.getElementById("refetch-and-restart2");
+  
+  // Disable buttons
+  [startPauseBtn, refetchBtn, mobileStartPauseBtn, mobileRefetchBtn].forEach(btn => {
+    if (btn) {
+      btn.disabled = true;
+      btn.style.opacity = "0.5";
+      btn.style.cursor = "not-allowed";
+      btn.classList.add("button-disabled");
+    }
+  });
+}
+
+// Function to enable only the Start/Pause button
+function enableStartPauseButton() {
+  // Desktop button
+  const startPauseBtn = document.getElementById("start-pause");
+  
+  // Mobile button
+  const mobileStartPauseBtn = document.getElementById("start-pause2");
+  
+  // Enable buttons
+  [startPauseBtn, mobileStartPauseBtn].forEach(btn => {
+    if (btn) {
+      btn.disabled = false;
+      btn.style.opacity = "1";
+      btn.style.cursor = "pointer";
+      btn.classList.remove("button-disabled");
+    }
+  });
+}
+
+// Function to enable both Start/Pause and Refetch buttons
+function enableBothButtons() {
+  // Desktop buttons
+  const startPauseBtn = document.getElementById("start-pause");
+  const refetchBtn = document.getElementById("refetch-and-restart");
+  
+  // Mobile buttons
+  const mobileStartPauseBtn = document.getElementById("start-pause2");
+  const mobileRefetchBtn = document.getElementById("refetch-and-restart2");
+  
+  // Enable buttons
+  [startPauseBtn, refetchBtn, mobileStartPauseBtn, mobileRefetchBtn].forEach(btn => {
+    if (btn) {
+      btn.disabled = false;
+      btn.style.opacity = "1";
+      btn.style.cursor = "pointer";
+      btn.classList.remove("button-disabled");
+    }
+  });
+}
+
+// Add a CSS class for visual feedback
+document.addEventListener('DOMContentLoaded', function() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .button-disabled {
+      opacity: 0.5 !important;
+      cursor: not-allowed !important;
+      pointer-events: none !important;
+    }
+  `;
+  document.head.appendChild(style);
+});
+
 // Async JS that kind of scares me, honestly
 async function fetchData(moddedUrl) {
   const response = await fetch(moddedUrl);
@@ -14170,6 +14244,12 @@ async function fetchData(moddedUrl) {
 // Function to not fetch JSON data if any of cat/dif/era are all deselected
 function dontFetchDataIfAllDeselected() {
   console.log(category_list);
+  
+  // Don't allow starting a new game if buttons are disabled
+  if (document.getElementById("start-pause").disabled) {
+    return;
+  }
+  
   if (category_list.length > 24) {
     document.getElementById("demo").innerHTML =
       "Cannot start game. You must select at least one category.";
@@ -14565,9 +14645,12 @@ function displayLoadingAnimation() {
   container.appendChild(loader);
 }
 
-// Modified mainGameFunction with countdown progress animation
+// Modified mainGameFunction with countdown progress animation and button disabling
 const mainGameFunction = async () => {
   document.getElementById("demo").innerHTML = "Fetching questions...";
+  
+  // Disable both buttons during fetching and countdown
+  disableBothButtons();
 
   questionDisplay.innerHTML = "";
   answerDisplay.innerHTML = "";
@@ -14588,6 +14671,10 @@ const mainGameFunction = async () => {
   } catch (error) {
     document.getElementById("demo").innerHTML =
       "Could not fetch questions due to settings or connection problems. Please try again or change settings.";
+    
+    // Re-enable both buttons if fetching fails
+    game_started = false;
+    enableBothButtons();
     return; // Stop execution if fetch fails
   }
 
@@ -14605,6 +14692,9 @@ const mainGameFunction = async () => {
   await delay(1000);
   document.getElementById("demo").innerHTML = "Go!";
   await delay(1000);
+
+  // Enable only the Start/Pause button after countdown (for pause functionality)
+  enableStartPauseButton();
 
   // Reset the progress bar for the game questions
   progressBar.style.animation = "none";
@@ -14706,15 +14796,20 @@ const mainGameFunction = async () => {
   }
 
   game_started = false;
-pauseFlag = false;
-showQuestion("Thanks for playing!");
-progressBar.style.animationPlayState = "paused";
-// Update both desktop and mobile buttons
-document.getElementById("start-pause").textContent = "START";
-var mobileButton = document.getElementById("start-pause2");
-if (mobileButton) mobileButton.textContent = "START";
-document.getElementById("demo").innerHTML =
-  'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Copyright &copy; 2025. Contact us at <a href="mailto:example@email.com">mark.mazurek@triviolivia.com</a>';
+  pauseFlag = false;
+  showQuestion("Thanks for playing!");
+  progressBar.style.animationPlayState = "paused";
+  
+  // Update both desktop and mobile buttons
+  document.getElementById("start-pause").textContent = "START";
+  var mobileButton = document.getElementById("start-pause2");
+  if (mobileButton) mobileButton.textContent = "START";
+  
+  // Re-enable both buttons when game ends
+  enableBothButtons();
+  
+  document.getElementById("demo").innerHTML =
+    'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Copyright &copy; 2025. Contact us at <a href="mailto:example@email.com">mark.mazurek@triviolivia.com</a>';
 };
 
 // Function to pause the game
@@ -15032,6 +15127,11 @@ document.addEventListener("keydown", function (event) {
 
 // Refetch questions button function
 function refetchAndRestart() {
+  // Don't allow refetching if button is disabled
+  if (document.getElementById("refetch-and-restart").disabled) {
+    return;
+  }
+  
   console.log("Refetching questions with currently selected game settings...");
 
   game_started = false;
