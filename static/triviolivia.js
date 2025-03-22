@@ -14612,6 +14612,19 @@ function syncSettings(settingType, value) {
   }
 }
 
+// Update the values when sliders change -- MORGAN EDIT
+document.getElementById('questionSlider').addEventListener('input', function() {
+  document.querySelector('#questionLabel span').textContent = this.value;
+});
+
+document.getElementById('perQuestionSlider').addEventListener('input', function() {
+  document.querySelector('#perQuestionLabel span').textContent = this.value + 's';
+});
+
+document.getElementById('perAnswerSlider').addEventListener('input', function() {
+  document.querySelector('#perAnswerLabel span').textContent = this.value + 's';
+});
+
 // Update label helper function
 function updateLabel(labelId, value, unit) {
   const label = document.getElementById(labelId);
