@@ -14320,16 +14320,16 @@ function confirm_reset() {
 
 // Function for indicator light toggle
 // function toggleIndicator(button) {
-  if (button.classList.contains("active")) {
-    button.classList.remove("active");
-    button.classList.add("inactive");
-    console.log(button);
-  } else {
-    button.classList.remove("inactive");
-    button.classList.add("active");
-    console.log(button);
-  }
-// }
+//   if (button.classList.contains("active")) {
+//     button.classList.remove("active");
+//     button.classList.add("inactive");
+//     console.log(button);
+//   } else {
+//     button.classList.remove("inactive");
+//     button.classList.add("active");
+//     console.log(button);
+//   }
+// 
 
 // TOGGLE MORGAN EDIT
         function toggleCategory(container) {
