@@ -14706,12 +14706,15 @@ const mainGameFunction = async () => {
   }
 
   game_started = false;
-  pauseFlag = false;
-  showQuestion("Thanks for playing!");
-  progressBar.style.animationPlayState = "paused";
-  document.getElementById("start-pause").textContent = "START";
-  document.getElementById("demo").innerHTML =
-    'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Copyright &copy; 2025. Contact us at <a href="mailto:example@email.com">mark.mazurek@triviolivia.com</a>';
+pauseFlag = false;
+showQuestion("Thanks for playing!");
+progressBar.style.animationPlayState = "paused";
+// Update both desktop and mobile buttons
+document.getElementById("start-pause").textContent = "START";
+var mobileButton = document.getElementById("start-pause2");
+if (mobileButton) mobileButton.textContent = "START";
+document.getElementById("demo").innerHTML =
+  'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Copyright &copy; 2025. Contact us at <a href="mailto:example@email.com">mark.mazurek@triviolivia.com</a>';
 };
 
 // Function to pause the game
