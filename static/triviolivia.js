@@ -14331,9 +14331,9 @@ function confirm_reset() {
 //   }
 // 
 
-// TOGGLE MORGAN EDIT
-        function toggleCategory(container) {
-            const toggleSwitch = container.querySelector('.toggle-switch');
+// TOGGLE MORGAN EDIT -- CHANGED container to button
+        function toggleCategory(button) {
+            const toggleSwitch = button.querySelector('.toggle-switch');
             if (toggleSwitch.classList.contains('active')) {
                 toggleSwitch.classList.remove('active');
                 toggleSwitch.classList.add('inactive');

@@ -270,7 +270,7 @@
                   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
               }
       
-              .question-container {
+          .question-container {
           flex: 3;
           display: flex;
           justify-content: center;
@@ -285,7 +285,6 @@
           overflow-wrap: break-word;
           word-wrap: break-word;
           hyphens: none;
-          outline: 2px solid white;
       }
       
       .answer-container {
@@ -1041,6 +1040,7 @@
               margin-bottom: 26vh; /* Reduced spacing between areas */
               overflow: hidden;
               padding-bottom: 0; /* Removed bottom padding */
+              outline: 1px solid white;
           }
           
           /* Content areas flex to fill game area */
@@ -1328,9 +1328,19 @@
     
     .title-settings h1 {
       font-size: 30px;
-      font-family: ;
+      background: #E93E3A;
+      background: linear-gradient(to top, #E93E3A 0%, #E93E3A 12%, #F3903F 36%, #FDC70C 71%, #FCEF44 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; 
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     }
     
+    .game-area-content {
+      background-color: rgba(0, 0, 0, .5);
+      outline: 1px solid white;
+      border-radius: 15px;
+      margin: 20px;
+    }
     
     
           </style>
@@ -1365,6 +1375,7 @@
                           </div> 
                       </div>
                   </div>
+                  <div id="game-area-content" class="game-area-content">
                       <div class="question-container">
   
                           Welcome to<br>
@@ -1373,6 +1384,7 @@
                       <div class="answer-container">
                           (in beta)
                       </div>
+                    </div>
   
                       <div id="loading-bar-container" class="loading-bar-container">
                         <div id="loading-bar" class="loading-bar">
