@@ -15398,10 +15398,10 @@ function changeButtonText() {
   if (pauseFlag === false) {
     // Update both desktop and mobile buttons with pause icon
     if (desktopButton) {
-      desktopButton.innerHTML = '<img src="{% static \'images/btn-icon-pause.svg\' %}" alt="game-paused">';
+      desktopButton.innerHTML = '<img src="{% static "images/btn-icon-pause.svg" %}" alt="game-paused">';
     }
     if (mobileButton) {
-      mobileButton.innerHTML = '<img src="{% static \'images/btn-icon-pause.svg\' %}" alt="game-paused">';
+      mobileButton.innerHTML = '<img src="{% static "images/btn-icon-pause.svg" %}" alt="game-paused">';
     }
     
     if (progressBar) progressBar.style.animationPlayState = "running";
@@ -15409,10 +15409,10 @@ function changeButtonText() {
   } else if (pauseFlag === true && game_started === true) {
     // Update both desktop and mobile buttons with play icon (for resume)
     if (desktopButton) {
-      desktopButton.innerHTML = '<img src="{% static \'images/btn-icon-play.svg\' %}" alt="game-play">';
+      desktopButton.innerHTML = '<img src="{% static "images/btn-icon-play.svg" %}" alt="game-paused">';
     }
     if (mobileButton) {
-      mobileButton.innerHTML = '<img src="{% static \'images/btn-icon-play.svg\' %}" alt="game-play">';
+      mobileButton.innerHTML = '<img src="{% static "images/btn-icon-play.svg" %}" alt="game-paused">';
     }
     
     if (progressBar) progressBar.style.animationPlayState = "paused";
@@ -15427,10 +15427,10 @@ function changeButtonText() {
   } else {
     // Initial state - show play button (START)
     if (desktopButton) {
-      desktopButton.innerHTML = '<img src="{% static \'images/btn-icon-play.svg\' %}" alt="game-play">';
+      desktopButton.innerHTML = '<img src="{% static "images/btn-icon-play.svg" %}" alt="game-paused">';
     }
     if (mobileButton) {
-      mobileButton.innerHTML = '<img src="{% static \'images/btn-icon-play.svg\' %}" alt="game-play">';
+      mobileButton.innerHTML = '<img src="{% static "images/btn-icon-play.svg" %}" alt="game-paused">';
     }
     
     pauseFlag = false;
