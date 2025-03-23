@@ -14362,16 +14362,16 @@ function toggleIndicator(button) {
   
 
 // // TOGGLE MORGAN EDIT -- CHANGED container to button
-// function toggleCategory(button) {
-//   const toggleSwitch = button.querySelector('.toggle-switch');
-//   if (toggleSwitch.classList.contains('active')) {
-//       toggleSwitch.classList.remove('active');
-//       toggleSwitch.classList.add('inactive');
-//   } else {
-//       toggleSwitch.classList.remove('inactive');
-//       toggleSwitch.classList.add('active');
-//   }
-// }
+function toggleCategory(button) {
+  const toggleSwitch = button.querySelector('.toggle-switch');
+  if (toggleSwitch.classList.contains("active")) {
+      toggleSwitch.classList.remove("active");
+      toggleSwitch.classList.add("inactive");
+  } else {
+      toggleSwitch.classList.remove("inactive");
+      toggleSwitch.classList.add("active");
+  }
+}
 
 
   // Find and update all other buttons with the same ID (syncs desktop and mobile)
