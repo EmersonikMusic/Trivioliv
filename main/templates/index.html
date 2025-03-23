@@ -176,7 +176,7 @@
 
 /* Main content area */
 .wrapper-main-content {
-  flex: 4; /* Take up 3/5 of the space */
+  flex: 4; /* Take up 4/5 of the space */
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -185,7 +185,7 @@
 
 /* Game settings menu */
 .menu-settings-desktop {
-  flex: 1.5; /* Take up 1.5/5 of the space */
+  flex: 1; /* Take up 1/5 of the space */
   display: flex;
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.4);
@@ -196,7 +196,7 @@
 
 /* Character column */
 .character-column {
-  flex: 0.5; /* Take up 0.5/5 of the space */
+  flex: 0; /* Take up 0/5 of the space */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -695,7 +695,7 @@
       } 
       
       .wrap-collabsible { 
-          margin: auto;
+          margin: 0 auto;
           width: 80%;
       } 
       
@@ -703,15 +703,13 @@
       display: flex;
       font-weight: 100;
       text-transform: uppercase;
-      /* padding: .25rem; */
       color: #DDD;
       background: rgba(0, 0, 0, 0);
       cursor: pointer;
       transition: all .25s ease-out;
       flex-direction: row;
       align-items: center;
-      margin: 0px 20px;
-      padding: 10px 0;
+      padding: 15px 20px;
       font-size: x-large;
     }
       
@@ -777,6 +775,7 @@
           width: 100%;
           flex-direction: row;
           align-items: center;
+          padding-left: 30px;
       }
       
       .content-inner button:hover{
@@ -1548,6 +1547,12 @@
       flex-direction: row;
       margin: 16px 0;
     }
+
+    .logo-header {
+      width: 200px;
+    }
+
+    
     
   </style>
   </head>
