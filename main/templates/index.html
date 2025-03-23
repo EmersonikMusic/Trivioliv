@@ -1373,10 +1373,13 @@
       display: flex;
       flex-direction: column;
       outline: 1px solid greenyellow;
+      margin: 20px;
     }
 
     .wrapper-main-content {
       outline: 1px solid red;
+      display: flex;
+      flex-direction: column;
     }
     
     
@@ -1384,26 +1387,26 @@
   </head>
   <body>
     <div id="wrapper-all" class="wrapper-all">
-      <div class="header">
-        <div id="logo-header" class="logo-header">
-          <a href="https://www.triviolivia.com" style="text-decoration: none; color: inherit;">
-            <img src="{% static 'images/TO_logo_sm_clr.svg' %}" alt="triviolivia.com" />
-          </a>
-        </div>
-        <div class="hamburger-menu dropdown">
-          <div class="login">
-            {% if user.is_authenticated %}
-            <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
-            <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
-            <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
-            {% else %}
-                <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">Register</button></a>
-                <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">Login</button></a>
-            {% endif %}
-          </div> 
-          </div>
-      </div>
       <div id="wrapper-main-content" class="wrapper-main-content">
+        <div class="header">
+          <div id="logo-header" class="logo-header">
+            <a href="https://www.triviolivia.com" style="none">
+              <img src="{% static 'images/TO_logo_sm_clr.svg' %}" alt="TriviOlivia.com">
+            </a>
+          </div>
+          <div class="hamburger-menu dropdown">
+            <div class="login">
+              {% if user.is_authenticated %}
+              <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
+              <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
+              <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
+              {% else %}
+                  <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">Register</button></a>
+                  <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">Login</button></a>
+              {% endif %}
+            </div> 
+            </div>
+        </div>
         <div id="wrapper-game-area" class="row h-100 g-2">
           <!-- Main Game Area -->
           <div class="game-area">
@@ -1438,111 +1441,111 @@
         </div> 
         
       </div>
-    <div id="menu-settings" class="menu-settings-desktop">
-      <div class="menu-container desktop-menu">
+      <div id="menu-settings" class="menu-settings-desktop">
+        <div class="menu-container desktop-menu">
 
-        <div id="title-settings" class="title-settings">
-          <h1>CUSTOMIZE YOUR GAME EXPERIENCE</h1>
-        </div>
+          <div id="title-settings" class="title-settings">
+            <h1>CUSTOMIZE YOUR GAME EXPERIENCE</h1>
+          </div>
 
-        <!--Categories menu-->
-        <div id="menu-categories" class="wrap-collabsible"> 
-            <input id="collapsible-categories" class="toggle" type="checkbox">
-            <img src="{% static 'images/icon-categories-inactive.svg' %}" alt="categories-inactive"> 
-            <label for="collapsible-categories" class="lbl-toggle">CATEGORIES</label>
+          <!--Categories menu-->
+          <div id="menu-categories" class="wrap-collabsible"> 
+              <input id="collapsible-categories" class="toggle" type="checkbox">
+              <img src="{% static 'images/icon-categories-inactive.svg' %}" alt="categories-inactive"> 
+              <label for="collapsible-categories" class="lbl-toggle">CATEGORIES</label>
+              <div class="collapsible-content">
+                  <div class="content-inner">
+                      <button id="all-none-categories" class="all-none-btn button" onclick="allNoneCategoriesButton()">ALL/NONE</button>
+                      {% for category in categories %}
+                      <div id='{{ category.name | slugify }}'>
+                          <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                              <!-- <span class="indicator"></span> MORGAN EDIT -->
+                              <div class="toggle-switch active">
+                                <div class="toggle-dot"></div>
+                            </div>
+                              {{ category.name | upper }}
+                          </button>
+                      </div>
+                      {% endfor %}
+              </div>
+              </div>
+          </div>
+
+          
+          <!--Difficulties menu-->
+          <div id="menu-difficulties" class="wrap-collabsible"> 
+            <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
+            <label for="collapsible-difficulties" class="lbl-toggle">
+                DIFFICULTIES
+            </label>
             <div class="collapsible-content">
                 <div class="content-inner">
-                    <button id="all-none-categories" class="all-none-btn button" onclick="allNoneCategoriesButton()">ALL/NONE</button>
-                    {% for category in categories %}
-                    <div id='{{ category.name | slugify }}'>
-                        <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
-                            <!-- <span class="indicator"></span> MORGAN EDIT -->
-                            <div class="toggle-switch active">
-                              <div class="toggle-dot"></div>
-                          </div>
-                            {{ category.name | upper }}
+                    <button id="all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE</button>
+                    {% for difficulty in difficulties %}
+                    <div id='{{ difficulty.name }}'>
+                        <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
+                            <span class="indicator"></span>
+                            {{ difficulty.name | upper}}
                         </button>
                     </div>
                     {% endfor %}
-            </div>
-            </div>
-        </div>
-
-        
-        <!--Difficulties menu-->
-        <div id="menu-difficulties" class="wrap-collabsible"> 
-          <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
-          <label for="collapsible-difficulties" class="lbl-toggle">
-              DIFFICULTIES
-          </label>
-          <div class="collapsible-content">
-              <div class="content-inner">
-                  <button id="all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE</button>
-                  {% for difficulty in difficulties %}
-                  <div id='{{ difficulty.name }}'>
-                      <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
-                          <span class="indicator"></span>
-                          {{ difficulty.name | upper}}
-                      </button>
-                  </div>
-                  {% endfor %}
-              </div>
-          </div>
-          </div>
-
-
-          <!--Eras menu-->
-          <div id="menu-eras" class="wrap-collabsible"> 
-          <input id="collapsible-eras" class="toggle" type="checkbox"> 
-          <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
-          <div class="collapsible-content">
-              <div class="content-inner">
-              <button id="all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
-              {% for era in eras %}
-              <div id='{{ era.name }}'>
-                  <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
-                      <span class="indicator"></span>
-                      {{ era.name }}
-                  </button>
-                  </div>
-              {% endfor %}
-              </div>
-          </div>
-          </div>
-
-          <!--Settings menu-->
-          <div id="menu-settings" class="wrap-collabsible"> 
-            <input id="collapsible-settings" class="toggle" type="checkbox"> 
-            <label for="collapsible-settings" class="lbl-toggle">settings</label>
-            <div class="collapsible-content">
-                <div class="content-inner">
-                    <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
-                        <div class="slider-container">
-                            <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
-                            <input type="range" min="10" max="50" value="10" step="10" class="slider" id="questionSlider">
-                        </div>
-                        <div class="slider-container">
-                            <div id="perQuestionLabel" class="slider-label">5s / QUESTION</div>
-                            <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
-                        </div>
-        
-                        <div class="slider-container">
-                            <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
-                            <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
-                        </div>
-                    </div>
-          
-                      <button id="fullscreen-btn" class="menu-button" onclick="toggleFullscreen()">TOGGLE FULLSCREEN</button>
-
-          
-
-
-                    
                 </div>
             </div>
-          </div>  
-        </div>
-    </div>
+            </div>
+
+
+            <!--Eras menu-->
+            <div id="menu-eras" class="wrap-collabsible"> 
+            <input id="collapsible-eras" class="toggle" type="checkbox"> 
+            <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
+            <div class="collapsible-content">
+                <div class="content-inner">
+                <button id="all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
+                {% for era in eras %}
+                <div id='{{ era.name }}'>
+                    <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
+                        <span class="indicator"></span>
+                        {{ era.name }}
+                    </button>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            </div>
+
+            <!--Settings menu-->
+            <div id="menu-settings" class="wrap-collabsible"> 
+              <input id="collapsible-settings" class="toggle" type="checkbox"> 
+              <label for="collapsible-settings" class="lbl-toggle">settings</label>
+              <div class="collapsible-content">
+                  <div class="content-inner">
+                      <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
+                          <div class="slider-container">
+                              <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
+                              <input type="range" min="10" max="50" value="10" step="10" class="slider" id="questionSlider">
+                          </div>
+                          <div class="slider-container">
+                              <div id="perQuestionLabel" class="slider-label">5s / QUESTION</div>
+                              <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
+                          </div>
+          
+                          <div class="slider-container">
+                              <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
+                              <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
+                          </div>
+                      </div>
+            
+                        <button id="fullscreen-btn" class="menu-button" onclick="toggleFullscreen()">TOGGLE FULLSCREEN</button>
+
+            
+
+
+                      
+                  </div>
+              </div>
+            </div>  
+          </div>
+      </div>
     </div>
   
       <!-- Bootstrap JS (Popper.js included) -->
