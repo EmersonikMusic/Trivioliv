@@ -14006,7 +14006,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const demoElement = document.getElementById("demo");
   if (demoElement) {
     demoElement.innerHTML = 
-      'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()"><b>START</b></span> to play.';
+      'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()"><b>START GAME</b></span> to play.';
   }
   
   // Initialize settings synchronization on page load
