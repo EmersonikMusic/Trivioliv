@@ -529,7 +529,7 @@
                 box-sizing: border-box;  
                 display: flex;
                 flex-direction: row;
-                gap: 5px;
+                gap: 20px;
                 align-items: center;
               }
 
@@ -552,7 +552,8 @@
                 border-radius: 15px; /* Optional: for rounded corners */
                 cursor: pointer;
                 font-size: 10px;
-                width: max-content;
+                /* width: max-content; */
+                width: 60px;
               }
       
               .desktop-character {
@@ -774,7 +775,6 @@
           width: 100%;
           flex-direction: row;
           align-items: center;
-          /* padding-left: 30px; */
           padding: 0 30px;
       }
       
@@ -792,11 +792,11 @@
       
       .collapsible-content .content-inner { 
           background: rgba(0, 0, 0, .2);
-          padding: 10 20;
-          margin: 0 20;
           border-bottom-right-radius: 14px; 
           border-bottom-left-radius: 14px; 
+          padding: 0 16px;
       } 
+
       .collapsible-content p { 
           margin-bottom: 0; 
       }
@@ -1549,9 +1549,18 @@
     }
 
     .logo-header {
-      width: 200px;
+      width: 150px;
     }
 
+    .nav-button {
+      color: #8DD4DA;
+      font-size: medium;
+      text-align: right;
+      background: none;
+      border: none;
+      text-decoration: none;
+
+    }
     
     
   </style>
@@ -1609,7 +1618,10 @@
               <img src="{% static 'images/btn-icon-pause.svg' %}" alt="game-paused">
               
           </div>
-          <div button id="refetch-and-restart" class="user-button" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
+          <div button id="refetch-and-restart" class="user-button" onclick="refetchAndRestart()" type="button" class="menu-button">
+            <!-- REFETCH -->
+            <img src="{% static 'images/btn-icon-refresh.svg' %}" alt="game-paused">
+          </div>
         </div>                            
       </div>
     </div> 
