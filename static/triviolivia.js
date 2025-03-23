@@ -15325,7 +15325,7 @@ function refetchAndRestart() {
   pauseFlag = false;
   globalData = [];
 
-  baseUrl = "https://triviolivia.com/api/questions/?";
+  baseUrl = "https://triviolivia.com/api/questions/";
   moddedUrl = "";
   queryParams = [];
   globalData = [];
@@ -15360,7 +15360,7 @@ function resetSettings() {
   difficulty_list = [];
   era_list = [];
 
-  baseUrl = "https://triviolivia.com/api/questions/?";
+  baseUrl = "https://triviolivia.com/api/questions/";
   moddedUrl = "";
   queryParams = [];
   globalData = [];
