@@ -15212,15 +15212,12 @@ const mainGameFunction = async () => {
   }
   
   // Update both desktop and mobile buttons
-  const startPauseBtn = document.getElementById("start-pause");
-  if (startPauseBtn) {
-    startPauseBtn.textContent = "START";
+  if (desktopButton) {
+    desktopButton.innerHTML = '<img src="/static/images/btn-icon-play.svg" alt="game-paused">';
+  if (mobileButton) {
+    mobileButton.innerHTML = '<img src="/static/images/btn-icon-play.svg" alt="game-paused">';
   }
-  
-  const mobileStartPauseBtn = document.getElementById("start-pause2");
-  if (mobileStartPauseBtn) {
-    mobileStartPauseBtn.textContent = "START";
-  }
+}
   
   // Re-enable both buttons when game ends
   enableBothButtons();
