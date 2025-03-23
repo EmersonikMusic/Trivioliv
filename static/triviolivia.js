@@ -14570,6 +14570,12 @@ function allNoneCategoriesButton() {
       button.classList.remove("active");
       button.classList.add("inactive");
     });
+
+     // Update visual state of all switches
+     allCategoryButtons.forEach(toggleSwitch => {
+      toggleSwitch.classList.remove("active");
+      toggleSwitch.classList.add("inactive")
+    });
     
     all_none_categories = false;
     document.getElementById("demo").innerHTML =
