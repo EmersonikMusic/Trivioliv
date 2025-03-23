@@ -15395,7 +15395,15 @@ function changeButtonText() {
     progressBar = document.getElementById("progress");
   }
   
-  if (pauseFlag === false) {
+
+  if (game_started === false) {
+    if (desktopButton) {
+      desktopButton.innerHTML = '<img src="/static/images/btn-icon-pay.svg" alt="start-game">';
+    }
+    if (mobileButton) {
+      mobileButton.innerHTML = '<img src="/static/images/btn-icon-play.svg" alt="start-game">';
+    }
+  } else if (pauseFlag === false) {
     // Update both desktop and mobile buttons with pause icon
     if (desktopButton) {
       desktopButton.innerHTML = '<img src="/static/images/btn-icon-pause.svg" alt="game-paused">';
@@ -15426,10 +15434,10 @@ function changeButtonText() {
   } else {
     // Initial state - show play button (START)
     if (desktopButton) {
-      desktopButton.innerHTML = '<img src="/static/images/btn-icon-pause.svg" alt="game-paused">';
+      desktopButton.innerHTML = '<img src="/static/images/btn-icon-pay.svg" alt="start-game">';
     }
     if (mobileButton) {
-      mobileButton.innerHTML = '<img src="/static/images/btn-icon-pause.svg" alt="game-paused">';
+      mobileButton.innerHTML = '<img src="/static/images/btn-icon-play.svg" alt="start-game">';
     }
     
     pauseFlag = false;
