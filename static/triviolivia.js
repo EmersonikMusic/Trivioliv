@@ -15396,16 +15396,24 @@ function changeButtonText() {
   }
   
   if (pauseFlag === false) {
-    // Update both desktop and mobile buttons
-    if (desktopButton) desktopButton.textContent = "PAUSE";
-    if (mobileButton) mobileButton.textContent = "PAUSE";
+    // Update both desktop and mobile buttons with pause icon
+    if (desktopButton) {
+      desktopButton.innerHTML = '<img src="{% static \'images/btn-icon-pause.svg\' %}" alt="game-paused">';
+    }
+    if (mobileButton) {
+      mobileButton.innerHTML = '<img src="{% static \'images/btn-icon-pause.svg\' %}" alt="game-paused">';
+    }
     
     if (progressBar) progressBar.style.animationPlayState = "running";
     pauseFlag = true;
   } else if (pauseFlag === true && game_started === true) {
-    // Update both desktop and mobile buttons
-    if (desktopButton) desktopButton.textContent = "RESUME";
-    if (mobileButton) mobileButton.textContent = "RESUME";
+    // Update both desktop and mobile buttons with play icon (for resume)
+    if (desktopButton) {
+      desktopButton.innerHTML = '<img src="{% static \'images/btn-icon-play.svg\' %}" alt="game-play">';
+    }
+    if (mobileButton) {
+      mobileButton.innerHTML = '<img src="{% static \'images/btn-icon-play.svg\' %}" alt="game-play">';
+    }
     
     if (progressBar) progressBar.style.animationPlayState = "paused";
     pauseFlag = false;
@@ -15413,13 +15421,17 @@ function changeButtonText() {
     
     const demoElement = document.getElementById("demo");
     if (demoElement) {
-      demoElement.innerHTML =
+      demoElement.innerHTML = 
         'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
     }
   } else {
-    // Update both desktop and mobile buttons
-    if (desktopButton) desktopButton.textContent = "START";
-    if (mobileButton) mobileButton.textContent = "START";
+    // Initial state - show play button (START)
+    if (desktopButton) {
+      desktopButton.innerHTML = '<img src="{% static \'images/btn-icon-play.svg\' %}" alt="game-play">';
+    }
+    if (mobileButton) {
+      mobileButton.innerHTML = '<img src="{% static \'images/btn-icon-play.svg\' %}" alt="game-play">';
+    }
     
     pauseFlag = false;
   }
