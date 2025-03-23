@@ -13953,8 +13953,63 @@ fill: #4e0b1b;
 
 document.body.style.background = "#4523a8";
 
-// Unsure
-const progressElement = document.getElementById("progress");
+// Define important elements early in the script
+let progressBar;
+let startButton;
+let pauseButton;
+let isPaused = true;
+
+// Initialize elements on DOMContentLoaded
+document.addEventListener("DOMContentLoaded", function() {
+  // Initialize element references
+  progressBar = document.getElementById("progress");
+  startButton = document.getElementById("startButton");
+  pauseButton = document.getElementById("pauseButton");
+  
+  // Set up event listeners only if elements exist
+  if (startButton) {
+    startButton.addEventListener("click", function() {
+      if (isPaused) {
+        progressBar.style.animation = "depleteProgress " + time_per_question + "s linear infinite";
+        isPaused = false;
+      } else {
+        progressBar.style.animation = "none";
+        progressBar.offsetHeight; // Trigger reflow to reset animation
+        progressBar.style.animation = "depleteProgress " + time_per_answer + "s linear infinite";
+      }
+    });
+  }
+  
+  if (pauseButton) {
+    pauseButton.addEventListener("click", function() {
+      if (!isPaused) {
+        progressBar.style.animationPlayState = "running";
+        isPaused = false;
+      } else {
+        progressBar.style.animationPlayState = "paused";
+        isPaused = true;
+      }
+    });
+  }
+  
+  if (progressBar) {
+    progressBar.addEventListener("animationiteration", function() {
+      if (!isPaused) {
+        progressBar.style.animation = 
+          "replenishProgress " + time_per_answer + "s linear forwards, shrinkProgress " + 
+          time_per_question + "s linear forwards";
+      }
+    });
+  }
+  
+  // Initialize settings synchronization on page load
+  syncSettings('questions', number_of_questions);
+  syncSettings('questionTime', time_per_question);
+  syncSettings('answerTime', time_per_answer);
+  
+  // Initialize dropdown close functionality
+  closeDropdownsOnClickOutside();
+});
 
 // Declaring question and answer display
 const questionDisplay = document.querySelector(".question-container");
@@ -13967,7 +14022,7 @@ var time_per_answer = 5;
 var game_started = false;
 var menu_hidden = false;
 var current_question_category = null;
-let pauseFlag = false;
+var pauseFlag = false;
 
 // Declaring banned category/difficulty/era lists
 var category_list = [];
@@ -14148,6 +14203,7 @@ var category_summaries = {
     "Video Games": "Games, Characters, Details, Consoles, Developers, Awards, Items, Genres, Publications, Hardware, Esports, Levels, Terms, Accessories, Conventions"
 }
 
+
 // Declaring variables for the base URL for fetching questions
 var baseUrl = "/api/questions";
 var moddedUrl = "";
@@ -14169,7 +14225,7 @@ function disableBothButtons() {
   const mobileRefetchBtn = document.getElementById("refetch-and-restart2");
   
   // Disable buttons
-  [startPauseBtn, refetchBtn, mobileStartPauseBtn, mobileRefetchBtn].forEach(btn => {
+  [startPauseBtn, refetchBtn].forEach(btn => {
     if (btn) {
       btn.disabled = true;
       btn.style.opacity = "0.5";
@@ -14177,6 +14233,10 @@ function disableBothButtons() {
       btn.classList.add("button-disabled");
     }
   });
+  
+  // Mobile buttons (only if they exist)
+  if (mobileStartPauseBtn) mobileStartPauseBtn.disabled = true;
+  if (mobileRefetchBtn) mobileRefetchBtn.disabled = true;
 }
 
 // Function to enable only the Start/Pause button
@@ -14188,14 +14248,20 @@ function enableStartPauseButton() {
   const mobileStartPauseBtn = document.getElementById("start-pause2");
   
   // Enable buttons
-  [startPauseBtn, mobileStartPauseBtn].forEach(btn => {
-    if (btn) {
-      btn.disabled = false;
-      btn.style.opacity = "1";
-      btn.style.cursor = "pointer";
-      btn.classList.remove("button-disabled");
-    }
-  });
+  if (startPauseBtn) {
+    startPauseBtn.disabled = false;
+    startPauseBtn.style.opacity = "1";
+    startPauseBtn.style.cursor = "pointer";
+    startPauseBtn.classList.remove("button-disabled");
+  }
+  
+  // Mobile button (only if it exists)
+  if (mobileStartPauseBtn) {
+    mobileStartPauseBtn.disabled = false;
+    mobileStartPauseBtn.style.opacity = "1";
+    mobileStartPauseBtn.style.cursor = "pointer";
+    mobileStartPauseBtn.classList.remove("button-disabled");
+  }
 }
 
 // Function to enable both Start/Pause and Refetch buttons
@@ -14209,7 +14275,7 @@ function enableBothButtons() {
   const mobileRefetchBtn = document.getElementById("refetch-and-restart2");
   
   // Enable buttons
-  [startPauseBtn, refetchBtn, mobileStartPauseBtn, mobileRefetchBtn].forEach(btn => {
+  [startPauseBtn, refetchBtn].forEach(btn => {
     if (btn) {
       btn.disabled = false;
       btn.style.opacity = "1";
@@ -14217,6 +14283,10 @@ function enableBothButtons() {
       btn.classList.remove("button-disabled");
     }
   });
+  
+  // Mobile buttons (only if they exist)
+  if (mobileStartPauseBtn) mobileStartPauseBtn.disabled = false;
+  if (mobileRefetchBtn) mobileRefetchBtn.disabled = false;
 }
 
 // Add a CSS class for visual feedback
@@ -14234,11 +14304,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Async JS that kind of scares me, honestly
 async function fetchData(moddedUrl) {
-  const response = await fetch(moddedUrl);
-  const data = await response.json();
-  globalData = data.slice(); // Create a copy of the array
-  shuffleArray(globalData); // Shuffle the copy
-  console.log(globalData);
+  try {
+    const response = await fetch(moddedUrl);
+    const data = await response.json();
+    globalData = data.slice(); // Create a copy of the array
+    shuffleArray(globalData); // Shuffle the copy
+    console.log(globalData);
+    return globalData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
 }
 
 // Function to not fetch JSON data if any of cat/dif/era are all deselected
@@ -14246,7 +14322,8 @@ function dontFetchDataIfAllDeselected() {
   console.log(category_list);
   
   // Don't allow starting a new game if buttons are disabled
-  if (document.getElementById("start-pause").disabled) {
+  const startPauseBtn = document.getElementById("start-pause");
+  if (startPauseBtn && startPauseBtn.disabled) {
     return;
   }
   
@@ -14262,13 +14339,17 @@ function dontFetchDataIfAllDeselected() {
   } else {
     changeButtonText();
     fetchQuestionsAndStartGame();
-    const hideAllMenus = () => {
+    
+    // Close all open menus
+    const checkboxes = document.querySelectorAll(".toggle");
+    if (checkboxes) {
       checkboxes.forEach((checkbox) => {
         checkbox.checked = false;
-        checkbox.nextElementSibling.classList.remove("active");
+        if (checkbox.nextElementSibling) {
+          checkbox.nextElementSibling.classList.remove("active");
+        }
       });
-    };
-    hideAllMenus();
+    }
   }
 }
 
@@ -14281,6 +14362,7 @@ function fetchQuestionsAndStartGame() {
   } else {
     game_started = true;
     globalData = [];
+    queryParams = []; // Reset query params
     if (category_list.length > 0) {
       queryParams.push("category=" + category_list.join(","));
     }
@@ -14304,10 +14386,13 @@ function fetchQuestionsAndStartGame() {
 
 // Function to shuffle returned array
 function shuffleArray(array) {
+  if (!array || !array.length) return array;
+  
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]]; // Swap elements
   }
+  return array;
 }
 
 // Future function of reset functionality
@@ -14318,39 +14403,10 @@ function confirm_reset() {
   //Reset function call
 }
 
-// Function for indicator light toggle
-// function toggleIndicator(button) {
-//   if (button.classList.contains("active")) {
-//     button.classList.remove("active");
-//     button.classList.add("inactive");
-//     console.log(button);
-//   } else {
-//     button.classList.remove("inactive");
-//     button.classList.add("active");
-//     console.log(button);
-//   }
-// 
-
-//Function to hide or show menu sections
-const checkboxes = document.querySelectorAll(".toggle");
-
-checkboxes.forEach((checkbox) => {
-  checkbox.addEventListener("change", function () {
-    if (this.checked) {
-      checkboxes.forEach((otherCheckbox) => {
-        if (otherCheckbox !== this) {
-          otherCheckbox.checked = false;
-          otherCheckbox.nextElementSibling.classList.remove("active");
-        }
-      });
-    }
-    this.nextElementSibling.classList.toggle("active", this.checked);
-  });
-});
-
-//Functions to toggle categories, difficulties, and eras
-// ToggleIndicator function
+//Function to toggle indicator light
 function toggleIndicator(button) {
+  if (!button) return; // Safety check
+  
   // Check if the button is the one that was clicked directly
   if (button.classList.contains("active")) {
     button.classList.remove("active");
@@ -14359,20 +14415,18 @@ function toggleIndicator(button) {
     button.classList.remove("inactive");
     button.classList.add("active");
   }
-  
 
-// // TOGGLE MORGAN EDIT -- CHANGED container to button
-function toggleCategory(button) {
+  // Toggle function for switch appearance
   const toggleSwitch = button.querySelector('.toggle-switch');
-  if (toggleSwitch.classList.contains("active")) {
-      toggleSwitch.classList.remove("active");
-      toggleSwitch.classList.add("inactive");
-  } else {
-      toggleSwitch.classList.remove("inactive");
-      toggleSwitch.classList.add("active");
+  if (toggleSwitch) {
+    if (toggleSwitch.classList.contains("active")) {
+        toggleSwitch.classList.remove("active");
+        toggleSwitch.classList.add("inactive");
+    } else {
+        toggleSwitch.classList.remove("inactive");
+        toggleSwitch.classList.add("active");
+    }
   }
-}
-
 
   // Find and update all other buttons with the same ID (syncs desktop and mobile)
   const buttonId = button.id;
@@ -14391,10 +14445,41 @@ function toggleCategory(button) {
   });
 }
 
+//Function to hide or show menu sections
+document.addEventListener('DOMContentLoaded', function() {
+  const checkboxes = document.querySelectorAll(".toggle");
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", function () {
+      if (this.checked) {
+        checkboxes.forEach((otherCheckbox) => {
+          if (otherCheckbox !== this) {
+            otherCheckbox.checked = false;
+            const nextSibling = otherCheckbox.nextElementSibling;
+            if (nextSibling) {
+              nextSibling.classList.remove("active");
+            }
+          }
+        });
+      }
+      
+      const nextSibling = this.nextElementSibling;
+      if (nextSibling) {
+        nextSibling.classList.toggle("active", this.checked);
+      }
+    });
+  });
+});
+
 // Toggle_categories function
 function toggle_categories(clicked_id) {
   // For message display
   const categoryName = category_number_identities[clicked_id];
+  
+  if (!categoryName) {
+    console.error("Unknown category ID:", clicked_id);
+    return;
+  }
   
   if (!category_list.includes(clicked_id)) {
     // Not in list (currently enabled) -> disable it
@@ -14418,6 +14503,11 @@ function toggle_difficulties(clicked_id) {
   // For message display
   const difficultyName = difficulty_number_identities[clicked_id];
   
+  if (!difficultyName) {
+    console.error("Unknown difficulty ID:", clicked_id);
+    return;
+  }
+  
   if (!difficulty_list.includes(clicked_id)) {
     // Not in list (currently enabled) -> disable it
     document.getElementById("demo").innerHTML =
@@ -14439,6 +14529,11 @@ function toggle_difficulties(clicked_id) {
 function toggle_eras(clicked_id) {
   // For message display
   const eraName = era_number_identities[clicked_id];
+  
+  if (!eraName) {
+    console.error("Unknown era ID:", clicked_id);
+    return;
+  }
   
   if (!era_list.includes(clicked_id)) {
     // Not in list (currently enabled) -> disable it
@@ -14572,16 +14667,6 @@ function allNoneErasButton() {
   console.log("Era list after ALL/NONE toggle:", era_list);
 }
 
-// Desktop sliders
-const questionSlider = document.getElementById("questionSlider");
-const perQuestionSlider = document.getElementById("perQuestionSlider");
-const perAnswerSlider = document.getElementById("perAnswerSlider");
-
-// Mobile sliders
-const mobileQuestionSlider = document.getElementById("mobileQuestionSlider");
-const mobilePerQuestionSlider = document.getElementById("mobilePerQuestionSlider");
-const mobilePerAnswerSlider = document.getElementById("mobilePerAnswerSlider");
-
 // Function to synchronize settings between mobile and desktop
 function syncSettings(settingType, value) {
   // Update the appropriate global variable
@@ -14589,6 +14674,9 @@ function syncSettings(settingType, value) {
     number_of_questions = parseInt(value);
     
     // Sync desktop and mobile sliders
+    const questionSlider = document.getElementById("questionSlider");
+    const mobileQuestionSlider = document.getElementById("mobileQuestionSlider");
+    
     if (questionSlider) questionSlider.value = value;
     if (mobileQuestionSlider) mobileQuestionSlider.value = value;
     
@@ -14596,12 +14684,18 @@ function syncSettings(settingType, value) {
     updateLabel("questionLabel", value, " QUESTIONS");
     updateLabel("mobileQuestionLabel", value, " QUESTIONS");
     
-    document.getElementById("demo").innerHTML = "Game set to " + value + " questions.";
+    const demoElement = document.getElementById("demo");
+    if (demoElement) {
+      demoElement.innerHTML = "Game set to " + value + " questions.";
+    }
   } 
   else if (settingType === 'questionTime') {
     time_per_question = parseInt(value);
     
     // Sync desktop and mobile sliders
+    const perQuestionSlider = document.getElementById("perQuestionSlider");
+    const mobilePerQuestionSlider = document.getElementById("mobilePerQuestionSlider");
+    
     if (perQuestionSlider) perQuestionSlider.value = value;
     if (mobilePerQuestionSlider) mobilePerQuestionSlider.value = value;
     
@@ -14609,12 +14703,18 @@ function syncSettings(settingType, value) {
     updateLabel("perQuestionLabel", value, "s / QUESTION");
     updateLabel("mobilePerQuestionLabel", value, "s / QUESTION");
     
-    document.getElementById("demo").innerHTML = "Questions will display for " + value + " seconds.";
+    const demoElement = document.getElementById("demo");
+    if (demoElement) {
+      demoElement.innerHTML = "Questions will display for " + value + " seconds.";
+    }
   } 
   else if (settingType === 'answerTime') {
     time_per_answer = parseInt(value);
     
     // Sync desktop and mobile sliders
+    const perAnswerSlider = document.getElementById("perAnswerSlider");
+    const mobilePerAnswerSlider = document.getElementById("mobilePerAnswerSlider");
+    
     if (perAnswerSlider) perAnswerSlider.value = value;
     if (mobilePerAnswerSlider) mobilePerAnswerSlider.value = value;
     
@@ -14622,66 +14722,76 @@ function syncSettings(settingType, value) {
     updateLabel("perAnswerLabel", value, "s / ANSWER");
     updateLabel("mobilePerAnswerLabel", value, "s / ANSWER");
     
-    document.getElementById("demo").innerHTML = "Answers will display for " + value + " seconds.";
+    const demoElement = document.getElementById("demo");
+    if (demoElement) {
+      demoElement.innerHTML = "Answers will display for " + value + " seconds.";
+    }
   }
 }
-
-// Update the values when sliders change -- MORGAN EDIT
-document.getElementById('questionSlider').addEventListener('input', function() {
-  document.querySelector('#questionLabel span').textContent = this.value;
-});
-
-document.getElementById('perQuestionSlider').addEventListener('input', function() {
-  document.querySelector('#perQuestionLabel span').textContent = this.value + 's';
-});
-
-document.getElementById('perAnswerSlider').addEventListener('input', function() {
-  document.querySelector('#perAnswerLabel span').textContent = this.value + 's';
-});
 
 // Update label helper function
 function updateLabel(labelId, value, unit) {
   const label = document.getElementById(labelId);
-  if (label) label.textContent = value + unit;
+  if (label) {
+    const span = label.querySelector('span');
+    if (span) {
+      span.textContent = value;
+    } else {
+      label.textContent = value + unit;
+    }
+  }
 }
 
-// Set up desktop slider event listeners
-if (questionSlider) {
-  questionSlider.addEventListener("input", function() {
-    syncSettings('questions', this.value);
-  });
-}
+// Set up slider event listeners in DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Desktop sliders
+  const questionSlider = document.getElementById("questionSlider");
+  const perQuestionSlider = document.getElementById("perQuestionSlider");
+  const perAnswerSlider = document.getElementById("perAnswerSlider");
 
-if (perQuestionSlider) {
-  perQuestionSlider.addEventListener("input", function() {
-    syncSettings('questionTime', this.value);
-  });
-}
+  // Mobile sliders
+  const mobileQuestionSlider = document.getElementById("mobileQuestionSlider");
+  const mobilePerQuestionSlider = document.getElementById("mobilePerQuestionSlider");
+  const mobilePerAnswerSlider = document.getElementById("mobilePerAnswerSlider");
+  
+  // Set up desktop slider event listeners
+  if (questionSlider) {
+    questionSlider.addEventListener("input", function() {
+      syncSettings('questions', this.value);
+    });
+  }
 
-if (perAnswerSlider) {
-  perAnswerSlider.addEventListener("input", function() {
-    syncSettings('answerTime', this.value);
-  });
-}
+  if (perQuestionSlider) {
+    perQuestionSlider.addEventListener("input", function() {
+      syncSettings('questionTime', this.value);
+    });
+  }
 
-// Set up mobile slider event listeners
-if (mobileQuestionSlider) {
-  mobileQuestionSlider.addEventListener("input", function() {
-    syncSettings('questions', this.value);
-  });
-}
+  if (perAnswerSlider) {
+    perAnswerSlider.addEventListener("input", function() {
+      syncSettings('answerTime', this.value);
+    });
+  }
 
-if (mobilePerQuestionSlider) {
-  mobilePerQuestionSlider.addEventListener("input", function() {
-    syncSettings('questionTime', this.value);
-  });
-}
+  // Set up mobile slider event listeners
+  if (mobileQuestionSlider) {
+    mobileQuestionSlider.addEventListener("input", function() {
+      syncSettings('questions', this.value);
+    });
+  }
 
-if (mobilePerAnswerSlider) {
-  mobilePerAnswerSlider.addEventListener("input", function() {
-    syncSettings('answerTime', this.value);
-  });
-}
+  if (mobilePerQuestionSlider) {
+    mobilePerQuestionSlider.addEventListener("input", function() {
+      syncSettings('questionTime', this.value);
+    });
+  }
+
+  if (mobilePerAnswerSlider) {
+    mobilePerAnswerSlider.addEventListener("input", function() {
+      syncSettings('answerTime', this.value);
+    });
+  }
+});
 
 // Functions for changing game settings, now using the syncSettings function
 function change_number_of_questions(value) {
@@ -14709,12 +14819,12 @@ let Question = class {
 
 // Arrow functions to show question and answer
 const showQuestion = (displayed_question) => {
-  const div = document.getElementById("question-container");
-  // div.style.opacity = 1;
-
+  // Safety checks
+  if (!questionDisplay) return;
+  
   // Clear the existing question and answer only when a new question is shown
   questionDisplay.innerHTML = "";
-  answerDisplay.innerHTML = "";
+  if (answerDisplay) answerDisplay.innerHTML = "";
 
   // Create and display the new question
   const messageElement = document.createElement("p");
@@ -14723,8 +14833,8 @@ const showQuestion = (displayed_question) => {
 };
 
 const showAnswer = (displayed_answer) => {
-  const div = document.getElementById("question-container");
-  // div.style.opacity = 0.7;
+  // Safety checks
+  if (!answerDisplay) return;
 
   // Clear the previous answer only (not the question)
   answerDisplay.innerHTML = "";
@@ -14740,6 +14850,7 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 // Loading animation display function
 function displayLoadingAnimation() {
   const container = document.getElementById('question-container');
+  if (!container) return;
   
   // Remove any existing loader to prevent duplicates
   const existingLoader = container.querySelector('.loader');
@@ -14762,15 +14873,45 @@ function displayLoadingAnimation() {
   container.appendChild(loader);
 }
 
+// Display loader animation
+function displayLoader() {
+  // Get the question container
+  const questionContainer = document.querySelector('.question-container');
+  if (!questionContainer) return;
+  
+  // Clear any previous content
+  questionContainer.innerHTML = '';
+  
+  // Create the loader element
+  const loader = document.createElement('div');
+  loader.className = 'loader';
+  
+  // Create three dot elements
+  for (let i = 0; i < 3; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    loader.appendChild(dot);
+  }
+  
+  // Add the loader to the question container
+  questionContainer.appendChild(loader);
+}
+
 // Modified mainGameFunction with countdown progress animation and button disabling
 const mainGameFunction = async () => {
-  document.getElementById("demo").innerHTML = "Fetching questions...";
+  const demoElement = document.getElementById("demo");
+  if (demoElement) {
+    demoElement.innerHTML = "Fetching questions...";
+  }
+  
+  // Make sure progressBar is defined
+  progressBar = document.getElementById("progress");
   
   // Disable both buttons during fetching and countdown
   disableBothButtons();
 
-  questionDisplay.innerHTML = "";
-  answerDisplay.innerHTML = "";
+  if (questionDisplay) questionDisplay.innerHTML = "";
+  if (answerDisplay) answerDisplay.innerHTML = "";
 
   // displayLoadingAnimation()
   displayLoader();
@@ -14783,11 +14924,16 @@ const mainGameFunction = async () => {
 
     await Promise.race([fetchPromise, timeoutPromise]);
 
-    document.getElementById("demo").innerHTML = "Questions fetched!";
+    if (demoElement) {
+      demoElement.innerHTML = "Questions fetched!";
+    }
     await delay(1000);
   } catch (error) {
-    document.getElementById("demo").innerHTML =
-      "Could not fetch questions due to settings or connection problems. Please try again or change settings.";
+    console.error("Error:", error);
+    if (demoElement) {
+      demoElement.innerHTML =
+        "Could not fetch questions due to settings or connection problems. Please try again or change settings.";
+    }
     
     // Re-enable both buttons if fetching fails
     game_started = false;
@@ -14796,76 +14942,110 @@ const mainGameFunction = async () => {
   }
 
   // Reset and prepare the progress bar for countdown animation
-  progressBar.style.animation = "none";
-  progressBar.offsetHeight; // Trigger reflow to reset animation
-  progressBar.style.animation = "growProgress 3s linear forwards";
-  progressBar.style.animationPlayState = "running";
+  if (progressBar) {
+    progressBar.style.animation = "none";
+    progressBar.offsetHeight; // Trigger reflow to reset animation
+    progressBar.style.animation = "growProgress 3s linear forwards";
+    progressBar.style.animationPlayState = "running";
+  }
 
-  document.getElementById("demo").innerHTML = "Game starts in 3.";
+  if (demoElement) demoElement.innerHTML = "Game starts in 3.";
   await delay(1000);
-  document.getElementById("demo").innerHTML = "Game starts in 2..";
+  if (demoElement) demoElement.innerHTML = "Game starts in 2..";
   await delay(1000);
-  document.getElementById("demo").innerHTML = "Game starts in 1...";
+  if (demoElement) demoElement.innerHTML = "Game starts in 1...";
   await delay(1000);
-  document.getElementById("demo").innerHTML = "Go!";
+  if (demoElement) demoElement.innerHTML = "Go!";
   await delay(1000);
 
   // Enable both buttons after countdown
   enableBothButtons();
 
   // Reset the progress bar for the game questions
-  progressBar.style.animation = "none";
-  progressBar.offsetHeight; // Trigger reflow to reset animation
+  if (progressBar) {
+    progressBar.style.animation = "none";
+    progressBar.offsetHeight; // Trigger reflow to reset animation
+  }
+
+  // Guard against missing data
+  if (!globalData || !globalData.length) {
+    if (demoElement) {
+      demoElement.innerHTML = "No questions available. Try different settings.";
+    }
+    game_started = false;
+    pauseFlag = false;
+    return;
+  }
 
   // This is the updated portion of the mainGameFunction
-  for (let i = 0; i < number_of_questions; i++) {
+  for (let i = 0; i < number_of_questions && i < globalData.length; i++) {
     if (!pauseFlag) {
-      progressBar.style.animation = "none";
-      progressBar.offsetHeight; // Trigger reflow to reset animation
-      progressBar.style.animation = `depleteProgress ${time_per_question}s linear`;
-      progressBar.style.animationPlayState = "running";
+      if (progressBar) {
+        progressBar.style.animation = "none";
+        progressBar.offsetHeight; // Trigger reflow to reset animation
+        progressBar.style.animation = `depleteProgress ${time_per_question}s linear`;
+        progressBar.style.animationPlayState = "running";
+      }
       isPaused = false;
     } else {
-      progressBar.style.animationPlayState = "paused";
+      if (progressBar) {
+        progressBar.style.animationPlayState = "paused";
+      }
     }
   
     while (!pauseFlag) {
       await delay(100);
     }
   
-    document.body.style.background =
-      category_colors[globalData[i].category_name];
+    // Check if current item exists
+    if (!globalData[i]) {
+      console.error("Missing data at index", i);
+      continue;
+    }
+    
+    // Check category name
+    const categoryName = globalData[i].category_name;
+    if (categoryName && category_colors[categoryName]) {
+      document.body.style.background = category_colors[categoryName];
+    }
   
+    // Handle character display
     const character = document.getElementById("character");
-    character.innerHTML =
-      contentDict[globalData[i].category_name.toLowerCase()];
-  
     const character2 = document.getElementById("character2");
-    character2.innerHTML = contentDict[globalData[i].category_name.toLowerCase()];
-    character2.style.display = "block";
-  
-    // Ensure SVG maintains its original dimensions
-    const svg = character2.querySelector("svg");
-    if (svg) {
-      // Preserve original aspect ratio without scaling to fit container
-      svg.setAttribute("preserveAspectRatio", "xMidYMid");
+    
+    if (character && categoryName && contentDict[categoryName.toLowerCase()]) {
+      character.innerHTML = contentDict[categoryName.toLowerCase()];
+    }
+    
+    if (character2 && categoryName && contentDict[categoryName.toLowerCase()]) {
+      character2.innerHTML = contentDict[categoryName.toLowerCase()];
+      character2.style.display = "block";
       
-      // Remove any width/height styles that might cause stretching
-      svg.style.width = "auto";
-      svg.style.height = "auto";
-      
-      // Ensure the SVG is visible but not stretched
-      svg.style.maxWidth = "100%";
+      // Ensure SVG maintains its original dimensions
+      const svg = character2.querySelector("svg");
+      if (svg) {
+        // Preserve original aspect ratio without scaling to fit container
+        svg.setAttribute("preserveAspectRatio", "xMidYMid");
+        
+        // Remove any width/height styles that might cause stretching
+        svg.style.width = "auto";
+        svg.style.height = "auto";
+        
+        // Ensure the SVG is visible but not stretched
+        svg.style.maxWidth = "100%";
+      }
     }
   
     let questionTimeRemaining = time_per_question * 10;
     let answerTimeRemaining = time_per_answer * 10;
   
     // Set up question timer animation
-    progressBar.style.animation = "none";
-    progressBar.offsetHeight; // Trigger reflow to reset animation
-    progressBar.style.animation = `depleteProgress ${time_per_question}s linear`;
-    progressBar.style.animationPlayState = "running";
+    if (progressBar) {
+      progressBar.style.animation = "none";
+      progressBar.offsetHeight; // Trigger reflow to reset animation
+      progressBar.style.animation = `depleteProgress ${time_per_question}s linear`;
+      progressBar.style.animationPlayState = "running";
+    }
   
     showQuestion(globalData[i].text);
   
@@ -14878,18 +15058,19 @@ const mainGameFunction = async () => {
       questionTimeRemaining--;
       let question_seconds = Math.floor(questionTimeRemaining / 10);
       let question_tenths = questionTimeRemaining % 10;
-      document.getElementById("demo").innerHTML = `Q${i + 1} - ${globalData[
-        i
-      ].category_name.toUpperCase()} - ${globalData[
-        i
-      ].difficulty_name.toUpperCase()} - Mark Mazurek - ${question_seconds}.${question_tenths}s`;
+      
+      if (demoElement) {
+        demoElement.innerHTML = `Q${i + 1} - ${globalData[i].category_name.toUpperCase()} - ${globalData[i].difficulty_name.toUpperCase()} - Mark Mazurek - ${question_seconds}.${question_tenths}s`;
+      }
     }
   
     // Set up answer timer animation with the reverse direction
-    progressBar.style.animation = "none";
-    progressBar.offsetHeight; // Trigger reflow to reset animation
-    progressBar.style.animation = `growProgress ${time_per_answer}s linear`;
-    progressBar.style.animationPlayState = "running";
+    if (progressBar) {
+      progressBar.style.animation = "none";
+      progressBar.offsetHeight; // Trigger reflow to reset animation
+      progressBar.style.animation = `growProgress ${time_per_answer}s linear`;
+      progressBar.style.animationPlayState = "running";
+    }
   
     showAnswer(globalData[i].answer);
   
@@ -14902,11 +15083,10 @@ const mainGameFunction = async () => {
       answerTimeRemaining--;
       let answer_seconds = Math.floor(answerTimeRemaining / 10);
       let answer_tenths = answerTimeRemaining % 10;
-      document.getElementById("demo").innerHTML = `Q${i + 1} - ${globalData[
-        i
-      ].category_name.toUpperCase()} - ${globalData[
-        i
-      ].difficulty_name.toUpperCase()} - Mark Mazurek - ${answer_seconds}.${answer_tenths}s`;
+      
+      if (demoElement) {
+        demoElement.innerHTML = `Q${i + 1} - ${globalData[i].category_name.toUpperCase()} - ${globalData[i].difficulty_name.toUpperCase()} - Mark Mazurek - ${answer_seconds}.${answer_tenths}s`;
+      }
     }
   
     showAnswer("");
@@ -14915,18 +15095,29 @@ const mainGameFunction = async () => {
   game_started = false;
   pauseFlag = false;
   showQuestion("Thanks for playing!");
-  progressBar.style.animationPlayState = "paused";
+  
+  if (progressBar) {
+    progressBar.style.animationPlayState = "paused";
+  }
   
   // Update both desktop and mobile buttons
-  document.getElementById("start-pause").textContent = "START";
-  var mobileButton = document.getElementById("start-pause2");
-  if (mobileButton) mobileButton.textContent = "START";
+  const startPauseBtn = document.getElementById("start-pause");
+  if (startPauseBtn) {
+    startPauseBtn.textContent = "START";
+  }
+  
+  const mobileStartPauseBtn = document.getElementById("start-pause2");
+  if (mobileStartPauseBtn) {
+    mobileStartPauseBtn.textContent = "START";
+  }
   
   // Re-enable both buttons when game ends
   enableBothButtons();
   
-  document.getElementById("demo").innerHTML =
-    'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Copyright &copy; 2025. Contact us at <a href="mailto:example@email.com">mark.mazurek@triviolivia.com</a>';
+  if (demoElement) {
+    demoElement.innerHTML =
+      'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Copyright &copy; 2025. Contact us at <a href="mailto:example@email.com">mark.mazurek@triviolivia.com</a>';
+  }
 };
 
 // Function to pause the game
@@ -14995,61 +15186,23 @@ function enable_era(clicked_id) {
   }
 }
 
-//Dynamic question and answer timer bar attempt
-let progressBar = document.getElementById("progress");
-let startButton = document.getElementById("startButton");
-let pauseButton = document.getElementById("pauseButton");
-let isPaused = true;
-
-startButton.addEventListener("click", function () {
-  if (isPaused) {
-    //   progressBar.style.animationPlayState = "paused";
-    progressBar.style.animation =
-      "depleteProgress " + time_per_question + "s linear infinite";
-    isPaused = false;
-  } else {
-    //   progressBar.style.animationPlayState = "running";
-    progressBar.style.animation = "none";
-    progressBar.offsetHeight; // Trigger reflow to reset animation
-    progressBar.style.animation =
-      "depleteProgress " + time_per_answer + "s linear infinite";
-  }
-});
-
-pauseButton.addEventListener("click", function () {
-  if (!isPaused) {
-    progressBar.style.animationPlayState = "running";
-    isPaused = false;
-  } else {
-    progressBar.style.animationPlayState = "paused";
-    isPaused = true;
-  }
-});
-
-progressBar.addEventListener("animationiteration", function () {
-  if (!isPaused) {
-    progressBar.style.animation =
-      "replenishProgress " +
-      time_per_answer +
-      "s linear forwards, shrinkProgress " +
-      time_per_question +
-      "s linear forwards";
-  }
-});
-
 // Makes pressing space bar start/pause the game
 document.addEventListener("keydown", function (event) {
   if (event.code === "Space") {
     // Checks if the spacebar is pressed
     event.preventDefault(); // Prevents the page from scrolling when pressing space
-    document.getElementById("start-game").click(); // Simulates a button click
+    const startGameElement = document.getElementById("start-game");
+    if (startGameElement) {
+      startGameElement.click(); // Simulates a button click
+    }
   }
 });
 
 // Refetch questions button function
 function refetchAndRestart() {
+  const refetchBtn = document.getElementById("refetch-and-restart");
   // Don't allow refetching if button is disabled
-  if (document.getElementById("refetch-and-restart").disabled) {
+  if (refetchBtn && refetchBtn.disabled) {
     return;
   }
   
@@ -15082,8 +15235,11 @@ function resetSettings() {
   all_none_eras = false;
   allNoneErasButton();
 
-  document.getElementById("demo").innerHTML =
-    'You have enabled all categories, difficulties, and eras. Press <span id="refetch-and-restart" style="cursor: pointer; display: inline;" onclick="refetchAndRestart()">REFETCH AND RESTART</span> to play again.';
+  const demoElement = document.getElementById("demo");
+  if (demoElement) {
+    demoElement.innerHTML =
+      'You have enabled all categories, difficulties, and eras. Press <span id="refetch-and-restart" style="cursor: pointer; display: inline;" onclick="refetchAndRestart()">REFETCH AND RESTART</span> to play again.';
+  }
 
   game_started = false;
   menu_hidden = false;
@@ -15106,16 +15262,16 @@ function displayAboutUs() {
   pauseFlag = true;
   const card = document.getElementById("about-us-card");
   const overlay = document.getElementById("overlay");
-  card.style.display = "block";
-  overlay.style.display = "block";
+  if (card) card.style.display = "block";
+  if (overlay) overlay.style.display = "block";
 }
 
 function closeAboutUs() {
   pauseFlag = false;
   const card = document.getElementById("about-us-card");
   const overlay = document.getElementById("overlay");
-  card.style.display = "none";
-  overlay.style.display = "none";
+  if (card) card.style.display = "none";
+  if (overlay) overlay.style.display = "none";
 }
 
 //Function to change START GAME text
@@ -15123,26 +15279,35 @@ function changeButtonText() {
   var desktopButton = document.getElementById("start-pause");
   var mobileButton = document.getElementById("start-pause2");
   
+  // Make sure progressBar is initialized
+  if (!progressBar) {
+    progressBar = document.getElementById("progress");
+  }
+  
   if (pauseFlag === false) {
     // Update both desktop and mobile buttons
-    desktopButton.textContent = "PAUSE";
+    if (desktopButton) desktopButton.textContent = "PAUSE";
     if (mobileButton) mobileButton.textContent = "PAUSE";
     
-    progressBar.style.animationPlayState = "running";
+    if (progressBar) progressBar.style.animationPlayState = "running";
     pauseFlag = true;
   } else if (pauseFlag === true && game_started === true) {
     // Update both desktop and mobile buttons
-    desktopButton.textContent = "RESUME";
+    if (desktopButton) desktopButton.textContent = "RESUME";
     if (mobileButton) mobileButton.textContent = "RESUME";
     
-    progressBar.style.animationPlayState = "paused";
+    if (progressBar) progressBar.style.animationPlayState = "paused";
     pauseFlag = false;
     console.log("Game paused.");
-    document.getElementById("demo").innerHTML =
-      'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
+    
+    const demoElement = document.getElementById("demo");
+    if (demoElement) {
+      demoElement.innerHTML =
+        'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
+    }
   } else {
     // Update both desktop and mobile buttons
-    desktopButton.textContent = "START";
+    if (desktopButton) desktopButton.textContent = "START";
     if (mobileButton) mobileButton.textContent = "START";
     
     pauseFlag = false;
@@ -15221,52 +15386,29 @@ function simulateFullscreenOnMobile() {
   }
 }
 
-// Display loader animation
-function displayLoader() {
-  // Get the question container
-  const questionContainer = document.querySelector('.question-container');
-  
-  // Clear any previous content
-  questionContainer.innerHTML = '';
-  
-  // Create the loader element
-  const loader = document.createElement('div');
-  loader.className = 'loader';
-  
-  // Create three dot elements
-  for (let i = 0; i < 3; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'dot';
-    loader.appendChild(dot);
-  }
-  
-  // Add the loader to the question container
-  questionContainer.appendChild(loader);
-}
-
 // Fix for mobile viewport height issues
 document.addEventListener('DOMContentLoaded', function() {
   // Function to handle resize and orientation changes
   function handleMobileLayout() {
-      // Only apply on mobile
-      if (window.innerWidth <= 767) {
-          // Get the real viewport height
-          let vh = window.innerHeight;
-          
-          // Set the height of game area to leave space for menu
-          let gameArea = document.querySelector('.game-area');
-          let mobileMenu = document.querySelector('.mobile-menu');
-          
-          // Calculate height based on viewport
-          let menuHeight = vh * 0.25; // 25vh
-          let gameHeight = vh - menuHeight - 20; // Subtract menu height and some padding
-          
-          // Apply heights
-          if (gameArea && mobileMenu) {
-              gameArea.style.height = gameHeight + 'px';
-              mobileMenu.style.height = menuHeight + 'px';
-          }
+    // Only apply on mobile
+    if (window.innerWidth <= 767) {
+      // Get the real viewport height
+      let vh = window.innerHeight;
+      
+      // Set the height of game area to leave space for menu
+      let gameArea = document.querySelector('.game-area');
+      let mobileMenu = document.querySelector('.mobile-menu');
+      
+      // Calculate height based on viewport
+      let menuHeight = vh * 0.25; // 25vh
+      let gameHeight = vh - menuHeight - 20; // Subtract menu height and some padding
+      
+      // Apply heights
+      if (gameArea && mobileMenu) {
+        gameArea.style.height = gameHeight + 'px';
+        mobileMenu.style.height = menuHeight + 'px';
       }
+    }
   }
   
   // Initial call
@@ -15277,21 +15419,17 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('orientationchange', handleMobileLayout);
   
   // Fix for iOS Safari when address bar appears/disappears
+  let ticking = false;
   window.addEventListener('scroll', function() {
-      // Throttle to avoid performance issues
-      if (!this.ticking) {
-          window.requestAnimationFrame(function() {
-              handleMobileLayout();
-              this.ticking = false;
-          });
-          this.ticking = true;
-      }
+    // Throttle to avoid performance issues
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        handleMobileLayout();
+        ticking = false;
+      });
+      ticking = true;
+    }
   });
-  
-  // Initialize settings synchronization on page load
-  syncSettings('questions', number_of_questions);
-  syncSettings('questionTime', time_per_question);
-  syncSettings('answerTime', time_per_answer);
 });
 
 // Function to handle closing dropdowns when clicking outside
@@ -15316,15 +15454,10 @@ function closeDropdownsOnClickOutside() {
       const contentElement = toggle.nextElementSibling.nextElementSibling;
       
       // If click was outside the dropdown content
-      if (!contentElement.contains(event.target)) {
+      if (contentElement && !contentElement.contains(event.target)) {
         // Close the dropdown
         toggle.checked = false;
       }
     });
   });
 }
-
-// Initialize dropdown close functionality
-document.addEventListener('DOMContentLoaded', function() {
-  closeDropdownsOnClickOutside();
-});
