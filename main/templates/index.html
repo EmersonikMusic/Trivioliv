@@ -1424,7 +1424,9 @@
 
                         <div id="container_btn_pauseplay" class="game-button-container">
                           <div class="desktop-buttons">
-                            <div button id="start-pause" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
+                            <div button id="start-pause" class="user-button" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">
+                              <img src="{% static 'main/templates/main/images/btn-icon-pause.svg' %}" alt="categories-inactive"> 
+                            </div>
                             <div button id="refetch-and-restart" class="user-button" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
                           </div>                            
                         </div>
@@ -1539,25 +1541,15 @@
               <!-- Side Menu (visible only on larger screens) -->
               <div class="col-md-3 d-flex flex-column h-100 pl-0">
                   <div class="menu-container desktop-menu">
-                      <!-- <div class="desktop-buttons">
-                          <div button id="start-pause" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
-  
-                          <div button id="refetch-and-restart" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
-  
-                          
-  
-  
-  
-                            
-            </div> -->
+
                       <div id="title-settings" class="title-settings">
                         <h1>CUSTOMIZE YOUR GAME EXPERIENCE</h1>
                       </div>
 
                           <!--Categories menu-->
                   <div class="wrap-collabsible"> 
-                      <input id="collapsible-categories" class="toggle" type="checkbox"> 
-                      <img src="main/templates/main/images/icon-categories-inactive.svg"></img>
+                      <input id="collapsible-categories" class="toggle" type="checkbox">
+                      <img src="{% static 'main/templates/main/images/icon-categories-inactive.svg' %}" alt="categories-inactive"> 
                       <label for="collapsible-categories" class="lbl-toggle">CATEGORIES</label>
                       <div class="collapsible-content">
                           <div class="content-inner">
