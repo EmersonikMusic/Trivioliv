@@ -14331,18 +14331,6 @@ function confirm_reset() {
 //   }
 // 
 
-// TOGGLE MORGAN EDIT -- CHANGED container to button
-        function toggleCategory(button) {
-            const toggleSwitch = button.querySelector('.toggle-switch');
-            if (toggleSwitch.classList.contains('active')) {
-                toggleSwitch.classList.remove('active');
-                toggleSwitch.classList.add('inactive');
-            } else {
-                toggleSwitch.classList.remove('inactive');
-                toggleSwitch.classList.add('active');
-            }
-        }
-
 //Function to hide or show menu sections
 const checkboxes = document.querySelectorAll(".toggle");
 
@@ -14372,6 +14360,20 @@ function toggleIndicator(button) {
     button.classList.add("active");
   }
   
+
+// // TOGGLE MORGAN EDIT -- CHANGED container to button
+// function toggleCategory(button) {
+//   const toggleSwitch = button.querySelector('.toggle-switch');
+//   if (toggleSwitch.classList.contains('active')) {
+//       toggleSwitch.classList.remove('active');
+//       toggleSwitch.classList.add('inactive');
+//   } else {
+//       toggleSwitch.classList.remove('inactive');
+//       toggleSwitch.classList.add('active');
+//   }
+// }
+
+
   // Find and update all other buttons with the same ID (syncs desktop and mobile)
   const buttonId = button.id;
   const allMatchingButtons = document.querySelectorAll(`button[id='${buttonId}']`);
