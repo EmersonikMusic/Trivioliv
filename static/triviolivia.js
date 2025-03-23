@@ -14002,14 +14002,32 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
   
+  // Set default message in bar first
+  const demoElement = document.getElementById("demo");
+  if (demoElement) {
+    demoElement.innerHTML = 
+      'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()"><b>START</b></span> to play.';
+  }
+  
   // Initialize settings synchronization on page load
-  syncSettings('questions', number_of_questions);
-  syncSettings('questionTime', time_per_question);
-  syncSettings('answerTime', time_per_answer);
+  initializeSettings();
   
   // Initialize dropdown close functionality
   closeDropdownsOnClickOutside();
 });
+
+// Modified to initialize settings without overwriting the default message
+function initializeSettings() {
+  // Store current values
+  const currentQuestions = number_of_questions;
+  const currentQuestionTime = time_per_question;
+  const currentAnswerTime = time_per_answer;
+  
+  // Sync UI with current values without updating the demo text
+  syncSettingsWithoutMessage('questions', currentQuestions);
+  syncSettingsWithoutMessage('questionTime', currentQuestionTime);
+  syncSettingsWithoutMessage('answerTime', currentAnswerTime);
+}
 
 // Declaring question and answer display
 const questionDisplay = document.querySelector(".question-container");
@@ -14205,14 +14223,10 @@ var category_summaries = {
 
 
 // Declaring variables for the base URL for fetching questions
-var baseUrl = "/api/questions";
+var baseUrl = "http://localhost:8000/api/questions/";
 var moddedUrl = "";
 var queryParams = [];
 let globalData;
-
-// Default message in bar
-document.getElementById("demo").innerHTML =
-  'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()"><b>START</b></span> to play.';
 
 // Function to disable both Start/Pause and Refetch buttons
 function disableBothButtons() {
@@ -14552,7 +14566,7 @@ function toggle_eras(clicked_id) {
   console.log("Updated era list:", era_list);
 }
 
-// Enhanced ALL/NONE buttons for better mobile support
+// Enhanced ALL/NONE buttons for better mobile support - FIXED
 function allNoneCategoriesButton() {
   const allCategoryButtons = document.querySelectorAll(".category");
   
@@ -14565,16 +14579,18 @@ function allNoneCategoriesButton() {
       category_list.push(id);
     });
     
-    // Update visual state of all buttons
+    // Update visual state of all buttons and their toggle switches
     allCategoryButtons.forEach(button => {
+      // Update button classes
       button.classList.remove("active");
       button.classList.add("inactive");
-    });
-
-     // Update visual state of all switches
-     allCategoryButtons.forEach(toggleSwitch => {
-      toggleSwitch.classList.remove("active");
-      toggleSwitch.classList.add("inactive")
+      
+      // Update toggle switch inside the button
+      const toggleSwitch = button.querySelector('.toggle-switch');
+      if (toggleSwitch) {
+        toggleSwitch.classList.remove("active");
+        toggleSwitch.classList.add("inactive");
+      }
     });
     
     all_none_categories = false;
@@ -14584,10 +14600,18 @@ function allNoneCategoriesButton() {
     // Currently showing "NONE", so enable all categories
     category_list = []; // Clear the list to enable all
     
-    // Update visual state of all buttons
+    // Update visual state of all buttons and their toggle switches
     allCategoryButtons.forEach(button => {
+      // Update button classes
       button.classList.remove("inactive");
       button.classList.add("active");
+      
+      // Update toggle switch inside the button
+      const toggleSwitch = button.querySelector('.toggle-switch');
+      if (toggleSwitch) {
+        toggleSwitch.classList.remove("inactive");
+        toggleSwitch.classList.add("active");
+      }
     });
     
     all_none_categories = true;
@@ -14597,6 +14621,7 @@ function allNoneCategoriesButton() {
   console.log("Category list after ALL/NONE toggle:", category_list);
 }
 
+// FIXED ALL/NONE for difficulties
 function allNoneDifficultiesButton() {
   const allDifficultyButtons = document.querySelectorAll(".difficulty");
   
@@ -14609,10 +14634,18 @@ function allNoneDifficultiesButton() {
       difficulty_list.push(id);
     });
     
-    // Update visual state of all buttons
+    // Update visual state of all buttons and their toggle switches
     allDifficultyButtons.forEach(button => {
+      // Update button classes
       button.classList.remove("active");
       button.classList.add("inactive");
+      
+      // Update toggle switch inside the button
+      const toggleSwitch = button.querySelector('.toggle-switch');
+      if (toggleSwitch) {
+        toggleSwitch.classList.remove("active");
+        toggleSwitch.classList.add("inactive");
+      }
     });
     
     all_none_difficulties = false;
@@ -14622,10 +14655,18 @@ function allNoneDifficultiesButton() {
     // Currently showing "NONE", so enable all difficulties
     difficulty_list = []; // Clear the list to enable all
     
-    // Update visual state of all buttons
+    // Update visual state of all buttons and their toggle switches
     allDifficultyButtons.forEach(button => {
+      // Update button classes
       button.classList.remove("inactive");
       button.classList.add("active");
+      
+      // Update toggle switch inside the button
+      const toggleSwitch = button.querySelector('.toggle-switch');
+      if (toggleSwitch) {
+        toggleSwitch.classList.remove("inactive");
+        toggleSwitch.classList.add("active");
+      }
     });
     
     all_none_difficulties = true;
@@ -14635,6 +14676,7 @@ function allNoneDifficultiesButton() {
   console.log("Difficulty list after ALL/NONE toggle:", difficulty_list);
 }
 
+// FIXED ALL/NONE for eras
 function allNoneErasButton() {
   const allEraButtons = document.querySelectorAll(".era");
   
@@ -14647,10 +14689,18 @@ function allNoneErasButton() {
       era_list.push(id);
     });
     
-    // Update visual state of all buttons
+    // Update visual state of all buttons and their toggle switches
     allEraButtons.forEach(button => {
+      // Update button classes
       button.classList.remove("active");
       button.classList.add("inactive");
+      
+      // Update toggle switch inside the button
+      const toggleSwitch = button.querySelector('.toggle-switch');
+      if (toggleSwitch) {
+        toggleSwitch.classList.remove("active");
+        toggleSwitch.classList.add("inactive");
+      }
     });
     
     all_none_eras = false;
@@ -14660,10 +14710,18 @@ function allNoneErasButton() {
     // Currently showing "NONE", so enable all eras
     era_list = []; // Fixed: Changed from category_list to era_list
     
-    // Update visual state of all buttons
+    // Update visual state of all buttons and their toggle switches
     allEraButtons.forEach(button => {
+      // Update button classes
       button.classList.remove("inactive");
       button.classList.add("active");
+      
+      // Update toggle switch inside the button
+      const toggleSwitch = button.querySelector('.toggle-switch');
+      if (toggleSwitch) {
+        toggleSwitch.classList.remove("inactive");
+        toggleSwitch.classList.add("active");
+      }
     });
     
     all_none_eras = true;
@@ -14671,6 +14729,53 @@ function allNoneErasButton() {
       "You have enabled all eras.";
   }
   console.log("Era list after ALL/NONE toggle:", era_list);
+}
+
+// Function to synchronize settings between mobile and desktop without changing message
+function syncSettingsWithoutMessage(settingType, value) {
+  // Update the appropriate global variable
+  if (settingType === 'questions') {
+    number_of_questions = parseInt(value);
+    
+    // Sync desktop and mobile sliders
+    const questionSlider = document.getElementById("questionSlider");
+    const mobileQuestionSlider = document.getElementById("mobileQuestionSlider");
+    
+    if (questionSlider) questionSlider.value = value;
+    if (mobileQuestionSlider) mobileQuestionSlider.value = value;
+    
+    // Update both labels
+    updateLabel("questionLabel", value, " QUESTIONS");
+    updateLabel("mobileQuestionLabel", value, " QUESTIONS");
+  } 
+  else if (settingType === 'questionTime') {
+    time_per_question = parseInt(value);
+    
+    // Sync desktop and mobile sliders
+    const perQuestionSlider = document.getElementById("perQuestionSlider");
+    const mobilePerQuestionSlider = document.getElementById("mobilePerQuestionSlider");
+    
+    if (perQuestionSlider) perQuestionSlider.value = value;
+    if (mobilePerQuestionSlider) mobilePerQuestionSlider.value = value;
+    
+    // Update both labels
+    updateLabel("perQuestionLabel", value, "s / QUESTION");
+    updateLabel("mobilePerQuestionLabel", value, "s / QUESTION");
+  } 
+  else if (settingType === 'answerTime') {
+    time_per_answer = parseInt(value);
+    
+    // Sync desktop and mobile sliders
+    const perAnswerSlider = document.getElementById("perAnswerSlider");
+    const mobilePerAnswerSlider = document.getElementById("mobilePerAnswerSlider");
+    
+    if (perAnswerSlider) perAnswerSlider.value = value;
+    if (mobilePerAnswerSlider) mobilePerAnswerSlider.value = value;
+    
+    // Update both labels
+    updateLabel("perAnswerLabel", value, "s / ANSWER");
+    updateLabel("mobilePerAnswerLabel", value, "s / ANSWER");
+  }
 }
 
 // Function to synchronize settings between mobile and desktop
@@ -15220,7 +15325,7 @@ function refetchAndRestart() {
   pauseFlag = false;
   globalData = [];
 
-  baseUrl = "/api/questions";
+  baseUrl = "http://localhost:8000/api/questions/?";
   moddedUrl = "";
   queryParams = [];
   globalData = [];
@@ -15255,7 +15360,7 @@ function resetSettings() {
   difficulty_list = [];
   era_list = [];
 
-  baseUrl = "/api/questions";
+  baseUrl = "http://localhost:8000/api/questions/?";
   moddedUrl = "";
   queryParams = [];
   globalData = [];
