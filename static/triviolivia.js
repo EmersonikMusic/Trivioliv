@@ -15426,10 +15426,10 @@ function changeButtonText() {
   } else {
     // Initial state - show play button (START)
     if (desktopButton) {
-      desktopButton.innerHTML = '<img src="/static/images/btn-icon-play.svg" alt="game-paused">';
+      desktopButton.innerHTML = '<img src="/static/images/btn-icon-pause.svg" alt="game-paused">';
     }
     if (mobileButton) {
-      mobileButton.innerHTML = '<img src="/static/images/btn-icon-play.svg" alt="game-paused">';
+      mobileButton.innerHTML = '<img src="/static/images/btn-icon-pause.svg" alt="game-paused">';
     }
     
     pauseFlag = false;
