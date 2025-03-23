@@ -100,6 +100,7 @@
       <title>TRIVIOLIVIA</title>
       <!-- Bootstrap CSS -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://use.typekit.net/aps1vss.css">
       <style>
         /* Modern CSS Reset */
         *, *::before, *::after {
@@ -115,7 +116,9 @@
         
         body {
           line-height: 1.5;
-          font-family: 'DIN Condensed Bold', Roboto, Arial, sans-serif;
+          font-family: "din-condensed", sans-serif;
+          font-weight: 400;
+          font-style: normal;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
         }
@@ -172,7 +175,7 @@
 
 /* Main content area */
 .wrapper-main-content {
-  flex: 3; /* Take up 3/5 of the space */
+  flex: 4; /* Take up 3/5 of the space */
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -456,7 +459,6 @@
           padding: 15px;
           /* Dynamic font sizing */
           font-size: clamp(16px, 5vw, 8vh);
-          background-color: rgba(0,0,0, 0.4);
           margin: 10px;
           border-radius: 10px;
           overflow-wrap: break-word;
@@ -547,6 +549,7 @@
                 border-radius: 15px; /* Optional: for rounded corners */
                 cursor: pointer;
                 font-size: 10px;
+                width: max-content;
               }
       
               .desktop-character {
@@ -820,6 +823,7 @@
           border-radius: 20px;
           flex-direction: row;
           align-items: center;
+          background-color: rgba(0, 0, 0, 0.4);
 }
         #progress {
           width: 100%;
@@ -1532,12 +1536,12 @@
     .nav-link {
      color: #8DD4DA;
      font-size: medium;
-     font-family: DIN Condensed Bold;
     }
 
     .footer {
       display:flex;
       flex-direction: row;
+      margin: 16px 0;
     }
     
   </style>
@@ -1590,9 +1594,8 @@
       </div>
       <div id="container_btn_pauseplay" class="game-button-container">
         <div class="desktop-buttons">
-          <div button id="start-pause" class="user-button" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">
-            <!-- <img src="{% static 'images/btn-icon-pause.svg' %}" alt="game-paused">  -->
-                <img src="{% static 'images/icon-categories-inactive.svg' %}" alt="categories-inactive">
+          <div button id="start-pause" class="user-button" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START GAME
+              
           </div>
           <div button id="refetch-and-restart" class="user-button" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
         </div>                            
@@ -1630,6 +1633,70 @@
 
       <!-- Other menus remain the same -->
       <!-- ... -->
+
+      <!--Difficulties menu-->
+      <div class="wrap-collabsible"> 
+        <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
+        <label for="collapsible-difficulties" class="lbl-toggle">
+            DIFFICULTIES
+        </label>
+        <div class="collapsible-content">
+            <div class="content-inner">
+                <button id="all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE</button>
+                {% for difficulty in difficulties %}
+                <div id='{{ difficulty.name }}'>
+                    <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
+                        <span class="indicator"></span>
+                        {{ difficulty.name | upper}}
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+
+
+        <!--Eras menu-->
+        <div class="wrap-collabsible"> 
+        <input id="collapsible-eras" class="toggle" type="checkbox"> 
+        <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
+        <div class="collapsible-content">
+            <div class="content-inner">
+            <button id="all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
+            {% for era in eras %}
+            <div id='{{ era.name }}'>
+                <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
+                    <span class="indicator"></span>
+                    {{ era.name }}
+                </button>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        </div>
+
+
+        <!--Settings menu-->
+<div class="wrap-collabsible"> 
+  <input id="collapsible-settings" class="toggle" type="checkbox"> 
+  <label for="collapsible-settings" class="lbl-toggle">settings</label>
+  <div class="collapsible-content">
+      <div class="content-inner">
+          <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
+              <div class="slider-container">
+                  <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
+                  <input type="range" min="10" max="50" value="10" step="10" class="slider" id="questionSlider">
+              </div>
+              <div class="slider-container">
+                  <div id="perQuestionLabel" class="slider-label">5s / QUESTION</div>
+                  <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
+              </div>
+
+              <div class="slider-container">
+                  <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
+                  <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
+              </div>
+          </div>
     </div>
   </div>
   
