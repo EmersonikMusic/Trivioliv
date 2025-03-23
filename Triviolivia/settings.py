@@ -49,7 +49,7 @@ CORS_ALLOW_METHODS = [
     "OPTIONS",
 ]
 
-# New stuff from Claude
+# Uncomment when pushing!!!
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 

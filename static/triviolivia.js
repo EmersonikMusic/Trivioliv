@@ -14205,7 +14205,7 @@ var category_summaries = {
 
 
 // Declaring variables for the base URL for fetching questions
-var baseUrl = "/api/questions";
+var baseUrl = "/api/questions/";
 var moddedUrl = "";
 var queryParams = [];
 let globalData;
@@ -14302,6 +14302,80 @@ document.addEventListener('DOMContentLoaded', function() {
   document.head.appendChild(style);
 });
 
+
+// Menu and character toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("DOM loaded, initializing toggle functionality...");
+  
+  // Get all required elements
+  const toggleButton = document.getElementById('menu-toggle-button');
+  const menuSettings = document.getElementById('menu-settings');
+  const wrapperAll = document.getElementById('wrapper-all');
+  const characterColumn = document.getElementById('character');
+  
+  // Check if all elements exist
+  if (!toggleButton) console.error("Toggle button not found!");
+  if (!menuSettings) console.error("Menu settings not found!");
+  if (!wrapperAll) console.error("Wrapper all not found!");
+  if (!characterColumn) console.error("Character column not found!");
+  
+  // If all elements exist, set up the toggle functionality
+  if (toggleButton && menuSettings && wrapperAll && characterColumn) {
+    console.log("All elements found, setting up toggle functionality...");
+    
+    // Initial state setup
+    if (!localStorage.getItem('menuHidden') || localStorage.getItem('menuHidden') !== 'true') {
+      // Default state: menu visible, character hidden
+      characterColumn.style.flex = '0';
+      characterColumn.style.width = '0';
+      characterColumn.style.opacity = '0';
+      console.log("Initial state: Menu visible, character hidden");
+    } else {
+      // Restored state: menu hidden, character visible
+      menuSettings.classList.add('menu-hidden');
+      wrapperAll.classList.add('menu-collapsed');
+      characterColumn.style.flex = '1';
+      characterColumn.style.width = 'auto';
+      characterColumn.style.opacity = '1';
+      console.log("Restored state: Menu hidden, character visible");
+    }
+    
+    // Add click event listener to toggle button
+    toggleButton.addEventListener('click', function() {
+      console.log("Toggle button clicked!");
+      
+      // Toggle the menu hidden state
+      menuSettings.classList.toggle('menu-hidden');
+      
+      // Toggle the wrapper collapsed state
+      wrapperAll.classList.toggle('menu-collapsed');
+      
+      // Directly toggle character visibility
+      if (wrapperAll.classList.contains('menu-collapsed')) {
+        // Menu collapsed - show character
+        characterColumn.style.flex = '1';
+        characterColumn.style.width = 'auto';
+        characterColumn.style.opacity = '1';
+        menuSettings.style.borderLeft = '1px solid white';
+        console.log("Toggled to: Menu hidden, character visible");
+      } else {
+        // Menu expanded - hide character
+        characterColumn.style.flex = '0';
+        characterColumn.style.width = '0';
+        characterColumn.style.opacity = '0';
+        console.log("Toggled to: Menu visible, character hidden");
+      }
+      
+      // Remember state in localStorage
+      // localStorage.setItem('menuHidden', wrapperAll.classList.contains('menu-collapsed') ? 'true' : 'false');
+    });
+  }
+});
+
+// If you have an existing menu toggle function, you can replace it with the one above
+// or merge the functionality
+
+
 // Async JS that kind of scares me, honestly
 async function fetchData(moddedUrl) {
   try {
@@ -14316,6 +14390,80 @@ async function fetchData(moddedUrl) {
     return [];
   }
 }
+
+
+//Toggles the menu-hidden class on the menu and menu-collapsed class on the wrapper
+
+      function trackButtonClick(event) {
+          var button = event.target;
+          var buttonText = button.innerText || button.textContent || 'unknown-button';
+          var category = 'General Button Click'; // Default category
+          var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
+  
+          // Track All/None buttons for Categories, Difficulties, and Eras
+          if (button.id.includes('all-none')) {
+              var groupName = '';
+              var allActive = false;
+              var allDisabled = false;
+  
+              if (button.id.includes('categories')) {
+                  groupName = 'Categories';
+                  // Check if all category buttons are active
+                  allActive = document.querySelectorAll('.category').length === document.querySelectorAll('.category.active').length;
+                  allDisabled = document.querySelectorAll('.category.active').length === 0;
+              } else if (button.id.includes('difficulties')) {
+                  groupName = 'Difficulties';
+                  // Check if all difficulty buttons are active
+                  allActive = document.querySelectorAll('.difficulty').length === document.querySelectorAll('.difficulty.active').length;
+                  allDisabled = document.querySelectorAll('.difficulty.active').length === 0;
+              } else if (button.id.includes('eras')) {
+                  groupName = 'Eras';
+                  // Check if all era buttons are active
+                  allActive = document.querySelectorAll('.era').length === document.querySelectorAll('.era.active').length;
+                  allDisabled = document.querySelectorAll('.era.active').length === 0;
+              }
+  
+              // Determine action based on state of all options
+              if (allActive) {
+                  gtag('event', groupName + '_all', {
+                      'event_category': groupName + ' Selection',
+                      'event_label': groupName + ' ALL (enabled)'
+                  });
+              } else if (allDisabled) {
+                  gtag('event', groupName + '_none', {
+                      'event_category': groupName + ' Selection',
+                      'event_label': groupName + ' NONE (disabled)'
+                  });
+              }
+  
+              return; // Skip normal button tracking for these buttons
+          }
+  
+          // Default behavior for other buttons
+          if (button.classList.contains('category')) {
+              category = 'Category Selection';
+          } else if (button.classList.contains('difficulty')) {
+              category = 'Difficulty Selection';
+          } else if (button.classList.contains('era')) {
+              category = 'Era Selection';
+          } else if (button.classList.contains('nav-button')) {
+              category = 'Navigation';
+          }
+  
+          gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked_' + state, {
+              'event_category': category,
+              'event_label': buttonText + ' (' + state.toUpperCase() + ')'
+          });
+      }
+  
+      document.addEventListener("DOMContentLoaded", function() {
+          document.querySelectorAll("button").forEach(function(button) {
+              button.addEventListener("click", trackButtonClick);
+          });
+      });
+  
+
+
 
 // Function to not fetch JSON data if any of cat/dif/era are all deselected
 function dontFetchDataIfAllDeselected() {
@@ -15220,7 +15368,7 @@ function refetchAndRestart() {
   pauseFlag = false;
   globalData = [];
 
-  baseUrl = "/api/questions";
+  baseUrl = "/api/questions/?";
   moddedUrl = "";
   queryParams = [];
   globalData = [];
@@ -15255,7 +15403,7 @@ function resetSettings() {
   difficulty_list = [];
   era_list = [];
 
-  baseUrl = "/api/questions";
+  baseUrl = "/api/questions/";
   moddedUrl = "";
   queryParams = [];
   globalData = [];
