@@ -15470,11 +15470,7 @@ function refetchAndRestart() {
   pauseFlag = false;
   globalData = [];
 
-<<<<<<< HEAD
-  baseUrl = "/api/questions/?";
-=======
   baseUrl = "/api/questions/";
->>>>>>> c4ef39bfa799d7a8c36b8862229f6ed74a9f4c05
   moddedUrl = "";
   queryParams = [];
   globalData = [];
