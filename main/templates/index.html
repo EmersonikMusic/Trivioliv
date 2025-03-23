@@ -121,6 +121,7 @@
           font-style: normal;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
+          height: auto;
         }
         
         img, picture, video, canvas, svg {
@@ -481,6 +482,7 @@
       p {
         margin-top: 10px;
         margin-bottom: 10px;
+        font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
       
       
@@ -692,23 +694,25 @@
       } 
       
       .wrap-collabsible { 
-          margin: 0px 0;
+          margin: auto;
+          width: 80%;
       } 
       
-      .lbl-toggle { 
-        display: flex; 
-        font-weight: 100; 
-        text-transform: uppercase; 
-        /* padding: .25rem;  */
-        color: #DDD; 
-        background: rgba(0, 0, 0, 0);
-        cursor: pointer; 
-        transition: all .25s ease-out; 
-        flex-direction: row;
-        align-items: center;
-        margin: 0px 20px;
-        padding: 10px 20px;
-      } 
+    .lbl-toggle {
+      display: flex;
+      font-weight: 100;
+      text-transform: uppercase;
+      /* padding: .25rem; */
+      color: #DDD;
+      background: rgba(0, 0, 0, 0);
+      cursor: pointer;
+      transition: all .25s ease-out;
+      flex-direction: row;
+      align-items: center;
+      margin: 0px 20px;
+      padding: 10px 0;
+      font-size: x-large;
+    }
       
       .lbl-toggle:hover { 
           color: #FFF;
@@ -1146,7 +1150,7 @@
                   display: inline-block;
               }
               
-              .main-text {
+              /* .main-text {
                   font-size: 2rem;
                   font-weight: 800;
                   color: white;
@@ -1170,7 +1174,7 @@
                   color: white;
                   vertical-align: baseline;
                   letter-spacing: 0;
-              }
+              } */
       
             /* Mobile fix */
       @media (max-width: 767px) {
