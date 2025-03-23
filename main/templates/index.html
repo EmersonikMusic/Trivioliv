@@ -166,7 +166,6 @@
   flex-direction: row;
   width: 100%;
   min-height: 100vh;
-  background: #121212;
   color: white;
   margin: 0;
 }
@@ -441,7 +440,6 @@
           padding: 15px;
           /* Dynamic font sizing */
           font-size: clamp(16px, 5vw, 8vh);
-          background-color: rgba(0,0,0, 0.4);
           margin: 10px;
           border-radius: 10px;
           overflow-wrap: break-word;
@@ -467,10 +465,10 @@
       }
       
       .loading-bar-container {
-      background-color: rgba(0, 0, 0, 0.5);
       border-radius: 20px;
+      height: 30px;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       width: 100%;
       justify-content: center;
       margin: 20px;
@@ -520,8 +518,8 @@
               }
       
               .desktop-buttons {
-                background-color: #57215B;
-                border: 5px solid #481D51;
+                /* background-color: #57215B;
+                border: 5px solid #481D51; */
                 width: 100%; /* Adjust as needed */
                 box-sizing: border-box;  
                 display: flex;
@@ -564,7 +562,7 @@
                   color: white;
               }
       
-              button {
+              /* button {
           display: flex;
           flex-wrap: nowrap;
           box-sizing: border-box;
@@ -579,7 +577,7 @@
           cursor: pointer;
           border-radius: 2px;
           color: white;
-      }
+      } */
               /* Mobile button styles */
               .mobile-menu .menu-button {
                   flex-basis: 50%;
@@ -667,7 +665,7 @@
                   }
 
                   .desktop-menu {
-                    flex-direction: row;
+                    flex-direction: column;
                   }
                   
                   .game-area {
@@ -815,6 +813,7 @@
         .loading-bar {
           display: flex;
           width: 100%;
+          height: 30px;
           position: relative;
           overflow: hidden;
           justify-content: center;
@@ -1017,8 +1016,8 @@
 /* START OF CATEGORY TOGGLE STYLE */
 .toggle-switch {
             position: relative;
-            width: 60px;
-            height: 30px;
+            width: 40px;
+            height: 22px;
             border-radius: 15px;
             margin-right: 15px;
             transition: background-color 0.3s ease;
@@ -1035,8 +1034,8 @@
         .toggle-dot {
             position: absolute;
             top: 3px;
-            width: 24px;
-            height: 24px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             transition: all 0.3s ease;
         }
@@ -1358,6 +1357,7 @@
         color: white;
         flex-direction: row;
         align-items: center;
+        font-size: medium;
       }
       
       /* Make all-none buttons consistent */
@@ -1447,7 +1447,7 @@
       align-items: center;
       padding: 3px 0;
       margin: 2px 0;
-      min-height: 22px; /* Ensure buttons have enough height */
+      min-height: 35px; /* Ensure buttons have enough height */
     }
     
     /* Fix for any potential conflicts */
@@ -1534,6 +1534,11 @@
      font-size: medium;
      font-family: DIN Condensed Bold;
     }
+
+    .footer {
+      display:flex;
+      flex-direction: row;
+    }
     
   </style>
   </head>
@@ -1574,12 +1579,14 @@
         </div>
       </div> 
     </div>
-    <div id="loading-bar-container" class="loading-bar-container">
-      <div id="loading-bar" class="loading-bar">
-        <div id="loading-text">
-          <p id="demo" class="loader-text"></p>
+    <div id="footer" class="footer">
+      <div id="loading-bar-container" class="loading-bar-container">
+        <div id="loading-bar" class="loading-bar">
+          <div id="loading-text">
+            <p id="demo" class="loader-text"></p>
+          </div>
+          <div id="progress"></div>
         </div>
-        <div id="progress"></div>
       </div>
       <div id="container_btn_pauseplay" class="game-button-container">
         <div class="desktop-buttons">
@@ -1602,7 +1609,7 @@
       <!--Categories menu-->
       <div id="menu-categories" class="wrap-collabsible"> 
         <input id="collapsible-categories" class="toggle" type="checkbox">
-        <img src="{% static 'images/icon-categories-inactive.svg' %}" alt="categories-inactive"> 
+        <!-- <img src="{% static 'images/icon-categories-inactive.svg' %}" alt="categories-inactive">  -->
         <label for="collapsible-categories" class="lbl-toggle">CATEGORIES</label>
         <div class="collapsible-content">
           <div class="content-inner">
