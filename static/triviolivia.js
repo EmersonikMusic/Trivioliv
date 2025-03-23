@@ -15435,6 +15435,7 @@ function changeButtonText() {
     pauseFlag = false;
   }
 }
+}
 
 // Fullscreen mode attempt
 function toggleFullscreen() {
