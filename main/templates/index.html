@@ -308,7 +308,7 @@
 /* Settings title styling */
 .title-settings {
   margin: 20px;
-  padding: 30px 0;
+  padding: 30px 10px;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
   text-align: center;
@@ -327,7 +327,8 @@
 
 /* ORIGINAL CSS BELOW */
       
-              body, html {
+              
+                  body, html {
                   height: 100%;
                   margin: 0;
                   padding: 0;
@@ -337,7 +338,7 @@
                   word-break: break-word;
                   overflow-wrap: break-word;
                   hyphens: none;
-                  font-weight: 1000;
+                  height: auto;
       
               }
       
@@ -1522,7 +1523,7 @@
     }
 
     .title-settings h1 {
-      font-size: xx-large;
+      font-size: xxx-large;
       background: #E93E3A;
       background: linear-gradient(to top, #E93E3A 0%, #E93E3A 12%, #F3903F 36%, #FDC70C 71%, #FCEF44 100%);
       -webkit-background-clip: text;
@@ -1616,7 +1617,6 @@
       <!--Categories menu-->
       <div id="menu-categories" class="wrap-collabsible"> 
         <input id="collapsible-categories" class="toggle" type="checkbox">
-        <!-- <img src="{% static 'images/icon-categories-inactive.svg' %}" alt="categories-inactive">  -->
         <label for="collapsible-categories" class="lbl-toggle">CATEGORIES</label>
         <div class="collapsible-content">
           <div class="content-inner">
@@ -1650,7 +1650,10 @@
                 {% for difficulty in difficulties %}
                 <div id='{{ difficulty.name }}'>
                     <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
-                        <span class="indicator"></span>
+                        <!-- <span class="indicator"></span> -->
+                        <div class="toggle-switch active">
+                          <div class="toggle-dot"></div>
+                        </div>
                         {{ difficulty.name | upper}}
                     </button>
                 </div>
@@ -1670,7 +1673,10 @@
             {% for era in eras %}
             <div id='{{ era.name }}'>
                 <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
-                    <span class="indicator"></span>
+                    <!-- <span class="indicator"></span> -->
+                    <div class="toggle-switch active">
+                      <div class="toggle-dot"></div>
+                    </div>
                     {{ era.name }}
                 </button>
                 </div>
