@@ -15206,7 +15206,6 @@ const mainGameFunction = async () => {
   game_started = false;
   pauseFlag = false;
   showQuestion("Thanks for playing!");
-  showAnswer(innerHTML = <button id="large-start-pause" onclick="dontFetchDataIfAllDeselected()" type="button">PLAY AGAIN</button>);
   
   if (progressBar) {
     progressBar.style.animationPlayState = "paused";
