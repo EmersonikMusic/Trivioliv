@@ -503,6 +503,10 @@
                   .mobile-menu {
                       display: none;
                   }
+
+                  .desktop-menu {
+                    flex-direction: row;
+                  }
                   
                   .game-area {
                       height: 100%;
@@ -511,7 +515,7 @@
       
               @media (max-width: 767px) {
                   .desktop-menu {
-                      display: none;
+                      flex-direction: column;
                   }
               }
       
@@ -1376,31 +1380,31 @@
       <div class="container-fluid p-1">
           <div class="row h-100 g-2">
               <!-- Main Game Area -->
+              <div class="header">
+                <div class="logo-container">
+                  <div class="logo">
+                      <a href="https://www.triviolivia.com" style="text-decoration: none; color: inherit;">
+                          <!-- <span class="main-text">TRIVIOLIVIA</span><span class="domain">.com</span> -->
+                           <div id="logo-header" class="logo-header">
+                            <img src="static/images/TO_logo_sm_clr.svg" alt="triviolivia.com" />
+                           </div>
+                      </a>
+                  </div>
+                </div>
+                <div class="hamburger-menu dropdown">
+                    <div class="login">
+                        {% if user.is_authenticated %}
+                        <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
+                        <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
+                        <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
+                        {% else %}
+                            <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">Register</button></a>
+                            <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">Login</button></a>
+                        {% endif %}
+                    </div> 
+                </div>
+            </div>
               <div class="col-md-9 d-flex flex-column h-100">
-                <div class="header">
-                  <div class="logo-container">
-                    <div class="logo">
-                        <a href="https://www.triviolivia.com" style="text-decoration: none; color: inherit;">
-                            <!-- <span class="main-text">TRIVIOLIVIA</span><span class="domain">.com</span> -->
-                             <div id="logo-header" class="logo-header">
-                              <img src="/main/templates/main/images/TO_logo_sm_clr.svg" alt="triviolivia.com" />
-                             </div>
-                        </a>
-                    </div>
-                  </div>
-                  <div class="hamburger-menu dropdown">
-                      <div class="login">
-                          {% if user.is_authenticated %}
-                          <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
-                          <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
-                          <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
-                          {% else %}
-                              <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">Register</button></a>
-                              <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">Login</button></a>
-                          {% endif %}
-                      </div> 
-                  </div>
-              </div>
                   <div class="game-area">
                    
                   <div id="game-area-content" class="game-area-content">
@@ -1425,7 +1429,7 @@
                         <div id="container_btn_pauseplay" class="game-button-container">
                           <div class="desktop-buttons">
                             <div button id="start-pause" class="user-button" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">
-                              <img src="{% static 'main/templates/main/images/btn-icon-pause.svg' %}" alt="categories-inactive"> 
+                              <img src="{% static 'main/templates/main/images/btn-icon-pause.svg' %}" alt="game-paused"> 
                             </div>
                             <div button id="refetch-and-restart" class="user-button" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
                           </div>                            
