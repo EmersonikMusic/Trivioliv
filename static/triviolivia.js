@@ -15464,45 +15464,20 @@ function refetchAndRestart() {
   
   console.log("Refetching questions with currently selected game settings...");
 
-  // Reset game state variables
   game_started = false;
   menu_hidden = false;
   current_question_category = null;
   pauseFlag = false;
-  
-  // Clear the data array
   globalData = [];
 
-  // Reset URL variables
-  baseUrl = "/api/questions/";
+  baseUrl = "/api/questions/?";
   moddedUrl = "";
   queryParams = [];
-  
-  // Build the query parameters with the correct number of questions
-  queryParams = []; // Reset query params
-  if (category_list.length > 0) {
-    queryParams.push("category=" + category_list.join(","));
-  }
-  if (difficulty_list.length > 0) {
-    queryParams.push("difficulty=" + difficulty_list.join(","));
-  }
-  if (era_list.length > 0) {
-    queryParams.push("era=" + era_list.join(","));
-  }
-  
-  // Ensure we're requesting the correct number of questions
-  const urlWithParams =
-    baseUrl +
-    "?questions=" +
-    number_of_questions +
-    "&" +
-    queryParams.join("&");
-  moddedUrl = urlWithParams;
-  
-  // Start the game with the updated settings
-  mainGameFunction();
+  globalData = [];
 
-  console.log("Refetch request completed with " + number_of_questions + " questions");
+  dontFetchDataIfAllDeselected();
+
+  console.log("Refetch request completed");
 }
 
 // Reset settings button
