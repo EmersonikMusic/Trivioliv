@@ -1,4 +1,4 @@
-const apiUrl = 'https://triviolivia.com/api/questions/'; // replace with your API endpoint URL
+const apiUrl = 'http://localhost:8000/api/questions/'; // replace with your API endpoint URL
 
 // make a fetch request to the API
 fetch(apiUrl)
