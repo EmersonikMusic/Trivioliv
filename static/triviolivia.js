@@ -14996,17 +14996,22 @@ function syncSettings(settingType, value) {
 }
 
 // Update label helper function
-function updateLabel(labelId, value, unit) {
-  const label = document.getElementById(labelId);
-  if (label) {
-    const span = label.querySelector('span');
-    if (span) {
-      span.textContent = value;
-    } else {
-      label.textContent = value + unit;
-    }
+function updateLabel(labelId, value, suffix) {
+  const element = document.getElementById(labelId);
+  if (element) {
+      // Split the suffix into 's' and the rest of the suffix
+      const parts = suffix.split(' ');
+      const s = parts[0];
+      const restOfSuffix = parts.slice(1).join(' ');
+      
+      // Create a span for the numeric value and 's' with light blue color (no space between)
+      const coloredValue = `<span style="color: #67B7D1;">${value}${s}</span>`;
+      
+      // Set the HTML content with colored value+s and regular suffix
+      element.innerHTML = `${coloredValue} ${restOfSuffix}`;
   }
 }
+
 
 // Set up slider event listeners in DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
