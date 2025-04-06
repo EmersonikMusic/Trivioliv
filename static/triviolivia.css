@@ -184,7 +184,6 @@ animation: bob 2s infinite ease-in-out;
 flex: 1;
 display: flex;
 flex-direction: column;
-margin-bottom: 10px;
 }
 
 /* Media queries for responsive design */
@@ -303,11 +302,11 @@ flex: 0.5;
     height: calc(100% - 30px);
     border-radius: 32px;
     outline: 1px solid white;
-    margin: 20px 30px 40px 40px;
-    display: flex;
+    margin: 20px 30px 0 40px;
     flex-direction: column;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: none;
 }
 
     .question-container {
@@ -354,6 +353,15 @@ margin-top: auto;
 margin-bottom: 0;
 }
 
+
+loading-screen {
+  outline: 1px solid red;
+  height: 100%;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+}
+
 p {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -365,7 +373,7 @@ p {
             /* background-color: rgba(0,0,0, 0.4); */
             color: white;
             border-radius: inherit;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); */
             min-width: 250px;
             
         }
@@ -705,15 +713,20 @@ content: url('/static/images/icon-settings-active.svg');
   background-color:transparent;
   border: none;
 }
+
 .btn-startgame-container {
   width: 200px;
   height: fit-content;
+  margin: 30px auto 0;
 }
 
 .btn-startgame img {
   width: 200px;
 }
 
+.loading-logo {
+padding: 20px;  
+}
 /* Attempt at dynamic question and answer timer indicator */
   .loading-bar {
     display: flex;
@@ -1279,7 +1292,7 @@ gap: 20px;
 }
 
 .footer {
-display:flex;
+display:none;
 flex-direction: row;
 margin: 30px 60px;
 gap: 30px;
@@ -1301,34 +1314,108 @@ display: flex;
 
 }
 
-/* Default styles for small mobile devices (320px and below) */
-body {
-  font-size: 16px;
-  /* Add your base small mobile styles here */
-  outline: 1px solid orange;
+
+
+
+
+  
+  
+/* START OF MEDIA QUERIES */
+:root {
+  --extra-large-desktop-width: 1440px;
+  --large-desktop-width: 1200px;
+  --desktop-width: 1024px;
+  --tablet-width: 768px;
+  --mobile-width: 480px;
+  --small-mobile-width: 320px;
 }
 
-/* Small mobile devices (320px to 479px) */
-@media only screen and (min-width: 320px) {
+/* Default styles for desktop (1024px and up) */
+body {
+  font-size: 16px;
+  /* Add your base desktop styles here */
+}
+
+/* Large desktops only (1200px to 1439px) */
+@media only screen and (max-width: 1439px) {
   body {
-    /* Small mobile device styles */
-    outline: 1px solid greenyellow;
+    /* Large desktop styles */
   }
 }
 
-/* Mobile devices (480px to 767px) */
-@media only screen and (min-width: 480px) {
+/* Desktops only (1024px to 1199px) */
+@media only screen and (max-width: 1199px) {
   body {
-    /* Mobile device styles */
-    outline: 1px solid red;
+    /* Desktop styles */
   }
 }
 
 /* Tablets (768px to 1023px) */
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 1023px) {
   body {
     /* Tablet styles */
-    outline: 1px solid purple;
   }
 }
 
+/* Mobile devices (480px to 767px) */
+@media only screen and (max-width: 767px) {
+  body {
+    /* Mobile device styles */
+  }
+}
+
+/* Small mobile devices (320px to 479px) */
+@media only screen and (max-width: 479px) {
+  .game-area-content {
+    color: red;
+}
+
+  .wrapper-all {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  color: white;
+  margin: 0;
+  }
+
+  .title-settings {
+    display: none;
+  }
+
+  .desktop-menu {
+    margin-top: 20px;
+  }
+
+  .menu-settings-desktop {
+    flex: 1;
+    margin: 0;
+    border-radius: 32px 32px 0 0;
+    outline: 1px solid white;
+  }
+
+  .menu-toggle-wrapper {
+    left: 50%;
+    top: 90px;
+    top: -71px;
+  }
+
+  .menu-toggle-button {
+    width: 80px;
+    height: 70px;
+    border-radius: 40% 40% 0 0;
+  }
+
+  .menu-toggle-button img {
+    transform: translateX(0);
+  }
+
+}
+
+/* Extra small mobile devices (below 320px) */
+@media only screen and (max-width: 319px) {
+  body {
+    /* Extra small mobile device styles */
+  }
+}

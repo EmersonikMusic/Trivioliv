@@ -62,17 +62,26 @@
       <!-- Start Game Button -->
      
       <div class="game-area">
+        
+
+        <div id="loading-screen" class="loading-screen">
+          <div id="loading-logo" class="loading-logo">
+            <img src="/static/images/img-TO-logo-full-desktop.svg" alt="triviolivia.com">
+          </div>
+          <div id="start-game-container" class="btn-startgame-container">
+            <button id="large-start-pause" class="btn-startgame" onclick="dontFetchDataIfAllDeselected()" type="button">
+            <img src="/static/images/btn-startgame.svg" alt="Start Game">
+            </button>
+          </div>
+        
+      </div>
+
         <div id="game-area-content" class="game-area-content">
           <div class="question-container">
             Welcome to<br>
             Earth's Deepest Trivia Source!
           </div>
           <div class="answer-container">
-            <div id="start-game-container" class="btn-startgame-container">
-              <button id="large-start-pause" class="btn-startgame" onclick="dontFetchDataIfAllDeselected()" type="button">
-               <img src="/static/images/btn-startgame.svg" alt="Start Game">
-              </button>
-            </div>
           </div>
         </div>
       </div> 
@@ -167,7 +176,6 @@
         </div>
         </div>
 
-
         <!--Eras menu-->
         <div class="wrap-collabsible"> 
           <input id="collapsible-eras" class="toggle" type="checkbox"> 
@@ -192,7 +200,6 @@
             </div>
         </div>
         </div>
-
 
         <!--Settings menu-->
         <div class="wrap-collabsible"> 
@@ -223,7 +230,8 @@
   </div>
 </div>
 </div>
-</div>
+
+
   
       <!-- Bootstrap JS (Popper.js included) -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
