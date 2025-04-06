@@ -14530,6 +14530,7 @@ function hideInitialGraphics() {
   document.querySelector('.footer').style.display = 'flex';
 }
 
+
 // Function to fetch JSON data asynchronously
 function fetchQuestionsAndStartGame() {
   if (game_started == true) {
@@ -14538,7 +14539,6 @@ function fetchQuestionsAndStartGame() {
     console.log("isPaused: " + isPaused);
   } else {
     hideInitialGraphics();
-    menu_hidden = true;
     game_started = true;
     globalData = [];
     queryParams = []; // Reset query params
