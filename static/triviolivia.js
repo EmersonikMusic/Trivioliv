@@ -14538,6 +14538,7 @@ function fetchQuestionsAndStartGame() {
     console.log("isPaused: " + isPaused);
   } else {
     hideInitialGraphics();
+    togglemenu();
     game_started = true;
     globalData = [];
     queryParams = []; // Reset query params
