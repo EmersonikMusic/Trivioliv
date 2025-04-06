@@ -14516,39 +14516,54 @@ function dontFetchDataIfAllDeselected() {
 }
 
 // Function to fetch JSON data asynchronously
+// Function to fetch JSON data asynchronously
 function fetchQuestionsAndStartGame() {
   if (game_started == true) {
     console.log("Button pressed.");
     console.log("pauseFlag: " + pauseFlag);
     console.log("isPaused: " + isPaused);
   } else {
-    game_started = true;
+    game_started = true; // Existing line
+
+    // <<< --- ADD THIS CODE BLOCK START --- >>>
+    const menuSettings = document.getElementById('menu-settings');
+    const wrapperAll = document.getElementById('wrapper-all');
+    const characterColumn = document.getElementById('character');
+    const toggleButton = document.getElementById('menu-toggle-button'); // Optional: if you want to rotate the icon
+
+    if (menuSettings && wrapperAll && characterColumn) {
+      // Check if the menu isn't already hidden
+      if (!menuSettings.classList.contains('menu-hidden')) {
+        console.log("Auto-hiding menu for game start.");
+        menuSettings.classList.add('menu-hidden');
+        wrapperAll.classList.add('menu-collapsed');
+
+        // Explicitly show character (mimics the toggle logic)
+        characterColumn.style.flex = '1';
+        characterColumn.style.width = 'auto';
+        characterColumn.style.opacity = '1';
+        // menuSettings.style.borderLeft = '1px solid white'; // Optional: If needed for visual consistency
+
+        // Optional: Rotate toggle button icon if it exists
+        // const toggleIcon = toggleButton ? toggleButton.querySelector('img') : null;
+        // if (toggleIcon) {
+        //    toggleIcon.style.transform = 'translateX(25%) rotate(180deg)'; // Match hidden state style
+        // }
+
+        // If you have a state variable tracking menu visibility, update it here:
+        // menu_hidden = true; // Example from original code
+      }
+    }
+    // <<< --- ADD THIS CODE BLOCK END --- >>>
+
+    // Existing code continues below...
     globalData = [];
     queryParams = []; // Reset query params
-    
-    // Explicitly add the number_of_questions parameter first
-    // This ensures it's not missing or overwritten
-    
     if (category_list.length > 0) {
       queryParams.push("category=" + category_list.join(","));
     }
-    if (difficulty_list.length > 0) {
-      queryParams.push("difficulty=" + difficulty_list.join(","));
-    }
-    if (era_list.length > 0) {
-      queryParams.push("era=" + era_list.join(","));
-    }
-    
-    // Make sure number_of_questions is passed as a query parameter, not part of the base URL
-    const urlWithParams =
-      baseUrl +
-      "?questions=" +
-      number_of_questions +
-      (queryParams.length > 0 ? "&" + queryParams.join("&") : "");
-    
-    console.log("Fetching with URL: " + urlWithParams); // Add logging
-    moddedUrl = urlWithParams;
-    menu_hidden = true;
+    // ... rest of the existing function code ...
+    // menu_hidden = true; // You can potentially remove this line if it exists elsewhere after adding the block above
     mainGameFunction();
   }
 }

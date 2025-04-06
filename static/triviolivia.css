@@ -43,18 +43,6 @@
   }
   
   /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
-  @media (prefers-reduced-motion: reduce) {
-    html:focus-within {
-      scroll-behavior: auto;
-    }
-    
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
 
 /* end of reset */
 
@@ -65,7 +53,8 @@
 display: flex;
 flex-direction: row;
 width: 100%;
-min-height: 100vh;
+height: 100vh;
+max-height: 100vh;
 color: white;
 margin: 0;
 }
@@ -76,6 +65,7 @@ flex: 4; /* Take up 4/5 of the space */
 display: flex;
 flex-direction: column;
 overflow: hidden;
+height: 100%;
 transition: margin-right 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
@@ -89,8 +79,10 @@ border-radius: 32px 0 0 32px;
 outline: 1px solid white;
 overflow: visible; /* Allow the toggle button to be visible outside */
 position: relative;
+height: 100%
 transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1); /* Smooth easing curve */
 background-color: rgba(0, 0, 0, 0.4);
+transition: transform 0.5s ease-out;
 }
 
 /* Menu toggle wrapper to create the cutout effect */
@@ -140,6 +132,7 @@ margin-right: -calc(100% - 1px); /* Adjust margin to match the 1px visible porti
 border-left: 1px solid white; /* Ensure the 1px is visible as a line */
 outline: 1px solid white;
 
+
 }
 
 
@@ -166,10 +159,12 @@ flex: 0; /* Initially hidden */
 width: 0; /* Start with no width */
 opacity: 0; /* Start invisible */
 /* transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1); Smooth transition */
-overflow: hidden; /* Hide overflow when collapsed */
-margin: 40px;
-outline: 1px solid red;
+overflow: hidden;
+  margin: auto 0;
+  padding-right: 100px;
+  
 }
+
 
 
 /* Character animation */
@@ -193,91 +188,12 @@ margin-bottom: 10px;
 }
 
 /* Media queries for responsive design */
-@media (max-width: 1200px) {
-/* Adjust flex basis for medium screens */
-.wrapper-main-content {
-flex: 2;
-}
 
-.menu-settings-desktop {
-flex: 1;
-margin: 1px 1px 1px 0;
-}
-}
 
 .character-column {
 flex: 0.5;
 
 
-}
-
-
-@media (max-width: 992px) {
-/* Swap to wrapped layout */
-.wrapper-all {
-flex-wrap: wrap;
-}
-
-.wrapper-main-content {
-flex: 100%;
-order: 1;
-}
-
-.wrapper-all.menu-collapsed .character-column {
-flex: 1;
-width: auto;
-opacity: 1;
-}
-
-.wrapper-all.menu-collapsed .wrapper-main-content {
-margin-right: 1px; /* Only 1px for the visible part of menu */
-}
-
-.character-column {
-flex: 1;
-order: 2;
-height: 200px;
-}
-
-.menu-settings-desktop {
-flex: 2;
-order: 3;
-}
-}
-
-@media (max-width: 768px) {
-/* Single column layout for small screens */
-.wrapper-all {
-flex-direction: column;
-}
-
-.wrapper-main-content {
-order: 1;
-}
-
-.menu-settings-desktop {
-order: 2;
-width: 100%;
-}
-
-.character-column {
-order: 3;
-width: 100%;
-height: 150px;
-}
-
-.menu-container.desktop-menu {
-height: 100%;
-flex-direction: column;
-padding: 15px;
-/* justify-content: flex-start; Key fix: Align content to the top */
-align-items: flex-start;
-}
-
-/* Ensure the game area has proper height on mobile */
-.game-area {
-min-height: 50vh;
-}
 }
 
 
@@ -395,7 +311,7 @@ min-height: 50vh;
 }
 
     .question-container {
-    flex: 4.5;
+    flex: 3.5;
     border: none;
     display: flex;
     justify-content: center;
@@ -412,7 +328,7 @@ min-height: 50vh;
 }
 
 .answer-container {
-    flex: 0.5;
+    flex: 1.5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -450,6 +366,7 @@ p {
             color: white;
             border-radius: inherit;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            min-width: 250px;
             
         }
 
@@ -621,25 +538,6 @@ color: white;
             padding: 10px;
         }
 
-        @media (min-width: 768px) {
-            .mobile-menu {
-                display: none;
-            }
-
-            .desktop-menu {
-              flex-direction: column;
-            }
-            
-            .game-area {
-                height: 100%;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .desktop-menu {
-                flex-direction: column;
-            }
-        }
 
 
 
@@ -761,6 +659,7 @@ content: url('/static/images/icon-settings-active.svg');
 
 .content-inner button:hover{
     background: rgba(0, 0, 0, .25);
+    border-radius: 100px;
 }
 .content-inner button.all-none-btn {
     background-color: rgba(0, 0, 0, .5);
@@ -1151,110 +1050,7 @@ border-radius: 50%;
         }
       
      
-      /* Mobile fix */
-@media (max-width: 767px) {
-    /* Reset core elements */
-    body, html {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow: hidden; /* Prevent scrolling on the body */
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-    }
-    
-    /* Main container setup */
-    .container-fluid {
-        height: 100%;
-        /* width: 100%; MORGAN EDIT */
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        padding: 5px;
-        overflow: hidden;
-    }
-    
-    /* Row takes up all available space */
-    .row.h-100 {
-        flex: 1;
-        width: 100%;
-        margin: 0;
-    }
-    
-    /* Column takes up full width on mobile */
-    .col-md-9 {
-        width: 100%;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        flex: 1;
-    }
-    
-    /* Game area fills available space */
-    .game-area {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 26vh; /* Reduced spacing between areas */
-        overflow: hidden;
-        padding-bottom: 0; /* Removed bottom padding */
-        outline: 1px solid white;
-    }
-    
-    /* Content areas flex to fill game area */
-    .question-container, .answer-container {
-        flex: 1;
-        overflow-y: auto;
-        min-height: 0; /* Critical for flex child to respect parent boundaries */
-        padding-bottom: 0; /* Removed extra padding */
-    }
-    
-   
-    
-    /* Fixed mobile menu at bottom */
-    .mobile-menu {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 25vh;
-        margin: 0;
-        border-radius: 12px 12px 0 0;
-        z-index: 1000;
-        padding-top: 5px; /* Added padding to push content down slightly */
-        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Optional: add shadow to visually separate */
-    }
-    
-    /* Hide desktop menu completely */
-    .col-md-3 {
-        display: none;
-    }
-    
-    /* Make sure loading bar stays at bottom of game area */
-   
-}
 
-@media (max-width: 767px) {
-  /* Update container padding to remove top padding */
-  .container-fluid {
-      padding: 0 5px 5px 5px; /* 0 top, 5px right, 5px bottom, 5px left */
-  }
-  
-  /* Optional: If the game area still appears to have too much space at the top */
-  .game-area {
-      border-radius: 0 0 12px 12px; /* Only round the bottom corners */
-      margin-top: 0; /* Ensure no top margin */
-  }
-  
-  /* Adjust header for mobile to be flush with top */
-  .header {
-      border-radius: 0; /* Remove top border radius from header */
-      margin: 0px 35px;
-  }
-}
 
 
 /* Mobile menu dropdowns - UPDATED */
@@ -1377,23 +1173,6 @@ border-radius: 50%;
 #mobileQuestionSlider, #mobilePerQuestionSlider, #mobilePerAnswerSlider {
   width: 100%;
 }
-
-/* Make sure mobile menu can handle dropdowns */
-@media (max-width: 767px) {
-  .mobile-menu {
-    height: 25vh;
-    z-index: 1000;
-    overflow: visible;
-  }
-  
-  .mobile-buttons {
-    overflow: visible;
-    position: relative;
-  }
-}
-
-
-
 
 
 
@@ -1520,5 +1299,36 @@ border: none;
 text-decoration: none;
 display: flex;
 
+}
+
+/* Default styles for small mobile devices (320px and below) */
+body {
+  font-size: 16px;
+  /* Add your base small mobile styles here */
+  outline: 1px solid orange;
+}
+
+/* Small mobile devices (320px to 479px) */
+@media only screen and (min-width: 320px) {
+  body {
+    /* Small mobile device styles */
+    outline: 1px solid greenyellow;
+  }
+}
+
+/* Mobile devices (480px to 767px) */
+@media only screen and (min-width: 480px) {
+  body {
+    /* Mobile device styles */
+    outline: 1px solid red;
+  }
+}
+
+/* Tablets (768px to 1023px) */
+@media only screen and (min-width: 768px) {
+  body {
+    /* Tablet styles */
+    outline: 1px solid purple;
+  }
 }
 
