@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Script to revert Django app files back to development settings.
-Reverses the changes made by prepare_for_production.py.
+Reverses the changes made by prepare_for_production.py,
+including the refetch functionality fixes.
 """
 
 import re
@@ -56,10 +57,15 @@ def main():
     ]
     
     triviolivia_js_replacements = [
-        (r'baseUrl = "/api/questions";', 
+        # Revert baseUrl format changes
+        (r'baseUrl = "/api/questions/";', 
          'baseUrl = "http://localhost:8000/api/questions/?";'),
-        (r'var baseUrl = "/api/questions";', 
-         'var baseUrl = "http://localhost:8000/api/questions/";')
+        (r'var baseUrl = "/api/questions/";', 
+         'var baseUrl = "http://localhost:8000/api/questions/";'),
+        
+        # Revert URL construction in fetchQuestionsAndStartGame
+        (r'const urlWithParams = baseUrl \+ "\?questions=" \+ number_of_questions \+ \(queryParams\.length > 0 \? "&" \+ queryParams\.join\("&"\) : ""\);', 
+         'const urlWithParams = baseUrl + "?questions=" + number_of_questions + "&" + queryParams.join("&");')
     ]
     
     settings_py_replacements = [

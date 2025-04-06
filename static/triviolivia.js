@@ -14525,6 +14525,10 @@ function fetchQuestionsAndStartGame() {
     game_started = true;
     globalData = [];
     queryParams = []; // Reset query params
+    
+    // Explicitly add the number_of_questions parameter first
+    // This ensures it's not missing or overwritten
+    
     if (category_list.length > 0) {
       queryParams.push("category=" + category_list.join(","));
     }
@@ -14534,12 +14538,15 @@ function fetchQuestionsAndStartGame() {
     if (era_list.length > 0) {
       queryParams.push("era=" + era_list.join(","));
     }
+    
+    // Make sure number_of_questions is passed as a query parameter, not part of the base URL
     const urlWithParams =
       baseUrl +
       "?questions=" +
       number_of_questions +
-      "&" +
-      queryParams.join("&");
+      (queryParams.length > 0 ? "&" + queryParams.join("&") : "");
+    
+    console.log("Fetching with URL: " + urlWithParams); // Add logging
     moddedUrl = urlWithParams;
     menu_hidden = true;
     mainGameFunction();
@@ -15470,7 +15477,7 @@ function refetchAndRestart() {
   pauseFlag = false;
   globalData = [];
 
-  baseUrl = "/api/questions/?";
+  baseUrl = "/api/questions/";
   moddedUrl = "";
   queryParams = [];
   globalData = [];

@@ -2,6 +2,7 @@
 """
 Script to prepare Django app files for production before pushing to git.
 Makes specific changes to base.js, triviolivia.js, and settings.py.
+Also includes fixes for the refetch functionality.
 """
 
 import re
@@ -87,10 +88,19 @@ def main():
     ]
     
     triviolivia_js_replacements = [
+        # Fix baseUrl format for consistency
         (r'baseUrl = "http://localhost:8000/api/questions/\?";', 
-         'baseUrl = "/api/questions";'),
+         'baseUrl = "/api/questions/";'),
         (r'var baseUrl = "http://localhost:8000/api/questions/";', 
-         'var baseUrl = "/api/questions";')
+         'var baseUrl = "/api/questions/";'),
+        
+        # Fix the refetch function to properly handle number_of_questions
+        (r'baseUrl = "/api/questions/\?";', 
+         'baseUrl = "/api/questions/";'),
+        
+        # Fix URL construction in fetchQuestionsAndStartGame
+        (r'const urlWithParams =\s*baseUrl \+\s*"\?questions=" \+\s*number_of_questions \+\s*"&" \+\s*queryParams\.join\("&"\);', 
+         'const urlWithParams = baseUrl + "?questions=" + number_of_questions + (queryParams.length > 0 ? "&" + queryParams.join("&") : "");')
     ]
     
     settings_py_replacements = [
@@ -117,7 +127,7 @@ def main():
         
         # If the user didn't provide a message, use a default one
         if not commit_message:
-            commit_message = "Update files for production"
+            commit_message = "Update files for production and fix refetch functionality"
             print(f"Using default commit message: '{commit_message}'")
         
         # Run git commands
