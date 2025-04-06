@@ -79,7 +79,7 @@ border-radius: 32px 0 0 32px;
 outline: 1px solid white;
 overflow: visible; /* Allow the toggle button to be visible outside */
 position: relative;
-height: 100%
+height: 100%;
 transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1); /* Smooth easing curve */
 background-color: rgba(0, 0, 0, 0.4);
 transition: transform 0.5s ease-out;
