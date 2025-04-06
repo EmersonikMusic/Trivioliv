@@ -21,9 +21,6 @@
   </script>
   
   
-  
-  
-<!-- START OF CSS -->
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -61,6 +58,13 @@
     </div>
     <div id="wrapper-game-area" class="row h-100 g-2">
       <!-- Main Game Area -->
+
+      <!-- Start Game Button -->
+      <div>
+        <button id="large-start-pause" onclick="dontFetchDataIfAllDeselected()" type="button">
+         <img src="/static/images/btn-startgame.svg" class="btn_startgame" alt="Start Game">
+        </button>
+      </div>
       <div class="game-area">
         <div id="game-area-content" class="game-area-content">
           <div class="question-container">
@@ -68,7 +72,7 @@
             Earth's Deepest Trivia Source!
           </div>
           <div class="answer-container">
-            <button id="large-start-pause" onclick="dontFetchDataIfAllDeselected()" type="button">START GAME</button>
+            
           </div>
         </div>
       </div> 
@@ -86,12 +90,12 @@
         <div class="desktop-buttons">
           <div button id="start-pause" class="user-button" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">
             <!-- START GAME -->
-              <img src="{% static 'images/btn-icon-pause.svg' %}" alt="game-paused">
+              <img src="/static/images/btn-icon-pause.svg" alt="game-paused">
               
           </div>
           <div button id="refetch-and-restart" class="user-button" onclick="refetchAndRestart()" type="button" class="menu-button">
             <!-- REFETCH -->
-            <img src="{% static 'images/btn-icon-refresh.svg' %}" alt="game-paused">
+            <img src="/static/images/btn-icon-refresh.svg" alt="game-paused">
           </div>
         </div>                            
       </div>
@@ -104,21 +108,21 @@
     <!-- Menu toggle button added here -->
     <div class="menu-toggle-wrapper">
       <button id="menu-toggle-button" class="menu-toggle-button">
-        <img src="{% static 'images/btn-icon-settings.svg' %}" alt="Toggle Menu">
+        <img src="/static/images/btn-icon-settings.svg" alt="Toggle Menu">
       </button>
     </div>
     
     <div class="menu-container desktop-menu">
       <div id="title-settings" class="title-settings">
         <!-- <h1>CUSTOMIZE YOUR GAME EXPERIENCE</h1> -->
-        <img src="{% static 'images/img-title-settings-desktop.svg' %}" alt="Customize Your Game Experience">
+        <img src="/static/images/img-title-settings-desktop.svg" alt="Customize Your Game Experience">
       </div>
 
       <!--Categories menu-->
       <div id="menu-categories" class="wrap-collabsible"> 
         <input id="collapsible-categories" class="toggle" type="checkbox">
         <label for="collapsible-categories" class="lbl-toggle">
-          <img src="{% static 'images/icon-categories-inactive.svg' %}" class="menu-icon" alt="Categories">
+          <img src="/static/images/icon-categories-inactive.svg" class="menu-icon" alt="Categories">
           CATEGORIES
         </label>
         <div class="collapsible-content">
@@ -142,7 +146,7 @@
       <div class="wrap-collabsible"> 
         <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
         <label for="collapsible-difficulties" class="lbl-toggle">
-          <img src="{% static 'images/icon-difficulty-inactive.svg' %}" class="menu-icon" alt="Difficulty">
+          <img src="/static/images/icon-difficulty-inactive.svg" class="menu-icon" alt="Difficulty">
           DIFFICULTIES
         </label>
         <div class="collapsible-content">
@@ -168,7 +172,7 @@
         <div class="wrap-collabsible"> 
           <input id="collapsible-eras" class="toggle" type="checkbox"> 
           <label for="collapsible-eras" class="lbl-toggle">
-            <img src="{% static 'images/icon-era-inactive.svg' %}" class="menu-icon" alt="Eras">
+            <img src="/static/images/icon-era-inactive.svg" class="menu-icon" alt="Eras">
             ERAS
           </label>
         <div class="collapsible-content">
@@ -194,7 +198,7 @@
         <div class="wrap-collabsible"> 
           <input id="collapsible-settings" class="toggle" type="checkbox" checked> 
           <label for="collapsible-settings" class="lbl-toggle">
-            <img src="{% static 'images/icon-settings-inactive.svg' %}" class="menu-icon" alt="Settings">
+            <img src="/static/images/icon-settings-inactive.svg" class="menu-icon" alt="Settings">
             SETTINGS
           </label>
   

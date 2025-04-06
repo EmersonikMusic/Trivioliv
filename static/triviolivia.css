@@ -722,22 +722,22 @@ color: #8DD4DA; /* This matches your existing active color */
 
 /* Categories active icon */
 #collapsible-categories:checked + .lbl-toggle .menu-icon {
-content: url('{% static "images/icon-categories-active.svg" %}');
+content: url('/static/images/icon-categories-active.svg');
 }
 
 /* Difficulties active icon */
 #collapsible-difficulties:checked + .lbl-toggle .menu-icon {
-content: url('{% static "images/icon-difficulty-active.svg" %}');
+content: url('/static/images/icon-difficulty-active.svg');
 }
 
 /* Eras active icon */
 #collapsible-eras:checked + .lbl-toggle .menu-icon {
-content: url('{% static "images/icon-era-active.svg" %}');
+content: url('/static/images/icon-era-active.svg');
 }
 
 /* Settings active icon */
 #collapsible-settings:checked + .lbl-toggle .menu-icon {
-content: url('{% static "images/icon-settings-active.svg" %}');
+content: url('/static/images/icon-settings-active.svg');
 }
 
 .content-inner { 
