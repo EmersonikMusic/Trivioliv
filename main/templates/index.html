@@ -174,7 +174,10 @@
   max-width: 1px;
   margin-right: -calc(100% - 1px); /* Adjust margin to match the 1px visible portion */
   border-left: 1px solid white; /* Ensure the 1px is visible as a line */
+  outline: 1px solid white;
+
 }
+
 
 /* Rotate the toggle icon when menu is hidden */
 .menu-settings-desktop.menu-hidden .menu-toggle-button img {
@@ -185,6 +188,7 @@
 .menu-settings-desktop.menu-hidden .menu-container {
   opacity: 0;
   visibility: hidden;
+  outline: 1px solid white;
 }
 
 /* Ensure the button maintains its position when menu collapses */
@@ -197,10 +201,12 @@
   flex: 0; /* Initially hidden */
   width: 0; /* Start with no width */
   opacity: 0; /* Start invisible */
-  transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1); /* Smooth transition */
+  /* transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1); Smooth transition */
   overflow: hidden; /* Hide overflow when collapsed */
   margin: auto 40px;
+  outline: 1px solid red;
 }
+
 
 /* Character animation */
 .character-svg {
@@ -681,15 +687,15 @@
       } 
       
       .wrap-collabsible {
-        margin: 0 auto 15px auto; /* Added bottom margin for spacing */
+        margin: 0 auto 10px auto; /* Added bottom margin for spacing */
         width: 80%;
         overflow: hidden;
       }
      
       
     .menu-icon {
-      width: 32px; /* Adjust size as needed */
-    height: 32px; /* Adjust size as needed */
+      width: 28px; /* Adjust size as needed */
+    height: 28px; /* Adjust size as needed */
     margin-right: 15px;
     transition: all 0.3s ease;
     }  
@@ -703,7 +709,7 @@
     background: rgba(0, 0, 0, 0);
     cursor: pointer;
     transition: all .25s ease-out;
-    padding: 10px;
+    /* padding: 10px; */
     font-size: x-large;
       
     }
@@ -745,6 +751,7 @@
           border-top-left-radius: 14px;
           background: rgba(0, 0, 0, .2);
           color: #8DD4DA;
+          padding: 20px;
       } 
       
 /* Section-specific active icons */
@@ -918,13 +925,13 @@
 }
 
 .slider-container {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .slider-label {
   color: #FFFFFF;
   text-align: left;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
   display: flex;
   align-items: center;
   font-size: larger;
