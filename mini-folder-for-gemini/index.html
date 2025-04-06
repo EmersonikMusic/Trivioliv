@@ -60,7 +60,11 @@
       <!-- Main Game Area -->
 
       <!-- Start Game Button -->
-     
+      <div>
+        <button id="large-start-pause" onclick="dontFetchDataIfAllDeselected()" type="button">
+         <img src="/static/images/btn-startgame.svg" class="btn_startgame" alt="Start Game">
+        </button>
+      </div>
       <div class="game-area">
         <div id="game-area-content" class="game-area-content">
           <div class="question-container">
@@ -68,11 +72,7 @@
             Earth's Deepest Trivia Source!
           </div>
           <div class="answer-container">
-            <div id="start-game-container" class="btn-startgame-container">
-              <button id="large-start-pause" class="btn-startgame" onclick="dontFetchDataIfAllDeselected()" type="button">
-               <img src="/static/images/btn-startgame.svg" alt="Start Game">
-              </button>
-            </div>
+            
           </div>
         </div>
       </div> 

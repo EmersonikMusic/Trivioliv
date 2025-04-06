@@ -167,7 +167,7 @@ width: 0; /* Start with no width */
 opacity: 0; /* Start invisible */
 /* transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1); Smooth transition */
 overflow: hidden; /* Hide overflow when collapsed */
-margin: 40px;
+margin: auto 40px;
 outline: 1px solid red;
 }
 
@@ -387,7 +387,7 @@ min-height: 50vh;
     height: calc(100% - 30px);
     border-radius: 32px;
     outline: 1px solid white;
-    margin: 20px 30px 40px 40px;
+    margin: 20px 60px 20px 40px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -576,9 +576,9 @@ color: white;
             border-radius: 8px;
         }
 
-    .character-container {
+        .character-container {
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     overflow: visible; /* Changed from hidden to visible */
     height: 100%;
@@ -694,7 +694,6 @@ font-size: x-large;
 
 .toggle:checked + .lbl-toggle {
 color: #8DD4DA; /* This matches your existing active color */
-padding: 20px 0 0 20px;
 }
 
 
@@ -716,7 +715,7 @@ padding: 20px 0 0 20px;
     border-top-left-radius: 14px;
     background: rgba(0, 0, 0, .2);
     color: #8DD4DA;
-    padding: 20px 0 0 20px;
+    padding: 20px;
 } 
 
 /* Section-specific active icons */
@@ -799,21 +798,9 @@ content: url('/static/images/icon-settings-active.svg');
  
 /* COLLAPSE/EXPAND DIV CSS END */
 
-/* Start Game Button */
-.btn-startgame {
-  width: 200px;
-  height: fit-content;
-  background-color:transparent;
-  border: none;
-}
-.btn-startgame-container {
-  width: 200px;
-  height: fit-content;
-}
 
-.btn-startgame img {
-  width: 200px;
-}
+
+
 
 /* Attempt at dynamic question and answer timer indicator */
   .loading-bar {
@@ -1024,13 +1011,6 @@ border-radius: 50%;
 }
 
 /* END OF SLIDER STUFF      */
-
-
-.button.all-none-btn {
-  outline: 1px solid #8DD4DA;
-}
-
-
 
 /* START OF CATEGORY TOGGLE STYLE */
 .toggle-switch {
