@@ -40,20 +40,8 @@
     <div class="header">
       <div id="logo-header" class="logo-header">
         <a href="https://www.triviolivia.com">
-          <img src="{% static 'images/TO_logo_sm_clr.svg' %}" alt="TriviOlivia.com">
+          <img src="{% static 'images/TO_logo_sm_wt.svg' %}" alt="TriviOlivia.com">
         </a>
-      </div>
-      <div class="hamburger-menu dropdown">
-        <div class="login">
-          {% if user.is_authenticated %}
-          <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
-          <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
-          <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
-          {% else %}
-              <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">Register</button></a>
-              <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">Login</button></a>
-          {% endif %}
-        </div> 
       </div>
     </div>
     <div id="wrapper-game-area" class="row h-100 g-2">
@@ -122,6 +110,18 @@
     </div>
     
     <div class="menu-container desktop-menu">
+      <div class="hamburger-menu dropdown">
+        <div class="login">
+          {% if user.is_authenticated %}
+          <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
+          <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
+          <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
+          {% else %}
+              <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">REGISTER</button></a>
+              <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">LOGIN</button></a>
+          {% endif %}
+        </div> 
+      </div>
       <div id="title-settings" class="title-settings">
         <!-- <h1>CUSTOMIZE YOUR GAME EXPERIENCE</h1> -->
         <img src="/static/images/img-title-settings-desktop.svg" alt="Customize Your Game Experience">
