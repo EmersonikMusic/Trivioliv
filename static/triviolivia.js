@@ -14500,9 +14500,8 @@ function dontFetchDataIfAllDeselected() {
       "Cannot start game. You must select at least one era.";
   } else {
     changeButtonText();
-    fetchQuestionsAndStartGame();
     
-    // Close all open menus
+    // Close all open menu sections
     const checkboxes = document.querySelectorAll(".toggle");
     if (checkboxes) {
       checkboxes.forEach((checkbox) => {
@@ -14512,6 +14511,27 @@ function dontFetchDataIfAllDeselected() {
         }
       });
     }
+    
+    // Also hide the entire options menu
+    const menuSettings = document.getElementById('menu-settings');
+    const wrapperAll = document.getElementById('wrapper-all');
+    const characterColumn = document.getElementById('character');
+    
+    if (menuSettings && wrapperAll && characterColumn) {
+      menuSettings.classList.add('menu-hidden');
+      wrapperAll.classList.add('menu-collapsed');
+      characterColumn.style.flex = '1';
+      characterColumn.style.width = 'auto';
+      characterColumn.style.opacity = '1';
+      
+      // Animate the gear icon
+      const toggleButton = document.getElementById('menu-toggle-button');
+      if (toggleButton && toggleButton.querySelector('img')) {
+        toggleButton.querySelector('img').style.transform = 'translateX(25%) rotate(180deg)';
+      }
+    }
+    
+    fetchQuestionsAndStartGame();
   }
 }
 
