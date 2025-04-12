@@ -14365,7 +14365,11 @@ document.addEventListener('DOMContentLoaded', function() {
       wrapperAll.classList.toggle('menu-collapsed');
       
       // Directly toggle character visibility
-      if (wrapperAll.classList.contains('menu-collapsed')) {
+      if (game_started == false) {
+        characterColumn.style.flex = '0';
+        characterColumn.style.width = '0';
+        characterColumn.style.opacity = '0';
+      } else if (wrapperAll.classList.contains('menu-collapsed')) {
         // Menu collapsed - show character
         characterColumn.style.flex = '1';
         characterColumn.style.width = 'auto';
