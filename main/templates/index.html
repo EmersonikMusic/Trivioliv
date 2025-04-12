@@ -138,7 +138,7 @@
           <div class="content-inner">
             <button id="all-none-categories" class="all-none-btn button" onclick="allNoneCategoriesButton()">ALL/NONE</button>
             {% for category in categories %}
-            <div id='{{ category.name | slugify }}'>
+            <div id='{{ category.name | slugify }}' class='menu-subcategories'>
               <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
                 <div class="toggle-switch active">
                   <div class="toggle-dot"></div>
