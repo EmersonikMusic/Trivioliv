@@ -14539,6 +14539,7 @@ function dontFetchDataIfAllDeselected() {
 function hideInitialGraphics() {
   // Make the logo fully visible
   document.querySelector('.logo-header').style.opacity = '100';
+  document.querySelector('.logo-header').style.display = 'block';
   
   // Hide the loading screen
   document.querySelector('.loading-screen').style.display = 'none';
