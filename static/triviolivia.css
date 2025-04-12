@@ -1255,11 +1255,6 @@ transition: max-height 0.5s ease-in-out, transform 0.5s ease-in-out;
 transform: translateY(350px);
 }
 
-/* .mobile-dropdown .toggle:checked + .lbl-toggle + .collapsible-content {
-max-height: 350px; 
-overflow-y: auto;
-transform: translateY(0);
-} */
 
 .title-settings {
   padding: 30px 20px 40px 20px;
@@ -1390,9 +1385,7 @@ body {
 
 
 .toggle:checked + .lbl-toggle + .collapsible-content { 
-    /* max-height: 100vh;
-    overflow: scroll; */
-    max-height: 240px; /* Fixed height instead of 100vh */
+    max-height: 280px; /* Fixed height instead of 100vh */
     overflow-y: auto; /* Show scrollbar only when needed */
     
   } 
@@ -1406,10 +1399,14 @@ body {
   color: white;
   margin: 0;
   }
+.loading-screen {
+  margin: auto;
+}
+
 
   .header {
     padding: 10px 30px;
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
@@ -1426,6 +1423,7 @@ body {
     text-align: center;
     font-size: x-large;
     color: #8DD4DA;
+    display: none;
   }
 
   .title-settings {
@@ -1455,22 +1453,26 @@ body {
   .menu-toggle-wrapper {
     left: 50%;
     top: 90px;
-    top: -71px;
+    top: -41px;
   }
 
   .menu-toggle-button {
-    width: 60px;
-    height: 50px;
+    width: 50px;
+    height: 40px;
     border-radius: 100% 100% 0 0;
+  
   }
+
+  .menu-toggle-button img {
+    width: 20px;
+    height: 20px;
+    }
 
   .menu-toggle-button img {
     transform: translateX(0);
   }
 
-  .menu-toggle-wrapper {
-    top: -51px;
-  }
+  
 
   .nav-button {
     font-size: medium;
@@ -1479,7 +1481,7 @@ body {
     .nav-link {
       color: #8DD4DA;
       font-size: medium;
-      padding-bottom: 10px;
+  
       }
 
 .lbl-toggle {
@@ -1492,6 +1494,7 @@ body {
 
 .toggle:checked + .lbl-toggle {
   padding: 10px 0 0 20px;
+  margin-top: 10px;
 }
 
 .menu-icon {
@@ -1500,16 +1503,28 @@ body {
 }
 
 .wrap-collabsible {
-  margin: 5px auto;
+  margin: 0 auto;
   width: 100%;
 }
 
+.slider-container {
+  margin-bottom: 10px;
+    flex-direction: row;
+    display: flex;
+  }
+
+  .slider {
+    margin-top: 5px;
+  }
 .slider-label {
-font-size: medium;
+  font-size: medium;
+  width: 60%;
+  margin-right: 20px;
+  padding: 0;
 }
 
 .menu_question_time {
-  padding: 0px 20px;
+  padding: 0px;
 }
 .collapsible-content .content-inner {
   padding: 10px 20px;
@@ -1520,9 +1535,7 @@ font-size: medium;
 }
 
 
-  .slider-container {
-  margin-bottom: 15px;
-  }
+
 
 }
 
