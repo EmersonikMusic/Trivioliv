@@ -14137,6 +14137,208 @@ function initializeSettings() {
   const currentAnswerTime = time_per_answer;
 }
 
+<<<<<<< Updated upstream
+=======
+// Declaring question and answer display
+const questionDisplay = document.querySelector(".question-container");
+const answerDisplay = document.querySelector(".answer-container");
+
+// Declaring game setting variables
+var number_of_questions = 10;
+var time_per_question = 5;
+var time_per_answer = 5;
+var game_started = false;
+var menu_hidden = false;
+var current_question_category = null;
+var pauseFlag = false;
+
+// Declaring banned category/difficulty/era lists
+var category_list = [];
+var difficulty_list = [];
+var era_list = [];
+
+// Declaring variables for ALL/NONE buttons
+var all_none_categories = true;
+var all_none_difficulties = true;
+var all_none_eras = true;
+var categoryButtons = document.querySelectorAll(".category");
+var difficultyButtons = document.querySelectorAll(".difficulty");
+var eraButtons = document.querySelectorAll(".era");
+
+// Declaring of mapping of category, difficulty, and era numbers to their respective names
+var category_number_identities = {
+  1: "Art",
+  2: "Economy",
+  3: "Food & Drink",
+  4: "Games",
+  5: "Geography",
+  6: "History",
+  7: "Human Body",
+  8: "Language",
+  9: "Literature",
+  10: "Math",
+  11: "Miscellaneous",
+  12: "Movies",
+  13: "Music",
+  14: "Nature",
+  15: "Philosophy",
+  16: "Politics",
+  17: "Pop Culture",
+  18: "Science",
+  19: "Sports",
+  20: "Technology",
+  21: "Television",
+  22: "Performing Arts",
+  23: "Theology",
+  24: "Video Games",
+  33: "Law",
+};
+
+// Does nothing right now
+var loginwalled_categories = {
+  3: "Food & Drink",
+  4: "Games",
+  11: "Miscellaneous",
+  15: "Philosophy",
+  16: "Politics",
+  17: "Pop Culture",
+  22: "Performing Arts",
+  23: "Theology",
+  24: "Video Games",
+  33: "Law",
+};
+
+var difficulty_number_identities = {
+  5: "Genius",
+  4: "Hard",
+  3: "Average",
+  2: "Easy",
+  1: "Casual",
+};
+
+var era_number_identities = {
+  1: "Pre-1500",
+  2: "1500-1800",
+  3: "1800-1900",
+  4: "1900-1950",
+  5: "1950s",
+  6: "1960s",
+  7: "1970s",
+  8: "1980s",
+  9: "1990s",
+  10: "2000s",
+  11: "2010s",
+  12: "2020s",
+};
+
+// Mapping of category names to their associated colors
+var category_colors = {
+  Art: "linear-gradient(345deg, rgba(165,50,27,1) 0%, rgba(221,126,107,1) 100%)",
+
+  Economy:
+    "linear-gradient(345deg, rgba(17,68,16,1) 0%, rgba(89,140,88,1) 100%)",
+
+  "Food & Drink":
+    "linear-gradient(345deg, rgba(127,43,11,1) 0%, rgba(242,133,0,1) 100%)",
+
+  Games: "linear-gradient(345deg, rgba(103,38,24,1) 0%, rgba(204,85,0,1) 100%)",
+
+  Geography:
+    "linear-gradient(345deg, rgba(61,38,19,1) 0%, rgba(154,123,79,1) 100%)",
+
+  History:
+    "linear-gradient(345deg, rgba(241,194,50,1) 0%, rgba(241,154,50,1) 100%)",
+
+  "Human Body":
+    "linear-gradient(345deg, rgba(106,77,20,1) 0%, rgba(180,130,32,1) 100%)",
+
+  Language:
+    "linear-gradient(345deg, rgba(28,60,133,1) 0%, rgba(102,147,245,1) 100%)",
+
+  Law: "linear-gradient(345deg, rgba(189,76,51,1) 0%, rgba(111,62,51,1) 100%)",
+
+  Literature:
+    "linear-gradient(345deg, rgba(202,128,39,1) 0%, rgba(217,157,41,1) 100%)",
+
+  Math: "linear-gradient(345deg, rgba(63,61,54,1) 0%, rgba(101,99,92,1) 100%)",
+
+  Miscellaneous:
+    "linear-gradient(345deg, rgba(13,109,122,1) 0%, rgba(18,168,152,1) 100%)",
+
+  Movies: "linear-gradient(345deg, rgba(184,34,34,1) 0%, rgba(102,0,0,1) 100%)",
+
+  Music: "linear-gradient(345deg, rgba(9,110,62,1) 0%, rgba(29,185,84,1) 100%)",
+
+  Nature: "linear-gradient(345deg, rgba(8,83,27,1) 0%, rgba(4,57,39,1) 100%)",
+
+  Philosophy:
+    "linear-gradient(345deg, rgba(89,61,128,1) 0%, rgba(151,95,172,1) 100%)",
+
+  Politics:
+    "linear-gradient(345deg, rgba(84,30,140,1) 0%, rgba(53,28,117,1) 100%)",
+
+  "Pop Culture":
+    "linear-gradient(345deg, rgba(233,85,148,1) 0%, rgba(255,143,171,1) 100%)",
+
+  Science:
+    "linear-gradient(345deg, rgba(6,85,83,1) 0%, rgba(11,103,56,1) 100%)",
+
+  Sports:
+    "linear-gradient(345deg, rgba(44,66,121,1) 0%, rgba(19,30,58,1) 100%)",
+
+  Technology:
+    "linear-gradient(345deg, rgba(22,134,161,1) 0%, rgba(31,89,103,1) 100%)",
+
+  Television:
+    "linear-gradient(345deg, rgba(45,44,41,1) 0%, rgba(87,81,78,1) 100%)",
+
+  "Performing Arts":
+    "linear-gradient(345deg, rgba(183,75,0,1) 0%, rgba(183,0,0,1) 100%)",
+
+  Theology:
+    "linear-gradient(345deg, rgba(64,14,66,1) 0%, rgba(60,19,33,1) 100%)",
+
+  "Video Games":
+    "linear-gradient(345deg, rgba(153,0,255,1) 0%, rgba(60,13,128,1) 100%)",
+};
+
+// Category summaries for hover display CURRENTLY DOES NOTHING
+var category_summaries = {
+    "Art": "Artists, Architecture, Sculpture, Photography, Painting, Museums, Styles, Terms, Typography, Theory, Techniques, Statues, Festivals, Digital Art, Awards, Colors, Design, Fashion, Heraldry, Logos",
+    "Economy": "Business, Currency, Stocks, Terms, Trade, Businesspeople, Cryptocurrency, Institutions, Finance, Economists, Marketing, Policies, Accounting, Events, Banking, Ecommerce, Brands, Investing, Unions",
+    "Food & Drink": "Origins, Foodstuffs, Brands, Ingredients, Restaurants, Alcohol, Cooking, National Dishes, Drinks, Terms, Diets, Agriculture, Cuisines, Producers, Nutrition, Processing, Restrictions, Spices",
+    "Games": "Board Games, Card Games, Tabletop Games, Puzzles, Games of Chance, Party Games, Schoolyard Games, Dexterity Games, Bar Games, Skill Toys, Genres",
+    "Geography": "Countries, Capitals, Regions, Territories, Bodies of Water, Cities, Landmarks, Cartography, Terms, Islands",
+    "History": "War, Events, Figures, Civilizations, Deaths, Royalty, Empires, Firsts, Periods, Quotes, Archaeology, Prehistory, Rulers, Terms, Artifacts, Explorers, Kingdoms, Names, Organizations, Places, Historians, Museums",
+    "Human Body": "Anatomy, Disease, Physiology, Systems, Organs, Terms, Pregnancy, Disorders, Tests, Conditions",
+    "Language": "Definitions, Terms, Languages, Translation, Codes, Shorthands, Slang, Words, Alphabets, Linguistics, Parts of Speech, Punctuation, Anagrams, Idioms, Sayings, Dialects, Sign Language",
+    "Law": "Terms, Cases, Laws, Enforcement, Courts, Prisons, Concepts, Codes, Institutions, Principles, Doctrines, Events, Firms, Branches, Figures",
+    "Literature": "Authors, Characters, Books, Details, Poetry, Lines, Awards, Stories, Literary Devices, Novellas, Terms, Fanbases, Genres, Publications, Publishers, Fables, Graphic Novels, Magazines, Quotes",
+    "Math": "Numbers, Problems, Mathematicians, Geometry, Terms, Units, Statistics, Concepts, Branches, Notation, Calculus, Instruments, Probability, Symbols",
+    "Miscellaneous": "Flags, Terms, Education, Buildings, Calendar, Journalism, Culture, Slogans, Organizations, Awards, Names, Products, Amusement Parks, Logos, Events, Symbols, Clothing, Fashion, Martial Arts, Quotes",
+    "Movies": "Characters, Actors, Awards, Films, Details, Directors, Box Office, Lines, Taglines, Cinematography, Studios, Festivals, Filmmaking, Franchises, Industry, Musicals, Screenwriters",
+    "Music": "Artists, Lyrics, Songs, Instruments, Composers, Albums, Concerts, Theory, Genres, Labels, Festivals, Aliases, Awards, Streaming, Anthems, Fanbases, Terms, Notation, Hardware, Producers, Music Videos",
+    "Nature": "Animals, Environment, Space, Plants, National Parks, Natural Processes, Terms, Natural Disasters, Geology, Weather, Life, Parks",
+    "Performing Arts": "Plays, Characters, Theaters, Playwrights, Opera, Musicals, Terms, Awards, Dance, Schools, Actors, Lines, Acting, Genres, Comedy, Performers, Podcasting, Circus, Magicians, Performing Arts",
+    "Philosophy": "Philosophers, Texts, Branches, Terms, Principles, Concepts, Journals, Schools, Ideologies, Logic, Movements, Argumentation, Activism, Metaphysics",
+    "Politics": "Politicians, Government, Geopolitics, Unions, Terms, Events, Movements, Parties, Elections, Treaties, Political Buildings, Revolutions, Activism, Institutions, International Politics, Alliances",
+    "Pop Culture": "Celebrities, Aliases, Comics, Scandals, Criminals, Deaths, Fashion, Magazines, Products, Traditions, Trends, Pseudoscience, Memes, Entertainment, Generations, Societies, Events, Websites, Lifestyle",
+    "Science": "Chemistry, Physics, Psychology, Biology, Scientists, Medicine, Biochemistry, Fields, Units, Astronomy, Geology, Sociology, Terms, Materials Science, Journals, Pathology, Research Centers, Techniques, Anthropology",
+    "Sports": "Teams, Olympics, Athletes, Leagues, Terms, Rules, Awards, Motorsports, World Cups, Events, Mascots, Records, Games, Equipment, Sports Entertainment, Stadiums, Fanbases, Positions, Governing Bodies, Martial Arts",
+    "Technology": "Internet, Software, Machines, Hardware, Vehicles, Companies, Programming, Terms, Inventors, Websites, Computers, Engineering, Weapons, Infrastructure, Advances, Names, Applications, Founders, AI",
+    "Television": "Characters, Details, Actors, Shows, Game Shows, Streaming, Reality TV, Producers, Theme Songs, News, Fanbases, Lines, Commercials, Terms, Animation, Broadcasting, Episodes, Events, Networks, Awards",
+    "Theology": "Mythology, World Religions, Holy Books, Places of Worship, Traditions, Holy Days, Astrology, Popes, Saints, Terms, Folklore, Leaders, Symbols, Apparel, Clergy, Events, Institutions, Irreligion, Titles",
+    "Video Games": "Games, Characters, Details, Consoles, Developers, Awards, Items, Genres, Publications, Hardware, Esports, Levels, Terms, Accessories, Conventions"
+}
+
+
+// Declaring variables for the base URL for fetching questions
+var baseUrl = "/api/questions/";
+var moddedUrl = "";
+var queryParams = [];
+let globalData;
+
+>>>>>>> Stashed changes
 // Function to disable both Start/Pause and Refetch buttons
 function disableBothButtons() {
   // Desktop buttons
@@ -15084,6 +15286,42 @@ function refetchAndRestart() {
   console.log("Refetch request completed");
 }
 
+<<<<<<< Updated upstream
+=======
+// Reset settings button
+function resetSettings() {
+  console.log("Resetting the game to its original settings...");
+
+  all_none_categories = false;
+  allNoneCategoriesButton();
+  all_none_difficulties = false;
+  allNoneDifficultiesButton();
+  all_none_eras = false;
+  allNoneErasButton();
+
+  const demoElement = document.getElementById("demo");
+  if (demoElement) {
+    demoElement.innerHTML =
+      'You have enabled all categories, difficulties, and eras. Press <span id="refetch-and-restart" style="cursor: pointer; display: inline;" onclick="refetchAndRestart()">REFETCH AND RESTART</span> to play again.';
+  }
+
+  game_started = false;
+  menu_hidden = false;
+  current_question_category = null;
+  pauseFlag = false;
+  category_list = [];
+  difficulty_list = [];
+  era_list = [];
+
+  baseUrl = "/api/questions/";
+  moddedUrl = "";
+  queryParams = [];
+  globalData = [];
+
+  console.log("Game settings reset completed.");
+}
+
+>>>>>>> Stashed changes
 // About Us stuff
 function displayAboutUs() {
   pauseFlag = true;
