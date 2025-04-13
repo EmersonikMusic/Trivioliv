@@ -84,8 +84,8 @@ p {
   margin-right: 50px; /* Default margin when menu is 'hidden' but button shows */
 }
 
-/* Adjust main content margin when menu is visible */
-.menu-settings-desktop:not(.menu-hidden) ~ .wrapper-main-content {
+/* Adjust main content margin when menu is visible (menu-collapsed class is NOT on parent) */
+.wrapper-all:not(.menu-collapsed) .wrapper-main-content {
   margin-right: 250px; /* Match menu width */
 }
 
@@ -475,70 +475,36 @@ p {
   transition: transform 0.5s ease-out, border-color 0.3s ease-out;
   transform: translateX(calc(100% - 50px)); /* Start 'hidden' showing only 50px button */
 
-  /* Standard borders (top, right, bottom) */
+  /* Standard borders (ALL sides now) */
   border-top: 1px solid white;
   border-right: 1px solid white;
   border-bottom: 1px solid white;
-  /* NO left border directly on menu */
-  border-left: none;
+  border-left: 1px solid white; /* Add left border */
   border-radius: 32px 0 0 32px; /* Rounded corners */
 }
 
-/* Pseudo-elements for the partial left border (Desktop) */
+/* Remove Pseudo-elements for border segments */
 .menu-settings-desktop::before,
 .menu-settings-desktop::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  width: 1px; /* Border width */
-  background-color: white;
-  transition: background-color 0.3s ease-out;
-  z-index: -1; /* Behind content */
-  border-radius: 0; /* Ensure pseudo-elements are straight lines */
-}
-
-/* Top part of the left border - Adjusted */
-.menu-settings-desktop::before {
-  top: 32px; /* Start after top radius */
-  height: calc(90px - 32px); /* End before button starts (90px = button top) */
-}
-
-/* Bottom part of the left border - Adjusted */
-.menu-settings-desktop::after {
-  top: 170px; /* Start after button ends (170px = button top + height) */
-  bottom: 32px; /* End before bottom radius */
-  /* Height is implicitly set by top and bottom */
+  display: none; /* No longer needed */
 }
 
 /* Visible state (when NOT .menu-hidden) (Desktop) */
 .menu-settings-desktop:not(.menu-hidden) {
   transform: translateX(0);
-  /* Ensure standard borders are visible */
-  border-top-color: white;
-  border-right-color: white;
-  border-bottom-color: white;
-}
-
-.menu-settings-desktop:not(.menu-hidden)::before,
-.menu-settings-desktop:not(.menu-hidden)::after {
-  background-color: white; /* Ensure pseudo-borders are visible */
+  /* Ensure standard borders are visible (implicitly handled by base style) */
+  /* border-color: white; */ /* Not needed unless overwriting */
 }
 
 /* Hidden state (when .menu-hidden IS present) (Desktop) */
 .menu-settings-desktop.menu-hidden {
   /* transform: translateX(calc(100% - 50px)); is the default */
-  /* Keep standard borders visible */
+  /* Keep ALL standard borders visible */
   border-top-color: white;
   border-right-color: white;
   border-bottom-color: white;
+  border-left-color: white; /* Ensure left border is white */
 }
-
-.menu-settings-desktop.menu-hidden::before,
-.menu-settings-desktop.menu-hidden::after {
-  /* Keep pseudo-element borders visible */
-  background-color: white;
-}
-
 
 /* Menu Container Styling (Desktop) */
 .menu-container {
@@ -546,8 +512,8 @@ p {
   border-radius: inherit; /* Inherit radius from parent */
   min-width: 250px;
   transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
-  position: relative; /* Ensure content is above pseudo-elements */
-  z-index: 1;
+  position: relative; /* Needed for z-index context if required */
+  z-index: 1; /* Ensure content is above background but below button */
   height: 100%; /* Ensure it fills the parent */
   overflow-y: auto; /* Allow scrolling if content overflows */
 }
@@ -567,7 +533,7 @@ p {
   width: 50px; /* Width of the visible button part */
   height: 80px; /* Height of the button */
   transform: translateX(-100%); /* Move it outside the menu flow */
-  z-index: 1000; /* Ensure it's clickable */
+  z-index: 101; /* Position slightly above menu container but below actual button */
   pointer-events: none; /* Allow clicks only on the button itself */
 }
 
@@ -578,7 +544,7 @@ p {
   top: 0;
   width: 100%; /* Fill the wrapper width */
   height: 100%; /* Fill the wrapper height */
-  background-color: rgba(0, 0, 0, 0.4); /* Match menu background */
+  background-color: rgba(0, 0, 0, 0.4); /* Match menu background to cover menu border */
   /* Button borders (Top, Left, Bottom) */
   border-top: 1px solid white;
   border-left: 1px solid white;
@@ -591,7 +557,7 @@ p {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  z-index: 1001; /* Above wrapper */
+  z-index: 102; /* Above wrapper/menu content */
   pointer-events: auto; /* Make it clickable */
   transition: border-color 0.3s ease-out;
 }
@@ -1157,7 +1123,7 @@ input[type='checkbox'] {
   /* Remove desktop pseudo-elements */
   .menu-settings-desktop::before,
   .menu-settings-desktop::after {
-      display: none;
+      display: none; /* Still not needed for mobile */
   }
 
   /* Mobile Visible state (when NOT .menu-hidden) */
@@ -1188,7 +1154,7 @@ input[type='checkbox'] {
       transform: translate(-50%, -100%); /* Move entirely above the menu */
       width: 50px; /* Width of the button */
       height: 40px; /* Height of the button */
-      z-index: 1000;
+      z-index: 1000; /* Keep positioning context */
       pointer-events: none;
   }
 
@@ -1211,9 +1177,9 @@ input[type='checkbox'] {
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      z-index: 1001;
+      z-index: 1001; /* Keep above wrapper */
       pointer-events: auto;
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgba(0, 0, 0, 0.4); /* Keep background */
       transition: border-color 0.3s ease-out;
   }
 
