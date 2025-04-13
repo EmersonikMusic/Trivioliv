@@ -50,15 +50,9 @@ CORS_ALLOW_METHODS = [
 ]
 
 # Uncomment when pushing!!!
-<<<<<<< Updated upstream
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-=======
-# # SECURE_SSL_REDIRECT = True
-# # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
->>>>>>> Stashed changes
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
