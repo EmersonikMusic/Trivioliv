@@ -314,11 +314,11 @@ p {
   overflow: hidden;
   margin: auto 0;
   padding-right: 100px;
+  
 }
 
 .character-svg {
   max-width: 100%;
-  max-height: 80vh;
   animation: bob 2s infinite ease-in-out;
 }
 
@@ -329,6 +329,24 @@ p {
   height: 100%;
   width: 100%;
   vertical-align: bottom;
+}
+
+.character-visible {
+  flex: 0.5 !important;
+  width: auto !important;
+  opacity: 1 !important;
+  transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  overflow: hidden;
+  margin: auto 0;
+  padding-right: 100px;
+}
+
+.character-hidden {
+  flex: 0 !important;
+  width: 0 !important;
+  opacity: 0 !important;
+  transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  overflow: hidden;
 }
 
 @keyframes bob {
@@ -354,8 +372,8 @@ p {
 .footer {
   display: none;
   flex-direction: row;
-  margin: 30px 60px;
-  gap: 30px;
+  margin: 30px;
+  gap: 10px;
 }
 
 /* Game Buttons */
@@ -1062,13 +1080,20 @@ input[type='checkbox'] {
     margin: 0;
   }
   
+
+
+  .wrapper-main-content {
+    overflow: visible;
+  }
+
   .loading-screen {
     margin: auto;
   }
   
   .header {
     display: flex;
-    margin: auto;
+    margin: 0 sauto;
+    padding: 0;
   }
   
   .title-settings img {
@@ -1180,6 +1205,242 @@ input[type='checkbox'] {
   .collapsible-content .content-inner {
     padding: 10px 20px;
   }
+
+
+/*----- NEW CSS TEST ------*/
+
+/* Small mobile devices (320px to 479px) */
+/* @media only screen and (max-width: 479px) { */
+  .game-area-content {
+    color: red;
+  }
+
+  #start-game-container {
+    display: flex;
+  }
+
+  #mobile-start-game-container {
+    display: flex;
+    width: 100%;
+    margin: auto;
+  }
+
+  #mobile-start-game-container .btn-startgame {
+    margin: 0 auto;
+    display: flex;
+  }
+
+  /* Make wrapper-game-area take up 100% of the screen */
+  #wrapper-game-area {
+    /* width: 100%; */
+    height: 100%;
+  }
+
+  /* Create a column layout with overlapping divs */
+  .wrapper-all {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    color: white;
+    margin: 0;
+    position: relative;
+  }
+  
+  /* Set each main div to column layout and create overlap */
+
+  .footer, 
+  .menu-settings-desktop {
+    flex-direction: column;
+    position: relative;
+    margin-bottom: -150px; /* Creates the overlap effect */
+  }
+
+  .game-area  {
+    /* flex-direction: column; */
+    position: relative;
+    margin-bottom: -11px; /* Creates the overlap effect */
+  }
+  
+  /* Position character column directly over footer */
+  .character-column {
+    position: relative;
+    margin: -10px 0 0px 210px;
+    /* top: 150px; */
+  }
+  
+  .character-column svg {
+   max-height: 100%;
+  }
+  
+
+  /* Ensure proper stacking order */
+  .game-area {
+    z-index: 2;
+    height: 260px;
+  }
+  
+  .footer {
+    z-index: 1;
+  }
+
+  .loading-bar-container, 
+  .loading-bar {
+    height: 30px;
+  }
+
+  #loading-text {
+    font-size: 7px;
+  }
+
+  .desktop-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .user-button {
+    padding: 10px 15px;
+    font-size: 10px;
+    width: 50px;
+  }
+
+  .character-column {
+    z-index: 2; /* Same as game-area to be directly over footer */
+  width: 100%;
+  opacity: 1;
+  height: 160px;
+  display: inline-block;
+  overflow: visible;
+  }
+  
+  .menu-settings-desktop {
+    z-index: 5; /* Highest z-index to be above everything */
+  }
+  
+  .loading-screen {
+    margin: auto;
+  }
+  
+  .header {
+    display: flex;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  .title-settings img {
+    display: none;
+  }
+  
+  .title-settings span {
+    text-align: center;
+    font-size: x-large;
+    color: #8DD4DA;
+    display: none;
+  }
+  
+  .title-settings {
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid white;
+    text-align: center;
+    width: 100%;
+    margin: auto;
+  }
+  
+  #menu-categories {
+    margin-top: 20px;
+  }
+  
+  .desktop-menu {
+    margin-top: 0px;
+    overflow-x: hidden;
+  }
+  
+  .menu-settings-desktop {
+    flex: 2;
+    flex-direction: column;
+    margin: 0;
+    border-radius: 32px 32px 0 0;
+    outline: 1px solid white;
+  }
+  
+  .menu-toggle-wrapper {
+    left: 50%;
+    top: -41px;
+  }
+  
+  .menu-toggle-button {
+    width: 50px;
+    height: 40px;
+    border-radius: 100% 100% 0 0;
+  }
+  
+  .menu-toggle-button img {
+    width: 20px;
+    height: 20px;
+    transform: translateX(0);
+  }
+  
+  .nav-button {
+    font-size: medium;
+  }
+  
+  .nav-link {
+    color: #8DD4DA;
+    font-size: medium;
+  }
+  
+  .lbl-toggle {
+    font-size: large;
+  }
+  
+  .lbl-toggle:hover {
+    padding: 8px 15px;
+  }
+  
+  .toggle:checked + .lbl-toggle {
+    padding: 10px 0 0 20px;
+    margin-top: 10px;
+  }
+  
+  .menu-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .wrap-collabsible {
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .slider-container {
+    margin-bottom: 10px;
+    flex-direction: row;
+    display: flex;
+  }
+  
+  .slider {
+    margin-top: 5px;
+  }
+  
+  .slider-label {
+    font-size: medium;
+    width: 60%;
+    margin-right: 20px;
+    padding: 0;
+  }
+  
+  .menu_question_time {
+    padding: 0px;
+  }
+  
+  .collapsible-content .content-inner {
+    padding: 10px 20px;
+  }
+
+
 }
 
 /* Extra small mobile devices (below 320px) */
