@@ -19,6 +19,7 @@ body, html {
   word-break: break-word;
   overflow-wrap: break-word;
   hyphens: none;
+  overflow-x: hidden; /* Prevent horizontal scroll caused by animation */
 }
 
 body {
@@ -68,16 +69,26 @@ p {
   max-height: 100vh;
   color: white;
   margin: 0;
+  position: relative; /* Needed for fixed positioning context */
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .wrapper-main-content {
-  flex: 4;
+  flex: 1; /* Allow main content to take remaining space */
   display: flex;
   flex-direction: column;
   overflow: hidden;
   height: 100%;
   transition: margin-right 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  /* Adjust margin based on visible button part */
+  margin-right: 50px; /* Default margin when menu is 'hidden' but button shows */
 }
+
+/* Adjust main content margin when menu is visible */
+.menu-settings-desktop:not(.menu-hidden) ~ .wrapper-main-content {
+  margin-right: 250px; /* Match menu width */
+}
+
 
 .container-fluid {
   height: 100vh;
@@ -187,12 +198,11 @@ p {
 .dropdown-item:hover {
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
-  outline: 1px solid red;
 }
 
 /* Game Area */
 .game-area {
-  flex: 4;
+  flex: 4; /* Keep original flex */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -204,7 +214,7 @@ p {
   color: white;
   height: calc(100% - 30px);
   border-radius: 32px;
-  outline: 1px solid white;
+  outline: 1px solid white; /* Keep this outline */
   margin: 20px 30px 0 40px;
   flex-direction: column;
   overflow: hidden;
@@ -314,7 +324,6 @@ p {
   overflow: hidden;
   margin: auto 0;
   padding-right: 100px;
-  
 }
 
 .character-svg {
@@ -339,7 +348,6 @@ p {
   overflow: hidden;
   margin: auto 0;
   padding-right: 100px;
-  outline: 1px solid red;
 }
 
 .character-hidden {
@@ -453,27 +461,95 @@ p {
   50% { transform: translateY(-15px); opacity: 1; }
 }
 
-/* Settings Menu */
+/* --- Settings Menu Animation & Borders (Desktop) --- */
 .menu-settings-desktop {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  margin: 1px 1px 1px 0;
-  border-radius: 32px 0 0 32px;
-  outline: 1px solid white;
-  overflow: visible;
-  position: relative;
+  min-width: 250px;
+  width: 250px;
+  position: fixed;
+  right: 0;
+  top: 0;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
-  transition: transform 0.5s ease-out;
+  z-index: 100;
+  overflow: visible; /* Allow button to overflow */
+  transition: transform 0.5s ease-out, border-color 0.3s ease-out;
+  transform: translateX(calc(100% - 50px)); /* Start 'hidden' showing only 50px button */
+
+  /* Standard borders (top, right, bottom) */
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  /* NO left border directly on menu */
+  border-left: none;
+  border-radius: 32px 0 0 32px; /* Rounded corners */
 }
 
+/* Pseudo-elements for the partial left border (Desktop) */
+.menu-settings-desktop::before,
+.menu-settings-desktop::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 1px; /* Border width */
+  background-color: white;
+  transition: background-color 0.3s ease-out;
+  z-index: -1; /* Behind content */
+  border-radius: 0; /* Ensure pseudo-elements are straight lines */
+}
+
+/* Top part of the left border - Adjusted */
+.menu-settings-desktop::before {
+  top: 32px; /* Start after top radius */
+  height: calc(90px - 32px); /* End before button starts (90px = button top) */
+}
+
+/* Bottom part of the left border - Adjusted */
+.menu-settings-desktop::after {
+  top: 170px; /* Start after button ends (170px = button top + height) */
+  bottom: 32px; /* End before bottom radius */
+  /* Height is implicitly set by top and bottom */
+}
+
+/* Visible state (when NOT .menu-hidden) (Desktop) */
+.menu-settings-desktop:not(.menu-hidden) {
+  transform: translateX(0);
+  /* Ensure standard borders are visible */
+  border-top-color: white;
+  border-right-color: white;
+  border-bottom-color: white;
+}
+
+.menu-settings-desktop:not(.menu-hidden)::before,
+.menu-settings-desktop:not(.menu-hidden)::after {
+  background-color: white; /* Ensure pseudo-borders are visible */
+}
+
+/* Hidden state (when .menu-hidden IS present) (Desktop) */
+.menu-settings-desktop.menu-hidden {
+  /* transform: translateX(calc(100% - 50px)); is the default */
+  /* Keep standard borders visible */
+  border-top-color: white;
+  border-right-color: white;
+  border-bottom-color: white;
+}
+
+.menu-settings-desktop.menu-hidden::before,
+.menu-settings-desktop.menu-hidden::after {
+  /* Keep pseudo-element borders visible */
+  background-color: white;
+}
+
+
+/* Menu Container Styling (Desktop) */
 .menu-container {
-  /* background-color: rgba(0,0,0, 0.4); */
   color: white;
-  border-radius: inherit;
-  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); */
+  border-radius: inherit; /* Inherit radius from parent */
   min-width: 250px;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+  position: relative; /* Ensure content is above pseudo-elements */
+  z-index: 1;
+  height: 100%; /* Ensure it fills the parent */
+  overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
 .desktop-menu {
@@ -483,72 +559,73 @@ p {
   padding: 15px;
 }
 
-/* Menu Toggle */
+/* Menu Toggle Button Wrapper (Desktop) */
 .menu-toggle-wrapper {
   position: absolute;
-  left: -36px;
-  top: 90px;
-  width: 50px;
-  height: 50px;
-  z-index: 1000;
-  pointer-events: none;
+  left: 0; /* Align with the left edge of the menu */
+  top: 90px; /* Position vertically (adjust as needed) */
+  width: 50px; /* Width of the visible button part */
+  height: 80px; /* Height of the button */
+  transform: translateX(-100%); /* Move it outside the menu flow */
+  z-index: 1000; /* Ensure it's clickable */
+  pointer-events: none; /* Allow clicks only on the button itself */
 }
 
+/* Menu Toggle Button (Desktop) */
 .menu-toggle-button {
   position: absolute;
-  left: 0;
+  left: 0; /* Stick to the left edge of the wrapper */
   top: 0;
-  width: 70px;
-  height: 80px;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 40% 0 0 40%;
-  border: none;
+  width: 100%; /* Fill the wrapper width */
+  height: 100%; /* Fill the wrapper height */
+  background-color: rgba(0, 0, 0, 0.4); /* Match menu background */
+  /* Button borders (Top, Left, Bottom) */
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  border-bottom: 1px solid white;
+  /* NO right border */
+  border-right: none;
+  /* Match menu's left corners */
+  border-radius: 32px 0 0 32px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  z-index: 1001;
-  outline: 1px solid white;
-  pointer-events: auto;
-  transform: translateX(-50%);
+  z-index: 1001; /* Above wrapper */
+  pointer-events: auto; /* Make it clickable */
+  transition: border-color 0.3s ease-out;
 }
 
 .menu-toggle-button img {
   width: 32px;
   height: 32px;
   transition: transform 0.3s ease;
-  transform: translateX(25%);
+  transform: translateX(0px); /* Adjust icon position within button */
 }
 
-/* Menu Hidden State */
-.menu-settings-desktop.menu-hidden {
-  flex: 0 0 1px !important;
-  min-width: 1px;
-  max-width: 1px;
-  margin-right: -calc(100% - 1px);
-  border-left: 1px solid white;
-  outline: 1px solid white;
-  transition: transform 0.5s ease-out;
-}
+/* Ensure toggle button border stays visible when menu is hidden (Desktop) */
+/* This rule is implicitly handled now by not hiding borders in .menu-hidden */
+/* .menu-settings-desktop.menu-hidden .menu-toggle-button { ... } */
 
-.menu-settings-desktop.menu-hidden .menu-toggle-button img {
-  transform: translateX(25%) rotate(180deg);
-}
 
+/* Fade out content when hidden (Desktop) */
 .menu-settings-desktop.menu-hidden .menu-container {
   opacity: 0;
   visibility: hidden;
-  outline: 1px solid white;
 }
 
-.menu-settings-desktop.menu-hidden .menu-toggle-wrapper {
-  left: -36px;
+/* Rotate toggle button image when hidden (Desktop) */
+.menu-settings-desktop.menu-hidden .menu-toggle-button img {
+  transform: translateX(0px) rotate(180deg);
 }
 
-/* When menu is hidden, expand main content */
-.menu-hidden + .wrapper-main-content {
-  flex: 5;
+/* Fade in content when visible (Desktop) */
+.menu-settings-desktop:not(.menu-hidden) .menu-container {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.2s; /* Delay fade-in slightly */
 }
+
 
 #tablet-start-game-container {
   display: none; /* Hide the menu version by default */
@@ -574,8 +651,8 @@ p {
   overflow: hidden;
 }
 
-input[type='checkbox'] { 
-  display: none; 
+input[type='checkbox'] {
+  display: none;
 }
 
 .lbl-toggle {
@@ -590,24 +667,24 @@ input[type='checkbox'] {
   font-size: x-large;
 }
 
-.lbl-toggle:hover { 
+.lbl-toggle:hover {
   color: #FFF;
   border-radius: 20px;
   background: rgba(0, 0, 0, .2);
   padding: 20px 0 20px 20px;
 }
 
-.lbl-toggle::before { 
-  display: none; 
+.lbl-toggle::before {
+  display: none;
 }
 
-.toggle:checked + .lbl-toggle::before { 
-  transform: rotate(90deg) translateX(-3px); 
+.toggle:checked + .lbl-toggle::before {
+  transform: rotate(90deg) translateX(-3px);
 }
 
-.collapsible-content { 
-  max-height: 0px; 
-  overflow: hidden; 
+.collapsible-content {
+  max-height: 0px;
+  overflow: hidden;
   transition: max-height .5s ease-in-out;
   display: flex;
   flex-direction: column;
@@ -615,7 +692,7 @@ input[type='checkbox'] {
   align-items: stretch;
 }
 
-.toggle:checked + .lbl-toggle { 
+.toggle:checked + .lbl-toggle {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   border-top-right-radius: 14px;
@@ -650,19 +727,18 @@ input[type='checkbox'] {
 }
 
 /* Collapsible Content Inner */
-.content-inner { 
+.content-inner {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   overflow-x: hidden;
 }
 
-.collapsible-content .content-inner { 
+.collapsible-content .content-inner {
   background: rgba(0, 0, 0, .2);
-  border-bottom-right-radius: 14px; 
-  border-bottom-left-radius: 14px; 
+  border-bottom-right-radius: 14px;
+  border-bottom-left-radius: 14px;
   padding: 0 16px;
-  background: rgba(0, 0, 0, .2);
   overflow-y: auto;
   flex: 1;
 }
@@ -699,7 +775,7 @@ input[type='checkbox'] {
   outline: 1px solid #8DD4DA;
 }
 
-.toggle:checked + .lbl-toggle + .collapsible-content { 
+.toggle:checked + .lbl-toggle + .collapsible-content {
   max-height: 280px;
   overflow-y: auto;
 }
@@ -855,6 +931,7 @@ input[type='checkbox'] {
 }
 
 /* Mobile Menu Styles */
+/* --- Styles below remain largely unchanged unless specifically needed for mobile animation --- */
 .mobile-menu {
   height: 25vh;
   margin-top: 8px;
@@ -1014,7 +1091,7 @@ input[type='checkbox'] {
   min-height: 30px;
 }
 
-.mobile-dropdown .toggle:checked + .lbl-toggle::before { 
+.mobile-dropdown .toggle:checked + .lbl-toggle::before {
   transform: rotate(-90deg) translateX(-2px);
 }
 
@@ -1041,411 +1118,314 @@ input[type='checkbox'] {
 /* Tablets (768px to 1023px) */
 @media only screen and (max-width: 1023px) {
   /* Tablet styles */
-  
 }
 
 /* Mobile devices (480px to 767px) */
 @media only screen and (max-width: 767px) {
   /* Mobile device styles */
-  
 }
 
 /* Small mobile devices (320px to 479px) */
 @media only screen and (max-width: 479px) {
-  .game-area-content {
-    color: red;
+  /* --- Mobile Menu & Button Overrides --- */
+  .menu-settings-desktop {
+      /* Revert desktop positioning and size */
+      position: relative; /* Change from fixed */
+      width: 100%;
+      min-width: unset;
+      height: auto; /* Auto height based on content */
+      flex: 0 0 auto; /* Don't grow or shrink, use auto basis */
+      order: 3; /* Place at the bottom in column layout */
+      margin: 0; /* Reset margins */
+      right: unset;
+      top: unset;
+      overflow: hidden; /* Hide overflow content */
+
+      /* Mobile Borders (Seamlessly attached *below* button) */
+      border-left: 1px solid white;
+      border-right: 1px solid white;
+      border-bottom: 1px solid white;
+      border-top: none; /* NO border where button attaches */
+      border-radius: 0 0 32px 32px; /* Rounded bottom corners */
+
+      /* Mobile Animation - Slide up from bottom */
+      transform: translateY(calc(100% - 40px)); /* Start 'hidden' showing only 40px button */
+      transition: transform 0.5s ease-out, border-color 0.3s ease-out; /* Keep transitions */
+      z-index: 5; /* Stacking context */
   }
 
+  /* Remove desktop pseudo-elements */
+  .menu-settings-desktop::before,
+  .menu-settings-desktop::after {
+      display: none;
+  }
+
+  /* Mobile Visible state (when NOT .menu-hidden) */
+  .menu-settings-desktop:not(.menu-hidden) {
+      transform: translateY(0);
+      /* Ensure mobile borders are visible */
+      border-left-color: white;
+      border-right-color: white;
+      border-bottom-color: white;
+      border-top: none;
+  }
+
+  /* Mobile Hidden state (when .menu-hidden IS present) */
+   .menu-settings-desktop.menu-hidden {
+      /* transform: translateY(calc(100% - 40px)); */ /* Default hidden position */
+      /* Keep borders visible */
+      border-left-color: white;
+      border-right-color: white;
+      border-top: none;
+      border-bottom-color: white;
+   }
+
+  /* Mobile Toggle Wrapper (Positions button above menu) */
+  .menu-toggle-wrapper {
+      position: absolute; /* Position relative to menu-settings-desktop */
+      left: 50%;
+      top: 0; /* Align with the top edge of the menu container */
+      transform: translate(-50%, -100%); /* Move entirely above the menu */
+      width: 50px; /* Width of the button */
+      height: 40px; /* Height of the button */
+      z-index: 1000;
+      pointer-events: none;
+  }
+
+  /* Mobile Toggle Button (Attached *above* menu) */
+  .menu-toggle-button {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%; /* Fill wrapper */
+      height: 100%; /* Fill wrapper */
+      /* Mobile Button Borders (Seamlessly attaches to menu below) */
+      border-left: 1px solid white;
+      border-right: 1px solid white;
+      border-top: 1px solid white;
+      border-bottom: none; /* No border where it meets menu */
+      border-radius: 15px 15px 0 0; /* Rounded top corners */
+
+      /* Keep other mobile styles */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1001;
+      pointer-events: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+      transition: border-color 0.3s ease-out;
+  }
+
+  .menu-toggle-button img {
+      width: 20px;
+      height: 20px;
+      transform: translateX(0); /* Reset desktop transform */
+      transition: transform 0.3s ease;
+  }
+
+  /* Mobile Hidden state button adjustments */
+  /* This rule is implicitly handled now by not hiding borders in .menu-hidden */
+  /* .menu-settings-desktop.menu-hidden .menu-toggle-button { ... } */
+
+
+  /* Mobile Image rotation when hidden */
+  .menu-settings-desktop.menu-hidden .menu-toggle-button img {
+      transform: rotate(180deg); /* Rotate icon when hidden */
+  }
+
+
+  /* Adjust main content wrapper for mobile */
+  .wrapper-main-content {
+      margin-right: 0; /* Remove desktop margin */
+      flex: 1; /* Ensure it takes available space */
+      overflow: auto; /* Allow scrolling if needed */
+      order: 0; /* Top element in column */
+  }
+
+  /* Ensure overall stacking works for mobile */
+  .wrapper-all {
+      display: flex;
+      flex-direction: column; /* Force column layout */
+      position: relative;
+      overflow: hidden; /* Prevent body scroll */
+      height: 100vh; /* Full viewport height */
+  }
+
+   /* Mobile Stacking Order (using order property) */
+   .wrapper-main-content { order: 0; }
+   .character-column { order: 1; }
+   .footer { order: 2; }
+   .menu-settings-desktop { order: 3; } /* Menu at the bottom */
+
+
+  /* --- Keep other mobile styles --- */
+
   #start-game-container {
-    display: flex;
+      display: flex;
   }
 
   #mobile-start-game-container {
-    display: flex;
-    width: 100%;
-    margin: auto;
+      display: flex;
+      width: 100%;
+      margin: auto;
   }
 
   #mobile-start-game-container .btn-startgame {
-    margin: 0 auto;
-    display: flex;
+      margin: 0 auto;
+      display: flex;
   }
 
-  .wrapper-all {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    max-height: 100vh;
-    color: white;
-    margin: 0;
+  #wrapper-game-area {
+      height: auto; /* Adjust height */
   }
-  
+
   .logo-header {
-    width: 100px;
-  }
-  
-
-  .wrapper-main-content {
-    overflow: visible;
+      width: 100px;
   }
 
   .loading-screen {
-    margin: auto;
+      margin: auto;
   }
-  
+
   .header {
-    display: flex;
-    margin: 0 sauto;
-    padding: 0;
+      display: flex;
+      margin: 0 auto;
+      padding: 0;
   }
-  
+
   .title-settings img {
-    display: none;
+      display: none;
   }
-  
+
   .title-settings span {
-    text-align: center;
-    font-size: x-large;
-    color: #8DD4DA;
-    display: none;
+      text-align: center;
+      font-size: x-large;
+      color: #8DD4DA;
+      display: none; /* Hidden in original, keep hidden */
   }
-  
+
   .title-settings {
-    padding: 0 0 10px 0;
-    border-bottom: 1px solid white;
-    text-align: center;
-    width: 100%;
-    margin: auto;
+      padding: 0 0 10px 0;
+      border-bottom: 1px solid white;
+      text-align: center;
+      width: 100%;
+      margin: auto;
   }
-  
+
   #menu-categories {
-    margin-top: 20px;
+      margin-top: 20px;
   }
-  
+
   .desktop-menu {
-    margin-top: 0px;
-    overflow-x: hidden;
+      margin-top: 0px;
+      overflow-x: hidden;
+      padding: 10px; /* Reduce padding slightly */
+      height: auto; /* Adjust height for content */
+      max-height: calc(100vh - 40px - 100px); /* Example: Viewport - button - footer estimate */
+      overflow-y: auto;
   }
-  
-  .menu-settings-desktop {
-    flex: 2;
-    flex-direction: column;
-    margin: 0;
-    border-radius: 32px 32px 0 0;
-    outline: 1px solid white;
-  }
-  
-  .menu-toggle-wrapper {
-    left: 50%;
-    top: -41px;
-  }
-  
-  .menu-toggle-button {
-    width: 50px;
-    height: 40px;
-    border-radius: 100% 100% 0 0;
-  }
-  
-  .menu-toggle-button img {
-    width: 20px;
-    height: 20px;
-    transform: translateX(0);
-  }
-  
+
   .nav-button {
-    font-size: medium;
+      font-size: medium;
   }
-  
+
   .nav-link {
-    color: #8DD4DA;
-    font-size: medium;
+      color: #8DD4DA;
+      font-size: medium;
   }
-  
+
   .lbl-toggle {
-    font-size: large;
+      font-size: large;
   }
-  
+
   .lbl-toggle:hover {
-    padding: 8px 15px;
+      padding: 8px 15px;
   }
-  
+
   .toggle:checked + .lbl-toggle {
-    padding: 10px 0 0 20px;
-    margin-top: 10px;
+      padding: 10px 0 0 20px;
+      margin-top: 10px;
   }
-  
+
   .menu-icon {
-    width: 20px;
-    height: 20px;
+      width: 20px;
+      height: 20px;
   }
-  
+
   .wrap-collabsible {
-    margin: 0 auto;
-    width: 100%;
+      margin: 0 auto;
+      width: 100%;
   }
-  
+
   .slider-container {
-    margin-bottom: 10px;
-    flex-direction: row;
-    display: flex;
+      margin-bottom: 10px;
+      flex-direction: row;
+      display: flex;
   }
-  
+
   .slider {
-    margin-top: 5px;
+      margin-top: 5px;
   }
-  
+
   .slider-label {
-    font-size: medium;
-    width: 60%;
-    margin-right: 20px;
-    padding: 0;
+      font-size: medium;
+      width: 60%;
+      margin-right: 20px;
+      padding: 0;
   }
-  
+
   .menu_question_time {
-    padding: 0px;
+      padding: 0px;
   }
-  
+
   .collapsible-content .content-inner {
-    padding: 10px 20px;
+      padding: 10px 20px;
   }
 
-
-/*----- NEW CSS TEST ------*/
-
-/* Small mobile devices (320px to 479px) */
-/* @media only screen and (max-width: 479px) { */
-  .game-area-content {
-    color: red;
-  }
-
-  #start-game-container {
-    display: flex;
-  }
-
-  #mobile-start-game-container {
-    display: flex;
-    width: 100%;
-    margin: auto;
-  }
-
-  #mobile-start-game-container .btn-startgame {
-    margin: 0 auto;
-    display: flex;
-  }
-
-  /* Make wrapper-game-area take up 100% of the screen */
-  #wrapper-game-area {
-    /* width: 100%; */
-    height: 100%;
-  }
-
-  /* Create a column layout with overlapping divs */
-  .wrapper-all {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    max-height: 100vh;
-    color: white;
-    margin: 0;
-    position: relative;
-  }
-  
-  /* Set each main div to column layout and create overlap */
-
-  .footer, 
-  .menu-settings-desktop {
-    flex-direction: column;
-    position: relative;
-    margin-bottom: -150px; /* Creates the overlap effect */
-  }
-
-  .game-area  {
-    /* flex-direction: column; */
-    position: relative;
-    margin-bottom: -11px; /* Creates the overlap effect */
-  }
-  
-  /* Position character column directly over footer */
-  .character-column {
-    position: relative;
-    margin: -10px 0 0px 210px;
-    /* top: 150px; */
-  }
-  
-  .character-column svg {
-   max-height: 100%;
-  }
-  
-
-  /* Ensure proper stacking order */
-  .game-area {
-    z-index: 2;
-    height: 260px;
-  }
-  
-  .footer {
-    z-index: 1;
-  }
-
-  .loading-bar-container, 
+  .loading-bar-container,
   .loading-bar {
-    height: 30px;
+      height: 30px;
   }
 
   #loading-text {
-    font-size: 7px;
+      font-size: 7px;
   }
 
   .desktop-buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      align-items: center;
   }
-  
+
   .user-button {
-    padding: 10px 15px;
-    font-size: 10px;
-    width: 50px;
+      padding: 10px 15px;
+      font-size: 10px;
+      width: 50px;
   }
 
   .character-column {
-    z-index: 2; /* Same as game-area to be directly over footer */
-  width: 100%;
-  opacity: 1;
-  height: 160px;
-  display: inline-block;
-  overflow: visible;
-  }
-  
-  .menu-settings-desktop {
-    z-index: 5; /* Highest z-index to be above everything */
-  }
-  
-  .loading-screen {
-    margin: auto;
-  }
-  
-  .header {
-    display: flex;
-    margin: 0 auto;
-    padding: 0;
-  }
-  
-  .title-settings img {
-    display: none;
-  }
-  
-  .title-settings span {
-    text-align: center;
-    font-size: x-large;
-    color: #8DD4DA;
-    display: none;
-  }
-  
-  .title-settings {
-    padding: 0 0 10px 0;
-    border-bottom: 1px solid white;
-    text-align: center;
-    width: 100%;
-    margin: auto;
-  }
-  
-  #menu-categories {
-    margin-top: 20px;
-  }
-  
-  .desktop-menu {
-    margin-top: 0px;
-    overflow-x: hidden;
-  }
-  
-  .menu-settings-desktop {
-    flex: 2;
-    flex-direction: column;
-    margin: 0;
-    border-radius: 32px 32px 0 0;
-    outline: 1px solid white;
-  }
-  
-  .menu-toggle-wrapper {
-    left: 50%;
-    top: -41px;
-  }
-  
-  .menu-toggle-button {
-    width: 50px;
-    height: 40px;
-    border-radius: 100% 100% 0 0;
-  }
-  
-  .menu-toggle-button img {
-    width: 20px;
-    height: 20px;
-    transform: translateX(0);
-  }
-  
-  .nav-button {
-    font-size: medium;
-  }
-  
-  .nav-link {
-    color: #8DD4DA;
-    font-size: medium;
-  }
-  
-  .lbl-toggle {
-    font-size: large;
-  }
-  
-  .lbl-toggle:hover {
-    padding: 8px 15px;
-  }
-  
-  .toggle:checked + .lbl-toggle {
-    padding: 10px 0 0 20px;
-    margin-top: 10px;
-  }
-  
-  .menu-icon {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .wrap-collabsible {
-    margin: 0 auto;
-    width: 100%;
-  }
-  
-  .slider-container {
-    margin-bottom: 10px;
-    flex-direction: row;
-    display: flex;
-  }
-  
-  .slider {
-    margin-top: 5px;
-  }
-  
-  .slider-label {
-    font-size: medium;
-    width: 60%;
-    margin-right: 20px;
-    padding: 0;
-  }
-  
-  .menu_question_time {
-    padding: 0px;
-  }
-  
-  .collapsible-content .content-inner {
-    padding: 10px 20px;
+     position: relative; /* Ensure it stays in flow */
+     margin: 0 auto; /* Center */
+     width: auto;
+     max-width: 150px; /* Limit size */
+     height: 160px; /* Fixed height */
+     z-index: 2; /* Above footer/menu trigger */
+     flex: 0 0 auto; /* Don't grow/shrink */
+   }
+
+  .character-column svg {
+     max-height: 100%;
   }
 
+  .footer {
+     position: relative; /* Stay in flow */
+     z-index: 1; /* Below character */
+     flex: 0 0 auto; /* Don't grow/shrink */
+   }
 
-}
+} /* End of @media (max-width: 479px) */
 
 /* Extra small mobile devices (below 320px) */
 @media only screen and (max-width: 319px) {
