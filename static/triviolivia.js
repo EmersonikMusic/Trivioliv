@@ -14412,17 +14412,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial state setup
     if (!localStorage.getItem('menuHidden') || localStorage.getItem('menuHidden') !== 'true') {
       // Default state: menu visible, character hidden
-      characterColumn.style.flex = '0';
-      characterColumn.style.width = '0';
-      characterColumn.style.opacity = '0';
+      characterColumn.classList.remove('character-visible'); 
+      characterColumn.classList.add('character-hidden');
       console.log("Initial state: Menu visible, character hidden");
     } else {
       // Restored state: menu hidden, character visible
       menuSettings.classList.add('menu-hidden');
       wrapperAll.classList.add('menu-collapsed');
-      characterColumn.style.flex = '1';
-      characterColumn.style.width = 'auto';
-      characterColumn.style.opacity = '1';
+      characterColumn.classList.remove('character-hidden'); 
+      characterColumn.classList.add('character-visible'); 
       console.log("Restored state: Menu hidden, character visible");
     }
     
