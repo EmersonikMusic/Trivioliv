@@ -339,6 +339,7 @@ p {
   overflow: hidden;
   margin: auto 0;
   padding-right: 100px;
+  outline: 1px solid red;
 }
 
 .character-hidden {
@@ -1080,7 +1081,10 @@ input[type='checkbox'] {
     margin: 0;
   }
   
-
+  .logo-header {
+    width: 100px;
+  }
+  
 
   .wrapper-main-content {
     overflow: visible;
