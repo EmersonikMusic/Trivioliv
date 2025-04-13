@@ -14436,21 +14436,19 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Directly toggle character visibility
       if (game_started == false) {
-        characterColumn.style.flex = '0';
-        characterColumn.style.width = '0';
-        characterColumn.style.opacity = '0';
+        characterColumn.classList.remove('character-visible'); 
+characterColumn.classList.add('character-hidden');
+        console.log("Toggled to: Menu hidden, character hidden");
       } else if (wrapperAll.classList.contains('menu-collapsed')) {
         // Menu collapsed - show character
-        characterColumn.style.flex = '1';
-        characterColumn.style.width = 'auto';
-        characterColumn.style.opacity = '1';
+        characterColumn.classList.remove('character-hidden'); 
+characterColumn.classList.add('character-visible'); 
         menuSettings.style.borderLeft = '1px solid white';
         console.log("Toggled to: Menu hidden, character visible");
       } else {
         // Menu expanded - hide character
-        characterColumn.style.flex = '0';
-        characterColumn.style.width = '0';
-        characterColumn.style.opacity = '0';
+        characterColumn.classList.remove('character-visible'); 
+characterColumn.classList.add('character-hidden');
         console.log("Toggled to: Menu visible, character hidden");
       }
     });
@@ -14582,9 +14580,8 @@ function dontFetchDataIfAllDeselected() {
     if (menuSettings && wrapperAll && characterColumn) {
       menuSettings.classList.add('menu-hidden');
       wrapperAll.classList.add('menu-collapsed');
-      characterColumn.style.flex = '1';
-      characterColumn.style.width = 'auto';
-      characterColumn.style.opacity = '1';
+      characterColumn.classList.remove('character-hidden'); 
+characterColumn.classList.add('character-visible'); 
       
       // Animate the gear icon
       const toggleButton = document.getElementById('menu-toggle-button');
@@ -14618,8 +14615,8 @@ function fetchQuestionsAndStartGame() {
     console.log("pauseFlag: " + pauseFlag);
     console.log("isPaused: " + isPaused);
   } else {
-    hideInitialGraphics();
     game_started = true;
+    hideInitialGraphics();
     globalData = [];
     queryParams = []; // Reset query params
     
