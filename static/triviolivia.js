@@ -14137,12 +14137,6 @@ function initializeSettings() {
   const currentAnswerTime = time_per_answer;
 }
 
-<<<<<<< Updated upstream
-=======
-// Declaring question and answer display
-const questionDisplay = document.querySelector(".question-container");
-const answerDisplay = document.querySelector(".answer-container");
-
 // Declaring game setting variables
 var number_of_questions = 10;
 var time_per_question = 5;
@@ -14335,11 +14329,7 @@ var category_summaries = {
 // Declaring variables for the base URL for fetching questions
 var baseUrl = "/api/questions/";
 var moddedUrl = "";
-var queryParams = [];
-let globalData;
-
->>>>>>> Stashed changes
-// Function to disable both Start/Pause and Refetch buttons
+var queryParams = [];// Function to disable both Start/Pause and Refetch buttons
 function disableBothButtons() {
   // Desktop buttons
   const startPauseBtn = document.getElementById("start-pause");
@@ -15286,8 +15276,6 @@ function refetchAndRestart() {
   console.log("Refetch request completed");
 }
 
-<<<<<<< Updated upstream
-=======
 // Reset settings button
 function resetSettings() {
   console.log("Resetting the game to its original settings...");
@@ -15321,7 +15309,6 @@ function resetSettings() {
   console.log("Game settings reset completed.");
 }
 
->>>>>>> Stashed changes
 // About Us stuff
 function displayAboutUs() {
   pauseFlag = true;
