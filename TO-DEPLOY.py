@@ -106,9 +106,9 @@ def main():
     settings_py_replacements = [
         (r'conn_max_age=MAX_CONN_AGE, ssl_require=False\)', 
          'conn_max_age=MAX_CONN_AGE, ssl_require=True)'),
-        (r'# ?SECURE_SSL_REDIRECT = True', 
+        (r'SECURE_SSL_REDIRECT = False', 
          'SECURE_SSL_REDIRECT = True'),
-        (r'# ?SECURE_PROXY_SSL_HEADER = \(\'HTTP_X_FORWARDED_PROTO\', \'https\'\)', 
+        (r'SECURE_PROXY_SSL_HEADER = \(\'HTTP_X_FORWARDED_PROTO\', \'https\'\)', 
          'SECURE_PROXY_SSL_HEADER = (\'HTTP_X_FORWARDED_PROTO\', \'https\')')
     ]
     

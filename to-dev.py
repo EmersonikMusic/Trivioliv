@@ -72,9 +72,9 @@ def main():
         (r'conn_max_age=MAX_CONN_AGE, ssl_require=True\)', 
          'conn_max_age=MAX_CONN_AGE, ssl_require=False)'),
         (r'SECURE_SSL_REDIRECT = True', 
-         '# SECURE_SSL_REDIRECT = True'),
+         'SECURE_SSL_REDIRECT = False'),
         (r'SECURE_PROXY_SSL_HEADER = \(\'HTTP_X_FORWARDED_PROTO\', \'https\'\)', 
-         '# SECURE_PROXY_SSL_HEADER = (\'HTTP_X_FORWARDED_PROTO\', \'https\')')
+         'SECURE_PROXY_SSL_HEADER = (\'HTTP_X_FORWARDED_PROTO\', \'https\')')
     ]
     
     # Apply replacements
