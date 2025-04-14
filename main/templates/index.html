@@ -64,11 +64,6 @@
     </button>
   </div>
   <div class="menu-container desktop-menu">
-    <div id="mobile-start-game-container" class="btn-startgame-container" style="display: none;">
-      <button id="mobile-start-pause" class="btn-startgame" onclick="dontFetchDataIfAllDeselected()" type="button">
-        <img src="{% static 'images/btn-startgame.svg' %}" alt="Start Game">
-      </button>
-    </div>
     <div class="hamburger-menu dropdown">
       <div class="login">
         {% if user.is_authenticated %}
@@ -81,11 +76,18 @@
         {% endif %}
       </div> 
     </div>
-    
+
     <div id="title-settings" class="title-settings">
       <img src="{% static 'images/img-title-settings-desktop.svg' %}" alt="Customize Your Game Experience">
       <span>CUSTOMIZE YOUR GAME EXPERIENCE</span>
     </div>
+
+    <div id="mobile-start-game-container" class="btn-startgame-container">
+      <button id="mobile-start-pause" class="btn-startgame" onclick="dontFetchDataIfAllDeselected()" type="button">
+        <img src="{% static 'images/btn-startgame.svg' %}" alt="Start Game">
+      </button>
+    </div>
+    
 
     <!--Categories menu-->
     <div id="menu-categories" class="wrap-collabsible"> 
@@ -187,5 +189,6 @@
     </div>
   </div>
 </div>
+
 
 </div> <!-- Bootstrap JS (Popper.js included) --> <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> <script src="{% static 'triviolivia.js' %}"></script> </body> {% endblock %}
