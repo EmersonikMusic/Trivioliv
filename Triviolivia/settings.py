@@ -216,3 +216,6 @@ class HerokuDiscoverRunner(DiscoverRunner):
 # Use HerokuDiscoverRunner on Heroku CI
 if "CI" in os.environ:
     TEST_RUNNER = "gettingstarted.settings.HerokuDiscoverRunner"
+
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'  # Allows framing on same domain
