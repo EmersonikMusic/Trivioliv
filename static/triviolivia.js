@@ -14210,12 +14210,7 @@ function fetchQuestionsAndStartGame() {
     if (era_list.length > 0) {
       queryParams.push("era=" + era_list.join(","));
     }
-    const urlWithParams =
-      baseUrl +
-      "?questions=" +
-      number_of_questions +
-      "&" +
-      queryParams.join("&");
+    const urlWithParams = baseUrl + "?questions=" + number_of_questions + (queryParams.length > 0 ? "&" + queryParams.join("&") : "");
     moddedUrl = urlWithParams;
     menu_hidden = true;
     mainGameFunction();
