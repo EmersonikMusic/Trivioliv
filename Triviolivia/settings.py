@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-from django.core.exceptions import ImproperlyConfigured
 from django.test.runner import DiscoverRunner
 import dj_database_url
 
@@ -23,24 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# The os.environ.get check makes this safer for production environments like Heroku.
-# In development, DEBUG will be True unless DJANGO_DEBUG is explicitly set to 'False'.
-# In a production environment (like Heroku), set DJANGO_DEBUG to 'False'.
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
-
 # SECURITY WARNING: keep the secret key used in production secret!
-# The default key is for development only.
-# In production, this MUST be set as an environment variable.
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-qfadm-gnvm*0_lz7w0rja@tee-qi5l*^yi8waiick41bsfnce8')
 
-# If we are in a production environment (DEBUG is False), we require the SECRET_KEY
-# to be set. This prevents the app from running with the insecure default key.
-if not DEBUG and not SECRET_KEY:
-    raise ImproperlyConfigured("The SECRET_KEY environment variable must be set in production.")
-
-if DEBUG and not SECRET_KEY:
-    SECRET_KEY = 'django-insecure-qfadm-gnvm*0_lz7w0rja@tee-qi5l*^yi8waiick41bsfnce8'
+# SECURITY WARNING: don't run with debug turned on in production!
+# The os.environ.get check makes this safer for production environments like Heroku
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 
 ALLOWED_HOSTS = [
@@ -74,9 +61,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # WhiteNoise should be placed directly after the SecurityMiddleware
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # Correctly placed high in the list
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -94,8 +80,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
-# Being explicit with allowed origins is a better security practice.
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_ALLOW_ALL = False # It is better to be explicit with origins
 
 
 ROOT_URLCONF = 'Triviolivia.urls'
@@ -193,9 +178,6 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
-# Simplified static file storage for production with WhiteNoise
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 
 MEDIA_URL = '/images/'
 
@@ -225,21 +207,8 @@ class HerokuDiscoverRunner(DiscoverRunner):
 
 
 # Use HerokuDiscoverRunner on Heroku CI
+# Note: The original path 'gettingstarted.settings.HerokuDiscoverRunner' might
+# need to be updated to your project's name if it's not 'gettingstarted'.
+# Assuming your project's main folder is 'Triviolivia'.
 if "CI" in os.environ:
     TEST_RUNNER = "Triviolivia.settings.HerokuDiscoverRunner"
-
-# --- Production Security Settings ---
-# These settings are applied when DEBUG is False.
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_BROWSER_XSS_FILTER = True
-
-    # HSTS (HTTP Strict Transport Security) settings
-    # Start with a low value for testing, e.g., 3600 (1 hour).
-    # After confirming everything works, increase this to a larger value,
-    # e.g., 31536000 (1 year).
-    SECURE_HSTS_SECONDS = 3600
-    # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    # SECURE_HSTS_PRELOAD = True
