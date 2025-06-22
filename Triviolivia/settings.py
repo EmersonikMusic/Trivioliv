@@ -28,10 +28,18 @@ SECRET_KEY = 'django-insecure-qfadm-gnvm*0_lz7w0rja@tee-qi5l*^yi8waiick41bsfnce8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'https://markadegames.com', 'https://www.markadegames.com','markadegames.com/:1',]
-CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = [
+    'triviolivia.com',
+    'www.triviolivia.com',
+    'localhost',
+    '127.0.0.1',
+]
+CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOWED_ORIGINS = [
-    "https://markadegames.com",
+    "https://triviolivia.com",
+    "https://www.triviolivia.com",
+    "http://localhost:3000",  # For local development
+    "http://127.0.0.1:3000",  # For local development
 ]
 
 # Application definition
@@ -55,6 +63,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,10 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'Triviolivia.urls'
