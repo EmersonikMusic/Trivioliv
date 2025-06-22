@@ -26,32 +26,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qfadm-gnvm*0_lz7w0rja@tee-qi5l*^yi8waiick41bsfnce8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'https://markadegames.com', 'https://www.markadegames.com','markadegames.com/:1',]
-CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = [
+    'triviolivia.com',
+    'www.triviolivia.com',
+    'triviolivia.herokuapp.com',  # Add your Heroku app URL
+    'localhost',
+    '127.0.0.1',
+]
+CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOWED_ORIGINS = [
-    "https://markadegames.com",
-    "https://www.triviolivia.com",
     "https://triviolivia.com",
+    "https://www.triviolivia.com",
+    "https://triviolivia.herokuapp.com",  # Add your Heroku app URL
+    "http://localhost:3000",  # For local development
+    "http://127.0.0.1:3000",  # For local development
 ]
-
-# Optional: Allow credentials (cookies, etc.) to be sent with requests
-CORS_ALLOW_CREDENTIALS = True
-
-# Optional: Specify allowed HTTP methods
-CORS_ALLOW_METHODS = [
-    "GET",
-    "POST",
-    "PUT",
-    "PATCH",
-    "DELETE",
-    "OPTIONS",
-]
-
-# New stuff from Claude
-SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
@@ -74,6 +65,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -81,10 +75,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'Triviolivia.urls'
