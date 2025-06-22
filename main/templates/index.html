@@ -1,196 +1,1398 @@
-{% extends 'base.html' %}
+<!-- {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
-<head> <link rel="icon" type="image/x-icon" href="{% static 'SVGs/favicon.svg' %}"> <title>TRIVIOLIVIA.com - Earth's Deepest Trivia Source</title> <!-- Google analytics tag --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-7JY71BDXF0"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-7JY71BDXF0'); </script> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Bootstrap CSS --> <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"> <link rel="stylesheet" href="https://use.typekit.net/aps1vss.css"> <link rel="stylesheet" href="{% static 'triviolivia.css' %}"> </head> <body> <!-- Updated HTML Structure --> <div id="wrapper-all" class="wrapper-all"> <div id="wrapper-main-content" class="wrapper-main-content"> <div class="header"> <div id="logo-header" class="logo-header"> <a href="https://www.triviolivia.com"> <img src="{% static 'images/TO_logo_sm_wt.svg' %}" alt="TriviOlivia.com"> </a> </div> </div>
+{% block content %} -->
 
-  <div id="wrapper-game-area" class="row h-100 g-2">
-    <!-- Main Game Area -->
-    <div class="game-area">
-      <div id="loading-screen" class="loading-screen">
-        <div id="loading-logo" class="loading-logo">
-          <img src="{% static 'images/img-TO-logo-full-desktop.svg' %}" alt="triviolivia.com">
-        </div>
-        <div id="start-game-container" class="btn-startgame-container">
-          <button id="large-start-pause" class="btn-startgame" onclick="dontFetchDataIfAllDeselected()" type="button">
-            <img src="{% static 'images/btn-startgame.svg' %}" alt="Start Game">
-          </button>
-        </div>
-      </div>
+<head>
+  <link rel="icon" type="image/x-icon" href="{% static 'SVGs/favicon.svg' %}">
+  <title>TRIVIOLIVIA.com - Earth's Deepest Trivia Source</title>
+</head>
 
-      <div id="game-area-content" class="game-area-content">
-        <div class="question-container">
-          Welcome to<br>
-          Earth's Deepest Trivia Source!
-        </div>
-        <div class="answer-container">
-        </div>
-      </div>
-    </div> 
-  </div>
+
+
+<!-- Google analytics tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7JY71BDXF0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7JY71BDXF0');
+</script>
+
+<script>
+    function trackButtonClick(event) {
+        var button = event.target;
+        var buttonText = button.innerText || button.textContent || 'unknown-button';
+        var category = 'General Button Click'; // Default category
+        var state = button.classList.contains('active') ? 'on' : 'off'; // Track on/off state
+
+        // Track All/None buttons for Categories, Difficulties, and Eras
+        if (button.id.includes('all-none')) {
+            var groupName = '';
+            var allActive = false;
+            var allDisabled = false;
+
+            if (button.id.includes('categories')) {
+                groupName = 'Categories';
+                // Check if all category buttons are active
+                allActive = document.querySelectorAll('.category').length === document.querySelectorAll('.category.active').length;
+                allDisabled = document.querySelectorAll('.category.active').length === 0;
+            } else if (button.id.includes('difficulties')) {
+                groupName = 'Difficulties';
+                // Check if all difficulty buttons are active
+                allActive = document.querySelectorAll('.difficulty').length === document.querySelectorAll('.difficulty.active').length;
+                allDisabled = document.querySelectorAll('.difficulty.active').length === 0;
+            } else if (button.id.includes('eras')) {
+                groupName = 'Eras';
+                // Check if all era buttons are active
+                allActive = document.querySelectorAll('.era').length === document.querySelectorAll('.era.active').length;
+                allDisabled = document.querySelectorAll('.era.active').length === 0;
+            }
+
+            // Determine action based on state of all options
+            if (allActive) {
+                gtag('event', groupName + '_all', {
+                    'event_category': groupName + ' Selection',
+                    'event_label': groupName + ' ALL (enabled)'
+                });
+            } else if (allDisabled) {
+                gtag('event', groupName + '_none', {
+                    'event_category': groupName + ' Selection',
+                    'event_label': groupName + ' NONE (disabled)'
+                });
+            }
+
+            return; // Skip normal button tracking for these buttons
+        }
+
+        // Default behavior for other buttons
+        if (button.classList.contains('category')) {
+            category = 'Category Selection';
+        } else if (button.classList.contains('difficulty')) {
+            category = 'Difficulty Selection';
+        } else if (button.classList.contains('era')) {
+            category = 'Era Selection';
+        } else if (button.classList.contains('nav-button')) {
+            category = 'Navigation';
+        }
+
+        gtag('event', buttonText.replace(/\s+/g, '_') + '_clicked_' + state, {
+            'event_category': category,
+            'event_label': buttonText + ' (' + state.toUpperCase() + ')'
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("button").forEach(function(button) {
+            button.addEventListener("click", trackButtonClick);
+        });
+    });
+</script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRIVIOLIVIA</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+  /* Modern CSS Reset */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
   
-  <div id="footer" class="footer">
-    <div id="loading-bar-container" class="loading-bar-container">
-      <div id="loading-bar" class="loading-bar">
-        <div id="loading-text">
-          <p id="demo" class="loader-text"></p>
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    line-height: 1.5;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  
+  input, button, textarea, select {
+    font: inherit;
+  }
+  
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  ul, ol {
+    list-style: none;
+  }
+  
+  /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+    
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #121212;
+            font-family: "Montserrat", 'Calibri', sans-serif;
+            color: white;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            hyphens: none;
+
+        }
+
+        .container-fluid {
+            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
+            padding: 0;
+            
+        }
+
+        .header {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 12px 12px 0 0;
+            font-weight: bold;
+            font-size: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Updated hamburger menu styles */
+.hamburger-menu {
+    cursor: pointer;
+}
+
+.hamburger-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    transition: background-color 0.2s;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 38px;
+    width: 38px;
+}
+
+.hamburger-btn:hover {
+    background-color: rgba(148, 125, 196, 0.3);
+}
+
+.hamburger-icon-bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 2px 0;
+    border-radius: 3px;
+    background-color: white;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Optional: Add animation when active */
+.hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+}
+
+.hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn[aria-expanded="true"] .hamburger-icon-bar:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+}
+
+.dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: none;
+}
+
+.dropdown-item {
+    color: white;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+}
+
+        .game-area {
+            height: calc(var(--vh, 1vh) * 70);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            height: calc(100% - 30px);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .question-container {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    /* Dynamic font sizing */
+    font-size: clamp(16px, 5vw, 8vh);
+    /* background-color: rgba(0,0,0, 0.4); */
+    margin: 10px;
+    border-radius: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: none;
+}
+
+.answer-container {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    /* Dynamic font sizing */
+    font-size: clamp(16px, 5vw, 8vh);
+    /* background-color: rgba(0,0,0, 0.4); */
+    margin: 10px;
+    border-radius: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: none;
+}
+
+.loading-bar-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: auto;
+  }
+
+p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+        .menu-container {
+            background-color: rgba(0,0,0, 0.4);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+        }
+
+        /* Mobile-specific styles */
+        .mobile-menu {
+            height: 25vh;
+            margin-top: 8px;
+            flex-direction: row;
+        }
+
+        .mobile-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            width: 70%;
+        }
+
+        .mobile-character {
+            width: 30%;
+            height: 100%;
+        }
+
+        /* Desktop-specific styles */
+        .desktop-menu {
+            height: 100%;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        .desktop-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .desktop-character {
+            margin-top: auto;
+            vertical-align: bottom;
+        }
+
+        .menu-button {
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            color: white;
+        }
+
+        button {
+    display: flex;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 11px;
+    text-align: left;
+    height: 20px;
+    padding: 0px;
+    margin: 1px 0;
+    border: none;
+    font-weight: 950;
+    cursor: pointer;
+    border-radius: 2px;
+    color: white;
+}
+
+        /* Mobile button styles */
+        .mobile-menu .menu-button {
+            flex-basis: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 33.33%;
+            color: white;
+        }
+
+        /* Desktop button styles */
+        .desktop-menu .menu-button {
+            width: 100%;
+            padding: 8px;
+            background-color: rgba(0,0,0, 0.5);
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0;
+            color: white;
+        }
+
+        .desktop-menu .menu-button:hover {
+            background-color: rgba(0,0,0, 0.7);
+            transform: scale(1.05);
+        }
+
+        .mobile-menu .menu-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .character-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible; /* Changed from hidden to visible */
+    height: 100%;
+    width: 100%;
+    vertical-align: bottom;
+}
+
+        /* Animation for the character */
+        @keyframes bob {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
+        .character-svg {
+            animation: bob 2s infinite ease-in-out;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+        }
+        
+        /* Mobile character container specific */
+        .mobile-character {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 5px;
+    width: 30%;
+    overflow: visible; /* Changed from hidden to visible */
+}
+        
+        /* Desktop character container specific */
+        .desktop-character {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu {
+                display: none;
+            }
+            
+            .game-area {
+                height: 100%;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .desktop-menu {
+                display: none;
+            }
+        }
+
+
+
+
+        /* COLLAPSE/EXPAND DIV CSS */
+
+input[type='checkbox'] { 
+    display: none; 
+} 
+
+.wrap-collabsible { 
+    margin: 0px 0;
+} 
+
+.lbl-toggle { 
+  display: flex; 
+  font-weight: 100; 
+  text-transform: uppercase; 
+  /* padding: .25rem;  */
+  color: #DDD; 
+  background: rgba(0, 0, 0, 0);
+  cursor: pointer; 
+  transition: all .25s ease-out; 
+  flex-direction: row;
+  align-items: center;
+  margin: 0px 20px;
+  padding: 10px 20px;
+} 
+
+.lbl-toggle:hover { 
+    color: #FFF;
+    border-radius: 14px;
+    background: rgba(0, 0, 0, .2); 
+}
+
+.lbl-toggle::before { 
+  content: ' '; 
+  display: inline-block; 
+  border-top: 5px solid transparent; 
+  border-bottom: 5px solid transparent; 
+  border-left: 5px solid currentColor; 
+  vertical-align: middle; 
+  margin-right: .7rem; 
+  transform: translateY(-2px); 
+  transition: transform .2s ease-out; 
+} 
+.toggle:checked + .lbl-toggle::before { 
+  transform: rotate(90deg) translateX(-3px); 
+} 
+
+.collapsible-content { 
+  max-height: 0px; 
+  overflow: hidden; 
+  transition: max-height .5s ease-in-out; 
+  transition-delay: 0.26s;
+
+  /* unsure about this one */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+} 
+
+.toggle:checked + .lbl-toggle { 
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 14px;
+    border-top-left-radius: 14px;
+    background: rgba(0, 0, 0, .2);
+} 
+
+.content-inner { 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.content-inner button {
+    color: rgba(225, 225, 225, 1);
+    display: flex;
+    vertical-align: middle;
+    /* background: rgba(0, 0, 0, .1); */
+    border-radius: 8px;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.content-inner button:hover{
+    background: rgba(0, 0, 0, .25);
+}
+.content-inner button.all-none-btn {
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    padding-left: 8px;
+    border-radius: 6px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.collapsible-content .content-inner { 
+    background: rgba(0, 0, 0, .2);
+    padding: 10 20;
+    margin: 0 20;
+    border-bottom-right-radius: 14px; 
+    border-bottom-left-radius: 14px; 
+} 
+.collapsible-content p { 
+    margin-bottom: 0; 
+}
+ 
+.toggle:checked + .lbl-toggle + .collapsible-content { 
+    max-height: 100vh;
+    overflow: scroll;
+  } 
+
+.hide {
+    display: none;
+}
+ 
+/* COLLAPSE/EXPAND DIV CSS END */
+
+
+
+
+
+/* Attempt at dynamic question and answer timer indicator */
+  #loading-bar {
+    display: flex;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    justify-content: center;
+  }
+  #progress {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: depleteProgress 10s linear infinite paused;
+  }
+
+  #loading-text {
+    display: flex;
+    color: white;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 1;
+  }
+
+  /* Existing animation for question display (depleting from full to empty) */
+@keyframes depleteProgress {
+from {
+  width: 100%;
+}
+to {
+  width: 0%;
+}
+}
+
+/* New animation for answer display (growing from empty to full) */
+@keyframes growProgress {
+from {
+  width: 0%;
+}
+to {
+  width: 100%;
+}
+}
+
+
+
+
+  /* Loading animation stuff */
+  .loader {
+            display: flex;
+            gap: 20px;
+        }
+        .dot {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.3; }
+            50% { transform: translateY(-20px); opacity: 1; }
+        }
+
+
+
+
+
+/* Slider stuff */
+.slider-container {
+    margin: 5px auto;
+}
+.slider-label {
+    text-align: center;
+    padding-bottom: 5px;
+}
+.slider {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.4);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #FFF;
+    cursor: pointer;
+}
+.slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #FFF;
+    cursor: pointer;
+}
+
+
+
+/* Indicator light attempt */
+.indicator {
+    width: 2px; /* Reduce the indicator width to match smaller buttons */
+    height: 100%; /* Set the indicator's height to 100% of the button's height */
+    background-color: #00F829;
+    left: 0; /* Position the indicator at the left edge of the button */
+    top: 0; /* Align the indicator with the top of the button */
+    bottom: 0; /* Align the indicator with the bottom of the button */
+    margin-right: 0px; /* Create space between indicator and text */
+    border-right: 1px solid #2D2D2D;
+    border-radius: 2px;
+    margin-right: 6px;
+  }
+
+  .inactive .indicator  {
+    background-color: red;
+  }
+
+.button .category-title, .difficulty-title, .era-title {
+    margin: auto;
+    padding-left: 10px;
+    text-align: left;
+}
+
+
+
+
+/* Character animations*/
+#character {
+    animation: bobbing 2s infinite ease-in-out;
+        }
+        @keyframes bobbing {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        #character2 {
+    animation: bobbing 2s infinite ease-in-out;
+        }
+        @keyframes bobbing {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-2px);
+            }
+        }
+
+        /* Loading animation */
+        .loader {
+            display: flex;
+            gap: 10px;
+        }
+        .dot {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.3; }
+            50% { transform: translateY(-15px); opacity: 1; }
+        }
+
+
+/* Logo stuff */
+        .logo-container {
+            text-align: center;
+        }
+        
+        .logo {
+            display: inline-block;
+        }
+        
+        .main-text {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(45deg, white, white);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .main-text:hover {
+            transform: scale(1.05);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .domain {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: white;
+            vertical-align: baseline;
+            letter-spacing: 0;
+        }
+
+      /* Mobile fix - replace your current mobile media query with this */
+@media (max-width: 767px) {
+    /* Reset core elements */
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Prevent scrolling on the body */
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+    
+    /* Main container setup */
+    .container-fluid {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        overflow: hidden;
+    }
+    
+    /* Row takes up all available space */
+    .row.h-100 {
+        flex: 1;
+        width: 100%;
+        margin: 0;
+    }
+    
+    /* Column takes up full width on mobile */
+    .col-md-9 {
+        width: 100%;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        flex: 1;
+    }
+    
+    /* Game area fills available space */
+    .game-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 26vh; /* Reduced spacing between areas */
+        overflow: hidden;
+        padding-bottom: 0; /* Removed bottom padding */
+    }
+    
+    /* Content areas flex to fill game area */
+    .question-container, .answer-container {
+        flex: 1;
+        overflow-y: auto;
+        min-height: 0; /* Critical for flex child to respect parent boundaries */
+        padding-bottom: 0; /* Removed extra padding */
+    }
+    
+    /* Make sure loading bar sits flush at the bottom of the game area */
+    .loading-bar-container {
+        margin-top: auto;
+        margin-bottom: 0;
+    }
+    
+    /* Fixed mobile menu at bottom */
+    .mobile-menu {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 25vh;
+        margin: 0;
+        border-radius: 12px 12px 0 0;
+        z-index: 1000;
+        padding-top: 5px; /* Added padding to push content down slightly */
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Optional: add shadow to visually separate */
+    }
+    
+    /* Hide desktop menu completely */
+    .col-md-3 {
+        display: none;
+    }
+    
+    /* Make sure loading bar stays at bottom of game area */
+    .loading-bar-container {
+        margin-top: auto;
+    }
+}
+
+
+
+
+/* Mobile menu dropdowns - UPDATED */
+/* Additional CSS for Mobile Menu Dropdowns */
+.mobile-dropdown {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-dropdown .wrap-collabsible {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.mobile-dropdown .lbl-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.mobile-dropdown .lbl-toggle:hover {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.mobile-dropdown .collapsible-content {
+  position: absolute;
+  top: -350px; /* Adjust as needed to position above buttons */
+  left: 0;
+  width: 100vw;
+  z-index: 1010;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.mobile-dropdown .toggle:checked + .lbl-toggle + .collapsible-content {
+  max-height: 350px; /* Adjust based on content height */
+  overflow-y: auto;
+}
+
+/* Make mobile content inner match desktop */
+.mobile-dropdown .content-inner {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  background: rgba(0, 0, 0, .2);
+  border-bottom-right-radius: 14px;
+  border-bottom-left-radius: 14px;
+}
+
+/* Standardize button appearance between mobile and desktop */
+.mobile-dropdown .button,
+.content-inner .button {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 11px;
+  height: 20px;
+  padding: 0px;
+  margin: 1px 0;
+  border: none;
+  font-weight: 950;
+  cursor: pointer;
+  border-radius: 2px;
+  color: white;
+  flex-direction: row;
+  align-items: center;
+}
+
+/* Make all-none buttons consistent */
+.mobile-dropdown .button.all-none-btn,
+.content-inner .button.all-none-btn {
+  background-color: rgba(0, 0, 0, .5);
+  display: flex;
+  padding-left: 8px;
+  border-radius: 6px;
+  flex-direction: row;
+  align-items: center;
+}
+
+/* Indicator consistency */
+.mobile-dropdown .button .indicator,
+.content-inner .button .indicator {
+  width: 2px;
+  height: 100%;
+  background-color: #00F829;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin-right: 6px;
+  border-right: 1px solid #2D2D2D;
+  border-radius: 2px;
+}
+
+.mobile-dropdown .button.inactive .indicator,
+.content-inner .button.inactive .indicator {
+  background-color: red;
+}
+
+/* Sync mobile sliders with desktop sliders */
+#mobileQuestionSlider, #mobilePerQuestionSlider, #mobilePerAnswerSlider {
+  width: 100%;
+}
+
+/* Make sure mobile menu can handle dropdowns */
+@media (max-width: 767px) {
+  .mobile-menu {
+    height: 25vh;
+    z-index: 1000;
+    overflow: visible;
+  }
+  
+  .mobile-buttons {
+    overflow: visible;
+    position: relative;
+  }
+}
+
+
+
+
+
+
+
+/* Enhanced indicator styling for better visibility */
+.indicator {
+width: 3px; /* Slightly wider for better visibility */
+height: 100%; /* Full height of the button */
+background-color: #00F829; /* Bright green for active state */
+left: 0;
+top: 0;
+bottom: 0;
+margin-right: 6px;
+border-right: 1px solid #2D2D2D;
+border-radius: 2px;
+display: inline-block; /* Ensure proper display */
+}
+
+.inactive .indicator {
+background-color: #FF3A30; /* Brighter red for better visibility */
+}
+
+/* Fix for mobile indicators */
+.mobile-dropdown .indicator {
+display: inline-block;
+margin-right: 6px;
+min-height: 15px; /* Ensure minimum height */
+}
+
+/* Make sure buttons display indicators properly */
+.content-inner button,
+.mobile-dropdown .content-inner button {
+display: flex;
+align-items: center;
+padding: 3px 0;
+margin: 2px 0;
+min-height: 22px; /* Ensure buttons have enough height */
+}
+
+/* Fix for any potential conflicts */
+.active .indicator {
+background-color: #00F829 !important;
+}
+
+.inactive .indicator {
+background-color: #FF3A30 !important;
+}
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid p-1">
+        <div class="row h-100 g-2">
+            <!-- Main Game Area -->
+            <div class="col-md-9 d-flex flex-column h-100">
+                <div class="game-area">
+                  <div class="header">
+                    <div class="logo-container">
+                      <div class="logo">
+                          <a href="https://www.triviolivia.com" style="text-decoration: none; color: inherit;">
+                              <span class="main-text">TRIVIOLIVIA</span><span class="domain">.com</span>
+                          </a>
+                      </div>
+                    </div>
+                    <div class="hamburger-menu dropdown">
+                        <div class="login">
+                            {% if user.is_authenticated %}
+                            <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
+                            <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
+                            <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
+                            {% else %}
+                                <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">Register</button></a>
+                                <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">Login</button></a>
+                            {% endif %}
+                        </div> 
+                    </div>
+                </div>
+                    <div class="question-container">
+
+                        Welcome to<br>
+                        Earth's Deepest Trivia Source!
+                    </div>
+                    <div class="answer-container">
+                        (in beta)
+                    </div>
+
+                    <div id="loading-bar-container" class="loading-bar-container">
+                        <div id="loading-bar">
+                            <div id="loading-text">
+                                <p id="demo" class="loader-text"></p>
+                            </div>
+                            <div id="progress"></div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Mobile Menu Bar (visible only on small screens) -->
+<div class="menu-container mobile-menu">
+    <div class="mobile-buttons">
+      <div button id="start-pause2" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
+      
+      <!-- Mobile Categories dropdown -->
+      <div class="menu-button mobile-dropdown">
+        <div class="wrap-collabsible"> 
+          <input id="mobile-collapsible-categories" class="toggle" type="checkbox"> 
+          <label for="mobile-collapsible-categories" class="lbl-toggle">CATEGORIES</label>
+          <div class="collapsible-content">
+            <div class="content-inner">
+              <button id="mobile-all-none-categories" class="all-none-btn button" onclick="allNoneCategoriesButton()">ALL/NONE</button>
+              {% for category in categories %}
+              <div id='mobile-{{ category.name | slugify }}'>
+                <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                  <span class="indicator"></span>
+                  {{ category.name | upper }}
+                </button>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
         </div>
-        <div id="progress"></div>
       </div>
-    </div>
-    <div id="container_btn_pauseplay" class="game-button-container">
-      <div class="desktop-buttons">
-        <div button id="start-pause" class="user-button" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">
-          <img src="{% static 'images/btn-icon-pause.svg' %}" alt="game-paused">
+      
+      <div button id="refetch-and-restart2" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
+      
+      <!-- Mobile Difficulties dropdown -->
+      <div class="menu-button mobile-dropdown">
+        <div class="wrap-collabsible"> 
+          <input id="mobile-collapsible-difficulties" class="toggle" type="checkbox"> 
+          <label for="mobile-collapsible-difficulties" class="lbl-toggle">DIFFICULTIES</label>
+          <div class="collapsible-content">
+            <div class="content-inner">
+              <button id="mobile-all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE</button>
+              {% for difficulty in difficulties %}
+              <div id='mobile-{{ difficulty.name }}'>
+                <button onclick='toggle_difficulties(this.id), toggleIndicator(this)' id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
+                  <span class="indicator"></span>
+                  {{ difficulty.name | upper}}
+                </button>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
         </div>
-        <div button id="refetch-and-restart" class="user-button" onclick="refetchAndRestart()" type="button" class="menu-button">
-          <img src="{% static 'images/btn-icon-refresh.svg' %}" alt="game-paused">
+      </div>
+      
+      <!-- Mobile Settings dropdown -->
+      <div class="menu-button mobile-dropdown">
+        <div class="wrap-collabsible"> 
+          <input id="mobile-collapsible-settings" class="toggle" type="checkbox"> 
+          <label for="mobile-collapsible-settings" class="lbl-toggle">SETTINGS</label>
+          <div class="collapsible-content">
+            <div class="content-inner">
+              <div id="mobile_menu_question_time" class="menu_question_time">
+                <div class="slider-container">
+                  <div id="mobileQuestionLabel" class="slider-label">10 QUESTIONS</div>
+                  <input type="range" min="10" max="100" value="10" step="10" class="slider" id="mobileQuestionSlider">
+                </div>
+                <div class="slider-container">
+                  <div id="mobilePerQuestionLabel" class="slider-label">5s / QUESTION</div>
+                  <input type="range" min="1" max="30" value="5" step="5" class="slider" id="mobilePerQuestionSlider">
+                </div>
+                <div class="slider-container">
+                  <div id="mobilePerAnswerLabel" class="slider-label">5s / ANSWER</div>
+                  <input type="range" min="1" max="30" value="5" step="5" class="slider" id="mobilePerAnswerSlider">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>                            
-    </div>
-  </div> 
-</div>
-
-
-<div id="character" class="character-column character-hidden">
-  <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
-</div> 
-
-
-<div id="menu-settings" class="menu-settings-desktop">
-
-  <!-- Menu toggle button -->
-  <div class="menu-toggle-wrapper">
-    <button id="menu-toggle-button" class="menu-toggle-button">
-      <img src="{% static 'images/btn-icon-settings.svg' %}" alt="Toggle Menu">
-    </button>
-  </div>
-  <div class="menu-container desktop-menu">
-    <div class="hamburger-menu dropdown">
-      <div class="login">
-        {% if user.is_authenticated %}
-          <a class="nav-link" href="{% url 'configure:main' %}"><button id="nav-configure" class="nav-button">Configure</button></a>
-          <a class="nav-link" href="#"><button id="nav-username" class="nav-button">{{user.username}}</button></a>
-          <a class="nav-link" href="{% url 'logout' %}"><button id="nav-logout" class="nav-button">Logout</button></a>
-        {% else %}
-          <a class="nav-link" href="{% url 'register' %}"><button id="nav-register" class="nav-button">REGISTER</button></a>
-          <a class="nav-link" href="{% url 'login' %}"><button id="nav-login" class="nav-button">LOGIN</button></a>
-        {% endif %}
-      </div> 
-    </div>
-
-    <div id="title-settings" class="title-settings">
-      <img src="{% static 'images/img-title-settings-desktop.svg' %}" alt="Customize Your Game Experience">
-      <span>CUSTOMIZE YOUR GAME EXPERIENCE</span>
-    </div>
-
-    <div id="mobile-start-game-container" class="btn-startgame-container">
-      <button id="mobile-start-pause" class="btn-startgame" onclick="dontFetchDataIfAllDeselected()" type="button">
-        <img src="{% static 'images/btn-startgame.svg' %}" alt="Start Game">
-      </button>
+      </div>
+      
+      <!-- Mobile Eras dropdown -->
+      <div class="menu-button mobile-dropdown">
+        <div class="wrap-collabsible"> 
+          <input id="mobile-collapsible-eras" class="toggle" type="checkbox"> 
+          <label for="mobile-collapsible-eras" class="lbl-toggle">ERAS</label>
+          <div class="collapsible-content">
+            <div class="content-inner">
+              <button id="mobile-all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
+              {% for era in eras %}
+              <div id='mobile-{{ era.name }}'>
+                <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
+                  <span class="indicator"></span>
+                  {{ era.name }}
+                </button>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     
-
-    <!--Categories menu-->
-    <div id="menu-categories" class="wrap-collabsible"> 
-      <input id="collapsible-categories" class="toggle" type="checkbox">
-      <label for="collapsible-categories" class="lbl-toggle">
-        <img src="{% static 'images/icon-categories-inactive.svg' %}" class="menu-icon" alt="Categories">
-        CATEGORIES
-      </label>
-      <div class="collapsible-content">
-        <div class="content-inner">
-          <button id="all-none-categories" class="all-none-btn button" onclick="allNoneCategoriesButton()">ALL/NONE</button>
-          {% for category in categories %}
-          <div id='{{ category.name | slugify }}' class='menu-subcategories'>
-            <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
-              <div class="toggle-switch active">
-                <div class="toggle-dot"></div>
-              </div>
-              {{ category.name | upper }}
-            </button>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-
-    <!--Difficulties menu-->
-    <div class="wrap-collabsible"> 
-      <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
-      <label for="collapsible-difficulties" class="lbl-toggle">
-        <img src="{% static 'images/icon-difficulty-inactive.svg' %}" class="menu-icon" alt="Difficulty">
-        DIFFICULTIES
-      </label>
-      <div class="collapsible-content">
-        <div class="content-inner">
-          <button id="all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE</button>
-          {% for difficulty in difficulties %}
-          <div id='{{ difficulty.name }}'>
-            <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
-              <div class="toggle-switch active">
-                <div class="toggle-dot"></div>
-              </div>
-              {{ difficulty.name | upper}}
-            </button>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-
-    <!--Eras menu-->
-    <div class="wrap-collabsible"> 
-      <input id="collapsible-eras" class="toggle" type="checkbox"> 
-      <label for="collapsible-eras" class="lbl-toggle">
-        <img src="{% static 'images/icon-era-inactive.svg' %}" class="menu-icon" alt="Eras">
-        ERAS
-      </label>
-      <div class="collapsible-content">
-        <div class="content-inner">
-          <button id="all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
-          {% for era in eras %}
-          <div id='{{ era.name }}'>
-            <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
-              <div class="toggle-switch active">
-                <div class="toggle-dot"></div>
-              </div>
-              {{ era.name }}
-            </button>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-
-    <!--Settings menu-->
-    <div class="wrap-collabsible"> 
-      <input id="collapsible-settings" class="toggle" type="checkbox" unchecked> 
-      <label for="collapsible-settings" class="lbl-toggle">
-        <img src="{% static 'images/icon-settings-inactive.svg' %}" class="menu-icon" alt="Settings">
-        SETTINGS
-      </label>
-      <div class="collapsible-content">
-        <div class="content-inner">
-          <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
-            <div class="slider-container">
-              <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
-              <input type="range" min="10" max="50" value="10" step="10" class="slider" id="questionSlider">
-            </div>
-            <div class="slider-container">
-              <div id="perQuestionLabel" class="slider-label">5s / QUESTION</div>
-              <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
-            </div>
-            <div class="slider-container">
-              <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
-              <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="character-container mobile-character" id="character2">
+      <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
     </div>
   </div>
-</div>
+
+            </div>
+            
+            <!-- Side Menu (visible only on larger screens) -->
+            <div class="col-md-3 d-flex flex-column h-100 pl-0">
+                <div class="menu-container desktop-menu">
+                    <div class="desktop-buttons">
+                        <div button id="start-pause" onclick="dontFetchDataIfAllDeselected()" type="button" class="menu-button">START/PAUSE</div>
+
+                        <div button id="refetch-and-restart" onclick="refetchAndRestart()" type="button" class="menu-button">REFETCH</div>
+
+                        
 
 
-</div> <!-- Bootstrap JS (Popper.js included) --> <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> <script src="{% static 'triviolivia.js' %}"></script> </body> {% endblock %}
+
+                          
+          </div>
+
+
+                        <!--Categories menu-->
+                <div class="wrap-collabsible"> 
+                    <input id="collapsible-categories" class="toggle" type="checkbox"> 
+                    <label for="collapsible-categories" class="lbl-toggle">
+                        CATEGORIES
+                    </label>
+                    <div class="collapsible-content">
+                        <div class="content-inner">
+                            <button id="all-none-categories" class="all-none-btn button" onclick="allNoneCategoriesButton()">ALL/NONE</button>
+                            {% for category in categories %}
+                            <div id='{{ category.name | slugify }}'>
+                                <button onclick='toggle_categories(this.id), toggleIndicator(this)' id='{{ category.id }}' title='{{ category.title }}' class="button active category {{ category.title }} {{ category.id }}">
+                                    <span class="indicator"></span>
+                                    {{ category.name | upper }}
+                                </button>
+                            </div>
+                            {% endfor %}
+                    </div>
+                    </div>
+                </div>
+
+                
+                        <!--Difficulties menu-->
+                <div class="wrap-collabsible"> 
+                  <input id="collapsible-difficulties" class="toggle" type="checkbox"> 
+                  <label for="collapsible-difficulties" class="lbl-toggle">
+                      DIFFICULTIES
+                  </label>
+                  <div class="collapsible-content">
+                      <div class="content-inner">
+                          <button id="all-none-difficulties" class="button all-none-btn" onclick="allNoneDifficultiesButton()">ALL/NONE</button>
+                          {% for difficulty in difficulties %}
+                          <div id='{{ difficulty.name }}'>
+                              <button onclick='toggle_difficulties(this.id), toggleIndicator(this)'id='{{ difficulty.score }}' type='button' class="button active difficulty {{ difficulty.title }} {{ difficulty.id }}">
+                                  <span class="indicator"></span>
+                                  {{ difficulty.name | upper}}
+                              </button>
+                          </div>
+                          {% endfor %}
+                      </div>
+                  </div>
+                  </div>
+  
+  
+                  <!--Eras menu-->
+                  <div class="wrap-collabsible"> 
+                  <input id="collapsible-eras" class="toggle" type="checkbox"> 
+                  <label for="collapsible-eras" class="lbl-toggle">ERAS</label>
+                  <div class="collapsible-content">
+                      <div class="content-inner">
+                      <button id="all-none-eras" class="button all-none-btn" onclick="allNoneErasButton()">ALL/NONE</button>
+                      {% for era in eras %}
+                      <div id='{{ era.name }}'>
+                          <button onclick='toggle_eras(this.id), toggleIndicator(this)' id='{{ era.id }}' type='button' class="button active era {{ era.title }} {{ era.id }}">
+                              <span class="indicator"></span>
+                              {{ era.name }}
+                          </button>
+                          </div>
+                      {% endfor %}
+                      </div>
+                  </div>
+                  </div>
+
+
+                  <!--Settings menu-->
+          <div class="wrap-collabsible"> 
+            <input id="collapsible-settings" class="toggle" type="checkbox"> 
+            <label for="collapsible-settings" class="lbl-toggle">settings</label>
+            <div class="collapsible-content">
+                <div class="content-inner">
+                    <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
+                        <div class="slider-container">
+                            <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
+                            <input type="range" min="10" max="100" value="10" step="10" class="slider" id="questionSlider">
+                        </div>
+                        <div class="slider-container">
+                            <div id="perQuestionLabel" class="slider-label">5s / QUESTION</div>
+                            <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
+                        </div>
+        
+                        <div class="slider-container">
+                            <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
+                            <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
+                        </div>
+                    </div>
+          
+                      <button id="fullscreen-btn" class="menu-button" onclick="toggleFullscreen()">TOGGLE FULLSCREEN</button>
+
+          
+
+
+                    
+                </div>
+            </div>
+        </div>
+        
+
+                  <div id="character">
+                    <img src="{% static 'SVGs/TO_OG.svg' %}" alt="Character">
+                </div>
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Popper.js included) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+<script src="{% static 'triviolivia.js' %}"></script>
+
+
+{% endblock %}
