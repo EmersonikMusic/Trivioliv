@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.core.exceptions import ImproperlyConfigured
 from django.test.runner import DiscoverRunner
 import dj_database_url
 
@@ -22,14 +23,30 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-qfadm-gnvm*0_lz7w0rja@tee-qi5l*^yi8waiick41bsfnce8')
-
 # SECURITY WARNING: don't run with debug turned on in production!
-# The os.environ.get check makes this safer for production environments like Heroku
+# In development, DEBUG will be True unless DJANGO_DEBUG is explicitly set to 'False'.
+# In a production environment (like Heroku), you MUST set the environment variable
+# DJANGO_DEBUG to 'False'.
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
+# SECURITY WARNING: keep the secret key used in production secret!
+# The application will not start in production if this environment variable is not set.
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
+# If in production, require the SECRET_KEY to be set.
+if not DEBUG and not SECRET_KEY:
+    raise ImproperlyConfigured(
+        "The SECRET_KEY environment variable must be set in production."
+    )
+
+# Use a default insecure key only when in development.
+if DEBUG and not SECRET_KEY:
+    SECRET_KEY = 'django-insecure-qfadm-gnvm*0_lz7w0rja@tee-qi5l*^yi8waiick41bsfnce8'
+
+
+# ALLOWED_HOSTS defines which domains can serve this Django site.
+# Both your root domain and 'www' subdomain are correctly listed here.
+# This setting does not affect DNS resolution; it's a security measure.
 ALLOWED_HOSTS = [
     'triviolivia.com',
     'www.triviolivia.com',
@@ -61,8 +78,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # WhiteNoise should be placed directly after the SecurityMiddleware for performance.
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # Correctly placed high in the list
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,7 +98,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = False # It is better to be explicit with origins
+CORS_ORIGIN_ALLOW_ALL = False
 
 
 ROOT_URLCONF = 'Triviolivia.urls'
@@ -116,19 +134,21 @@ CHANNEL_LAYERS = {
 
 MAX_CONN_AGE = 600
 
+# Default to SQLite for local development
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3")
+        "NAME": BASE_DIR / "db.sqlite3"
     }
 }
 
+# Use Heroku's Postgres database in production
 if "DATABASE_URL" in os.environ:
-    # Configure Django for DATABASE_URL environment variable.
     DATABASES["default"] = dj_database_url.config(
-        conn_max_age=MAX_CONN_AGE, ssl_require=True)
+        conn_max_age=MAX_CONN_AGE, ssl_require=True
+    )
 
-    # Enable test database if found in CI environment.
+    # Enable test database if found in CI environment
     if "CI" in os.environ:
         DATABASES["default"]["TEST"] = DATABASES["default"]
 
@@ -137,18 +157,10 @@ if "DATABASE_URL" in os.environ:
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
 
@@ -156,13 +168,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -170,14 +178,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    BASE_DIR / 'static',
 ]
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-]
+# Use WhiteNoise for efficient static file serving in production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 MEDIA_URL = '/images/'
 
@@ -189,7 +196,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'login'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 REST_FRAMEWORK = {
@@ -198,17 +204,34 @@ REST_FRAMEWORK = {
 
 
 class HerokuDiscoverRunner(DiscoverRunner):
-    """Test Runner for Heroku CI, which provides a database for you.
-    This requires you to set the TEST database (done for you by settings().)"""
-
+    """Test Runner for Heroku CI."""
     def setup_databases(self, **kwargs):
         self.keepdb = True
         return super(HerokuDiscoverRunner, self).setup_databases(**kwargs)
 
 
-# Use HerokuDiscoverRunner on Heroku CI
-# Note: The original path 'gettingstarted.settings.HerokuDiscoverRunner' might
-# need to be updated to your project's name if it's not 'gettingstarted'.
-# Assuming your project's main folder is 'Triviolivia'.
 if "CI" in os.environ:
     TEST_RUNNER = "Triviolivia.settings.HerokuDiscoverRunner"
+
+
+# --- Production Security Settings ---
+# These settings are applied only when DEBUG is False.
+if not DEBUG:
+    # CRITICAL FOR HEROKU: Tell Django to trust the 'X-Forwarded-Proto' header
+    # that Heroku's router sets to 'https'. This is required for SECURE_SSL_REDIRECT.
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+    # Redirect all non-HTTPS requests to HTTPS.
+    SECURE_SSL_REDIRECT = True
+    
+    # Ensure cookies are only sent over HTTPS.
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    
+    # Enable HTTP Strict Transport Security (HSTS)
+    # This tells browsers to only communicate with your site via HTTPS.
+    # Start with a low value for testing (e.g., 3600 for 1 hour).
+    # After confirming everything works, increase to a large value like 2592000 (30 days).
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
