@@ -32,27 +32,9 @@ ALLOWED_HOSTS = ['*', 'https://markadegames.com', 'https://www.markadegames.com'
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
     "https://markadegames.com",
-    "https://www.triviolivia.com",
-    "https://triviolivia.com",
 ]
 
-# Optional: Allow credentials (cookies, etc.) to be sent with requests
-CORS_ALLOW_CREDENTIALS = True
-
-# Optional: Specify allowed HTTP methods
-CORS_ALLOW_METHODS = [
-    "GET",
-    "POST",
-    "PUT",
-    "PATCH",
-    "DELETE",
-    "OPTIONS",
-]
-
-# Uncomment when pushing!!!
-SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
+# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -216,6 +198,3 @@ class HerokuDiscoverRunner(DiscoverRunner):
 # Use HerokuDiscoverRunner on Heroku CI
 if "CI" in os.environ:
     TEST_RUNNER = "gettingstarted.settings.HerokuDiscoverRunner"
-
-
-X_FRAME_OPTIONS = 'SAMEORIGIN'  # Allows framing on same domain
