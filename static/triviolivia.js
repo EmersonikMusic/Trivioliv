@@ -15297,7 +15297,7 @@ function closeDropdownsOnClickOutside() {
   });
 }
 
-// Initialize dropdown close functionality
+// Initialize dropdown close functionality.
 document.addEventListener('DOMContentLoaded', function() {
   closeDropdownsOnClickOutside();
 });
