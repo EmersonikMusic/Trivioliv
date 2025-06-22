@@ -1300,14 +1300,14 @@ input[type='checkbox'] {
 
   /* Position character column directly over footer */
   .character-column {
-    width: 100%;
+    width: auto; /* Allow the container to shrink to the content's width */
     opacity: 1;
     height: 190px;
-    display: inline-block;
+    display: block; /* Change to block to work with auto margins */
     overflow: visible;
-    margin: -150px 0px 0 200px;
-    padding:0;
-  
+    /* This combination of auto left margin and a fixed right margin will push the element to the right */
+    margin: -150px 50px 0 auto; 
+    padding: 0;
   }
 
   
