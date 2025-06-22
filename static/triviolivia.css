@@ -1306,7 +1306,7 @@ input[type='checkbox'] {
     display: block; /* Change to block to work with auto margins */
     overflow: visible;
     /* This combination of auto left margin and a fixed right margin will push the element to the right */
-    margin: -150px 50px 0 auto; 
+    /* margin: -150px 50px 0 auto;  */
     padding: 0;
   }
 
