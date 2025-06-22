@@ -1,4 +1,3 @@
-
 // Dictionary holding HTML content
 const contentDict = {
 
@@ -14150,7 +14149,7 @@ var category_summaries = {
 }
 
 // Declaring variables for the base URL for fetching questions
-var baseUrl = "/api/questions";
+var baseUrl = "https://triviolivia.herokuapp.com/api/questions";
 var moddedUrl = "";
 var queryParams = [];
 let globalData;
@@ -14158,80 +14157,6 @@ let globalData;
 // Default message in bar
 document.getElementById("demo").innerHTML =
   'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()"><b>START</b></span> to play.';
-
-// Function to disable both Start/Pause and Refetch buttons
-function disableBothButtons() {
-  // Desktop buttons
-  const startPauseBtn = document.getElementById("start-pause");
-  const refetchBtn = document.getElementById("refetch-and-restart");
-  
-  // Mobile buttons
-  const mobileStartPauseBtn = document.getElementById("start-pause2");
-  const mobileRefetchBtn = document.getElementById("refetch-and-restart2");
-  
-  // Disable buttons
-  [startPauseBtn, refetchBtn, mobileStartPauseBtn, mobileRefetchBtn].forEach(btn => {
-    if (btn) {
-      btn.disabled = true;
-      btn.style.opacity = "0.5";
-      btn.style.cursor = "not-allowed";
-      btn.classList.add("button-disabled");
-    }
-  });
-}
-
-// Function to enable only the Start/Pause button
-function enableStartPauseButton() {
-  // Desktop button
-  const startPauseBtn = document.getElementById("start-pause");
-  
-  // Mobile button
-  const mobileStartPauseBtn = document.getElementById("start-pause2");
-  
-  // Enable buttons
-  [startPauseBtn, mobileStartPauseBtn].forEach(btn => {
-    if (btn) {
-      btn.disabled = false;
-      btn.style.opacity = "1";
-      btn.style.cursor = "pointer";
-      btn.classList.remove("button-disabled");
-    }
-  });
-}
-
-// Function to enable both Start/Pause and Refetch buttons
-function enableBothButtons() {
-  // Desktop buttons
-  const startPauseBtn = document.getElementById("start-pause");
-  const refetchBtn = document.getElementById("refetch-and-restart");
-  
-  // Mobile buttons
-  const mobileStartPauseBtn = document.getElementById("start-pause2");
-  const mobileRefetchBtn = document.getElementById("refetch-and-restart2");
-  
-  // Enable buttons
-  [startPauseBtn, refetchBtn, mobileStartPauseBtn, mobileRefetchBtn].forEach(btn => {
-    if (btn) {
-      btn.disabled = false;
-      btn.style.opacity = "1";
-      btn.style.cursor = "pointer";
-      btn.classList.remove("button-disabled");
-    }
-  });
-}
-
-// Add a CSS class for visual feedback
-document.addEventListener('DOMContentLoaded', function() {
-  const style = document.createElement('style');
-  style.textContent = `
-    .button-disabled {
-      opacity: 0.5 !important;
-      cursor: not-allowed !important;
-      pointer-events: none !important;
-    }
-  `;
-  document.head.appendChild(style);
-});
 
 // Async JS that kind of scares me, honestly
 async function fetchData(moddedUrl) {
@@ -14245,12 +14170,6 @@ async function fetchData(moddedUrl) {
 // Function to not fetch JSON data if any of cat/dif/era are all deselected
 function dontFetchDataIfAllDeselected() {
   console.log(category_list);
-  
-  // Don't allow starting a new game if buttons are disabled
-  if (document.getElementById("start-pause").disabled) {
-    return;
-  }
-  
   if (category_list.length > 24) {
     document.getElementById("demo").innerHTML =
       "Cannot start game. You must select at least one category.";
@@ -14559,115 +14478,25 @@ function allNoneErasButton() {
   console.log("Era list after ALL/NONE toggle:", era_list);
 }
 
-// Desktop sliders
-const questionSlider = document.getElementById("questionSlider");
-const perQuestionSlider = document.getElementById("perQuestionSlider");
-const perAnswerSlider = document.getElementById("perAnswerSlider");
-
-// Mobile sliders
-const mobileQuestionSlider = document.getElementById("mobileQuestionSlider");
-const mobilePerQuestionSlider = document.getElementById("mobilePerQuestionSlider");
-const mobilePerAnswerSlider = document.getElementById("mobilePerAnswerSlider");
-
-// Function to synchronize settings between mobile and desktop
-function syncSettings(settingType, value) {
-  // Update the appropriate global variable
-  if (settingType === 'questions') {
-    number_of_questions = parseInt(value);
-    
-    // Sync desktop and mobile sliders
-    if (questionSlider) questionSlider.value = value;
-    if (mobileQuestionSlider) mobileQuestionSlider.value = value;
-    
-    // Update both labels
-    updateLabel("questionLabel", value, " QUESTIONS");
-    updateLabel("mobileQuestionLabel", value, " QUESTIONS");
-    
-    document.getElementById("demo").innerHTML = "Game set to " + value + " questions.";
-  } 
-  else if (settingType === 'questionTime') {
-    time_per_question = parseInt(value);
-    
-    // Sync desktop and mobile sliders
-    if (perQuestionSlider) perQuestionSlider.value = value;
-    if (mobilePerQuestionSlider) mobilePerQuestionSlider.value = value;
-    
-    // Update both labels
-    updateLabel("perQuestionLabel", value, "s / QUESTION");
-    updateLabel("mobilePerQuestionLabel", value, "s / QUESTION");
-    
-    document.getElementById("demo").innerHTML = "Questions will display for " + value + " seconds.";
-  } 
-  else if (settingType === 'answerTime') {
-    time_per_answer = parseInt(value);
-    
-    // Sync desktop and mobile sliders
-    if (perAnswerSlider) perAnswerSlider.value = value;
-    if (mobilePerAnswerSlider) mobilePerAnswerSlider.value = value;
-    
-    // Update both labels
-    updateLabel("perAnswerLabel", value, "s / ANSWER");
-    updateLabel("mobilePerAnswerLabel", value, "s / ANSWER");
-    
-    document.getElementById("demo").innerHTML = "Answers will display for " + value + " seconds.";
-  }
+//Functions to change number of questions, time per question, and time per answer
+function change_number_of_questions(clicked_id) {
+  number_of_questions = parseInt(clicked_id);
+  document.getElementById("demo").innerHTML =
+    "Game set to " + number_of_questions + " questions.";
 }
 
-// Update label helper function
-function updateLabel(labelId, value, unit) {
-  const label = document.getElementById(labelId);
-  if (label) label.textContent = value + unit;
+function change_time_per_question(clicked_id) {
+  time_per_question = clicked_id;
+  document.getElementById("demo").innerHTML =
+    "Questions will display for " + time_per_question + " seconds.";
+  console.log(time_per_question);
 }
 
-// Set up desktop slider event listeners
-if (questionSlider) {
-  questionSlider.addEventListener("input", function() {
-    syncSettings('questions', this.value);
-  });
-}
-
-if (perQuestionSlider) {
-  perQuestionSlider.addEventListener("input", function() {
-    syncSettings('questionTime', this.value);
-  });
-}
-
-if (perAnswerSlider) {
-  perAnswerSlider.addEventListener("input", function() {
-    syncSettings('answerTime', this.value);
-  });
-}
-
-// Set up mobile slider event listeners
-if (mobileQuestionSlider) {
-  mobileQuestionSlider.addEventListener("input", function() {
-    syncSettings('questions', this.value);
-  });
-}
-
-if (mobilePerQuestionSlider) {
-  mobilePerQuestionSlider.addEventListener("input", function() {
-    syncSettings('questionTime', this.value);
-  });
-}
-
-if (mobilePerAnswerSlider) {
-  mobilePerAnswerSlider.addEventListener("input", function() {
-    syncSettings('answerTime', this.value);
-  });
-}
-
-// Functions for changing game settings, now using the syncSettings function
-function change_number_of_questions(value) {
-  syncSettings('questions', value);
-}
-
-function change_time_per_question(value) {
-  syncSettings('questionTime', value);
-}
-
-function change_time_per_answer(value) {
-  syncSettings('answerTime', value);
+function change_time_per_answer(clicked_id) {
+  time_per_answer = clicked_id;
+  document.getElementById("demo").innerHTML =
+    "Answers will display for " + time_per_answer + " seconds.";
+  console.log(time_per_answer);
 }
 
 //Question class declaration
@@ -14736,12 +14565,8 @@ function displayLoadingAnimation() {
   container.appendChild(loader);
 }
 
-// Modified mainGameFunction with countdown progress animation and button disabling
 const mainGameFunction = async () => {
   document.getElementById("demo").innerHTML = "Fetching questions...";
-  
-  // Disable both buttons during fetching and countdown
-  disableBothButtons();
 
   questionDisplay.innerHTML = "";
   answerDisplay.innerHTML = "";
@@ -14762,18 +14587,8 @@ const mainGameFunction = async () => {
   } catch (error) {
     document.getElementById("demo").innerHTML =
       "Could not fetch questions due to settings or connection problems. Please try again or change settings.";
-    
-    // Re-enable both buttons if fetching fails
-    game_started = false;
-    enableBothButtons();
     return; // Stop execution if fetch fails
   }
-
-  // Reset and prepare the progress bar for countdown animation
-  progressBar.style.animation = "none";
-  progressBar.offsetHeight; // Trigger reflow to reset animation
-  progressBar.style.animation = "growProgress 3s linear forwards";
-  progressBar.style.animationPlayState = "running";
 
   document.getElementById("demo").innerHTML = "Game starts in 3.";
   await delay(1000);
@@ -14783,13 +14598,6 @@ const mainGameFunction = async () => {
   await delay(1000);
   document.getElementById("demo").innerHTML = "Go!";
   await delay(1000);
-
-  // Enable both buttons after countdown
-  enableBothButtons();
-
-  // Reset the progress bar for the game questions
-  progressBar.style.animation = "none";
-  progressBar.offsetHeight; // Trigger reflow to reset animation
 
   // This is the updated portion of the mainGameFunction
   for (let i = 0; i < number_of_questions; i++) {
@@ -14890,15 +14698,7 @@ const mainGameFunction = async () => {
   pauseFlag = false;
   showQuestion("Thanks for playing!");
   progressBar.style.animationPlayState = "paused";
-  
-  // Update both desktop and mobile buttons
   document.getElementById("start-pause").textContent = "START";
-  var mobileButton = document.getElementById("start-pause2");
-  if (mobileButton) mobileButton.textContent = "START";
-  
-  // Re-enable both buttons when game ends
-  enableBothButtons();
-  
   document.getElementById("demo").innerHTML =
     'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Copyright &copy; 2025. Contact us at <a href="mailto:example@email.com">mark.mazurek@triviolivia.com</a>';
 };
@@ -14969,6 +14769,202 @@ function enable_era(clicked_id) {
   }
 }
 
+//Functions for ALL/NONE buttons - FIXED VERSION
+function allNoneCategoriesButton() {
+  if (all_none_categories == true) {
+    // Currently showing "ALL", so disable all categories
+    category_list = []; // Clear existing list
+    
+    // Get all category IDs from identities object
+    Object.keys(category_number_identities).forEach(id => {
+      category_list.push(id);
+    });
+    
+    // Update visual state of buttons
+    for (let i = 0; i < categoryButtons.length; i++) {
+      categoryButtons[i].classList.remove("active");
+      categoryButtons[i].classList.add("inactive");
+    }
+    
+    all_none_categories = false;
+    document.getElementById("demo").innerHTML =
+      "You must select at least one category before starting the game.";
+  } else {
+    // Currently showing "NONE", so enable all categories
+    category_list = []; // Clear the list to enable all
+    
+    // Update visual state of buttons
+    for (let i = 0; i < categoryButtons.length; i++) {
+      categoryButtons[i].classList.remove("inactive");
+      categoryButtons[i].classList.add("active");
+    }
+    
+    all_none_categories = true;
+    document.getElementById("demo").innerHTML =
+      "You have enabled all categories.";
+  }
+  console.log("Category list after ALL/NONE toggle:", category_list);
+}
+
+function allNoneDifficultiesButton() {
+  if (all_none_difficulties == true) {
+    // Currently showing "ALL", so disable all difficulties
+    difficulty_list = []; // Clear existing list
+    
+    // Get all difficulty IDs from identities object
+    Object.keys(difficulty_number_identities).forEach(id => {
+      difficulty_list.push(id);
+    });
+    
+    // Update visual state of buttons
+    for (let i = 0; i < difficultyButtons.length; i++) {
+      difficultyButtons[i].classList.remove("active");
+      difficultyButtons[i].classList.add("inactive");
+    }
+    
+    all_none_difficulties = false;
+    document.getElementById("demo").innerHTML =
+      "You must select at least one difficulty before starting the game.";
+  } else {
+    // Currently showing "NONE", so enable all difficulties
+    difficulty_list = []; // Clear the list to enable all
+    
+    // Update visual state of buttons
+    for (let i = 0; i < difficultyButtons.length; i++) {
+      difficultyButtons[i].classList.remove("inactive");
+      difficultyButtons[i].classList.add("active");
+    }
+    
+    all_none_difficulties = true;
+    document.getElementById("demo").innerHTML =
+      "You have enabled all difficulties.";
+  }
+  console.log("Difficulty list after ALL/NONE toggle:", difficulty_list);
+}
+
+function allNoneErasButton() {
+  if (all_none_eras == true) {
+    // Currently showing "ALL", so disable all eras
+    era_list = []; // Clear existing list
+    
+    // Get all era IDs from identities object
+    Object.keys(era_number_identities).forEach(id => {
+      era_list.push(id);
+    });
+    
+    // Update visual state of buttons
+    for (let i = 0; i < eraButtons.length; i++) {
+      eraButtons[i].classList.remove("active");
+      eraButtons[i].classList.add("inactive");
+    }
+    
+    all_none_eras = false;
+    document.getElementById("demo").innerHTML =
+      "You must select at least one era before starting the game.";
+  } else {
+    // Currently showing "NONE", so enable all eras
+    era_list = []; // Fixed: Changed from category_list to era_list
+    
+    // Update visual state of buttons
+    for (let i = 0; i < eraButtons.length; i++) {
+      eraButtons[i].classList.remove("inactive");
+      eraButtons[i].classList.add("active");
+    }
+    
+    all_none_eras = true;
+    document.getElementById("demo").innerHTML =
+      "You have enabled all eras.";
+  }
+  console.log("Era list after ALL/NONE toggle:", era_list);
+}
+
+// Slider functions
+const questionSlider = document.getElementById("questionSlider");
+const perQuestionSlider = document.getElementById("perQuestionSlider");
+const perAnswerSlider = document.getElementById("perAnswerSlider");
+
+questionSlider.addEventListener("input", function () {
+  updateLabel("questionLabel", this.value, " QUESTIONS");
+  change_number_of_questions(this.value);
+});
+
+perQuestionSlider.addEventListener("input", function () {
+  updateLabel("perQuestionLabel", this.value, "s / QUESTION");
+  change_time_per_question(this.value);
+});
+
+perAnswerSlider.addEventListener("input", function () {
+  updateLabel("perAnswerLabel", this.value, "s / ANSWER");
+  change_time_per_answer(this.value);
+});
+
+
+// Add these lines after your existing slider event listeners
+const mobileQuestionSlider = document.getElementById("mobileQuestionSlider");
+const mobilePerQuestionSlider = document.getElementById("mobilePerQuestionSlider");
+const mobilePerAnswerSlider = document.getElementById("mobilePerAnswerSlider");
+
+// Add event listeners to mobile sliders
+if (mobileQuestionSlider) {
+  mobileQuestionSlider.addEventListener("input", function () {
+    updateLabel("mobileQuestionLabel", this.value, " QUESTIONS");
+    change_number_of_questions(this.value);
+  });
+}
+
+if (mobilePerQuestionSlider) {
+  mobilePerQuestionSlider.addEventListener("input", function () {
+    updateLabel("mobilePerQuestionLabel", this.value, "s / QUESTION");
+    change_time_per_question(this.value);
+  });
+}
+
+if (mobilePerAnswerSlider) {
+  mobilePerAnswerSlider.addEventListener("input", function () {
+    updateLabel("mobilePerAnswerLabel", this.value, "s / ANSWER");
+    change_time_per_answer(this.value);
+  });
+}
+
+
+function updateLabel(labelId, value, unit) {
+  document.getElementById(labelId).textContent = value + unit;
+}
+
+//Function to change START GAME text
+function changeButtonText() {
+  var desktopButton = document.getElementById("start-pause");
+  var mobileButton = document.getElementById("start-pause2");
+  
+  if (pauseFlag === false) {
+    // Update both desktop and mobile buttons
+    desktopButton.textContent = "PAUSE";
+    if (mobileButton) mobileButton.textContent = "PAUSE";
+    
+    progressBar.style.animationPlayState = "running";
+    pauseFlag = true;
+  } else if (pauseFlag === true && game_started === true) {
+    // Update both desktop and mobile buttons
+    desktopButton.textContent = "RESUME";
+    if (mobileButton) mobileButton.textContent = "RESUME";
+    
+    progressBar.style.animationPlayState = "paused";
+    pauseFlag = false;
+    console.log("Game paused.");
+    document.getElementById("demo").innerHTML =
+      'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
+  } else {
+    // Update both desktop and mobile buttons
+    desktopButton.textContent = "START";
+    if (mobileButton) mobileButton.textContent = "START";
+    
+    pauseFlag = false;
+  }
+}
+
+// New function to disable banned categories
+function disableBannedCategories() {}
+
 //Dynamic question and answer timer bar attempt
 let progressBar = document.getElementById("progress");
 let startButton = document.getElementById("startButton");
@@ -15022,11 +15018,6 @@ document.addEventListener("keydown", function (event) {
 
 // Refetch questions button function
 function refetchAndRestart() {
-  // Don't allow refetching if button is disabled
-  if (document.getElementById("refetch-and-restart").disabled) {
-    return;
-  }
-  
   console.log("Refetching questions with currently selected game settings...");
 
   game_started = false;
@@ -15035,7 +15026,7 @@ function refetchAndRestart() {
   pauseFlag = false;
   globalData = [];
 
-  baseUrl = "/api/questions";
+  baseUrl = "https://triviolivia.herokuapp.com/api/questions";
   moddedUrl = "";
   queryParams = [];
   globalData = [];
@@ -15067,7 +15058,7 @@ function resetSettings() {
   difficulty_list = [];
   era_list = [];
 
-  baseUrl = "/api/questions";
+  baseUrl = "https://triviolivia.herokuapp.com/api/questions";
   moddedUrl = "";
   queryParams = [];
   globalData = [];
@@ -15230,11 +15221,6 @@ document.addEventListener('DOMContentLoaded', function() {
           this.ticking = true;
       }
   });
-  
-  // Initialize settings synchronization on page load
-  syncSettings('questions', number_of_questions);
-  syncSettings('questionTime', time_per_question);
-  syncSettings('answerTime', time_per_answer);
 });
 
 // Function to handle closing dropdowns when clicking outside
@@ -15267,7 +15253,99 @@ function closeDropdownsOnClickOutside() {
   });
 }
 
-// Initialize dropdown close functionality
+// Slider syncing
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialize the mobile sliders to match desktop values
+  const initialQuestionValue = document.getElementById("questionSlider")?.value || 10;
+  const initialPerQuestionValue = document.getElementById("perQuestionSlider")?.value || 5;
+  const initialPerAnswerValue = document.getElementById("perAnswerSlider")?.value || 5;
+  
+  // Set mobile slider values
+  const mobileQuestionSlider = document.getElementById("mobileQuestionSlider");
+  const mobilePerQuestionSlider = document.getElementById("mobilePerQuestionSlider");
+  const mobilePerAnswerSlider = document.getElementById("mobilePerAnswerSlider");
+  
+  if (mobileQuestionSlider) {
+    mobileQuestionSlider.value = initialQuestionValue;
+    updateLabel("mobileQuestionLabel", initialQuestionValue, " QUESTIONS");
+  }
+  
+  if (mobilePerQuestionSlider) {
+    mobilePerQuestionSlider.value = initialPerQuestionValue;
+    updateLabel("mobilePerQuestionLabel", initialPerQuestionValue, "s / QUESTION");
+  }
+  
+  if (mobilePerAnswerSlider) {
+    mobilePerAnswerSlider.value = initialPerAnswerValue;
+    updateLabel("mobilePerAnswerLabel", initialPerAnswerValue, "s / ANSWER");
+  }
+  
+  // Ensure all indicators are properly displayed initially
+  document.querySelectorAll('.button.active').forEach(button => {
+    const indicator = button.querySelector('.indicator');
+    if (indicator) {
+      indicator.style.backgroundColor = '#00F829';
+    }
+  });
+  
+  document.querySelectorAll('.button.inactive').forEach(button => {
+    const indicator = button.querySelector('.indicator');
+    if (indicator) {
+      indicator.style.backgroundColor = '#FF3A30';
+    }
+  });
+  
+  // Sync mobile and desktop button states
+  function syncButtonStates() {
+    // Sync categories
+    document.querySelectorAll('.category').forEach(button => {
+      const id = button.id;
+      const isDisabled = category_list.includes(id);
+      
+      if (isDisabled) {
+        button.classList.remove('active');
+        button.classList.add('inactive');
+      } else {
+        button.classList.remove('inactive');
+        button.classList.add('active');
+      }
+    });
+    
+    // Sync difficulties
+    document.querySelectorAll('.difficulty').forEach(button => {
+      const id = button.id;
+      const isDisabled = difficulty_list.includes(id);
+      
+      if (isDisabled) {
+        button.classList.remove('active');
+        button.classList.add('inactive');
+      } else {
+        button.classList.remove('inactive');
+        button.classList.add('active');
+      }
+    });
+    
+    // Sync eras
+    document.querySelectorAll('.era').forEach(button => {
+      const id = button.id;
+      const isDisabled = era_list.includes(id);
+      
+      if (isDisabled) {
+        button.classList.remove('active');
+        button.classList.add('inactive');
+      } else {
+        button.classList.remove('inactive');
+        button.classList.add('active');
+      }
+    });
+  }
+  
+  // Run initial sync
+  syncButtonStates();
+  
+  // Fix for mobile viewport height issues
+  handleMobileLayout();
+  
+  // Setup click-outside functionality for mobile dropdowns
   closeDropdownsOnClickOutside();
 });
