@@ -692,9 +692,9 @@ to {
     -webkit-appearance: none;
     height: 6px;
     border-radius: 5px;
-    background-color: rgba(0,0,0,0.4);
+    /* background-color: rgba(0,0,0,0.4); */
     outline: none;
-    opacity: 0.7;
+    opacity: 0.3;
     -webkit-transition: .2s;
     transition: opacity .2s;
 }
@@ -826,7 +826,7 @@ to {
             letter-spacing: 0;
         }
 
-      /* Mobile fix - replace your current mobile media query with this */
+      /* Mobile fix */
 @media (max-width: 767px) {
     /* Reset core elements */
     body, html {
@@ -917,7 +917,24 @@ to {
     }
 }
 
-
+@media (max-width: 767px) {
+  /* Update container padding to remove top padding */
+  .container-fluid {
+      padding: 0 5px 5px 5px; /* 0 top, 5px right, 5px bottom, 5px left */
+  }
+  
+  /* Optional: If the game area still appears to have too much space at the top */
+  .game-area {
+      border-radius: 0 0 12px 12px; /* Only round the bottom corners */
+      margin-top: 0; /* Ensure no top margin */
+  }
+  
+  /* Adjust header for mobile to be flush with top */
+  .header {
+      border-radius: 0; /* Remove top border radius from header */
+      margin-top: 0;
+  }
+}
 
 
 /* Mobile menu dropdowns - UPDATED */
@@ -1121,8 +1138,8 @@ transition: transform .2s ease-out;
 } 
 
 /* Change from 90deg rotation to 180deg to point up when open */
-.toggle:checked + .lbl-toggle::before { 
-transform: rotate(180deg) translateY(2px); 
+.mobile-dropdown .toggle:checked + .lbl-toggle::before { 
+transform: rotate(-90deg) translateX(-2px);
 }
 
 /* Mobile dropdown animation */
@@ -1149,6 +1166,9 @@ overflow-y: auto;
 /* End position - animate upward to original position */
 transform: translateY(0);
 }
+
+
+
 
 
     </style>
@@ -1259,15 +1279,15 @@ transform: translateY(0);
               <div id="mobile_menu_question_time" class="menu_question_time">
                 <div class="slider-container">
                   <div id="mobileQuestionLabel" class="slider-label">10 QUESTIONS</div>
-                  <input type="range" min="10" max="100" value="10" step="10" class="slider" id="mobileQuestionSlider">
+                  <input type="range" min="10" max="50" value="10" step="10" class="slider" id="mobileQuestionSlider">
                 </div>
                 <div class="slider-container">
                   <div id="mobilePerQuestionLabel" class="slider-label">5s / QUESTION</div>
-                  <input type="range" min="1" max="30" value="5" step="5" class="slider" id="mobilePerQuestionSlider">
+                  <input type="range" min="5" max="30" value="5" step="5" class="slider" id="mobilePerQuestionSlider">
                 </div>
                 <div class="slider-container">
                   <div id="mobilePerAnswerLabel" class="slider-label">5s / ANSWER</div>
-                  <input type="range" min="1" max="30" value="5" step="5" class="slider" id="mobilePerAnswerSlider">
+                  <input type="range" min="5" max="30" value="5" step="5" class="slider" id="mobilePerAnswerSlider">
                 </div>
               </div>
             </div>
@@ -1393,16 +1413,16 @@ transform: translateY(0);
                     <div id="menu_question_time" class="menu_left right-indicator menu_question_time">
                         <div class="slider-container">
                             <div id="questionLabel" class="slider-label">10 QUESTIONS</div>
-                            <input type="range" min="10" max="100" value="10" step="10" class="slider" id="questionSlider">
+                            <input type="range" min="10" max="50" value="10" step="10" class="slider" id="questionSlider">
                         </div>
                         <div class="slider-container">
                             <div id="perQuestionLabel" class="slider-label">5s / QUESTION</div>
-                            <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
+                            <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perQuestionSlider">
                         </div>
         
                         <div class="slider-container">
                             <div id="perAnswerLabel" class="slider-label">5s / ANSWER</div>
-                            <input type="range" min="1" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
+                            <input type="range" min="5" max="30" value="5" step="5" class="slider" id="perAnswerSlider">
                         </div>
                     </div>
           
