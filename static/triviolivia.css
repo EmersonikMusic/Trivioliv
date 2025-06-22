@@ -988,211 +988,229 @@ input[type='checkbox'] {
 
 /* Mobile devices (up to 767px) */
 @media only screen and (max-width: 767px) {
-    .wrapper-all {
-        flex-direction: column;
-        position: relative;
-    }
+  .wrapper-all {
+      flex-direction: column;
+      position: relative; /* Set a positioning context for the character */
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
 
-    .wrapper-main-content {
-        overflow: visible;
-        min-height: 80vh;
-    }
+  .wrapper-main-content {
+      overflow: visible;
+      min-height: 80vh;
+  }
 
-    .header {
-        margin: 10px auto;
-        padding: 0;
-    }
+  .header {
+      margin: 10px auto;
+      padding: 0 15px; /* Added horizontal padding */
+      width: 100%;
+  }
 
-    .logo-header {
-        width: 100px;
-    }
+  .logo-header {
+      width: 100px;
+  }
 
-    .nav-link,
-    .nav-button {
-        font-size: medium;
-    }
+  .nav-link,
+  .nav-button {
+      font-size: 1rem; /* Use scalable rem units */
+  }
 
-    /* Game Area */
-    .game-area {
-        z-index: 2;
-    }
+  /* Game Area */
+  .game-area {
+      z-index: 2;
+  }
 
-    .game-area-content {
-        margin: 0 20px;
-    }
+  .game-area-content {
+      margin: 0 20px;
+  }
 
-    /* Loading Screen */
-    .loading-screen {
-        margin: auto;
-        min-height: 50vh;
-    }
+  /* Loading Screen */
+  .loading-screen {
+      margin: auto;
+      min-height: 50vh;
+  }
 
-    .loading-logo {
-        padding: 40px;
-    }
+  .loading-logo {
+      padding: 40px;
+  }
 
-    .loading-bar-container,
-    .loading-bar {
-        height: 30px;
-    }
+  .loading-bar-container,
+  .loading-bar {
+      height: 30px;
+  }
 
-    #loading-text {
-        font-size: 7px;
-    }
+  #loading-text {
+      font-size: 0.75rem; /* Increased from 7px for readability */
+  }
 
-    /* Start Game Button */
-    #start-game-container button {
-        display: none;
-    }
+  /* Start Game Button */
+  #start-game-container button {
+      display: none;
+  }
 
-    #mobile-start-game-container {
-        display: flex;
-        width: 100%;
-        margin: auto;
-    }
+  #mobile-start-game-container {
+      display: flex;
+      width: 100%;
+      margin: auto;
+  }
 
-    #mobile-start-game-container .btn-startgame {
-        margin: 0 auto;
-        display: flex;
-    }
+  #mobile-start-game-container .btn-startgame {
+      margin: 0 auto;
+      display: flex;
+  }
 
-    /* Character */
-    .character-column {
-        width: 100%;
-        height: 190px;
-        overflow: visible;
-        margin: -150px 0 0 200px;
-        padding: 0;
-        display: inline-block;
-    }
+  /* Character */
+  .character-column {
+      /*
+       * To move the character further right and improve responsiveness,
+       * it is absolutely positioned relative to .wrapper-all.
+       * Adjust 'right' to change horizontal position.
+       * Adjust 'bottom' to change vertical position.
+       */
+      position: absolute;
+      width: 190px;      /* Set a consistent width */
+      height: auto;       /* Let height adjust automatically */
+      bottom: 10vh;       /* Position from the bottom of the viewport */
+      right: -30px;         /* Position from the right. Negative values move it further off-screen to the right */
+      margin: 0;          /* Reset margin */
+      padding: 0;
+      z-index: 1;         /* Ensure it's behind the game area but above the background */
+      overflow: visible;
+      display: block;
+  }
 
-    .character-column svg {
-        height: 100%;
-        margin-bottom: -11px;
-    }
+  .character-column svg {
+      height: 100%;
+      margin-bottom: -11px; /* This likely fine-tunes alignment, can be kept */
+  }
 
-    /* Footer */
-    .footer {
-        z-index: 1;
-        flex-direction: column;
-    }
 
-    .desktop-buttons {
-        gap: 10px;
-    }
+  /* Footer */
+  .footer {
+      z-index: 1;
+      flex-direction: column;
+  }
 
-    .user-button {
-        padding: 10px 15px;
-        font-size: 10px;
-        width: 50px;
-    }
+  .desktop-buttons {
+      gap: 10px;
+  }
 
-    /* Settings Menu */
-    .menu-settings-desktop {
-        flex: 2;
-        margin: 105px 0 0 0;
-        border-radius: 32px 32px 0 0;
-        z-index: 5;
-    }
+  .user-button {
+      padding: 10px 15px;
+      font-size: 0.8rem; /* Use scalable rem units */
+      width: 55px;
+  }
 
-    .menu-settings-desktop.menu-hidden {
-        flex: 0 0 1px !important;
-        margin-top: -10px;
-        border: 1px solid white;
-        overflow: visible;
-        max-width: 100%;
-    }
+  /* Settings Menu */
+  .menu-settings-desktop {
+      flex: 2;
+      margin: 105px 0 0 0;
+      border-radius: 32px 32px 0 0;
+      z-index: 5;
+  }
 
-    .desktop-menu {
-        margin-top: 0;
-        overflow-x: hidden;
-    }
+  .menu-settings-desktop.menu-hidden {
+      flex: 0 0 1px !important;
+      margin-top: -10px;
+      border: 1px solid white;
+      overflow: visible;
+      max-width: 100%;
+  }
 
-    .menu-toggle-wrapper {
-        left: 50%;
-        top: -41px;
-    }
+  .desktop-menu {
+      margin-top: 0;
+      overflow-x: hidden;
+  }
 
-    .menu-toggle-button {
-        width: 50px;
-        height: 40px;
-        border-radius: 100% 100% 0 0;
-    }
+  .menu-toggle-wrapper {
+      left: 50%;
+      transform: translateX(-50%); /* Ensures the toggle is centered */
+      top: -41px;
+  }
 
-    .menu-toggle-button img {
-        width: 20px;
-        height: 20px;
-        transform: translateX(0);
-    }
+  .menu-toggle-button {
+      width: 50px;
+      height: 40px;
+      border-radius: 100% 100% 0 0;
+  }
 
-    .title-settings {
-        padding: 0 0 20px 0;
-        border-bottom: none;
-        width: 100%;
-        margin: auto;
-    }
+  .menu-toggle-button img {
+      width: 20px;
+      height: 20px;
+      transform: translateX(0);
+  }
 
-    .title-settings img {
-        display: none;
-    }
+  .title-settings {
+      padding: 0 0 20px 0;
+      border-bottom: none;
+      width: 100%;
+      margin: auto;
+  }
 
-    .title-settings span {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        font-size: larger;
-        color: #8DD4DA;
-    }
+  .title-settings img {
+      display: none;
+  }
 
-    #menu-categories {
-        margin-top: 20px;
-    }
+  .title-settings span {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      font-size: 1.25rem; /* Use scalable rem units */
+      color: #8DD4DA;
+  }
 
-    .wrap-collabsible {
-        width: 100%;
-        margin: 0 auto;
-    }
+  #menu-categories {
+      margin-top: 20px;
+  }
 
-    .lbl-toggle {
-        font-size: large;
-    }
+  .wrap-collabsible {
+      width: 100%;
+      margin: 0 auto;
+  }
 
-    .lbl-toggle:hover {
-        padding: 8px 15px;
-    }
+  .lbl-toggle {
+      font-size: 1.1rem; /* Use scalable rem units */
+  }
 
-    .toggle:checked+.lbl-toggle {
-        padding: 10px 0 0 20px;
-        margin-top: 10px;
-    }
+  .lbl-toggle:hover {
+      padding: 8px 15px;
+  }
 
-    .menu-icon {
-        width: 20px;
-        height: 20px;
-    }
+  .toggle:checked+.lbl-toggle {
+      padding: 10px 0 0 20px;
+      margin-top: 10px;
+  }
 
-    .collapsible-content .content-inner {
-        padding: 10px 20px;
-    }
+  .menu-icon {
+      width: 20px;
+      height: 20px;
+  }
 
-    .slider-container {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 10px;
-    }
+  .collapsible-content .content-inner {
+      padding: 10px 20px;
+  }
 
-    .slider {
-        margin-top: 5px;
-    }
+  .slider-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center; /* Better alignment */
+      gap: 15px; /* Use gap for spacing */
+      margin-bottom: 10px;
+  }
 
-    .slider-label {
-        width: 60%;
-        margin-right: 20px;
-        padding: 0;
-        font-size: medium;
-    }
+  .slider {
+      margin-top: 5px;
+      flex-grow: 1; /* Allow slider to fill available space */
+  }
 
-    .menu_question_time {
-        padding: 0;
-    }
+  .slider-label {
+      width: auto; /* Remove fixed width */
+      margin-right: 0;
+      padding: 0;
+      font-size: 1rem; /* Use scalable rem units */
+      flex-shrink: 0; /* Prevent label from shrinking */
+  }
+
+  .menu_question_time {
+      padding: 0;
+  }
 }
