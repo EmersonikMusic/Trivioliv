@@ -31,6 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'triviolivia.com',
     'www.triviolivia.com',
+    'triviolivia.herokuapp.com',  # Add your Heroku app URL
     'localhost',
     '127.0.0.1',
 ]
@@ -38,6 +39,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOWED_ORIGINS = [
     "https://triviolivia.com",
     "https://www.triviolivia.com",
+    "https://triviolivia.herokuapp.com",  # Add your Heroku app URL
     "http://localhost:3000",  # For local development
     "http://127.0.0.1:3000",  # For local development
 ]
