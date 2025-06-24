@@ -250,10 +250,9 @@ align-items: stretch;
 }
 
 .login {
-  margin: auto 0;
+  margin-left: auto;
   display: flex;
 }
-
 
 .main-column {
   display: flex;
