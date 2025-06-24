@@ -92,6 +92,7 @@ button {
 
 
 #character {
+  vertical-align: bottom;
   animation: bobbing 2s infinite ease-in-out;
       }
       @keyframes bobbing {
