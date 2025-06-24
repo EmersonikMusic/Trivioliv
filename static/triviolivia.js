@@ -14899,7 +14899,7 @@ const mainGameFunction = async () => {
   enableBothButtons();
   
   document.getElementById("demo").innerHTML =
-    'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Copyright &copy; 2025. Contact us at <a href="mailto:example@email.com">mark.mazurek@triviolivia.com</a>';
+    'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Copyright &copy; 2025. Contact us at <a href="mailto:mark.mazurek@triviolivia.com">mark.mazurek@triviolivia.com</a>';
 };
 
 // Function to pause the game
