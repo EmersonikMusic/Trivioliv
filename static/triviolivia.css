@@ -608,4 +608,11 @@ h2 {
           0%, 100% { transform: translateY(0); opacity: 0.3; }
           50% { transform: translateY(-15px); opacity: 1; }
       }
-      
+
+      #character {
+        animation: bobbing 2s infinite ease-in-out;
+        margin-top: auto; /* Pushes the element to the bottom */
+        margin-left: auto; /* Centers the element horizontally */
+        margin-right: auto; /* Centers the element horizontally */
+        padding-bottom: 20px; /* Adds some space from the bottom edge */
+      }
