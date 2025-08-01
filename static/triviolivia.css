@@ -449,14 +449,17 @@ h2 {
 }
 
 .question-container, .answer-container {
-  padding: 10px 50px;
+  padding: 10px 20px; /* Reduced horizontal padding for more text space */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: clamp(16px, 5vw, 8vh); /* Scales dynamically within a safe range */
+  /* Use viewport units for dynamic scaling, with a smaller minimum */
+  font-size: clamp(12px, 5vw, 8vh); 
   font-family: "Myriad Pro", "Montserrat", 'American Typewriter', sans-serif;
   font-weight: 500;
+  white-space: normal; /* Ensures text wraps */
+  overflow-wrap: break-word; /* Prevents long words from overflowing */
 }
 
 .question-container {
