@@ -80,7 +80,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # WhiteNoise should be placed directly after the SecurityMiddleware for performance.
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'Triviolivia.middleware.HerokuToCustomDomainRedirectMiddleware',
+    'trivioliv.middleware.HerokuToCustomDomainRedirectMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -236,3 +236,8 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 3600
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+
+
+    # Added to try to make redirect to triviolivia.com from herokuapp.com work
+    USE_X_FORWARDED_HOST = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
