@@ -18,13 +18,17 @@ from django.urls import path, include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 
-
+# 1. Added the RedirectView import here
+from django.views.generic import RedirectView 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('configure/', include('configure.urls')),
     path('compete/', include('compete.urls')),
-    path('', include('main.urls')),
+    
+    # 2. Replaced your old 'main.urls' root path with the permanent 301 redirect
+    path('', RedirectView.as_view(url='https://www.triviolivia.com/', permanent=True)),
+    
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('api.urls')),
 ]
