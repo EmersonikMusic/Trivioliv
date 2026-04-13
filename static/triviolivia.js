@@ -11427,8 +11427,6 @@ const contentDict = {
 </svg>`,
 };
 
-document.querySelector(".container-fluid").style.background = "#4523a8";
-
 // ==========================================
 // 1. DOM ELEMENTS (Cached for performance)
 // ==========================================
@@ -12055,3 +12053,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+
+
+document.body.style.background = "#4523a8";
