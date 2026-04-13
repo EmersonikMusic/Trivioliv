@@ -1125,94 +1125,61 @@ background-color: #FF3A30 !important;
 }
 
 
-
-
-/* Updated triangle rotation for mobile dropdowns */
-.lbl-toggle::before { 
-content: ' '; 
-display: inline-block; 
-border-top: 5px solid transparent; 
-border-bottom: 5px solid transparent; 
-border-left: 5px solid currentColor; 
-vertical-align: middle; 
-margin-right: .7rem; 
-transform: translateY(-2px); 
-transition: transform .2s ease-out; 
-} 
-
-/* Change from 90deg rotation to 180deg to point up when open */
-.mobile-dropdown .toggle:checked + .lbl-toggle::before { 
-transform: rotate(-90deg) translateX(-2px);
-}
-
-/* Mobile dropdown animation */
-.mobile-dropdown .collapsible-content {
-position: absolute;
-top: -350px; /* Final position above the buttons */
-left: 0;
-width: 100vw;
-z-index: 1010;
-background: rgba(0, 0, 0, 0.9);
-border-radius: 12px;
-box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
-max-height: 0;
-overflow: hidden;
-/* Add transform transition to create the up/down animation */
-transition: max-height 0.5s ease-in-out, transform 0.5s ease-in-out;
-/* Start position - pushed down by 350px */
-transform: translateY(350px);
-}
-
-.mobile-dropdown .toggle:checked + .lbl-toggle + .collapsible-content {
-max-height: 350px; /* Adjust based on content height */
-overflow-y: auto;
-/* End position - animate upward to original position */
-transform: translateY(0);
-}
-
-/* --- FIX FOR MOBILE DROPDOWN MENUS --- */
+/* --- BULLETPROOF MOBILE DROPDOWN FIX --- */
 @media (max-width: 767px) {
-  /* 1. Remove relative positioning so the dropdown anchors to the full-width mobile menu instead of the tiny button */
-  .mobile-buttons, 
-  .mobile-dropdown {
-    position: static !important;
-  }
-
-  /* 2. Fix the layout, position, and animation of the dropdown container */
-  .mobile-dropdown .collapsible-content {
-    position: absolute !important;
-    bottom: 100% !important; /* Snaps exactly to the top edge of the mobile menu bar */
-    top: auto !important;
+  /* 1. Ensure the fixed menu is the anchor */
+  .mobile-menu {
+    position: fixed !important;
+    bottom: 0 !important;
     left: 0 !important;
     width: 100vw !important;
-    transform: none !important; /* Removes the broken Y-axis translation */
-    transition: max-height 0.4s ease-in-out !important; /* Smooth sliding animation */
-    border-radius: 16px 16px 0 0 !important;
+    z-index: 1000 !important;
+  }
+
+  /* 2. Fix the dropdown to the screen, snapping right above the 25vh menu */
+  .mobile-dropdown .collapsible-content {
+    position: fixed !important;
+    bottom: 25vh !important; /* Sits exactly on top of the mobile menu */
+    left: 0 !important;
+    width: 100vw !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    top: auto !important;
+    transform: none !important; /* Removes the buggy translation */
+    transition: max-height 0.3s ease-out !important;
     background: rgba(0, 0, 0, 0.95) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    z-index: 1010;
+    border-radius: 16px 16px 0 0 !important;
+    z-index: 1010 !important;
+    pointer-events: none !important; /* CRITICAL: Prevents invisible box from stealing clicks */
   }
 
-  /* 3. Give it a dynamic max-height when opened so it scales to any phone screen */
+  /* 3. When opened */
   .mobile-dropdown .toggle:checked + .lbl-toggle + .collapsible-content {
-    max-height: 55vh !important; 
+    max-height: 55vh !important;
+    pointer-events: auto !important; /* Enable clicks inside the open menu */
+    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
   }
 
-  /* 4. Ensure the buttons inside are fully scrollable and spaced nicely */
+  /* 4. Scrollable inner content */
   .mobile-dropdown .content-inner {
     max-height: 55vh !important;
     overflow-y: auto !important;
-    padding: 15px 15px 25px 15px !important; /* Better padding for thumb tapping */
+    padding: 15px 15px 30px 15px !important;
     background: transparent !important;
   }
-  
-  /* 5. Ensure the indicator triangles point correctly when opened */
-  .mobile-dropdown .toggle:checked + .lbl-toggle::before { 
+
+  /* 5. Ensure the label stays on top and is clickable */
+  .mobile-dropdown .lbl-toggle {
+    position: relative !important;
+    z-index: 1020 !important; 
+    cursor: pointer !important;
+  }
+
+  /* 6. Fix triangle animation */
+  .mobile-dropdown .toggle:checked + .lbl-toggle::before {
     transform: rotate(90deg) translateX(-3px) !important;
   }
 }
-
-
 
     </style>
 </head>
