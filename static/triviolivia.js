@@ -12054,5 +12054,3 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-
-document.body.style.background = "#4523a8";
