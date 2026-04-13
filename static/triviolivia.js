@@ -12022,3 +12022,31 @@ function toggleFullscreen() {
     window.scrollTo(0, 1);
   }
 }
+
+
+
+
+
+// --- MOBILE DROPDOWN CLICK ENFORCER ---
+document.addEventListener("DOMContentLoaded", function() {
+  const mobileLabels = document.querySelectorAll('.mobile-dropdown .lbl-toggle');
+  
+  mobileLabels.forEach(label => {
+    label.addEventListener('click', function(e) {
+      // Prevent the browser's buggy default label-to-checkbox behavior
+      e.preventDefault(); 
+      
+      // Find the specific checkbox this label is attached to
+      const checkboxId = this.getAttribute('for');
+      const checkbox = document.getElementById(checkboxId);
+      
+      if (checkbox) {
+        // Manually flip the checked state
+        checkbox.checked = !checkbox.checked;
+        
+        // Fire a change event so the rest of your accordion logic knows it opened
+        checkbox.dispatchEvent(new Event('change'));
+      }
+    });
+  });
+});
