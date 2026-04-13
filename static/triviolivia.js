@@ -11770,7 +11770,7 @@ const mainGameFunction = async (currentSessionId) => {
     const currentQ = state.globalData[i];
     if (!currentQ) break; // Defensive check if fetch returned fewer questions than requested
 
-    const currentBg = category_colors[currentQ.category_name] || "#4523a8";
+    const currentBg = category_colors[currentQ.category_name];
     document.body.style.background = currentBg;
     updateThemeColor(currentBg); // Syncs the mobile status bar
 
