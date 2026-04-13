@@ -11462,14 +11462,14 @@ const DOM = {
 // ==========================================
 const state = {
   settings: { questions: 10, timePerQuestion: 5, timePerAnswer: 5 },
-  flags: { gameStarted: false, menuHidden: false, pauseFlag: false, isPaused: true },
+  flags: { gameStarted: false, menuHidden: false, pauseFlag: false, isPaused: true, gameSessionId: 0 },
   lists: { category: [], difficulty: [], era: [] },
   allNone: { category: true, difficulty: true, era: true },
   currentQuestionCategory: null,
   globalData: [],
   moddedUrl: "",
   baseUrl: "/api/questions",
-  queryParams: []
+  queryParams: [],
 };
 
 const Dictionaries = {
@@ -11623,6 +11623,9 @@ function fetchQuestionsAndStartGame() {
   if (state.flags.gameStarted) return;
   
   state.flags.gameStarted = true;
+  state.flags.gameSessionId++; // Increment ID to cancel any previous game loops
+  const currentSessionId = state.flags.gameSessionId;
+  
   state.globalData = [];
   state.queryParams = [];
   
@@ -11632,7 +11635,8 @@ function fetchQuestionsAndStartGame() {
   
   state.moddedUrl = `${state.baseUrl}?questions=${state.settings.questions}&${state.queryParams.join("&")}`;
   state.flags.menuHidden = true;
-  mainGameFunction();
+  
+  mainGameFunction(currentSessionId); // Pass the new ID forward
 }
 
 // ==========================================
@@ -11665,7 +11669,7 @@ function displayLoader() {
   DOM.questionDisplay.appendChild(loader);
 }
 
-const mainGameFunction = async () => {
+const mainGameFunction = async (currentSessionId) => {
   DOM.demo.innerHTML = "Fetching questions...";
   disableBothButtons();
   DOM.questionDisplay.innerHTML = "";
@@ -11676,14 +11680,22 @@ const mainGameFunction = async () => {
     const fetchPromise = fetchData(state.moddedUrl);
     const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 20000));
     await Promise.race([fetchPromise, timeoutPromise]);
+    
+    // Safety check: Exit if a new game was started during the fetch
+    if (state.flags.gameSessionId !== currentSessionId) return; 
+    
     DOM.demo.innerHTML = "Questions fetched!";
     await delay(1000);
   } catch (error) {
+    if (state.flags.gameSessionId !== currentSessionId) return;
     DOM.demo.innerHTML = "Could not fetch questions due to settings or connection problems. Please try again or change settings.";
     state.flags.gameStarted = false;
     enableBothButtons();
     return;
   }
+
+  // Safety check before countdown
+  if (state.flags.gameSessionId !== currentSessionId) return;
 
   // Countdown Animation
   DOM.progressBar.style.animation = "none";
@@ -11694,6 +11706,8 @@ const mainGameFunction = async () => {
   for (let count of ["3.", "2..", "1...", "Go!"]) {
     DOM.demo.innerHTML = count === "Go!" ? count : `Game starts in ${count}`;
     await delay(1000);
+    // Safety check during countdown delays
+    if (state.flags.gameSessionId !== currentSessionId) return;
   }
 
   enableBothButtons();
@@ -11712,13 +11726,19 @@ const mainGameFunction = async () => {
       DOM.progressBar.style.animationPlayState = "paused";
     }
   
-    while (!state.flags.pauseFlag) await delay(100);
+    // Waiting for unpause
+    while (!state.flags.pauseFlag) {
+      await delay(100);
+      if (state.flags.gameSessionId !== currentSessionId) return; // Exit if new game started
+    }
   
     const currentQ = state.globalData[i];
-    document.body.style.background = category_colors[currentQ.category_name];
+    if (!currentQ) break; // Defensive check if fetch returned fewer questions than requested
+
+    document.body.style.background = category_colors[currentQ.category_name] || "#4523a8";
   
-    // Content dictionary render (Assumes contentDict is defined globally elsewhere)
-    if (typeof contentDict !== 'undefined') {
+    // Content dictionary render
+    if (typeof contentDict !== 'undefined' && contentDict[currentQ.category_name.toLowerCase()]) {
       const icon = contentDict[currentQ.category_name.toLowerCase()];
       DOM.character.innerHTML = icon;
       DOM.character2.innerHTML = icon;
@@ -11745,10 +11765,16 @@ const mainGameFunction = async () => {
   
     while (qTimeRemaining > 0) {
       await delay(100);
+      if (state.flags.gameSessionId !== currentSessionId) return; // Exit if new game started
+      
       if (!state.flags.pauseFlag) continue;
+      
       qTimeRemaining--;
       DOM.demo.innerHTML = `Q${i + 1} - ${currentQ.category_name.toUpperCase()} - ${currentQ.difficulty_name.toUpperCase()} - Mark Mazurek - ${Math.floor(qTimeRemaining / 10)}.${qTimeRemaining % 10}s`;
     }
+  
+    // Check right before transitioning to the answer phase
+    if (state.flags.gameSessionId !== currentSessionId) return;
   
     DOM.progressBar.style.animation = "none";
     DOM.progressBar.offsetHeight;
@@ -11759,7 +11785,10 @@ const mainGameFunction = async () => {
   
     while (aTimeRemaining > 0) {
       await delay(100);
+      if (state.flags.gameSessionId !== currentSessionId) return; // Exit if new game started
+      
       if (!state.flags.pauseFlag) continue;
+      
       aTimeRemaining--;
       DOM.demo.innerHTML = `Q${i + 1} - ${currentQ.category_name.toUpperCase()} - ${currentQ.difficulty_name.toUpperCase()} - Mark Mazurek - ${Math.floor(aTimeRemaining / 10)}.${aTimeRemaining % 10}s`;
     }
@@ -11767,7 +11796,10 @@ const mainGameFunction = async () => {
     showAnswer("");
   }
 
-  // Clean up after game
+  // Check one last time before running cleanup
+  if (state.flags.gameSessionId !== currentSessionId) return;
+
+  // Clean up after game completes
   state.flags.gameStarted = false;
   state.flags.pauseFlag = false;
   showQuestion("Thanks for playing!");
