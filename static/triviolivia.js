@@ -11509,10 +11509,8 @@ const category_colors = {
 // ==========================================
 // 3. INITIALIZATION & STYLES
 // ==========================================
-const defaultMessage = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()"><b>START</b></span> to play.';
-
 if (DOM.demo) {
-  DOM.demo.innerHTML = defaultMessage;
+  DOM.demo.innerHTML = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()"><b>START</b></span> to play.';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11528,11 +11526,6 @@ document.addEventListener('DOMContentLoaded', () => {
   syncSettings('questions', state.settings.questions);
   syncSettings('questionTime', state.settings.timePerQuestion);
   syncSettings('answerTime', state.settings.timePerAnswer);
-  
-  // Restore the default message after the sliders sync
-  if (DOM.demo) {
-    DOM.demo.innerHTML = defaultMessage;
-  }
 });
 
 // ==========================================
