@@ -11429,54 +11429,6 @@ const contentDict = {
 
 document.body.style.background = "#4523a8";
 
-// --- BULLETPROOF THEME COLOR FUNCTION ---
-function updateThemeColor(bgString) {
-  // 1. Find or create the meta tag
-  let metaThemeColor = document.querySelector("meta[name='theme-color']");
-  if (!metaThemeColor) {
-    metaThemeColor = document.createElement("meta");
-    metaThemeColor.name = "theme-color";
-    document.head.appendChild(metaThemeColor);
-  }
-  
-  let themeColor = "#4523a8"; // Default purple
-  
-  // 2. Extract colors and convert to Hex
-  if (bgString.includes("gradient")) {
-    // Find all rgb/rgba matches in the string
-    const rgbMatches = [...bgString.matchAll(/rgba?\((\d+),\s*(\d+),\s*(\d+)/g)];
-    
-    if (rgbMatches.length > 0) {
-      // Get the LAST color in the gradient (the 100% stop at the top of the screen)
-      const topColor = rgbMatches[rgbMatches.length - 1];
-      
-      // Convert RGB to HEX format (#RRGGBB)
-      const r = parseInt(topColor[1]).toString(16).padStart(2, '0');
-      const g = parseInt(topColor[2]).toString(16).padStart(2, '0');
-      const b = parseInt(topColor[3]).toString(16).padStart(2, '0');
-      
-      themeColor = `#${r}${g}${b}`;
-    }
-  } else {
-    themeColor = bgString;
-  }
-  
-  // 3. Apply to meta tag for the status bar
-  metaThemeColor.content = themeColor;
-  
-  // 4. Apply to HTML background so the notch and overscroll bounce blend perfectly
-  document.documentElement.style.backgroundColor = themeColor;
-}
-
-// Call it once to set the initial purple color on load
-updateThemeColor("#4523a8");
-
-// Call it once to set the initial purple color on load
-updateThemeColor("#4523a8");
-
-// Call it once to set the initial purple color on load
-updateThemeColor("#4523a8");
-
 // ==========================================
 // 1. DOM ELEMENTS (Cached for performance)
 // ==========================================
@@ -11783,10 +11735,8 @@ const mainGameFunction = async (currentSessionId) => {
     const currentQ = state.globalData[i];
     if (!currentQ) break; // Defensive check if fetch returned fewer questions than requested
 
-    const currentBg = category_colors[currentQ.category_name] || "#4523a8";
-    document.body.style.background = currentBg;
-    updateThemeColor(currentBg); // Syncs the mobile status bar
-
+    document.body.style.background = category_colors[currentQ.category_name] || "#4523a8";
+  
     // Content dictionary render
     if (typeof contentDict !== 'undefined' && contentDict[currentQ.category_name.toLowerCase()]) {
       const icon = contentDict[currentQ.category_name.toLowerCase()];
