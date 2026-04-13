@@ -11427,7 +11427,7 @@ const contentDict = {
 </svg>`,
 };
 
-document.body.style.background = "#4523a8";
+document.querySelector(".container-fluid").style.background = "#4523a8";
 
 // ==========================================
 // 1. DOM ELEMENTS (Cached for performance)
