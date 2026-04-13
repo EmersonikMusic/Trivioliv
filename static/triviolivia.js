@@ -11967,16 +11967,21 @@ const closeAboutUs = () => { state.flags.pauseFlag = false; document.getElementB
 
 // Mobile layout fixes
 function handleMobileLayout() {
+  let gameArea = document.querySelector('.game-area');
+  let mobileMenu = document.querySelector('.mobile-menu');
+
   if (window.innerWidth <= 767) {
     let vh = window.innerHeight;
-    let gameArea = document.querySelector('.game-area');
-    let mobileMenu = document.querySelector('.mobile-menu');
     let menuHeight = vh * 0.25;
     
     if (gameArea && mobileMenu) {
       gameArea.style.height = (vh - menuHeight - 20) + 'px';
       mobileMenu.style.height = menuHeight + 'px';
     }
+  } else {
+    // Clear the inline heights on desktop so CSS handles it properly
+    if (gameArea) gameArea.style.height = '';
+    if (mobileMenu) mobileMenu.style.height = '';
   }
 }
 
