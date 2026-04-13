@@ -11430,7 +11430,7 @@ const contentDict = {
 document.body.style.background = "#4523a8";
 
 // ==========================================
-// 1. DOM ELEMENTS (Cached for performance)
+// 1. DOM ELEMENTS & CACHE
 // ==========================================
 const DOM = {
   progressElement: document.getElementById("progress"),
@@ -11441,7 +11441,6 @@ const DOM = {
   character2: document.getElementById("character2"),
   progressBar: document.getElementById("progress"),
   
-  // Desktop & Mobile Buttons
   btns: {
     startPauseDesktop: document.getElementById("start-pause"),
     startPauseMobile: document.getElementById("start-pause2"),
@@ -11449,7 +11448,6 @@ const DOM = {
     refetchMobile: document.getElementById("refetch-and-restart2")
   },
 
-  // Sliders
   sliders: {
     questions: { desktop: document.getElementById("questionSlider"), mobile: document.getElementById("mobileQuestionSlider"), label: "questionLabel", mobileLabel: "mobileQuestionLabel", unit: " QUESTIONS" },
     questionTime: { desktop: document.getElementById("perQuestionSlider"), mobile: document.getElementById("mobilePerQuestionSlider"), label: "perQuestionLabel", mobileLabel: "mobilePerQuestionLabel", unit: "s / QUESTION" },
@@ -11476,6 +11474,34 @@ const Dictionaries = {
   category: { 1: "Art", 2: "Economy", 3: "Food & Drink", 4: "Games", 5: "Geography", 6: "History", 7: "Human Body", 8: "Language", 9: "Literature", 10: "Math", 11: "Miscellaneous", 12: "Movies", 13: "Music", 14: "Nature", 15: "Philosophy", 16: "Politics", 17: "Pop Culture", 18: "Science", 19: "Sports", 20: "Technology", 21: "Television", 22: "Performing Arts", 23: "Theology", 24: "Video Games", 33: "Law" },
   difficulty: { 5: "Genius", 4: "Hard", 3: "Average", 2: "Easy", 1: "Casual" },
   era: { 1: "Pre-1500", 2: "1500-1800", 3: "1800-1900", 4: "1900-1950", 5: "1950s", 6: "1960s", 7: "1970s", 8: "1980s", 9: "1990s", 10: "2000s", 11: "2010s", 12: "2020s" }
+};
+
+const category_summaries = {
+    "Art": "Artists, Architecture, Sculpture, Photography, Painting, Museums, Styles, Terms, Typography, Theory, Techniques, Statues, Festivals, Digital Art, Awards, Colors, Design, Fashion, Heraldry, Logos",
+    "Economy": "Business, Currency, Stocks, Terms, Trade, Businesspeople, Cryptocurrency, Institutions, Finance, Economists, Marketing, Policies, Accounting, Events, Banking, Ecommerce, Brands, Investing, Unions",
+    "Food & Drink": "Origins, Foodstuffs, Brands, Ingredients, Restaurants, Alcohol, Cooking, National Dishes, Drinks, Terms, Diets, Agriculture, Cuisines, Producers, Nutrition, Processing, Restrictions, Spices",
+    "Games": "Board Games, Card Games, Tabletop Games, Puzzles, Games of Chance, Party Games, Schoolyard Games, Dexterity Games, Bar Games, Skill Toys, Genres",
+    "Geography": "Countries, Capitals, Regions, Territories, Bodies of Water, Cities, Landmarks, Cartography, Terms, Islands",
+    "History": "War, Events, Figures, Civilizations, Deaths, Royalty, Empires, Firsts, Periods, Quotes, Archaeology, Prehistory, Rulers, Terms, Artifacts, Explorers, Kingdoms, Names, Organizations, Places, Historians, Museums",
+    "Human Body": "Anatomy, Disease, Physiology, Systems, Organs, Terms, Pregnancy, Disorders, Tests, Conditions",
+    "Language": "Definitions, Terms, Languages, Translation, Codes, Shorthands, Slang, Words, Alphabets, Linguistics, Parts of Speech, Punctuation, Anagrams, Idioms, Sayings, Dialects, Sign Language",
+    "Law": "Terms, Cases, Laws, Enforcement, Courts, Prisons, Concepts, Codes, Institutions, Principles, Doctrines, Events, Firms, Branches, Figures",
+    "Literature": "Authors, Characters, Books, Details, Poetry, Lines, Awards, Stories, Literary Devices, Novellas, Terms, Fanbases, Genres, Publications, Publishers, Fables, Graphic Novels, Magazines, Quotes",
+    "Math": "Numbers, Problems, Mathematicians, Geometry, Terms, Units, Statistics, Concepts, Branches, Notation, Calculus, Instruments, Probability, Symbols",
+    "Miscellaneous": "Flags, Terms, Education, Buildings, Calendar, Journalism, Culture, Slogans, Organizations, Awards, Names, Products, Amusement Parks, Logos, Events, Symbols, Clothing, Fashion, Martial Arts, Quotes",
+    "Movies": "Characters, Actors, Awards, Films, Details, Directors, Box Office, Lines, Taglines, Cinematography, Studios, Festivals, Filmmaking, Franchises, Industry, Musicals, Screenwriters",
+    "Music": "Artists, Lyrics, Songs, Instruments, Composers, Albums, Concerts, Theory, Genres, Labels, Festivals, Aliases, Awards, Streaming, Anthems, Fanbases, Terms, Notation, Hardware, Producers, Music Videos",
+    "Nature": "Animals, Environment, Space, Plants, National Parks, Natural Processes, Terms, Natural Disasters, Geology, Weather, Life, Parks",
+    "Performing Arts": "Plays, Characters, Theaters, Playwrights, Opera, Musicals, Terms, Awards, Dance, Schools, Actors, Lines, Acting, Genres, Comedy, Performers, Podcasting, Circus, Magicians, Performing Arts",
+    "Philosophy": "Philosophers, Texts, Branches, Terms, Principles, Concepts, Journals, Schools, Ideologies, Logic, Movements, Argumentation, Activism, Metaphysics",
+    "Politics": "Politicians, Government, Geopolitics, Unions, Terms, Events, Movements, Parties, Elections, Treaties, Political Buildings, Revolutions, Activism, Institutions, International Politics, Alliances",
+    "Pop Culture": "Celebrities, Aliases, Comics, Scandals, Criminals, Deaths, Fashion, Magazines, Products, Traditions, Trends, Pseudoscience, Memes, Entertainment, Generations, Societies, Events, Websites, Lifestyle",
+    "Science": "Chemistry, Physics, Psychology, Biology, Scientists, Medicine, Biochemistry, Fields, Units, Astronomy, Geology, Sociology, Terms, Materials Science, Journals, Pathology, Research Centers, Techniques, Anthropology",
+    "Sports": "Teams, Olympics, Athletes, Leagues, Terms, Rules, Awards, Motorsports, World Cups, Events, Mascots, Records, Games, Equipment, Sports Entertainment, Stadiums, Fanbases, Positions, Governing Bodies, Martial Arts",
+    "Technology": "Internet, Software, Machines, Hardware, Vehicles, Companies, Programming, Terms, Inventors, Websites, Computers, Engineering, Weapons, Infrastructure, Advances, Names, Applications, Founders, AI",
+    "Television": "Characters, Details, Actors, Shows, Game Shows, Streaming, Reality TV, Producers, Theme Songs, News, Fanbases, Lines, Commercials, Terms, Animation, Broadcasting, Episodes, Events, Networks, Awards",
+    "Theology": "Mythology, World Religions, Holy Books, Places of Worship, Traditions, Holy Days, Astrology, Popes, Saints, Terms, Folklore, Leaders, Symbols, Apparel, Clergy, Events, Institutions, Irreligion, Titles",
+    "Video Games": "Games, Characters, Details, Consoles, Developers, Awards, Items, Genres, Publications, Hardware, Esports, Levels, Terms, Accessories, Conventions"
 };
 
 const category_colors = {
@@ -11507,8 +11533,57 @@ const category_colors = {
 };
 
 // ==========================================
-// 3. INITIALIZATION & STYLES
+// 3. INITIALIZATION, STORAGE & STYLES
 // ==========================================
+function saveLocalSettings() {
+  const dataToSave = {
+    settings: state.settings,
+    lists: state.lists,
+    allNone: state.allNone
+  };
+  localStorage.setItem('triviolivia_settings', JSON.stringify(dataToSave));
+}
+
+function loadLocalSettings() {
+  try {
+    const saved = localStorage.getItem('triviolivia_settings');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      state.settings = parsed.settings || state.settings;
+      state.lists = parsed.lists || state.lists;
+      state.allNone = parsed.allNone || state.allNone;
+      
+      // Re-sync UI to match loaded state
+      syncSettings('questions', state.settings.questions, false);
+      syncSettings('questionTime', state.settings.timePerQuestion, false);
+      syncSettings('answerTime', state.settings.timePerAnswer, false);
+      
+      // Visually update category/diff/era buttons based on loaded lists
+      ['category', 'difficulty', 'era'].forEach(type => {
+         const isAll = state.allNone[type];
+         document.querySelectorAll(`.${type}`).forEach(btn => {
+             const id = btn.id;
+             // If ALL is selected, or if this specific ID is in the exclusion list
+             const isActive = isAll ? !state.lists[type].includes(id) : state.lists[type].includes(id);
+             btn.classList.remove("active", "inactive");
+             btn.classList.add(isActive ? "active" : "inactive");
+         });
+      });
+    }
+  } catch (e) {
+    console.error("Could not load saved settings.", e);
+  }
+}
+
+function initTooltips() {
+  document.querySelectorAll('.category').forEach(btn => {
+    const name = Dictionaries.category[btn.id];
+    if (name && category_summaries[name]) {
+      btn.title = category_summaries[name]; // Adds native browser tooltip
+    }
+  });
+}
+
 if (DOM.demo) {
   DOM.demo.innerHTML = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()"><b>START</b></span> to play.';
 }
@@ -11521,11 +11596,15 @@ document.addEventListener('DOMContentLoaded', () => {
   document.head.appendChild(style);
   closeDropdownsOnClickOutside();
   handleMobileLayout();
+  initTooltips();
   
-  // Init settings
-  syncSettings('questions', state.settings.questions);
-  syncSettings('questionTime', state.settings.timePerQuestion);
-  syncSettings('answerTime', state.settings.timePerAnswer);
+  // Default Init
+  syncSettings('questions', state.settings.questions, false);
+  syncSettings('questionTime', state.settings.timePerQuestion, false);
+  syncSettings('answerTime', state.settings.timePerAnswer, false);
+  
+  // Load saved config if exists
+  loadLocalSettings();
 });
 
 // ==========================================
@@ -11619,27 +11698,9 @@ function fetchQuestionsAndStartGame() {
   state.globalData = [];
   state.queryParams = [];
   
-  // Helper to convert blacklists (disabled items) to whitelists (active items)
-  const getActiveItems = (typeKey) => {
-    const disabledItems = state.lists[typeKey].map(String);
-    return Object.keys(Dictionaries[typeKey]).filter(id => !disabledItems.includes(id));
-  };
-
-  const activeCategories = getActiveItems('category');
-  const activeDifficulties = getActiveItems('difficulty');
-  const activeEras = getActiveItems('era');
-  
-  // Only add parameters if we aren't selecting *everything*
-  // (Missing parameters implicitly request all from the backend)
-  if (activeCategories.length > 0 && activeCategories.length < Object.keys(Dictionaries.category).length) {
-    state.queryParams.push(`category=${activeCategories.join(",")}`);
-  }
-  if (activeDifficulties.length > 0 && activeDifficulties.length < Object.keys(Dictionaries.difficulty).length) {
-    state.queryParams.push(`difficulty=${activeDifficulties.join(",")}`);
-  }
-  if (activeEras.length > 0 && activeEras.length < Object.keys(Dictionaries.era).length) {
-    state.queryParams.push(`era=${activeEras.join(",")}`);
-  }
+  if (state.lists.category.length > 0) state.queryParams.push(`category=${state.lists.category.join(",")}`);
+  if (state.lists.difficulty.length > 0) state.queryParams.push(`difficulty=${state.lists.difficulty.join(",")}`);
+  if (state.lists.era.length > 0) state.queryParams.push(`era=${state.lists.era.join(",")}`);
   
   state.moddedUrl = `${state.baseUrl}?questions=${state.settings.questions}&${state.queryParams.join("&")}`;
   state.flags.menuHidden = true;
@@ -11722,13 +11783,12 @@ const mainGameFunction = async () => {
     } else {
       DOM.progressBar.style.animationPlayState = "paused";
     }
-    
+  
     while (!state.flags.pauseFlag) await delay(100);
-    
+  
     const currentQ = state.globalData[i];
     document.body.style.background = category_colors[currentQ.category_name];
-    
-    // Content dictionary render (Assumes contentDict is defined globally elsewhere)
+  
     if (typeof contentDict !== 'undefined') {
       const icon = contentDict[currentQ.category_name.toLowerCase()];
       DOM.character.innerHTML = icon;
@@ -11743,38 +11803,38 @@ const mainGameFunction = async () => {
         svg.style.maxWidth = "100%";
       }
     }
-    
+  
     let qTimeRemaining = state.settings.timePerQuestion * 10;
     let aTimeRemaining = state.settings.timePerAnswer * 10;
-    
+  
     DOM.progressBar.style.animation = "none";
     DOM.progressBar.offsetHeight;
     DOM.progressBar.style.animation = `depleteProgress ${state.settings.timePerQuestion}s linear`;
     DOM.progressBar.style.animationPlayState = "running";
-    
+  
     showQuestion(currentQ.text);
-    
+  
     while (qTimeRemaining > 0) {
       await delay(100);
       if (!state.flags.pauseFlag) continue;
       qTimeRemaining--;
       DOM.demo.innerHTML = `Q${i + 1} - ${currentQ.category_name.toUpperCase()} - ${currentQ.difficulty_name.toUpperCase()} - Mark Mazurek - ${Math.floor(qTimeRemaining / 10)}.${qTimeRemaining % 10}s`;
     }
-    
+  
     DOM.progressBar.style.animation = "none";
     DOM.progressBar.offsetHeight;
     DOM.progressBar.style.animation = `growProgress ${state.settings.timePerAnswer}s linear`;
     DOM.progressBar.style.animationPlayState = "running";
-    
+  
     showAnswer(currentQ.answer);
-    
+  
     while (aTimeRemaining > 0) {
       await delay(100);
       if (!state.flags.pauseFlag) continue;
       aTimeRemaining--;
       DOM.demo.innerHTML = `Q${i + 1} - ${currentQ.category_name.toUpperCase()} - ${currentQ.difficulty_name.toUpperCase()} - Mark Mazurek - ${Math.floor(aTimeRemaining / 10)}.${aTimeRemaining % 10}s`;
     }
-    
+  
     showAnswer("");
   }
 
@@ -11792,7 +11852,6 @@ const mainGameFunction = async () => {
 // ==========================================
 // 7. TOGGLES & LIST MANAGEMENT
 // ==========================================
-// Generic list toggler to replace repetitive functions
 function toggleListState(listKey, clickedId, dictionary, typeName) {
   const list = state.lists[listKey];
   const name = dictionary[clickedId];
@@ -11804,22 +11863,21 @@ function toggleListState(listKey, clickedId, dictionary, typeName) {
     DOM.demo.innerHTML = `You have enabled the ${name} ${typeName}.`;
     list.splice(list.indexOf(clickedId), 1);
   }
+  saveLocalSettings();
 }
 
-// Preserve exposed function names for HTML bindings
 function toggle_categories(id) { toggleListState('category', id, Dictionaries.category, 'category'); }
 function toggle_difficulties(id) { toggleListState('difficulty', id, Dictionaries.difficulty, 'difficulty'); }
 function toggle_eras(id) { toggleListState('era', id, Dictionaries.era, 'era'); }
 
 // Keeping these for legacy bindings if they exist
-function disable_category(id) { if (!state.lists.category.includes(id)) state.lists.category.push(id); }
-function enable_category(id) { if (state.lists.category.includes(id)) state.lists.category.splice(state.lists.category.indexOf(id), 1); }
-function disable_difficulty(id) { if (!state.lists.difficulty.includes(id)) state.lists.difficulty.push(id); }
-function enable_difficulty(id) { if (state.lists.difficulty.includes(id)) state.lists.difficulty.splice(state.lists.difficulty.indexOf(id), 1); }
-function disable_era(id) { if (!state.lists.era.includes(id)) state.lists.era.push(id); }
-function enable_era(id) { if (state.lists.era.includes(id)) state.lists.era.splice(state.lists.era.indexOf(id), 1); }
+function disable_category(id) { if (!state.lists.category.includes(id)) { state.lists.category.push(id); saveLocalSettings(); } }
+function enable_category(id) { if (state.lists.category.includes(id)) { state.lists.category.splice(state.lists.category.indexOf(id), 1); saveLocalSettings(); } }
+function disable_difficulty(id) { if (!state.lists.difficulty.includes(id)) { state.lists.difficulty.push(id); saveLocalSettings(); } }
+function enable_difficulty(id) { if (state.lists.difficulty.includes(id)) { state.lists.difficulty.splice(state.lists.difficulty.indexOf(id), 1); saveLocalSettings(); } }
+function disable_era(id) { if (!state.lists.era.includes(id)) { state.lists.era.push(id); saveLocalSettings(); } }
+function enable_era(id) { if (state.lists.era.includes(id)) { state.lists.era.splice(state.lists.era.indexOf(id), 1); saveLocalSettings(); } }
 
-// Generic All/None toggler
 function toggleAllNone(typeKey, domClass, dict) {
   const buttons = document.querySelectorAll(domClass);
   const isAll = state.allNone[typeKey];
@@ -11835,23 +11893,22 @@ function toggleAllNone(typeKey, domClass, dict) {
   DOM.demo.innerHTML = isAll 
     ? `You must select at least one ${typeKey} before starting the game.` 
     : `You have enabled all ${typeKey}s.`;
+    
+  saveLocalSettings();
 }
 
 function allNoneCategoriesButton() { toggleAllNone('category', '.category', Dictionaries.category); }
 function allNoneDifficultiesButton() { toggleAllNone('difficulty', '.difficulty', Dictionaries.difficulty); }
 function allNoneErasButton() { toggleAllNone('era', '.era', Dictionaries.era); }
 
-// Generic Indicator Toggler
 function toggleIndicator(button) {
   const isActivating = !button.classList.contains("active");
-  
   document.querySelectorAll(`button[id='${button.id}']`).forEach(btn => {
     btn.classList.remove("active", "inactive");
     btn.classList.add(isActivating ? "active" : "inactive");
   });
 }
 
-// Menu accordions
 document.querySelectorAll(".toggle").forEach((checkbox) => {
   checkbox.addEventListener("change", function () {
     if (this.checked) {
@@ -11869,7 +11926,7 @@ document.querySelectorAll(".toggle").forEach((checkbox) => {
 // ==========================================
 // 8. SLIDERS & SETTINGS
 // ==========================================
-function syncSettings(settingType, value) {
+function syncSettings(settingType, value, save = true) {
   const val = parseInt(value);
   const cfg = DOM.sliders[settingType];
   
@@ -11886,6 +11943,8 @@ function syncSettings(settingType, value) {
   if (mLabel) mLabel.textContent = val + cfg.unit;
 
   DOM.demo.innerHTML = settingType === 'questions' ? `Game set to ${val} questions.` : `Questions/Answers will display for ${val} seconds.`;
+  
+  if(save) saveLocalSettings();
 }
 
 Object.keys(DOM.sliders).forEach(key => {
@@ -11922,7 +11981,12 @@ function resetSettings() {
   state.allNone.difficulty = false; allNoneDifficultiesButton();
   state.allNone.era = false; allNoneErasButton();
 
-  DOM.demo.innerHTML = 'You have enabled all categories, difficulties, and eras. Press <span id="refetch-and-restart" style="cursor: pointer; display: inline;" onclick="refetchAndRestart()">REFETCH AND RESTART</span> to play again.';
+  // Reset Sliders
+  syncSettings('questions', 10, false);
+  syncSettings('questionTime', 5, false);
+  syncSettings('answerTime', 5, false);
+
+  DOM.demo.innerHTML = 'All settings have been reset to default. Press <span id="refetch-and-restart" style="cursor: pointer; display: inline;" onclick="refetchAndRestart()">REFETCH AND RESTART</span> to play again.';
 
   state.flags.gameStarted = false;
   state.flags.menuHidden = false;
@@ -11930,6 +11994,16 @@ function resetSettings() {
   state.lists.category = [];
   state.lists.difficulty = [];
   state.lists.era = [];
+  
+  saveLocalSettings();
+}
+
+// The New Functional Reset Confirm
+function confirm_reset() {
+  if (window.confirm("Are you sure you want to wipe all your settings and reset the game to default?")) {
+    resetSettings();
+    localStorage.removeItem('triviolivia_settings');
+  }
 }
 
 const pauseGame = () => { state.flags.pauseFlag = true; };
