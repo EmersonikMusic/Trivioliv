@@ -11867,7 +11867,14 @@ function syncSettings(settingType, value) {
   if (dLabel) dLabel.textContent = val + cfg.unit;
   if (mLabel) mLabel.textContent = val + cfg.unit;
 
-  DOM.demo.innerHTML = settingType === 'questions' ? `Game set to ${val} questions.` : `Questions/Answers will display for ${val} seconds.`;
+  // Specific messaging for each slider type
+  if (settingType === 'questions') {
+    DOM.demo.innerHTML = `Game set to ${val} questions.`;
+  } else if (settingType === 'questionTime') {
+    DOM.demo.innerHTML = `Questions will display for ${val} seconds.`;
+  } else if (settingType === 'answerTime') {
+    DOM.demo.innerHTML = `Answers will display for ${val} seconds.`;
+  }
 }
 
 Object.keys(DOM.sliders).forEach(key => {
