@@ -11429,6 +11429,32 @@ const contentDict = {
 
 document.body.style.background = "#4523a8";
 
+// --- NEW THEME COLOR FUNCTION ---
+function updateThemeColor(bgString) {
+  // Find or create the meta tag
+  let metaThemeColor = document.querySelector("meta[name='theme-color']");
+  if (!metaThemeColor) {
+    metaThemeColor = document.createElement("meta");
+    metaThemeColor.name = "theme-color";
+    document.head.appendChild(metaThemeColor);
+  }
+  
+  let themeColor = "#4523a8"; // Default
+  
+  // Safari requires a solid color, so we extract the first color from your gradient string
+  if (bgString.includes("gradient")) {
+    const match = bgString.match(/rgba?\([^)]+\)|#[a-zA-Z0-9]{3,8}/);
+    if (match) themeColor = match[0];
+  } else {
+    themeColor = bgString;
+  }
+  
+  metaThemeColor.content = themeColor;
+}
+
+// Call it once to set the initial purple color on load
+updateThemeColor("#4523a8");
+
 // ==========================================
 // 1. DOM ELEMENTS (Cached for performance)
 // ==========================================
@@ -11735,8 +11761,10 @@ const mainGameFunction = async (currentSessionId) => {
     const currentQ = state.globalData[i];
     if (!currentQ) break; // Defensive check if fetch returned fewer questions than requested
 
-    document.body.style.background = category_colors[currentQ.category_name] || "#4523a8";
-  
+    const currentBg = category_colors[currentQ.category_name] || "#4523a8";
+    document.body.style.background = currentBg;
+    updateThemeColor(currentBg); // Syncs the mobile status bar
+    
     // Content dictionary render
     if (typeof contentDict !== 'undefined' && contentDict[currentQ.category_name.toLowerCase()]) {
       const icon = contentDict[currentQ.category_name.toLowerCase()];
