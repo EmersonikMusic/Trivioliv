@@ -11733,7 +11733,7 @@ const mainGameFunction = async (currentSessionId) => {
     const currentQ = state.globalData[i];
     if (!currentQ) break; // Defensive check if fetch returned fewer questions than requested
 
-    document.body.style.background = category_colors[currentQ.category_name] || "#4523a8";
+    document.querySelector('.container-fluid').style.background = category_colors[currentQ.category_name] || "#4523a8";
   
     // Content dictionary render
     if (typeof contentDict !== 'undefined' && contentDict[currentQ.category_name.toLowerCase()]) {
@@ -12055,4 +12055,4 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-document.body.style.background = "#4523a8";
+document.querySelector('.container-fluid').style.background = "#4523a8";
