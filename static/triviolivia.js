@@ -11429,9 +11429,9 @@ const contentDict = {
 
 document.body.style.background = "#4523a8";
 
-// --- NEW THEME COLOR FUNCTION ---
+// --- BULLETPROOF THEME COLOR FUNCTION ---
 function updateThemeColor(bgString) {
-  // Find or create the meta tag
+  // 1. Find or create the meta tag
   let metaThemeColor = document.querySelector("meta[name='theme-color']");
   if (!metaThemeColor) {
     metaThemeColor = document.createElement("meta");
@@ -11439,18 +11439,27 @@ function updateThemeColor(bgString) {
     document.head.appendChild(metaThemeColor);
   }
   
-  let themeColor = "#4523a8"; // Default
+  let themeColor = "#4523a8"; // Default purple
   
-  // Safari requires a solid color, so we extract the first color from your gradient string
+  // 2. Extract just the R, G, B values and drop the alpha channel for Safari
   if (bgString.includes("gradient")) {
-    const match = bgString.match(/rgba?\([^)]+\)|#[a-zA-Z0-9]{3,8}/);
-    if (match) themeColor = match[0];
+    const rgbMatch = bgString.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (rgbMatch) {
+      themeColor = `rgb(${rgbMatch[1]}, ${rgbMatch[2]}, ${rgbMatch[3]})`;
+    }
   } else {
     themeColor = bgString;
   }
   
+  // 3. Update the meta tag for the status bar
   metaThemeColor.content = themeColor;
+  
+  // 4. Update the HTML background so iOS overscroll and notch areas match the top of the gradient
+  document.documentElement.style.backgroundColor = themeColor;
 }
+
+// Call it once to set the initial purple color on load
+updateThemeColor("#4523a8");
 
 // Call it once to set the initial purple color on load
 updateThemeColor("#4523a8");
@@ -11764,7 +11773,7 @@ const mainGameFunction = async (currentSessionId) => {
     const currentBg = category_colors[currentQ.category_name] || "#4523a8";
     document.body.style.background = currentBg;
     updateThemeColor(currentBg); // Syncs the mobile status bar
-    
+
     // Content dictionary render
     if (typeof contentDict !== 'undefined' && contentDict[currentQ.category_name.toLowerCase()]) {
       const icon = contentDict[currentQ.category_name.toLowerCase()];
