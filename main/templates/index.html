@@ -1145,29 +1145,74 @@ transition: transform .2s ease-out;
 transform: rotate(-90deg) translateX(-2px);
 }
 
-/* Mobile dropdown animation */
+/* ==========================================
+   MOBILE DROPDOWN FIXES
+   ========================================== */
+
+/* Remove relative positioning so fixed elements work cleanly */
+.mobile-dropdown {
+  position: static; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-dropdown .wrap-collabsible {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.mobile-dropdown .lbl-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+/* Mobile dropdown animation 
+  Anchoring to fixed bottom (25vh) naturally forces the menu to grow UPWARDS
+*/
 .mobile-dropdown .collapsible-content {
-position: absolute;
-top: -350px; /* Final position above the buttons */
-left: 0;
-width: 100vw;
-z-index: 1010;
-background: rgba(0, 0, 0, 0.9);
-border-radius: 12px;
-box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
-max-height: 0;
-overflow: hidden;
-/* Add transform transition to create the up/down animation */
-transition: max-height 0.5s ease-in-out, transform 0.5s ease-in-out;
-/* Start position - pushed down by 350px */
-transform: translateY(350px);
+  position: fixed;
+  bottom: 25vh; /* Anchors exactly to the top of your mobile menu */
+  left: 0;
+  width: 100vw;
+  z-index: 1010;
+  background: rgba(15, 15, 20, 0.98);
+  border-radius: 16px 16px 0 0; /* Rounded top corners since it pops up */
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle top border */
+  box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.5);
+  max-height: 0;
+  overflow: hidden;
+  /* Transition ONLY max-height for a clean slide-up effect */
+  transition: max-height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .mobile-dropdown .toggle:checked + .lbl-toggle + .collapsible-content {
-max-height: 350px; /* Adjust based on content height */
-overflow-y: auto;
-/* End position - animate upward to original position */
-transform: translateY(0);
+  max-height: 55vh; /* Provides plenty of room to scroll categories/settings */
+  overflow-y: auto;
+}
+
+/* Inner content spacing for mobile dropdowns */
+.mobile-dropdown .content-inner {
+  max-height: none; 
+  overflow-y: visible;
+  padding: 15px;
+  background: transparent;
+  border-radius: 0; /* Clear desktop bottom-rounding */
+}
+
+/* Reverses the triangle to point UP (-90deg) when the menu is open */
+.mobile-dropdown .toggle:checked + .lbl-toggle::before { 
+  transform: rotate(-90deg) translateX(-3px);
 }
 
 
