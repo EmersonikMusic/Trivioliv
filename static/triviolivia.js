@@ -11430,7 +11430,7 @@ const contentDict = {
 document.body.style.background = "#4523a8";
 
 // ==========================================
-// 1. DOM ELEMENTS
+// 1. DOM ELEMENTS (Cached for performance)
 // ==========================================
 const DOM = {
   progressElement: document.getElementById("progress"),
@@ -11441,6 +11441,7 @@ const DOM = {
   character2: document.getElementById("character2"),
   progressBar: document.getElementById("progress"),
   
+  // Desktop & Mobile Buttons
   btns: {
     startPauseDesktop: document.getElementById("start-pause"),
     startPauseMobile: document.getElementById("start-pause2"),
@@ -11448,6 +11449,7 @@ const DOM = {
     refetchMobile: document.getElementById("refetch-and-restart2")
   },
 
+  // Sliders
   sliders: {
     questions: { desktop: document.getElementById("questionSlider"), mobile: document.getElementById("mobileQuestionSlider"), label: "questionLabel", mobileLabel: "mobileQuestionLabel", unit: " QUESTIONS" },
     questionTime: { desktop: document.getElementById("perQuestionSlider"), mobile: document.getElementById("mobilePerQuestionSlider"), label: "perQuestionLabel", mobileLabel: "mobilePerQuestionLabel", unit: "s / QUESTION" },
@@ -11456,15 +11458,18 @@ const DOM = {
 };
 
 // ==========================================
-// 2. GAME STATE
+// 2. GAME STATE & DATA MAPS
 // ==========================================
 const state = {
   settings: { questions: 10, timePerQuestion: 5, timePerAnswer: 5 },
-  flags: { gameStarted: false, pauseFlag: false, stopLoop: false },
+  flags: { gameStarted: false, menuHidden: false, pauseFlag: false, isPaused: true },
   lists: { category: [], difficulty: [], era: [] },
   allNone: { category: true, difficulty: true, era: true },
+  currentQuestionCategory: null,
   globalData: [],
-  baseUrl: "/api/questions"
+  moddedUrl: "",
+  baseUrl: "/api/questions",
+  queryParams: []
 };
 
 const Dictionaries = {
@@ -11501,19 +11506,85 @@ const category_colors = {
   "Video Games": "linear-gradient(345deg, rgba(153,0,255,1) 0%, rgba(60,13,128,1) 100%)"
 };
 
+// ==========================================
+// 3. INITIALIZATION & STYLES
+// ==========================================
 const defaultMessage = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()"><b>START</b></span> to play.';
 
-// ==========================================
-// 3. UTILITIES
-// ==========================================
-const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+if (DOM.demo) {
+  DOM.demo.innerHTML = defaultMessage;
+}
 
-async function waitWhilePaused() {
-  while (state.flags.pauseFlag) {
-    if (state.flags.stopLoop) return;
-    await delay(100);
+document.addEventListener('DOMContentLoaded', () => {
+  const style = document.createElement('style');
+  style.textContent = `
+    .button-disabled { opacity: 0.5 !important; cursor: not-allowed !important; pointer-events: none !important; }
+  `;
+  document.head.appendChild(style);
+  closeDropdownsOnClickOutside();
+  handleMobileLayout();
+  
+  // Init settings
+  syncSettings('questions', state.settings.questions);
+  syncSettings('questionTime', state.settings.timePerQuestion);
+  syncSettings('answerTime', state.settings.timePerAnswer);
+  
+  // Restore the default message after the sliders sync
+  if (DOM.demo) {
+    DOM.demo.innerHTML = defaultMessage;
+  }
+});
+
+// ==========================================
+// 4. UI BUTTON MANAGERS
+// ==========================================
+function setButtonsState(disabledState, includeRefetch = true) {
+  const method = disabledState ? 'add' : 'remove';
+  const opacity = disabledState ? '0.5' : '1';
+  const cursor = disabledState ? 'not-allowed' : 'pointer';
+
+  const buttonsToToggle = [DOM.btns.startPauseDesktop, DOM.btns.startPauseMobile];
+  if (includeRefetch) buttonsToToggle.push(DOM.btns.refetchDesktop, DOM.btns.refetchMobile);
+
+  buttonsToToggle.forEach(btn => {
+    if (btn) {
+      btn.disabled = disabledState;
+      btn.style.opacity = opacity;
+      btn.style.cursor = cursor;
+      btn.classList[method]("button-disabled");
+    }
+  });
+}
+
+const disableBothButtons = () => setButtonsState(true, true);
+const enableBothButtons = () => setButtonsState(false, true);
+const enableStartPauseButton = () => setButtonsState(false, false);
+
+function changeButtonText() {
+  if (!state.flags.pauseFlag) {
+    updateButtonDisplays("PAUSE");
+    DOM.progressBar.style.animationPlayState = "running";
+    state.flags.pauseFlag = true;
+  } else if (state.flags.pauseFlag && state.flags.gameStarted) {
+    updateButtonDisplays("RESUME");
+    DOM.progressBar.style.animationPlayState = "paused";
+    state.flags.pauseFlag = false;
+    DOM.demo.innerHTML = 'GAME PAUSED. Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">RESUME GAME</span> to continue.';
+  } else {
+    updateButtonDisplays("START");
+    state.flags.pauseFlag = false;
   }
 }
+
+function updateButtonDisplays(text) {
+  if (DOM.btns.startPauseDesktop) DOM.btns.startPauseDesktop.textContent = text;
+  if (DOM.btns.startPauseMobile) DOM.btns.startPauseMobile.textContent = text;
+}
+
+// ==========================================
+// 5. FETCH & DATA MANAGEMENT
+// ==========================================
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -11522,209 +11593,400 @@ function shuffleArray(array) {
   }
 }
 
-// ==========================================
-// 4. UI MANAGERS
-// ==========================================
-function updateButtonDisplays(text) {
-  if (DOM.btns.startPauseDesktop) DOM.btns.startPauseDesktop.textContent = text;
-  if (DOM.btns.startPauseMobile) DOM.btns.startPauseMobile.textContent = text;
+async function fetchData(moddedUrl) {
+  const response = await fetch(moddedUrl);
+  const data = await response.json();
+  state.globalData = [...data];
+  shuffleArray(state.globalData);
 }
 
-function setButtonsState(disabledState) {
-  const method = disabledState ? 'add' : 'remove';
-  const buttons = [DOM.btns.startPauseDesktop, DOM.btns.startPauseMobile, DOM.btns.refetchDesktop, DOM.btns.refetchMobile];
-  buttons.forEach(btn => {
-    if (btn) {
-      btn.disabled = disabledState;
-      btn.classList[method]("button-disabled");
-    }
-  });
-}
-
-// ==========================================
-// 5. CORE LOGIC
-// ==========================================
 function dontFetchDataIfAllDeselected() {
-  if (state.flags.gameStarted) {
-    state.flags.pauseFlag = !state.flags.pauseFlag;
-    if (state.flags.pauseFlag) {
-      updateButtonDisplays("RESUME");
-      DOM.progressBar.style.animationPlayState = "paused";
-      DOM.demo.innerHTML = 'GAME PAUSED. Press RESUME to continue.';
-    } else {
-      updateButtonDisplays("PAUSE");
-      DOM.progressBar.style.animationPlayState = "running";
-    }
-    return;
+  if (DOM.btns.startPauseDesktop && DOM.btns.startPauseDesktop.disabled) return;
+  
+  if (state.lists.category.length >= Object.keys(Dictionaries.category).length) {
+    DOM.demo.innerHTML = "Cannot start game. You must select at least one category.";
+  } else if (state.lists.difficulty.length >= Object.keys(Dictionaries.difficulty).length) {
+    DOM.demo.innerHTML = "Cannot start game. You must select at least one difficulty.";
+  } else if (state.lists.era.length >= Object.keys(Dictionaries.era).length) {
+    DOM.demo.innerHTML = "Cannot start game. You must select at least one era.";
+  } else {
+    changeButtonText();
+    fetchQuestionsAndStartGame();
+    document.querySelectorAll(".toggle").forEach(cb => {
+      cb.checked = false;
+      if(cb.nextElementSibling) cb.nextElementSibling.classList.remove("active");
+    });
   }
-
-  // Validate selections
-  const totalCats = Object.keys(Dictionaries.category).length;
-  if (state.lists.category.length >= totalCats) {
-    DOM.demo.innerHTML = "Select at least one category.";
-    return;
-  }
-
-  fetchQuestionsAndStartGame();
 }
 
-async function fetchQuestionsAndStartGame() {
-  state.flags.gameStarted = true;
-  state.flags.pauseFlag = false;
-  state.flags.stopLoop = false;
-  updateButtonDisplays("PAUSE");
-
-  let queryParams = [`questions=${state.settings.questions}`];
-  if (state.lists.category.length > 0) queryParams.push(`category=${state.lists.category.join(",")}`);
-  if (state.lists.difficulty.length > 0) queryParams.push(`difficulty=${state.lists.difficulty.join(",")}`);
-  if (state.lists.era.length > 0) queryParams.push(`era=${state.lists.era.join(",")}`);
-
-  const moddedUrl = `${state.baseUrl}?${queryParams.join("&")}`;
+function fetchQuestionsAndStartGame() {
+  if (state.flags.gameStarted) return;
   
-  DOM.demo.innerHTML = "Fetching questions...";
+  state.flags.gameStarted = true;
+  state.globalData = [];
+  state.queryParams = [];
+  
+  if (state.lists.category.length > 0) state.queryParams.push(`category=${state.lists.category.join(",")}`);
+  if (state.lists.difficulty.length > 0) state.queryParams.push(`difficulty=${state.lists.difficulty.join(",")}`);
+  if (state.lists.era.length > 0) state.queryParams.push(`era=${state.lists.era.join(",")}`);
+  
+  state.moddedUrl = `${state.baseUrl}?questions=${state.settings.questions}&${state.queryParams.join("&")}`;
+  state.flags.menuHidden = true;
+  mainGameFunction();
+}
+
+// ==========================================
+// 6. GAME LOOP
+// ==========================================
+const showQuestion = (text) => {
   DOM.questionDisplay.innerHTML = "";
   DOM.answerDisplay.innerHTML = "";
-  
-  try {
-    const response = await fetch(moddedUrl);
-    state.globalData = await response.json();
-    shuffleArray(state.globalData);
-    mainGameFunction();
-  } catch (e) {
-    DOM.demo.innerHTML = "Connection Error.";
-    state.flags.gameStarted = false;
-    updateButtonDisplays("START");
+  const p = document.createElement("p");
+  p.textContent = text;
+  DOM.questionDisplay.append(p);
+};
+
+const showAnswer = (text) => {
+  DOM.answerDisplay.innerHTML = "";
+  const p = document.createElement("p");
+  p.textContent = text;
+  DOM.answerDisplay.append(p);
+};
+
+function displayLoader() {
+  DOM.questionDisplay.innerHTML = '';
+  const loader = document.createElement('div');
+  loader.className = 'loader';
+  for (let i = 0; i < 3; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    loader.appendChild(dot);
   }
+  DOM.questionDisplay.appendChild(loader);
 }
 
-async function mainGameFunction() {
-  // 3-2-1 Countdown
+const mainGameFunction = async () => {
+  DOM.demo.innerHTML = "Fetching questions...";
+  disableBothButtons();
+  DOM.questionDisplay.innerHTML = "";
+  DOM.answerDisplay.innerHTML = "";
+  displayLoader();
+
+  try {
+    const fetchPromise = fetchData(state.moddedUrl);
+    const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 20000));
+    await Promise.race([fetchPromise, timeoutPromise]);
+    DOM.demo.innerHTML = "Questions fetched!";
+    await delay(1000);
+  } catch (error) {
+    DOM.demo.innerHTML = "Could not fetch questions due to settings or connection problems. Please try again or change settings.";
+    state.flags.gameStarted = false;
+    enableBothButtons();
+    return;
+  }
+
+  // Countdown Animation
+  DOM.progressBar.style.animation = "none";
+  DOM.progressBar.offsetHeight;
+  DOM.progressBar.style.animation = "growProgress 3s linear forwards";
+  DOM.progressBar.style.animationPlayState = "running";
+
   for (let count of ["3.", "2..", "1...", "Go!"]) {
-    await waitWhilePaused();
-    if (state.flags.stopLoop) return;
     DOM.demo.innerHTML = count === "Go!" ? count : `Game starts in ${count}`;
     await delay(1000);
   }
 
-  for (let i = 0; i < state.globalData.length; i++) {
-    if (state.flags.stopLoop) return;
-    const currentQ = state.globalData[i];
-    
-    // Setup UI for Question
-    document.body.style.background = category_colors[currentQ.category_name] || "#4523a8";
-    DOM.questionDisplay.innerHTML = `<p>${currentQ.text}</p>`;
-    DOM.answerDisplay.innerHTML = "";
-    
-    // Question Timer
-    DOM.progressBar.style.animation = "none";
-    DOM.progressBar.offsetHeight; 
-    DOM.progressBar.style.animation = `depleteProgress ${state.settings.timePerQuestion}s linear forwards`;
-    DOM.progressBar.style.animationPlayState = state.flags.pauseFlag ? "paused" : "running";
+  enableBothButtons();
+  DOM.progressBar.style.animation = "none";
+  DOM.progressBar.offsetHeight;
 
-    let qTime = state.settings.timePerQuestion * 10;
-    while (qTime > 0) {
-      await waitWhilePaused();
-      if (state.flags.stopLoop) return;
-      DOM.demo.innerHTML = `Q${i + 1} - ${currentQ.category_name.toUpperCase()} - ${Math.floor(qTime/10)}.${qTime%10}s`;
-      await delay(100);
-      qTime--;
+  // Main Question Loop
+  for (let i = 0; i < state.settings.questions; i++) {
+    if (!state.flags.pauseFlag) {
+      DOM.progressBar.style.animation = "none";
+      DOM.progressBar.offsetHeight;
+      DOM.progressBar.style.animation = `depleteProgress ${state.settings.timePerQuestion}s linear`;
+      DOM.progressBar.style.animationPlayState = "running";
+      state.flags.isPaused = false;
+    } else {
+      DOM.progressBar.style.animationPlayState = "paused";
     }
-
-    // Answer Timer
-    DOM.answerDisplay.innerHTML = `<p>${currentQ.answer}</p>`;
+  
+    while (!state.flags.pauseFlag) await delay(100);
+  
+    const currentQ = state.globalData[i];
+    document.body.style.background = category_colors[currentQ.category_name];
+  
+    // Content dictionary render (Assumes contentDict is defined globally elsewhere)
+    if (typeof contentDict !== 'undefined') {
+      const icon = contentDict[currentQ.category_name.toLowerCase()];
+      DOM.character.innerHTML = icon;
+      DOM.character2.innerHTML = icon;
+      DOM.character2.style.display = "block";
+      
+      const svg = DOM.character2.querySelector("svg");
+      if (svg) {
+        svg.setAttribute("preserveAspectRatio", "xMidYMid");
+        svg.style.width = "auto";
+        svg.style.height = "auto";
+        svg.style.maxWidth = "100%";
+      }
+    }
+  
+    let qTimeRemaining = state.settings.timePerQuestion * 10;
+    let aTimeRemaining = state.settings.timePerAnswer * 10;
+  
     DOM.progressBar.style.animation = "none";
     DOM.progressBar.offsetHeight;
-    DOM.progressBar.style.animation = `growProgress ${state.settings.timePerAnswer}s linear forwards`;
-    DOM.progressBar.style.animationPlayState = state.flags.pauseFlag ? "paused" : "running";
-
-    let aTime = state.settings.timePerAnswer * 10;
-    while (aTime > 0) {
-      await waitWhilePaused();
-      if (state.flags.stopLoop) return;
-      DOM.demo.innerHTML = `ANSWERING - ${Math.floor(aTime/10)}.${aTime%10}s`;
+    DOM.progressBar.style.animation = `depleteProgress ${state.settings.timePerQuestion}s linear`;
+    DOM.progressBar.style.animationPlayState = "running";
+  
+    showQuestion(currentQ.text);
+  
+    while (qTimeRemaining > 0) {
       await delay(100);
-      aTime--;
+      if (!state.flags.pauseFlag) continue;
+      qTimeRemaining--;
+      DOM.demo.innerHTML = `Q${i + 1} - ${currentQ.category_name.toUpperCase()} - ${currentQ.difficulty_name.toUpperCase()} - Mark Mazurek - ${Math.floor(qTimeRemaining / 10)}.${qTimeRemaining % 10}s`;
     }
+  
+    DOM.progressBar.style.animation = "none";
+    DOM.progressBar.offsetHeight;
+    DOM.progressBar.style.animation = `growProgress ${state.settings.timePerAnswer}s linear`;
+    DOM.progressBar.style.animationPlayState = "running";
+  
+    showAnswer(currentQ.answer);
+  
+    while (aTimeRemaining > 0) {
+      await delay(100);
+      if (!state.flags.pauseFlag) continue;
+      aTimeRemaining--;
+      DOM.demo.innerHTML = `Q${i + 1} - ${currentQ.category_name.toUpperCase()} - ${currentQ.difficulty_name.toUpperCase()} - Mark Mazurek - ${Math.floor(aTimeRemaining / 10)}.${aTimeRemaining % 10}s`;
+    }
+  
+    showAnswer("");
   }
 
-  DOM.demo.innerHTML = "Game Finished!";
+  // Clean up after game
   state.flags.gameStarted = false;
+  state.flags.pauseFlag = false;
+  showQuestion("Thanks for playing!");
+  DOM.progressBar.style.animationPlayState = "paused";
   updateButtonDisplays("START");
-}
-
-function refetchAndRestart() {
-  state.flags.stopLoop = true; // Kill existing loop
-  state.flags.gameStarted = false;
-  fetchQuestionsAndStartGame();
-}
+  enableBothButtons();
+  
+  DOM.demo.innerHTML = 'Press <span id="start-game" style="cursor: pointer; display: inline;" onclick="dontFetchDataIfAllDeselected()">START</span> to play again. Copyright &copy; 2026. Contact us at <a href="mailto:mark.mazurek@triviolivia.com">mark.mazurek@triviolivia.com</a>';
+};
 
 // ==========================================
-// 6. INITIALIZATION & EVENTS
+// 7. TOGGLES & LIST MANAGEMENT
 // ==========================================
-document.addEventListener('DOMContentLoaded', () => {
-  handleMobileLayout();
-  syncSettings('questions', state.settings.questions);
-  syncSettings('questionTime', state.settings.timePerQuestion);
-  syncSettings('answerTime', state.settings.timePerAnswer);
-  if (DOM.demo) DOM.demo.innerHTML = defaultMessage;
-});
-
-function syncSettings(type, val) {
-  const num = parseInt(val);
-  const cfg = DOM.sliders[type];
-  if (type === 'questions') state.settings.questions = num;
-  if (type === 'questionTime') state.settings.timePerQuestion = num;
-  if (type === 'answerTime') state.settings.timePerAnswer = num;
-
-  [cfg.desktop, cfg.mobile].forEach(s => { if(s) s.value = num; });
-  [cfg.label, cfg.mobileLabel].forEach(l => { 
-    const el = document.getElementById(l);
-    if(el) el.textContent = num + cfg.unit;
-  });
-}
-
-// Logic for Toggles
-function toggleListState(listKey, id, dict, type) {
+// Generic list toggler to replace repetitive functions
+function toggleListState(listKey, clickedId, dictionary, typeName) {
   const list = state.lists[listKey];
-  const idx = list.indexOf(id);
-  if (idx === -1) {
-    list.push(id);
-    DOM.demo.innerHTML = `Disabled ${dict[id]}`;
+  const name = dictionary[clickedId];
+  
+  if (!list.includes(clickedId)) {
+    DOM.demo.innerHTML = `You have disabled the ${name} ${typeName}.`;
+    list.push(clickedId);
   } else {
-    list.splice(idx, 1);
-    DOM.demo.innerHTML = `Enabled ${dict[id]}`;
+    DOM.demo.innerHTML = `You have enabled the ${name} ${typeName}.`;
+    list.splice(list.indexOf(clickedId), 1);
   }
 }
 
-function toggle_categories(id) { toggleListState('category', id, Dictionaries.category, 'cat'); }
-function toggle_difficulties(id) { toggleListState('difficulty', id, Dictionaries.difficulty, 'diff'); }
+// Preserve exposed function names for HTML bindings
+function toggle_categories(id) { toggleListState('category', id, Dictionaries.category, 'category'); }
+function toggle_difficulties(id) { toggleListState('difficulty', id, Dictionaries.difficulty, 'difficulty'); }
 function toggle_eras(id) { toggleListState('era', id, Dictionaries.era, 'era'); }
 
-function toggleIndicator(button) {
-  button.classList.toggle("active");
-  button.classList.toggle("inactive");
-}
+// Keeping these for legacy bindings if they exist
+function disable_category(id) { if (!state.lists.category.includes(id)) state.lists.category.push(id); }
+function enable_category(id) { if (state.lists.category.includes(id)) state.lists.category.splice(state.lists.category.indexOf(id), 1); }
+function disable_difficulty(id) { if (!state.lists.difficulty.includes(id)) state.lists.difficulty.push(id); }
+function enable_difficulty(id) { if (state.lists.difficulty.includes(id)) state.lists.difficulty.splice(state.lists.difficulty.indexOf(id), 1); }
+function disable_era(id) { if (!state.lists.era.includes(id)) state.lists.era.push(id); }
+function enable_era(id) { if (state.lists.era.includes(id)) state.lists.era.splice(state.lists.era.indexOf(id), 1); }
 
-function allNoneCategoriesButton() {
-  const isActive = state.allNone.category;
-  state.lists.category = isActive ? Object.keys(Dictionaries.category) : [];
-  document.querySelectorAll(".category").forEach(b => {
-    b.classList.toggle("active", !isActive);
-    b.classList.toggle("inactive", isActive);
+// Generic All/None toggler
+function toggleAllNone(typeKey, domClass, dict) {
+  const buttons = document.querySelectorAll(domClass);
+  const isAll = state.allNone[typeKey];
+
+  state.lists[typeKey] = isAll ? Object.keys(dict) : [];
+  
+  buttons.forEach(btn => {
+    btn.classList.remove(isAll ? "active" : "inactive");
+    btn.classList.add(isAll ? "inactive" : "active");
   });
-  state.allNone.category = !isActive;
+
+  state.allNone[typeKey] = !isAll;
+  DOM.demo.innerHTML = isAll 
+    ? `You must select at least one ${typeKey} before starting the game.` 
+    : `You have enabled all ${typeKey}s.`;
 }
 
-// Attach slider listeners
-Object.keys(DOM.sliders).forEach(key => {
-  const cfg = DOM.sliders[key];
-  [cfg.desktop, cfg.mobile].forEach(el => {
-    if (el) el.addEventListener("input", (e) => syncSettings(key, e.target.value));
+function allNoneCategoriesButton() { toggleAllNone('category', '.category', Dictionaries.category); }
+function allNoneDifficultiesButton() { toggleAllNone('difficulty', '.difficulty', Dictionaries.difficulty); }
+function allNoneErasButton() { toggleAllNone('era', '.era', Dictionaries.era); }
+
+// Generic Indicator Toggler
+function toggleIndicator(button) {
+  const isActivating = !button.classList.contains("active");
+  
+  document.querySelectorAll(`button[id='${button.id}']`).forEach(btn => {
+    btn.classList.remove("active", "inactive");
+    btn.classList.add(isActivating ? "active" : "inactive");
+  });
+}
+
+// Menu accordions
+document.querySelectorAll(".toggle").forEach((checkbox) => {
+  checkbox.addEventListener("change", function () {
+    if (this.checked) {
+      document.querySelectorAll(".toggle").forEach((other) => {
+        if (other !== this) {
+          other.checked = false;
+          if(other.nextElementSibling) other.nextElementSibling.classList.remove("active");
+        }
+      });
+    }
+    if(this.nextElementSibling) this.nextElementSibling.classList.toggle("active", this.checked);
   });
 });
 
-function handleMobileLayout() {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
+// ==========================================
+// 8. SLIDERS & SETTINGS
+// ==========================================
+function syncSettings(settingType, value) {
+  const val = parseInt(value);
+  const cfg = DOM.sliders[settingType];
+  
+  if (settingType === 'questions') state.settings.questions = val;
+  else if (settingType === 'questionTime') state.settings.timePerQuestion = val;
+  else if (settingType === 'answerTime') state.settings.timePerAnswer = val;
+
+  if (cfg.desktop) cfg.desktop.value = val;
+  if (cfg.mobile) cfg.mobile.value = val;
+  
+  const dLabel = document.getElementById(cfg.label);
+  const mLabel = document.getElementById(cfg.mobileLabel);
+  if (dLabel) dLabel.textContent = val + cfg.unit;
+  if (mLabel) mLabel.textContent = val + cfg.unit;
+
+  // Specific messaging for each slider type
+  if (settingType === 'questions') {
+    DOM.demo.innerHTML = `Game set to ${val} questions.`;
+  } else if (settingType === 'questionTime') {
+    DOM.demo.innerHTML = `Questions will display for ${val} seconds.`;
+  } else if (settingType === 'answerTime') {
+    DOM.demo.innerHTML = `Answers will display for ${val} seconds.`;
+  }
 }
+
+Object.keys(DOM.sliders).forEach(key => {
+  const cfg = DOM.sliders[key];
+  if (cfg.desktop) cfg.desktop.addEventListener("input", function() { syncSettings(key, this.value); });
+  if (cfg.mobile) cfg.mobile.addEventListener("input", function() { syncSettings(key, this.value); });
+});
+
+function change_number_of_questions(value) { syncSettings('questions', value); }
+function change_time_per_question(value) { syncSettings('questionTime', value); }
+function change_time_per_answer(value) { syncSettings('answerTime', value); }
+
+// ==========================================
+// 9. EVENT LISTENERS & UTILS
+// ==========================================
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") {
+    e.preventDefault();
+    const startBtn = document.getElementById("start-game");
+    if(startBtn) startBtn.click();
+  }
+});
+
+function refetchAndRestart() {
+  if (DOM.btns.refetchDesktop && DOM.btns.refetchDesktop.disabled) return;
+  state.flags.gameStarted = false;
+  state.flags.menuHidden = false;
+  state.flags.pauseFlag = false;
+  dontFetchDataIfAllDeselected();
+}
+
+function resetSettings() {
+  state.allNone.category = false; allNoneCategoriesButton();
+  state.allNone.difficulty = false; allNoneDifficultiesButton();
+  state.allNone.era = false; allNoneErasButton();
+
+  DOM.demo.innerHTML = 'You have enabled all categories, difficulties, and eras. Press <span id="refetch-and-restart" style="cursor: pointer; display: inline;" onclick="refetchAndRestart()">REFETCH AND RESTART</span> to play again.';
+
+  state.flags.gameStarted = false;
+  state.flags.menuHidden = false;
+  state.flags.pauseFlag = false;
+  state.lists.category = [];
+  state.lists.difficulty = [];
+  state.lists.era = [];
+}
+
+const pauseGame = () => { state.flags.pauseFlag = true; };
+const resumeGame = () => { state.flags.pauseFlag = false; mainGameFunction(); };
+const displayAboutUs = () => { state.flags.pauseFlag = true; document.getElementById("about-us-card").style.display = "block"; document.getElementById("overlay").style.display = "block"; };
+const closeAboutUs = () => { state.flags.pauseFlag = false; document.getElementById("about-us-card").style.display = "none"; document.getElementById("overlay").style.display = "none"; };
+
+// Mobile layout fixes
+function handleMobileLayout() {
+  if (window.innerWidth <= 767) {
+    let vh = window.innerHeight;
+    let gameArea = document.querySelector('.game-area');
+    let mobileMenu = document.querySelector('.mobile-menu');
+    let menuHeight = vh * 0.25;
+    
+    if (gameArea && mobileMenu) {
+      gameArea.style.height = (vh - menuHeight - 20) + 'px';
+      mobileMenu.style.height = menuHeight + 'px';
+    }
+  }
+}
+
 window.addEventListener('resize', handleMobileLayout);
+window.addEventListener('orientationchange', handleMobileLayout);
+window.addEventListener('scroll', function() {
+  if (!this.ticking) {
+    window.requestAnimationFrame(() => { handleMobileLayout(); this.ticking = false; });
+    this.ticking = true;
+  }
+});
+
+function closeDropdownsOnClickOutside() {
+  document.addEventListener('click', (event) => {
+    const openToggles = document.querySelectorAll('.mobile-dropdown .toggle:checked');
+    if (openToggles.length === 0) return;
+    if (event.target.classList.contains('lbl-toggle') || event.target.closest('.lbl-toggle')) return;
+    
+    openToggles.forEach(toggle => {
+      const content = toggle.nextElementSibling?.nextElementSibling;
+      if (content && !content.contains(event.target)) toggle.checked = false;
+    });
+  });
+}
+
+function toggleFullscreen() {
+  let elem = document.documentElement;
+  let isiOS = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  if (!isiOS) {
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    } else {
+      if (elem.requestFullscreen) elem.requestFullscreen();
+      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+    }
+  } else {
+    document.documentElement.style.height = "100%";
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.height = "100%";
+    document.body.style.overflow = "hidden";
+    window.scrollTo(0, 1);
+  }
+}
