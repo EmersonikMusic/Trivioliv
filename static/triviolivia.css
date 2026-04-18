@@ -610,7 +610,32 @@ h2 {
       }
 
 
+/* Custom styling and animation for the START button */
+.start-pulse-btn {
+  background-color: #28a745 !important; /* Green background */
+  color: white !important;
+  animation: subtlePulse 2s infinite;
+}
 
+.start-pulse-btn:hover {
+  background-color: #218838 !important; /* Slightly darker green on hover */
+}
+
+/* Subtle glowing pulse animation */
+@keyframes subtlePulse {
+  0% {
+      box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+      transform: scale(1);
+  }
+  50% {
+      box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
+      transform: scale(1.02);
+  }
+  100% {
+      box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+      transform: scale(1);
+  }
+}
 
 
       
