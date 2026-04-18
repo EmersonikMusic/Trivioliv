@@ -613,33 +613,4 @@ h2 {
 
 
 
-
-      /* Styling for the START buttons */
-#start-pause, #start-pause2 {
-  background-color: #28a745 !important; /* Eye-catching green */
-  color: white;
-  animation: subtle-pulse 2s infinite ease-in-out;
-  transition: background-color 0.3s ease;
-}
-
-/* Subtle glowing pulse animation */
-@keyframes subtle-pulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
-  }
-  50% {
-    transform: scale(1.03); /* Slight enlargement */
-    box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); /* Fading glow */
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
-  }
-}
-
-/* Pause the animation and slightly darken on hover */
-#start-pause:hover, #start-pause2:hover {
-  background-color: #218838 !important;
-  animation-play-state: paused;
-}
+      
