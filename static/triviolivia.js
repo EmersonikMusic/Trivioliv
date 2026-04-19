@@ -11574,11 +11574,19 @@ function changeButtonText() {
   }
 }
 
+// Replace your existing updateButtonDisplays function with this:
 function updateButtonDisplays(text) {
-  if (DOM.btns.startPauseDesktop) DOM.btns.startPauseDesktop.textContent = text;
-  if (DOM.btns.startPauseMobile) DOM.btns.startPauseMobile.textContent = text;
+  const isStart = text === "START";
+  
+  if (DOM.btns.startPauseDesktop) {
+    DOM.btns.startPauseDesktop.textContent = text;
+    DOM.btns.startPauseDesktop.classList.toggle("ready-to-start", isStart);
+  }
+  if (DOM.btns.startPauseMobile) {
+    DOM.btns.startPauseMobile.textContent = text;
+    DOM.btns.startPauseMobile.classList.toggle("ready-to-start", isStart);
+  }
 }
-
 // ==========================================
 // 5. FETCH & DATA MANAGEMENT
 // ==========================================
