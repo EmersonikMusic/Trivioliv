@@ -610,29 +610,34 @@ h2 {
       }
 
 
-/* Custom styling and animation for the START button */
-.start-pulse-btn {
-  background-color: #28a745 !important; /* Green background */
-  color: white !important;
-  animation: subtlePulse 2s infinite;
+/* Direct ID targeting to guarantee the styling applies */
+#start-pause, #start-pause2 {
+  background-color: #00F829 !important; 
+  color: #000000 !important; /* Black text on neon green for high contrast */
+  font-weight: 1000 !important;
+  text-shadow: none !important;
+  box-shadow: 0 0 10px rgba(0, 248, 41, 0.5) !important;
+  animation: attentionPulse 1.5s infinite !important;
+  border: 2px solid #00F829 !important;
 }
 
-.start-pulse-btn:hover {
-  background-color: #218838 !important; /* Slightly darker green on hover */
+#start-pause:hover, #start-pause2:hover {
+  background-color: #33ff55 !important;
+  transform: scale(1.05) !important;
 }
 
-/* Subtle glowing pulse animation */
-@keyframes subtlePulse {
+/* More noticeable pulsing animation */
+@keyframes attentionPulse {
   0% {
-      box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+      box-shadow: 0 0 0 0 rgba(0, 248, 41, 0.8);
       transform: scale(1);
   }
   50% {
-      box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
-      transform: scale(1.02);
+      box-shadow: 0 0 0 15px rgba(0, 248, 41, 0);
+      transform: scale(1.03); /* Noticeable physical bump */
   }
   100% {
-      box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+      box-shadow: 0 0 0 0 rgba(0, 248, 41, 0);
       transform: scale(1);
   }
 }
