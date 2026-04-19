@@ -11938,8 +11938,8 @@ function change_time_per_answer(value) { syncSettings('answerTime', value); }
 document.addEventListener("keydown", (e) => {
   if (e.code === "Space") {
     e.preventDefault();
-    const startBtn = document.getElementById("start-game");
-    if(startBtn) startBtn.click();
+    // Directly call the handler to toggle the start/pause/resume state
+    dontFetchDataIfAllDeselected();
   }
 });
 
