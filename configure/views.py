@@ -31,6 +31,7 @@ def listify_eras(request):
         print(question.text)
         question.save()
     return(redirect('configure:question-list'))
+
 @login_required
 def export_to_csv(request):
 
@@ -40,7 +41,7 @@ def export_to_csv(request):
     response = HttpResponse('text/csv')
     response['Content-Disposition'] = 'attachment; filename=questions_export.csv'
     writer = csv.writer(response)
-    writer.writerow(                       ['text','response','answer','score','difficulty','category','subcategory', 'eras'])
+    writer.writerow(['text','response','answer','score','difficulty','category','subcategory', 'eras'])
     question_fields = question_list.values_list('text','response','answer','score','difficulty__name','category__name','subcategory__name','eras_list')
     
     for q in question_fields:
@@ -58,22 +59,37 @@ def main(request):
     }
     return render(request, 'configure/main.html',context)
 
-def  question_list(request):
+@login_required
+def question_list(request):
 
     if request.method=="POST":
-        start_num=int(request.POST.get('start_num'))
-        df=pd.read_csv('trivia_questions2.csv',sep=',')
+        start_num_raw = request.POST.get('start_num')
+        start_num = int(start_num_raw) if start_num_raw else 0
+        df = pd.read_csv('trivia_questions2.csv', sep=',')
 
-        for q in range(start_num,len(df)):
-            print(str(q)+ '. ' + df.iloc[q][4])
-            question, created = Question.objects.update_or_create(text=df.iloc[q][4],
-                                                    defaults={'answer':df.iloc[q][5],
-                                                                'subcategory':Subcategory.objects.get(name=df.iloc[q][0]),
-                                                                'category':Category.objects.get(name=df.iloc[q][1]),
-                                                                'difficulty':Difficulty.objects.get(score=int(df.iloc[q][2])),
-                                                                'author':request.user,
-                                                                })
+        for q in range(start_num, len(df)):
+            print(str(q) + '. ' + str(df.iloc[q][4]))
+            
+            # Safely handle potentially missing subcategories (NaN in pandas)
+            subcat_name = df.iloc[q][0]
+            if pd.isna(subcat_name):
+                subcategory = None
+            else:
+                try:
+                    subcategory = Subcategory.objects.get(name=subcat_name)
+                except Subcategory.DoesNotExist:
+                    subcategory = None
 
+            question, created = Question.objects.update_or_create(
+                text=df.iloc[q][4],
+                defaults={
+                    'answer': df.iloc[q][5],
+                    'subcategory': subcategory,
+                    'category': Category.objects.get(name=df.iloc[q][1]),
+                    'difficulty': Difficulty.objects.get(score=int(df.iloc[q][2])),
+                    'author': request.user,
+                }
+            )
 
         return redirect('configure:question-list')
            
@@ -88,7 +104,6 @@ class QuestionCreateView(LoginRequiredMixin, CreateView):
     model = Question
     template_name = 'configure/question_create.html'
     fields = ['text', 'answer','category', 'subcategory', 'eras', 'difficulty', ]
-
 
     def get_success_url(self):
         return reverse('configure:question-list')
