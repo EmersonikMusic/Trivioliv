@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # In development, DEBUG will be True unless DJANGO_DEBUG is explicitly set to 'False'.
 # In a production environment (like Heroku), you MUST set the environment variable
 # DJANGO_DEBUG to 'False'.
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = False
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # The application will not start in production if this environment variable is not set.
