@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.http import HttpResponse
 
 from .models import *
@@ -12,32 +11,24 @@ from .forms import *
 import pandas as pd
 import csv
 
-# Create your views here.
-
 @login_required
 def listify_eras(request):
     questions = Question.objects.all()
-    era_not_assigned = Era.objects.get(name="Not Assigned")
+    era_not_assigned, _ = Era.objects.get_or_create(name="Not Assigned")
     for question in questions:
-        
         question.eras_list = ", ".join([e.name for e in question.eras.all()])
     
         if not question.eras_list:
-            print('Triggered')
             question.eras.add(era_not_assigned)
             question.save()
             question.eras_list = ", ".join([e.name for e in question.eras.all()])
         
-        print(question.text)
         question.save()
-    return(redirect('configure:question-list'))
+    return redirect('configure:question-list')
 
 @login_required
 def export_to_csv(request):
-
     question_list = Question.objects.all()
-    for q in question_list:
-        print(q.eras_list)
     response = HttpResponse('text/csv')
     response['Content-Disposition'] = 'attachment; filename=questions_export.csv'
     writer = csv.writer(response)
@@ -46,64 +37,97 @@ def export_to_csv(request):
     
     for q in question_fields:
         writer.writerow(q)
-    return(response)
+    return response
 
 @login_required
 def main(request):
-
     context = {
         'categories': Category.objects.all()[:25],
         'eras': Era.objects.all()[:25],
         'difficulties': Difficulty.objects.all()[:25],
         'questions': Question.objects.all()[:25],
     }
-    return render(request, 'configure/main.html',context)
+    return render(request, 'configure/main.html', context)
 
 @login_required
 def question_list(request):
-
-    if request.method=="POST":
+    if request.method == "POST":
         start_num_raw = request.POST.get('start_num')
-        start_num = int(start_num_raw) if start_num_raw else 0
-        df = pd.read_csv('trivia_questions2.csv', sep=',')
+        try:
+            start_num = int(start_num_raw) if start_num_raw else 0
+        except ValueError:
+            start_num = 0
+
+        # Allow actual file uploads via form, fallback to hardcoded path
+        csv_file = request.FILES.get('csv_file', 'trivia_questions2.csv')
+        
+        try:
+            df = pd.read_csv(csv_file, sep=',')
+        except Exception as e:
+            return HttpResponse(f"Error loading CSV file: {e}", status=400)
 
         for q in range(start_num, len(df)):
-            print(str(q) + '. ' + str(df.iloc[q][4]))
+            text_val = df.iloc[q][4]
+            if pd.isna(text_val):
+                continue  # Skip rows missing a question
             
-            # Safely handle potentially missing subcategories (NaN in pandas)
-            subcat_name = df.iloc[q][0]
-            if pd.isna(subcat_name):
-                subcategory = None
-            else:
-                try:
-                    subcategory = Subcategory.objects.get(name=subcat_name)
-                except Subcategory.DoesNotExist:
-                    subcategory = None
+            # Safely handle Category (Create if missing)
+            cat_name = df.iloc[q][1]
+            category = None
+            if not pd.isna(cat_name):
+                category, _ = Category.objects.get_or_create(name=cat_name)
 
-            question, created = Question.objects.update_or_create(
-                text=df.iloc[q][4],
-                defaults={
-                    'answer': df.iloc[q][5],
-                    'subcategory': subcategory,
-                    'category': Category.objects.get(name=df.iloc[q][1]),
-                    'difficulty': Difficulty.objects.get(score=int(df.iloc[q][2])),
-                    'author': request.user,
-                }
-            )
+            # Safely handle Subcategory (Create if missing)
+            subcat_name = df.iloc[q][0]
+            subcategory = None
+            if not pd.isna(subcat_name):
+                defaults = {'category': category} if category else {}
+                try:
+                    subcategory, _ = Subcategory.objects.get_or_create(name=subcat_name, defaults=defaults)
+                except Exception:
+                    subcategory = Subcategory.objects.filter(name=subcat_name).first()
+
+            # Safely handle Difficulty (Create if missing)
+            diff_val = df.iloc[q][2]
+            difficulty = None
+            if not pd.isna(diff_val):
+                try:
+                    score = int(diff_val)
+                    difficulty, _ = Difficulty.objects.get_or_create(
+                        score=score, 
+                        defaults={'name': f'Difficulty {score}'}
+                    )
+                except (ValueError, TypeError):
+                    pass
+
+            answer_val = df.iloc[q][5]
+            
+            # Create Question Record safely
+            try:
+                Question.objects.update_or_create(
+                    text=str(text_val),
+                    defaults={
+                        'answer': str(answer_val) if not pd.isna(answer_val) else "",
+                        'subcategory': subcategory,
+                        'category': category,
+                        'difficulty': difficulty,
+                        'author': request.user,
+                    }
+                )
+            except Exception as e:
+                print(f"Row {q} failed to process: {e}")
 
         return redirect('configure:question-list')
            
     context = {
         'questions': Question.objects.all()[:20],
     }
-
-    return render(request, 'configure/question_list.html',context)
+    return render(request, 'configure/question_list.html', context)
     
-
 class QuestionCreateView(LoginRequiredMixin, CreateView):
     model = Question
     template_name = 'configure/question_create.html'
-    fields = ['text', 'answer','category', 'subcategory', 'eras', 'difficulty', ]
+    fields = ['text', 'answer','category', 'subcategory', 'eras', 'difficulty']
 
     def get_success_url(self):
         return reverse('configure:question-list')
@@ -112,28 +136,23 @@ class QuestionCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
-def batch(request,start_num=0):
-
-    context={}
-
-    return render(request, 'configure/question_batch.html',context)
+def batch(request, start_num=0):
+    context = {}
+    return render(request, 'configure/question_batch.html', context)
 
 def delete_all(request):
-
     Question.objects.all().delete()
-
-    return reverse('configure:main')
+    return redirect('configure:main')
 
 def search_questions(request):
-    question_results=[]
+    question_results = []
     if request.method == "POST":
-        searched = request.POST['searched']
-        question_results = Question.objects.filter(text__contains=searched)
+        searched = request.POST.get('searched', '')
+        question_results = Question.objects.filter(text__icontains=searched)
 
-    context={
-        'results':question_results
+    context = {
+        'results': question_results
     }
-
     return render(request, 'configure/search_questions.html', context)
 
 class QuestionUpdateView(UpdateView):
@@ -177,7 +196,6 @@ class CategoryDeleteView(DeleteView):
     template_name = 'configure/category_delete.html'
     success_url =  reverse_lazy('configure:category-list')
 
-
 class SubcategoryListView(ListView):
     model = Subcategory
     template_name = 'configure/subcategory_list.html'
@@ -185,12 +203,25 @@ class SubcategoryListView(ListView):
     paginate_by = 25
 
     def post(self, request, *args, **kwargs):
-        df=pd.read_csv('subcategories.csv',sep=',')
-        for i in range(len(df)):
-            print(df.iloc[i][0])
-            subcategory, created = Subcategory.objects.update_or_create(name=df.iloc[i][1],
-                                                    defaults={'category':Category.objects.get(name=df.iloc[i][0]),
-                                                                })
+        # Support file uploads with robust fallback
+        csv_file = request.FILES.get('csv_file', 'subcategories.csv')
+        try:
+            df = pd.read_csv(csv_file, sep=',')
+            for i in range(len(df)):
+                cat_name = df.iloc[i][0]
+                subcat_name = df.iloc[i][1]
+                
+                if pd.isna(cat_name) or pd.isna(subcat_name):
+                    continue
+
+                category, _ = Category.objects.get_or_create(name=cat_name)
+                Subcategory.objects.update_or_create(
+                    name=subcat_name,
+                    defaults={'category': category}
+                )
+        except Exception as e:
+            return HttpResponse(f"Error importing subcategories: {e}", status=400)
+            
         return redirect('configure:subcategory-list')
 
 class SubcategoryDetailView(DetailView):
