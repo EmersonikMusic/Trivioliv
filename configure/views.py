@@ -58,64 +58,90 @@ def question_list(request):
         except ValueError:
             start_num = 0
 
-        # Allow actual file uploads via form, fallback to hardcoded path
-        csv_file = request.FILES.get('csv_file', 'trivia_questions2.csv')
-        
+        # Safely fetch the uploaded file or fallback to local
+        csv_file = request.FILES.get('csv_file')
+        if not csv_file:
+            csv_file = 'trivia_questions2.csv'
+            
         try:
             df = pd.read_csv(csv_file, sep=',')
         except Exception as e:
             return HttpResponse(f"Error loading CSV file: {e}", status=400)
 
         for q in range(start_num, len(df)):
-            text_val = df.iloc[q][4]
-            if pd.isna(text_val):
-                continue  # Skip rows missing a question
-            
-            # Safely handle Category (Create if missing)
-            cat_name = df.iloc[q][1]
-            category = None
-            if not pd.isna(cat_name):
-                category, _ = Category.objects.get_or_create(name=cat_name)
+            try:  # This overarching TRY block prevents a 500 error if any row is corrupted
+                # Ensure the row has enough columns to prevent IndexError
+                if df.shape[1] < 6:
+                    continue
 
-            # Safely handle Subcategory (Create if missing)
-            subcat_name = df.iloc[q][0]
-            subcategory = None
-            if not pd.isna(subcat_name):
-                defaults = {'category': category} if category else {}
-                try:
-                    subcategory, _ = Subcategory.objects.get_or_create(name=subcat_name, defaults=defaults)
-                except Exception:
-                    subcategory = Subcategory.objects.filter(name=subcat_name).first()
+                text_val = df.iloc[q][4]
+                if pd.isna(text_val):
+                    continue
+                
+                # 1. Category (Truncate to 64 chars to prevent DataError)
+                cat_name = df.iloc[q][1]
+                category = None
+                if not pd.isna(cat_name):
+                    category, _ = Category.objects.get_or_create(name=str(cat_name)[:64])
 
-            # Safely handle Difficulty (Create if missing)
-            diff_val = df.iloc[q][2]
-            difficulty = None
-            if not pd.isna(diff_val):
-                try:
-                    score = int(diff_val)
-                    difficulty, _ = Difficulty.objects.get_or_create(
-                        score=score, 
-                        defaults={'name': f'Difficulty {score}'}
-                    )
-                except (ValueError, TypeError):
-                    pass
+                # 2. Subcategory
+                subcat_name = df.iloc[q][0]
+                subcategory = None
+                if not pd.isna(subcat_name):
+                    defaults = {'category': category} if category else {}
+                    try:
+                        subcategory, _ = Subcategory.objects.get_or_create(name=str(subcat_name)[:64], defaults=defaults)
+                    except Exception:
+                        subcategory = Subcategory.objects.filter(name=str(subcat_name)[:64]).first()
 
-            answer_val = df.iloc[q][5]
-            
-            # Create Question Record safely
-            try:
-                Question.objects.update_or_create(
-                    text=str(text_val),
+                # 3. Difficulty
+                diff_val = df.iloc[q][2]
+                difficulty = None
+                if not pd.isna(diff_val):
+                    try:
+                        score = int(diff_val)
+                        difficulty, _ = Difficulty.objects.get_or_create(
+                            score=score, 
+                            defaults={'name': f'Difficulty {score}'}
+                        )
+                    except Exception:
+                        # Fallback if a Difficulty exists with that score under a different name
+                        difficulty = Difficulty.objects.filter(score=score).first()
+                        if not difficulty:
+                            difficulty = Difficulty.objects.create(score=score, name=f'Difficulty {score} (Dup)')
+
+                # Skip row if missing required foreign keys to prevent IntegrityError
+                if not category or not difficulty:
+                    print(f"Row {q} missing required category or difficulty. Skipping.")
+                    continue
+
+                answer_val = df.iloc[q][5]
+                
+                # 4. Create Question (Truncate limits to prevent DataError)
+                question, _ = Question.objects.update_or_create(
+                    text=str(text_val)[:511],
                     defaults={
-                        'answer': str(answer_val) if not pd.isna(answer_val) else "",
+                        'answer': str(answer_val)[:256] if not pd.isna(answer_val) else "N/A",
                         'subcategory': subcategory,
                         'category': category,
                         'difficulty': difficulty,
                         'author': request.user,
                     }
                 )
+
+                # 5. Automatically Map Eras (Index 3)
+                eras_val = df.iloc[q][3]
+                if not pd.isna(eras_val):
+                    era_names = [e.strip() for e in str(eras_val).split(',')]
+                    for en in era_names:
+                        if en:
+                            era_obj, _ = Era.objects.get_or_create(name=en[:64])
+                            question.eras.add(era_obj)
+
             except Exception as e:
-                print(f"Row {q} failed to process: {e}")
+                # Catch absolutely everything for this row so the batch doesn't crash
+                print(f"Row {q} crashed: {e}")
+                continue
 
         return redirect('configure:question-list')
            
@@ -123,7 +149,6 @@ def question_list(request):
         'questions': Question.objects.all()[:20],
     }
     return render(request, 'configure/question_list.html', context)
-    
 class QuestionCreateView(LoginRequiredMixin, CreateView):
     model = Question
     template_name = 'configure/question_create.html'

@@ -18,13 +18,14 @@
     <button class="btn btn-primary">Listify Eras for Export</button>
 </a>
 
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
+    <div class="mb-3 mt-3 d-flex align-items-center">
+        <input type="file" name="csv_file" class="form-control" accept=".csv" style="max-width: 300px; margin-right: 10px;">
         <button class="btn btn-secondary" type="submit">Batch Add from CSV</button>
-    <input type="number" class="number" name="start_num" id="start_num" width="100px;" placeholder="0">
+        <input type="number" class="number ms-2" name="start_num" id="start_num" style="width: 100px;" placeholder="Start Row (0)">
+    </div>
 </form>
-
-
 <table class="table">
     <thead>
         <tr>
