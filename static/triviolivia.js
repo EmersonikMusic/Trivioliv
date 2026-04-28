@@ -5588,7 +5588,7 @@ const contentDict = {
         .cls-11 {
           fill: url(#linear-gradient-2);
         }
-  
+        
         .cls-12 {
           fill: #353635;
         }
