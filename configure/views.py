@@ -10,6 +10,7 @@ from .forms import *
 
 import pandas as pd
 import csv
+import traceback
 
 @login_required
 def listify_eras(request):
@@ -70,18 +71,18 @@ def question_list(request):
 
         for q in range(start_num, len(df)):
             try:  
-                # Fetch row safely and verify it has the expected 6 columns 
-                row = df.iloc[q]
-                if len(row) < 6:
-                    print(f"Row {q} is missing columns. Skipping.")
+                # Ensure the dataframe has at least 6 columns
+                if df.shape[1] < 6:
+                    print(f"Row {q} failed: CSV needs at least 6 columns, found {df.shape[1]}")
                     continue
 
-                subcat_name = row[0]
-                cat_name = row[1]
-                diff_val = row[2]
-                eras_val = row[3]
-                text_val = row[4]
-                answer_val = row[5]
+                # Safely pull cells by EXACT integer position (row_index, column_index)
+                subcat_name = df.iloc[q, 0]
+                cat_name    = df.iloc[q, 1]
+                diff_val    = df.iloc[q, 2]
+                eras_val    = df.iloc[q, 3]
+                text_val    = df.iloc[q, 4]
+                answer_val  = df.iloc[q, 5]
 
                 if pd.isna(text_val) or pd.isna(answer_val):
                     print(f"Row {q}: Missing Question or Answer text. Skipping.")
@@ -105,7 +106,8 @@ def question_list(request):
                 difficulty = None
                 if not pd.isna(diff_val):
                     try:
-                        score = int(diff_val)
+                        # Extract only numbers in case it has letters
+                        score = int(''.join(filter(str.isdigit, str(diff_val))))
                         difficulty, _ = Difficulty.objects.get_or_create(
                             score=score, 
                             defaults={'name': f'Difficulty {score}'}
@@ -144,8 +146,9 @@ def question_list(request):
                 question.save()
 
             except Exception as e:
-                # Log the specific error so Heroku/Console can display it
+                # Log the specific error AND the full traceback to Heroku
                 print(f"Row {q} crashed: {e}")
+                traceback.print_exc()
                 continue
 
         return redirect('configure:question-list')
@@ -239,8 +242,8 @@ class SubcategoryListView(ListView):
         try:
             df = pd.read_csv(csv_file, sep=',')
             for i in range(len(df)):
-                cat_name = df.iloc[i][0]
-                subcat_name = df.iloc[i][1]
+                cat_name = df.iloc[i, 0]
+                subcat_name = df.iloc[i, 1]
                 
                 if pd.isna(cat_name) or pd.isna(subcat_name):
                     continue
