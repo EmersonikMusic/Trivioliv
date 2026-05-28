@@ -69,33 +69,39 @@ def question_list(request):
             return HttpResponse(f"Error loading CSV file: {e}", status=400)
 
         for q in range(start_num, len(df)):
-            try:  # This overarching TRY block prevents a 500 error if any row is corrupted
-                # Ensure the row has enough columns to prevent IndexError
-                if df.shape[1] < 6:
+            try:  
+                # Fetch row safely and verify it has the expected 6 columns 
+                row = df.iloc[q]
+                if len(row) < 6:
+                    print(f"Row {q} is missing columns. Skipping.")
                     continue
 
-                text_val = df.iloc[q][4]
-                if pd.isna(text_val):
+                subcat_name = row[0]
+                cat_name = row[1]
+                diff_val = row[2]
+                eras_val = row[3]
+                text_val = row[4]
+                answer_val = row[5]
+
+                if pd.isna(text_val) or pd.isna(answer_val):
+                    print(f"Row {q}: Missing Question or Answer text. Skipping.")
                     continue
                 
                 # 1. Category (Truncate to 64 chars to prevent DataError)
-                cat_name = df.iloc[q][1]
                 category = None
                 if not pd.isna(cat_name):
-                    category, _ = Category.objects.get_or_create(name=str(cat_name)[:64])
+                    category, _ = Category.objects.get_or_create(name=str(cat_name).strip()[:64])
 
                 # 2. Subcategory
-                subcat_name = df.iloc[q][0]
                 subcategory = None
                 if not pd.isna(subcat_name):
                     defaults = {'category': category} if category else {}
                     try:
-                        subcategory, _ = Subcategory.objects.get_or_create(name=str(subcat_name)[:64], defaults=defaults)
+                        subcategory, _ = Subcategory.objects.get_or_create(name=str(subcat_name).strip()[:64], defaults=defaults)
                     except Exception:
-                        subcategory = Subcategory.objects.filter(name=str(subcat_name)[:64]).first()
+                        subcategory = Subcategory.objects.filter(name=str(subcat_name).strip()[:64]).first()
 
                 # 3. Difficulty
-                diff_val = df.iloc[q][2]
                 difficulty = None
                 if not pd.isna(diff_val):
                     try:
@@ -114,14 +120,12 @@ def question_list(request):
                 if not category or not difficulty:
                     print(f"Row {q} missing required category or difficulty. Skipping.")
                     continue
-
-                answer_val = df.iloc[q][5]
                 
                 # 4. Create Question (Truncate limits to prevent DataError)
                 question, _ = Question.objects.update_or_create(
-                    text=str(text_val)[:511],
+                    text=str(text_val).strip()[:511],
                     defaults={
-                        'answer': str(answer_val)[:256] if not pd.isna(answer_val) else "N/A",
+                        'answer': str(answer_val).strip()[:256],
                         'subcategory': subcategory,
                         'category': category,
                         'difficulty': difficulty,
@@ -129,17 +133,18 @@ def question_list(request):
                     }
                 )
 
-                # 5. Automatically Map Eras (Index 3)
-                eras_val = df.iloc[q][3]
+                # 5. Automatically Map Eras
                 if not pd.isna(eras_val):
-                    era_names = [e.strip() for e in str(eras_val).split(',')]
+                    era_names = [e.strip() for e in str(eras_val).split(',') if e.strip()]
                     for en in era_names:
-                        if en:
-                            era_obj, _ = Era.objects.get_or_create(name=en[:64])
-                            question.eras.add(era_obj)
+                        era_obj, _ = Era.objects.get_or_create(name=en[:64])
+                        question.eras.add(era_obj)
+                
+                question.eras_list = ", ".join([e.name for e in question.eras.all()])
+                question.save()
 
             except Exception as e:
-                # Catch absolutely everything for this row so the batch doesn't crash
+                # Log the specific error so Heroku/Console can display it
                 print(f"Row {q} crashed: {e}")
                 continue
 
@@ -149,6 +154,7 @@ def question_list(request):
         'questions': Question.objects.all()[:20],
     }
     return render(request, 'configure/question_list.html', context)
+
 class QuestionCreateView(LoginRequiredMixin, CreateView):
     model = Question
     template_name = 'configure/question_create.html'
