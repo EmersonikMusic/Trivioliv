@@ -80,6 +80,10 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # WhiteNoise should be placed directly after the SecurityMiddleware for performance.
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    
+    # CUSTOM REDIRECT MIDDLEWARE:
+    'Triviolivia.middleware.HerokuToCustomDomainRedirectMiddleware',
+    
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
