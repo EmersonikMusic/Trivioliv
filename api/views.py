@@ -9,50 +9,51 @@ import random
 
 from .serializers import *
 from configure.models import *
+# Create your views here.
 
 class QuestionList(generics.ListAPIView):
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
-        # 1. Start with only active questions
-        queryset = Question.objects.filter(active=True)
-        
-        category = self.request.query_params.get('category')
-        era = self.request.query_params.get('era')
-        difficulty = self.request.query_params.get('difficulty')
-        questions = self.request.query_params.get('questions')
+            """
+            Optionally restricts the returned purchases to a given user,
+            by filtering against a `username` query parameter in the URL.
+            """
+            queryset = Question.objects.all()
+            category = self.request.query_params.get('category')
+            era= self.request.query_params.get('era')
+            difficulty = self.request.query_params.get('difficulty')
+            questions = self.request.query_params.get('questions')
 
-        # 2. INCLUSIVE Filtering (Whitelist)
-        # We use .filter() instead of .exclude() because the app sends 
-        # the IDs of the categories the user actually WANTS to play.
-        if category is not None:
-            cat_list = category.split(',')
-            queryset = queryset.filter(category__id__in=cat_list)
-        
-        if era is not None:
-            era_list = era.split(',')
-            # Uses eras__id__in to correctly filter the ManyToMany field
-            queryset = queryset.filter(eras__id__in=era_list)
-        
-        if difficulty is not None:
-            diff_list = difficulty.split(',')
-            queryset = queryset.filter(difficulty__id__in=diff_list)
+            if category is not None:
+                cat_list = category.split(',')
+                queryset = queryset.exclude(category__id__in=cat_list)
+            
+            if era is not None:
+                banned_era_list = era.split(',')
+                valid_eras = Era.objects.exclude(id__in=banned_era_list)
+                queryset = queryset.filter(eras__id__in=valid_eras)
+            
+            if difficulty is not None:
+                diff_list = difficulty.split(',')
+                queryset = queryset.exclude(difficulty__id__in=diff_list)
 
-        # 3. Determine number of questions requested
-        num_questions = int(questions) if questions is not None else 1
+            num_questions=1
+            if questions is not None:
+                num_questions=int(questions)
 
-        # 4. Safely and efficiently select random questions
-        valid_ids = list(queryset.values_list('id', flat=True))
-        
-        # Prevent IndexError if they request more questions than are available
-        if num_questions > len(valid_ids):
-            num_questions = len(valid_ids)
+            i=1
+            question_list=[]
+            q_list = queryset
+            print(num_questions)
+            while i <= num_questions:
+                random_question = random.choice(q_list)
+                question_list.append(random_question.id)
+                q_list = q_list.exclude(id=random_question.id)
+                i=i+1
+            print(question_list)
 
-        # Use random.sample to grab unique random IDs
-        random_question_ids = random.sample(valid_ids, num_questions)
-
-        # Return the final filtered queryset
-        return queryset.filter(id__in=random_question_ids)
+            return queryset.filter(id__in=question_list).distinct()
     
 class QuestionDetail(APIView):
     def get_object(self, pk):
