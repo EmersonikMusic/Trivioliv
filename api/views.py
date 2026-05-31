@@ -15,45 +15,49 @@ class QuestionList(generics.ListAPIView):
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
-            """
-            Optionally restricts the returned purchases to a given user,
-            by filtering against a `username` query parameter in the URL.
-            """
-            queryset = Question.objects.all()
-            category = self.request.query_params.get('category')
-            era= self.request.query_params.get('era')
-            difficulty = self.request.query_params.get('difficulty')
-            questions = self.request.query_params.get('questions')
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        # FIX 1: Only query questions that are marked active in the database
+        queryset = Question.objects.filter(active=True)
+        
+        category = self.request.query_params.get('category')
+        era = self.request.query_params.get('era')
+        difficulty = self.request.query_params.get('difficulty')
+        questions = self.request.query_params.get('questions')
 
-            if category is not None:
-                cat_list = category.split(',')
-                queryset = queryset.exclude(category__id__in=cat_list)
-            
-            if era is not None:
-                banned_era_list = era.split(',')
-                valid_eras = Era.objects.exclude(id__in=banned_era_list)
-                queryset = queryset.filter(eras__id__in=valid_eras)
-            
-            if difficulty is not None:
-                diff_list = difficulty.split(',')
-                queryset = queryset.exclude(difficulty__id__in=diff_list)
+        # Exclude categories passed in the URL
+        if category is not None:
+            cat_list = category.split(',')
+            queryset = queryset.exclude(category__id__in=cat_list)
+        
+        # FIX 2: Correctly exclude ANY question that contains a banned era
+        if era is not None:
+            banned_era_list = era.split(',')
+            queryset = queryset.exclude(eras__id__in=banned_era_list)
+        
+        # Exclude difficulties passed in the URL
+        if difficulty is not None:
+            diff_list = difficulty.split(',')
+            queryset = queryset.exclude(difficulty__id__in=diff_list)
 
-            num_questions=1
-            if questions is not None:
-                num_questions=int(questions)
+        # Determine number of questions requested
+        num_questions = int(questions) if questions is not None else 1
 
-            i=1
-            question_list=[]
-            q_list = queryset
-            print(num_questions)
-            while i <= num_questions:
-                random_question = random.choice(q_list)
-                question_list.append(random_question.id)
-                q_list = q_list.exclude(id=random_question.id)
-                i=i+1
-            print(question_list)
+        # FIX 3: Safely and efficiently select random questions without crashing
+        # Get a flat list of all valid question IDs that survived the filters
+        valid_ids = list(queryset.values_list('id', flat=True))
+        
+        # Prevent IndexError if they request more questions than are available
+        if num_questions > len(valid_ids):
+            num_questions = len(valid_ids)
 
-            return queryset.filter(id__in=question_list).distinct()
+        # Use random.sample to grab unique random IDs
+        random_question_ids = random.sample(valid_ids, num_questions)
+
+        # Return the final filtered queryset based on those random IDs
+        return queryset.filter(id__in=random_question_ids)
     
 class QuestionDetail(APIView):
     def get_object(self, pk):
