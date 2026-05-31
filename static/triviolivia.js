@@ -11456,7 +11456,7 @@ const DOM = {
 };
 
 // ==========================================
-// 2. GAME STATE & DATA MAPS
+// 2. GAME STATE & DATA MAPS.
 // ==========================================
 const state = {
   settings: { questions: 10, timePerQuestion: 5, timePerAnswer: 5 },
