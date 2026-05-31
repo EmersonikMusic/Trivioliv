@@ -27,7 +27,7 @@ class QuestionList(generics.ListAPIView):
 
         if category is not None:
             cat_list = category.split(',')
-            queryset = queryset.exclude(category__id__in=cat_list)
+            queryset = queryset.filter(category__id__in=cat_list)
         
         if era is not None:
             banned_era_list = era.split(',')
