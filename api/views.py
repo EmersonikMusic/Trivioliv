@@ -9,17 +9,12 @@ import random
 
 from .serializers import *
 from configure.models import *
-# Create your views here.
 
 class QuestionList(generics.ListAPIView):
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
-        """
-        Optionally restricts the returned purchases to a given user,
-        by filtering against a `username` query parameter in the URL.
-        """
-        # FIX 1: Only query questions that are marked active in the database
+        # 1. Start with only active questions
         queryset = Question.objects.filter(active=True)
         
         category = self.request.query_params.get('category')
@@ -27,26 +22,26 @@ class QuestionList(generics.ListAPIView):
         difficulty = self.request.query_params.get('difficulty')
         questions = self.request.query_params.get('questions')
 
-        # Exclude categories passed in the URL
+        # 2. INCLUSIVE Filtering (Whitelist)
+        # We use .filter() instead of .exclude() because the app sends 
+        # the IDs of the categories the user actually WANTS to play.
         if category is not None:
             cat_list = category.split(',')
-            queryset = queryset.exclude(category__id__in=cat_list)
+            queryset = queryset.filter(category__id__in=cat_list)
         
-        # FIX 2: Correctly exclude ANY question that contains a banned era
         if era is not None:
-            banned_era_list = era.split(',')
-            queryset = queryset.exclude(eras__id__in=banned_era_list)
+            era_list = era.split(',')
+            # Uses eras__id__in to correctly filter the ManyToMany field
+            queryset = queryset.filter(eras__id__in=era_list)
         
-        # Exclude difficulties passed in the URL
         if difficulty is not None:
             diff_list = difficulty.split(',')
-            queryset = queryset.exclude(difficulty__id__in=diff_list)
+            queryset = queryset.filter(difficulty__id__in=diff_list)
 
-        # Determine number of questions requested
+        # 3. Determine number of questions requested
         num_questions = int(questions) if questions is not None else 1
 
-        # FIX 3: Safely and efficiently select random questions without crashing
-        # Get a flat list of all valid question IDs that survived the filters
+        # 4. Safely and efficiently select random questions
         valid_ids = list(queryset.values_list('id', flat=True))
         
         # Prevent IndexError if they request more questions than are available
@@ -56,7 +51,7 @@ class QuestionList(generics.ListAPIView):
         # Use random.sample to grab unique random IDs
         random_question_ids = random.sample(valid_ids, num_questions)
 
-        # Return the final filtered queryset based on those random IDs
+        # Return the final filtered queryset
         return queryset.filter(id__in=random_question_ids)
     
 class QuestionDetail(APIView):
