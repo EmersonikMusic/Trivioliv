@@ -17,11 +17,11 @@ class HerokuToCustomDomainRedirectMiddleware:
             
             # Define the base paths that should NOT redirect
             excluded_paths = (
-                '/api/', 
+                '/api', 
                 '/configure', 
-                '/admin/',       # Keep Django admin accessible on Heroku if needed
-                '/static/',      # Required if your excluded pages need to load CSS/JS
-                '/images/',      # Keep media files accessible just in case
+                '/admin',       # Keep Django admin accessible on Heroku if needed
+                '/static',      # Required if your excluded pages need to load CSS/JS
+                '/images',      # Keep media files accessible just in case
             )
             
             # If the path does NOT start with any of the excluded paths, redirect (301)
