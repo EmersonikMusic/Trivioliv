@@ -87,7 +87,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     
     # CUSTOM REDIRECT MIDDLEWARE:
-    'Triviolivia.middleware.HerokuToCustomDomainRedirectMiddleware',
+    # 'Triviolivia.middleware.HerokuToCustomDomainRedirectMiddleware',
     
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
