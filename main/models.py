@@ -20,4 +20,6 @@ class URLDeploymentLog(models.Model):
         ordering = ['-deployed_at']  # Newest deployments show first
 
     def __str__(self):
-        return f"{self.custom_url} ({self.deployed_at.strftime('%Y-%m-%d %H:%M')})"
+        if self.deployed_at:
+            return f"{self.custom_url} ({self.deployed_at.strftime('%Y-%m-%d %H:%M')})"
+        return f"{self.custom_url} (Pending)"
