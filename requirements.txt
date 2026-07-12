@@ -13,6 +13,7 @@ django-model-utils
 django-filter
 django-heroku
 djangorestframework
+judoscale-django
 lockfile==0.12.2
 gunicorn
 pandas
